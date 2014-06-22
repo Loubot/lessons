@@ -12,6 +12,7 @@ class StaticController < ApplicationController
 		gb = Gibbon::API.new("a54fa2423a373c73c8eff5e2f8c208d4-us8", { :timeout => 15 })
 		flash[:notice] = params
 		if valid_email?(params[:email])
+			flash[:notice] = 'yep'
 			begin
 				gb.lists.subscribe({:id => 'e854603460', :email => {:email => params[:email] },:double_optin => false})
 			rescue Gibbon::MailChimpError => e
