@@ -5,4 +5,6 @@ class Teacher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email, confirmation: true, uniqueness: { case_sensitive: false }
+
+  has_one :photo, :as => :imageable
 end

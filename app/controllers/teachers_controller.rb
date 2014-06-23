@@ -7,6 +7,8 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
+		@context = context
+		@photo = Photo.new
 		@params = params
 		@teacher = Teacher.find(current_teacher)
 	end
@@ -21,7 +23,14 @@ class TeachersController < ApplicationController
 
 
 	private
-	def teacher_params
-		params.require(:teacher).permit!
-	end
+		def teacher_params
+			params.require(:teacher).permit!
+		end
+
+
+		def context 
+			if params[:controller] == 'teachers'
+				Teacher.find(params[:id])
+			end
+		end
 end

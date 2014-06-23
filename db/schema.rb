@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621002503) do
+ActiveRecord::Schema.define(version: 20140623053156) do
+
+  create_table "photos", force: true do |t|
+    t.string   "name"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "teachers", force: true do |t|
     t.string   "first_name"

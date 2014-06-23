@@ -1,6 +1,5 @@
 <div class="dropzone-container">
-	<form action="/file-upload" class="dropzone" id="my_dropzone">
-	
-	<input type="file" name="file" />
-</form>
+	<%= form_for [@context, @photo], html: { class: 'dropzone' } do |p| %>
+		
+	<% end %>
 </div>
