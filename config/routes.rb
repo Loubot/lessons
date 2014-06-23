@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :teachers
-  resources :teachers
+  resources :teachers, only: [:update, :edit, :destroy]
 
   get '/how-it-works'     => 'static#how_it_works'
   get '/mailing-list'     => 'static#mailing_list'
