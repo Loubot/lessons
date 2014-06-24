@@ -1,0 +1,478 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/loubot/.nvm/v0.10.29/bin/node',
+1 verbose cli   '/home/loubot/.nvm/v0.10.29/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'cake' ]
+2 info using npm@1.4.14
+3 info using node@v0.10.29
+4 verbose cache add [ 'cake', null ]
+5 verbose cache add name=undefined spec="cake" args=["cake",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'cake',
+6 verbose parsed url   path: 'cake',
+6 verbose parsed url   href: 'cake' }
+7 silly lockFile 5ddc2ae1-cake cake
+8 verbose lock cake /home/loubot/.npm/5ddc2ae1-cake.lock
+9 silly lockFile 5ddc2ae1-cake cake
+10 silly lockFile 5ddc2ae1-cake cake
+11 verbose addNamed [ 'cake', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 2174a64b-cake cake@
+14 verbose lock cake@ /home/loubot/.npm/2174a64b-cake.lock
+15 silly addNameRange { name: 'cake', range: '*', hasData: false }
+16 verbose url raw cake
+17 verbose url resolving [ 'https://registry.npmjs.org/', './cake' ]
+18 verbose url resolved https://registry.npmjs.org/cake
+19 info trying registry request attempt 1 at 21:14:52
+20 http GET https://registry.npmjs.org/cake
+21 http 200 https://registry.npmjs.org/cake
+22 silly registry.get cb [ 200,
+22 silly registry.get   { date: 'Tue, 24 Jun 2014 20:14:53 GMT',
+22 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+22 silly registry.get     etag: '"62NZ1TVK27VHDCLX3D9OL87QF"',
+22 silly registry.get     'content-type': 'application/json',
+22 silly registry.get     'cache-control': 'max-age=30',
+22 silly registry.get     'content-length': '3159',
+22 silly registry.get     'accept-ranges': 'bytes',
+22 silly registry.get     via: '1.1 varnish',
+22 silly registry.get     age: '0',
+22 silly registry.get     'x-served-by': 'cache-ams4129-AMS',
+22 silly registry.get     'x-cache': 'MISS',
+22 silly registry.get     'x-cache-hits': '0',
+22 silly registry.get     'x-timer': 'S1403640893.537688,VS0,VE94',
+22 silly registry.get     vary: 'Accept',
+22 silly registry.get     'keep-alive': 'timeout=10, max=50',
+22 silly registry.get     connection: 'Keep-Alive' } ]
+23 silly addNameRange number 2 { name: 'cake', range: '*', hasData: true }
+24 silly addNameRange versions [ 'cake', [ '0.1.0', '0.1.1' ] ]
+25 verbose addNamed [ 'cake', '0.1.1' ]
+26 verbose addNamed [ '0.1.1', '0.1.1' ]
+27 silly lockFile 9404ff61-cake-0-1-1 cake@0.1.1
+28 verbose lock cake@0.1.1 /home/loubot/.npm/9404ff61-cake-0-1-1.lock
+29 silly lockFile d6c29825-ry-npmjs-org-cake-cake-0-1-1-tgz https://registry.npmjs.org/cake/-/cake-0.1.1.tgz
+30 verbose lock https://registry.npmjs.org/cake/-/cake-0.1.1.tgz /home/loubot/.npm/d6c29825-ry-npmjs-org-cake-cake-0-1-1-tgz.lock
+31 verbose addRemoteTarball [ 'https://registry.npmjs.org/cake/-/cake-0.1.1.tgz',
+31 verbose addRemoteTarball   '4a65d0dafb01818023162a717340dd88e0785b37' ]
+32 info retry fetch attempt 1 at 21:14:53
+33 verbose fetch to= /home/loubot/tmp/npm-3139-eAEkIFEi/registry.npmjs.org/cake/-/cake-0.1.1.tgz
+34 http GET https://registry.npmjs.org/cake/-/cake-0.1.1.tgz
+35 http 200 https://registry.npmjs.org/cake/-/cake-0.1.1.tgz
+36 silly lockFile d6c29825-ry-npmjs-org-cake-cake-0-1-1-tgz https://registry.npmjs.org/cake/-/cake-0.1.1.tgz
+37 silly lockFile d6c29825-ry-npmjs-org-cake-cake-0-1-1-tgz https://registry.npmjs.org/cake/-/cake-0.1.1.tgz
+38 silly lockFile 9404ff61-cake-0-1-1 cake@0.1.1
+39 silly lockFile 9404ff61-cake-0-1-1 cake@0.1.1
+40 silly lockFile 2174a64b-cake cake@
+41 silly lockFile 2174a64b-cake cake@
+42 silly resolved [ { name: 'cake',
+42 silly resolved     description: 'Coffee-Script\'s Make',
+42 silly resolved     keywords: [ 'coffeescript' ],
+42 silly resolved     author: { name: 'Stéphane Alnet' },
+42 silly resolved     version: '0.1.1',
+42 silly resolved     license: 'MIT',
+42 silly resolved     engines: { node: '>=0.8.0' },
+42 silly resolved     directories: { lib: './lib/coffee-script' },
+42 silly resolved     bin: { cake: './bin/cake' },
+42 silly resolved     scripts: { test: 'node ./bin/cake test' },
+42 silly resolved     bugs: { url: 'https://github.com/shimaore/cake/issues' },
+42 silly resolved     repository: { type: 'git', url: 'git://github.com/shimaore/cake.git' },
+42 silly resolved     dependencies: { 'coffee-script': 'latest' },
+42 silly resolved     readme: 'A fork of CoffeeScript\'s `cake` utility so that it might be used with e.g. `coffee-script-redux`.\n\n  To install:\n  npm install -g cake\n  (Leave off the -g if you don\'t wish to install globally.)\n\n  To suggest a feature, report a bug, or general discussion:\n  http://github.com/shimaore/cake/issues/\n',
+42 silly resolved     readmeFilename: 'README',
+42 silly resolved     _id: 'cake@0.1.1',
+42 silly resolved     dist:
+42 silly resolved      { shasum: '4a65d0dafb01818023162a717340dd88e0785b37',
+42 silly resolved        tarball: 'http://registry.npmjs.org/cake/-/cake-0.1.1.tgz' },
+42 silly resolved     _from: 'cake@',
+42 silly resolved     _npmVersion: '1.3.8',
+42 silly resolved     _npmUser: { name: 'shimaore', email: 'stephane@shimaore.net' },
+42 silly resolved     maintainers: [ [Object] ],
+42 silly resolved     _shasum: '4a65d0dafb01818023162a717340dd88e0785b37',
+42 silly resolved     _resolved: 'https://registry.npmjs.org/cake/-/cake-0.1.1.tgz' } ]
+43 info install cake@0.1.1 into /home/loubot/.nvm/v0.10.29/lib
+44 info installOne cake@0.1.1
+45 info /home/loubot/.nvm/v0.10.29/lib/node_modules/cake unbuild
+46 verbose tar unpack /home/loubot/.npm/cake/0.1.1/package.tgz
+47 silly lockFile fc12be7f-m-v0-10-29-lib-node-modules-cake tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+48 verbose lock tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake /home/loubot/.npm/fc12be7f-m-v0-10-29-lib-node-modules-cake.lock
+49 silly lockFile a53ccc1a-oubot-npm-cake-0-1-1-package-tgz tar:///home/loubot/.npm/cake/0.1.1/package.tgz
+50 verbose lock tar:///home/loubot/.npm/cake/0.1.1/package.tgz /home/loubot/.npm/a53ccc1a-oubot-npm-cake-0-1-1-package-tgz.lock
+51 silly gunzTarPerm modes [ '755', '644' ]
+52 silly gunzTarPerm extractEntry package.json
+53 silly gunzTarPerm extractEntry .npmignore
+54 silly gunzTarPerm extractEntry README
+55 silly gunzTarPerm extractEntry LICENSE
+56 silly gunzTarPerm extractEntry bin/cake
+57 silly gunzTarPerm extractEntry lib/cake.js
+58 silly gunzTarPerm extractEntry lib/helpers.js
+59 silly gunzTarPerm extractEntry lib/optparse.js
+60 silly lockFile fc12be7f-m-v0-10-29-lib-node-modules-cake tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+61 silly lockFile fc12be7f-m-v0-10-29-lib-node-modules-cake tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+62 silly lockFile a53ccc1a-oubot-npm-cake-0-1-1-package-tgz tar:///home/loubot/.npm/cake/0.1.1/package.tgz
+63 silly lockFile a53ccc1a-oubot-npm-cake-0-1-1-package-tgz tar:///home/loubot/.npm/cake/0.1.1/package.tgz
+64 info preinstall cake@0.1.1
+65 verbose readDependencies using package.json deps
+66 verbose readDependencies using package.json deps
+67 verbose cache add [ 'coffee-script@latest', null ]
+68 verbose cache add name=undefined spec="coffee-script@latest" args=["coffee-script@latest",null]
+69 verbose parsed url { protocol: null,
+69 verbose parsed url   slashes: null,
+69 verbose parsed url   auth: null,
+69 verbose parsed url   host: null,
+69 verbose parsed url   port: null,
+69 verbose parsed url   hostname: null,
+69 verbose parsed url   hash: null,
+69 verbose parsed url   search: null,
+69 verbose parsed url   query: null,
+69 verbose parsed url   pathname: 'coffee-script@latest',
+69 verbose parsed url   path: 'coffee-script@latest',
+69 verbose parsed url   href: 'coffee-script@latest' }
+70 verbose cache add name="coffee-script" spec="latest" args=["coffee-script","latest"]
+71 verbose parsed url { protocol: null,
+71 verbose parsed url   slashes: null,
+71 verbose parsed url   auth: null,
+71 verbose parsed url   host: null,
+71 verbose parsed url   port: null,
+71 verbose parsed url   hostname: null,
+71 verbose parsed url   hash: null,
+71 verbose parsed url   search: null,
+71 verbose parsed url   query: null,
+71 verbose parsed url   pathname: 'latest',
+71 verbose parsed url   path: 'latest',
+71 verbose parsed url   href: 'latest' }
+72 verbose addNamed [ 'coffee-script', 'latest' ]
+73 verbose addNamed [ null, null ]
+74 silly lockFile 7e5ad31f-coffee-script-latest coffee-script@latest
+75 verbose lock coffee-script@latest /home/loubot/.npm/7e5ad31f-coffee-script-latest.lock
+76 info addNameTag [ 'coffee-script', 'latest' ]
+77 verbose url raw coffee-script
+78 verbose url resolving [ 'https://registry.npmjs.org/', './coffee-script' ]
+79 verbose url resolved https://registry.npmjs.org/coffee-script
+80 info trying registry request attempt 1 at 21:14:54
+81 verbose etag "9W8FID6CX24GZZXBA7HPUIHIB"
+82 http GET https://registry.npmjs.org/coffee-script
+83 http 200 https://registry.npmjs.org/coffee-script
+84 silly registry.get cb [ 200,
+84 silly registry.get   { date: 'Tue, 24 Jun 2014 20:14:54 GMT',
+84 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+84 silly registry.get     etag: '"47W6KZV7GE04J3JTMK69I4711"',
+84 silly registry.get     'content-type': 'application/json',
+84 silly registry.get     'cache-control': 'max-age=30',
+84 silly registry.get     'content-length': '30834',
+84 silly registry.get     'accept-ranges': 'bytes',
+84 silly registry.get     via: '1.1 varnish',
+84 silly registry.get     age: '22',
+84 silly registry.get     'x-served-by': 'cache-ams4125-AMS',
+84 silly registry.get     'x-cache': 'HIT',
+84 silly registry.get     'x-cache-hits': '1',
+84 silly registry.get     'x-timer': 'S1403640894.582134,VS0,VE0',
+84 silly registry.get     vary: 'Accept',
+84 silly registry.get     'keep-alive': 'timeout=10, max=50',
+84 silly registry.get     connection: 'Keep-Alive' } ]
+85 verbose addNamed [ 'coffee-script', '1.7.1' ]
+86 verbose addNamed [ '1.7.1', '1.7.1' ]
+87 silly lockFile 66cb63a1-coffee-script-1-7-1 coffee-script@1.7.1
+88 verbose lock coffee-script@1.7.1 /home/loubot/.npm/66cb63a1-coffee-script-1-7-1.lock
+89 silly lockFile 66cb63a1-coffee-script-1-7-1 coffee-script@1.7.1
+90 silly lockFile 66cb63a1-coffee-script-1-7-1 coffee-script@1.7.1
+91 silly lockFile 7e5ad31f-coffee-script-latest coffee-script@latest
+92 silly lockFile 7e5ad31f-coffee-script-latest coffee-script@latest
+93 silly resolved [ { name: 'coffee-script',
+93 silly resolved     description: 'Unfancy JavaScript',
+93 silly resolved     keywords: [ 'javascript', 'language', 'coffeescript', 'compiler' ],
+93 silly resolved     author: { name: 'Jeremy Ashkenas' },
+93 silly resolved     version: '1.7.1',
+93 silly resolved     license: 'MIT',
+93 silly resolved     engines: { node: '>=0.8.0' },
+93 silly resolved     directories: { lib: './lib/coffee-script' },
+93 silly resolved     main: './lib/coffee-script/coffee-script',
+93 silly resolved     bin: { coffee: './bin/coffee', cake: './bin/cake' },
+93 silly resolved     scripts: { test: 'node ./bin/cake test' },
+93 silly resolved     homepage: 'http://coffeescript.org',
+93 silly resolved     bugs: { url: 'https://github.com/jashkenas/coffee-script/issues' },
+93 silly resolved     repository:
+93 silly resolved      { type: 'git',
+93 silly resolved        url: 'git://github.com/jashkenas/coffee-script.git' },
+93 silly resolved     devDependencies:
+93 silly resolved      { 'uglify-js': '~2.2',
+93 silly resolved        jison: '>=0.2.0',
+93 silly resolved        'highlight.js': '~8.0.0',
+93 silly resolved        underscore: '~1.5.2' },
+93 silly resolved     dependencies: { mkdirp: '~0.3.5' },
+93 silly resolved     _id: 'coffee-script@1.7.1',
+93 silly resolved     dist:
+93 silly resolved      { shasum: '62996a861780c75e6d5069d13822723b73404bfc',
+93 silly resolved        tarball: 'http://registry.npmjs.org/coffee-script/-/coffee-script-1.7.1.tgz' },
+93 silly resolved     _from: 'coffee-script@latest',
+93 silly resolved     _npmVersion: '1.3.24',
+93 silly resolved     _npmUser: { name: 'michaelficarra', email: 'npm@michael.ficarra.me' },
+93 silly resolved     maintainers: [ [Object] ],
+93 silly resolved     _shasum: '62996a861780c75e6d5069d13822723b73404bfc',
+93 silly resolved     _resolved: 'https://registry.npmjs.org/coffee-script/-/coffee-script-1.7.1.tgz',
+93 silly resolved     readme: 'ERROR: No README data found!' } ]
+94 info install coffee-script@1.7.1 into /home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+95 info installOne coffee-script@1.7.1
+96 info /home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script unbuild
+97 verbose tar unpack /home/loubot/.npm/coffee-script/1.7.1/package.tgz
+98 silly lockFile 25250257--cake-node-modules-coffee-script tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script
+99 verbose lock tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script /home/loubot/.npm/25250257--cake-node-modules-coffee-script.lock
+100 silly lockFile 64a017d2--coffee-script-1-7-1-package-tgz tar:///home/loubot/.npm/coffee-script/1.7.1/package.tgz
+101 verbose lock tar:///home/loubot/.npm/coffee-script/1.7.1/package.tgz /home/loubot/.npm/64a017d2--coffee-script-1-7-1-package-tgz.lock
+102 silly gunzTarPerm modes [ '755', '644' ]
+103 silly gunzTarPerm extractEntry package.json
+104 silly gunzTarPerm extractEntry .npmignore
+105 silly gunzTarPerm extractEntry README
+106 silly gunzTarPerm extractEntry LICENSE
+107 silly gunzTarPerm extractEntry register.js
+108 silly gunzTarPerm extractEntry CNAME
+109 silly gunzTarPerm extractEntry CONTRIBUTING.md
+110 silly gunzTarPerm extractEntry bin/cake
+111 silly gunzTarPerm extractEntry bin/coffee
+112 silly gunzTarPerm extractEntry lib/coffee-script/browser.js
+113 silly gunzTarPerm extractEntry lib/coffee-script/grammar.js
+114 silly gunzTarPerm extractEntry lib/coffee-script/helpers.js
+115 silly gunzTarPerm extractEntry lib/coffee-script/index.js
+116 silly gunzTarPerm extractEntry lib/coffee-script/lexer.js
+117 silly gunzTarPerm extractEntry lib/coffee-script/command.js
+118 silly gunzTarPerm extractEntry lib/coffee-script/optparse.js
+119 silly gunzTarPerm extractEntry lib/coffee-script/parser.js
+120 silly gunzTarPerm extractEntry lib/coffee-script/register.js
+121 silly gunzTarPerm extractEntry lib/coffee-script/repl.js
+122 silly gunzTarPerm extractEntry lib/coffee-script/rewriter.js
+123 silly gunzTarPerm extractEntry lib/coffee-script/coffee-script.js
+124 silly gunzTarPerm extractEntry lib/coffee-script/scope.js
+125 silly gunzTarPerm extractEntry lib/coffee-script/cake.js
+126 silly gunzTarPerm extractEntry lib/coffee-script/sourcemap.js
+127 silly gunzTarPerm extractEntry lib/coffee-script/nodes.js
+128 silly lockFile 25250257--cake-node-modules-coffee-script tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script
+129 silly lockFile 25250257--cake-node-modules-coffee-script tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script
+130 silly lockFile 64a017d2--coffee-script-1-7-1-package-tgz tar:///home/loubot/.npm/coffee-script/1.7.1/package.tgz
+131 silly lockFile 64a017d2--coffee-script-1-7-1-package-tgz tar:///home/loubot/.npm/coffee-script/1.7.1/package.tgz
+132 info preinstall coffee-script@1.7.1
+133 verbose readDependencies using package.json deps
+134 verbose readDependencies using package.json deps
+135 verbose cache add [ 'mkdirp@~0.3.5', null ]
+136 verbose cache add name=undefined spec="mkdirp@~0.3.5" args=["mkdirp@~0.3.5",null]
+137 verbose parsed url { protocol: null,
+137 verbose parsed url   slashes: null,
+137 verbose parsed url   auth: null,
+137 verbose parsed url   host: null,
+137 verbose parsed url   port: null,
+137 verbose parsed url   hostname: null,
+137 verbose parsed url   hash: null,
+137 verbose parsed url   search: null,
+137 verbose parsed url   query: null,
+137 verbose parsed url   pathname: 'mkdirp@~0.3.5',
+137 verbose parsed url   path: 'mkdirp@~0.3.5',
+137 verbose parsed url   href: 'mkdirp@~0.3.5' }
+138 verbose cache add name="mkdirp" spec="~0.3.5" args=["mkdirp","~0.3.5"]
+139 verbose parsed url { protocol: null,
+139 verbose parsed url   slashes: null,
+139 verbose parsed url   auth: null,
+139 verbose parsed url   host: null,
+139 verbose parsed url   port: null,
+139 verbose parsed url   hostname: null,
+139 verbose parsed url   hash: null,
+139 verbose parsed url   search: null,
+139 verbose parsed url   query: null,
+139 verbose parsed url   pathname: '~0.3.5',
+139 verbose parsed url   path: '~0.3.5',
+139 verbose parsed url   href: '~0.3.5' }
+140 verbose addNamed [ 'mkdirp', '~0.3.5' ]
+141 verbose addNamed [ null, '>=0.3.5-0 <0.4.0-0' ]
+142 silly lockFile c3f0fe9b-mkdirp-0-3-5 mkdirp@~0.3.5
+143 verbose lock mkdirp@~0.3.5 /home/loubot/.npm/c3f0fe9b-mkdirp-0-3-5.lock
+144 silly addNameRange { name: 'mkdirp', range: '>=0.3.5-0 <0.4.0-0', hasData: false }
+145 verbose url raw mkdirp
+146 verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp' ]
+147 verbose url resolved https://registry.npmjs.org/mkdirp
+148 info trying registry request attempt 1 at 21:14:54
+149 verbose etag "N0KM76H0RFTNFX4VI0IJX84V"
+150 http GET https://registry.npmjs.org/mkdirp
+151 http 200 https://registry.npmjs.org/mkdirp
+152 silly registry.get cb [ 200,
+152 silly registry.get   { date: 'Tue, 24 Jun 2014 20:14:55 GMT',
+152 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+152 silly registry.get     etag: '"6R5YN5GU1OBNTR6PKX7R5619N"',
+152 silly registry.get     'content-type': 'application/json',
+152 silly registry.get     'cache-control': 'max-age=30',
+152 silly registry.get     'content-length': '21377',
+152 silly registry.get     'accept-ranges': 'bytes',
+152 silly registry.get     via: '1.1 varnish',
+152 silly registry.get     age: '294',
+152 silly registry.get     'x-served-by': 'cache-ams4134-AMS',
+152 silly registry.get     'x-cache': 'HIT',
+152 silly registry.get     'x-cache-hits': '1',
+152 silly registry.get     'x-timer': 'S1403640895.400740,VS0,VE0',
+152 silly registry.get     vary: 'Accept',
+152 silly registry.get     'keep-alive': 'timeout=10, max=50',
+152 silly registry.get     connection: 'Keep-Alive' } ]
+153 silly addNameRange number 2 { name: 'mkdirp', range: '>=0.3.5-0 <0.4.0-0', hasData: true }
+154 silly addNameRange versions [ 'mkdirp',
+154 silly addNameRange   [ '0.0.1',
+154 silly addNameRange     '0.0.2',
+154 silly addNameRange     '0.0.3',
+154 silly addNameRange     '0.0.4',
+154 silly addNameRange     '0.0.5',
+154 silly addNameRange     '0.0.6',
+154 silly addNameRange     '0.0.7',
+154 silly addNameRange     '0.1.0',
+154 silly addNameRange     '0.2.0',
+154 silly addNameRange     '0.2.1',
+154 silly addNameRange     '0.2.2',
+154 silly addNameRange     '0.3.0',
+154 silly addNameRange     '0.3.1',
+154 silly addNameRange     '0.3.2',
+154 silly addNameRange     '0.3.3',
+154 silly addNameRange     '0.3.4',
+154 silly addNameRange     '0.3.5',
+154 silly addNameRange     '0.4.0',
+154 silly addNameRange     '0.4.1',
+154 silly addNameRange     '0.4.2',
+154 silly addNameRange     '0.5.0' ] ]
+155 verbose addNamed [ 'mkdirp', '0.3.5' ]
+156 verbose addNamed [ '0.3.5', '0.3.5' ]
+157 silly lockFile 67d2df2a-mkdirp-0-3-5 mkdirp@0.3.5
+158 verbose lock mkdirp@0.3.5 /home/loubot/.npm/67d2df2a-mkdirp-0-3-5.lock
+159 silly lockFile 67d2df2a-mkdirp-0-3-5 mkdirp@0.3.5
+160 silly lockFile 67d2df2a-mkdirp-0-3-5 mkdirp@0.3.5
+161 silly lockFile c3f0fe9b-mkdirp-0-3-5 mkdirp@~0.3.5
+162 silly lockFile c3f0fe9b-mkdirp-0-3-5 mkdirp@~0.3.5
+163 silly resolved [ { name: 'mkdirp',
+163 silly resolved     description: 'Recursively mkdir, like `mkdir -p`',
+163 silly resolved     version: '0.3.5',
+163 silly resolved     author:
+163 silly resolved      { name: 'James Halliday',
+163 silly resolved        email: 'mail@substack.net',
+163 silly resolved        url: 'http://substack.net' },
+163 silly resolved     main: './index',
+163 silly resolved     keywords: [ 'mkdir', 'directory' ],
+163 silly resolved     repository:
+163 silly resolved      { type: 'git',
+163 silly resolved        url: 'http://github.com/substack/node-mkdirp.git' },
+163 silly resolved     scripts: { test: 'tap test/*.js' },
+163 silly resolved     devDependencies: { tap: '~0.4.0' },
+163 silly resolved     license: 'MIT',
+163 silly resolved     _id: 'mkdirp@0.3.5',
+163 silly resolved     dist:
+163 silly resolved      { shasum: 'de3e5f8961c88c787ee1368df849ac4413eca8d7',
+163 silly resolved        tarball: 'http://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz' },
+163 silly resolved     _from: 'mkdirp@~0.3.5',
+163 silly resolved     _npmVersion: '1.2.2',
+163 silly resolved     _npmUser: { name: 'substack', email: 'mail@substack.net' },
+163 silly resolved     maintainers: [ [Object] ],
+163 silly resolved     directories: {},
+163 silly resolved     _shasum: 'de3e5f8961c88c787ee1368df849ac4413eca8d7',
+163 silly resolved     _resolved: 'https://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz',
+163 silly resolved     bugs: { url: 'https://github.com/substack/node-mkdirp/issues' },
+163 silly resolved     readme: 'ERROR: No README data found!',
+163 silly resolved     homepage: 'https://github.com/substack/node-mkdirp' } ]
+164 info install mkdirp@0.3.5 into /home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script
+165 info installOne mkdirp@0.3.5
+166 info /home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules/mkdirp unbuild
+167 verbose tar unpack /home/loubot/.npm/mkdirp/0.3.5/package.tgz
+168 silly lockFile 6be8985c-offee-script-node-modules-mkdirp tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules/mkdirp
+169 verbose lock tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules/mkdirp /home/loubot/.npm/6be8985c-offee-script-node-modules-mkdirp.lock
+170 silly lockFile 566c9469-bot-npm-mkdirp-0-3-5-package-tgz tar:///home/loubot/.npm/mkdirp/0.3.5/package.tgz
+171 verbose lock tar:///home/loubot/.npm/mkdirp/0.3.5/package.tgz /home/loubot/.npm/566c9469-bot-npm-mkdirp-0-3-5-package-tgz.lock
+172 silly gunzTarPerm modes [ '755', '644' ]
+173 silly gunzTarPerm extractEntry package.json
+174 silly gunzTarPerm extractEntry .npmignore
+175 silly gunzTarPerm extractEntry LICENSE
+176 silly gunzTarPerm extractEntry index.js
+177 silly gunzTarPerm extractEntry examples/pow.js
+178 silly gunzTarPerm extractEntry readme.markdown
+179 silly gunzTarPerm extractEntry test/perm.js
+180 silly gunzTarPerm extractEntry test/perm_sync.js
+181 silly gunzTarPerm extractEntry test/race.js
+182 silly gunzTarPerm extractEntry test/rel.js
+183 silly gunzTarPerm extractEntry test/return.js
+184 silly gunzTarPerm extractEntry test/clobber.js
+185 silly gunzTarPerm extractEntry test/root.js
+186 silly gunzTarPerm extractEntry test/umask.js
+187 silly gunzTarPerm extractEntry test/sync.js
+188 silly gunzTarPerm extractEntry test/chmod.js
+189 silly gunzTarPerm extractEntry test/umask_sync.js
+190 silly gunzTarPerm extractEntry test/return_sync.js
+191 silly gunzTarPerm extractEntry test/mkdirp.js
+192 silly gunzTarPerm extractEntry .travis.yml
+193 silly lockFile 6be8985c-offee-script-node-modules-mkdirp tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules/mkdirp
+194 silly lockFile 6be8985c-offee-script-node-modules-mkdirp tar:///home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules/mkdirp
+195 silly lockFile 566c9469-bot-npm-mkdirp-0-3-5-package-tgz tar:///home/loubot/.npm/mkdirp/0.3.5/package.tgz
+196 silly lockFile 566c9469-bot-npm-mkdirp-0-3-5-package-tgz tar:///home/loubot/.npm/mkdirp/0.3.5/package.tgz
+197 info preinstall mkdirp@0.3.5
+198 verbose readDependencies using package.json deps
+199 verbose readDependencies using package.json deps
+200 silly resolved []
+201 verbose about to build /home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules/mkdirp
+202 info build /home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules/mkdirp
+203 verbose linkStuff [ true,
+203 verbose linkStuff   '/home/loubot/.nvm/v0.10.29/lib/node_modules',
+203 verbose linkStuff   false,
+203 verbose linkStuff   '/home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script/node_modules' ]
+204 info linkStuff mkdirp@0.3.5
+205 verbose linkBins mkdirp@0.3.5
+206 verbose linkMans mkdirp@0.3.5
+207 verbose rebuildBundles mkdirp@0.3.5
+208 info install mkdirp@0.3.5
+209 info postinstall mkdirp@0.3.5
+210 verbose about to build /home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script
+211 info build /home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/coffee-script
+212 verbose linkStuff [ true,
+212 verbose linkStuff   '/home/loubot/.nvm/v0.10.29/lib/node_modules',
+212 verbose linkStuff   false,
+212 verbose linkStuff   '/home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules' ]
+213 info linkStuff coffee-script@1.7.1
+214 verbose linkBins coffee-script@1.7.1
+215 verbose link bins [ { coffee: './bin/coffee', cake: './bin/cake' },
+215 verbose link bins   '/home/loubot/.nvm/v0.10.29/lib/node_modules/cake/node_modules/.bin',
+215 verbose link bins   false ]
+216 verbose linkMans coffee-script@1.7.1
+217 verbose rebuildBundles coffee-script@1.7.1
+218 verbose rebuildBundles [ 'mkdirp' ]
+219 info install coffee-script@1.7.1
+220 info postinstall coffee-script@1.7.1
+221 verbose about to build /home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+222 info build /home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+223 verbose linkStuff [ true,
+223 verbose linkStuff   '/home/loubot/.nvm/v0.10.29/lib/node_modules',
+223 verbose linkStuff   true,
+223 verbose linkStuff   '/home/loubot/.nvm/v0.10.29/lib/node_modules' ]
+224 info linkStuff cake@0.1.1
+225 verbose linkBins cake@0.1.1
+226 verbose link bins [ { cake: './bin/cake' },
+226 verbose link bins   '/home/loubot/.nvm/v0.10.29/bin',
+226 verbose link bins   true ]
+227 verbose linkMans cake@0.1.1
+228 verbose rebuildBundles cake@0.1.1
+229 verbose rebuildBundles [ '.bin', 'coffee-script' ]
+230 info /home/loubot/.nvm/v0.10.29/lib/node_modules/cake unbuild
+231 info preuninstall cake@0.1.1
+232 info uninstall cake@0.1.1
+233 verbose true,/home/loubot/.nvm/v0.10.29/lib/node_modules,/home/loubot/.nvm/v0.10.29/lib/node_modules unbuild cake@0.1.1
+234 verbose /home/loubot/.nvm/v0.10.29/bin,[object Object] binRoot
+235 error error rolling back Error: Refusing to delete: /home/loubot/.nvm/v0.10.29/bin/cake not in /home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+235 error error rolling back     at clobberFail (/home/loubot/.nvm/v0.10.29/lib/node_modules/npm/lib/utils/gently-rm.js:57:12)
+235 error error rolling back     at next (/home/loubot/.nvm/v0.10.29/lib/node_modules/npm/lib/utils/gently-rm.js:43:14)
+235 error error rolling back     at /home/loubot/.nvm/v0.10.29/lib/node_modules/npm/lib/utils/gently-rm.js:52:12
+235 error error rolling back     at Object.oncomplete (fs.js:107:15)
+235 error error rolling back  cake@0.1.1 { [Error: Refusing to delete: /home/loubot/.nvm/v0.10.29/bin/cake not in /home/loubot/.nvm/v0.10.29/lib/node_modules/cake] code: 'EEXIST', path: '/home/loubot/.nvm/v0.10.29/bin/cake' }
+236 error Refusing to delete: /home/loubot/.nvm/v0.10.29/bin/cake not in /home/loubot/.nvm/v0.10.29/lib/node_modules/cake
+File exists: /home/loubot/.nvm/v0.10.29/bin/cake
+Move it away, and try again.
+237 error System Linux 3.13.0-29-generic
+238 error command "/home/loubot/.nvm/v0.10.29/bin/node" "/home/loubot/.nvm/v0.10.29/bin/npm" "install" "-g" "cake"
+239 error cwd /home/loubot/Documents/railsApps/lessons
+240 error node -v v0.10.29
+241 error npm -v 1.4.14
+242 error path /home/loubot/.nvm/v0.10.29/bin/cake
+243 error code EEXIST
+244 verbose exit [ 1, true ]

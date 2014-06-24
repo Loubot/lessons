@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require jquery.ui.datepicker
 //= require moment.min.js
+//= require anytime.js
 //= require_tree .
