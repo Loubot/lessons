@@ -11,6 +11,7 @@ class TeachersController < ApplicationController
 		@photo = Photo.new
 		@params = params
 		@teacher = Teacher.find(current_teacher)
+		@event = Event.new
 		gon.events = Event.all
 	end
 	

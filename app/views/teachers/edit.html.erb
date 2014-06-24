@@ -1,5 +1,8 @@
 <%= @params %>
 <%= render 'form' %>
 
-<div id="datepicker" style="height:30px;width:50px;"></div>
+
+<%= form_for @event do |f| %>
+	<%= f.text_field :title, class: 'datepicker' %>
+<% end %>
 <div id='calendar' style="height:500px;width:500px;"></div>

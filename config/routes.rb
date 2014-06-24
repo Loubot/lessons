@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :teachers, only: [:update, :edit, :destroy] do
   	resources :photos
   end
+  resources :events
 
   get '/how-it-works'     => 'static#how_it_works'
   get '/mailing-list'     => 'static#mailing_list'
