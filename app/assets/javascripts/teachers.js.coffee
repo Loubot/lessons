@@ -2,6 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'page:change', ->
+	$('#calendar').fullCalendar
+		
+		defaultView: 'agendaWeek'
 	dropzone = new Dropzone('#my_dropzone', {
 		addRemoveLinks: true
 		url: 'files/post'
@@ -9,3 +12,5 @@ $(document).on 'page:change', ->
 		addRemoveLinks: true
 		autoProcessQueue: false
 		})
+
+	
