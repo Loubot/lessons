@@ -5,11 +5,13 @@
 
 <div class="col-md-6" id='calendar' style="height:500px;width:500px;"></div>
 <div class="col-md-6">
-	
+		<% my_time = Time.now + 5.days + 7.hours + 3.minutes + 14.seconds %>
 		<%= form_for @event do |f| %>
+
 			<input name="date" type="text" id='date'>
-			<input name="start_time" type="text" id="start_time">
-			<input name="end_time" type="text" id="end_time">
+			<%= f.time_select :start_time, :ignore_date => true, :minute_step => 30  %>
+			<%= f.time_select :end_time, :ignore_date => true, :minute_step => 30  %>
+			
 			<%= f.submit %>
 		<% end %>
 </div>
