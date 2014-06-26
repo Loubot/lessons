@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
 	def create
+		
 		save_params = format_time(params)
 		@event = Event.new(save_params)
 		if @event.save
@@ -19,8 +20,8 @@ class EventsController < ApplicationController
 
 	def format_time(params)
 		date = params[:date]
-		starttime = Time.zone.parse("#{date} #{params[:start_time]}")
-		endtime = Time.zone.parse("#{date} #{params[:end_time]}")
+		starttime = Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}")
+		endtime = Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}")
 		@event_params = { start_time: starttime, end_time: endtime, status: 'active'}
 	end
 end

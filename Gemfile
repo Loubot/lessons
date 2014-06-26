@@ -46,6 +46,8 @@ gem 'annotate'
 
 gem 'jquery-ui-rails'
 
+gem "combined_time_select", "~> 1.0.1"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

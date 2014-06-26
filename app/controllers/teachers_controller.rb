@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
 	before_action :authenticate_teacher!
 	before_action :check_id, only: [:update]
+	include TeachersHelper
 
 	def check_id
 		redirect_to root_path unless current_teacher.id = params[:id]
@@ -12,7 +13,7 @@ class TeachersController < ApplicationController
 		@params = params
 		@teacher = Teacher.find(current_teacher)
 		@event = Event.new
-		gon.events = Event.all
+		gon.events = format_times(Event.all)
 	end
 	
 	def update

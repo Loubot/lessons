@@ -3,11 +3,7 @@ $(document).on 'page:change', ->
 			
 			defaultView: 'agendaWeek'
 			scrollTime:	'12:00:00	'
-			events: [
-				title  : 'event3',
-	      start  : '2014-06-25T21:30:00'
-	      end 	 : '2014-06-25T22:30:00'
-			]
+			events: gon.events
 	
   $("#date").AnyTime_picker
     format: "%Y-%m-%d"
