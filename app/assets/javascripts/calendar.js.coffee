@@ -1,9 +1,10 @@
 $(document).on 'page:change', ->
-	$('#calendar').fullCalendar
-			
+	$('#calendar').fullCalendar			
 			defaultView: 'agendaWeek'
 			scrollTime:	'12:00:00	'
 			events: gon.events
+
+
 	
   $("#date").AnyTime_picker
     format: "%Y-%m-%d"

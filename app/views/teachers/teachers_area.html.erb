@@ -1,0 +1,32 @@
+<%= @params %>
+<div class="col-md-12" id='calendar' style="height:400px;width:500px;"></div>
+<div class="col-md-12">
+		<h2>Add an appointment</h2>
+		<%= form_for @event do |f| %>
+
+			Date:<input name="date" type="text" id='date' >
+			<%= f.time_select :start_time,
+			  :combined => true,
+			  :default => Time.now.change(:hour => 11, :min => 30),
+			  :minute_interval => 30,
+			  :time_separator => "",
+			  :start_hour => 10,
+			  :start_minute => 30,
+			  :end_hour => 14,
+			  :end_minute => 30
+			%>
+			<%= f.time_select :end_time,
+			  :combined => true,
+			  :default => Time.now.change(:hour => 12, :min => 30),
+			  :minute_interval => 30,
+			  :time_separator => "",
+			  :start_hour => 10,
+			  :start_minute => 30,
+			  :end_hour => 14,
+			  :end_minute => 30
+			%>
+			<%= f.hidden_field :teacher_id, value: current_teacher.id %>
+			
+			<%= f.submit id: 'event_submit' %>
+		<% end %>
+</div>

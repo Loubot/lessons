@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20140624000659) do
 
   create_table "events", force: true do |t|
     t.string   "title"
+    t.integer  "teacher_id"
     t.datetime "start_time"
     t.datetime "end_time"
     t.string   "status"

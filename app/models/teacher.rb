@@ -30,4 +30,6 @@ class Teacher < ActiveRecord::Base
   validates :email, confirmation: true, uniqueness: { case_sensitive: false }
 
   has_one :photo, :as => :imageable
+
+  has_many :events
 end

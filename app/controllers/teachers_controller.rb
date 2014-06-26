@@ -12,8 +12,7 @@ class TeachersController < ApplicationController
 		@photo = Photo.new
 		@params = params
 		@teacher = Teacher.find(current_teacher)
-		@event = Event.new
-		gon.events = format_times(Event.all)
+		
 	end
 	
 	def update
@@ -23,6 +22,14 @@ class TeachersController < ApplicationController
 			redirect_to :back
 		end
 	end
+
+	def teachers_area
+		@params = params
+		@teacher = Teacher.find(current_teacher)
+		@event = Event.new
+		gon.events = format_times(Event.all)
+	end
+
 
 
 	private
