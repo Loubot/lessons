@@ -38,6 +38,8 @@ gem 'binding_of_caller'
 
 gem 'devise'
 
+gem 'carrierwave'
+
 gem 'gibbon'
 
 gem 'gon'

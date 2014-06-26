@@ -1,5 +1,15 @@
-<div class="dropzone-container">
-	<%= form_for [@context, @photo], html: { class: 'dropzone' } do |p| %>
-		
-	<% end %>
-</div>
+<div class="container-fluid">
+	<div class="dropzone-container">
+		<%= form_for [@context, @photo], remote: true, html: { id: 'dropzone', class: 'dropzone' } do |p| %>
+			<div class="form-group fallback">
+					
+	         <%= p.file_field :avatar %>
+	         <%= p.hidden_field :teacher_id, value: current_teacher.id %>
+	         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+	    </div> <!-- end of fallback -->
+		<% end %>
+	</div> <!-- end of dropzone-container -->
+	<div class="row">
+		<%= render @photos %>
+	</div> <!-- end of row -->
+</div> <!-- end of container-fluid -->

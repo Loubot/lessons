@@ -8,11 +8,10 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@context = context
-		@photo = Photo.new
+		@context = Teacher.find(current_teacher)
+		@photo = @context.photos.new
 		@params = params
-		@teacher = Teacher.find(current_teacher)
-		
+		@photos = @context.photos.all
 	end
 	
 	def update
@@ -37,10 +36,4 @@ class TeachersController < ApplicationController
 			params.require(:teacher).permit!
 		end
 
-
-		def context 
-			if params[:controller] == 'teachers'
-				Teacher.find(params[:id])
-			end
-		end
 end

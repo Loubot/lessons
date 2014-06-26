@@ -2,12 +2,19 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'page:change', ->	
-	dropzone = new Dropzone('#my_dropzone', {
+	dropzone = new Dropzone('#dropzone', {
+		paramName: "photo[avatar]"
 		addRemoveLinks: true
-		url: 'files/post'
 		parallelUploads: 10
-		addRemoveLinks: true
-		autoProcessQueue: false
+		autoProcessQueue: true
 		})
+
+	dropzone.on 'error', (file) ->
+		$('body').prepend("<b style='color: red;'>An error occurred while saving the Student.</b>")
+
+	dropzone.on 'success', (file) ->
+		console.log 'File uploaded successfully'
+
+
 
 	
