@@ -36,11 +36,18 @@
 			    		
 			    		<% end %>
 			    	</div>
-	    		</div>
+	    		</div> <!-- end of panel-default -->
     		</div> <!-- end of col-xs-12 col-sm-8 col-md-4 -->
+    		<div class="col-md-1"></div>
+
     		<div class="col-md-4">
     			<%= render 'dropzone' %>
     		</div>
-    	</div>
+    	</div> <!-- end of row centered form -->
+    	<div class="row">
+    		<hr>
+    		<h2>Uploaded photos</h2>
+				<%= render @photos %>
+			</div> <!-- end of row -->
 
-</div>
+</div> <!-- end of container-fluid -->

@@ -20,6 +20,18 @@ class PhotosController < ApplicationController
 		end
 	end
 
+	def destroy
+		@context = context
+		@photo = @context.photos.find(params[:id])
+		if @photo.destroy
+			flash[:success] = "Photo deleted!"
+			redirect_to :back
+		else
+			flash[:error] = "Could not delete photo #{@photo.errors.full_messages}"
+			redirect_to :back
+		end
+	end
+
 	private
 		def context 
 			if params[:teacher_id]
