@@ -14,7 +14,7 @@ $(document).on 'page:change', ->
 
 	dropzone.on 'success', (file) ->
 		console.log 'File uploaded successfully'
-
+		location.reload()
 
 
 	
