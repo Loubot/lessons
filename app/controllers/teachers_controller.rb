@@ -12,8 +12,9 @@ class TeachersController < ApplicationController
 		@photo = @context.photos.new
 		@params = params
 		@photos = @context.photos.all
+		@qualifications = Qualification.where(teacher_id: current_teacher.id)
 		@qualification = @context.qualifications.new
-		@qualifications = @context.qualifications
+		
 	end
 	
 	def update
