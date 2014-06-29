@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   		get '/teachers-area'		=> 'teachers#teachers_area'
   	end
   	resources :photos
+    resources :qualifications, only: [:create, :destroy, :edit]
   end
   resources :events
 

@@ -12,6 +12,8 @@ class TeachersController < ApplicationController
 		@photo = @context.photos.new
 		@params = params
 		@photos = @context.photos.all
+		@qualification = @context.qualifications.new
+		@qualifications = @context.qualifications
 	end
 	
 	def update

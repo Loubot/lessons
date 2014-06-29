@@ -5,7 +5,7 @@ class CreateQualifications < ActiveRecord::Migration
       t.string :school
       t.datetime :start
       t.datetime :end
-
+      t.integer :teacher_id
       t.timestamps
     end
   end

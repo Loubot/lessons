@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140627124703) do
     t.string   "school"
     t.datetime "start"
     t.datetime "end"
+    t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
