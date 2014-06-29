@@ -8,7 +8,14 @@ $(document).on 'page:change', ->
 		addRemoveLinks: true
 		parallelUploads: 10
 		autoProcessQueue: true
+		#previewsContainer: ".first_thumbnail"
+		# init: ->
+		# 	@on "addedfile", (file) ->				
+	 #    	$(".row").toggle()
+
 		})
+
+	
 
 	dropzone.on 'error', (file) ->
 		$('body').prepend("<b style='color: red;'>An error occurred while saving the Student.</b>")
