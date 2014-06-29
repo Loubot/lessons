@@ -1,6 +1,6 @@
 <div class="col-xs-6 col-md-3">
   <a href="#" class="thumbnail">
-    <%= image_tag photo.avatar.url %>
+    <%= image_tag photo.avatar.url(:thumb) %>
     <%= link_to 'Delete',[@context, photo], class: 'btn btn-danger', data: { confirm: 'Are you sure?' }, method: :delete %></p>
   </a>
 </div>
