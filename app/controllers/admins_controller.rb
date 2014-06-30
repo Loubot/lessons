@@ -12,5 +12,6 @@ class AdminsController < ApplicationController
 		@category = Category.new
 		@categories = Category.all
 		@subject = Subject.new
+		@teachers = Teacher.all
 	end
 end

@@ -11,19 +11,15 @@
 			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<%= f.submit class: 'btn btn-info' %>
+					<%= f.submit class: 'btn btn-primary' %>
 				</div>
 			</div>
 			
 		<% end %>
-	</div>
-</div>
+	</div> <!-- end of col-md-9 -->
+</div> <!-- end of container-fluid -->
 <hr>
-<div class="container-fluid">
-	<div class="col-md-7 col-md-offset-1">
 
-		<div class="panel-group" id="accordian">
-			<%= render @categories %>
-		</div>
-	</div>
-</div>
+<%= render 'categories' %>
+
+<%= render 'make_admin' %>
