@@ -1,8 +1,17 @@
 <div class="container-fluid">
 	<div class="col-md-7 col-md-offset-1">
 
-		<div class="panel-group" id="accordian">
-			<%= render @teachers %>
+		<div class="panel-group" id="accordion">
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h4 class="panel-title">
+		      	<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+		      		List of teachers
+		      	</a>
+						
+					</h4>
+				</div>
+			</div>
 		</div>
 	</div> <!-- end of col-md-7 col-md-offset-1 -->
 </div> <!-- end of container-fluid -->
