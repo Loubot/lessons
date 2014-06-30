@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627124703) do
+ActiveRecord::Schema.define(version: 20140630101243) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: true do |t|
     t.string   "title"
@@ -42,6 +48,13 @@ ActiveRecord::Schema.define(version: 20140627124703) do
     t.datetime "updated_at"
   end
 
+  create_table "subjects", force: true do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "teachers", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -59,6 +72,7 @@ ActiveRecord::Schema.define(version: 20140627124703) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.boolean  "admin"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
