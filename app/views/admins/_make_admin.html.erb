@@ -8,9 +8,25 @@
 		      	<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 		      		List of teachers
 		      	</a>
-						
+
 					</h4>
 				</div>
+				<div id="collapseOne" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="list-group">
+							<%= form_tag make_admin_path, method: 'put' do %>
+								<% @teachers.each do |teacher| %>
+									<li class="list-group-item"><%= teacher.first_name %>
+										<%= check_box_tag 'teacher[admin][]', teacher.id, teacher.admin, class: 'pull-right' %>
+									</li>
+								<% end %>
+								
+							  <%= submit_tag 'Update admins', class: 'btn btn-info' %>
+							   
+							<% end %>
+						</ul>
+					</div>
+			</div>
 			</div>
 		</div>
 	</div> <!-- end of col-md-7 col-md-offset-1 -->

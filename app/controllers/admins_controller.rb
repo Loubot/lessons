@@ -14,4 +14,9 @@ class AdminsController < ApplicationController
 		@subject = Subject.new
 		@teachers = Teacher.all
 	end
+
+	def make_admin
+		flash[:notice] = params
+		redirect_to :back
+	end
 end
