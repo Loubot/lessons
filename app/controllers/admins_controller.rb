@@ -1,4 +1,6 @@
 class AdminsController < ApplicationController
+
+	include AdminsHelper
 	before_action :is_admin?
 
 	def is_admin?
@@ -18,5 +20,7 @@ class AdminsController < ApplicationController
 	def make_admin
 		flash[:notice] = params
 		redirect_to :back
+		(params[:teacher] && params[:teacher][:admin]) ? admins = params[:teacher][:admin] : admins = []
+		update_admins(admins)
 	end
 end
