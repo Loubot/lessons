@@ -12,17 +12,18 @@
 </head>
 <body>
 	
-		<div class="container " id="main_page">
-			<%= render 'partials/nav' %>
-			<div class="col-md-1"></div>
-			<div class="col-md-11">
-				
-				<%= render 'partials/notices' %>
+		
+	<%= render 'partials/nav' %>
+	<div class="container" id="main_page">
+		<div class="col-md-1"></div>
+		<div class="col-md-11">
 			
-				<%= yield %>
+			<%= render 'partials/notices' %>
+		
+			<%= yield %>
 
-			</div>
-		</div> 	
+		</div>
+	</div> 	
 		
 	
 </body>

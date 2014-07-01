@@ -6,6 +6,8 @@ module AdminsHelper
 			return
 		end
 
+		all_ids = Teacher.pluck(:id)
+		puts "%%%%%%%%%%%%%%#{all_ids}"
 		admin_ids.each do |admin| 
 			Teacher.find(admin.to_i).update_attributes(admin: true)
 		end
