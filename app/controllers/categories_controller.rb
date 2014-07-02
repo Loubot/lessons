@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
 
 	def destroy
 		@category = Category.find(params[:id])
-		if @cetagory.destroy
+		if @category.destroy
 			flash[:success] = "Category deleted successfully"
 			redirect_to :back
 		else
