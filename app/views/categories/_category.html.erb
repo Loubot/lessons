@@ -18,12 +18,13 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<%= s.submit class: 'btn btn-info' %>
+							<%= link_to 'Delete Category', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'pull-right btn btn-danger' %>
 						</div>
 					</div>
 				<% end %>
 				<% category.subjects.each do |subject| %>
 					<li class="list-group-item"><%= subject.name %>
-						<span class="pull-right"><%= link_to 'Delete', subject, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+						<span class="pull-right"><%= link_to 'Delete subject', subject, method: :delete, data: { confirm: 'Are you sure?' } %></span>
 					</li>
 				<% end %>
 			</ul>

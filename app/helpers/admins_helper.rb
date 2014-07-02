@@ -6,8 +6,11 @@ module AdminsHelper
 			return
 		end
 
-		all_ids = Teacher.pluck(:id)
-		puts "%%%%%%%%%%%%%%#{all_ids}"
+		missing_ids = Teacher.where("id NOT IN (?)", admin_ids).pluck(:id)
+		missing_ids.each do |missing_id|
+			Teacher.find(missing_id.to_i).update_attributes(admin: false)
+		end
+		
 		admin_ids.each do |admin| 
 			Teacher.find(admin.to_i).update_attributes(admin: true)
 		end

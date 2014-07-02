@@ -9,6 +9,6 @@
 #
 
 class Category < ActiveRecord::Base
-	has_many :subjects
+	has_many :subjects, dependent: :destroy
 	validates :name, presence: true
 end
