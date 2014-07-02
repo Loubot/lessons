@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630101243) do
+ActiveRecord::Schema.define(version: 20140702204914) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20140630101243) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.boolean  "admin"
+    t.float    "lat"
+    t.float    "lon"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true

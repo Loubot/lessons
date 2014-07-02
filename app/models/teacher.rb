@@ -19,6 +19,9 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  admin                  :boolean
+#  lat                    :float
+#  lon                    :float
 #
 
 class Teacher < ActiveRecord::Base

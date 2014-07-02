@@ -26,3 +26,25 @@ $(document).on 'page:change', ->
 
 
 	
+initialize = ->
+  mapCanvas = document.getElementById("map_canvas")
+  mapOptions =
+    center: new google.maps.LatLng(52.904281, -8.023571)
+    zoom: 8
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+
+  map = new google.maps.Map(map_canvas, mapOptions)
+  google.maps.event.addListener map, "click", (e) ->
+	  $('#lat').val(e.latLng.lat())
+	  $('#lon').val(e.latLng.lng())
+	
+	  
+	  #optionally mark the location
+	  #markLocation e.latLng
+  return
+		
+	$(document).ready ->
+		google.maps.event.addDomListener window, 'load', initialize
+		
+		
+	
