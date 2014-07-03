@@ -12,9 +12,8 @@
  *
  *= require_tree .
  *= require_self
- *= require jquery.ui.datepicker
- *= require jquery.ui.slider
+ *= require jquery.ui.all
  */
 
  @import url(http://fonts.googleapis.com/css?family=Open+Sans);
- 
+

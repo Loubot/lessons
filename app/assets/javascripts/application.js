@@ -13,8 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require jquery.ui.slider
-//= require jquery.ui.datepicker
+//= require jquery.ui.all
 //= require moment.min.js
 //= require anytime.js
 //= require_tree .
