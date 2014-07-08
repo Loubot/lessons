@@ -30,7 +30,6 @@ $(document).on 'page:change', ->
 initialize = ->
   mapCanvas = document.getElementById("map_canvas")
   if gon.location[0] == null && gon.location[1] == null
-    alert 'b'
     mapOptions = 
       center: new google.maps.LatLng(52.904281, -8.023571)
       zoom: 8
@@ -69,7 +68,6 @@ window.start_address_search = () ->
   	return
 	
 setMapOptions = () ->
-	alert 'a'
 	mapOptions =
 	    center: new google.maps.LatLng(gon.location[0], gon.location[1])
 	    zoom: 16
