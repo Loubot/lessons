@@ -30,7 +30,7 @@ class TeachersController < ApplicationController
 		@teacher = Teacher.find(current_teacher)
 		@event = Event.new
 		gon.events = format_times(Event.all)
-		gon.location = [lat: @teacher.lat, lon: @teacher.lon]
+		gon.location = [@teacher.lat,@teacher.lon]
 	end
 
 

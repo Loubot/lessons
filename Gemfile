@@ -28,7 +28,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
-	gem 'jquery-ui-rails'
+	gem 'jquery-ui-rails', '4.2.1'
 	gem 'unicorn'
 end
 
@@ -48,7 +48,7 @@ gem 'gon'
 
 gem 'annotate'
 
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '4.2.1'
 
 gem "combined_time_select", "~> 1.0.1"
 
