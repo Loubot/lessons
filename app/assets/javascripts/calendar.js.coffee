@@ -1,9 +1,14 @@
 $(document).on 'page:change', ->
   if $('#calendar').length > 0
-  	$('#calendar').fullCalendar			
-  			defaultView: 'agendaWeek'
-  			scrollTime:	'12:00:00	'
-  			events: gon.events
+  	$('#calendar').fullCalendar
+        handleWindowResize: true
+        defaultView: 'agendaWeek'
+        scrollTime:	'12:00:00	'
+        minTime: '07:00'
+        events: gon.events
+        eventColor: 'red'
+        allDaySlot: false
+        header: right:  'today prev,next', center: 'month,agendaWeek,agendaDay'
 
 
   	

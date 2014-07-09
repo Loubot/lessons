@@ -54,6 +54,8 @@ GEM
     coffee-script-source (1.7.0)
     combined_time_select (1.0.1)
     daemons (1.1.9)
+    date_validator (0.7.0)
+      activemodel (>= 3)
     debug_inspector (0.0.2)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -184,6 +186,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   combined_time_select (~> 1.0.1)
+  date_validator
   devise
   gibbon
   gon

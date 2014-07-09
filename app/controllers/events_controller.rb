@@ -16,6 +16,21 @@ class EventsController < ApplicationController
 		end
 	end
 
+	def edit
+		@event = Event.find(params[:id])
+		@teacher = Teacher.find(current_teacher)
+	end
+
+	def update
+		if @event.update_attributes(event_params)
+			flash[:success] = "Lesson updated successfully"
+			redirect_to :back
+		else
+			flash[:danger] = "Couldn't save lesson #{@event.errors.full_messages}"
+			redirect_to :back
+		end
+	end
+
 	private
 
 	def event_params

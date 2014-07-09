@@ -28,8 +28,11 @@ class TeachersController < ApplicationController
 	def teachers_area
 		@params = params
 		@teacher = Teacher.find(current_teacher)
-		@event = Event.new
-		gon.events = format_times(Event.all)
+		gon.events = format_times(@teacher.events)
+		
+		@event = @teacher.events.new
+		
+		
 		gon.location = [@teacher.lat,@teacher.lon]
 	end
 

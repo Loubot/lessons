@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   devise_for :teachers
   resources :teachers, only: [:update, :edit, :destroy] do
   	member do 
-  		get '/teachers-area'		=> 'teachers#teachers_area'
+  		get '/teachers-area'		  => 'teachers#teachers_area'
+      get '/edit-appointments'  => 'teachers#edit_appointments'
   	end
   	resources :photos
     resources :qualifications, only: [:create, :destroy, :edit]
+    resources :events
   end
-  resources :events
+  
   resources :categories, only: [:update, :create, :destroy]
   resources :subjects, only: [:update, :create, :destroy]
 

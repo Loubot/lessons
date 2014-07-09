@@ -54,6 +54,8 @@ gem "combined_time_select", "~> 1.0.1"
 
 gem 'validates_overlap'
 
+gem 'date_validator'
+
 gem 'rmagick'
 
 # Use ActiveModel has_secure_password
