@@ -4,7 +4,7 @@
 	<div class="col-md-8">
 		
 		<div id="map_canvas" class="col-md-12" ></div>
-	</div>
+	</div> <!-- end of col-md-8 -->
 	<div class="col-md-4" >
 		<h2 class="h3">Where are you located?</h2><br>
 		<input id="address" type="text"><button id="start_address_search" onclick="start_address_search()">Find address</button><br>
@@ -26,5 +26,13 @@
 				<%= f.submit 'Update your coordinates', class: 'btn btn-info' %>
 			</div>
 		<% end %>
-	</div>
+		<p class="text-center coordsHinter">No coordinates selected yet!!</p>
+	</div> <!-- end of col-md-4 -->
+	
+</div> <!-- end of map_container -->
+
+<div class="row">
+	<%= button_to teachers_area_teacher_path(current_teacher), method: 'get', class: 'btn btn-success pull-right' do %>
+		Your work area <span class="glyphicon glyphicon-circle-arrow-right"></span>
+	<% end %>	
 </div>

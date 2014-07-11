@@ -29,9 +29,10 @@ initialize = ->
   return
 	
 	# Run initialize on dom ready if map_container is on screen
-	$(document).ready ->
+	$(document).on 'ready page:load', ->
 		if $('#map_container').length > 0
 			google.maps.event.addDomListener window, 'load', initialize
+			checkCoordsSet()
 
 window.start_address_search = () ->
 	geocoder = new google.maps.Geocoder()
@@ -56,3 +57,6 @@ setMapPosition = (latlng, zoom = 8) ->
 	map.setZoom zoom
 	marker.setPosition latlng
 	
+checkCoordsSet = () ->
+	if gon.location[0] == null && gon.location[1] == null
+		$('.coordsHinter').css('visibility', 'visible')
