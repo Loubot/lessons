@@ -29,16 +29,18 @@ class TeachersController < ApplicationController
 		@teacher = Teacher.find(current_teacher)
 		gon.events = format_times(@teacher.events)
 		
-		@event = @teacher.events.new
-		
-		
-		gon.location = [@teacher.lat,@teacher.lon]
+		@event = @teacher.events.new		
 	end
 
 	def qualification_form
 		@context = Teacher.find(current_teacher)
 		@qualifications = Qualification.where(teacher_id: current_teacher.id)
 		@qualification = @context.qualifications.new
+	end
+
+	def your_location
+		@teacher = Teacher.find(current_teacher)
+		gon.location = [@teacher.lat,@teacher.lon]
 	end
 
 	private

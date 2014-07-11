@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   		get '/teachers-area'		  => 'teachers#teachers_area'
       get '/edit-appointments'  => 'teachers#edit_appointments'
       get '/qualification-form' => 'teachers#qualification_form'
+      get '/your-location'      => 'teachers#your_location'
   	end
   	resources :photos
     resources :qualifications, only: [:create, :destroy, :edit]
