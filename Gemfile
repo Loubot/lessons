@@ -28,7 +28,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
-	gem 'jquery-ui-rails', '4.2.1'
 	gem 'unicorn'
 end
 
@@ -56,7 +55,7 @@ gem 'validates_overlap'
 
 gem 'date_validator'
 
-gem 'rmagick'
+#gem 'rmagick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

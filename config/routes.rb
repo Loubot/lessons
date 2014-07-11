@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :teachers
+  devise_for :teachers, :controllers => { :registrations => 'registrations' }
   resources :teachers, only: [:update, :edit, :destroy] do
   	member do 
   		get '/teachers-area'		  => 'teachers#teachers_area'
       get '/edit-appointments'  => 'teachers#edit_appointments'
+      get '/qualification-form' => 'teachers#qualification_form'
   	end
   	resources :photos
     resources :qualifications, only: [:create, :destroy, :edit]

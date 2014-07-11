@@ -47,32 +47,37 @@
 
 </div>
 <hr>
-	<div class="container-fluid">
-		<% if @photos != [] %>
-  	<div class="row">
-  		<hr>
-  		<h2>Uploaded photos</h2>
-			<%= render @photos %>
-		</div> <!-- end of row -->
-		<% else %>
-			<div class="row">
-			  <div class="col-xs-6 col-md-3 first_thumbnail">
-			    <a href="#" class="thumbnail ">
-			      <img data-src="holder.js/100%x180" alt="...">
-			    </a>
-			    <span data-dz-name></span>
-			  </div>
-			  Your uploaded photos will appear here
+<div class="container-fluid">
+	<% if @photos != [] %>
+	<div class="row">
+		<hr>
+		<h2>Uploaded photos</h2>
+		<%= render @photos %>
+	</div> <!-- end of row -->
+	<% else %>
+		<div class="row">
+		  <div class="col-xs-6 col-md-3 first_thumbnail">
+		    <a href="#" class="thumbnail ">
+		      <img data-src="holder.js/100%x180" alt="...">
+		    </a>
+		    <span data-dz-name></span>
+		  </div>
+		  Your uploaded photos will appear here
+		  
+		  <div class="col-xs-6 col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img data-src="holder.js/100%x180" alt="...">
+		    </a>
+		  </div>
 			  
-			  <div class="col-xs-6 col-md-3">
-			    <a href="#" class="thumbnail">
-			      <img data-src="holder.js/100%x180" alt="...">
-			    </a>
-			  </div>
-				  
-				
-			</div>
+			
+		</div>
 
-		<% end %>
-	</div>
+	<% end %>
+</div>
+
+<%= button_to qualification_form_teacher_path(current_teacher.id), method: 'get', class: 'btn btn-success pull-right' do %>
+	Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
+<% end %>
+<br>
 

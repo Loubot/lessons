@@ -12,8 +12,7 @@ class TeachersController < ApplicationController
 		@photo = @context.photos.new
 		@params = params
 		@photos = @context.photos.all
-		@qualifications = Qualification.where(teacher_id: current_teacher.id)
-		@qualification = @context.qualifications.new
+		
 		
 	end
 	
@@ -36,7 +35,11 @@ class TeachersController < ApplicationController
 		gon.location = [@teacher.lat,@teacher.lon]
 	end
 
-
+	def qualification_form
+		@context = Teacher.find(current_teacher)
+		@qualifications = Qualification.where(teacher_id: current_teacher.id)
+		@qualification = @context.qualifications.new
+	end
 
 	private
 		def teacher_params

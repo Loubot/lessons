@@ -44,3 +44,7 @@
 		<h2>Your qualifications will appear here </h2>
 	<% end %>
 </div>
+
+<%= button_to teachers_area_teacher_path(current_teacher), method: 'get', class: 'btn btn-success pull-right' do %>
+	Your area <span class="glyphicon glyphicon-circle-arrow-right"></span>
+<% end %>
