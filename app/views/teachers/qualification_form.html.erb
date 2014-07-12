@@ -48,11 +48,11 @@
 <hr>
 <div id="teacherSetupNav" class="row col-md-12" >
 	<div class="col-md-10 col-md-offset-2">
-		<%= button_to edit_teacher_path(current_teacher), method: 'get', class: 'btn center-block lower_nav_buttons current_page' do %>
-			Edit profile <span class="glyphicon glyphicon-circle-arrow-up"></span>
+		<%= button_to edit_teacher_path(current_teacher), method: 'get', class: 'btn btn-success center-block lower_nav_buttons ' do %>
+			Edit profile <span class="glyphicon glyphicon-circle-arrow-left"></span>
 		<% end %>
-		<%= button_to qualification_form_teacher_path(current_teacher.id), method: 'get', class: 'btn btn-success center-block lower_nav_buttons' do %>
-			Qualifications <span class="glyphicon glyphicon-circle-arrow-right"></span>
+		<%= button_to qualification_form_teacher_path(current_teacher.id), method: 'get', class: 'btn center-block lower_nav_buttons current_page' do %>
+			Qualifications <span class="glyphicon glyphicon-circle-arrow-up"></span>
 		<% end %>
 		<%= button_to your_location_teacher_path(current_teacher), method: 'get', class: 'btn btn-success center-block lower_nav_buttons' do %>
 			Where are you? <span class="glyphicon glyphicon-circle-arrow-right"></span>
