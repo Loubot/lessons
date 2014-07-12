@@ -7,7 +7,10 @@ $(document).on 'page:change', ->
 		paramName: "photo[avatar]"
 		addRemoveLinks: true
 		parallelUploads: 10
-		autoProcessQueue: true
+		previewsContainer: '.first_thumbnail'
+		thumbnailWidth: 274
+		thumbnailHeight:180
+		autoProcessQueue: false
 		#previewsContainer: ".first_thumbnail"
 		# init: ->
 		# 	@on "addedfile", (file) ->				

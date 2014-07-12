@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lessons</title>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <%= include_gon %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= csrf_meta_tag %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+  <%= render 'partials/shim' %>
+</head>
+<body>
+	<%= render 'partials/teacher_nav' %>
+	
+			
+	<div class="container-fluid">
+    <%= render 'partials/notices' %>
+
+  <%= yield %>
+  </div>
+
+		
+		
+	
+</body>
+</html>

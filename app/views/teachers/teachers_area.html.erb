@@ -54,19 +54,4 @@
 </div>
 
 <hr>
-<div id="teacherSetupNav" class="row col-md-12" >
-	<div class="col-md-10 col-md-offset-2">
-		<%= button_to edit_teacher_path(current_teacher), method: 'get', class: 'btn btn-success center-block lower_nav_buttons ' do %>
-			Edit profile <span class="glyphicon glyphicon-circle-arrow-left"></span>
-		<% end %>
-		<%= button_to qualification_form_teacher_path(current_teacher.id), method: 'get', class: 'btn btn-success center-block lower_nav_buttons' do %>
-			Qualifications <span class="glyphicon glyphicon-circle-arrow-left"></span>
-		<% end %>
-		<%= button_to your_location_teacher_path(current_teacher), method: 'get', class: 'btn btn-success center-block lower_nav_buttons' do %>
-			Where are you? <span class="glyphicon glyphicon-circle-arrow-left"></span>
-		<% end %>
-		<%= button_to teachers_area_teacher_path(current_teacher), method: 'get', class: 'btn current_page center-block lower_nav_buttons' do %>
-			Your work area <span class="glyphicon glyphicon-circle-arrow-up"></span>
-		<% end %>
-	</div>
-</div>
+

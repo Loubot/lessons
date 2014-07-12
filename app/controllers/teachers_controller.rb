@@ -1,7 +1,9 @@
 class TeachersController < ApplicationController
+	layout 'teacher_layout'
 	before_action :authenticate_teacher!
 	before_action :check_id, only: [:update]
 	include TeachersHelper
+
 
 	def check_id
 		redirect_to root_path unless current_teacher.id = params[:id]
