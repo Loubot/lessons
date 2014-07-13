@@ -7,13 +7,17 @@ class PhotosController < ApplicationController
 
 	def create
 		@context = context
-		
+		# if params[:profile] == 'true'
+		# 	photo_params[:filename] = 'profile'
+		# end
 		@photo = @context.photos.build(photo_params)
 		respond_to do |format|
 			if @photo.save
-				flash[:success] = "Photo uploaded successfully"
-				format.html { redirect_to edit_teacher_path(current_teacher) }
-				format.json { render json: @photo }
+				
+				format.html { flash[:success] = params
+					redirect_to edit_teacher_path(current_teacher) }
+				format.json { flash[:success] = params
+					render json: @photo }
 			else
 				flash[:danger] = "Couldn't upload photo #{@photo.erros.full_messages}"
 				render edit_teacher_path(current_teacher)
