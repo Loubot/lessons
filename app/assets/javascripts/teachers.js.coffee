@@ -7,10 +7,9 @@ $(document).on 'page:change', ->
 		paramName: "photo[avatar]"
 		addRemoveLinks: true
 		parallelUploads: 10
-		previewsContainer: '.first_thumbnail'
 		thumbnailWidth: 274
 		thumbnailHeight:180
-		autoProcessQueue: false
+		autoProcessQueue: true
 		#previewsContainer: ".first_thumbnail"
 		# init: ->
 		# 	@on "addedfile", (file) ->				
@@ -23,6 +22,8 @@ $(document).on 'page:change', ->
 	dropzone.on 'error', (file) ->
 		$('body').prepend("<b style='color: red;'>An error occurred while saving the Student.</b>")
 
+	dropzone.on 'sending', (file, xhr, formData) ->
+		formData.append 'profile', 'true'
 	dropzone.on 'success', (file) ->
 		console.log 'File uploaded successfully'
 		location.reload()

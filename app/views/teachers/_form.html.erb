@@ -1,12 +1,28 @@
 <div class="container-fluid teacher_edit_profile">
-	<div class="panel panel-default">
-		<div class="panel-heading teachers_info">Your info 
-			<div class="btn-group pull-right">            
-       	<button class="btn btn-default" data-toggle="modal" data-target="#teachers_info_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
-      </div>
-		</div> <!-- end of panel_heading -->
-		<div class="panel-body">
-
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-heading teachers_info"><h2 class="panel-title">Your info</h2>
+					<div class="btn-group pull-right">            
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teachers_info_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
+		      </div>
+				</div> <!-- end of panel_heading -->
+				<div class="panel-body">
+					<div class="row">
+					  <div class="col-xs-6 col-md-3">
+					    <a href="#" class="thumbnail">
+					    	<%= (!@context.photos.first.avatar.blank?) ? image_tag(@context.photos.first.avatar.url) : raw("<img data-src='holder.js/100%x180' alt='...'>") %>
+					      
+					    </a>
+					  </div>
+					</div>
+					<p><span class="col-md-3">Name:</span><span class="col-md-9"><%= @context.first_name %></span></p>
+					<p><span class="col-md-3">Surname:</span><span class="col-md-9"><%= @context.last_name %></span></p>
+					<p><span class="col-md-3">Address:</span ><span class="col-md-9"><%= @context.address %></span></p>
+					<p><span class="col-md-3">Email:</span><span class="col-md-9"><%= @context.email %></span></p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

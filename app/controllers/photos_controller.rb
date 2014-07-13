@@ -7,6 +7,7 @@ class PhotosController < ApplicationController
 
 	def create
 		@context = context
+		
 		@photo = @context.photos.build(photo_params)
 		respond_to do |format|
 			if @photo.save
