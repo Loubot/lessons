@@ -1,11 +1,11 @@
 <!-- Button trigger modal -->
 <!-- Modal -->
-<div class="modal fade" id="teachers_info_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="teachers_dropzone_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Upload photos</h4>
       </div>
       <div class="modal-body">
         <div  class="container-fluid">
@@ -19,40 +19,12 @@
               </div> <!-- end of fallback -->
             <% end %>
           </div> <!-- end of dropzone-container -->
-          <%= form_for @context do |f| %>
-            <div class="row">
-              <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                  <%= f.text_field :first_name, class: "form-control input-sm", placeholder: 'First name' %>
-                  <!-- <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name"> -->
-                </div>
-              </div>
-              <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                  <%= f.text_field :last_name, class: "form-control input-sm", placeholder: 'Last name' %>
-                  <!-- <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name"> -->
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= f.text_area :address, class: "form-control input-sm", placeholder: "Address" %> 
-              <!-- <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address"> -->
-            </div>
-            <div class="form-group">
-              <%= f.text_area :overview, class: "form-control input-sm", placeholder: "Overview" %> 
-              <!-- <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address"> -->
-            </div>
-
-            
-            <%= f.submit 'Update details', class: 'btn btn-info btn-block' %>
           
-          <% end %>
         </div> <!-- end of container-fluid -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="process_queue">Upload photos</button>
       </div>
     </div>
   </div>

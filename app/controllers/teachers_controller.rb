@@ -45,6 +45,12 @@ class TeachersController < ApplicationController
 		gon.location = [@teacher.lat,@teacher.lon]
 	end
 
+	def change_profile_pic
+		@params = params
+		flash[:notice] = params
+		redirect_to :back
+	end
+
 	private
 		def teacher_params
 			params.require(:teacher).permit!

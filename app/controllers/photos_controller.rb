@@ -14,9 +14,9 @@ class PhotosController < ApplicationController
 		respond_to do |format|
 			if @photo.save
 				
-				format.html { flash[:success] = params
+				format.html { flash[:success] = "Photo uploaded successfully!"
 					redirect_to edit_teacher_path(current_teacher) }
-				format.json { flash[:success] = params
+				format.json { flash[:success] = "Photo uploaded successfully!"
 					render json: @photo }
 			else
 				flash[:danger] = "Couldn't upload photo #{@photo.erros.full_messages}"

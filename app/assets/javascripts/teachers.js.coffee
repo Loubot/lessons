@@ -9,16 +9,14 @@ $(document).on 'page:change', ->
 		parallelUploads: 10
 		thumbnailWidth: 274
 		thumbnailHeight:180
-		autoProcessQueue: true
+		autoProcessQueue: false
 		#previewsContainer: ".first_thumbnail"
 		# init: ->
 		# 	@on "addedfile", (file) ->				
 	 #    	$(".row").toggle()
 
-		})
-
-	
-
+		})  
+  
 	dropzone.on 'error', (file) ->
 		$('body').prepend("<b style='color: red;'>An error occurred while saving the Student.</b>")
 
@@ -27,4 +25,15 @@ $(document).on 'page:change', ->
 	dropzone.on 'success', (file) ->
 		console.log 'File uploaded successfully'
 		location.reload()
+	$('#process_queue').on 'click', ->
+    dropzone.processQueue()
+
+  $('.profile_pic_popover').popover()
+  $('.popover-dismiss').popover({
+	  trigger: 'focus'
+	})
 #//////////////////////////////////////////////////////////////////////////////
+
+window.makeProfilePic = (data) ->
+	alert data
+
