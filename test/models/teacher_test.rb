@@ -22,6 +22,7 @@
 #  admin                  :boolean
 #  lat                    :float
 #  lon                    :float
+#  profile                :integer
 #
 
 require 'test_helper'

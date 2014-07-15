@@ -22,6 +22,7 @@
 #  admin                  :boolean
 #  lat                    :float
 #  lon                    :float
+#  profile                :integer
 #
 
 class Teacher < ActiveRecord::Base

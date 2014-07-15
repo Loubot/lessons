@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-
+	include PhotosHelper
 	def new 
 		@context = context
 		@photo = Photo.new	
@@ -28,6 +28,7 @@ class PhotosController < ApplicationController
 	def destroy
 		@context = context
 		@photo = @context.photos.find(params[:id])
+		checkProfile(params[:id])
 		if @photo.destroy
 			flash[:success] = "Photo deleted!"
 			redirect_to :back

@@ -12,6 +12,8 @@ class TeachersController < ApplicationController
 	def edit
 		@context = Teacher.find(current_teacher)
 		@photo = @context.photos.new
+		@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
+		
 		@params = params
 		@photos = @context.photos.all
 		
@@ -47,7 +49,9 @@ class TeachersController < ApplicationController
 
 	def change_profile_pic
 		@params = params
-		flash[:notice] = params
+		@teacher = Teacher.find(current_teacher)
+		@teacher.update_attributes(profile: params[:id])
+		flash[:notice] = 'Profile picture updated'
 		redirect_to :back
 	end
 

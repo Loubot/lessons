@@ -22,6 +22,7 @@
 #  admin                  :boolean
 #  lat                    :float
 #  lon                    :float
+#  profile                :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

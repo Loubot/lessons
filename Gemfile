@@ -57,7 +57,7 @@ gem 'validates_overlap'
 
 gem 'date_validator'
 
-#gem 'rmagick'
+gem 'rmagick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702204914) do
+ActiveRecord::Schema.define(version: 20140715131849) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20140702204914) do
     t.boolean  "admin"
     t.float    "lat"
     t.float    "lon"
+    t.integer  "profile"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
