@@ -30,7 +30,7 @@ initialize = ->
 	
 	# Run initialize on dom ready if map_container is on screen
 	$(document).on 'ready page:load', ->
-		if $('#map_container').length > 0
+		if $('#map_container').is(':visible')
 			google.maps.event.addDomListener window, 'load', initialize
 			checkCoordsSet()
 
