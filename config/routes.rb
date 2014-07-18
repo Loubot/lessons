@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :teachers, :controllers => { :registrations => 'registrations' }
-  resources :teachers, only: [:update, :edit, :destroy] do
+  devise_for  :teachers, :controllers => { :registrations => 'registrations' }
+  resources   :teachers, only: [:update, :edit, :destroy] do
   	member do 
   		get   '/teachers-area'		  => 'teachers#teachers_area'
       get   '/edit-appointments'  => 'teachers#edit_appointments'
@@ -8,13 +8,14 @@ Rails.application.routes.draw do
       get   '/your-location'      => 'teachers#your_location'
       post  '/change-profile-pic' => 'teachers#change_profile_pic'
   	end
-  	resources :photos
+  	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
     resources :events
+
   end
-  
-  resources :categories, only: [:update, :create, :destroy]
-  resources :subjects, only: [:update, :create, :destroy]
+  resources :experiences,   only: [:create, :update, :destroy]
+  resources :categories,    only: [:update, :create, :destroy]
+  resources :subjects,      only: [:update, :create, :destroy]
 
   get '/how-it-works'     => 'static#how_it_works'
   get '/mailing-list'     => 'static#mailing_list'

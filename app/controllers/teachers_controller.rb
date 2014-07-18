@@ -13,7 +13,7 @@ class TeachersController < ApplicationController
 		@context = Teacher.find(current_teacher)
 		@photo = @context.photos.new
 		@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
-		
+		@experience = Experience.new
 		@params = params
 		@photos = @context.photos.all
 		
