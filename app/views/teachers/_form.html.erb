@@ -6,13 +6,13 @@
 				<div class="panel-heading teachers_info"><h2 class="panel-title">Your info</h2>
 					<div class="btn-group pull-right">            
 		       	<button class="btn btn-default" data-toggle="modal" data-target="#teachers_info_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
-		      </div>
+		      </div> <!-- end of btn-group pull-right -->
 				</div> <!-- end of panel_heading -->
 				<div class="panel-body">
 					<div class="row">
 					  <div class="col-xs-6 col-md-3">
 					    <a href="#" class="thumbnail" data-toggle="modal" data-target="#teachers_dropzone_modal">
-					    	<%= (@profilePic != nil) ? image_tag(@profilePic.avatar.url(:thumb)) : image_tag('silhouette.jpg')  %>
+					    	<%= (@profilePic != nil) ? image_tag(@profilePic.avatar.url) : image_tag('silhouette.jpg')  %>
 					      
 					    </a>
 					  </div>
@@ -35,7 +35,12 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-10">
 			<div class="panel panel-default">
-			<div class="panel-heading"><h2 class="panel-title">Photos of you</h2></div> <!-- end of panel heading -->
+				<div class="panel-heading teachers_info"><h2 class="panel-title">Photos of you</h2>
+					<div class="btn-group pull-right">            
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teachers_dropzone_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
+		      </div> <!-- end of btn-group pull-right -->
+				</div> <!-- end of panel heading -->
+
 			<div class="panel-body">
 				<%= render @photos %>
 			</div>
