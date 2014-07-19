@@ -35,6 +35,7 @@ class Teacher < ActiveRecord::Base
 
   has_many :photos, as: :imageable, dependent: :destroy
 
+  has_many :experiences
   has_many :events
   has_many :qualifications
 end

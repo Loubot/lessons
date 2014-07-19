@@ -16,7 +16,8 @@ class TeachersController < ApplicationController
 		@experience = Experience.new
 		@params = params
 		@photos = @context.photos.all
-		
+		@experience = Experience.new
+		@experiences = @context.experiences
 		
 	end
 	

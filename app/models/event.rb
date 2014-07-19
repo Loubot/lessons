@@ -10,6 +10,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  teacher_id :integer
+#  present    :binary
 #
 
 class Event < ActiveRecord::Base

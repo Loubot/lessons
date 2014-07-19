@@ -6,6 +6,7 @@ class CreateExperiences < ActiveRecord::Migration
       t.integer :teacher_id
       t.datetime :start
       t.datetime :end
+      t.binary :present
 
       t.timestamps
     end
