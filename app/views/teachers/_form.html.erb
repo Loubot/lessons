@@ -60,8 +60,10 @@
 		       	<button class="btn btn-default" data-toggle="modal" data-target="#teachers_experience_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
 		      </div> <!-- end of btn-group pull-right -->
 				</div> <!-- end of panel heading -->
-				<div class="panel-body">					
-					<%= render 'partials/experience' %>
+				<div class="panel-body">
+					<ul class="list-group">			
+						<%= render partial: 'partials/experience', collection: @experiences %>
+					</ul>
 				</div>
 			</div>
 		</div>

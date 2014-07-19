@@ -1,13 +1,13 @@
 class ExperiencesController < ApplicationController
 
-	def create
+	def create		
 		@experience = Experience.new(experience_params)
 		if @experience.save
 			flash[:success] = "Work experience saved"
-			rediret_to :back
+			redirect_to :back
 		else
 			flash[:danger] = "Couldn't save your work experience #{@experience.errors.full_messages}"
-			rediret_to :back
+			redirect_to :back
 		end
 	end
 

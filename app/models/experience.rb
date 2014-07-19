@@ -14,4 +14,13 @@
 
 class Experience < ActiveRecord::Base
 	belongs_to :teacher
+
+	before_save :addTime
+
+
+	def addTime
+		if self.present == '1'
+			self.end = Time.now()
+		end
+	end
 end
