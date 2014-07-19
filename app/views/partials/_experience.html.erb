@@ -1,3 +1,11 @@
-<li class="list-group-item"><strong>Title: <%= experience.title %></strong>
-		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - #{experience.end.strftime('%Y %b')}"%></span></li>
+<% if experience.present == '1' %>
+	<li class="list-group-item"><strong>Title: <%= experience.title %></strong>
+		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - Present"%></span>
+	</li>
+
+<% else %>
+	<li class="list-group-item"><strong>Title: <%= experience.title %></strong>
+		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - #{experience.end.strftime('%Y %b')}"%></span>
+	</li>
+<% end %>
 
