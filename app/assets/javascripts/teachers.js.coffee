@@ -6,8 +6,10 @@ $(document).on 'page:change', ->
 	$('#qualification_present').on 'click', () ->
 		if $("#qualification_endDate").css('opacity') is '1'
 			$('#qualification_endDate').animate opacity: .1
+			$('#qualification_endDate').children().prop disabled: true
 		else 
 		  $('#qualification_endDate').animate opacity: 1
+		  $('#qualification_endDate').children().prop disabled: false
 
 	# end of qualification form checkbox
 

@@ -1,7 +1,13 @@
+<% endTime = qualification.present == '1' ? 'Present' : qualification.end.strftime('%Y %b') %>
 <div class="panel panel-default">
-	<div class="panel-heading"><%= qualification.title %></div>
+	<div class="panel-heading teachers_info"><h2 class="panel-title pull-left"><%= qualification.title %></h2>
+		<div class="btn-group pull-right"><%= link_to  teacher_qualification_path(current_teacher.id, qualification), class: 'btn btn-default', data: { confirm: 'Are you sure?' }, method: 'delete' do %>
+				Delete qualification<span class="glyphicon glyphicon-floppy-remove"></span>
+			<% end %>
+		</div>
+	</div>
 	<div class="panel-body">
 		<strong><%= qualification.school %></strong>
-		<span class="pull-right"><%= "#{qualification.start.strftime('%Y %b')} - #{qualification.end.strftime('%Y %b')}"%></span>
+		<span class="pull-right"><%= "#{qualification.start.strftime('%Y %b')} - #{endTime}"%></span>
 	</div>
 </div>

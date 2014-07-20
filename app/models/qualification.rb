@@ -17,7 +17,7 @@ class Qualification < ActiveRecord::Base
 	validates :start, :end, :overlap => true
 	validates :start, :end, :teacher_id, presence: true
 
-	before_save :addTime
+	before_validation :addTime
 
 	def addTime
 		if self.present == '1'
