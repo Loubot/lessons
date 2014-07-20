@@ -1,7 +1,16 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).on 'page:change', ->	
+$(document).on 'page:change', ->
+	# qualification form checkbo
+	$('#qualification_present').on 'click', () ->
+		if $("#qualification_endDate").css('opacity') is '1'
+			$('#qualification_endDate').animate opacity: .1
+		else 
+		  $('#qualification_endDate').animate opacity: 1
+
+	# end of qualification form checkbox
+
 	$('#qual_left').css('height', $('#qual_form').height())
 	dropzone = new Dropzone('#dropzone', {
 		paramName: "photo[avatar]"
@@ -32,8 +41,10 @@ $(document).on 'page:change', ->
   $('.popover-dismiss').popover({
 	  trigger: 'focus'
 	})
-#//////////////////////////////////////////////////////////////////////////////
-	$('#visible_check').on 'click', () ->		
-		$('body').find('#endDate').animate({opacity:'toggle'}, 400)
-		
 
+#//////////////////////////////////////////////////////////////////////////////
+	$('#visible_check').on 'click', () ->
+		if $('#endDate').css('opacity') is '1'
+			$('#endDate').animate opacity: .1
+		else
+		  $('#endDate').animate opacity: 1

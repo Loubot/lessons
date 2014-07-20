@@ -69,10 +69,29 @@
 		</div>
 	</div>
 </div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-heading teachers_info"><h2 class="panel-title">About you</h2>
+					<div class="btn-group pull-right">            
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teacher_about_you_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
+		      </div> <!-- end of btn-group pull-right -->
+				</div> <!-- end of panel heading -->
+				<div class="panel-body">
+					<%= @context.overview %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- end of profile picture panel -->
 <%= render 'modals/teacher_photos_dropzone' %>
 <%= render 'modals/teacher_info_form' %>
 <%= render 'modals/teacher_experience_form' %>
+<%= render 'modals/teacher_about_you_form' %>
 
 
 

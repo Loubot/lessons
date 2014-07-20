@@ -16,4 +16,12 @@ class Qualification < ActiveRecord::Base
 	belongs_to :teacher
 	validates :start, :end, :overlap => true
 	validates :start, :end, :teacher_id, presence: true
+
+	before_save :addTime
+
+	def addTime
+		if self.present == '1'
+			self.end = Time.now()
+		end
+	end
 end

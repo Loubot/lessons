@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718043120) do
+ActiveRecord::Schema.define(version: 20140720031223) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140718043120) do
     t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.binary   "present"
   end
 
   create_table "subjects", force: true do |t|
