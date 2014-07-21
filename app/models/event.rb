@@ -25,6 +25,6 @@ before_save :add_name
 private
 	def add_name
 		user = Teacher.find(self.teacher_id)
-		self.title = "#{user.first_name} #{user.last_name}"
+		self.title = "#{user.first_name} #{user.last_name}"		
 	end
 end

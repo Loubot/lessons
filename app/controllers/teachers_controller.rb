@@ -21,8 +21,9 @@ class TeachersController < ApplicationController
 		
 	end
 	
-	def update
+	def update		
 		@teacher = Teacher.find(current_teacher)
+		teacher_params = addTime(params) if params[:teacher]['opening(5i)']
 		if @teacher.update_attributes(teacher_params)
 			flash[:success] = 'Details updated ok'
 			redirect_to :back
@@ -61,4 +62,9 @@ class TeachersController < ApplicationController
 			params.require(:teacher).permit!
 		end
 
+		def addTime(params)
+			opening = Time.zone.parse(params[:teacher]['opening(5i)'])
+			closing = Time.zone.parse(params[:teacher]['closing(5i)'])
+			returned_params = { opening: opening, closing: closing }
+		end
 end

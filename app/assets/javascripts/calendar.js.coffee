@@ -6,7 +6,6 @@ $(document).on 'page:change', ->
       scrollTime:	'12:00:00	'
       minTime: '07:00'
       events: gon.events
-      eventColor: 'red'
       allDaySlot: false
       selectable: true
       selectHelper: true
