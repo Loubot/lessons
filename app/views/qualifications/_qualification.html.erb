@@ -2,7 +2,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading teachers_info"><h2 class="panel-title pull-left"><%= qualification.title %></h2>
 		<div class="btn-group pull-right"><%= link_to  teacher_qualification_path(current_teacher.id, qualification), class: 'btn btn-default', data: { confirm: 'Are you sure?' }, method: 'delete' do %>
-				Delete qualification<span class="glyphicon glyphicon-floppy-remove"></span>
+				<span class="glyphicon glyphicon-floppy-remove"></span> Delete qualification
 			<% end %>
 		</div>
 	</div>
