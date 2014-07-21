@@ -23,7 +23,9 @@ class TeachersController < ApplicationController
 	
 	def update		
 		@teacher = Teacher.find(current_teacher)
-		teacher_params = addTime(params) if params[:teacher]['opening(5i)']
+		if params[:teacher]['opening(5i)']
+			(teacher_params = addTime(params)) 
+		end
 		if @teacher.update_attributes(teacher_params)
 			flash[:success] = 'Details updated ok'
 			redirect_to :back
