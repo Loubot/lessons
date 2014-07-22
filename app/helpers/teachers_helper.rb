@@ -10,4 +10,14 @@ module TeachersHelper
 		end
 		formatted_times
 	end
+
+	def open_close_times(open, close)
+		if (open != nil && close != nil)
+			open_close = { open: open.strftime("%H:%M"), close: close.strftime("%H:%M") }
+		else
+			open_close = { open: '07:00', close: '17:00'}
+		end
+		puts "??????????????????#{open_close}"
+		open_close
+	end
 end

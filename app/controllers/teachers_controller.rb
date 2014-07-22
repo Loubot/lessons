@@ -36,7 +36,7 @@ class TeachersController < ApplicationController
 		@params = params
 		@teacher = Teacher.find(current_teacher)
 		gon.events = format_times(@teacher.events)
-		
+		gon.openingTimes = open_close_times(current_teacher.opening, current_teacher.closing)
 		@event = @teacher.events.new		
 	end
 
