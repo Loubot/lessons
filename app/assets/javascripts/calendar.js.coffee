@@ -1,5 +1,10 @@
 $(document).on 'page:change', ->
   if $('#calendar').length > 0
+    if typeof gon.events == 'undefined'
+      events = []
+    else
+      events = gon.events
+
     open = getOpen()
     close = getClose()
   	$('#calendar').fullCalendar
@@ -8,7 +13,7 @@ $(document).on 'page:change', ->
       scrollTime:	'12:00:00	'
       minTime: open
       maxTime: close
-      events: gon.events
+      events: events
       allDaySlot: false
       selectable: true
       selectHelper: true
