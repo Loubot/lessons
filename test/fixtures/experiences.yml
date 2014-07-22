@@ -8,6 +8,7 @@
 #  teacher_id  :integer
 #  start       :datetime
 #  end         :datetime
+#  present     :binary
 #  created_at  :datetime
 #  updated_at  :datetime
 #

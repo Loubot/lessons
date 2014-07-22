@@ -23,6 +23,8 @@
 #  lat                    :float
 #  lon                    :float
 #  profile                :integer
+#  opening                :datetime
+#  closing                :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

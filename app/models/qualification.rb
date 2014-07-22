@@ -10,6 +10,7 @@
 #  teacher_id :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  present    :binary
 #
 
 class Qualification < ActiveRecord::Base

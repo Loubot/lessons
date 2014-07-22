@@ -23,6 +23,8 @@
 #  lat                    :float
 #  lon                    :float
 #  profile                :integer
+#  opening                :datetime
+#  closing                :datetime
 #
 
 require 'test_helper'

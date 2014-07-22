@@ -10,7 +10,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  teacher_id :integer
-#  present    :binary
+#  time_off   :binary
 #
 
 require 'test_helper'
