@@ -33,10 +33,9 @@ $(document).on 'page:change', ->
 
 
 checkEvents = () ->
-  if typeof gon.events == 'undefined'
-      return []
-    else
-      return gon.events
+  events = if gon.events == 'undefined' then [] else gon.events
+  
+  return gon.events
 
 getOpen = () ->
   return gon.openingTimes['open']
