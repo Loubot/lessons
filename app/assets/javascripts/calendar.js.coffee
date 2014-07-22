@@ -1,9 +1,6 @@
 $(document).on 'page:change', ->
   if $('#calendar').length > 0
-    if typeof gon.events == 'undefined'
-      events = []
-    else
-      events = gon.events
+    events = checkEvents()
 
     open = getOpen()
     close = getClose()
@@ -33,6 +30,13 @@ $(document).on 'page:change', ->
   		
     $('#button').click ->
     	alert $('#time_field').val()
+
+
+checkEvents = () ->
+  if typeof gon.events == 'undefined'
+      return []
+    else
+      return gon.events
 
 getOpen = () ->
   return gon.openingTimes['open']
