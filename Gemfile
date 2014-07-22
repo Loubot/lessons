@@ -45,7 +45,7 @@ gem 'carrierwave'
 
 gem 'gibbon'
 
-gem 'gon'
+gem 'gon', '~>4.1.0'
 
 gem 'annotate'
 
