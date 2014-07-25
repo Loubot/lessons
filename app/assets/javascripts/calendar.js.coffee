@@ -17,6 +17,8 @@ $(document).on 'page:change', ->
       header: right:  'today prev,next', center: 'month,agendaWeek,agendaDay'
       select: (start, end, jsEvent, view) ->
         alert jsEvent
+      eventRender: (event, element) ->
+        alert element[0]
         return
 
     $('#calendar').fullcalendar 
