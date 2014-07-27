@@ -12,8 +12,8 @@ ready = ->
     scheduler.markTimespan
       days: 0
       zones: [        
-        (parseFloat(gon.openingTimes['openHour']) + parseFloat(checkOpenMins())) * 60
-        (parseFloat(gon.openingTimes['closeHour']) + parseFloat(checkCloseMins())) * 60        
+        checkOpenMins() * 60
+        checkCloseMins() * 60        
       ]
       invert_zones: true
       css: "gray_section"
@@ -35,8 +35,8 @@ ready = ->
           
     events = checkEvents()
 
-    open = getOpen()
-    close = getClose()
+    # open = getOpen()
+    # close = getClose()
   	
   	
     $("#date").AnyTime_picker
@@ -55,19 +55,11 @@ checkEvents = () ->
   
   return events
 
-getOpen = () ->
-  return gon.openingTimes['open']
-
-getClose = () ->
-  return gon.openingTimes['close']
-
 checkOpenMins = ->
-  openMins = gon.openingTimes['openMin']
-  return mins = if openMins != '00' then (openMins / 60) else 0
+  (parseFloat(gon.openingTimes['openHour']) + parseFloat(gon.openingTimes['openMin'] / 60))  
 
 checkCloseMins = ->
-  closeMins = gon.openingTimes['closeMin']
-  return mins = if closeMins != '00' then (closeMins / 60) else 0
+  (parseFloat(gon.openingTimes['closeHour']) + parseFloat(gon.openingTimes['closeMin'] / 60))
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

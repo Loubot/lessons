@@ -16,7 +16,7 @@ module TeachersHelper
 			open_close = { openHour: open.strftime("%H"),openMin: open.strftime("%M"),
 			 closeHour: close.strftime("%H"), closeMin: close.strftime("%M") }
 		else
-			open_close = { openHour: '7', openMin: '30', closeHour: '17', closeMin: '30' }
+			open_close = { openHour: '7', openMin: '00', closeHour: '17', closeMin: '30' }
 		end
 		open_close
 	end
