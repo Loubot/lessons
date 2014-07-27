@@ -13,9 +13,10 @@ module TeachersHelper
 
 	def open_close_times(open, close)
 		if (open != nil && close != nil)
-			open_close = { open: open.strftime("%H:%M"), close: close.strftime("%H:%M") }
+			open_close = { openHour: open.strftime("%H"),openMin: open.strftime("%M"),
+			 closeHour: close.strftime("%H"), closeMin: close.strftime("%M") }
 		else
-			open_close = { open: '07:00', close: '17:00'}
+			open_close = { openHour: '7', openMin: '30', closeHour: '17', closeMin: '30' }
 		end
 		open_close
 	end
