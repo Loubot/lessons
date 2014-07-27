@@ -3,6 +3,7 @@ ready = ->
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"
     scheduler.config.first_hour = 6
     scheduler.config.last_hour = 20
+    scheduler.config.readonly = true;
     #scheduler.config.limit_time_select = true;
     #scheduler.config.details_on_create = true;
     scheduler.locale.labels.timeline_tab = "Timeline"
@@ -18,6 +19,8 @@ ready = ->
       invert_zones: true
       css: "gray_section"
       type: "dhx_time_block" #the hardcoded valuee
+    events = gon.events
+    scheduler.parse(events, 'json')
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
       date = new Date(new_date)
       if (date.getDay() is 0) or (date.getDay() is 3)
