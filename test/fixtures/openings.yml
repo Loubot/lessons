@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mon_open: 2014-07-28 12:15:39
+  mon_close: 2014-07-28 12:15:39
+  tues_open: 2014-07-28 12:15:39
+  tues_close: 2014-07-28 12:15:39
+  wed_open: 2014-07-28 12:15:39
+  wed_close: 2014-07-28 12:15:39
+  thur_open: 2014-07-28 12:15:39
+  thur_close: 2014-07-28 12:15:39
+  fri_open: 2014-07-28 12:15:39
+  fri_close: 2014-07-28 12:15:39
+  sat_open: 2014-07-28 12:15:39
+  sat_close: 2014-07-28 12:15:39
+  sun_open: 2014-07-28 12:15:39
+  sun_close: 2014-07-28 12:15:39
+
+two:
+  mon_open: 2014-07-28 12:15:39
+  mon_close: 2014-07-28 12:15:39
+  tues_open: 2014-07-28 12:15:39
+  tues_close: 2014-07-28 12:15:39
+  wed_open: 2014-07-28 12:15:39
+  wed_close: 2014-07-28 12:15:39
+  thur_open: 2014-07-28 12:15:39
+  thur_close: 2014-07-28 12:15:39
+  fri_open: 2014-07-28 12:15:39
+  fri_close: 2014-07-28 12:15:39
+  sat_open: 2014-07-28 12:15:39
+  sat_close: 2014-07-28 12:15:39
+  sun_open: 2014-07-28 12:15:39
+  sun_close: 2014-07-28 12:15:39

@@ -9,11 +9,11 @@
         <div  class="container-fluid">
           <div class="row">
 						<div class="col-md-12">
-							<%= form_for @teacher, html: { class: 'form-horizontal' } do |f| %>
+							<%= form_for [@teacher,@opening], html: { class: 'form-horizontal' } do |f| %>
 								<div class="form-group">
-									<%= f.label :opening, 'Opening time:', class: 'col-sm-4 control-label' %>
+									<%= f.label :mon_open, 'Opening time:', class: 'col-sm-4 control-label' %>
 									<div class="col-sm-8">
-										<%= f.time_select :opening,
+										<%= f.time_select :mon_open,
 										  :combined => true,
 										  :default => Time.now.change(:hour => 12, :min => 30),
 										  :minute_interval => 30,
@@ -26,9 +26,9 @@
 									</div> <!-- end of col-sm-10 -->
 								</div> <!-- end of form-group --><br>
 								<div class="form-group">
-								<%= f.label :closing, 'Closing time:', class: 'col-sm-4 control-label' %>
+								<%= f.label :mon_close, 'Closing time:', class: 'col-sm-4 control-label' %>
 									<div class="col-sm-8">
-										<%= f.time_select :closing,
+										<%= f.time_select :mon_close,
 										  :combined => true,
 										  :default => Time.now.change(:hour => 12, :min => 30),
 										  :minute_interval => 30,
@@ -38,6 +38,7 @@
 										  :end_hour => 22,
 										  :end_minute => 30
 										%>
+										<%= f.hidden_field :teacher_id, value: current_teacher.id %>
 									</div> <!-- end of col-sm-10 -->
 								</div> <!-- end of form-group -->
 								<div class="modal-footer">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721043331) do
+ActiveRecord::Schema.define(version: 20140728111539) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -40,6 +40,28 @@ ActiveRecord::Schema.define(version: 20140721043331) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "openings", force: true do |t|
+    t.datetime "mon_open"
+    t.datetime "mon_close"
+    t.datetime "tues_open"
+    t.datetime "tues_close"
+    t.datetime "wed_open"
+    t.datetime "wed_close"
+    t.datetime "thur_open"
+    t.datetime "thur_close"
+    t.datetime "fri_open"
+    t.datetime "fri_close"
+    t.datetime "sat_open"
+    t.datetime "sat_close"
+    t.datetime "sun_open"
+    t.datetime "sun_close"
+    t.integer  "teacher_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true
 
   create_table "photos", force: true do |t|
     t.string   "name"

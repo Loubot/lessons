@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   	end
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
+    resources :openings, only: [:create, :update]
     resources :events
 
   end
