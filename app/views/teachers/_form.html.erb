@@ -13,7 +13,7 @@
 					<div class="row">
 					  <div class="col-xs-6 col-md-3">
 					    <a href="#" class="thumbnail" data-toggle="modal" data-target="#teachers_dropzone_modal">
-					    	<%= (@profilePic != nil) ? image_tag(@profilePic.avatar.url(:thumb)) : image_tag('silhouette.jpg')  %>
+					    	<%= (@profilePic != nil) ? image_tag(@profilePic.avatar.url) : image_tag('silhouette.jpg')  %>
 					      
 					    </a>
 					  </div>

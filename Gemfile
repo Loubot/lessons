@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.1.2'
+#ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -58,7 +58,7 @@ gem 'validates_overlap'
 
 gem 'date_validator'
 
-gem 'rmagick'
+#gem 'rmagick'
 
 gem "fog"
 
