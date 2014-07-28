@@ -13,13 +13,9 @@ module TeachersHelper
 		formatted_times
 	end
 
-	def open_close_times(open, close)
-		if (open != nil && close != nil)
-			open_close = { openHour: open.strftime("%H"),openMin: open.strftime("%M"),
-			 closeHour: close.strftime("%H"), closeMin: close.strftime("%M") }
-		else
-			open_close = { openHour: '7', openMin: '00', closeHour: '17', closeMin: '30' }
-		end
-		open_close
+	def open_close_times(openings)
+		{ days: 1, zones: [0,openings.mon_open.strftime("%H").to_i * 60,
+			openings.mon_close.strftime("%H").to_i * 60, 24 *60 ], 
+			css: "gray_section", type: "dhx_time_block" }
 	end
 end

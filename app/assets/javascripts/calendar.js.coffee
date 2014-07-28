@@ -10,31 +10,15 @@ ready = ->
     scheduler.locale.labels.unit_tab = "Unit"
     scheduler.locale.labels.section_custom = "Section"
     scheduler.init('scheduler_here')
-    scheduler.markTimespan
-      days: 0
-      zones: [        
-        checkOpenMins() * 60
-        checkCloseMins() * 60        
-      ]
-      invert_zones: true
-      css: "gray_section"
-      type: "dhx_time_block" #the hardcoded valuee
+    scheduler.markTimespan gon.openingTimes
     events = gon.events
     scheduler.parse(events, 'json')
+    
+    
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
-      date = new Date(new_date)
-      if (date.getDay() is 0) or (date.getDay() is 3)
-        scheduler.markTimespan
-          days: 0
-          zones: [
-            4 * 60
-            8 * 60
-            12 * 60
-            15 * 60
-          ]
-          invert_zones: false
-          css: "gray_section"
-          type: "dhx_time_block" #the hardcoded valuee
+      if new_mode != 'month'
+        scheduler.deleteAllSections()
+        scheduler.markTimespan gon.openingTimes
           
     events = checkEvents()
 
