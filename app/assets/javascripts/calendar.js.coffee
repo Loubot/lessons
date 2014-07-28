@@ -17,7 +17,6 @@ ready = ->
     
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
       if new_mode != 'month'
-        scheduler.deleteAllSections()
         scheduler.markTimespan gon.openingTimes
           
     events = checkEvents()
