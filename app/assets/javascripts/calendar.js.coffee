@@ -19,7 +19,12 @@ ready = ->
     
     
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
-      if new_mode is 'day' then markTimespanDay(new_date.getDay()) else markTimespanWeek()    
+      if new_mode is 'day' then markTimespanDay(new_date.getDay()) else markTimespanWeek()
+
+    scheduler.attachEvent 'onAfterSchedulerResize', ->      
+      state = scheduler.getState()
+
+      if state.mode is 'day' then markTimespanDay(state.date.getDay()) else markTimespanWeek()
       
     
     events = checkEvents()
