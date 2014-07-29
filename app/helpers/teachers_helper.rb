@@ -14,8 +14,34 @@ module TeachersHelper
 	end
 
 	def open_close_times(openings)
-		{ days: 1, zones: [0,openings.mon_open.strftime("%H").to_i * 60,
-			openings.mon_close.strftime("%H").to_i * 60, 24 *60 ], 
-			css: "gray_section", type: "dhx_time_block" }
+		begin
+			[
+				{ days: 1, zones: [0,openings.mon_open.strftime("%H").to_i * 60,
+					openings.mon_close.strftime("%H").to_i * 60, 24 *60 ], 
+					css: "gray_section", type: "dhx_time_block" },
+				{ days: 2, zones: [0,openings.tues_open.strftime("%H").to_i * 60,
+					openings.tues_close.strftime("%H").to_i * 60, 24 *60 ], 
+					css: "gray_section", type: "dhx_time_block" },
+				{ days: 3, zones: [0,openings.wed_open.strftime("%H").to_i * 60,
+					openings.wed_close.strftime("%H").to_i * 60, 24 *60 ], 
+					css: "gray_section", type: "dhx_time_block" },
+				{ days: 4, zones: [0,openings.thur_open.strftime("%H").to_i * 60,
+					openings.thur_close.strftime("%H").to_i * 60, 24 *60 ], 
+					css: "gray_section", type: "dhx_time_block" },
+				{ days: 5, zones: [0,openings.fri_open.strftime("%H").to_i * 60,
+					openings.fri_close.strftime("%H").to_i * 60, 24 *60 ], 
+					css: "gray_section", type: "dhx_time_block" },
+				{ days: 6, zones: [0,openings.sat_open.strftime("%H").to_i * 60,
+					openings.sat_close.strftime("%H").to_i * 60, 24 *60 ], 
+					css: "gray_section", type: "dhx_time_block" },
+				{ days: 0, zones: [0,openings.sun_open.strftime("%H").to_i * 60,
+					openings.sun_close.strftime("%H").to_i * 60, 24 *60 ], 
+					css: "gray_section", type: "dhx_time_block" }
+			]
+		rescue NoMethodError
+			[]
+		ensure
+			[]
+		end		
 	end
 end
