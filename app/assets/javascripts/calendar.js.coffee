@@ -25,7 +25,7 @@ ready = ->
     events = gon.events
     # parse events into the scheduler
     scheduler.parse(events, 'json')
-    #// end of get gon evetnts//
+    #// end of get gon events//
     
     # attach event to viewchange and mark time off after change
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
