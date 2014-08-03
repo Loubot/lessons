@@ -63,13 +63,26 @@
 					</label>
 				</div> <!-- end of btn-group -->
 				<%= f.hidden_field :teacher_id, value: current_teacher.id %>
+				
+				<div class="form-group">
+					<div class="col-sm-10">
+						<div class="checkbox">
+							
+							
+							<label><%= check_box_tag 'Multiple' %>Block booking</label>
+							<span id="no_of_weeks" class="pull-right">Number of weeks: <%= select_tag "booking_length", options_for_select((2..52)) %></span>
+
+						</div>
+					</div>
+				</div>
+				<br>
 				<div class="form-group">
 					<div class=" col-sm-10">
 						<%= f.submit id: 'event_submit' %>
 					</div>
-				</div> <!-- end of form-group	 -->	
+				</div> <!-- end of form-group	 -->
 			<% end %>
-		<button class="btn btn-default" data-toggle="modal" data-target="#teachers_open_close_modal"><span class="glyphicon glyphicon-pencil"></span>Edit open and closing</button>
+		<button class="btn btn-default" data-toggle="modal" data-target="#teachers_open_close_modal"><span 			class="glyphicon glyphicon-pencil"></span>Edit open and closing</button>
 	</div> <!-- end of col-md-4 -->
 
 </div> <!-- end of row -->

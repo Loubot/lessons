@@ -1,7 +1,9 @@
 class EventsController < ApplicationController
 	def create
-		# flash[:success] = params[:event][:time_off]
-		# redirect_to :back
+		if params['Multiple']
+			flash[:success] = params['booking_length']
+		end
+		
 		if params[:date].blank? 
 			flash[:danger] = "Date can't be blank"
 			redirect_to :back and return

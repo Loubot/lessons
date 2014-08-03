@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'page:change', ->
-	# qualification form checkbo
+	# qualification form checkbox
 	$('#qualification_present').on 'click', () ->
 		if $("#qualification_endDate").css('opacity') is '1'
 			$('#qualification_endDate').animate opacity: .1
@@ -44,9 +44,19 @@ $(document).on 'page:change', ->
 	  trigger: 'focus'
 	})
 
-#//////////////////////////////////////////////////////////////////////////////
+#/////////////Qualifications visibility checkbox
 	$('#visible_check').on 'click', () ->
 		if $('#endDate').css('opacity') is '1'
 			$('#endDate').animate opacity: .1
 		else
 		  $('#endDate').animate opacity: 1
+#/////////////End of qualifications visibility checkbox
+
+#////////////////Teachers area block book checkbox
+$(document).on 'change', '#Multiple', ->
+	if !($('#no_of_weeks').is ':visible')
+		$('#no_of_weeks').css 'display', 'inline'
+	else
+		$('#no_of_weeks').css 'display', 'none'
+		
+
