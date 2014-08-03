@@ -6,16 +6,26 @@ class EventsController < ApplicationController
 			flash[:danger] = "Date can't be blank"
 			redirect_to :back and return
 		end
-		save_params = format_time(params)
-		@event = Event.new(save_params)
-		if @event.save
-			flash[:success] = "Event saved"
-			redirect_to :back
-		else
-			flash[:danger] = "Not saved #{@event.errors.full_messages}"
-			redirect_to :back
+		# save_params = format_time(params)
+		# @event = Event.new(save_params)
+		ids = []
+		2.times do 
+			e = Event.new(create_params(Time.now))
+			if e.save
+				flash[:success] = 'cool'
+				ids << e.id
+			else
+				flash[:danger] = 'nope'
+				puts "#{e.errors.full_messages}"
+				ids.each do |e|
+					event = Event.find(e.to_i)
+					event.destroy
+				end
+				redirect_to :back and return
+				
+			end
 		end
-	end
+
 
 	def edit
 		@event = Event.find(params[:id])
