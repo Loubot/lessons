@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728111539) do
+ActiveRecord::Schema.define(version: 20140805130024) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 20140728111539) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "subjects_teachers", id: false, force: true do |t|
+    t.integer "subject_id", null: false
+    t.integer "teacher_id", null: false
+  end
+
+  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id"
 
   create_table "teachers", force: true do |t|
     t.string   "first_name"
