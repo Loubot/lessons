@@ -60,6 +60,12 @@ class TeachersController < ApplicationController
 		redirect_to :back
 	end
 
+	def subject_search
+		#@subjects = Subject.all
+
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+	end
+
 	private
 		def teacher_params
 			params.require(:teacher).permit!

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   		get   '/teachers-area'		  => 'teachers#teachers_area'
       get   '/edit-appointments'  => 'teachers#edit_appointments'
       get   '/qualification-form' => 'teachers#qualification_form'
-      get   '/your-location'      => 'teachers#your_location'
+      get   '/your-location'      => 'teachers#your_location'      
       post  '/change-profile-pic' => 'teachers#change_profile_pic'
   	end
   	resources :photos, only: [:create, :destroy]
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy]
 
+  get '/subject-search'    =>  'teachers#subject_search'
   get '/how-it-works'     => 'static#how_it_works'
   get '/mailing-list'     => 'static#mailing_list'
   post '/add-to-list'     => 'static#add_to_list'

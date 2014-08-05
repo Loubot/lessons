@@ -28,7 +28,25 @@
 	</div>
 </div>
 
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-heading teachers_info"><h2 class="panel-title pull-left">What do you teach?</h2>
+					<div class="btn-group pull-right">            
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teachers_subjects_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
+		      </div> <!-- end of btn-group pull-right -->
+				</div> <!-- end of panel heading -->
 
+			<div class="panel-body">
+				
+			</div>
+		</div> <!-- end of panel default -->
+		</div>
+	</div>
+	
+</div> <!-- end of container fluid -->
 <hr>
 <!-- start of profile picture panel -->
 <div class="container-fluid">
@@ -93,6 +111,7 @@
 <%= render 'modals/teacher_info_form' %>
 <%= render 'modals/teacher_experience_form' %>
 <%= render 'modals/teacher_about_you_form' %>
+<%= render 'modals/teachers_subjects_form' %>
 
 
 

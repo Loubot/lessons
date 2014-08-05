@@ -1,0 +1,22 @@
+<div class="modal fade" id="teachers_subjects_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Select subjects</h4>
+      </div>
+      <div class="modal-body">
+        <div  class="container-fluid">
+          <%= form_tag subject_search_path, method: 'get', remote: 'true', id: 'subject_search' do %>
+            <%= text_field_tag :search, params[:search] %>
+            <%= submit_tag 'Search', name: 'nil', id: 'search_submit' %>
+          <% end %>
+        </div> <!-- end of container-fluid -->
+
+        <div id="search_results"></div>
+      </div> <!-- end of modal-body -->
+      
+    </div>
+  </div>
+</div>

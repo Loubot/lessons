@@ -52,6 +52,11 @@ $(document).on 'page:change', ->
 		  $('#endDate').animate opacity: 1
 #/////////////End of qualifications visibility checkbox
 
+#///////////////Teachers subject search
+	$('#subject_search').keyup ->
+		$.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
+
+
 #////////////////Teachers area block book checkbox
 $(document).on 'change', '#Multiple', ->
 	if !($('#no_of_weeks').is ':visible')
@@ -59,4 +64,8 @@ $(document).on 'change', '#Multiple', ->
 	else
 		$('#no_of_weeks').css 'display', 'none'
 		
+#///////////////End of Teachers area block book checkbox
+
+
+
 
