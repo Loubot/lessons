@@ -1,3 +1,3 @@
 $('#search_results').empty()
-$('#search_results').append("<%= escape_javascript(render partial: 'teachers/subjects', 
+$('#search_results').append("<%= escape_javascript(render partial: 'partials/subjects', 
 							collection: @subjects, as: :subject) %>");
