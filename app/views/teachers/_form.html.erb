@@ -40,7 +40,9 @@
 				</div> <!-- end of panel heading -->
 
 			<div class="panel-body">
-				
+				<ul class="list-group" id="list_teachers_subjects">
+					<%= render partial: 'partials/list_teachers_subjects', collection: @subjects, as: :subject %>
+				</ul>
 			</div>
 		</div> <!-- end of panel default -->
 		</div>
