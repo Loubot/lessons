@@ -22,6 +22,32 @@ class SubjectsController < ApplicationController
 		end
 	end
 
+	def add_subject_to_teacher
+		if params[:teacher]
+			@teacher = Teacher.find(current_teacher)
+			@subject = Subject.find(params[:id])
+			if !@teacher.subjects.include?(@subject)
+				@teacher.subjects << @subject
+				flash[:success] = "#{@subject.name} successfully added to your list of subjects"
+			else
+				flash[:danger] = "Subject already added"
+			end
+		else
+			flash[:danger] = "No subject detected"
+		end
+		redirect_to :back
+	end
+
+	def remove_subject_from_teacher
+		subject = Subject.find(params[:id])
+		if current_teacher.subjects.destroy(subject)
+			flash[:success] = "#{subject.name} deleted from your list of subjects"
+		else
+			flash[:danger] = "Couldn't remove subject"
+		end
+		redirect_to :back
+	end
+
 	private
 		def subject_params
 			params.require(:subject).permit!

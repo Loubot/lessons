@@ -67,21 +67,7 @@ class TeachersController < ApplicationController
 		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
-	def add_subject_to_teacher
-		if params[:subject]
-			@teacher = Teacher.find(current_teacher)
-			@subject = Subject.find(params[:subject])
-			if !@teacher.subjects.include?(@subject)
-				@teacher.subjects << Subject.find(params[:subject])
-				flash[:success] = "Subject successfully added"
-			else
-				flash[:danger] = "Subject already added"
-			end
-		else
-			flash[:danger] = "No subject detected"
-		end
-		redirect_to :back
-	end
+	
 
 	private
 		def teacher_params
