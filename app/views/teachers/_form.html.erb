@@ -15,18 +15,24 @@
 					    <a href="#" class="thumbnail" data-toggle="modal" data-target="#teachers_dropzone_modal">
 					    	<%= (@profilePic != nil) ? image_tag(@profilePic.avatar.url) : image_tag('silhouette.jpg')  %>
 					      
-					    </a>
-					  </div>
-					</div>
-					<p><span class="col-md-3">Name:</span><span class="col-md-9"><%= @context.first_name %></span></p>
-					<p><span class="col-md-3">Surname:</span><span class="col-md-9"><%= @context.last_name %></span></p>
-					<p><span class="col-md-3">Address:</span ><span class="col-md-9"><%= @context.address %></span></p><br>
-					<p><span class="col-md-3">Email:</span><span class="col-md-9"><%= @context.email %></span></p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+					    </a> 
+					  </div> <!-- end of col-xs-6 col-md-3 -->
+					  <div class="col-md-6">
+					  	<div class="row">
+					  		<span class="col-md-3">Name:</span><span class="col-md-9"><%= @context.first_name %></span>
+								<span class="col-md-3">Surname:</span><span class="col-md-9"><%= @context.last_name %></span>
+								
+								<span class="col-md-3">Email:</span><span class="col-md-9"><%= @context.email %></span>
+								<span class="col-md-3">Address:</span ><span class="col-md-9"><%= @context.address %></span>
+					  	</div>
+					  </div><!--  end of col-md-6 -->
+					</div> <!-- end of row -->
+					
+				</div> <!-- end of panel-body -->
+			</div> <!-- end of panel panel-default -->
+		</div> <!-- end of col-md-10 -->
+	</div> <!-- end of row -->
+</div> <!-- end of teacher_edit_profile -->
 
 <div class="container-fluid">
 	<div class="row">

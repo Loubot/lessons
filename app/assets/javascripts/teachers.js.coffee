@@ -57,6 +57,12 @@ teachersInfoReady = ->
 	$('#subject_search').keyup ->
 		$.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
 
+	#///////////////Autofocus teachers subject search input field
+	$('#teachers_subjects_modal').on 'shown.bs.modal', ->
+		document.getElementById('teachers_search_input').focus()
+	#///////////////End of autofocus function
+
+
 
 #////////////////Teachers area block book checkbox
 $(document).on 'change', '#Multiple', ->
@@ -66,6 +72,7 @@ $(document).on 'change', '#Multiple', ->
 		$('#no_of_weeks').css 'display', 'none'
 		
 #///////////////End of Teachers area block book checkbox
+
 
 $(document).ready(teachersInfoReady)
 $(document).on('page:load', teachersInfoReady)
