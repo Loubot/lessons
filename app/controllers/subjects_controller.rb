@@ -22,6 +22,12 @@ class SubjectsController < ApplicationController
 		end
 	end
 
+	def subject_search
+		#@subjects = Subject.all
+
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+	end
+
 	def add_subject_to_teacher
 		if params[:teacher]
 			@teacher = Teacher.find(current_teacher)
