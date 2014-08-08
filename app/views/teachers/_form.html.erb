@@ -55,7 +55,7 @@
 	</div>
 	
 </div> <!-- end of container fluid -->
-<hr>
+
 <!-- start of profile picture panel -->
 <div class="container-fluid">
 	<div class="row">
@@ -76,7 +76,7 @@
 	</div>
 	
 </div> <!-- end of container fluid -->
-
+<!-- end of profile picture panel -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -107,14 +107,20 @@
 		       	<button class="btn btn-default" data-toggle="modal" data-target="#teacher_about_you_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
 		      </div> <!-- end of btn-group pull-right -->
 				</div> <!-- end of panel heading -->
-				<div class="panel-body">
-					<%= @context.overview %>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- end of profile picture panel -->
+				<!-- <div class="panel-body">
+					
+				</div>  end  of panel-body -->
+				<ul class="list-group clearfix">
+					<li class="list-group-item"><%= @context.overview %></li>
+					<li class="list-group-item">
+						Your rate: <span class="pull-right"><%= current_teacher.rate == nil ? "No price set yet" : number_to_currency(@context.rate,unit:'€') %></span>
+					</li>
+				</ul>
+			</div> <!-- end of panel panel-default -->
+		</div> <!-- end of col-md-10 -->
+	</div> <!-- end of row -->
+</div> <!-- end of container-fluid -->
+
 <%= render 'modals/teacher_photos_dropzone' %>
 <%= render 'modals/teacher_info_form' %>
 <%= render 'modals/teacher_experience_form' %>

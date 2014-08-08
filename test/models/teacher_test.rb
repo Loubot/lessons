@@ -25,6 +25,7 @@
 #  profile                :integer
 #  opening                :datetime
 #  closing                :datetime
+#  rate                   :decimal(8, 2)
 #
 
 require 'test_helper'

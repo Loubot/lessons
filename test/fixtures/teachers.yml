@@ -25,6 +25,7 @@
 #  profile                :integer
 #  opening                :datetime
 #  closing                :datetime
+#  rate                   :decimal(8, 2)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
