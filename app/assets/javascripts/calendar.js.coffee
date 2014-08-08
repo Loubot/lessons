@@ -22,26 +22,36 @@ ready = ->
     #// end of grey out time off //
 
     # get gon events
-    events = gon.events
+    events = checkEvents()
+
     # parse events into the scheduler
     scheduler.parse(events, 'json')
-    #// end of get gon events//
+    #// end of get gon events// 
     
     # attach event to viewchange and mark time off after change
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
-      if new_mode is 'day' then markTimespanDay(new_date.getDay()) else markTimespanWeek()
+      switch new_mode
+        when 'day' then markTimespanDay(new_date.getDay())
+        when 'week' then markTimespanWeek(new_date.getDay())
+        else return
+      
     #// end of viewchange function//
+
+    scheduler.attachEvent 'onClick', ->
+
 
     # attach event to onAfterSchedulerResize and mark time off when it's called
     scheduler.attachEvent 'onAfterSchedulerResize', ->      
-      state = scheduler.getState()
+      switch scheduler.getState()
+        when 'day' then markTimespanDay(state.date.getDay())
+        when 'week' then markTimespanWeek(state.date.getDay())
+        else return
 
-      if state.mode is 'day' then markTimespanDay(state.date.getDay()) else markTimespanWeek()
+      #if state.mode is 'day' then markTimespanDay(state.date.getDay()) else markTimespanWeek()
     #// end of onAfterSchedulerResize //
       
     
-    events = checkEvents()
-
+    
     # open = getOpen()
     # close = getClose()
   	

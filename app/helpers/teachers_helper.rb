@@ -4,7 +4,7 @@ module TeachersHelper
 		formatted_times = []
 		events.each do |event|
 			#event.time_off == '1' ? eventColor = '#e6e6e6' : eventColor = '#d9534f'
-			formatted_times << {id: event.id, text: event.title,
+			formatted_times << {id: event.id, text: event.title, textColor: 'white',
 										 start_date: event.start_time.strftime('%Y-%m-%d %H:%M'), 
 										end_date: event.end_time.strftime('%Y-%m-%d %H:%M'), color:'#0E64A0' 
 										#url: "/teachers/#{current_teacher.id}/events/#{event.id}/edit"

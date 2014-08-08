@@ -27,10 +27,9 @@ class TeachersController < ApplicationController
 			flash[:success] = 'Details updated ok'
 			
 		end
-		if params[:teacher]['opening(5i)']
-			flash[:danger] = 'nope'
-			(teacher_params = addTime(params)) 
-		end
+		# if params[:teacher]['opening(5i)']
+		# 	(teacher_params = addTime(params)) 
+		# end
 		redirect_to :back
 		
 	end
@@ -65,8 +64,6 @@ class TeachersController < ApplicationController
 	end
 
 	def subject_search
-		#@subjects = Subject.all
-
 		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
@@ -84,13 +81,6 @@ class TeachersController < ApplicationController
 		end
 
 		def checkOpeningExists	
-			@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)		
-			# if opening = Opening.where(teacher_id: current_teacher.id)
-			# 	puts "//////////////////a"
-			# 	Opening.where(teacher_id: current_teacher.id)
-			# else
-			# 	puts "///////////////////b"
-			# 	Teacher.find(current_teacher).openings.new
-			# end
+			@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)			
 		end
 end
