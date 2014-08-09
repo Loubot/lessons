@@ -11,6 +11,7 @@ ready = ->
     scheduler.locale.labels.timeline_tab = "Timeline"
     scheduler.locale.labels.unit_tab = "Unit"
     scheduler.locale.labels.section_custom = "Section"
+    format = scheduler.date.date_to_str("%Y-%m-%d %H:%i")
     #// end of scheduler config options //
 
     # initialise scheduler
@@ -27,6 +28,9 @@ ready = ->
     # parse events into the scheduler
     scheduler.parse(events, 'json')
     #// end of get gon events// 
+
+    scheduler.templates.tooltip_text = (start, end, event) ->
+      "<b>Event:</b> " + event.text + "<br/><b>Start date:</b> " + format(start) + "<br/><b>End date:</b> " + format(end)
     
     # attach event to viewchange and mark time off after change
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
