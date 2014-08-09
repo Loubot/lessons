@@ -5,17 +5,36 @@ ready = ->
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"
     scheduler.config.first_hour = 6
     scheduler.config.last_hour = 23
-    scheduler.config.readonly = true
+    scheduler.config.readonly = false
     #scheduler.config.limit_time_select = true;
     #scheduler.config.details_on_create = true;
     scheduler.locale.labels.timeline_tab = "Timeline"
     scheduler.locale.labels.unit_tab = "Unit"
     scheduler.locale.labels.section_custom = "Section"
+    format = scheduler.date.date_to_str("%d-%m-%Y %H:%i")
+    
+    
+    scheduler.config.details_on_create= true;
+    scheduler.config.details_on_dblclick= true;
+    # scheduler.config.icons_select = ["icon_edit","icon_delete"]
+    # scheduler.config.icons_edit = [
+    #    "icon_save",
+    #    "icon_cancel"
+    # ]
     #// end of scheduler config options //
 
     # initialise scheduler
     scheduler.init('scheduler_here')
     #// end of initialise scheduler //
+
+    # onclick will disable edit buttons
+    scheduler.attachEvent 'onClick',  -> 
+
+    #// end of onclick
+
+    #// lightbox event handler
+    scheduler.attachEvent 'onLightboxButton ', (button_id) ->
+      alert button_id
 
     # grey out time off
     markTimespanWeek()
@@ -27,6 +46,9 @@ ready = ->
     # parse events into the scheduler
     scheduler.parse(events, 'json')
     #// end of get gon events// 
+
+    # scheduler.templates.tooltip_text = (start, end, event) ->
+    #   "<b>Event:</b> " + event.text + "<br/><b>Start date:</b> " + format(start) + "<br/><b>End date:</b> " + format(end)
     
     # attach event to viewchange and mark time off after change
     scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
@@ -37,7 +59,7 @@ ready = ->
       
     #// end of viewchange function//
 
-    scheduler.attachEvent 'onClick', ->
+    
 
 
     # attach event to onAfterSchedulerResize and mark time off when it's called
