@@ -58,7 +58,7 @@ gem 'validates_overlap'
 
 gem 'date_validator'
 
-#gem 'rmagick'
+gem 'rmagick'
 
 gem "fog"
 
