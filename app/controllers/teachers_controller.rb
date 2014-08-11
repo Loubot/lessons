@@ -35,6 +35,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teachers_area
+		@del_event = Event.first
 		@params = params
 		@teacher = Teacher.find(current_teacher)
 		gon.events = format_times(@teacher.events)

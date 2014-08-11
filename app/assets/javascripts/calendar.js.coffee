@@ -8,9 +8,13 @@ ready = ->
     scheduler.config.readonly = false
     #scheduler.config.limit_time_select = true;
     #scheduler.config.details_on_create = true;
+    scheduler.config.drag_create = false
+    scheduler.config.drag_resize= false
     scheduler.locale.labels.timeline_tab = "Timeline"
     scheduler.locale.labels.unit_tab = "Unit"
     scheduler.locale.labels.section_custom = "Section"
+    scheduler.config.wide_form = false
+    scheduler.config.dblclick_create = false
     format = scheduler.date.date_to_str("%d-%m-%Y %H:%i")
     
     
@@ -32,9 +36,29 @@ ready = ->
 
     #// end of onclick
 
-    #// lightbox event handler
-    scheduler.attachEvent 'onLightboxButton ', (button_id) ->
-      alert button_id
+    #// lightbox delete button handler
+    scheduler.attachEvent "onConfirmedBeforeEventDelete", (id, e) ->
+      console.log JSON.stringify e
+      $.ajax
+        url: "/teachers/#{e.teacher_id}/events/#{e.id}"
+        type: 'DELETE'
+        success: location.reload()
+        error: (error) ->
+          console.log error      
+    #//end of lightbox delete handler
+
+    #// start event save handler
+    scheduler.attachEvent "onEventSave", (id,ev,is_new) ->
+      #console.log Date.parse(ev.start_date)
+      $.ajax
+        url: "/teachers/#{gon.events[0].teacher_id}/events/#{id}"
+        data: { event: { title: ev.title, start_time: (Date.parse(ev.start_date))/1000, end_time: (Date.parse(ev.end_date)) /1000,id: ev.id }}
+        type: 'put'
+        success: location.reload()
+        error: (error) ->
+          console.log error
+
+    #// end of event save hanlder
 
     # grey out time off
     markTimespanWeek()

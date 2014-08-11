@@ -28,13 +28,27 @@ class EventsController < ApplicationController
 	end
 
 	def update
-		if @event.update_attributes(event_params)
-			flash[:success] = "Lesson updated successfully"
-			redirect_to :back
-		else
-			flash[:danger] = "Couldn't save lesson #{@event.errors.full_messages}"
-			redirect_to :back
-		end
+		# puts "/////////////////////////#{event_params}"
+		# redirect_to :back
+		@event = Event.find(params[:id])
+		start_time = params[:event][:start_time].to_i
+		puts "///////////////#{Time.at(start_time)}"
+		end_time = params[:event][:end_time].to_i
+		puts "/////////////////#{end_time}"
+		@event.update_attributes(start_time: Time.at(start_time), end_time: Time.at(end_time),
+															title: params[:title])
+		redirect_to :back
+		# if @event.update_attributes(event_params)
+		# 	flash[:success] = "Lesson updated successfully"
+		# 	redirect_to :back
+		# else
+		# 	flash[:danger] = "Couldn't save lesson #{@event.errors.full_messages}"
+		# 	redirect_to :back
+		# end
+	end
+
+	def destroy
+		Event.find(params[:id]).destroy
 	end
 
 	private

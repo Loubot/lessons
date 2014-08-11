@@ -6,7 +6,8 @@ module TeachersHelper
 			#event.time_off == '1' ? eventColor = '#e6e6e6' : eventColor = '#d9534f'
 			formatted_times << {id: event.id, text: event.title, textColor: 'white',
 										 start_date: event.start_time.strftime('%Y-%m-%d %H:%M'), 
-										end_date: event.end_time.strftime('%Y-%m-%d %H:%M'), color:'#0E64A0' 
+										end_date: event.end_time.strftime('%Y-%m-%d %H:%M'), color:'#0E64A0',
+										teacher_id: event.teacher_id
 										#url: "/teachers/#{current_teacher.id}/events/#{event.id}/edit"
 										 }
 		end
