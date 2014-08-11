@@ -28,15 +28,19 @@ class EventsController < ApplicationController
 	end
 
 	def update
-		# puts "/////////////////////////#{event_params}"
+		#puts "/////////////////////////#{Time.at(event_params[:start_time].to_i)}"
 		# redirect_to :back
 		@event = Event.find(params[:id])
-		start_time = params[:event][:start_time].to_i
+		start_time = (params[:event][:start_time].to_i) + 1.hours
 		puts "///////////////#{Time.at(start_time)}"
-		end_time = params[:event][:end_time].to_i
+		end_time = (params[:event][:end_time].to_i) + 1.hours
 		puts "/////////////////#{end_time}"
-		@event.update_attributes(start_time: Time.at(start_time), end_time: Time.at(end_time),
+		 if @event.update_attributes(start_time: Time.at(start_time), end_time: Time.at(end_time),
 															title: params[:title])
+		 	flash[:success] = "Event updated successfully"
+		 else
+		 	flash[:danger] = "Could not update event #{@event.errors.full_messages}"
+		 end
 		redirect_to :back
 		# if @event.update_attributes(event_params)
 		# 	flash[:success] = "Lesson updated successfully"

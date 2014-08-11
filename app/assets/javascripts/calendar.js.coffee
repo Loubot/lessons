@@ -6,6 +6,7 @@ ready = ->
     scheduler.config.first_hour = 6
     scheduler.config.last_hour = 23
     scheduler.config.readonly = false
+    scheduler.config.time_step = 30
     #scheduler.config.limit_time_select = true;
     #scheduler.config.details_on_create = true;
     scheduler.config.drag_create = false
@@ -20,11 +21,7 @@ ready = ->
     
     scheduler.config.details_on_create= true;
     scheduler.config.details_on_dblclick= true;
-    # scheduler.config.icons_select = ["icon_edit","icon_delete"]
-    # scheduler.config.icons_edit = [
-    #    "icon_save",
-    #    "icon_cancel"
-    # ]
+    
     #// end of scheduler config options //
 
     # initialise scheduler
@@ -54,9 +51,12 @@ ready = ->
         url: "/teachers/#{gon.events[0].teacher_id}/events/#{id}"
         data: { event: { title: ev.title, start_time: (Date.parse(ev.start_date))/1000, end_time: (Date.parse(ev.end_date)) /1000,id: ev.id }}
         type: 'put'
-        success: location.reload()
+        success: (json) ->
+            console.log JSON.stringify json
+            location.reload()
         error: (error) ->
           console.log error
+          location.reload()
 
     #// end of event save hanlder
 
