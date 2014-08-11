@@ -24,6 +24,9 @@ ready = ->
     
     #// end of scheduler config options //
 
+    # get gon events
+    events = checkEvents()
+
     # initialise scheduler
     scheduler.init('scheduler_here')
     #// end of initialise scheduler //
@@ -52,20 +55,23 @@ ready = ->
         data: { event: { title: ev.title, start_time: (Date.parse(ev.start_date))/1000, end_time: (Date.parse(ev.end_date)) /1000,id: ev.id }}
         type: 'put'
         success: (json) ->
-            console.log JSON.stringify json
-            location.reload()
+          #scheduler.parse json, 'json'
+          console.log JSON.stringify json
+          dhtmlx.message
+            text:"Event updated successfully"
+            expire:1000
+            type: 'myCss'
+          switch scheduler.getState()
+            when 'day' then markTimespanDay(state.date.getDay())
+            when 'week' then markTimespanWeek(state.date.getDay())
+            else return
         error: (error) ->
-          console.log error
           location.reload()
-
     #// end of event save hanlder
 
     # grey out time off
     markTimespanWeek()
-    #// end of grey out time off //
-
-    # get gon events
-    events = checkEvents()
+    #// end of grey out time off //    
 
     # parse events into the scheduler
     scheduler.parse(events, 'json')
