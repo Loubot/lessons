@@ -17,12 +17,13 @@ Rails.application.routes.draw do
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
-    member do
+    member do      
       post    '/add-teacher'          =>  'subjects#add_subject_to_teacher'
       delete  '/remove-from-teacher'  =>  'subjects#remove_subject_from_teacher'
     end
   end
 
+  get         '/display-subjects'     =>  'subjects#display_subjects'
   get         '/subject-search'       => 'teachers#subject_search'
   get         '/how-it-works'         => 'static#how_it_works'
   get         '/mailing-list'         => 'static#mailing_list'

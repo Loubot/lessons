@@ -1,3 +1,10 @@
+<div  class="container-fluid">
+  <%= form_tag display_subjects_path, method: 'get' do %>
+    <%= text_field_tag :search, params[:search], id: 'teachers_search_input' %>
+    <%= submit_tag 'Search', name: 'nil', id: 'search_submit' %>
+  <% end %>
+</div> <!-- end of container-fluid -->
+
 <div class="container">
 	<div class="page-header center-block text-center"><h1><strong>How it works</strong></h1></div>
 	<div class="row center-block">
