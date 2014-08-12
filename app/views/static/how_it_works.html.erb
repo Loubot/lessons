@@ -1,6 +1,7 @@
 <div  class="container-fluid">
   <%= form_tag display_subjects_path, method: 'get' do %>
-    <%= text_field_tag :search, params[:search], id: 'teachers_search_input' %>
+    <%= text_field_tag :search_subjects, params[:search], placeholder: 'Subject name' %>
+    <%= text_field_tag :search_position, params[:search], placeholder: 'County' %>
     <%= submit_tag 'Search', name: 'nil', id: 'search_submit' %>
   <% end %>
 </div> <!-- end of container-fluid -->
