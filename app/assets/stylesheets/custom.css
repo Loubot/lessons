@@ -15,13 +15,13 @@ hr{
 
 /*standard layout page*/
 #standard_layout{
-	background-color: #f2f2f2;
+	background-color: #F8F8FF;
 }
 /*end of standard layout page*/
 
 #main_page{
 	padding-top: 50px;
-	background-color:#f2f2f2;
+	background-color:#F8F8FF;
 	min-height: 100%;
 }
 .jumbotron{

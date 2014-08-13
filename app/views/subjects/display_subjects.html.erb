@@ -4,11 +4,12 @@
 <div class="row">
 	<table class="table table-bordered table-hover subject_search_results_table">
 		<tr class="search_results_table_row">
-			<td class="nopadding"><%= image_tag teacher.photos.first.avatar.url(:thumb), class: 'pull-left' %>
-				<%= "#{teacher.first_name}" "#{teacher.last_name}" %><br>
-				<%= teacher.subjects.first.name %>
+			<td class="nopadding"><%= image_tag Photo.find(teacher.profile).avatar.url(:thumb), class: 'pull-left' %>
+				<%= "#{teacher.first_name} #{teacher.last_name}" %><br>
+				<%= teacher.subjects.first.name %><br>
+				<%= teacher.address %>
 			</td>		
-			<td><%= number_to_currency(teacher.rate,unit:'€') %></td>
+			<td>Price: <br><%= number_to_currency(teacher.rate,unit:'€') %></td>
 		</tr>
 	</table>
 </div>
