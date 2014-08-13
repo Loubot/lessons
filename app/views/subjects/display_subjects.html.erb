@@ -1,4 +1,16 @@
-<%= @params %><br>
+ <%= @params %><br>
+
 <% @teachers.each do |teacher| %>
-	<%= teacher.first_name %> 
+	<div class="row" id="search_results_container">
+		
+			<div class="col-md-9 subject_search_left nopadding">
+				<%= image_tag teacher.photos.first.avatar.url(:thumb), class: 'pull-left' %>
+				<%= "#{teacher.first_name}" "#{teacher.last_name}" %><br>
+				<%= teacher.subjects.first.name %>
+			</div> <!-- end of col-md-9 -->
+			<div class="col-md-3 subject_search_right nopadding">
+				hello
+			</div>
+		
+	</div> <!-- end of row -->
 <% end %>
