@@ -64,21 +64,12 @@ hr{
 }
 
 /*Subject search page*/
-#search_results_container{
-	margin-bottom: 10px;
-}
-.subject_search_left{
+.subject_search_results_table{
 	background-color: white;
-	border: 1px solid #D4D8D1;
-}
-
-.subject_search_right{
-	border: 1px solid #D4D8D1;
-
 }
 
 .nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
 }
 /*end of subject search page*/

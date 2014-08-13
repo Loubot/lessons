@@ -1,16 +1,27 @@
  <%= @params %><br>
 
 <% @teachers.each do |teacher| %>
-	<div class="row" id="search_results_container">
-		
-			<div class="col-md-9 subject_search_left nopadding">
-				<%= image_tag teacher.photos.first.avatar.url(:thumb), class: 'pull-left' %>
+<div class="row">
+	<table class="table table-bordered table-hover subject_search_results_table">
+		<tr class="search_results_table_row">
+			<td class="nopadding"><%= image_tag teacher.photos.first.avatar.url(:thumb), class: 'pull-left' %>
 				<%= "#{teacher.first_name}" "#{teacher.last_name}" %><br>
 				<%= teacher.subjects.first.name %>
-			</div> <!-- end of col-md-9 -->
-			<div class="col-md-3 subject_search_right nopadding">
-				hello
-			</div>
+			</td>		
+			<td><%= number_to_currency(teacher.rate,unit:'€') %></td>
+		</tr>
+	</table>
+</div>
+<% end %>
+
+
+<div class="row" id="search_results_container">
+		
+		<div class="col-md-9 subject_search_left nopadding">
+			
+		</div> <!-- end of col-md-9 -->
+		<div class="col-md-3 subject_search_right nopadding">
+			
+		</div>
 		
 	</div> <!-- end of row -->
-<% end %>
