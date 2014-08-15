@@ -3,7 +3,11 @@
 <% @teachers.each do |teacher| %>
 	<div class="row search_results_row">
 		<div class="col-md-9 search_results_left nopadding">
-			<%= image_tag Photo.find(teacher.profile).avatar.url, size: '100x100', class: 'pull-left results_photos' %>
+
+			<a href="http://www.google.com" class="image_container">
+				<%= silhouette_helper(teacher) %>				
+			</a>
+
 			<%= teacher.subjects.first.name %><br>
 			<%= teacher.address %>
 		</div>
