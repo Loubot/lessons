@@ -64,23 +64,23 @@ hr{
 }
 
 /*Subject search page*/
-.subject_search_results_table{
-	background-color: white;
-}
 
 .search_results_left{
+	background-color: white;
 	border-style: solid;
 	border-width: 1px;
-	margin-bottom: 5px;
-	background-color: white;
+	margin-top: 9px;
+	border-color: #E6E6E6;
 }
 
 .search_restuls_right{
 	background-color: white;
-	border-top: solid;
+	border-top: solid;	
 	border-right: solid;
 	border-bottom: solid;
-	border-width: 1px;
+	border-width: .1em;
+	border-color: #E6E6E6;
+	margin-top: 9px;
 }
 
 .nopadding {
@@ -89,6 +89,22 @@ hr{
 }
 
 .results_photos{
+	position: absolute;
 	margin-right: 10px;
 }
+
+.results_photos.front{
+	z-index: 1;
+}
+
+.results_photos.back{
+	z-index: 3;
+	margin-top: 20px;
+	opacity: 0;
+}
+
+.search_results_row:hover {
+	box-shadow: 4px 4px 5px #888888;
+}
+
 /*end of subject search page*/

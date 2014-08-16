@@ -61,12 +61,21 @@ teachersInfoReady = ->
 	$('#teachers_subjects_modal').on 'shown.bs.modal', ->
 		document.getElementById('teachers_search_input').focus()
 	#///////////////End of autofocus function
+
 #/////////////search results page
 	if $('.search_results_row').length > 0
-		$('.search_restuls_right').each ->
+		# navigator.geolocation.getCurrentPosition (pos) ->
+		# 	alert JSON.stringify pos
+		$('.search_results_left').css 'height', $('.results_photos').css 'height'
+		$('.search_restuls_right').each ->			
 			$('.search_restuls_right').css 'height', $('.search_results_left').css 'height'
+
+		$('.search_results_row').mouseover ->
+			$(this).find('.results_photos.back').animate opacity: .55, 100
+		$('.search_results_row').mouseleave ->
+			$(this).find('.results_photos.back').animate opacity: 0, 100
 		
-#////////////end of search results page
+		#////////////end of search results page
 
 
 #////////////////Teachers area block book checkbox

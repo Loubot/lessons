@@ -1,17 +1,18 @@
  <%= @params %><br>
 
 <% @teachers.each do |teacher| %>
-	<div class="row search_results_row">
-		<div class="col-md-9 search_results_left nopadding">
+	<div class="row search_results_row nopadding">
+		<div class="col-md-9 search_results_left search_results_shadow nopadding">
 
 			<a href="http://www.google.com" class="image_container">
-				<%= silhouette_helper(teacher) %>				
+				<%= silhouette_helper(teacher) %>		
+				<%= image_tag 'eye.png', size: '100x50', class: 'pull-left results_photos back' %>
 			</a>
-
+			<%= "#{teacher.first_name} #{teacher.last_name}" %><br>
 			<%= teacher.subjects.first.name %><br>
 			<%= teacher.address %>
 		</div>
-		<div class="col-md-3 search_restuls_right">
+		<div class="col-md-3 search_restuls_right search_results_shadow">
 			Price: <br><%= number_to_currency(teacher.rate,unit:'€') %>
 		</div>
 	</div> <!-- end of row -->
