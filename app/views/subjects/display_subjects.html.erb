@@ -5,12 +5,16 @@
 		<div class="col-md-9 search_results_left search_results_shadow nopadding">
 
 			<a href="http://www.google.com" class="image_container">
+				
 				<%= silhouette_helper(teacher) %>		
 				<%= image_tag 'eye.png', size: '100x50', class: 'pull-left results_photos back' %>
+				
+				<div class="search_results_teachers_info">
+					<h4 class="search_results_teachers_name"><%= "#{teacher.first_name} #{teacher.last_name}" %></h4>
+					<p><%= teacher.subjects.first.name %></p>
+					<p><%= teacher.address %></p>
+				</div>
 			</a>
-			<%= "#{teacher.first_name} #{teacher.last_name}" %><br>
-			<%= teacher.subjects.first.name %><br>
-			<%= teacher.address %>
 		</div>
 		<div class="col-md-3 search_restuls_right search_results_shadow">
 			Price: <br><%= number_to_currency(teacher.rate,unit:'€') %>

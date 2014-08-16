@@ -63,7 +63,7 @@ teachersInfoReady = ->
 	#///////////////End of autofocus function
 
 #/////////////search results page
-	if $('.search_results_row').length > 0
+	if $('.search_results_row').length > 0		
 		# navigator.geolocation.getCurrentPosition (pos) ->
 		# 	alert JSON.stringify pos
 		$('.search_results_left').css 'height', $('.results_photos').css 'height'
@@ -71,8 +71,13 @@ teachersInfoReady = ->
 			$('.search_restuls_right').css 'height', $('.search_results_left').css 'height'
 
 		$('.search_results_row').mouseover ->
+			$('.image_container').css 'color', 'black'
+			$(@).find('.search_results_teachers_name').css 'color', '#0000FF'
+			$('.image_container').css 'text-decoration', 'none'
 			$(this).find('.results_photos.back').animate opacity: .55, 100
 		$('.search_results_row').mouseleave ->
+			$('.image_container').css 'color', 'black'
+			$(@).find('.search_results_teachers_name').css 'color', 'black'
 			$(this).find('.results_photos.back').animate opacity: 0, 100
 		
 		#////////////end of search results page
