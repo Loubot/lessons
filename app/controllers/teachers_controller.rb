@@ -10,6 +10,9 @@ class TeachersController < ApplicationController
 	end
 
 	def show_teacher
+		
+		@params = params
+		@teacher = Teacher.find(params[:id])
 		render layout: 'application'
 	end
 

@@ -140,3 +140,11 @@ hr{
 	font-family: "HelveticaNeue", "Helvetica Neue",Helvetica,Arial,sans-serif}
 }
 /*end of subject search page*/
+
+/*teacger display page*/
+
+#teaher_display_map{
+	height:100px;
+}
+
+/*end of teacher display page*/

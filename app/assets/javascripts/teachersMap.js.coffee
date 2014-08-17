@@ -1,7 +1,12 @@
 
-		#map
-#//////////////////////////////////////////////////////////////////////////////
+#////////////////////////////show teachers map
+initialise_show_teachers_map = ->
+	alert 'b'
 
+
+#///////////////////////////end of show teachers map
+
+#////////////////////////////teachers info map
 initialize = ->
   mapCanvas = document.getElementById("map_canvas")
   if gon.location[0] == null && gon.location[1] == null
@@ -28,11 +33,7 @@ initialize = ->
 	  #markLocation e.latLng
   return
 	
-	# Run initialize on dom ready if map_container is on screen
-	$(document).on 'ready page:load', ->
-		if $('#map_container').is(':visible')
-			google.maps.event.addDomListener window, 'load', initialize
-			checkCoordsSet()
+	
 
 window.start_address_search = () ->
 	geocoder = new google.maps.Geocoder()
@@ -60,3 +61,13 @@ setMapPosition = (latlng, zoom = 8) ->
 checkCoordsSet = () ->
 	if gon.location[0] == null && gon.location[1] == null
 		$('.coordsHinter').css('visibility', 'visible')
+
+#//////////end of teachers info map
+
+# Run initialize on dom ready if map_container is on screen
+$(document).on 'ready page:load', ->
+	if $('#map_container').is(':visible')
+		google.maps.event.addDomListener window, 'load', initialize
+		checkCoordsSet()
+	else if $('#teaher_display_map').is(':visible')
+		initialise_show_teachers_map()

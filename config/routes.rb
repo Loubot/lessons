@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get         'show-teacher'         =>  'teachers#show_teacher'  
+  get         '/show-teacher'         =>  'teachers#show_teacher'  
   get         '/display-subjects'     =>  'subjects#display_subjects'
   get         '/subject-search'       =>  'teachers#subject_search'
   get         '/how-it-works'         =>  'static#how_it_works'
