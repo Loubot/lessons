@@ -72,13 +72,13 @@ teachersInfoReady = ->
 
 		$('.search_results_row').mouseover ->
 			$('.image_container').css 'color', 'black'
-			$(@).find('.search_results_teachers_name').css 'color', '#0000FF'
+			$(@).find('.search_results_teachers_name').animate color: '#509BE6',50
 			$('.image_container').css 'text-decoration', 'none'
-			$(this).find('.results_photos.back').animate opacity: .55, 100
+			$(this).find('.results_photos.back').animate opacity: .7, 50
 		$('.search_results_row').mouseleave ->
 			$('.image_container').css 'color', 'black'
-			$(@).find('.search_results_teachers_name').css 'color', 'black'
-			$(this).find('.results_photos.back').animate opacity: 0, 100
+			$(@).find('.search_results_teachers_name').animate color: 'black',50
+			$(this).find('.results_photos.back').animate opacity: 0, 50
 		
 		#////////////end of search results page
 
