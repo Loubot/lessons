@@ -9,10 +9,10 @@ class TeachersController < ApplicationController
 		redirect_to root_path unless current_teacher.id = params[:id]
 	end
 
-	def show_teacher
-		
+	def show_teacher		
 		@params = params
 		@teacher = Teacher.find(params[:id])
+		gon.location= [@teacher.lat, @teacher.lon]
 		render layout: 'application'
 	end
 

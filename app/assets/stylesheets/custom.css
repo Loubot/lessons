@@ -137,14 +137,16 @@ hr{
 }
 
 .search_results_teachers_name{
-	font-family: "HelveticaNeue", "Helvetica Neue",Helvetica,Arial,sans-serif}
+	font-family: "HelveticaNeue", "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 /*end of subject search page*/
 
-/*teacger display page*/
+/*teacher display page*/
 
-#teaher_display_map{
-	height:100px;
+#teacher_display_map{
+	height: 400px;
+	width: 400px;
+	
 }
 
 /*end of teacher display page*/

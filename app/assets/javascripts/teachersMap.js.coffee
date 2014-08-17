@@ -1,9 +1,22 @@
 
 #////////////////////////////show teachers map
 initialise_show_teachers_map = ->
-	alert 'b'
+	mapCanvas = document.getElementById('teacher_display_map')
+	mapOptions = setMapOptions()
 
+	window.map = new google.maps.Map(mapCanvas, mapOptions)
 
+	circleOptions = 
+		strokeColor: '#FF0000'
+		strokeOpacity: .8
+		strokeWeight: 2
+		fillColor: '#FF0000'
+		fillOpacity: .35
+		map: map
+		center: mapOptions.center
+		radius: 200
+
+	googleCircle = new google.maps.Circle(circleOptions)
 #///////////////////////////end of show teachers map
 
 #////////////////////////////teachers info map
@@ -17,7 +30,7 @@ initialize = ->
   else
     mapOptions = setMapOptions()
   
-  window.map = new google.maps.Map(map_canvas, mapOptions)
+  window.map = new google.maps.Map(mapCanvas, mapOptions)
   window.marker = new google.maps.Marker(
 				map: map
 				position: mapOptions.center				
@@ -48,9 +61,9 @@ window.start_address_search = () ->
 	
 setMapOptions = () ->
 	mapOptions =
-	    center: new google.maps.LatLng(gon.location[0], gon.location[1])
-	    zoom: 16
-	    mapTypeId: google.maps.MapTypeId.ROADMAP
+    center: new google.maps.LatLng(gon.location[0], gon.location[1])
+    zoom: 16
+    mapTypeId: google.maps.MapTypeId.ROADMAP
 	return mapOptions
 
 setMapPosition = (latlng, zoom = 8) ->
@@ -69,5 +82,5 @@ $(document).on 'ready page:load', ->
 	if $('#map_container').is(':visible')
 		google.maps.event.addDomListener window, 'load', initialize
 		checkCoordsSet()
-	else if $('#teaher_display_map').is(':visible')
-		initialise_show_teachers_map()
+	else if $('#teacher_display_map').is(':visible')
+		google.maps.event.addDomListener window, 'load', initialise_show_teachers_map
