@@ -3,6 +3,7 @@
 initialise_show_teachers_map = ->
 	mapCanvas = document.getElementById('teacher_display_map')
 	mapOptions = setMapOptions()
+	mapOptions.zoom = 14 #override setMapOptions zoom level
 
 	window.map = new google.maps.Map(mapCanvas, mapOptions)
 
@@ -78,9 +79,9 @@ checkCoordsSet = () ->
 #//////////end of teachers info map
 
 # Run initialize on dom ready if map_container is on screen
-$(document).on 'ready page:load', ->
+$(document).on 'ready page:load', ->	
 	if $('#map_container').is(':visible')
-		google.maps.event.addDomListener window, 'load', initialize
+		initialize()
 		checkCoordsSet()
 	else if $('#teacher_display_map').is(':visible')
-		google.maps.event.addDomListener window, 'load', initialise_show_teachers_map
+		initialise_show_teachers_map()

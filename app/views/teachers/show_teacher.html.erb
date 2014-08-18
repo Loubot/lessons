@@ -1,7 +1,44 @@
 <%= @params %>
 <%= include_gon %><br>
 
-<div id="teacher_display_map">
-</div>
+<div class="row">
+
+	<div class="col-md-9">
+		<%= @teacher.profile == nil ? image_tag('silhouette.jpg') : image_tag(Photo.find(@teacher.profile).avatar.url,size: '100x100') %>	<br>
+		<%= @teacher.address %><br>
+		<%= @teacher.overview %><br>
+		<div class="panel panel-default">
+			<div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
+				
+			</div> <!-- end of panel heading -->
+			<div class="panel-body">
+				<ul class="list-group">			
+					<%= render partial: 'partials/experience', collection: @teacher.experiences %>
+				</ul>
+			</div> <!-- end of panel-body -->
+		</div> <!-- end of panel panel-default -->
+
+		<div class="container-fluid nopadding">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h2 class="panel-title pull-left">Education</h2></div> <!-- end of panel-heading -->
+
+				<div class="panel-body">
+					<ul class="list-group">
+						<%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
+					</ul> <!-- end of list-group -->
+				</div> <!-- end of panel-body -->
+			</div> <!-- end of panel-default -->
+			
+		</div> <!-- end of container-fluid -->
+	</div> <!-- end of col-md-9 -->
+
+
+	<div class="col-md-3">
+		<div id="teacher_display_map">
+		</div> <!-- end of teacher_display_map -->
+	</div> <!-- end of col-md-3 -->
+</div> <!-- end of row -->
+
+
 
 
