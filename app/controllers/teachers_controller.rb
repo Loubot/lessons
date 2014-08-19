@@ -13,6 +13,8 @@ class TeachersController < ApplicationController
 		@params = params
 		@teacher = Teacher.find(params[:id])
 		gon.location= [@teacher.lat, @teacher.lon]
+		gon.events = format_times(@teacher.events)
+		gon.openingTimes = open_close_times(@teacher.openings.first)
 		render layout: 'application'
 	end
 
@@ -71,7 +73,7 @@ class TeachersController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end	
 
 

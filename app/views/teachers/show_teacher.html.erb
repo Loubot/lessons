@@ -2,30 +2,13 @@
 <%= include_gon %><br>
 
 <div class="row">
-	<div id="teacher_display_map" class="col-md-4">
-	</div> <!-- end of teacher_display_map -->
-		<div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler col-md-5" >
-		    <div class="dhx_cal_navline" >
-		        <div class="dhx_cal_prev_button">&nbsp;</div>
-		        <div class="dhx_cal_next_button">&nbsp;</div>
-		        
-		        <div class="dhx_cal_date" id="blabla"></div>
-		        
-		    </div>
-		    <div class="dhx_cal_header"></div>
-		    <div class="dhx_cal_data"></div>       
-		</div>
-
-</div>
-
-<div class="row">
 
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading"><%= @teacher.first_name %></div>
 			<div class="panel-body">
 				<div class="media">
-					<span class="pull-left"><%= @teacher.profile == nil ? image_tag('silhouette.jpg', class: 'media-object') : image_tag(Photo.find(@teacher.profile).avatar.url,size: '100x100', class: 'media-object') %> </span>			
+					<span class="pull-left"><%= @teacher.profile == nil ? image_tag('silhouette.jpg', class: 'media-object') : image_tag(Photo.find(@teacher.profile).avatar.url(:thumb), class: 'media-object') %> </span>			
 					<div class="media-body">
 						<%= @teacher.address %><br>
 						<%= @teacher.overview %><br>
@@ -59,10 +42,25 @@
 			</div> <!-- end of panel-default -->
 			
 		</div> <!-- end of container-fluid -->
+		<div class="container-fluid">
+			<div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
+		    <div class="dhx_cal_navline" >
+		        <div class="dhx_cal_prev_button">&nbsp;</div>
+		        <div class="dhx_cal_next_button">&nbsp;</div>
+		        
+		        <div class="dhx_cal_date display_teachers_cal_date pull-left"></div>
+		        
+		    </div> <!-- end of dhx_cal_navline -->
+		    <div class="dhx_cal_header"></div>
+		    <div class="dhx_cal_data"></div>       
+			</div> <!-- end of scheduler_here -->
+		</div> <!-- end of container fluid -->
 	</div> <!-- end of col-md-9 -->
 
 
 	<div class="col-md-3">
+		<div id="teacher_display_map">
+		</div> <!-- end of teacher_display_map -->
 		
 	</div> <!-- end of col-md-3 -->
 </div> <!-- end of row -->

@@ -145,11 +145,20 @@ hr{
 
 #teacher_display_map{
 	height: 350px;
-	/*width: 350px;*/
+	width: 350px;
 	
 }
 
 .teachers_display_scheduler{
 	height: 350px;
+	
+}
+
+.dhx_cal_date.display_teachers_cal_date{
+	height:30px !important;
+	line-height:30px !important;
+	background:0 0;
+	border:1px solid #CECECE;
+	text-align: left !important;
 }
 /*end of teacher display page*/
