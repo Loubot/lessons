@@ -1,5 +1,5 @@
-ready = ->
-  if $('#scheduler_here').length > 0
+calendarReady = ->
+  if $('.teachers_area_scheduler').length > 0
 
     #scheduler config options
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"
@@ -151,5 +151,5 @@ markTimespanWeek = ->
     scheduler.markTimespan time
 #// end of mark timespan in week view //   
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(calendarReady)
+$(document).on('page:load', calendarReady)
