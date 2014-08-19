@@ -1,6 +1,6 @@
 calendarDisplayTeacherReady = ->
-
-	if $('.teachers_display_scheduler').length > 0
+  if $('.teachers_display_scheduler').length > 0
+    alert 'b'
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"
     scheduler.config.first_hour = 6
     scheduler.config.last_hour = 23
@@ -19,18 +19,18 @@ calendarDisplayTeacherReady = ->
     scheduler.config.details_on_create= false
     scheduler.config.details_on_dblclick= false
 
-		scheduler.init('scheduler_here')
-
+    scheduler.init('scheduler_here')
+    scheduler.parse(gon.events ,'json')
 		#///////////mark teachers opening times
-		markTime()
+    markTime()
 
-		scheduler.attachEvent 'onAfterSchedulerResize', -> 
-			markTime()		
+    scheduler.attachEvent 'onAfterSchedulerResize', -> 
+      markTime()		
 
-		scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
-			markTime()
+    scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
+      markTime()
 		# end of mark teachers opening times
-		scheduler.parse(gon.events ,'json')
+		
 
 
 		
@@ -41,6 +41,6 @@ $(document).on('page:load', calendarDisplayTeacherReady)
 
 #function to mark teachers opening times
 markTime = ->
-	for time in gon.openingTimes
+  for time in gon.openingTimes
     scheduler.markTimespan time
 #end of function to mark teachers openingTimes 
