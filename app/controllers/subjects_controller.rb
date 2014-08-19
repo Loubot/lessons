@@ -25,12 +25,12 @@ class SubjectsController < ApplicationController
 	def subject_search
 		#@subjects = Subject.all
 
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def display_subjects
 		@params = params
-		@subject = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
+		@subject = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%").first
 		@teachers = defined?(@subject.teachers) ? @subject.teachers : []
 	end
 

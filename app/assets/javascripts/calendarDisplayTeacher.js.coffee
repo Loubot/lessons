@@ -22,10 +22,13 @@ calendarDisplayTeacherReady = ->
 		scheduler.init('scheduler_here')
 
 		#///////////mark teachers opening times
-		scheduler.attachEvent 'onAfterSchedulerResize', -> 
-			markTime()
-
 		markTime()
+
+		scheduler.attachEvent 'onAfterSchedulerResize', -> 
+			markTime()		
+
+		scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
+			markTime()
 		# end of mark teachers opening times
 		scheduler.parse(gon.events ,'json')
 
