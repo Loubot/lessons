@@ -22,6 +22,12 @@ class StaticController < ApplicationController
 		redirect_to :back
 	end
 
+	def display_subjects
+		@params = params
+		@subject = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
+		@teachers = defined?(@subject.teachers) ? @subject.teachers : []
+	end
+
 	private
 
 	def valid_email?(email)

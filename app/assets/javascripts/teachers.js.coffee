@@ -57,6 +57,10 @@ teachersInfoReady = ->
 	$('#subject_search').keyup ->
 		$.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
 
+	$('#main_subject_search').keyup ->
+		$.get($('#main_subject_search').attr('action'), $('#main_subject_search').serialize(), null, 'script')
+#///////////////End of teachers subject_search
+
 	#///////////////Autofocus teachers subject search input field
 	$('#teachers_subjects_modal').on 'shown.bs.modal', ->
 		document.getElementById('teachers_search_input').focus()

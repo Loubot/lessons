@@ -1,0 +1,12 @@
+<%= @params %><br>
+
+
+<% if @teachers == [] %>
+	No results found
+<% else %>
+	<div id="display_search_results">
+		<%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
+	</div>
+<% end %>
+
+

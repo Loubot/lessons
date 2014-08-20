@@ -1,0 +1,2 @@
+$('#display_search_results').empty();
+$('#display_search_results').append("<%= escape_javascript(render partial: 'static/test', collection: @teachers, as: :teacher) %>");

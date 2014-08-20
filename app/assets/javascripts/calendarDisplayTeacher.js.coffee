@@ -1,6 +1,5 @@
 calendarDisplayTeacherReady = ->
   if $('.teachers_display_scheduler').length > 0
-    alert 'b'
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"
     scheduler.config.first_hour = 6
     scheduler.config.last_hour = 23

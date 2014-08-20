@@ -1,9 +1,12 @@
 <div  class="container-fluid">
-  <%= form_tag display_subjects_path, method: 'get' do %>
+  <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search' do %>
     <%= text_field_tag :search_subjects, params[:search], placeholder: 'Subject name',autocomplete: :off %>
     <%= text_field_tag :search_position, params[:search], placeholder: 'County', autocomplete: :off %>
     <%= submit_tag 'Search', name: 'nil', id: 'search_submit' %>
   <% end %>
+  <div id="display_search_results">
+
+  </div>
 </div> <!-- end of container-fluid -->
 
 <div class="container">

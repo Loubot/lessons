@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   end
 
   get         '/show-teacher'         =>  'teachers#show_teacher'  
-  get         '/display-subjects'     =>  'subjects#display_subjects'
+  get         '/display-subjects'     =>  'static#display_subjects'
   get         '/subject-search'       =>  'teachers#subject_search'
   get         '/how-it-works'         =>  'static#how_it_works'
   get         '/mailing-list'         =>  'static#mailing_list'
