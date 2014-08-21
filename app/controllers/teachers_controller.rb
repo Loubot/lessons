@@ -73,7 +73,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end	
 
 
