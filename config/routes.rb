@@ -23,9 +23,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get         '/subject-search'       =>  'static#subject_search'
   get         '/show-teacher'         =>  'teachers#show_teacher'  
   get         '/display-subjects'     =>  'static#display_subjects'
-  get         '/subject-search'       =>  'teachers#subject_search'
+  #get         '/subject-search'       =>  'teachers#subject_search'
   get         '/how-it-works'         =>  'static#how_it_works'
   get         '/mailing-list'         =>  'static#mailing_list'
   post        '/add-to-list'          =>  'static#add_to_list'

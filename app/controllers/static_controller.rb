@@ -22,11 +22,17 @@ class StaticController < ApplicationController
 		redirect_to :back
 	end
 
+	def subject_search
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		render json: @subjects
+	end
+
 	def display_subjects
 		@params = params
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subject = params[:search_subjects] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
+		flash[:notice] = @subject.to_json
 		@teachers = defined?(@subject.teachers) ? @subject.teachers : []
-		render json: @subjects
+		
 	end
 
 	private
