@@ -1,6 +1,6 @@
 <div  class="container-fluid">
-  <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', remote: :true do %>
-    <%= text_field_tag :search_subjects, params[:search], placeholder: 'Subject name', id: 'main_subject_search_textfield', autocomplete: :off %>
+  <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search' do %>
+    <%= text_field_tag :search_subjects, params[:search], placeholder: 'Subject name', class: 'typeahead', autocomplete: :off %>
     <%= text_field_tag :search_position, params[:search], placeholder: 'County', autocomplete: :off %>
     <%= submit_tag 'Search', name: 'nil', id: 'search_submit' %>
   <% end %>

@@ -24,8 +24,8 @@ class StaticController < ApplicationController
 
 	def display_subjects
 		@params = params
-		@subjects = Subject.all.pluck(:name)
-		#@teachers = defined?(@subject.teachers) ? @subject.teachers : []
+		@subjects = Subject.all
+		@teachers = defined?(@subject.teachers) ? @subject.teachers : []
 		render json: @subjects
 	end
 

@@ -53,24 +53,6 @@ teachersInfoReady = ->
   $('#subject_search').keyup ->
     $.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
 
-  if $('#main_subject_search').length > 0
-    alert 'b'
-    $.ajax
-      url: $('#main_subject_search').attr('action')
-      data:  $('#main_subject_search').serialize()
-      dataType: 'json'
-      success: (data) ->
-        console.log data
-        window.data = data
-        $('#main_subject_search_textfield').typeahead
-          hint: true
-          highlight: true
-          minLength: 1
-        ,
-          source: data
-
-        
-
 #///////////////End of teachers subject_search
 
 
