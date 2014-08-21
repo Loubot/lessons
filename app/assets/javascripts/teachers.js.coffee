@@ -48,7 +48,20 @@ teachersInfoReady = ->
       $('#endDate').animate opacity: 1
 #/////////////End of qualifications visibility checkbox
   
-	
+#////////////Root page subject search with typeahead
+  if $('.typeahead').length > 0
+      bestPictures = new Bloodhound(
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+        prefetch: "http://localhost:3000/subject-search"
+      )
+      bestPictures.initialize()
+      $(".typeahead").typeahead null,
+        name: "best-pictures"
+        displayKey: "name"
+        source: bestPictures.ttAdapter()
+#///////////End of root page subject search with typeahead
+
 #///////////////Teachers subject search
   $('#subject_search').keyup ->
     $.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')

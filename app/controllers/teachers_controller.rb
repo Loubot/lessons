@@ -72,7 +72,7 @@ class TeachersController < ApplicationController
 		redirect_to :back
 	end
 
-	def subject_search
+	def teacher_subject_search
 		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end	
 
