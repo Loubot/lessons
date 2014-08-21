@@ -53,7 +53,7 @@ teachersInfoReady = ->
       bestPictures = new Bloodhound(
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
         queryTokenizer: Bloodhound.tokenizers.whitespace
-        prefetch: "http://localhost:3000/subject-search"
+        prefetch: "/subject-search"
       )
       bestPictures.initialize()
       $(".typeahead").typeahead null,
