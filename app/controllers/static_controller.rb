@@ -24,7 +24,7 @@ class StaticController < ApplicationController
 
 	def display_subjects
 		@params = params
-		@subjects = Subject.all
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		@teachers = defined?(@subject.teachers) ? @subject.teachers : []
 		render json: @subjects
 	end

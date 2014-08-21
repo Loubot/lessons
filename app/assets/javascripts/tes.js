@@ -1,28 +1,15 @@
 $(document).ready(function(){
-  var countries = new Bloodhound({
+  var bestPictures = new Bloodhound({
 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 queryTokenizer: Bloodhound.tokenizers.whitespace,
-limit: 10,
-remote: 'http://localhost:3000/display-subjects',
-prefetch: {
-
-url: 'http://localhost:3000/display-subjects',
-
-filter: function(list) {
-return $.map(list, function(country) { return { name: country }; });
-}
-}
+prefetch: 'http://localhost:3000/display-subjects'
 });
  
-countries.initialize();
+bestPictures.initialize();
  
-
 $('.typeahead').typeahead(null, {
-name: 'countries',
+  name: 'best-pictures',
 displayKey: 'name',
-
-source: countries.ttAdapter()
-
+source: bestPictures.ttAdapter()
 });
-alert(countries.ttAdapter())
   });
