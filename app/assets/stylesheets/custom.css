@@ -139,6 +139,22 @@ hr{
 .search_results_teachers_name{
 	font-family: "HelveticaNeue", "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+.main_page_search_container{
+	text-align: center;
+}
+
+.typeahead.subject{
+	width: 400px;
+	height: 38px;
+	font-size: 25px;
+}
+
+.typeahead.county{
+	height: 38px;
+	font-size: 25px;
+	width: 400px;
+}
 /*end of subject search page*/
 
 /*teacher display page*/
