@@ -56,10 +56,14 @@ teachersInfoReady = ->
         prefetch: "/subject-search"
       )
       bestPictures.initialize()
-      $(".typeahead").typeahead null,
-        name: "best-pictures"
+      $(".typeahead").typeahead 
+        hint: true
+        highlight: true
+        minLength: 2
+      ,        
+        name: "Subjects"
         displayKey: "name"
-        source: bestPictures.ttAdapter()
+        source: bestPictures.ttAdapter() 
 #///////////End of root page subject search with typeahead
 
 #///////////////Teachers subject search

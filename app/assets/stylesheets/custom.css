@@ -19,6 +19,13 @@ hr{
 	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
 }
 
+/*edit bootstrap containers to wrap long sentences onto next line
+*/
+.list-group-item{
+	word-wrap: break-word !important;
+}
+/*end of edit bootstrap containers*/
+
 #teacher_nav_bar{
 	/*background-color: blue !important;*/
 }
@@ -167,7 +174,7 @@ hr{
 
 .teachers_display_scheduler{
 	height: 500px;
-	
+	width: 350px;
 }
 
 .dhx_cal_date.display_teachers_cal_date{
