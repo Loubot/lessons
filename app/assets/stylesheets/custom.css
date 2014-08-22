@@ -24,6 +24,10 @@ hr{
 .list-group-item{
 	word-wrap: break-word !important;
 }
+
+.media-body{
+	word-wrap: break-word !important;
+}
 /*end of edit bootstrap containers*/
 
 #teacher_nav_bar{
@@ -169,7 +173,8 @@ hr{
 #teacher_display_map{
 	height: 350px;
 	width: 350px;
-	
+	border: 1px solid #CCCCC0;
+	margin-bottom: 5px;
 }
 
 .teachers_display_scheduler{
@@ -184,4 +189,9 @@ hr{
 	border:1px solid #CECECE;
 	text-align: left !important;
 }
+
+.dhx_cal_container.teachers_display_scheduler{
+	border: 1px solid #CCCCC0;
+}
+
 /*end of teacher display page*/
