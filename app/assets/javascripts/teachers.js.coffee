@@ -56,7 +56,7 @@ teachersInfoReady = ->
       prefetch: "/subject-search"
     )
     bestPictures.initialize()
-    $(".typeahead").typeahead 
+    $(".typeahead.subject").typeahead 
       hint: true
       highlight: true
       minLength: 2
@@ -65,9 +65,28 @@ teachersInfoReady = ->
       displayKey: "name"
       source: bestPictures.ttAdapter()
 
-  if $('.typeahead.county').length > 0 
-    counties = getCounties()
-    alert counties
+  if $('.typeahead.county').length > 0
+    countyList = getCounties()
+    counties = new Bloodhound(
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value")
+      queryTokenizer: Bloodhound.tokenizers.whitespace    
+      local: $.map(getCounties(), (county) ->
+        value: county)
+    )
+
+  
+    counties.initialize()
+    $(".typeahead.county").typeahead
+      hint: true
+      highlight: true
+      minLength: 1
+    ,
+      name: "counties"
+      displayKey: "value"
+      
+    
+      source: counties.ttAdapter()
+    
 #///////////End of root page subject search with typeahead
 
 #///////////////Teachers subject search
@@ -116,6 +135,7 @@ $(document).on('page:load', teachersInfoReady)
 
 
 getCounties = () ->
-  return ["Antrim,Armagh,Carlow,Cavan,Clare,Cork,Derry,Donegal,Down,Dublin,Fermanagh,Galway,Kerry,Kildare,
-    Kilkenny,Laois,Leitrim,Limerick,Longford,Louth,Mayo,Meath,Monaghan,Offaly,Roscommon,Sligo,Tipperary,
-    Tyrone,Waterford,Westmeath,Wexford,Wicklow"]
+  return ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
+          'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
+          'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
+          'Waterford','Westmeath','Wexford','Wicklow']
