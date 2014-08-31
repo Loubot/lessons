@@ -44,4 +44,10 @@ class Teacher < ActiveRecord::Base
   has_many :events
   has_many :qualifications
   has_many :openings
+
+  geocoded_by :address, :latitude  => :lat, :longitude => :lon
+
+  def self.address
+    
+  end
 end
