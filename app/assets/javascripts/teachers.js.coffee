@@ -49,21 +49,25 @@ teachersInfoReady = ->
 #/////////////End of qualifications visibility checkbox
   
 #////////////Root page subject search with typeahead
-  if $('.typeahead').length > 0
-      bestPictures = new Bloodhound(
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
-        queryTokenizer: Bloodhound.tokenizers.whitespace
-        prefetch: "/subject-search"
-      )
-      bestPictures.initialize()
-      $(".typeahead").typeahead 
-        hint: true
-        highlight: true
-        minLength: 2
-      ,        
-        name: "Subjects"
-        displayKey: "name"
-        source: bestPictures.ttAdapter() 
+  if $('.typeahead.subject').length > 0
+    bestPictures = new Bloodhound(
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      prefetch: "/subject-search"
+    )
+    bestPictures.initialize()
+    $(".typeahead").typeahead 
+      hint: true
+      highlight: true
+      minLength: 2
+    ,        
+      name: "Subjects"
+      displayKey: "name"
+      source: bestPictures.ttAdapter()
+
+  if $('.typeahead.county').length > 0 
+    counties = getCounties()
+    alert counties
 #///////////End of root page subject search with typeahead
 
 #///////////////Teachers subject search
@@ -108,3 +112,10 @@ $(document).on 'change', '#Multiple', ->
 
 $(document).ready(teachersInfoReady)
 $(document).on('page:load', teachersInfoReady)
+
+
+
+getCounties = () ->
+  return ["Antrim,Armagh,Carlow,Cavan,Clare,Cork,Derry,Donegal,Down,Dublin,Fermanagh,Galway,Kerry,Kildare,
+    Kilkenny,Laois,Leitrim,Limerick,Longford,Louth,Mayo,Meath,Monaghan,Offaly,Roscommon,Sligo,Tipperary,
+    Tyrone,Waterford,Westmeath,Wexford,Wicklow"]
