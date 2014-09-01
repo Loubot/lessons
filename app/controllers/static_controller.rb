@@ -32,9 +32,14 @@ class StaticController < ApplicationController
 		@subject = params[:search_subjects] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
 		flash[:notice] = @subject.to_json
 		if !params[:search_position].empty?
-			@teachers = defined?(@subject.teachers) ? @subject.teachers.near(params[:search_position], 50).order(rate: :desc)
-				 : []
-		else 
+			if params[:sort_by] == 'Rate'
+				@teachers = defined?(@subject.teachers) ? @subject.teachers.near(params[:search_position], 50).reorder('rate ASC')
+					 : []
+			else
+				flash[:success] = 'b'
+				@teachers = defined?(@subject.teachers) ? @subject.teachers.near(params[:search_position], 50).order('distance ASC') : []	
+			end
+		else
 			@teachers = defined?(@subject.teachers) ? @subject.teachers : []
 		end
 		

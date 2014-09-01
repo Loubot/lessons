@@ -14,10 +14,7 @@
     </div>
     <div class="pull-right col-md-4">
       <label>Sort by:</label>
-      <select class="form-control">
-        <option>Distance</option>
-        <option>Rate</option>
-      </select>
+      <%= select_tag 'sort_by', options_for_select(['Distance', 'Rate'], selected: params[:sort_by]), class: 'form-control' %>
     </div>
   <% end %>
   <div id="display_search_results">
