@@ -15,6 +15,7 @@
 		<% end %>
 	</div> <!-- end of col-md-9 -->
 	<div class="col-md-3 search_restuls_right search_results_shadow">
-		Price: <br><%= number_to_currency(teacher.rate,unit:'€') %>
+		Price: <br><%= number_to_currency(teacher.rate,unit:'€') %><br>
+		Distance: <br> <%= teacher.distance_to(params[:search_position], :mi) %>
 	</div> <!-- end of search_restuls_right -->
 </div> <!-- end of row -->

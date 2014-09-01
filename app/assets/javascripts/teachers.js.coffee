@@ -72,9 +72,7 @@ teachersInfoReady = ->
       queryTokenizer: Bloodhound.tokenizers.whitespace    
       local: $.map(getCounties(), (county) ->
         value: county)
-    )
-
-  
+    )  
     counties.initialize()
     $(".typeahead.county").typeahead
       hint: true
@@ -82,8 +80,7 @@ teachersInfoReady = ->
       minLength: 1
     ,
       name: "counties"
-      displayKey: "value"
-      
+      displayKey: "value"      
     
       source: counties.ttAdapter()
     
