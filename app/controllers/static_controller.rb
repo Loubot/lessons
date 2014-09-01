@@ -23,21 +23,23 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 	end
 
 	def display_subjects
 		@params = params
-		@subject = params[:search_subjects] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%").first
+		@subject = params[:search_subjects] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
 		flash[:notice] = @subject.to_json
 		if !params[:search_position].empty?
-			if params[:sort_by] == 'Rate'
+			if params[:sort_by] == 'Rate: lowest first'
 				@teachers = defined?(@subject.teachers) ? @subject.teachers.near(params[:search_position], 50).reorder('rate ASC')
 					 : []
+			elsif params[:sort_by] == "Rate: highest first"
+				@teachers = defined?(@subject.teachers) ? @subject.teachers.near(params[:search_position], 50).reorder('rate DESC')
+					 : []
 			else
-				flash[:success] = 'b'
-				@teachers = defined?(@subject.teachers) ? @subject.teachers.near(params[:search_position], 50).order('distance ASC') : []	
+				@teachers = defined?(@subject.teachers) ? @subject.teachers.near(params[:search_position], 50) : []	
 			end
 		else
 			@teachers = defined?(@subject.teachers) ? @subject.teachers : []
