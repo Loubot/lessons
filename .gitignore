@@ -17,3 +17,4 @@
 /public/uploads
 /config/initializers/carrierwave.rb
 /app/uploaders/avatar_uploader.rb
+/config/database.yml

@@ -8,6 +8,10 @@ class StaticController < ApplicationController
 		
 	end
 
+	def welcome
+
+	end
+
 	def add_to_list
 		gb = Gibbon::API.new("a54fa2423a373c73c8eff5e2f8c208d4-us8", { :timeout => 15 })
 		flash[:notice] = params

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get         '/welcome'                =>  'static#welcome'
   get         '/subject-search'         =>  'static#subject_search'
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/display-subjects'       =>  'static#display_subjects'
@@ -32,5 +33,5 @@ Rails.application.routes.draw do
   post        '/add-to-list'            =>  'static#add_to_list'
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
-  root to: 'static#how_it_works'
+  root to: 'static#welcome'
 end
