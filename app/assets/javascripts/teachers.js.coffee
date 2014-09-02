@@ -83,6 +83,8 @@ teachersInfoReady = ->
       displayKey: "value"      
     
       source: counties.ttAdapter()
+  $(document).on 'change', '.form-control.distance_rate', ->
+    $('#main_subject_search').submit()
     
 #///////////End of root page subject search with typeahead
 
