@@ -38,6 +38,8 @@ class Teacher < ActiveRecord::Base
 
   has_many :photos, as: :imageable, dependent: :destroy
 
+  has_many :reviews, dependent: :destroy
+
   has_and_belongs_to_many :subjects
 
   has_many :experiences

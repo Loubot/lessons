@@ -19,7 +19,12 @@
 		<% if !params[:search_position].empty? %>
 			Distance: <br> <%= teacher.distance_to(params[:search_position], :mi).round(2) %>
 		<% else %>
-			<br>No specified location
+			No specified location
+		<% end %><br>
+		<% if !teacher.reviews.empty? %>
+			<% teacher.reviews.first.rating.times do %>
+				<span style="color:#ffaa00;font-size:140%;">★</span>
+			<% end %>
 		<% end %>
 	</div> <!-- end of search_restuls_right -->
 </div> <!-- end of row -->
