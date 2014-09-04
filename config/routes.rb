@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for  :teachers, :controllers => { :registrations => 'registrations' }
   resources   :teachers, only: [:update, :edit, :destroy] do
   	member do 
