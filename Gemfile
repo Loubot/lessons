@@ -60,6 +60,8 @@ gem 'date_validator'
 
 gem 'rmagick'
 
+gem 'mini_magick'
+
 gem "fog"
 
 gem 'geocoder'

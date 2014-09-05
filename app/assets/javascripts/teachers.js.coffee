@@ -101,7 +101,7 @@ teachersInfoReady = ->
 	#///////////////End of autofocus function
 
 #/////////////search results page
-  if $('.search_results_row').length > 0    
+  if $('.search_results_row').length > 0
     $('.search_results_left').css 'height', $('.results_photos').css 'height'
 		$('.search_restuls_right').each ->			
 			$('.search_restuls_right').css 'height', $('.search_results_left').css 'height'
@@ -110,7 +110,7 @@ teachersInfoReady = ->
 			$('.image_container').css 'color', 'black'
 			$(@).find('.search_results_teachers_name').animate color: '#509BE6',50
 			$('.image_container').css 'text-decoration', 'none'
-			$(this).find('.results_photos.back').animate opacity: .7, 50
+			$(this).find('.results_photos.back').animate opacity: .5, 50
 		$('.search_results_row').mouseleave ->
 			$('.image_container').css 'color', 'black'
 			$(@).find('.search_results_teachers_name').animate color: 'black',50
