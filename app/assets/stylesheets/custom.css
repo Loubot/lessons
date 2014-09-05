@@ -96,6 +96,7 @@ hr{
 }
 
 .search_results_left{
+	height: 125px;
 	background-color: white;
 	border-style: solid;
 	border-width: 1px;
@@ -104,6 +105,7 @@ hr{
 }
 
 .search_restuls_right{
+	height: 125px;
 	background-color: white;
 	border-top: solid;	
 	border-right: solid;
