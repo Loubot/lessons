@@ -23,7 +23,7 @@ teachersInfoReady = ->
       thumbnailHeight:180
       autoProcessQueue: false
       })  
-  	
+  
     dropzone.on 'error', (file) ->
       $('body').prepend("<b style='color: red;'>An error occurred while saving the Student.</b>")
 
@@ -98,33 +98,29 @@ teachersInfoReady = ->
 #///////////////Autofocus teachers subject search input field
   $('#teachers_subjects_modal').on 'shown.bs.modal', ->
     document.getElementById('teachers_search_input').focus()
-	#///////////////End of autofocus function
+#///////////////End of autofocus function
 
 #/////////////search results page
   if $('.search_results_row').length > 0
-    $('.search_results_left').css 'height', $('.results_photos').css 'height'
-		$('.search_restuls_right').each ->			
-			$('.search_restuls_right').css 'height', $('.search_results_left').css 'height'
 
-		$('.search_results_row').mouseover ->
-			$('.image_container').css 'color', 'black'
-			$(@).find('.search_results_teachers_name').animate color: '#509BE6',50
-			$('.image_container').css 'text-decoration', 'none'
-			$(this).find('.results_photos.back').animate opacity: .5, 50
-		$('.search_results_row').mouseleave ->
-			$('.image_container').css 'color', 'black'
-			$(@).find('.search_results_teachers_name').animate color: 'black',50
-			$(this).find('.results_photos.back').animate opacity: 0, 50
-		
-		#////////////end of search results page
+    $('.search_results_row').mouseover ->
+      $('.image_container').css 'color', 'black'
+      $(@).find('.search_results_teachers_name').animate color: '#509BE6',50
+      $('.image_container').css 'text-decoration', 'none'
+      $(this).find('.results_photos.back').animate opacity: .5, 50
+    $('.search_results_row').mouseleave ->
+      $('.image_container').css 'color', 'black'
+      $(@).find('.search_results_teachers_name').animate color: 'black',50
+      $(this).find('.results_photos.back').animate opacity: 0, 50
+
+#////////////end of search results page
 
 
 #////////////////Teachers area block book checkbox
 $(document).on 'change', '#Multiple', ->
-	
-	$('#no_of_weeks').animate height: 'toggle', 100
-	
-		
+
+  $('#no_of_weeks').animate height: 'toggle', 100
+
 #///////////////End of Teachers area block book checkbox
 
 
