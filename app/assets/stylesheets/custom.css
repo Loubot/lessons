@@ -172,12 +172,12 @@ hr{
 }
 
 .review_container{
-	margin-left: -15px;
-	margin-right: -15px;
-	width: 235px;
-	border-top: 1px solid #CCCCC0;
+		
+	right: 0;
 	bottom: 0;
+	left: 0;
 	position: absolute;
+	border-top: 1px solid #CCCCC0;
 }
 /*end of subject search page*/
 

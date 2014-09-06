@@ -7,7 +7,8 @@ gem 'rails', '4.1.1'
 
 gem 'bundler'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :development
+# gem 'sqlite3', group: :development
+gem 'pg', group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -58,9 +59,9 @@ gem 'validates_overlap'
 
 gem 'date_validator'
 
-#gem 'rmagick'
+gem 'rmagick'
 
-#gem 'mini_magick'
+gem 'mini_magick'
 
 gem "fog"
 
