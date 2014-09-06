@@ -23,9 +23,12 @@
 				No specified location
 			<% end %><br>
 			<% if !teacher.reviews.empty? %>
-				<% teacher.reviews.first.rating.times do %>
-					<span style="color:#ffaa00;font-size:140%;">★</span>
-				<% end %>
+				<div class="review_container">					
+					<% teacher.reviews.first.rating.times do %>
+						<span style="color:#ffaa00;font-size:140%;">★</span>
+					<% end %>
+					 <%= pluralize(teacher.reviews.count, 'review') %>
+				</div>
 			<% end %>
 		</div> <!-- end of search_restuls_right -->
 	<% end %>
