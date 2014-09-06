@@ -9,7 +9,7 @@
 			<div class="panel-heading"><%= @teacher.first_name %></div>
 			<div class="panel-body">
 				<div class="media">
-					<span class="pull-left"><%= @teacher.profile == nil ? image_tag('silhouette.jpg', class: 'media-object') : image_tag(Photo.find(@teacher.profile).avatar.url(:thumb), class: 'media-object') %> </span>			
+					<span class="pull-left"><%= @teacher.profile == nil ? image_tag('silhouette.jpg', class: 'media-object') : image_tag(Photo.find(@teacher.profile).avatar.url, size: '125x125', class: 'media-object') %> </span>			
 					<div class="media-body">
 						<%= @teacher.address %><br>
 						<%= @teacher.overview %><br>
@@ -43,9 +43,24 @@
 			</div> <!-- end of panel-default -->
 			
 		</div> <!-- end of container-fluid -->
-		<div class="container-fluid">
-			
-		</div> <!-- end of container fluid -->
+		<% if !@teacher.reviews.empty? %>
+			<div class="container-fluid nopadding">
+				<table class="table table-bordered">
+					<thead>
+				 		<tr>
+				    	<th class="col-md-7">Review</th>
+				    	<th>Student</th>
+				    	<th>When</th>
+				 		</tr>
+					</thead>
+					<tbody>
+						<%= render partial: 'partials/review_row_partial', collection: @teacher.reviews, as: :review %>
+					</tbody>
+				</table>
+
+			</div> <!-- end of container fluid -->
+		<% end %>
+		
 	</div> <!-- end of col-md-9 -->
 
 
