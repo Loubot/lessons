@@ -16,5 +16,5 @@
 /tmp
 /public/uploads
 /config/initializers/carrierwave.rb
-/app/uploaders/
+/app/uploaders
 /config/database.yml
