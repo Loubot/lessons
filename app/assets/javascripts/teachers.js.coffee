@@ -50,6 +50,9 @@ teachersInfoReady = ->
   
 #////////////Root page subject search with typeahead
   if $('.typeahead.subject').length > 0
+    $('#main_subject_search').on 'keypress', (e) ->
+      e.preventDefault() if e.which == 13
+
     bestPictures = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
       queryTokenizer: Bloodhound.tokenizers.whitespace
@@ -83,6 +86,15 @@ teachersInfoReady = ->
       displayKey: "value"      
     
       source: counties.ttAdapter()
+
+    $('.typeahead.county').on 'keypress', (e) ->
+      if e.which is 13
+        $('.typeahead.county').typeahead('val', $('.typeahead.county').val())
+    $('.typeahead.subject').keypress (e) ->
+      if e.which is 13
+        $('.typeahead.subject').typeahead 'val', $('.typeahead.subject').val()
+        
+
   $(document).on 'change', '.form-control.distance_rate', ->
     $('#main_subject_search').submit()
     
