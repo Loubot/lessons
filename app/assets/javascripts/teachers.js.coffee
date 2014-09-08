@@ -89,7 +89,7 @@ teachersInfoReady = ->
 
     $('.typeahead.county').on 'keypress', (e) ->
       if e.which is 13
-        $('.typeahead.county').typeahead('val', $('.typeahead.county').val())
+        $('.typeahead.county').typeahead 'val', $('.typeahead.county').val()
     $('.typeahead.subject').keypress (e) ->
       if e.which is 13
         $('.typeahead.subject').typeahead 'val', $('.typeahead.subject').val()
