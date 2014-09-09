@@ -11,8 +11,22 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-	  edit_teacher_path(resource)
+    case resource
+    when :user, User
+      root_path
+    else
+      edit_teacher_path(resource)
+    end    
 	end
+
+  def after_sign_up_path_for(resource)
+    case resource
+    when :user, User
+      root_path
+    else
+      edit_teacher_path(resource)
+    end  
+  end
 	
 end
 

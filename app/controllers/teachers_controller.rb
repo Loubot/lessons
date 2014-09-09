@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
 	layout 'teacher_layout'
 	before_action :authenticate_teacher!, except: [:show_teacher]
+	before_action :authenticate_user!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
 	include TeachersHelper
 

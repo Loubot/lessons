@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get         '/sign_up'                =>  'static#sign_up'
   get         '/welcome'                =>  'static#welcome'
   get         '/subject-search'         =>  'static#subject_search'
   get         '/show-teacher'           =>  'teachers#show_teacher'  
