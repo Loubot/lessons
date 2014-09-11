@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 dual_registration_container left">
+      <h2><strong>Learn</strong></h2><span class="label label-primary">Register below to become a student</span>
       <%= form_for(:user, :url => registration_path(:user)) do |f| %>
        <%= devise_error_messages! %>
 
@@ -16,7 +17,8 @@
         <div><%= f.submit "Sign up" %></div>
       <% end %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 dual_registration_container right">
+      <h2><strong>Teach</strong></h2><span class="label label-primary">Register below to become a teacher</span>
       <%= form_for(:teacher, :url => registration_path(:teacher)) do |f| %>
        <div><%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true %></div>

@@ -88,7 +88,14 @@ hr{
 	border: 1px solid #009fda;
 }
 
-/*display_subject _subject_earch page*/
+/*display_subject _subject_search page*/
+#search_submit_container{
+	text-align: center;
+}
+
+#search_submit{
+
+}
 
 .image_container{
 	color: black;
@@ -216,3 +223,24 @@ hr{
 }
 
 /*end of show_teacher page*/
+
+/*Sign_up page*/
+.dual_registration_container{
+	box-shadow: 2px 2px 6px #888888;
+	
+}
+
+.dual_registration_container.left{
+	width: 45%;
+	background-color: white;
+}
+
+
+.dual_registration_container.right{
+	margin-left: 10px;
+	background-color: white;	
+	padding-bottom: 2em;
+	
+}
+
+/*End of sign_up page*/
