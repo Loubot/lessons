@@ -1,4 +1,4 @@
-class StaticController < ApplicationControlle
+class StaticController < ApplicationController
 
 	layout 'static_layout'
 
