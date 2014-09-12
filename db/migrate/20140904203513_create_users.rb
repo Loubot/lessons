@@ -8,3 +8,5 @@ class CreateUsers < ActiveRecord::Migration
     end
   end
 end
+
+# rake db:migrate:down VERSION=20140904203513 --trace

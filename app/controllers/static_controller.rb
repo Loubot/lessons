@@ -1,6 +1,8 @@
-class StaticController < ApplicationController
+class StaticController < ApplicationControlle
 
-	include StaticHelper
+	layout 'static_layout'
+
+	include StaticHelper	
 	
 	def how_it_works
 
@@ -14,7 +16,11 @@ class StaticController < ApplicationController
 
 	end
 
-	def sign_up
+	def learn
+
+	end
+
+	def teach
 
 	end
 
