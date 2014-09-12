@@ -23,13 +23,13 @@ class StaticController < ApplicationController
 	end
 
 	def add_to_list
-		gb = Gibbon::API.new("a54fa2423a373c73c8eff5e2f8c208d4-us8", { :timeout => 15 })
+		puts "***********#{ENV['_mail_chimp_api']}"
+		gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
 		flash[:notice] = params
 		if valid_email?(params[:email])
-			flash[:notice] = 'yep'
 			begin
-				gb.lists.subscribe({:id => 'e854603460', :email => {:email => params[:email] },:double_optin => false})
-			rescue Gibbon::MailChimpError => e
+				gb.lists.subscribe({:id => ENV['_mail_chimp_list'], :email => {:email => params[:email] },:double_optin => false})
+			rescue Gibbon::MailChimpError, StandardError => e
 				flash[:danger] = e
 			end
 		end
