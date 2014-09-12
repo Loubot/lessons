@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    case resource
-    when :user, User
+    case resource.is_teacher
+    when false
       root_path
     else
       edit_teacher_path(resource)
@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
 	end
 
   def after_sign_up_path_for(resource)
-    case resource
-    when :user, User
+    case resource.is_teacher
+    when false
       root_path
     else
       edit_teacher_path(resource)

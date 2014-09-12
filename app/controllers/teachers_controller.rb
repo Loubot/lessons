@@ -1,13 +1,16 @@
 class TeachersController < ApplicationController
 	layout 'teacher_layout'
 	before_action :authenticate_teacher!, except: [:show_teacher]
-	before_action :authenticate_user!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
+	before_action :check_is_teacher, except: [:show_teacher]
 	include TeachersHelper
 
+	def check_is_teacher
+		redirect_to root_path unless current_teacher.is_teacher == true	
+	end
 
 	def check_id
-		redirect_to root_path unless current_teacher.id = params[:id]
+		redirect_to root_path unless current_teacher.id == params[:id]
 	end
 
 	def show_teacher		

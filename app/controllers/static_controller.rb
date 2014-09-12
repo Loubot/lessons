@@ -1,7 +1,5 @@
 class StaticController < ApplicationController
 
-	layout 'static_layout'
-
 	include StaticHelper	
 	
 	def how_it_works
