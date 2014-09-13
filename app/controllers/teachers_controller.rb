@@ -10,7 +10,7 @@ class TeachersController < ApplicationController
 	end
 
 	def check_id
-		redirect_to root_path unless current_teacher.id == params[:id]
+		redirect_to root_path unless current_teacher.id == params[:id].to_i
 	end
 
 	def show_teacher		
