@@ -4,8 +4,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
 # include CarrierWave::RMagick
 # include CarrierWave::MiniMagick
 # Choose what kind of storage to use for this uploader:
-storage :file
-# storage :fog
+# storage :file
+storage :fog
 def root
 Rails.root.join 'public/'
 end
@@ -24,14 +24,14 @@ end
 # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
 # end
 # Process files as they are uploaded:
-# process :resize_to_fill => [125, 125]
+process :resize_to_fill => [125, 125]
 #
 # def scale(width, height)
 # # do something
 # end
-# version :thumb do
-# process :resize_to_fill => [200, 200]
-# end
+version :thumb do
+process :resize_to_fill => [200, 200]
+end
 #Create different versions of your uploaded files:
 # version :thumb do
 # process :resize_to_fit => [50, 50]
