@@ -13,7 +13,7 @@
 
         <div><%= f.label :password_confirmation %><br />
           <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-          <%= f.hidden_field_tag name: 'is_teacher', value: false %>
+          <%= hidden_field_tag 'is_teacher', false %>
         <div><%= f.submit "Sign up" %></div>
       <% end %>
     </div>

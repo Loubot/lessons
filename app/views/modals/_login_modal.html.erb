@@ -6,43 +6,57 @@
         <h4 class="modal-title" id="myModalLabel">Login</h4>
       </div>
       <div class="modal-body">
-        <h2>Sign in</h2>
+        <div class="container-fluid">
+          <div class="col-md-6">
+            <h2>Sign in</h2>
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal') do |f| %>
-          <div class="heading">
-            <h4 class="form-heading">Sign In</h4>
-          </div> <!-- end of heading -->
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal') do |f| %>
+              <div class="heading">
+                <h4 class="form-heading">Sign In</h4>
+              </div> <!-- end of heading -->
 
-          <div class="control-group">
-            <%= f.label :email, class: 'control-label' %>
-            <div class="controls">
-              <%= f.email_field :email, autofocus: true %>
-            </div> <!-- end of controls -->
-          </div> <!-- end of control-group --> 
-          <div class="control-group">
-            <%= f.label :password, class: 'control-label' %>
-            <div class="controls">
-              <%= f.password_field :password, autocomplete: "off" %>
-            </div> <!-- end of controls -->
-          </div> <!-- end of control-group -->
+              <div class="control-group">
+                <%= f.label :email, class: 'control-label' %>
+                <div class="controls">
+                  <%= f.email_field :email, autofocus: true %>
+                </div> <!-- end of controls -->
+              </div> <!-- end of control-group --> 
+              <div class="control-group">
+                <%= f.label :password, class: 'control-label' %>
+                <div class="controls">
+                  <%= f.password_field :password, autocomplete: "off" %>
+                </div> <!-- end of controls -->
+              </div> <!-- end of control-group -->
 
-          
+              
 
-          <div class="control-group">
-              <div class="controls">
-                <% if devise_mapping.rememberable? -%>
-                  <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-                <% end -%>
+              <div class="control-group">
+                  <div class="controls">
+                    <% if devise_mapping.rememberable? -%>
+                      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+                    <% end -%>
+                  </div>
               </div>
-          </div>
+              <div><%= f.submit "Sign in", class: 'btn btn-success' %></div>
+            <% end %>
 
-
-
-          <div><%= f.submit "Sign in", class: 'btn btn-success' %></div>
-        <% end %>
-
-        <%= render "devise/shared/links" %>
-       
+            <%= render "devise/shared/links" %>
+          </div> <!-- end of col-md-6 -->
+          <div class="col-md-6">
+            <ul class="ds-btn">                
+              <li>
+                <%= link_to(learn_path, html_options = { class: 'btn btn-lg btn-primary' }) do %>
+                  <i class="glyphicon glyphicon-user pull-left"></i><span>Students<br><small>Student registration</small></span>
+                <% end %>
+                      
+              </li>              
+              <li>
+                <a class="btn btn-lg btn-info" href="http://dotstrap.com/">
+                <i class="glyphicon glyphicon-list pull-left"></i><span>Teachers<br><small>Teacher registration</small></span></a> 
+              </li>
+            </ul>
+          </div> <!-- end of col-md-6 -->
+        </div> <!-- end of container-fluid-->
 
       </div> <!-- end of modal-body -->
       <!-- <div class="modal-footer">
