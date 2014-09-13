@@ -223,3 +223,23 @@ hr{
 }
 
 /*end of show_teacher page*/
+
+/* teach page*/
+.teacher_registration_container{
+	box-shadow: 2px 2px 5px #888888;
+
+}
+
+.teacher_registration_form{
+	font-size: 14px;
+}
+
+form .glyphicon {
+  top: 0;
+}
+
+.teach_page_login_link{
+	color: #47a447;
+}
+
+/* end of teach page*/
