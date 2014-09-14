@@ -9,7 +9,7 @@
 			<div class="panel-heading"><%= @teacher.first_name %></div>
 			<div class="panel-body">
 				<div class="media">
-					<span class="pull-left"><%= @teacher.profile == nil ? image_tag('silhouette.jpg', class: 'media-object') : image_tag(Photo.find(@teacher.profile).avatar.url, size: '125x125', class: 'media-object') %> </span>			
+					<span class="pull-left"><%= show_teacher_silhouette_helper(@teacher) %> </span>			
 					<div class="media-body">
 						<%= @teacher.address %><br>
 						<%= @teacher.overview %><br>
