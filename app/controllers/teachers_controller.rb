@@ -26,8 +26,7 @@ class TeachersController < ApplicationController
 	def edit
 		@context = Teacher.find(current_teacher)
 		@photo = @context.photos.new
-		@profilePic = show_teacher_silhouette_helper(@context)
-		@experience = Experience.new
+		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
 		@photos = @context.photos.all
 		@experience = Experience.new
