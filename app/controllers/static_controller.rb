@@ -23,7 +23,6 @@ class StaticController < ApplicationController
 	end
 
 	def add_to_list
-		puts "***********#{ENV['_mail_chimp_api']}"
 		gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
 		flash[:notice] = params
 		if valid_email?(params[:email])

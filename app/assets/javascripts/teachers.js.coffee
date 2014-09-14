@@ -90,9 +90,11 @@ teachersInfoReady = ->
     $('.typeahead.county').on 'keypress', (e) ->
       if e.which is 13
         $('.typeahead.county').typeahead 'val', $('.typeahead.county').val()
+        $('.typeahead.county').typeahead 'close'
     $('.typeahead.subject').keypress (e) ->
       if e.which is 13
         $('.typeahead.subject').typeahead 'val', $('.typeahead.subject').val()
+        $('.typeahead.subject').typeahead 'close'
         
 
   $(document).on 'change', '.form-control.distance_rate', ->
