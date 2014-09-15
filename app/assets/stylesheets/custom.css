@@ -28,6 +28,11 @@ hr{
 .media-body{
 	word-wrap: break-word !important;
 }
+
+.panel-footer{
+	word-wrap: break-word !important;
+}
+
 /*end of edit bootstrap containers*/
 
 #teacher_nav_bar{
