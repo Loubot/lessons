@@ -208,6 +208,8 @@ hr{
 .teachers_display_scheduler{
 	height: 500px;
 	width: 350px;
+	border: 1px solid #CCCCC0;
+	margin-bottom: 5px;
 }
 
 .dhx_cal_date.display_teachers_cal_date{
@@ -220,6 +222,10 @@ hr{
 
 .dhx_cal_container.teachers_display_scheduler{
 	border: 1px solid #CCCCC0;
+}
+
+.teacher_purchase_panel{
+	
 }
 
 /*end of show_teacher page*/
