@@ -15,8 +15,8 @@
 /log/*.log
 /tmp
 /public/uploads
-/config/initializers/carrierwave.rb
-/app/uploaders/avatar_uploader.rb
-/config/database.yml
+config/initializers/carrierwave.rb
+app/uploaders/avatar_uploader.rb
+config/database.yml
 
 # git rm -r --cached .
