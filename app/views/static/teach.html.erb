@@ -33,24 +33,7 @@
         <br><br>
       <% end %>
     </div> <!-- end of col-md-6 teacher_registration_container -->
-    <div class="col-md-6 teacher_registration_container">
-      <h2><strong>Learn</strong></h2><span class="label label-primary">Register below to become a student</span>
-      <%= form_for(:teacher, :url => registration_path(:teacher)) do |f| %>
-       <%= devise_error_messages! %>
-
-        <div><%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %></div>
-
-        <div><%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "off" %></div>
-
-        <div><%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-          <%= hidden_field_tag 'is_teacher', false %>
-        <div><%= f.submit "Sign up", class: 'btn btn-success' %></div>
-        <br><BR>
-      <% end %>
-    </div> <!-- end of col-md-6 -->
+    
   </div> <!-- end of row -->
 </div> <!-- end of container-fluid -->
 
