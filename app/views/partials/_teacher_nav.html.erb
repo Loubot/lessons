@@ -21,17 +21,13 @@
         <li><%= link_to 'Work area', teachers_area_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
       </ul>
       
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_teacher.first_name %><span class="caret"></span><span class="glyphicon glyphicon-user"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><%= link_to 'Log dout', destroy_teacher_session_path, method: 'delete' %></li>
-          </ul>
-        </li>
+       <ul class="nav navbar-nav navbar-right">
+        <li><a href="/how-it-works">How it works</a></li>
+        <% if current_teacher %>
+          <li><%= link_to 'Logout', destroy_teacher_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Login', new_teacher_session_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

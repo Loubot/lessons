@@ -238,7 +238,12 @@ hr{
 /* teach page*/
 .teacher_registration_container{
 	box-shadow: 2px 2px 5px #888888;
+	width: 45%;
+}
 
+.teacher_registration_container.left{
+
+	margin-right: 10px;
 }
 
 .teacher_registration_form{

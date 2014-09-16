@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li ><a href="/mailing-list">Subscribe to mailing list</a></li>
-        <% if current_teacher %>
+        <% if current_teacher && current_teacher.is_teacher == true %>
           <li><%=link_to current_teacher.first_name, edit_teacher_path(current_teacher) %></li>
         <% end %>       
       </ul>

@@ -20,7 +20,7 @@ class TeachersController < ApplicationController
 		gon.events = public_format_times(@teacher.events)
 		gon.openingTimes = open_close_times(@teacher.openings.first)
 		@distance = @teacher.distance_to([51.886823, -8.472886],:km)
-		render layout: 'application'
+		pick_show_teacher_view		
 	end
 
 	def edit

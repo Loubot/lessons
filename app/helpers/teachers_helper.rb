@@ -60,4 +60,12 @@ module TeachersHelper
 			[]
 		end		
 	end
+
+	def pick_show_teacher_view
+		if @teacher.is_teacher == true
+			render 'show_teacher'
+		else 
+			render 'show_teacher_to_user'
+		end
+	end
 end
