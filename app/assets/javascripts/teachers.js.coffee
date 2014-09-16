@@ -91,6 +91,7 @@ teachersInfoReady = ->
       if e.which is 13
         $('.typeahead.county').typeahead 'val', $('.typeahead.county').val()
         $('.typeahead.county').typeahead 'close'
+        #$('#main_subject_search').submit()
     $('.typeahead.subject').keypress (e) ->
       if e.which is 13
         $('.typeahead.subject').typeahead 'val', $('.typeahead.subject').val()
