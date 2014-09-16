@@ -62,10 +62,13 @@ module TeachersHelper
 	end
 
 	def pick_show_teacher_view
-		if @teacher.is_teacher == true
-			render 'show_teacher'
-		else 
-			render 'show_teacher_to_user'
+		if current_teacher.is_teacher == true
+			puts "aaaaaaaaaaaaaaaaa"
+			render layout: 'teacher_layout', action: 'show_teacher'	
+
+		else
+			puts "bbbbbbbbbbbb"
+			render layout: 'application', action: 'show_teacher_to_user'
 		end
 	end
 end
