@@ -20,7 +20,7 @@
               <li class="list-group-item"><i class="icon-ok text-danger"></i>27/7 support</li>
           </ul>
           <div class="panel-footer">
-              <a class="btn btn-lg btn-block btn-info" href="http://www.jquery2dotnet.com">BOOK NOW!</a>
+              <button class="btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</buton>
           </div>
         </div> <!-- end of panel panel_info  -->   
     </div> <!-- end of teacher_purchase_panel -->
@@ -101,3 +101,5 @@
     </div> <!-- end of scheduler_here -->   
   </div> <!-- end of col-md-3 -->
 </div> <!-- end of row -->
+
+<%= render 'modals/payment_choice_modal' %>
