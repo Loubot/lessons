@@ -69,9 +69,9 @@ class StaticController < ApplicationController
 			pay_response = pay_request.pay(data)
 
 			if pay_response.success?
-				flash[:success] = pay_response
-				render 'welcome'
-			  # redirect_to pay_response.preapproval_paypal_payment_url
+				flash[:success] = pay_response.preapproval_paypal_payment_url
+				# render 'welcome'
+			  redirect_to pay_response.preapproval_paypal_payment_url
 			else
 			  puts pay_response.errors.first['message']
 			  redirect_to failed_payment_url
