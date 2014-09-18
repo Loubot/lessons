@@ -59,7 +59,7 @@ class StaticController < ApplicationController
 				:'X-PAYPAL-SECURITY-PASSWORD' => 'MRXUGXEXHYX7JGHH',
 				:'X-PAYPAL-SECURITY-SIGNATURE' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug',
 				actionType: 'PAY',
-				:'X-PAYPAL-APPLICATION-ID' => '80W284485P519543T',
+				:'X-PAYPAL-APPLICATION-ID' => 'ASWtURAkgXGnKk7ugaH9CqmCE8McNDwYgupFtYMWxKbrYbdKedJ36OsYRWzI',
 				:'receiverList.receiver(0).email' => 'louisangelini@gmail.com',
 				:'receiverList.receiver(0).amount' => '10',
 				currencyCode: 'GBP',
@@ -67,7 +67,7 @@ class StaticController < ApplicationController
 				returnUrl: 'http://learn-your-lesson.herokuapp.com'
 
 			}
-			url = "https://www.paypal.com/cgi-bin/webscr?" +  values.to_query
+			url = "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay?" +  values.to_query
 		end
 end
 
@@ -76,3 +76,4 @@ end
 # API Username	lllouis_api1.yahoo.com
 # API Password	MRXUGXEXHYX7JGHH
 # Signature	AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug
+#https://github.com/paypal/adaptivepayments-sdk-ruby
