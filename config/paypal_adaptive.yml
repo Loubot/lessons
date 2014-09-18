@@ -1,0 +1,23 @@
+development:
+  environment: "sandbox"
+  username: "lllouis_api1.yahoo.com"
+  password: "MRXUGXEXHYX7JGHH"
+  signature: "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug"
+  application_id: "APP-80W284485P519543T"
+  api_cert_file:
+
+test:
+  environment: "sandbox"
+  username: "sandbox_username"
+  password: "sandbox_password"
+  signature: "sandbox_signature"
+  application_id: "sandbox_app_id"
+  api_cert_file: "/path/to_cert"
+
+production:
+  environment: "production"
+  username: "my_production_username"
+  password: "my_production_password"
+  signature: "my_production_signature"
+  application_id: "my_production_app_id"
+  api_cert_file: "/path/to_cert"
