@@ -11,7 +11,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-
+		@paypal_url = create_paypal
 	end
 
 	def learn
@@ -48,8 +48,31 @@ class StaticController < ApplicationController
 
 	private
 
-	def valid_email?(email)
-		valid_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-		email =~ valid_regex
-	end
+		def valid_email?(email)
+			valid_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+			email =~ valid_regex
+		end
+
+		def create_paypal
+			values = {
+				:'X-PAYPAL-SECURITY-USERID' => 'lllouis_api1.yahoo.com',
+				:'X-PAYPAL-SECURITY-PASSWORD' => 'MRXUGXEXHYX7JGHH',
+				:'X-PAYPAL-SECURITY-SIGNATURE' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug',
+				actionType: 'PAY',
+				:'X-PAYPAL-APPLICATION-ID' => '80W284485P519543T',
+				:'receiverList.receiver(0).email' => 'louisangelini@gmail.com',
+				:'receiverList.receiver(0).amount' => '10',
+				currencyCode: 'GBP',
+				cancelUrl: 'http://learn-your-lesson.herokuapp.com',
+				returnUrl: 'http://learn-your-lesson.herokuapp.com'
+
+			}
+			url = "https://www.paypal.com/cgi-bin/webscr?" +  values.to_query
+		end
 end
+
+
+# Credential	API Signature
+# API Username	lllouis_api1.yahoo.com
+# API Password	MRXUGXEXHYX7JGHH
+# Signature	AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug
