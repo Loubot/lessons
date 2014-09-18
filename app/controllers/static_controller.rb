@@ -11,7 +11,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-		@paypal_url = create_paypal
+		create_paypal if params[:do_it].present?
 	end
 
 	def learn
@@ -54,28 +54,37 @@ class StaticController < ApplicationController
 		end
 
 		def create_paypal
-			pay_request = PaypalAdaptive::Request.new
+			require "pp-adaptive"
 
-			data = {
-			"returnUrl" => "http://learn-your-lesson.herokuapp.com", 
-			"requestEnvelope" => {"errorLanguage" => "en_US"},
-			"currencyCode"=>"EUR",  
-			"receiverList"=>{"receiver"=>[{"email"=>"tlouisangelini@gmail.com", "amount"=>"10.00"}]},
-			"cancelUrl"=>"http://learn-your-lesson.com",
-			"actionType"=>"PAY",
-			"ipnNotificationUrl"=>"http://learn-your-lesson.herokuapp.com"
-			}
+			client = AdaptivePayments::Client.new(
+			  :user_id       => "lllouis_api1.yahoo.com",
+			  :password      => "MRXUGXEXHYX7JGHH",
+			  :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
+			  :app_id        => "APP-80W284485P519543T",
+			  :sandbox       => true
+			)
 
-			pay_response = pay_request.pay(data)
+			client.execute(:Pay,
+			  :action_type     => "PAY",
+			  :receiver_email  => "louisangelini@gmail.com",
+			  :receiver_amount => 50,
+			  :currency_code   => "EUR",
+			  :cancel_url      => "https://learn-your-lesson.herokuapp.com",
+			  :return_url      => "https://ylearn-your-lesson.herokuapp.com"
+			) do |response|
 
-			if pay_response.success?
-				flash[:success] = pay_response.preapproval_paypal_payment_url
-				# render 'welcome'
-			  redirect_to pay_response.preapproval_paypal_payment_url
-			else
-			  puts pay_response.errors.first['message']
-			  redirect_to failed_payment_url
+			  if response.success?
+			    puts "Pay key: #{response.pay_key}"
+
+			    # send the user to PayPal to make the payment
+			    # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
+			    redirect_to client.payment_url(response)
+			  else
+			    puts "#{response.ack_code}: #{response.error_message}"
+			  end
+
 			end
+			
 		end
 end
 
