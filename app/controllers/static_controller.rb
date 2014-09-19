@@ -11,7 +11,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-		create_paypal if params[:do_it].present?
+		create_paypal(params)
 	end
 
 	def learn
@@ -53,7 +53,7 @@ class StaticController < ApplicationController
 			email =~ valid_regex
 		end
 
-		def create_paypal
+		def create_paypal(params)
 			require "pp-adaptive"
 
 			client = AdaptivePayments::Client.new(
@@ -67,7 +67,7 @@ class StaticController < ApplicationController
 			client.execute(:Pay,
 			  :action_type     => "PAY",
 			  :receiver_email  => "louisangelini@gmail.com",
-			  :receiver_amount => 50,
+			  :receiver_amount => params[:receiver_amount],
 			  :currency_code   => "EUR",
 			  :cancel_url      => "https://learn-your-lesson.herokuapp.com",
 			  :return_url      => "https://ylearn-your-lesson.herokuapp.com"

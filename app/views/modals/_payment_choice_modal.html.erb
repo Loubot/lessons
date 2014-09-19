@@ -7,7 +7,13 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <div class="col-md-6">Check out with paypal</div>
+          <div class="col-md-6">
+            <%= form_tag welcome_url, method: 'get' do %>
+              <%= hidden_field_tag :teacher, @teacher.email %>
+              <%= hidden_field_tag :receiver_amount, @teacher.rate %>
+              <%= submit_tag 'Pay' %>
+            <% end %>
+          </div>
           <div class="col-md-">Check out with Stripe</div>
         </div>
       </div> <!-- end of modal-body -->
