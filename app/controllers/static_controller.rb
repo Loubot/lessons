@@ -105,13 +105,17 @@ class StaticController < ApplicationController
 
 			client.execute(:Pay,
 			  :action_type     => "PAY",
-			  :receiver_email  => "louisangelini@gmail.com",
 			  :receiver_amount => params[:receiver_amount],
 			  :currency_code   => "GBP",
 			  :cancel_url      => "https://learn-your-lesson.herokuapp.com",
 			  :return_url      => "http://localhost:3000/paypal-return",
 			  :notify_URL			 => 'http://69bbab3a.ngrok.com/store-paypal',
-			  :ipn_notification_url => 'http://69bbab3a.ngrok.com/store-paypal'
+			  :ipn_notification_url => 'http://69bbab3a.ngrok.com/store-paypal',
+			  :receivers    	 => [
+			  	{ :email => 'louisangelini@gmail.com', :amount => 50, :primary => true },
+			  	{ :email => 'loubotsjobs@gmail.com', :amount => 35 }
+			  	] 
+			  
 			) do |response|
 
 			  if response.success?
