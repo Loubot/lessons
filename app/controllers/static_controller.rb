@@ -1,5 +1,7 @@
 class StaticController < ApplicationController
 
+	protect_from_forgery except: [:store_paypal]
+
 	include StaticHelper	
 	
 	def how_it_works
@@ -15,9 +17,17 @@ class StaticController < ApplicationController
 	end
 
 	def store_paypal
-		puts "???????????????? #{params}"
-		flash[:success] = params
-		redirect_to root_url
+		p "???????????????? #{params.inspect}"
+		uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+		http = Net::HTTP.new(uri.host,uri.port)
+		http.open_timeout = 60
+		http.read_timeout = 60
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+		http.use_ssl = true
+		response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
+													'User-Agent' => 'My custom user agent').body
+		puts "*************** #{response}"
+		render nothing: true
 	end
 
 	def paypal_return
@@ -85,7 +95,6 @@ class StaticController < ApplicationController
 
 		def create_paypal(params)
 			require "pp-adaptive"
-			puts "444444444444 #{params[:receiver_amount].to_f}"
 			client = AdaptivePayments::Client.new(
 			  :user_id       => "lllouis_api1.yahoo.com",
 			  :password      => "MRXUGXEXHYX7JGHH",
@@ -101,7 +110,8 @@ class StaticController < ApplicationController
 			  :currency_code   => "GBP",
 			  :cancel_url      => "https://learn-your-lesson.herokuapp.com",
 			  :return_url      => "http://localhost:3000/paypal-return",
-			  :notify_URL			 => 'http://69bbab3a.ngrok.com/store-paypal'
+			  :notify_URL			 => 'http://69bbab3a.ngrok.com/store-paypal',
+			  :ipn_notification_url => 'http://69bbab3a.ngrok.com/store-paypal'
 			) do |response|
 
 			  if response.success?
