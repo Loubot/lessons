@@ -17,7 +17,7 @@ class OpeningsController < ApplicationController
 	def update
 		@opening = Opening.find(params[:id])
 		if @opening.update_attributes(format_times(params))
-			flash[:success] = params
+			flash[:success] = "Opening times updated"
 			redirect_to :back
 		else
 			flash[:danger] = "Can't update opening times #{@opening.errors.full_messages}"
