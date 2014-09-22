@@ -13,7 +13,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome		
-		# create_paypal(params) if params[:paypal].present?
+		create_paypal(params) if params[:paypal].present?
 	end
 
 	def store_paypal
