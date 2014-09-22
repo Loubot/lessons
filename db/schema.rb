@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140912061030) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -64,7 +61,7 @@ ActiveRecord::Schema.define(version: 20140912061030) do
     t.datetime "updated_at"
   end
 
-  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true, using: :btree
+  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true
 
   create_table "photos", force: true do |t|
     t.string   "name"
@@ -107,7 +104,7 @@ ActiveRecord::Schema.define(version: 20140912061030) do
     t.integer "teacher_id", null: false
   end
 
-  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id", using: :btree
+  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id"
 
   create_table "teachers", force: true do |t|
     t.string   "first_name"
@@ -136,7 +133,7 @@ ActiveRecord::Schema.define(version: 20140912061030) do
     t.boolean  "is_teacher",                                     default: false, null: false
   end
 
-  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
-  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
+  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
+  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
 
 end

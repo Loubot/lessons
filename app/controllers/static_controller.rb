@@ -13,7 +13,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome		
-		create_paypal(params) if params[:paypal].present?
+		# create_paypal(params) if params[:paypal].present?
 	end
 
 	def store_paypal
@@ -76,7 +76,7 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 	end
 
