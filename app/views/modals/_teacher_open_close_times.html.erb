@@ -12,7 +12,7 @@
 							<%= form_for [@teacher,@opening], html: { class: 'form-horizontal' } do |f| %>
 								<div class="form-group">
 									<%= f.label :mon_open, 'Monday opening time:', class: 'col-sm-5 control-label' %>
-									<div class="col-sm-7">
+									<div class="col-sm-3">
 										<%= f.time_select :mon_open,
 										  :combined => true,
 										  :default => Time.now.change(:hour => 12, :min => 30),
@@ -23,11 +23,11 @@
 										  :end_hour => 19,
 										  :end_minute => 30
 										%>
-									</div> <!-- end of col-sm-10 -->
+									</div> <!-- end of col-sm-7 -->                  
 								</div> <!-- end of form-group -->
 								<div class="form-group">
 								<%= f.label :mon_close, 'Monday closing time:', class: 'col-sm-5 control-label' %>
-									<div class="col-sm-7">
+									<div class="col-sm-3">
 										<%= f.time_select :mon_close,
 										  :combined => true,
 										  :default => Time.now.change(:hour => 12, :min => 30),
@@ -38,7 +38,12 @@
 										  :end_hour => 22,
 										  :end_minute => 30
 										%>										
-									</div> <!-- end of col-sm-10 -->
+									</div> <!-- end of col-sm-7 -->
+                  <div class="checkbox col-sm-4">
+                    <label>
+                      <%= check_box_tag 'all_day_mon' %>Closed Monday
+                    </label>
+                  </div>
 								</div> <!-- end of form-group -->
 								<div class="form-group">
                   <%= f.label :tues_open, 'Tuesday opening time:', class: 'col-sm-5 control-label' %>
@@ -53,7 +58,7 @@
                       :end_hour => 19,
                       :end_minute => 30
                     %>
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                 <%= f.label :tues_close, 'Tuesday closing time:', class: 'col-sm-5 control-label' %>
@@ -68,7 +73,7 @@
                       :end_hour => 22,
                       :end_minute => 30
                     %>                    
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                   <%= f.label :wed_open, 'Wednesday opening time:', class: 'col-sm-5 control-label' %>
@@ -83,7 +88,7 @@
                       :end_hour => 19,
                       :end_minute => 30
                     %>
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                 <%= f.label :wed_close, 'Wednesday closing time:', class: 'col-sm-5 control-label' %>
@@ -98,7 +103,7 @@
                       :end_hour => 22,
                       :end_minute => 30
                     %>                    
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                   <%= f.label :thur_open, 'Thursday opening time:', class: 'col-sm-5 control-label' %>
@@ -113,7 +118,7 @@
                       :end_hour => 19,
                       :end_minute => 30
                     %>
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                 <%= f.label :thur_close, 'Thursday closing time:', class: 'col-sm-5 control-label' %>
@@ -128,7 +133,7 @@
                       :end_hour => 22,
                       :end_minute => 30
                     %>                    
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                   <%= f.label :fri_open, 'Friday opening time:', class: 'col-sm-5 control-label' %>
@@ -143,7 +148,7 @@
                       :end_hour => 19,
                       :end_minute => 30
                     %>
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                 <%= f.label :fri_close, 'Friday closing time:', class: 'col-sm-5 control-label' %>
@@ -158,7 +163,7 @@
                       :end_hour => 22,
                       :end_minute => 30
                     %>                    
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                   <%= f.label :sat_open, 'Saturday opening time:', class: 'col-sm-5 control-label' %>
@@ -173,7 +178,7 @@
                       :end_hour => 19,
                       :end_minute => 30
                     %>
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
                 <%= f.label :sat_close, 'Saturday closing time:', class: 'col-sm-5 control-label' %>
@@ -188,7 +193,7 @@
                       :end_hour => 22,
                       :end_minute => 30
                     %>                    
-                  </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
                 <div class="form-group">
 									<%= f.label :sun_open, 'Sunday opening time:', class: 'col-sm-5 control-label' %>
@@ -203,7 +208,7 @@
 										  :end_hour => 19,
 										  :end_minute => 30
 										%>
-									</div> <!-- end of col-sm-10 -->
+									</div> <!-- end of col-sm-7 -->
 								</div> <!-- end of form-group -->
 								<div class="form-group">
 								<%= f.label :sun_close, 'Sunday closing time:', class: 'col-sm-5 control-label' %>
@@ -218,7 +223,7 @@
 										  :end_hour => 22,
 										  :end_minute => 30
 										%>										
-									</div> <!-- end of col-sm-10 -->
+									</div> <!-- end of col-sm-7 -->
 								</div> <!-- end of form-group -->
 								<%= f.hidden_field :teacher_id, value: current_teacher.id %>
 								<div class="modal-footer">

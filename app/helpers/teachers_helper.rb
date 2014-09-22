@@ -54,9 +54,11 @@ module TeachersHelper
 					openings.sun_close.strftime("%H").to_i * 60, 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" }
 			]
-		rescue NoMethodError
+		rescue NoMethodError => e
+			puts "Error #{e}"
 			[]
 		ensure
+			puts "Error #{e}"
 			[]
 		end		
 	end
