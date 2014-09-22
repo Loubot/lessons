@@ -1,4 +1,4 @@
-/*add font file*/
+add font file*/
 @font-face{
 	font-family: teachersFont;
 	
@@ -16,8 +16,10 @@ body {
 }
 
 hr{
-	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
+
+
 
 /*edit bootstrap containers to wrap long sentences onto next line
 */
@@ -193,6 +195,16 @@ hr{
 }
 /*end of subject search page*/
 
+/*teachers-area page opening times modal*/
+.second_day{
+	border-bottom: 1px solid #CCCCC0;
+}
+
+.modal-body.opening_times{
+	padding: 0;
+}
+/*end of teachers-area page opening times modal*/
+
 /*show_teacher*/
 
 .table_header{
@@ -265,4 +277,4 @@ form .glyphicon {
 .ds-btn li a span{padding-left:15px;padding-right:5px;width:100%;display:inline-block; text-align:left;}
 .ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
 
-/* end of login_modal page*/
+/* end of login_modal page

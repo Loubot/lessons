@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Opening hours</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body opening_times">
         <div  class="container-fluid">
           <div class="row">
 						<div class="col-md-12">
@@ -25,7 +25,7 @@
 										%>
 									</div> <!-- end of col-sm-7 -->                  
 								</div> <!-- end of form-group -->
-								<div class="form-group">
+								<div class="form-group second_day">
 								<%= f.label :mon_close, 'Monday closing time:', class: 'col-sm-5 control-label' %>
 									<div class="col-sm-3">
 										<%= f.time_select :mon_close,
@@ -45,6 +45,7 @@
                     </label>
                   </div> <!-- end of checkbox col-sm-4 -->
 								</div> <!-- end of form-group -->
+                
 								<div class="form-group">
                   <%= f.label :tues_open, 'Tuesday opening time:', class: 'col-sm-5 control-label' %>
                   <div class="col-sm-3">
@@ -60,7 +61,7 @@
                     %>
                   </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
-                <div class="form-group">
+                <div class="form-group second_day">
                 <%= f.label :tues_close, 'Tuesday closing time:', class: 'col-sm-5 control-label' %>
                   <div class="col-sm-3">
                     <%= f.time_select :tues_close,
@@ -95,7 +96,7 @@
                     %>
                   </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
-                <div class="form-group">
+                <div class="form-group second_day">
                 <%= f.label :wed_close, 'Wednesday closing time:', class: 'col-sm-5 control-label' %>
                   <div class="col-sm-3">
                     <%= f.time_select :wed_close,
@@ -130,7 +131,7 @@
                     %>
                   </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
-                <div class="form-group">
+                <div class="form-group second_day">
                 <%= f.label :thur_close, 'Thursday closing time:', class: 'col-sm-5 control-label' %>
                   <div class="col-sm-3">
                     <%= f.time_select :thur_close,
@@ -165,7 +166,7 @@
                     %>
                   </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
-                <div class="form-group">
+                <div class="form-group second_day">
                 <%= f.label :fri_close, 'Friday closing time:', class: 'col-sm-5 control-label' %>
                   <div class="col-sm-3">
                     <%= f.time_select :fri_close,
@@ -200,7 +201,7 @@
                     %>
                   </div> <!-- end of col-sm-7 -->
                 </div> <!-- end of form-group -->
-                <div class="form-group">
+                <div class="form-group second_day">
                 <%= f.label :sat_close, 'Saturday closing time:', class: 'col-sm-5 control-label' %>
                   <div class="col-sm-3">
                     <%= f.time_select :sat_close,
@@ -235,7 +236,7 @@
 										%>
 									</div> <!-- end of col-sm-7 -->
 								</div> <!-- end of form-group -->
-								<div class="form-group">
+								<div class="form-group ">
 								<%= f.label :sun_close, 'Sunday closing time:', class: 'col-sm-5 control-label' %>
 									<div class="col-sm-3">
 										<%= f.time_select :sun_close,
