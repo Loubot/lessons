@@ -110,7 +110,7 @@ class StaticController < ApplicationController
 			  :cancel_url      => "https://learn-your-lesson.herokuapp.com",
 			  :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return",
 			  :notify_URL			 => 'https://learn-your-lesson.herokuapp.com/store-paypal',
-			  :ipn_notification_url => paypal_return_path,
+			  :ipn_notification_url => "#{store_paypal_path}",
 			  :receivers    	 => [
 			  	{ :email => 'louisangelini@gmail.com', :amount => 50, :primary => true },
 			  	{ :email => 'loubotsjobs@gmail.com', :amount => 35 }
