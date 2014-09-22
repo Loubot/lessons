@@ -111,7 +111,6 @@ teachersInfoReady = ->
 
 #///////////////Autofocus on login modal
   if $('#login_modal_email').length > 0
-    alert 'a'
     $('#login_modal').on 'shown.bs.modal', ->
       document.getElementById('login_modal_email').focus()
 

@@ -76,7 +76,7 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 	end
 
@@ -108,9 +108,9 @@ class StaticController < ApplicationController
 			  :receiver_amount => params[:receiver_amount],
 			  :currency_code   => "GBP",
 			  :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-			  :return_url      => "http://localhost:3000/paypal-return",
-			  :notify_URL			 => 'http://69bbab3a.ngrok.com/store-paypal',
-			  :ipn_notification_url => 'http://69bbab3a.ngrok.com/store-paypal',
+			  :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return",
+			  :notify_URL			 => 'https://learn-your-lesson.herokuapp.com/store-paypal',
+			  :ipn_notification_url => paypal_return_path,
 			  :receivers    	 => [
 			  	{ :email => 'louisangelini@gmail.com', :amount => 50, :primary => true },
 			  	{ :email => 'loubotsjobs@gmail.com', :amount => 35 }
