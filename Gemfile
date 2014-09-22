@@ -67,7 +67,7 @@ gem "fog"
 
 gem 'geocoder'
 
-# gem 'pp-adaptive'
+gem 'pp-adaptive'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
