@@ -28,16 +28,22 @@ Rails.application.routes.draw do
   get         '/welcome'                =>  'static#welcome'
   get         '/subject-search'         =>  'static#subject_search'
   get         '/display-subjects'       =>  'static#display_subjects'
-  get         'paypal-return'           =>  'static#paypal_return'  
-  post        'store-paypal'            =>  'static#store_paypal'
-  get         'paypal-create'           =>  'payments#paypal_create'
-  post        'stripe-create'           =>  'payments#stripe_create'
-  get         '/show-teacher'           =>  'teachers#show_teacher'  
-  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
   get         '/how-it-works'           =>  'static#how_it_works'
   get         '/mailing-list'           =>  'static#mailing_list'
   post        '/add-to-list'            =>  'static#add_to_list'
+
+  get         'paypal-create'           =>  'payments#paypal_create'
+  get         'paypal-return'           =>  'payments#paypal_return'  
+  post        'store-paypal'            =>  'payments#store_paypal'
+  post        'stripe-create'           =>  'payments#stripe_create'
+
+
+  get         '/show-teacher'           =>  'teachers#show_teacher'  
+  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
+
+
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
-  root to: 'static#welcome'
+
+  root to:                                  'static#welcome'
 end

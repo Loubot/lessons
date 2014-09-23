@@ -14,45 +14,7 @@ class StaticController < ApplicationController
 
 	def welcome		
 		
-	end
-
-	def store_paypal
-		p "???????????????? #{params.inspect}"
-		uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
-		http = Net::HTTP.new(uri.host,uri.port)
-		http.open_timeout = 60
-		http.read_timeout = 60
-		http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-		http.use_ssl = true
-		response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
-													'User-Agent' => 'My custom user agent').body
-		puts "*************** #{response}"
-		render nothing: true
-	end
-
-	def paypal_return
-		
-		require "pp-adaptive"
-
-		client = AdaptivePayments::Client.new(
-		  :user_id       => "lllouis_api1.yahoo.com",
-		  :password      => "MRXUGXEXHYX7JGHH",
-		  :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-		  :app_id        => "APP-80W284485P519543T",
-		  :sandbox       => true
-		)
-
-		client.execute(:PaymentDetails, :pay_key => "AP-4TS489127N381100H") do |response|
-		  if response.success?
-		    puts "Payment status: #{response.inspect}"
-		    flash[:success] = "Payment status: #{response.inspect}"
-		  else
-		    puts "#{response.ack_code}: #{response.error_message}"
-		  end
-		end
-
-		redirect_to root_url
-	end
+	end	
 
 	def learn
 
