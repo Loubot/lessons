@@ -15,7 +15,20 @@
               <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
             <% end %>
           </div>
-          <div class="col-md-">Check out with Stripe</div>
+          <div class="col-md-6">
+            <%= form_tag stripe_create_path do %>
+              <article>
+                <label class="amount">
+                  <span>Amount: $5.00</span>
+                </label>
+              </article>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
+                data-description="Book your lesson"
+                data-amount="500"></script>
+            <% end %>
+          </div>
         </div>
       </div> <!-- end of modal-body -->
       <!-- <div class="modal-footer"> 
@@ -25,3 +38,6 @@
     </div> <!-- end of modal-content -->
   </div> <!-- end of modal-dialog -->
 </div> <!-- end of modal fade -->
+
+<!-- stripe secret sk_test_1ZTmwrLuejFto5JhzCS9UAWu -->
+<!-- stripe publishable pk_test_bedFzS7vnmzthkrQolmUjXNn -->

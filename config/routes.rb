@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get         '/display-subjects'       =>  'static#display_subjects'
   get         'paypal-return'           =>  'static#paypal_return'
   post        'store-paypal'            =>  'static#store_paypal'
+  post        'stripe-create'           =>  'payments#stripe_create'
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
   get         '/how-it-works'           =>  'static#how_it_works'
