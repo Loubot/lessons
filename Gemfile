@@ -5,10 +5,10 @@ source 'http://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
-gem 'bundler'
+gem 'bundler', '>= 1.3.0'
 # Use sqlite3 as the database for Active Record
-# gem 'sqlite3', group: :development
-gem 'pg', group: :development
+gem 'sqlite3', '1.3.9', platforms: [:mingw, :mswin], group: :development
+# gem 'pg', group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -19,9 +19,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '3.1.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '2.2.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -30,9 +30,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 
 group :production do
-	gem 'pg'
-	gem 'rails_12factor'
-	gem 'unicorn'
+	gem 'rails_12factor', '0.0.2'
+	gem 'unicorn', '4.8.3'
 end
 
 gem 'thin'
@@ -41,33 +40,33 @@ gem 'better_errors'
 
 gem 'binding_of_caller'
 
-gem 'devise'
+gem 'devise', '~> 3.2.4'
 
-gem 'carrierwave'
+gem 'carrierwave', '~> 0.10.0'
 
-gem 'gibbon'
+gem 'gibbon', '~> 1.1.3'
 
-gem 'gon', '~>5.1.1'
+gem 'gon', '~> 5.1.1'
 
 gem 'annotate'
 
-gem 'jquery-ui-rails', '4.2.1'
+gem 'jquery-ui-rails', '~> 4.2.1'
 
 gem "combined_time_select", "~> 1.0.1"
 
-gem 'validates_overlap'
+gem 'validates_overlap', '~> 0.3.0'
 
-gem 'date_validator'
+gem 'date_validator', '~> 0.7.0'
 
-gem 'rmagick'
+# gem 'rmagick', '~> 2.13.3'
 
-gem 'mini_magick'
+# gem 'mini_magick', '~> 3.8.0'
 
-gem "fog"
+gem "fog", '~> 1.23.0'
 
-gem 'geocoder'
+gem 'geocoder', '~> 1.2.4'
 
-gem 'pp-adaptive'
+gem 'pp-adaptive', '~> 1.0.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
