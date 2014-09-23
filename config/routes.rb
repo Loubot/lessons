@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get         'paypal-return'           =>  'payments#paypal_return'  
   post        'store-paypal'            =>  'payments#store_paypal'
   post        'stripe-create'           =>  'payments#stripe_create'
+  post        '/store-stripe'           =>  'payments#store_stripe'
 
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
@@ -45,5 +46,5 @@ Rails.application.routes.draw do
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
 
-  root to:                                  'static#welcome'
+  root to: 'static#welcome'
 end

@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
 
-  protect_from_forgery except: [:store_paypal]
+  protect_from_forgery except: [:store_paypal, :store_stripe]
 
   def paypal_create
     create_paypal(params) if params[:paypal].present?
@@ -66,11 +66,14 @@ class PaymentsController < ApplicationController
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to charges_path
-    end
+    
   end
 
-  def store_paypal
-    # https://stripe.com/docs/webhooks
+  def store_stripe
+    require 'json'
+    json_resonse = JSON.parse(request.body.read)
+    p json_resonse
+    render status: 200, nothing: true
   end
 
 
@@ -89,17 +92,13 @@ class PaymentsController < ApplicationController
 
         client.execute(:Pay,
           :action_type     => "PAY",
+          :receiver_email  => "louisangelini@gmail.com",
           :receiver_amount => params[:receiver_amount],
           :currency_code   => "GBP",
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return",
-          :notify_URL      => 'https://learn-your-lesson.herokuapp.com/store-paypal',
-          :ipn_notification_url => "https://learn-your-lesson.herokuapp.com/store-paypal",
-          :receivers       => [
-            { :email => 'louisangelini@gmail.com', :amount => 50, :primary => true },
-            { :email => 'loubotsjobs@gmail.com', :amount => 35 }
-            ] 
-          
+          :return_url      => "http://localhost:3000/paypal-return",
+          :notify_URL      => 'http://69bbab3a.ngrok.com/store-paypal',
+          :ipn_notification_url => 'http://c338920.ngrok.com/store-paypal'
         ) do |response|
 
           if response.success?
@@ -111,7 +110,9 @@ class PaymentsController < ApplicationController
           else
             puts "#{response.ack_code}: #{response.error_message}"
           end
-               
+
+        end
+        
       end
 
 end

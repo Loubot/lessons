@@ -22,7 +22,7 @@
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
                 data-description="Book your lesson"
-                data-amount="500"></script>
+                data-amount="<%= (@teacher.rate * 100).to_i %>"></script>
               <%= hidden_field_tag :amount, @teacher.rate %>
             <% end %>
           </div> <!-- end of col-md-6 stripe_choice -->
