@@ -8,7 +8,7 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="col-md-6">
-            <%= form_tag welcome_url, method: 'get' do %>
+            <%= form_tag paypal_create_path, method: 'get' do %>
               <%= hidden_field_tag :teacher, @teacher.email %>
               <%= hidden_field_tag :receiver_amount, @teacher.rate %>
               <%= hidden_field_tag :paypal, '1' %>
@@ -17,16 +17,11 @@
           </div>
           <div class="col-md-6">
             <%= form_tag stripe_create_path do %>
-              <article>
-                <label class="amount">
-                  <span>Amount: $5.00</span>
-                </label>
-              </article>
-
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
                 data-description="Book your lesson"
                 data-amount="500"></script>
+              <%= hidden_field_tag :amount, @teacher.rate %>
             <% end %>
           </div>
         </div>
