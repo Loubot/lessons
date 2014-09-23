@@ -1,5 +1,7 @@
 class PaymentsController < ApplicationController
 
+  protect_from_forgery except: [:store_paypal]
+
   def paypal_create
     create_paypal(params) if params[:paypal].present?
   end

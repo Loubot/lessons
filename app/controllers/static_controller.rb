@@ -1,6 +1,4 @@
-class StaticController < ApplicationController
-
-	protect_from_forgery except: [:store_paypal]
+class StaticController < ApplicationController	
 
 	include StaticHelper	
 	

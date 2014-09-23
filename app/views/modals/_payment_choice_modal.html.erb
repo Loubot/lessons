@@ -7,15 +7,17 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <div class="col-md-6">
+          <div class="col-md-6 paypal_choice">
             <%= form_tag paypal_create_path, method: 'get' do %>
               <%= hidden_field_tag :teacher, @teacher.email %>
               <%= hidden_field_tag :receiver_amount, @teacher.rate %>
               <%= hidden_field_tag :paypal, '1' %>
               <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
             <% end %>
-          </div>
-          <div class="col-md-6">
+          </div> <!-- end of col-md-6 paypal_choice -->
+
+
+          <div class="col-md-6 stripe_choice">
             <%= form_tag stripe_create_path do %>
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
@@ -23,8 +25,9 @@
                 data-amount="500"></script>
               <%= hidden_field_tag :amount, @teacher.rate %>
             <% end %>
-          </div>
-        </div>
+          </div> <!-- end of col-md-6 stripe_choice -->
+
+        </div> <!-- end of container-fluid -->
       </div> <!-- end of modal-body -->
       <!-- <div class="modal-footer"> 
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
