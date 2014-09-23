@@ -97,7 +97,7 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => "http://localhost:3000/paypal-return",
-          :notify_URL      => 'http://69bbab3a.ngrok.com/store-paypal',
+          :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :ipn_notification_url => 'http://c338920.ngrok.com/store-paypal'
         ) do |response|
 
