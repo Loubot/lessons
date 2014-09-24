@@ -44,6 +44,7 @@ class Teacher < ActiveRecord::Base
 
   has_many :experiences
   has_many :events
+  #has_many :events foreign_key: xyz
   has_many :qualifications
   has_many :openings
 

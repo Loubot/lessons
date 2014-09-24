@@ -21,3 +21,4 @@
 #config/database.yml
 
 # git rm -r --cached .
+# git update-index --assume-unchanged

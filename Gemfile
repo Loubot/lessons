@@ -7,8 +7,8 @@ gem 'rails', '4.1.1'
 
 gem 'bundler', '>= 1.3.0'
 # Use sqlite3 as the database for Active Record
-# gem 'sqlite3', '1.3.9', platforms: [:mingw, :mswin], group: :development
-gem 'pg'
+gem 'sqlite3', '1.3.9', platforms: [:mingw, :mswin], group: :development
+# gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -58,9 +58,9 @@ gem 'validates_overlap', '~> 0.3.0'
 
 gem 'date_validator', '~> 0.7.0'
 
-gem 'rmagick', '~> 2.13.3'
+# gem 'rmagick', '~> 2.13.3'
 
-gem 'mini_magick', '~> 3.8.0'
+# gem 'mini_magick', '~> 3.8.0'
 
 gem "fog", '~> 1.23.0'
 
@@ -82,4 +82,4 @@ gem 'stripe', '~> 1.15'
 # gem 'debugger', group: [:development, :test]
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin]
+gem 'tzinfo-data', '~> 1.2', platforms: [:mingw, :mswin]

@@ -18,6 +18,7 @@ validates :start_time, :end_time,  presence: :true
 validates :start_time, :end_time, :overlap => {:exclude_edges => ["start_time", "end_time"]}
 validates :start_time, date: { before: :end_time, message: 'must be after end time' }
 belongs_to :teacher
+#belongs_to :teacher, foreign_key: xyz
 
 before_save :add_name
 
