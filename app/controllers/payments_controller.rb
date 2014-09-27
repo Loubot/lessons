@@ -47,6 +47,7 @@ class PaymentsController < ApplicationController
 
   def stripe_create
    # Amount in cents
+   
     @amount = params[:amount].to_i * 100    
 
     customer = Stripe::Customer.create(
@@ -58,7 +59,8 @@ class PaymentsController < ApplicationController
       :customer    => customer.id,
       :amount      => @amount,
       :description => 'Rails Stripe customer',
-      :currency    => 'eur'
+      :currency    => 'eur',
+      :application_fee => 33
     )
 
     redirect_to welcome_path
@@ -71,9 +73,31 @@ class PaymentsController < ApplicationController
 
   def store_stripe
     require 'json'
-    json_resonse = JSON.parse(request.body.read)
-    p json_resonse
+    json_response = JSON.parse(request.body.read)
+    p "%%%%%%%%%%%%%%%%% #{json_response['data']['object']['id']}"
     render status: 200, nothing: true
+  end
+
+  def stripe_auth_user
+    uri = URI.parse('https://connect.stripe.com/oauth/token')
+    uri.query = URI.encode_www_form({
+        'client_secret' => 'sk_test_1ZTmwrLuejFto5JhzCS9UAWu', 'code' => params[:code],
+          'grant_type' => 'authorization_code'
+      })
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(uri.request_uri)
+    response = http.request(request).body
+
+    p "££££££££££££££££££££££ #{response.inspect}"
+    # params = {'client_secret' => 'sk_test_1ZTmwrLuejFto5JhzCS9UAWu', 'code' => 'ac_4qftwDWUN15L3DvnQIp0XxT7nXrKEX5Q',
+    #   'grant_type' => 'authorization_code'}
+    
+    # conn = Net::HTTP.new("https://connect.stripe.com/oauth/token")
+    # r = conn.post('/oauth/token', params)
+    # p "(((((((((((((((((((( #{r}"
+    render nothing: true
   end
 
 
@@ -92,13 +116,15 @@ class PaymentsController < ApplicationController
 
         client.execute(:Pay,
           :action_type     => "PAY",
-          :receiver_email  => "louisangelini@gmail.com",
-          :receiver_amount => params[:receiver_amount],
           :currency_code   => "GBP",
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return",
+          :return_url      => "http://localhost:3000/paypal-return",
           :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
-          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal'
+          :ipn_notification_url => 'http://2c20e592.ngrok.com/store-paypal',
+          :receivers => [
+            { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
+            { :email => 'loubotsjobs@gmail.com',  amount: 10}
+          ]
         ) do |response|
 
           if response.success?
@@ -116,3 +142,12 @@ class PaymentsController < ApplicationController
       end
 
 end
+
+
+# authorisation code ac_4qQhjRNlu4BQ0UCRpwg1kGBqC3r3RKdH
+
+
+# curl -X POST https://connect.stripe.com/oauth/token \
+#   -d client_secret=sk_test_1ZTmwrLuejFto5JhzCS9UAWu \
+#   -d code=ac_4qg3IUs0PsYCNwhxcLI8d66VkslSgj7U \
+#   -d grant_type=authorization_code

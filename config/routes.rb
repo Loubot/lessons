@@ -33,7 +33,8 @@ Rails.application.routes.draw do
   post        '/add-to-list'            =>  'static#add_to_list'
 
   get         'paypal-create'           =>  'payments#paypal_create'
-  get         'paypal-return'           =>  'payments#paypal_return'  
+  get         'paypal-return'           =>  'payments#paypal_return' 
+  get         'stripe-auth-user'        =>  'payments#stripe_auth_user' 
   post        'store-paypal'            =>  'payments#store_paypal'
   post        'stripe-create'           =>  'payments#stripe_create'
   post        '/store-stripe'           =>  'payments#store_stripe'
