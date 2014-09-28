@@ -117,15 +117,43 @@
 					</li>
 				</ul>
 			</div> <!-- end of panel panel-default -->
-		</div> <!-- end of col-md-10 -->
+		</div> <!-- end of col-md-12 -->
 	</div> <!-- end of row -->
 </div> <!-- end of container-fluid -->
+
+<div class="container-fluid">
+	<div class="row">
+		
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Payment choices</h2>
+					<div class="btn-group pull-right">            
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teacher_select_payment"><span class="glyphicon glyphicon-credit-card"></span> Edit</button>
+		      </div> <!-- end of btn-group pull-right -->
+				</div> <!-- end of panel heading -->
+				<div class="panel-body">
+					<div class="well well-lg">We offer 2 choices for payment. <%= link_to 'Paypal', 'https://www.paypal.com/' %> and <%= link_to 'Stripe', 'https://stripe.com/ie' %>. We will not keep any of your money or credit card details. To avail of these payment options you must sign up to these services as a merchant. You can chose either or both.</div>
+				</div>  <!-- end  of panel-body -->
+				<ul class="list-group">
+					<li class="list-group-item">Paypal: <span class="pull-right"><%= current_teacher.paypal_email %></span></li>
+					<li class="list-group-item">Stripe: <span class="pull-right"><%= current_teacher.stripe_access_token %></span></li>
+				</ul>
+			</div> <!-- end of panel panel-default -->
+		</div> <!-- end of col-md-12 -->
+	</div> <!-- end of row -->
+</div> <!-- end of container-fluid -->
+
+
+
+
+
 
 <%= render 'modals/teacher_photos_dropzone' %>
 <%= render 'modals/teacher_info_form' %>
 <%= render 'modals/teacher_experience_form' %>
 <%= render 'modals/teacher_about_you_form' %>
 <%= render 'modals/teachers_subjects_form' %>
+<%= render 'modals/teacher_select_payment' %>
 
 
 

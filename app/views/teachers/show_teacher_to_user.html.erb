@@ -103,13 +103,3 @@
 </div> <!-- end of row -->
 
 <%= render 'modals/payment_choice_modal' %>
-
-<%= form_tag 'https://connect.stripe.com/oauth/authorize', method: 'get' do %>
-  <%= hidden_field_tag :response_type, 'code' %>
-  <%= hidden_field_tag :client_id, 'ca_4qQTgrfr1l9xHgK7qnrNZbpXz2tpBecX' %>
-  <%= hidden_field_tag :scope, 'read_write' %>
-  <%= hidden_field_tag :redirect_uri, 'http://localhost:3000/stripe-auth-user' %>
-  <%= hidden_field_tag :stripe_landing, 'login' %>
-  <%= hidden_field_tag :state, @teacher.id %>
-  <%= submit_tag 'Stripe' %>
-<% end %>

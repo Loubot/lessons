@@ -91,15 +91,20 @@ class PaymentsController < ApplicationController
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     request = Net::HTTP::Post.new(uri.request_uri)
     response = http.request(request).body
+    json_resp = JSON.parse(response)
 
-    p "££££££££££££££££££££££ #{response.inspect}"
+    p "££££££££££££££££££££££ #{json_resp}"
     # params = {'client_secret' => 'sk_test_1ZTmwrLuejFto5JhzCS9UAWu', 'code' => 'ac_4qftwDWUN15L3DvnQIp0XxT7nXrKEX5Q',
     #   'grant_type' => 'authorization_code'}
     
     # conn = Net::HTTP.new("https://connect.stripe.com/oauth/token")
     # r = conn.post('/oauth/token', params)
     # p "(((((((((((((((((((( #{r}"
-    redirect_to show_teacher_path(id: params[:state])
+    if json_resp['access_token'].present?
+      flash[:success] = "Successfully registered with Strip"
+      current_teacher.update_attributes(stripe_access_token: json_resp['access_token'])
+    end
+    redirect_to edit_teacher_path(id: params[:state])
   end
 
 

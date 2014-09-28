@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912061030) do
+ActiveRecord::Schema.define(version: 20140928135446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(version: 20140912061030) do
     t.datetime "closing"
     t.decimal  "rate",                   precision: 8, scale: 2
     t.boolean  "is_teacher",                                     default: false, null: false
+    t.string   "paypal_email",                                   default: ""
+    t.string   "stripe_access_token",                            default: ""
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
