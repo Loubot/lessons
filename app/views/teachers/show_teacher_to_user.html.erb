@@ -110,5 +110,6 @@
   <%= hidden_field_tag :scope, 'read_write' %>
   <%= hidden_field_tag :redirect_uri, 'http://localhost:3000/stripe-auth-user' %>
   <%= hidden_field_tag :stripe_landing, 'login' %>
+  <%= hidden_field_tag :state, @teacher.id %>
   <%= submit_tag 'Stripe' %>
 <% end %>

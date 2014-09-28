@@ -50,17 +50,19 @@ class PaymentsController < ApplicationController
    
     @amount = params[:amount].to_i * 100    
 
-    customer = Stripe::Customer.create(
-      :email => 'lllouis@yahoo.com',
-      :card  => params[:stripeToken]
-    )
+    # customer = Stripe::Customer.create(
+    #   :email => 'lllouis@yahoo.com',
+    #   :card  => params[:stripeToken]
+    # )
 
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
+    charge = Stripe::Charge.create({
       :amount      => @amount,
       :description => 'Rails Stripe customer',
       :currency    => 'eur',
-      :application_fee => 33
+      :application_fee => 3300,
+      :card => params[:stripeToken]
+      },
+      'sk_test_dIOCHGKvKpLngD0zKF3eHYAM'
     )
 
     redirect_to welcome_path
@@ -97,7 +99,7 @@ class PaymentsController < ApplicationController
     # conn = Net::HTTP.new("https://connect.stripe.com/oauth/token")
     # r = conn.post('/oauth/token', params)
     # p "(((((((((((((((((((( #{r}"
-    render nothing: true
+    redirect_to show_teacher_path(id: params[:state])
   end
 
 
