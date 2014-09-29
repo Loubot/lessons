@@ -8,7 +8,9 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="col-md-6 paypal_choice">
-            
+            <%= form_for @context do |f| %>
+              <%= f.email_field :paypal_email, placeholder: 'Paypal Email' %>
+            <% end %>
           </div> <!-- end of col-md-6 paypal_choice -->
 
 
@@ -20,7 +22,7 @@
               <%= hidden_field_tag :redirect_uri, 'http://localhost:3000/stripe-auth-user' %>
               <%= hidden_field_tag :stripe_landing, 'login' %>
               <%= hidden_field_tag :state, current_teacher.id %>
-              <%= submit_tag 'Stripe' %>
+              <%= submit_tag 'Stripe Registration', class: 'btn btn-info' %>
             <% end %>
             
           </div> <!-- end of col-md-6 stripe_choice -->

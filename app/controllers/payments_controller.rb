@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
 
-  protect_from_forgery except: [:store_paypal, :store_stripe]
+  protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create]
 
   def paypal_create
     create_paypal(params) if params[:paypal].present?
@@ -62,7 +62,7 @@ class PaymentsController < ApplicationController
       :application_fee => 3300,
       :card => params[:stripeToken]
       },
-      'sk_test_dIOCHGKvKpLngD0zKF3eHYAM'
+      Teacher.find(params[:teacher_id]).stripe_access_token
     )
 
     redirect_to welcome_path
@@ -126,8 +126,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => "http://localhost:3000/paypal-return",
-          :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
-          :ipn_notification_url => 'http://2c20e592.ngrok.com/store-paypal',
+          :notify_URL      => 'http://10c416a6.ngrok.com/store-paypal',
+          :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10}
