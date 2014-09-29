@@ -5,17 +5,25 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Payment Options</h4>
       </div>
-      <div class="modal-body">
-        <div class="container-fluid">
+      <div class="modal-body teacher_select_payment_modal_body">
+        <div class="container-fluid teacher_payment_registration_details">
           <div class="col-md-6 paypal_choice">
-            <%= form_for @context do |f| %>
+            <p class="paypal_reg_explanation">Please enter your paypal login email address. We will never ask you for your paypal
+            password.</p>
+            
+            <%= form_for @context, class: 'paypal_email_form' do |f| %>
               <%= f.email_field :paypal_email, placeholder: 'Paypal Email' %>
+              <%= f.submit 'Save email', class: 'btn btn-info' %>
             <% end %>
           </div> <!-- end of col-md-6 paypal_choice -->
 
 
           <div class="col-md-6 stripe_choice">
-            <%= form_tag 'https://connect.stripe.com/oauth/authorize', method: 'get' do %>
+            Click the button below to connect your stripe account to LYL. 
+            You will be prompted by Stripe to login and click accept. Stripe will
+            then send us an access token that we use to take payments on your behalf. 
+            We do not store your Stripe password.
+            <%= form_tag 'https://connect.stripe.com/oauth/authorize', method: 'get', class: 'stripe_reg_button' do %>
               <%= hidden_field_tag :response_type, 'code' %>
               <%= hidden_field_tag :client_id, 'ca_4qQTgrfr1l9xHgK7qnrNZbpXz2tpBecX' %>
               <%= hidden_field_tag :scope, 'read_write' %>
