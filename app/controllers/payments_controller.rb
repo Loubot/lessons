@@ -57,7 +57,7 @@ class PaymentsController < ApplicationController
 
     charge = Stripe::Charge.create({
       :amount      => @amount,
-      :description => 'Rails Stripe customer',
+      :description => "{}",
       :currency    => 'eur',
       :application_fee => 3300,
       :card => params[:stripeToken]
@@ -102,7 +102,7 @@ class PaymentsController < ApplicationController
     # p "(((((((((((((((((((( #{r}"
     if json_resp['access_token'].present?
       @teacher = Teacher.find(current_teacher.id)
-      flash[:success] = "Successfully registered with Strip"
+      flash[:success] = "Successfully registered with Stripe"
       @teacher.update_attributes(stripe_access_token: json_resp['access_token'])
     end
     redirect_to edit_teacher_path(id: params[:state])
