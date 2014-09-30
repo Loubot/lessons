@@ -7,27 +7,32 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <div class="col-md-6 paypal_choice">
-            <%= form_tag paypal_create_path, method: 'get' do %>
-              <%= hidden_field_tag :teacher, @teacher.email %>
-              <%= hidden_field_tag :receiver_amount, @teacher.rate %>
-              <%= hidden_field_tag :paypal, '1' %>
-              <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
-            <% end %>
-          </div> <!-- end of col-md-6 paypal_choice -->
+          <% if @teacher.paypal_email != "" %>
+            <div class="col-md-6">
+              <%= form_tag paypal_create_path, method: 'get' do %>
+                <%= hidden_field_tag :teacher, @teacher.paypal_email %>
+                <%= hidden_field_tag :receiver_amount, @teacher.rate %>
+                <%= hidden_field_tag :paypal, '1' %>
+                <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
+              <% end %>
+            </div> <!-- end of col-md-6-->
+          <% end %>
 
 
-          <div class="col-md-6 stripe_choice">
-            <%= form_tag stripe_create_path do %>
-              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
-                data-description="Book your lesson"
-                data-currency="eur"
-                data-amount="<%= (@teacher.rate * 100).to_i %>"></script>
-              <%= hidden_field_tag :amount, @teacher.rate %>
-              <%= hidden_field_tag :teacher_id, @teacher.id %>
-            <% end %>
-          </div> <!-- end of col-md-6 stripe_choice -->
+          <% if @teacher.stripe_access_token != "" %>
+            <div class="col-md-6">
+              <%= form_tag stripe_create_path do %>
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
+                  data-description="Book your lesson"
+                  data-currency="eur"
+                  data-amount="<%= (@teacher.rate * 100).to_i %>"></script>
+                <%= hidden_field_tag :amount, @teacher.rate %>
+                <%= hidden_field_tag :teacher_id, @teacher.id %>
+              <% end %>
+            </div> <!-- end of col-md-6-->
+
+          <% end %>
 
         </div> <!-- end of container-fluid -->
       </div> <!-- end of modal-body -->

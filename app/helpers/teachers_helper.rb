@@ -63,8 +63,8 @@ module TeachersHelper
 		end		
 	end
 
-	def pick_show_teacher_view
-		if !teacher_signed_in? || current_teacher.is_teacher == false
+	def pick_show_teacher_view(id)
+		if current_teacher.id.to_i != id.to_i
 			render layout: 'application', action: 'show_teacher_to_user'
 		else 
 			render layout: 'teacher_layout', action: 'show_teacher'			
