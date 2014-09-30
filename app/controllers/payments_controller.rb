@@ -1,7 +1,5 @@
 class PaymentsController < ApplicationController
 
-  before_action :authenticate_teacher!
-
   protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create]
 
   def paypal_create
@@ -103,8 +101,9 @@ class PaymentsController < ApplicationController
     # r = conn.post('/oauth/token', params)
     # p "(((((((((((((((((((( #{r}"
     if json_resp['access_token'].present?
+      @teacher = Teacher.find(current_teacher.id)
       flash[:success] = "Successfully registered with Strip"
-      current_teacher.update_attributes(stripe_access_token: json_resp['access_token'])
+      @teacher.update_attributes(stripe_access_token: json_resp['access_token'])
     end
     redirect_to edit_teacher_path(id: params[:state])
   end
