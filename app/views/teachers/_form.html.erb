@@ -141,7 +141,11 @@
 						<li class="list-group-item list-group-item-danger">Paypal: <span class="pull-right"><strong>Paypal email not set</strong></span></li>
 					<% end %>
 
-					
+					<% if current_teacher.stripe_access_token != "" %>
+						<li class="list-group-item list-group-item-success"><span>Stripe access token:</span> <span class="pull-right"><%= current_teacher.stripe_access_token %></span></li>
+					<% else %>
+						<li class="list-group-item list-group-item-danger"><span>Stripe:</span> <span class="pull-right">Not registered on stripe </span></li>
+					<% end %>
 					
 				</ul>
 			</div> <!-- end of panel panel-default -->
