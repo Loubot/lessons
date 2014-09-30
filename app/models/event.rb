@@ -11,6 +11,7 @@
 #  updated_at :datetime
 #  teacher_id :integer
 #  time_off   :binary
+#  student_id :integer
 #
 
 class Event < ActiveRecord::Base
