@@ -1,5 +1,7 @@
 class PaymentsController < ApplicationController
 
+  before_action :authenticate_teacher!
+
   protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create]
 
   def paypal_create
