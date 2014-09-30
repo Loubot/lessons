@@ -51,6 +51,11 @@ class EventsController < ApplicationController
 		Event.find(params[:id]).destroy
 	end
 
+	# ajax event booking
+	def create_event_and_book
+
+	end
+
 	private
 
 		def event_params

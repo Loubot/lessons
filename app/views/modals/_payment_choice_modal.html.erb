@@ -7,7 +7,76 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          
+          <% if teacher_signed_in? %>
+            <h2>Add an appointment</h2>
+            <%= form_for [@teacher,@event], html: { class: 'form-horizontal' } do |f| %>
+              <div class="form-group">
+                <label for="date" class="col-sm-2 control-label">Date:</label>
+                <div class="col-sm-10">
+                  <input name="date" type="text" id='date' >
+                </div>
+              </div> <!-- end of form-group -->
+            
+              <div class='form-group'>
+                <%= f.label :start_time, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-8">
+                  <%= f.time_select :start_time,
+                    :combined => true,
+                    :default => Time.now.change(:hour => 11, :min => 30),
+                    :minute_interval => 30,
+                    :time_separator => "",
+                    :start_hour => 10,
+                    :start_minute => 30,
+                    :end_hour => 14,
+                    :end_minute => 30
+                  %>
+                </div> <!-- end of col-sm-8 -->
+              </div> <!-- end of form-group -->
+
+              <div class="form-group">
+                <%= f.label :end_time, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-8">
+                  <%= f.time_select :end_time,
+                    :combined => true,
+                    :default => Time.now.change(:hour => 12, :min => 30),
+                    :minute_interval => 30,
+                    :time_separator => "",
+                    :start_hour => 10,
+                    :start_minute => 30,
+                    :end_hour => 14,
+                    :end_minute => 30
+                  %>
+                </div> <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default active">
+                    <%= f.radio_button :time_off, '0', { checked: true } %>Lesson
+                  </label>
+                  <label class="btn btn-default">
+                    <%= f.radio_button :time_off, '1' %>Time off
+                  </label>
+                </div> <!-- end of btn-group -->
+                <%= f.hidden_field :teacher_id, value: current_teacher.id %>
+                
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <div class="checkbox">
+                    
+                    
+                    <label><%= check_box_tag 'Multiple' %>Block booking</label>
+                    <span id="no_of_weeks" class="pull-right">Number of weeks: <%= select_tag "booking_length", options_for_select((2..52)) %></span>
+
+                  </div> <!-- end of checkbox -->
+                </div> <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+                <br>
+              <div class="form-group">
+                <div class=" col-sm-10">
+                  <%= f.submit id: 'event_submit' %>
+                </div> <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group  -->
+            <% end %>
+          <% end %>
 
         </div> <!-- end of container-fluid -->
       </div> <!-- end of modal-body -->

@@ -15,6 +15,7 @@ class TeachersController < ApplicationController
 
 	def show_teacher		
 		@params = params
+		@event = Event.new
 		@teacher = Teacher.find(params[:id])
 		gon.location= [@teacher.lat, @teacher.lon]
 		gon.events = public_format_times(@teacher.events)

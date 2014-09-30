@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
     resources :openings, only: [:create, :update]
-    resources :events
+    resources :events do
+      get :create_event_and_book, on: :member
+    end
 
   end
   resources :experiences,   only: [:create, :update, :destroy]
