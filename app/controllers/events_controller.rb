@@ -53,15 +53,8 @@ class EventsController < ApplicationController
 
 	# ajax event booking
 	def create_event_and_book
-		@event = Event.new(student_format_time(params))
-		if @event.save
-			flash[:success] = "Lesson created successfully"
-			redirect_to :back
-		else
-			flash[:danger] = "Couldn't save lesson #{@event.errors.full_messages}"
-			redirect_to :back
-		end
-		render 
+		p '((((((('
+		
 	end
 
 	private

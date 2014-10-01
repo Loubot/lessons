@@ -11,9 +11,7 @@ Rails.application.routes.draw do
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
     resources :openings, only: [:create, :update]
-    resources :events do
-      get :create_event_and_book, on: :member
-    end
+    resources :events
 
   end
   resources :experiences,   only: [:create, :update, :destroy]
@@ -40,6 +38,8 @@ Rails.application.routes.draw do
   post        'store-paypal'            =>  'payments#store_paypal'
   post        'stripe-create'           =>  'payments#stripe_create'
   post        '/store-stripe'           =>  'payments#store_stripe'
+
+  post        'events/create-event-and-book' => 'events#create_event_and_book'
 
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
