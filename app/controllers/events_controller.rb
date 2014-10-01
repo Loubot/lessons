@@ -53,7 +53,15 @@ class EventsController < ApplicationController
 
 	# ajax event booking
 	def create_event_and_book
-
+		@event = Event.new(student_format_time(params))
+		if @event.save
+			flash[:success] = "Lesson created successfully"
+			redirect_to :back
+		else
+			flash[:danger] = "Couldn't save lesson #{@event.errors.full_messages}"
+			redirect_to :back
+		end
+		render 
 	end
 
 	private
@@ -66,7 +74,18 @@ class EventsController < ApplicationController
 			date = params[:date]
 			starttime = Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}")
 			endtime = Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}")
-			@event_params = { time_off: params[:event][:time_off], start_time: starttime, end_time: endtime, status: 'active', teacher_id: params[:event][:teacher_id]}
+			@event_params = { time_off: params[:event][:time_off], start_time: starttime,
+											 end_time: endtime, status: 'active',
+											  teacher_id: params[:event][:teacher_id]}
+		end
+
+		def student_format_time
+			date = params[:date]
+			starttime = Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}")
+			endtime = Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}")
+			@event_params = { time_off: params[:event][:time_off], start_time: starttime,
+											 end_time: endtime, status: 'active',
+											  teacher_id: params[:event][:teacher_id], student_id: params[:student_id]}
 		end
 
 		def doMultipleBookings(params)

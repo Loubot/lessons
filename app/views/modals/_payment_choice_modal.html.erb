@@ -13,7 +13,7 @@
               <div class="form-group">
                 <label for="date" class="col-sm-2 control-label">Date:</label>
                 <div class="col-sm-10">
-                  <input name="date" type="text" id='date' >
+                  <input name="date" type="text" id='date' class="payment_choice_date_picker" >
                 </div>
               </div> <!-- end of form-group -->
             
@@ -48,15 +48,6 @@
                   %>
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
-                <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-default active">
-                    <%= f.radio_button :time_off, '0', { checked: true } %>Lesson
-                  </label>
-                  <label class="btn btn-default">
-                    <%= f.radio_button :time_off, '1' %>Time off
-                  </label>
-                </div> <!-- end of btn-group -->
-                <%= f.hidden_field :teacher_id, value: current_teacher.id %>
                 
               <div class="form-group">
                 <div class="col-sm-10">
@@ -75,8 +66,9 @@
                   <%= f.submit id: 'event_submit' %>
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group  -->
-            <% end %>
-          <% end %>
+              <%= f.hidden_field :student_id, value: current_teacher.id %>
+            <% end %> <!-- end of form_for -->
+          <% end %> <!-- if teacher_signed_in? -->
 
         </div> <!-- end of container-fluid -->
       </div> <!-- end of modal-body -->

@@ -102,21 +102,17 @@ calendarReady = ->
       #if state.mode is 'day' then markTimespanDay(state.date.getDay()) else markTimespanWeek()
     #// end of onAfterSchedulerResize //
       
-    
-    
+    datePicker()
     # open = getOpen()
     # close = getClose()
-  	
-  	
-    $("#date").AnyTime_picker
-      format: "%Y-%m-%d"
-    $('#start_time').AnyTime_picker
-    	format: '%H:%i'
-    $('#end_time').AnyTime_picker
-    	format: '%H:%i'
-  		
+
     # $('#button').click ->
     # 	alert $('#time_field').val()
+
+  if $('.teacher_purchase_panel').length > 0
+    $('#payment_choice_modal').on 'shown.bs.modal', ->
+      console.log 'a'
+      datePicker()
 # check if events is a valid object
 checkEvents = () ->
   events = if gon.events == 'undefined' then [] else gon.events
@@ -124,6 +120,16 @@ checkEvents = () ->
   return events
 #// end of events check//
 
+#// enable datepicker
+datePicker = ->
+  $("#date").AnyTime_picker
+    format: "%Y-%m-%d"
+  $('#start_time').AnyTime_picker
+    format: '%H:%i'
+  $('#end_time').AnyTime_picker
+    format: '%H:%i'
+
+#// end of enable datepicker
 # old function to parse time for scheduler
 checkOpenMins = ->
   (parseFloat(gon.openingTimes['openHour']) + parseFloat(gon.openingTimes['openMin'] / 60))  
