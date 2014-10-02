@@ -20,32 +20,14 @@
               <div class='form-group'>
                 <%= label_tag 'start_time', nil, class: 'col-sm-4 control-label' %>
                 <div class="col-sm-8">
-                  <%= time_select :start_time,
-                    :combined => true,
-                    :default => Time.now.change(:hour => 11, :min => 30),
-                    :minute_interval => 30,
-                    :time_separator => "",
-                    :start_hour => 10,
-                    :start_minute => 30,
-                    :end_hour => 14,
-                    :end_minute => 30
-                  %>
+                  <%= time_select 'event', 'start_time', { minute_step: 30 } %>
                 </div> <!-- end of col-sm-8 -->
               </div> <!-- end of form-group -->
 
               <div class="form-group">
-                <%= label_tag 'end_time', nil, class: 'col-sm-4 control-label' %>
+                <%= label_tag 'event', 'end_time', class: 'col-sm-4 control-label' %>
                 <div class="col-sm-8">
-                  <%= time_select :end_time,
-                    :combined => true,
-                    :default => Time.now.change(:hour => 12, :min => 30),
-                    :minute_interval => 30,
-                    :time_separator => "",
-                    :start_hour => 10,
-                    :start_minute => 30,
-                    :end_hour => 14,
-                    :end_minute => 30
-                  %>
+                  <%= time_select 'event', 'end_time', { minute_step: 30 } %>
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
                 
@@ -66,7 +48,7 @@
                   <%= submit_tag 'save', id: 'event_submit' %>
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group  -->
-              <%= hidden_field_tag :student_id, value: current_teacher.id %>
+              <%= hidden_field_tag :student_id, current_teacher.id %>
             <% end %> <!-- end of form_for -->
           <% end %> <!-- if teacher_signed_in? -->
 
