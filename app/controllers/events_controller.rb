@@ -56,9 +56,9 @@ class EventsController < ApplicationController
 		#student_format_time(params)
 		@event = Event.new(student_format_time(params))
 		if @event.valid?
-			@info = @event.id
+			@teacher = Teacher.find(params[:id])
 		else
-			@info = @event.errors.full_messages
+			@teacher = @event.errors.full_messages
 		end
 		
 	end
@@ -81,6 +81,7 @@ class EventsController < ApplicationController
 		def student_format_time(params)
 			date = params[:date]
 			starttime = Time.zone.parse("#{date} #{params[:event]['start_time(4i)']}:#{params[:event]['start_time(5i)']}")
+			p "$$$$$$$$$$$$ #{starttime}"
 			endtime = Time.zone.parse("#{date} #{params[:event]['end_time(4i)']}:#{params[:event]['end_time(5i)']}")
 			@event_params = { time_off: params[:event][:time_off], start_time: starttime,
 											 end_time: endtime, status: 'active',

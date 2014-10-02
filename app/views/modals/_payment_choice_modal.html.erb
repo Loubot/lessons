@@ -20,14 +20,14 @@
               <div class='form-group'>
                 <%= label_tag 'start_time', nil, class: 'col-sm-4 control-label' %>
                 <div class="col-sm-8">
-                  <%= time_select('event', 'start_time', { prompt: {hour: '12', minute: '30'} ,  minute_step: 30 }) %>
+                  <%= time_select 'event', 'start_time', { minute_step: 30 } %>
                 </div> <!-- end of col-sm-8 -->
               </div> <!-- end of form-group -->
 
               <div class="form-group">
                 <%= label_tag 'event', 'end_time', class: 'col-sm-4 control-label' %>
                 <div class="col-sm-8">
-                  <%= time_select 'event', 'end_time', { minute_step: 30 }, value: '13:00' %>
+                  <%= time_select 'event', 'end_time', { minute_step: 30 } %>
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
                 
@@ -49,6 +49,7 @@
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group  -->
               <%= hidden_field_tag :student_id, current_teacher.id %>
+              <%= hidden_field_tag :id, @teacher.id %>
             <% end %> <!-- end of form_for -->
           <% end %> <!-- if teacher_signed_in? -->
 
