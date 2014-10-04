@@ -1,2 +1,6 @@
-$('.modal-body').empty();
-$('.modal-body').append("<%= escape_javascript(render 'partials/payment_buttons_for_user', object: @teacher) %> ");
+<% if @teacher.instance_of? Array %>
+  $('.modal-body').append("<%= escape_javascript(@teacher) %>");
+<% else %>
+  $('.modal-body').empty();
+  $('.modal-body').append("<%= escape_javascript(@teacher.class.name ) %> ");
+<% end %> 

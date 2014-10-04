@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
 
   protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create]
-  before_action get_event_id, only: [store_paypal:, store_stripe:]
+  before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
 
   def get_event_id
