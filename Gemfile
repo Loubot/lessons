@@ -58,9 +58,9 @@ gem 'validates_overlap', '~> 0.3.0'
 
 gem 'date_validator', '~> 0.7.0'
 
-# gem 'rmagick', '~> 2.13.3'
+gem 'rmagick', '~> 2.13.3'
 
-# gem 'mini_magick', '~> 3.8.0'
+gem 'mini_magick', '~> 3.8.0'
 
 gem "fog", '~> 1.23.0'
 

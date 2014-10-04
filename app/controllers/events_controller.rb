@@ -57,7 +57,6 @@ class EventsController < ApplicationController
 		@event = Event.new(student_format_time(params[:event]))
 
 		if @event.valid?			
-			p "Session id = #{session[:event_id]}"
 			@teacher = Teacher.find(params[:event][:teacher_id])
 		else
 			@teacher = @event.errors.full_messages
