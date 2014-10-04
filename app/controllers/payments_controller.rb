@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
 
 
   def get_event_id
-    @event_id = session[:event_id] || []
+    @event_id = session[:event_params] || []
   end
 
   def paypal_create

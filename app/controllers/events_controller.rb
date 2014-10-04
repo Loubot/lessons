@@ -56,7 +56,7 @@ class EventsController < ApplicationController
 		#student_format_time(params)
 		@event = Event.create!(student_format_time(params))
 		if @event.valid?
-			session[:event_id] = @event.id
+			session[:event_params] = params
 			p "Session id = #{session[:event_id]}"
 			@teacher = Teacher.find(params[:teacher_id])
 		else
