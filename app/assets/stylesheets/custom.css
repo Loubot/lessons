@@ -232,6 +232,7 @@ hr{
 }
 
 .dhx_cal_date.display_teachers_cal_date{
+	padding-left: 5%;
 	height:30px !important;
 	line-height:30px !important;
 	background:0 0;
