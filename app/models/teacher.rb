@@ -26,7 +26,7 @@
 #  opening                :datetime
 #  closing                :datetime
 #  rate                   :decimal(8, 2)
-#  is_teacher             :boolean          default(FALSE), not null
+#  is_teacher             :boolean
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
 #
