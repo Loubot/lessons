@@ -107,14 +107,3 @@
 </div> <!-- end of row -->
 
 <%= render 'modals/payment_choice_modal' %>
-
- <% if @teacher.paypal_email != "" %>
-    <div class="col-md-6">
-      <%= form_tag paypal_create_path, method: 'get' do %>
-        <%= hidden_field_tag :teacher, @teacher.paypal_email %>
-        <%= hidden_field_tag :receiver_amount, @teacher.rate %>
-        <%= hidden_field_tag :paypal, '1' %>
-        <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
-      <% end %>
-    </div> <!-- end of col-md-6-->
-  <% end %>
