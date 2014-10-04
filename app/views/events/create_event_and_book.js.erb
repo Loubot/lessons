@@ -1,5 +1,7 @@
 <% if @teacher.instance_of? Array %>
-  $('.modal-body').prepend("<%= escape_javascript(@teacher[0].to_s) %>");
+  $('.modal-body').prepend("<div class='payment_choice_error'>");
+  $('.payment_choice_error').append("<%= escape_javascript(@teacher[0].to_s) %>");
+  $('.payment_choice_error').append("</div>");
 <% else %>
   $('.modal-body').empty();
   $('.modal-body').append("<%= escape_javascript( render 'partials/payment_buttons_for_user', object: @teacher ) %> ");
