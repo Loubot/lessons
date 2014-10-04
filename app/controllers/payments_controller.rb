@@ -49,7 +49,7 @@ class PaymentsController < ApplicationController
       end
     end
 
-    redirect_to root_url
+    redirect_to :back
   end
 
 
@@ -72,8 +72,8 @@ class PaymentsController < ApplicationController
       },
       Teacher.find(params[:teacher_id]).stripe_access_token
     )
-
-    redirect_to welcome_path
+    flash[:succss] = 'Your booking was successful"'
+    redirect_to :back
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
@@ -113,6 +113,7 @@ class PaymentsController < ApplicationController
       flash[:success] = "Successfully registered with Stripe"
       @teacher.update_attributes(stripe_access_token: json_resp['access_token'])
     end
+    flash[:success] = 'Your booking was successfull'
     redirect_to edit_teacher_path(id: params[:state])
   end
 
