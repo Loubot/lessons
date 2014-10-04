@@ -54,7 +54,7 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book
 		#student_format_time(params)
-		@event = Event.create!(student_format_time(params))
+		@event = Event.new(student_format_time(params))
 		if @event.valid?
 			session[:event_params] = params
 			p "Session id = #{session[:event_id]}"

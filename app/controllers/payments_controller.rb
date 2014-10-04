@@ -9,6 +9,8 @@ class PaymentsController < ApplicationController
   end
 
   def paypal_create
+    @event = Event.create!(session[:event_params])
+    p "££££££££££££ #{@event.id}"
     create_paypal(params) if params[:paypal].present?
   end
 

@@ -3,7 +3,7 @@
 <%= "dddd #{@distance}"%><br>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-2">
     <div class="teacher_purchase_panel">        
       <div class="panel panel-info">
           <div class="panel-heading">
@@ -12,7 +12,7 @@
           </div>
           <div class="panel-body text-center">
               <p class="lead">
-                  <strong>Rate: <%= number_to_currency(@teacher.rate, unit: '€') %></strong></p>
+                  <strong>Rate: <%= number_to_currency(@teacher.rate, unit: '€') %> / hour</strong></p>
           </div>
           <ul class="list-group list-group-flush text-center">
               <li class="list-group-item"><i class="icon-ok text-danger"></i>Personal use</li>
@@ -89,7 +89,7 @@
   </div> <!-- end of col-md-9 -->
 
 
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div id="teacher_display_map">
     </div> <!-- end of teacher_display_map -->
     <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
