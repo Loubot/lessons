@@ -54,11 +54,11 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book
 		#student_format_time(params)
-		@event = Event.new(student_format_time(params))
-		if @event.valid?
-			session[:event_params] = params
+		@event = Event.new(student_format_time(params[:event]))
+
+		if @event.valid?			
 			p "Session id = #{session[:event_id]}"
-			@teacher = Teacher.find(params[:teacher_id])
+			@teacher = Teacher.find(params[:event][:teacher_id])
 		else
 			@teacher = @event.errors.full_messages
 		end
@@ -82,10 +82,10 @@ class EventsController < ApplicationController
 
 		def student_format_time(params)
 			date = params[:date]
-			starttime = Time.zone.parse("#{date} #{params[:event]['start_time(4i)']}:#{params[:event]['start_time(5i)']}")
+			starttime = Time.zone.parse("#{date} #{params['start_time(4i)']}:#{params['start_time(5i)']}")
 			# p "$$$$$$$$$$$$ #{starttime}"
-			endtime = Time.zone.parse("#{date} #{params[:event]['end_time(4i)']}:#{params[:event]['end_time(5i)']}")
-			@event_params = { time_off: params[:event][:time_off], start_time: starttime,
+			endtime = Time.zone.parse("#{date} #{params['end_time(4i)']}:#{params['end_time(5i)']}")
+			session[:event_params] = { time_off: params[:time_off], start_time: starttime,
 											 end_time: endtime, status: 'active',
 											  teacher_id: params[:teacher_id]}
 
