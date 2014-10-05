@@ -1,29 +1,33 @@
 class TeachersController < ApplicationController
-	layout 'teacher_layout'
+	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
+	before_action :check_is_teacher, except: [:show_teacher]
 	include TeachersHelper
 
+	def check_is_teacher
+		redirect_to root_path unless current_teacher.is_teacher == true	
+	end
 
 	def check_id
-		redirect_to root_path unless current_teacher.id = params[:id]
+		redirect_to root_path unless current_teacher.id == params[:id].to_i
 	end
 
 	def show_teacher		
 		@params = params
+		@event = Event.new
 		@teacher = Teacher.find(params[:id])
 		gon.location= [@teacher.lat, @teacher.lon]
 		gon.events = public_format_times(@teacher.events)
 		gon.openingTimes = open_close_times(@teacher.openings.first)
 		@distance = @teacher.distance_to([51.886823, -8.472886],:km)
-		render layout: 'application'
+		pick_show_teacher_view(params[:id])		
 	end
 
 	def edit
 		@context = Teacher.find(current_teacher)
 		@photo = @context.photos.new
-		@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
-		@experience = Experience.new
+		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
 		@photos = @context.photos.all
 		@experience = Experience.new

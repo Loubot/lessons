@@ -16,8 +16,10 @@ body {
 }
 
 hr{
-	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
+
+
 
 /*edit bootstrap containers to wrap long sentences onto next line
 */
@@ -28,6 +30,11 @@ hr{
 .media-body{
 	word-wrap: break-word !important;
 }
+
+.panel-footer{
+	word-wrap: break-word !important;
+}
+
 /*end of edit bootstrap containers*/
 
 #teacher_nav_bar{
@@ -48,6 +55,8 @@ hr{
 	padding-top: 50px;
 	background-color:#f6f6f6;
 	min-height: 100%;
+	width: 90%;
+	margin: 0 auto;
 }
 .jumbotron{
 	margin-bottom: 0;
@@ -88,7 +97,14 @@ hr{
 	border: 1px solid #009fda;
 }
 
-/*display_subject _subject_earch page*/
+/*display_subject _subject_search page*/
+#search_submit_container{
+	text-align: center;
+}
+
+#search_submit{
+
+}
 
 .image_container{
 	color: black;
@@ -181,6 +197,16 @@ hr{
 }
 /*end of subject search page*/
 
+/*teachers-area page opening times modal*/
+.second_day{
+	border-bottom: 1px solid #CCCCC0;
+}
+
+.modal-body.opening_times{
+	padding: 0;
+}
+/*end of teachers-area page opening times modal*/
+
 /*show_teacher*/
 
 .table_header{
@@ -193,17 +219,20 @@ hr{
 
 #teacher_display_map{
 	height: 350px;
-	width: 350px;
+	width: 100%;
 	border: 1px solid #CCCCC0;
 	margin-bottom: 5px;
 }
 
 .teachers_display_scheduler{
 	height: 500px;
-	width: 350px;
+	width: 100%;
+	border: 1px solid #CCCCC0;
+	margin-bottom: 5px;
 }
 
 .dhx_cal_date.display_teachers_cal_date{
+	padding-left: 5%;
 	height:30px !important;
 	line-height:30px !important;
 	background:0 0;
@@ -215,4 +244,41 @@ hr{
 	border: 1px solid #CCCCC0;
 }
 
+.teacher_purchase_panel{
+	
+}
+
 /*end of show_teacher page*/
+
+
+/* teach page*/
+.teacher_registration_container{
+	box-shadow: 2px 2px 5px #888888;
+	width: 45%;
+}
+
+.teacher_registration_container.left{
+
+	margin-right: 10px;
+}
+
+.teacher_registration_form{
+	font-size: 14px;
+}
+
+form .glyphicon {
+  top: 0;
+}
+
+.teach_page_login_link{
+	color: #47a447;
+}
+
+/* end of teach page*/
+
+/* login_modal page*/
+.ds-btn li{ list-style:none; float:left; padding:10px; }
+.ds-btn li a span{padding-left:15px;padding-right:5px;width:100%;display:inline-block; text-align:left;}
+.ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
+
+/* end of login_modal page

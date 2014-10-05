@@ -1,0 +1,67 @@
+<div class="modal fade" id="payment_choice_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Payment Options</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <% if teacher_signed_in? %>
+            <h2>Add an appointment</h2>
+            <%= form_tag events_create_event_and_book_path, class: 'form-horizontal', method: 'post', remote: true do |f| %>
+              <div class="form-group">
+                <label for="date" class="col-sm-2 control-label">Date:</label>
+                <div class="col-sm-10">
+                  <input name="event[date]" type="text" id='date' placeholder='Click to select date' class="payment_choice_date_picker" >
+                </div>
+              </div> <!-- end of form-group -->
+            
+              <div class='form-group'>
+                <%= label_tag 'start_time', nil, class: 'col-sm-4 control-label' %>
+                <div class="col-sm-8">
+                  <%= time_select 'event', 'start_time', { minute_step: 30 } %>
+                </div> <!-- end of col-sm-8 -->
+              </div> <!-- end of form-group -->
+
+              <div class="form-group">
+                <%= label_tag 'event', 'end_time', class: 'col-sm-4 control-label' %>
+                <div class="col-sm-8">
+                  <%= time_select 'event', 'end_time', { minute_step: 30 } %>
+                </div> <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+                
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <div class="checkbox">
+                    
+                    
+                    <label><%= check_box_tag 'Multiple' %>Block booking</label>
+                    <span id="no_of_weeks" class="pull-right">Number of weeks: <%= select_tag "booking_length", options_for_select((2..52)) %></span>
+
+                  </div> <!-- end of checkbox -->
+                </div> <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+                <br>
+              <div class="form-group">
+                <div class=" col-sm-10">
+                  <%= submit_tag 'save', id: 'event_submit' %>
+                </div> <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group  -->
+              <%= hidden_field_tag 'event[student_id]', current_teacher.id %>
+              <%= hidden_field_tag 'event[teacher_id]', @teacher.id %>
+            <% end %> <!-- end of form_for -->
+          <% end %> <!-- if teacher_signed_in? -->
+
+        </div> <!-- end of container-fluid -->
+      </div> <!-- end of modal-body -->
+      <!-- <div class="modal-footer"> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> --> <!-- end of modal-footer -->
+    </div> <!-- end of modal-content -->
+  </div> <!-- end of modal-dialog -->
+</div> <!-- end of modal fade -->
+
+<!-- stripe secret sk_test_1ZTmwrLuejFto5JhzCS9UAWu -->
+<!-- stripe publishable pk_test_bedFzS7vnmzthkrQolmUjXNn -->

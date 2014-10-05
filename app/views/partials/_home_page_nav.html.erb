@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" id="teacher_nav_bar" role="navigation">
+<nav class="navbar navbar-default" id="standard_nav_bar" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -9,26 +9,30 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to 'lesson.ie', root_path, class: 'navbar-brand' %>
-      
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><%= link_to 'Personal info', edit_teacher_path(current_teacher) %></li>
-        <li><%= link_to 'Qualifications', qualification_form_teacher_path(current_teacher) %></li>
-        <li><%= link_to 'Location', your_location_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
-        <li><%= link_to 'Work area', teachers_area_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
+        <li ><a href="/mailing-list">Subscribe to mailing list</a></li>
+        <% if current_teacher && current_teacher.is_teacher == true %>
+          <li><%=link_to current_teacher.first_name, edit_teacher_path(current_teacher) %></li>
+        <% end %>       
       </ul>
       
-       <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="/how-it-works">How it works</a></li>
+
         <% if current_teacher %>
           <li><%= link_to 'Logout', destroy_teacher_session_path, method: :delete %></li>
         <% else %>
-          <li><%= link_to 'Login', new_teacher_session_path %></li>
+          <li><%= link_to 'Become a teacher', teach_path %></li>
+          <li><%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' } %></li>
+          <li><%= link_to 'Sign Up', learn_path %></li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<%= render 'modals/login_modal' %>

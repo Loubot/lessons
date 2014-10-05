@@ -50,6 +50,9 @@ teachersInfoReady = ->
   
 #////////////Root page subject search with typeahead
   if $('.typeahead.subject').length > 0
+    $('#main_subject_search').on 'keypress', (e) ->
+      e.preventDefault() if e.which == 13
+
     bestPictures = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
       queryTokenizer: Bloodhound.tokenizers.whitespace
@@ -83,6 +86,18 @@ teachersInfoReady = ->
       displayKey: "value"      
     
       source: counties.ttAdapter()
+
+    # $('.typeahead.county').on 'keypress', (e) ->
+    #   if e.which is 13
+    #     $('.typeahead.county').typeahead 'val', $('.typeahead.county').val()
+    #     $('.typeahead.county').typeahead 'close'
+    #     #$('#main_subject_search').submit()
+    # $('.typeahead.subject').keypress (e) ->
+    #   if e.which is 13
+    #     $('.typeahead.subject').typeahead 'val', $('.typeahead.subject').val()
+    #     $('.typeahead.subject').typeahead 'close'
+        
+
   $(document).on 'change', '.form-control.distance_rate', ->
     $('#main_subject_search').submit()
     
@@ -94,10 +109,17 @@ teachersInfoReady = ->
 
 #///////////////End of teachers subject_search
 
-  
+#///////////////Autofocus on login modal
+  if $('#login_modal_email').length > 0
+    $('#login_modal').on 'shown.bs.modal', ->
+      document.getElementById('login_modal_email').focus()
+
+#//////////////End of autofocus on login modal
+
 #///////////////Autofocus teachers subject search input field
-  $('#teachers_subjects_modal').on 'shown.bs.modal', ->
-    document.getElementById('teachers_search_input').focus()
+  if $('#teachers_subjects_modal').length > 0
+    $('#teachers_subjects_modal').on 'shown.bs.modal', ->
+      document.getElementById('teachers_search_input').focus()
 #///////////////End of autofocus function
 
 #/////////////search results page

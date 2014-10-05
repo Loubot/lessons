@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905204703) do
+ActiveRecord::Schema.define(version: 20140930222955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140905204703) do
     t.datetime "updated_at"
     t.integer  "teacher_id"
     t.binary   "time_off"
+    t.integer  "student_id"
   end
 
   create_table "experiences", force: true do |t|
@@ -116,12 +117,12 @@ ActiveRecord::Schema.define(version: 20140905204703) do
     t.text     "overview"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                                          default: "", null: false
-    t.string   "encrypted_password",                             default: "", null: false
+    t.string   "email",                                          default: "",    null: false
+    t.string   "encrypted_password",                             default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                                  default: 0,  null: false
+    t.integer  "sign_in_count",                                  default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -133,29 +134,12 @@ ActiveRecord::Schema.define(version: 20140905204703) do
     t.datetime "opening"
     t.datetime "closing"
     t.decimal  "rate",                   precision: 8, scale: 2
+    t.boolean  "is_teacher",                                     default: false, null: false
+    t.string   "paypal_email",                                   default: ""
+    t.string   "stripe_access_token",                            default: ""
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
   add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
-
-  create_table "users", force: true do |t|
-    t.text     "first_name"
-    t.text     "last_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

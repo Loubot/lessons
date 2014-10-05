@@ -2,6 +2,7 @@
 <html>
 <head>  
   <title>Lessons</title>
+  <%= tag 'meta', name: 'viewport', content: 'initial-scale=1' %>
   <%= include_gon %>
   <script src="https://maps.googleapis.com/maps/api/js"></script>  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -14,15 +15,14 @@
 </head>
 <body>
 	<%= render 'partials/teacher_nav' %>
-	
 			
-	<div class="container">
-    <div class="container-fluid">
-      <%= render 'partials/notices' %>
+	
+  <div class="container-fluid" id="main_page">
+    <%= render 'partials/notices' %>
 
-      <%= yield %>
-    </div>
+    <%= yield %>
   </div>
+ 
 
 		
 		

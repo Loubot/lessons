@@ -1,0 +1,109 @@
+<%= @params %>
+<%= include_gon %><br>
+<%= "dddd #{@distance}"%><br>
+
+<div class="row">
+  <div class="col-md-2">
+    <div class="teacher_purchase_panel">        
+      <div class="panel panel-info">
+          <div class="panel-heading">
+              <h4 class="text-center">
+                  <%= "#{@teacher.first_name} #{@teacher.last_name}" %></h4>
+          </div>
+          <div class="panel-body text-center">
+              <p class="lead">
+                  <strong>Rate: <%= number_to_currency(@teacher.rate, unit: '€') %> / hour</strong></p>
+          </div>
+          <ul class="list-group list-group-flush text-center">
+              <li class="list-group-item"><i class="icon-ok text-danger"></i>Personal use</li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i>Unlimited projects</li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i>27/7 support</li>
+          </ul>
+          <div class="panel-footer">
+            <% if teacher_signed_in? %>
+              <button class="btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</buton>
+            <% else %>
+              <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn-info' %>
+            <% end %>
+          </div>
+        </div> <!-- end of panel panel_info  -->   
+    </div> <!-- end of teacher_purchase_panel -->
+  </div> <!-- end of col-md-3 -->
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= @teacher.first_name %></div>
+      <div class="panel-body">
+        <div class="media">
+          <span class="pull-left"><%= show_teacher_silhouette_helper(@teacher) %> </span>     
+          <div class="media-body">
+            <%= @teacher.address %><br>
+            <%= @teacher.overview %><br>
+          </div> <!-- end of media-body -->
+        </div> <!-- end of media -->
+      </div> <!-- end of panel-body -->
+    </div> <!-- end of panel panel-default -->
+    
+    <div class="panel panel-default">
+      <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
+        
+      </div> <!-- end of panel heading -->
+      <div class="panel-body">
+        <ul class="list-group">     
+          <%= render partial: 'partials/experience', collection: @teacher.experiences %>
+        </ul>
+      </div> <!-- end of panel-body -->
+    </div> <!-- end of panel panel-default -->
+
+    <div class="container-fluid nopadding">
+      <div class="panel panel-default">
+        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
+        
+      </div> <!-- end of panel heading -->
+
+        <div class="panel-body">
+          <ul class="list-group">
+            <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
+          </ul> <!-- end of list-group -->
+        </div> <!-- end of panel-body -->
+      </div> <!-- end of panel-default -->
+      
+    </div> <!-- end of container-fluid -->
+    <% if !@teacher.reviews.empty? %>
+      <div class="container-fluid nopadding">
+        <table class="table table-bordered">
+          <thead class="table_header">
+            <tr>
+              <th class="col-md-7">Review</th>
+              <th>Student</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: 'partials/review_row_partial', collection: @teacher.reviews, as: :review %>
+          </tbody>
+        </table>
+
+      </div> <!-- end of container fluid -->
+    <% end %>
+    
+  </div> <!-- end of col-md-9 -->
+
+
+  <div class="col-md-4">
+    <div id="teacher_display_map">
+    </div> <!-- end of teacher_display_map -->
+    <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
+      <div class="dhx_cal_navline" >
+          <div class="dhx_cal_prev_button">&nbsp;</div>
+          <div class="dhx_cal_next_button">&nbsp;</div>
+          
+          <div class="dhx_cal_date display_teachers_cal_date pull-left"></div>
+          
+      </div> <!-- end of dhx_cal_navline -->
+      <div class="dhx_cal_header"></div>
+      <div class="dhx_cal_data"></div>       
+    </div> <!-- end of scheduler_here -->   
+  </div> <!-- end of col-md-3 -->
+</div> <!-- end of row -->
+
+<%= render 'modals/payment_choice_modal' %>

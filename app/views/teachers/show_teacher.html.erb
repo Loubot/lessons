@@ -3,13 +3,12 @@
 <%= "dddd #{@distance}"%><br>
 
 <div class="row">
-
-	<div class="col-md-9">
+	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading"><%= @teacher.first_name %></div>
 			<div class="panel-body">
 				<div class="media">
-					<span class="pull-left"><%= @teacher.profile == nil ? image_tag('silhouette.jpg', class: 'media-object') : image_tag(Photo.find(@teacher.profile).avatar.url, size: '125x125', class: 'media-object') %> </span>			
+					<span class="pull-left"><%= show_teacher_silhouette_helper(@teacher) %> </span>			
 					<div class="media-body">
 						<%= @teacher.address %><br>
 						<%= @teacher.overview %><br>
@@ -64,7 +63,7 @@
 	</div> <!-- end of col-md-9 -->
 
 
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div id="teacher_display_map">
 		</div> <!-- end of teacher_display_map -->
 		<div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
@@ -77,10 +76,6 @@
 	    </div> <!-- end of dhx_cal_navline -->
 	    <div class="dhx_cal_header"></div>
 	    <div class="dhx_cal_data"></div>       
-		</div> <!-- end of scheduler_here -->
+		</div> <!-- end of scheduler_here -->		
 	</div> <!-- end of col-md-3 -->
 </div> <!-- end of row -->
-
-
-
-

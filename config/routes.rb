@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   devise_for  :teachers, :controllers => { :registrations => 'registrations' }
   resources   :teachers, only: [:update, :edit, :destroy] do
   	member do 
@@ -24,15 +23,31 @@ Rails.application.routes.draw do
     end
   end
 
+  get         '/learn'                  =>  'static#learn'
+  get         '/teach'                  =>  'static#teach'
   get         '/welcome'                =>  'static#welcome'
   get         '/subject-search'         =>  'static#subject_search'
-  get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/display-subjects'       =>  'static#display_subjects'
-  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
   get         '/how-it-works'           =>  'static#how_it_works'
   get         '/mailing-list'           =>  'static#mailing_list'
   post        '/add-to-list'            =>  'static#add_to_list'
+
+  get         'paypal-create'           =>  'payments#paypal_create'
+  get         'paypal-return'           =>  'payments#paypal_return' 
+  get         'stripe-auth-user'        =>  'payments#stripe_auth_user' 
+  post        'store-paypal'            =>  'payments#store_paypal'
+  post        'stripe-create'           =>  'payments#stripe_create'
+  post        '/store-stripe'           =>  'payments#store_stripe'
+
+  post        'events/create-event-and-book' => 'events#create_event_and_book'
+
+
+  get         '/show-teacher'           =>  'teachers#show_teacher'  
+  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
+
+
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
+
   root to: 'static#welcome'
 end

@@ -27,6 +27,7 @@
 .panel-heading.teachers_info{
 	overflow: hidden;
 }
+// end of edit teachers personal info _form.html teachers folder
 
 //your-location
 #map_container{
@@ -63,7 +64,7 @@
 
 // Move date-picker over bootstrap
 #AnyTime--date{
-	z-index:999;
+	z-index:100000;
 }
 
 // block booking week selector
@@ -71,3 +72,52 @@
 	display: none;
 }
 
+// Teachers _form page _teachers_select_payment modal /view/teachers
+.teacher_payment_registration_details{
+	position: relative;
+}
+
+.paypal_choice{
+	border: solid 1px #888888;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 49%;
+	margin-right: 2px;
+	box-shadow: 2px 2px 10px #888888;
+}
+
+.stripe_choice{
+	border: solid 1px #888888;
+	box-shadow: 2px 2px 10px #888888;
+	width: 49%;
+	padding-bottom: 5px;
+}
+
+.paypal_reg_explanation{
+	margin-bottom: 30px;
+}
+
+.paypal_email_form{
+	bottom: 0px;
+}
+
+.stripe_reg_button{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+}
+
+.teacher_select_payment_modal_body{
+	padding-bottom: 50px;
+}
+
+// End of Teachers _form page _teachers_select_ppayment modal
+
+// show_teacher_to_user page create_event_and_book.js
+.payment_choice_error{
+	color: red;
+}
+
+// Ebd if show_teacher_to_user page create_event_and_book.js

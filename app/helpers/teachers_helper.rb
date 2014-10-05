@@ -54,10 +54,24 @@ module TeachersHelper
 					openings.sun_close.strftime("%H").to_i * 60, 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" }
 			]
-		rescue NoMethodError
+		rescue NoMethodError => e
+			puts "Error #{e}"
 			[]
 		ensure
+			puts "Error #{e}"
 			[]
 		end		
+	end
+
+	def pick_show_teacher_view(id)
+		if teacher_signed_in?
+			if current_teacher.id.to_i != id.to_i
+				render layout: 'application', action: 'show_teacher_to_user'
+			else 
+				render layout: 'teacher_layout', action: 'show_teacher'			
+			end
+		else
+			render layout: 'application', action: 'show_teacher_to_user'
+		end
 	end
 end

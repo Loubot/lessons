@@ -26,6 +26,9 @@
 #  opening                :datetime
 #  closing                :datetime
 #  rate                   :decimal(8, 2)
+#  is_teacher             :boolean
+#  paypal_email           :string(255)      default("")
+#  stripe_access_token    :string(255)      default("")
 #
 
 class Teacher < ActiveRecord::Base
@@ -44,6 +47,7 @@ class Teacher < ActiveRecord::Base
 
   has_many :experiences
   has_many :events
+  #has_many :events foreign_key: xyz
   has_many :qualifications
   has_many :openings
 

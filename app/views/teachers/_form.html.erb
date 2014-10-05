@@ -13,7 +13,7 @@
 					<div class="row">
 					  <div class="col-xs-6 col-md-3">
 					    <a href="#" class="thumbnail" data-toggle="modal" data-target="#teachers_dropzone_modal">
-					    	<%= (@profilePic != nil) ? image_tag(@profilePic.avatar.url) : image_tag('silhouette.jpg')  %>
+					    	<%= show_teacher_silhouette_helper(@context)  %>
 					      
 					    </a> 
 					  </div> <!-- end of col-xs-6 col-md-3 -->
@@ -117,15 +117,53 @@
 					</li>
 				</ul>
 			</div> <!-- end of panel panel-default -->
-		</div> <!-- end of col-md-10 -->
+		</div> <!-- end of col-md-12 -->
 	</div> <!-- end of row -->
 </div> <!-- end of container-fluid -->
+
+<div class="container-fluid">
+	<div class="row">
+		
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Payment choices</h2>
+					<div class="btn-group pull-right">            
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teacher_select_payment"><span class="glyphicon glyphicon-credit-card"></span> Edit</button>
+		      </div> <!-- end of btn-group pull-right -->
+				</div> <!-- end of panel heading -->
+				<div class="panel-body">
+					<div class="well well-lg">We offer 2 choices for payment. <%= link_to 'Paypal', 'https://www.paypal.com/' %> and <%= link_to 'Stripe', 'https://stripe.com/ie' %>. We will not keep any of your money or credit card details. To avail of these payment options you must sign up to these services as a merchant. You can chose either or both. <br>For paypal all we need is the email address you log into paypal with. For stripe you must click on the stripe registration button and allow us to add you as a client.</div> <!-- end of well well-lg -->
+				</div>  <!-- end  of panel-body -->
+				<ul class="list-group">
+					<% if current_teacher.paypal_email != "" %>
+					<li class="list-group-item list-group-item-success">Paypal email: <span class="pull-right"><%= current_teacher.paypal_email %></span></li>
+					<% else %>
+						<li class="list-group-item list-group-item-danger">Paypal: <span class="pull-right"><strong>Paypal email not set</strong></span></li>
+					<% end %>
+
+					<% if current_teacher.stripe_access_token != "" %>
+						<li class="list-group-item list-group-item-success"><span>Stripe access token:</span> <span class="pull-right"><%= current_teacher.stripe_access_token %></span></li>
+					<% else %>
+						<li class="list-group-item list-group-item-danger"><span>Stripe:</span> <span class="pull-right"><strong>Not registered on Stripe </strong></span></li>
+					<% end %>
+					
+				</ul>
+			</div> <!-- end of panel panel-default -->
+		</div> <!-- end of col-md-12 -->
+	</div> <!-- end of row -->
+</div> <!-- end of container-fluid -->
+
+
+
+
+
 
 <%= render 'modals/teacher_photos_dropzone' %>
 <%= render 'modals/teacher_info_form' %>
 <%= render 'modals/teacher_experience_form' %>
 <%= render 'modals/teacher_about_you_form' %>
 <%= render 'modals/teachers_subjects_form' %>
+<%= render 'modals/teacher_select_payment' %>
 
 
 
