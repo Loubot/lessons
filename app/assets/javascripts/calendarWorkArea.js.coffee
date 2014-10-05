@@ -93,8 +93,9 @@ calendarReady = ->
 
 
     # attach event to onAfterSchedulerResize and mark time off when it's called
-    scheduler.attachEvent 'onAfterSchedulerResize', ->      
-      switch scheduler.getState()
+    scheduler.attachEvent 'onAfterSchedulerResize', ->
+      state = scheduler.getState()
+      switch scheduler.getState().mode
         when 'day' then markTimespanDay(state.date.getDay())
         when 'week' then markTimespanWeek(state.date.getDay())
         else return
@@ -107,11 +108,10 @@ calendarReady = ->
     # close = getClose()
 
     # $('#button').click ->
-    # 	alert $('#time_field').val()
+    #   alert $('#time_field').val()
 
   if $('.teacher_purchase_panel').length > 0
     $('#payment_choice_modal').on 'shown.bs.modal', ->
-      console.log 'a'
       datePicker()
 # check if events is a valid object
 checkEvents = () ->
@@ -139,7 +139,7 @@ checkCloseMins = ->
 #// end of scheduler time parser //
 
 # mark timespan for correct day in day view only
-markTimespanDay = (day) ->
+window.markTimespanDay = (day) ->
   switch day
     when 1 then scheduler.markTimespan gon.openingTimes[0]
     when 2 then scheduler.markTimespan gon.openingTimes[1]
@@ -152,7 +152,7 @@ markTimespanDay = (day) ->
 #// end of mark timespan in dayview //
 
 # mark time span in week view only
-markTimespanWeek = ->
+window.markTimespanWeek = ->
   for time in gon.openingTimes
     scheduler.markTimespan time
 #// end of mark timespan in week view //   
