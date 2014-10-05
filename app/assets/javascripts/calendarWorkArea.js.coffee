@@ -18,12 +18,11 @@ calendarReady = ->
     scheduler.config.dblclick_create = false
     format = scheduler.date.date_to_str("%d-%m-%Y %H:%i")
 
-    scheduler.config.lightbox.sections = [{ name:"time", height:72, type:"time", map_to:"auto"}]
+    scheduler.config.lightbox.sections = [{ name:"time", height:72, type:"time", map_to:"auto"}] 
+    
+    scheduler.config.details_on_create= true
+    scheduler.config.details_on_dblclick= true
 
-    
-    
-    scheduler.config.details_on_create= true;
-    scheduler.config.details_on_dblclick= true;
     
     #// end of scheduler config options //
 
@@ -72,10 +71,7 @@ calendarReady = ->
           location.reload()
     #// end of event save hanlder
 
-    # grey out time off
-    markTimespanWeek()
-    #// end of grey out time off //    
-
+    
     # parse events into the scheduler
     scheduler.parse(events, 'json')
     #// end of get gon events// 
@@ -97,6 +93,7 @@ calendarReady = ->
 
     # attach event to onAfterSchedulerResize and mark time off when it's called
     scheduler.attachEvent 'onAfterSchedulerResize', ->
+      scheduler.update_view()
       state = scheduler.getState()
       switch scheduler.getState().mode
         when 'day' then markTimespanDay(state.date.getDay())
@@ -106,9 +103,16 @@ calendarReady = ->
       #if state.mode is 'day' then markTimespanDay(state.date.getDay()) else markTimespanWeek()
     #// end of onAfterSchedulerResize //
       
+    #// enable datepicker on date entry input
     datePicker()
+
+    #// end of enable datepicker on date entry input
+
+
    
    #// enable tooltip on clear button
+    if jQuery.isEmptyObject(gon.openingTimes) then $('#calendar_unmark_time').css 'display', 'none' #don't display button if no events
+
     $('#calendar_unmark_time').tooltip()
 
     #// end of enable tooltip on clear button
@@ -118,6 +122,13 @@ calendarReady = ->
   if $('.teacher_purchase_panel').length > 0
     $('#payment_choice_modal').on 'shown.bs.modal', ->
       datePicker()
+
+  # grey out time off 
+  markTimespanWeek()
+  #// end of grey out time off //
+
+  $('.dhx_cal_date').text ''
+
 # check if events is a valid object
 checkEvents = () ->
   events = if gon.events == 'undefined' then [] else gon.events
@@ -147,6 +158,7 @@ window.markedTimes = []
 
 # mark timespan for correct day in day view only
 window.markTimespanDay = (day) ->
+  $('.dhx_cal_date').text ''
   switch day
     when 1 then scheduler.markTimespan gon.openingTimes[0]
     when 2 then scheduler.markTimespan gon.openingTimes[1]
@@ -160,6 +172,9 @@ window.markTimespanDay = (day) ->
 
 # mark time span in week view only
 window.markTimespanWeek = ->
+  $('.dhx_cal_date').text ''
+  console.log 'a'
+  $('#calendar_unmark_time').prop disabled: false
   for time in gon.openingTimes
     window.markedTimes.push scheduler.markTimespan time
 
