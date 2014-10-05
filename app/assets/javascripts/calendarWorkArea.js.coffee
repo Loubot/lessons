@@ -167,6 +167,7 @@ window.markTimespanWeek = ->
 window.unmarkTimespan = ->
   for time in markedTimes
     scheduler.unmarkTimespan time
+  $('#calendar_unmark_time').prop disabled: true
 #// end of mark timespan in week view //   
 
 $(document).ready(calendarReady)
