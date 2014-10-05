@@ -9,9 +9,15 @@ class PaymentsController < ApplicationController
   end
 
   def paypal_create
-    @event = Event.create!(session[:event_params])
-    p "££££££££££££ #{@event.id}"
-    create_paypal(params) if params[:paypal].present?
+    if params[:paypal].present?
+      p 'right here'
+      create_paypal(params) 
+    else
+      p 'not here'
+      flash[:error] = 'nope'
+      redirect_to :back
+    end
+
   end
 
   def store_paypal
@@ -31,7 +37,7 @@ class PaymentsController < ApplicationController
   def paypal_return
     
     require "pp-adaptive"
-
+    p 'right here!!!'
     client = AdaptivePayments::Client.new(
       :user_id       => "lllouis_api1.yahoo.com",
       :password      => "MRXUGXEXHYX7JGHH",
@@ -122,6 +128,7 @@ class PaymentsController < ApplicationController
   private
 
       def create_paypal(params)
+        p 'got here'
         require "pp-adaptive"
         client = AdaptivePayments::Client.new(
           :user_id       => "lllouis_api1.yahoo.com",
@@ -159,12 +166,3 @@ class PaymentsController < ApplicationController
       end
 
 end
-
-
-# authorisation code ac_4qQhjRNlu4BQ0UCRpwg1kGBqC3r3RKdH
-
-
-# curl -X POST https://connect.stripe.com/oauth/token \
-#   -d client_secret=sk_test_1ZTmwrLuejFto5JhzCS9UAWu \
-#   -d code=ac_4qg3IUs0PsYCNwhxcLI8d66VkslSgj7U \
-#   -d grant_type=authorization_code
