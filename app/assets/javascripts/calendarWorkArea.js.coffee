@@ -20,8 +20,10 @@ calendarReady = ->
 
     scheduler.config.lightbox.sections = [{ name:"time", height:72, type:"time", map_to:"auto"}] 
     
-    scheduler.config.details_on_create= true
-    scheduler.config.details_on_dblclick= true
+    scheduler.config.details_on_create = true
+    scheduler.config.details_on_dblclick = true
+    scheduler.config.left_border = true
+    scheduler.config.touch_tip = true
 
     
     #// end of scheduler config options //
@@ -118,6 +120,7 @@ calendarReady = ->
     if jQuery.isEmptyObject(gon.openingTimes) then $('#calendar_unmark_time').css 'display', 'none' #don't display button if no events
 
     $('#calendar_unmark_time').tooltip()
+    $('.radio_label').tooltip()
 
     #// end of enable tooltip on clear button
 

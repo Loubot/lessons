@@ -1,6 +1,6 @@
 <%= @params %><br>
 <div class="row">
-	<div id="scheduler_here" class="dhx_cal_container teachers_area_scheduler col-md-8" style='height:850px;'>
+	<div id="scheduler_here" class="dhx_cal_container teachers_area_scheduler col-md-8" style='height:500px;'>
     <div class="dhx_cal_navline">
         <div class="dhx_cal_prev_button">&nbsp;</div>
         <div class="dhx_cal_next_button">&nbsp;</div>
@@ -57,7 +57,7 @@
 					<label class="btn btn-default active">
 						<%= f.radio_button :time_off, '0', { checked: true } %>Lesson
 					</label>
-					<label class="btn btn-default">
+					<label class="btn radio_label btn-default" data-toggle="tooltip" data-placement="right" title="Select time off to enter hours that you are unavailable" data-container"body">
 						<%= f.radio_button :time_off, '1' %>Time off
 					</label>
 				</div> <!-- end of btn-group -->
@@ -81,9 +81,11 @@
 				</div> <!-- end of col-sm-10 -->
 			</div> <!-- end of form-group	 -->
 		<% end %>
+
+		<hr>
 		<button class="btn btn-default" data-toggle="modal" data-target="#teachers_open_close_modal"><span class="glyphicon glyphicon-pencil"></span>Edit open and closing</button><br>	<br>
 		
-		<button class="btn btn-warning" data-toggle="tooltip" title="Should someone make a booking during your closed time and you need to edit it click this button to unlock the calendar" data-placement="left" id="calendar_unmark_time" onclick="unmarkTimespan()">Unlock calendar</button>
+		<button class="btn btn-warning" data-toggle="tooltip" title="Should someone make a booking during your closed time and you need to edit it click this button to unlock the calendar" data-placement="right" id="calendar_unmark_time" onclick="unmarkTimespan()">Unlock calendar</button>
 	</div> <!-- end of col-md-4 -->
 
 </div> <!-- end of row -->
