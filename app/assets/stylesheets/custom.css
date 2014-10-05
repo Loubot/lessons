@@ -57,6 +57,7 @@ hr{
 	min-height: 100%;
 	width: 90%;
 	margin: 0 auto;
+	height: 80%%;
 }
 .jumbotron{
 	margin-bottom: 0;
@@ -242,6 +243,14 @@ hr{
 
 .dhx_cal_container.teachers_display_scheduler{
 	border: 1px solid #CCCCC0;
+}
+
+.teachers_area_scheduler{
+	height: 100%;
+}
+
+.row_teachers_area{
+	height: 100%;
 }
 
 /*.dhx_cal_light{
