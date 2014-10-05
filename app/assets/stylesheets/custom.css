@@ -304,17 +304,29 @@ form .glyphicon {
 
 
 @media (max-width: 768px) {
-  .btn-responsive {
-    padding:2px 4px;
-    font-size:60%;
-    line-height: 1;
+  .btn {
+	font-size:11px;
+    padding:4px 6px;
   }
 }
 
-@media (min-width: 769px) and (max-width: 992px) {
-  .btn-responsive {
-    padding:4px 9px;
-    font-size:70%;
-    line-height: 1.2;
+@media (min-width: 768px) {
+  .btn {
+	font-size:12px;
+    padding:6px 12px;
+  }
+}
+  
+@media (min-width: 992px) {
+  .btn {
+	font-size:14px;
+    padding:8px 12px;
+  }
+}
+ 
+@media (min-width: 1200px) {
+  .btn {
+    padding:10px 16px;
+	font-size:16px;
   }
 }
