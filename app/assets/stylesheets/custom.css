@@ -265,6 +265,7 @@ hr{
 	
 }
 
+
 /*end of show_teacher page*/
 
 
@@ -298,4 +299,22 @@ form .glyphicon {
 .ds-btn li a span{padding-left:15px;padding-right:5px;width:100%;display:inline-block; text-align:left;}
 .ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
 
-/* end of login_modal page
+/* end of login_modal page */
+
+
+
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding:2px 4px;
+    font-size:60%;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .btn-responsive {
+    padding:4px 9px;
+    font-size:70%;
+    line-height: 1.2;
+  }
+}
