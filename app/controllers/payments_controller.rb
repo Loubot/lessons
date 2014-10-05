@@ -8,20 +8,12 @@ class PaymentsController < ApplicationController
     @event_id = session[:event_params] || []
   end
 
-  def paypal_create
-    if params[:paypal].present?
-      p 'right here'
-      create_paypal(params) 
-    else
-      p 'not here'
-      flash[:error] = 'nope'
-      redirect_to :back
-    end
-
+  def paypal_create    
+    create_paypal(params) if params[:paypal].present?
   end
 
   def store_paypal
-    p "???????????????? #{params.inspect}"
+    p "Paypal IPN params: #{params.inspect}"
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
@@ -30,14 +22,20 @@ class PaymentsController < ApplicationController
     http.use_ssl = true
     response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
                           'User-Agent' => 'My custom user agent').body
-    puts "*************** #{response}"
-    render nothing: true
+    puts "Paypal verification response: #{response}"
+    if reponse == "VERIFIED"
+      @event = Event.create!(session[:event_params])
+      p "Event created id: #{@event.id}"
+    else
+      p "Paypal payment didn't work out"
+      render nothing: true
+    end
   end
 
   def paypal_return
     
     require "pp-adaptive"
-    p 'right here!!!'
+
     client = AdaptivePayments::Client.new(
       :user_id       => "lllouis_api1.yahoo.com",
       :password      => "MRXUGXEXHYX7JGHH",
@@ -128,7 +126,6 @@ class PaymentsController < ApplicationController
   private
 
       def create_paypal(params)
-        p 'got here'
         require "pp-adaptive"
         client = AdaptivePayments::Client.new(
           :user_id       => "lllouis_api1.yahoo.com",
@@ -164,5 +161,4 @@ class PaymentsController < ApplicationController
         end
         
       end
-
 end

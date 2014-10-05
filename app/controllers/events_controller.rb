@@ -29,7 +29,7 @@ class EventsController < ApplicationController
 	end
 
 	def update
-		puts "//////////////#{params}"
+		puts "vents controller/update params: #{params}"
 		@event = Event.find(params[:id])
 		start_time = (params[:event][:start_time].to_i) + 1.hours
 		end_time = (params[:event][:end_time].to_i) + 1.hours
