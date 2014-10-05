@@ -53,7 +53,7 @@ class PaymentsController < ApplicationController
       end
     end
 
-    redirect_to :back
+    render status: 200, nothing: true
   end
 
 
