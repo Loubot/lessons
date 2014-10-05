@@ -139,8 +139,8 @@ class PaymentsController < ApplicationController
           :action_type     => "PAY",
           :currency_code   => "GBP",
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return",
-          :notify_URL      => 'http://10c416a6.ngrok.com/store-paypal',
+          :return_url      => "http://learn-your-lesson.herokuapp.com/",
+          :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
