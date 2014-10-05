@@ -7,7 +7,7 @@ module TeachersHelper
 			formatted_times << {id: event.id, text: event.title, textColor: 'white',
 										 start_date: event.start_time.strftime('%Y-%m-%d %H:%M'), 
 										end_date: event.end_time.strftime('%Y-%m-%d %H:%M'), color:'#0E64A0',
-										teacher_id: event.teacher_id
+										teacher_id: event.teacher_id, description: event.teacher.first_name
 										#url: "/teachers/#{current_teacher.id}/events/#{event.id}/edit"
 										 }
 		end

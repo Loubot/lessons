@@ -17,6 +17,9 @@ calendarReady = ->
     scheduler.config.wide_form = false
     scheduler.config.dblclick_create = false
     format = scheduler.date.date_to_str("%d-%m-%Y %H:%i")
+
+    scheduler.config.lightbox.sections = [{ name:"time", height:72, type:"time", map_to:"auto"}]
+
     
     
     scheduler.config.details_on_create= true;
