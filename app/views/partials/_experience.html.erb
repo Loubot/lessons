@@ -1,10 +1,10 @@
 <% if experience.present == '1' %>
-	<li class="list-group-item"><strong>Title: <%= experience.title %></strong>
+	<li class="list-group-item clearfix"><strong>Title: <%= experience.title %></strong>
 		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - Present"%></span>
 	</li>
 	<div class="panel-footer"><%= experience.description %></div>
 <% else %>
-	<li class="list-group-item"><strong>Title: <%= experience.title %></strong>
+	<li class="list-group-item clearfix"><strong>Title: <%= experience.title %></strong>
 		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - #{experience.end.strftime('%Y %b')}"%></span>
 	</li>
 	<div class="panel-footer"><%= experience.description %></div>
