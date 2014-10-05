@@ -107,11 +107,13 @@ calendarReady = ->
     #// end of onAfterSchedulerResize //
       
     datePicker()
-    # open = getOpen()
-    # close = getClose()
+   
+   #// enable tooltip on clear button
+    $('#calendar_unmark_time').tooltip()
 
-    # $('#button').click ->
-    #   alert $('#time_field').val()
+    #// end of enable tooltip on clear button
+
+    #// end of calendar ready
 
   if $('.teacher_purchase_panel').length > 0
     $('#payment_choice_modal').on 'shown.bs.modal', ->
@@ -141,6 +143,8 @@ checkCloseMins = ->
   (parseFloat(gon.openingTimes['closeHour']) + parseFloat(gon.openingTimes['closeMin'] / 60))
 #// end of scheduler time parser //
 
+window.markedTimes = []
+
 # mark timespan for correct day in day view only
 window.markTimespanDay = (day) ->
   switch day
@@ -157,7 +161,12 @@ window.markTimespanDay = (day) ->
 # mark time span in week view only
 window.markTimespanWeek = ->
   for time in gon.openingTimes
-    scheduler.markTimespan time
+    window.markedTimes.push scheduler.markTimespan time
+
+  
+window.unmarkTimespan = ->
+  for time in markedTimes
+    scheduler.unmarkTimespan time
 #// end of mark timespan in week view //   
 
 $(document).ready(calendarReady)

@@ -81,7 +81,9 @@
 				</div> <!-- end of col-sm-10 -->
 			</div> <!-- end of form-group	 -->
 		<% end %>
-		<button class="btn btn-default" data-toggle="modal" data-target="#teachers_open_close_modal"><span 			class="glyphicon glyphicon-pencil"></span>Edit open and closing</button>
+		<button class="btn btn-default" data-toggle="modal" data-target="#teachers_open_close_modal"><span class="glyphicon glyphicon-pencil"></span>Edit open and closing</button><br>	<br>
+		
+		<button class="btn btn-warning" data-toggle="tooltip" title="Should someone make a booking during your closed time and you need to edit it click this button to unlock the calendar" data-placement="left" id="calendar_unmark_time" onclick="unmarkTimespan()">Unlock calendar</button>
 	</div> <!-- end of col-md-4 -->
 
 </div> <!-- end of row -->
