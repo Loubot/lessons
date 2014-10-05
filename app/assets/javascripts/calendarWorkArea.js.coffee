@@ -108,7 +108,11 @@ calendarReady = ->
 
     #// end of enable datepicker on date entry input
 
+    # grey out time off 
+    markTimespanWeek()
+    #// end of grey out time off //
 
+    $('.dhx_cal_date').text ''
    
    #// enable tooltip on clear button
     if jQuery.isEmptyObject(gon.openingTimes) then $('#calendar_unmark_time').css 'display', 'none' #don't display button if no events
@@ -123,11 +127,7 @@ calendarReady = ->
     $('#payment_choice_modal').on 'shown.bs.modal', ->
       datePicker()
 
-  # grey out time off 
-  markTimespanWeek()
-  #// end of grey out time off //
-
-  $('.dhx_cal_date').text ''
+  
 
 # check if events is a valid object
 checkEvents = () ->
@@ -173,7 +173,6 @@ window.markTimespanDay = (day) ->
 # mark time span in week view only
 window.markTimespanWeek = ->
   $('.dhx_cal_date').text ''
-  console.log 'a'
   $('#calendar_unmark_time').prop disabled: false
   for time in gon.openingTimes
     window.markedTimes.push scheduler.markTimespan time
