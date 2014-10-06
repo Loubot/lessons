@@ -149,8 +149,6 @@ $(document).on 'change', '#Multiple', ->
 $(document).ready(teachersInfoReady)
 $(document).on('page:load', teachersInfoReady)
 
-alert window.innerWidth
-
 getCounties = () ->
   return ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',

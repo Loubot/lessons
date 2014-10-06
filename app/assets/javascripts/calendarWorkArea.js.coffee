@@ -113,8 +113,6 @@ calendarReady = ->
     # grey out time off 
     markTimespanWeek()
     #// end of grey out time off //
-
-    $('.dhx_cal_date').text ''
    
    #// enable tooltip on clear button
     if jQuery.isEmptyObject(gon.openingTimes) then $('#calendar_unmark_time').css 'display', 'none' #don't display button if no events
@@ -161,7 +159,6 @@ window.markedTimes = []
 
 # mark timespan for correct day in day view only
 window.markTimespanDay = (day) ->
-  $('.dhx_cal_date').text ''
   switch day
     when 1 then scheduler.markTimespan gon.openingTimes[0]
     when 2 then scheduler.markTimespan gon.openingTimes[1]
@@ -175,7 +172,6 @@ window.markTimespanDay = (day) ->
 
 # mark time span in week view only
 window.markTimespanWeek = ->
-  $('.dhx_cal_date').text ''
   $('#calendar_unmark_time').prop disabled: false
   for time in gon.openingTimes
     window.markedTimes.push scheduler.markTimespan time

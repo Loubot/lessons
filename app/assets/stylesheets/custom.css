@@ -241,10 +241,6 @@ hr{
 	text-align: left !important;
 }
 
-.dhx_cal_date{
-
-}
-
 .dhx_cal_container.teachers_display_scheduler{
 	border: 1px solid #CCCCC0;
 }
@@ -305,21 +301,30 @@ form .glyphicon {
 
 /* end of login_modal page */
 
+@media (min-width: 500px) {
+	
+}
 
+@media (max-width: 649px) {
+	.dhx_cal_date.teachers_area_cal_date{
+  	visibility: hidden;
+  }
+}
 
-@media (max-width: 768px) {
-  .btn {
-	font-size:11px;
-    
-    text-align: center;
+@media (min-width: 650px) {
+	.dhx_cal_date.teachers_area_cal_date{
+  	font-size: 12px !important;
   }
 }
 
 @media (min-width: 768px) {
   .btn {
 	font-size:10px;
-    
+    display: initial;
     text-align: center;
+  }
+  .dhx_cal_date.teachers_area_cal_date{
+  	font-size: 14px !important;
   }
 }
   
@@ -329,7 +334,10 @@ form .glyphicon {
   text-align: center;
   }
   .dhx_cal_date.display_teachers_cal_date{
-  	font-size: 12px !important;
+  	font-size: 13px !important;
+  }
+  .dhx_cal_date.teachers_area_cal_date{
+  	font-size: 13px !important;
   }
 }
  
@@ -341,5 +349,8 @@ form .glyphicon {
   } 
   .dhx_cal_date.display_teachers_cal_date{
   	font-size: 16px !important;
+  }
+  .dhx_cal_date.teachers_area_cal_date{
+  	font-size: 18px !important;
   }
 }
