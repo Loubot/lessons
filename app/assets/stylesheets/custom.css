@@ -241,6 +241,10 @@ hr{
 	text-align: left !important;
 }
 
+.dhx_cal_date{
+
+}
+
 .dhx_cal_container.teachers_display_scheduler{
 	border: 1px solid #CCCCC0;
 }
@@ -306,27 +310,36 @@ form .glyphicon {
 @media (max-width: 768px) {
   .btn {
 	font-size:11px;
-    padding:4px 6px;
+    
+    text-align: center;
   }
 }
 
 @media (min-width: 768px) {
   .btn {
-	font-size:12px;
-    padding:6px 12px;
+	font-size:10px;
+    
+    text-align: center;
   }
 }
   
 @media (min-width: 992px) {
   .btn {
-	font-size:14px;
-    padding:8px 12px;
+	font-size:12px;
+  text-align: center;
+  }
+  .dhx_cal_date.display_teachers_cal_date{
+  	font-size: 12px !important;
   }
 }
  
 @media (min-width: 1200px) {
   .btn {
-    padding:10px 16px;
+    
 	font-size:16px;
+	text-align: center;
+  } 
+  .dhx_cal_date.display_teachers_cal_date{
+  	font-size: 16px !important;
   }
 }
