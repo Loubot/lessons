@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
   end
 
   def store_paypal
-    p "Paypal IPN params: #{params.inspect}"
+    
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
@@ -22,9 +22,11 @@ class PaymentsController < ApplicationController
     http.use_ssl = true
     response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
                           'User-Agent' => 'My custom user agent').body
+    p "paypal post params: #{params['sender_email']}"
     puts "Paypal verification response: #{response}"
-    if reponse == "VERIFIED"
-      @event = Event.create!(session[:event_params])
+    if response == "VERIFIED"
+      event_params = UserCart.find_by(teacher_id: params[:sender_email]).params
+      Event.create!(event_params)
       p "Event created id: #{@event.id}"
     else
       p "Paypal payment didn't work out"
@@ -139,9 +141,9 @@ class PaymentsController < ApplicationController
           :action_type     => "PAY",
           :currency_code   => "GBP",
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://learn-your-lesson.herokuapp.com/",
+          :return_url      => "http://10c416a6.ngrok.com/paypal-return",
           :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
-          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
+          :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10}

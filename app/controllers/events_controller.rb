@@ -54,10 +54,15 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book
 		#student_format_time(params)
-		@event = Event.new(student_format_time(params[:event]))
+		event_params = student_format_time(params[:event])
+		@event = Event.new(event_params)
 
 		if @event.valid?			
 			@teacher = Teacher.find(params[:event][:teacher_id])
+			event = UserCart.find_or_initialize_by(teacher_id: @teacher.paypal_email)
+			event.update_attributes(teacher_id: @teacher.paypal_email,
+															student_id: params[:event][:student_id], params: event_params)
+			p "event  #{event.inspect}"
 		else
 			@teacher = @event.errors.full_messages
 		end
