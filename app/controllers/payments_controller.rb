@@ -140,13 +140,14 @@ class PaymentsController < ApplicationController
         client.execute(:Pay,
           :action_type     => "PAY",
           :currency_code   => "GBP",
+          :tracking_id     => '124',
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => "http://10c416a6.ngrok.com/paypal-return",
           :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
-            { :email => 'loubotsjobs@gmail.com',  amount: 10}
+            { :email => 'loubotsjobs@gmail.com',  amount: 10 }
           ]
         ) do |response|
 
