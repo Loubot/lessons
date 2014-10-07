@@ -143,9 +143,10 @@ ActiveRecord::Schema.define(version: 20141006202419) do
   add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
 
   create_table "user_carts", force: true do |t|
-    t.string   "teacher_id"
-    t.string   "student_id"
+    t.integer  "teacher_id"
+    t.integer  "student_id"
     t.text     "params"
+    t.text     "tracking_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

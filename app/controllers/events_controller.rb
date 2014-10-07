@@ -57,12 +57,12 @@ class EventsController < ApplicationController
 		event_params = student_format_time(params[:event])
 		@event = Event.new(event_params)
 
-		if @event.valid?			
-			@teacher = Teacher.find(params[:event][:teacher_id])
-			event = UserCart.find_or_initialize_by(teacher_id: @teacher.paypal_email)
-			event.update_attributes(teacher_id: @teacher.paypal_email,
+		if @event.valid?
+			@teacher = Teacher.find(params[:event][:teacher_id])			
+			@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
+			@cart.update_attributes(teacher_id: params[:event][:teacher_id],
 															student_id: params[:event][:student_id], params: event_params)
-			p "event  #{event.inspect}"
+			p "cart  #{@cart.inspect}"
 		else
 			@teacher = @event.errors.full_messages
 		end

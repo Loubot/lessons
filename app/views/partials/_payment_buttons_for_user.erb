@@ -5,6 +5,7 @@
         <%= hidden_field_tag :teacher, @teacher.paypal_email %>
         <%= hidden_field_tag :receiver_amount, @teacher.rate %>
         <%= hidden_field_tag :paypal, '1' %>
+        <%= hidden_field_tag :tracking_id, @cart.tracking_id %>
         <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
       <% end %>
     </div> <!-- end of col-md-6-->
@@ -22,9 +23,9 @@
           data-amount="<%= (@teacher.rate * 100).to_i %>"></script>
         <%= hidden_field_tag :amount, @teacher.rate %>
         <%= hidden_field_tag :teacher_id, @teacher.id %>
-        <% if teacher_signed_in? %>
-          <%= hidden_field_tag :current_teacher, current_teacher.id %>
-        <% end %>
+        <%= hidden_field_tag :tracking_id, @cart.tracking_id %>        
+        <%= hidden_field_tag :current_teacher, current_teacher.id if teacher_signed_in? %>
+        
         
       <% end %>
     </div> <!-- end of col-md-6-->

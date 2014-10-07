@@ -22,12 +22,13 @@ class PaymentsController < ApplicationController
     http.use_ssl = true
     response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
                           'User-Agent' => 'My custom user agent').body
-    p "paypal post params: #{params['sender_email']}"
+    p "paypal post params: #{params['tracking_id']}"
     puts "Paypal verification response: #{response}"
     if response == "VERIFIED"
-      event_params = UserCart.find_by(teacher_id: params[:sender_email]).params
-      Event.create!(event_params)
-      p "Event created id: #{@event.id}"
+      cart = UserCart.find_by(tracking_id: params['tracking_id'])
+      event = Event.create!(cart.params)
+      p "Event errors #{event.errors.full_messages}" if !event.valid?
+      p "Event created id: #{event.id}"
     else
       p "Paypal payment didn't work out"
       render nothing: true
@@ -70,11 +71,12 @@ class PaymentsController < ApplicationController
     # )
 
     charge = Stripe::Charge.create({
-      :amount      => @amount,
-      :description => "{}",
-      :currency    => 'eur',
-      :application_fee => 3300,
-      :card => params[:stripeToken]
+      :amount             => @amount,
+      :description        => "{}",
+      :currency           => 'eur',
+      :application_fee    => 3300,
+      :card               => params[:stripeToken],
+      :metadata           => { tracking_id: params[:tracking_id] }
       },
       Teacher.find(params[:teacher_id]).stripe_access_token
     )
@@ -90,7 +92,11 @@ class PaymentsController < ApplicationController
   def store_stripe
     require 'json'
     json_response = JSON.parse(request.body.read)
-    p "%%%%%%%%%%%%%%%%% #{json_response['data']['object']['id']}"
+    p "%%%%%%%%%%%%%%%%% #{json_response['data']['object']['metadata']['tracking_id']}"
+    cart = UserCart.find(json_response['data']['object']['metadata']['tracking_id'])
+    @event = Event.create!(cart.params)
+    
+    p "Event errors #{@event.errors.full_messages}" if !@event.valid?
     render status: 200, nothing: true
   end
 
@@ -140,7 +146,7 @@ class PaymentsController < ApplicationController
         client.execute(:Pay,
           :action_type     => "PAY",
           :currency_code   => "GBP",
-          :tracking_id     => '124',
+          :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => "http://10c416a6.ngrok.com/paypal-return",
           :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
