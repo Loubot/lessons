@@ -37,26 +37,27 @@ class PaymentsController < ApplicationController
 
   def paypal_return
     
-    require "pp-adaptive"
+    # require "pp-adaptive"
 
-    client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
-      :sandbox       => true
-    )
+    # client = AdaptivePayments::Client.new(
+    #   :user_id       => "lllouis_api1.yahoo.com",
+    #   :password      => "MRXUGXEXHYX7JGHH",
+    #   :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
+    #   :app_id        => "APP-80W284485P519543T",
+    #   :sandbox       => true
+    # )
 
-    client.execute(:PaymentDetails, :pay_key => "AP-4TS489127N381100H") do |response|
-      if response.success?
-        puts "Payment status: #{response.inspect}"
-        flash[:success] = "Payment status: #{response.inspect}"
-      else
-        puts "#{response.ack_code}: #{response.error_message}"
-      end
-    end
+    # client.execute(:PaymentDetails, :pay_key => "AP-4TS489127N381100H") do |response|
+    #   if response.success?
+    #     puts "Payment status: #{response.inspect}"
+    #     flash[:success] = "Payment status: #{response.inspect}"
+    #   else
+    #     puts "#{response.ack_code}: #{response.error_message}"
+    #   end
+    # end
 
-    render status: 200, nothing: true
+    flash[:success] = "Payment was successful. You will receive an email soon. Eventually. When I code it!"
+    redirect_to root_url
   end
 
 
@@ -74,14 +75,14 @@ class PaymentsController < ApplicationController
       :amount             => @amount,
       :description        => "{}",
       :currency           => 'eur',
-      :application_fee    => 3300,
+      :application_fee    => 300,
       :card               => params[:stripeToken],
       :metadata           => { tracking_id: params[:tracking_id] }
       },
       Teacher.find(params[:teacher_id]).stripe_access_token
     )
-    flash[:succss] = 'Your booking was successful"'
-    redirect_to :back
+    flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+    redirect_to root_url
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
@@ -93,10 +94,12 @@ class PaymentsController < ApplicationController
     require 'json'
     json_response = JSON.parse(request.body.read)
     p "%%%%%%%%%%%%%%%%% #{json_response['data']['object']['metadata']['tracking_id']}"
-    cart = UserCart.find(json_response['data']['object']['metadata']['tracking_id'])
-    @event = Event.create!(cart.params)
+    cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
+    event = Event.create!(cart.params)
     
-    p "Event errors #{@event.errors.full_messages}" if !@event.valid?
+    p "Event errors #{event.errors.full_messages}" if !event.valid?
+    p "Event created id: #{event.id}"   
+    
     render status: 200, nothing: true
   end
 
@@ -148,9 +151,9 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://10c416a6.ngrok.com/paypal-return",
+          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return",
           :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
-          :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
+          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -164,7 +167,7 @@ class PaymentsController < ApplicationController
             # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
             redirect_to client.payment_url(response)
           else
-            puts "#{response.ack_code}: #{response.error_message}"
+            puts "blabla #{response.ack_code}: #{response.error_message}"
           end
 
         end
