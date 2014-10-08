@@ -2,22 +2,23 @@
 <html>
 <head>  
   <title>Lessons</title>
-  <%= tag 'meta', name: 'viewport', content: 'initial-scale=1' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,width=1000, minimum-scale=1.0" />
   <%= include_gon %>
   <script src="https://maps.googleapis.com/maps/api/js"></script>  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <%= csrf_meta_tag %>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
   <%= render 'partials/shim' %>
 </head>
 <body>
-	<%= render 'partials/teacher_nav' %>
+	<div class="container">
+    <%= render 'partials/teacher_nav' %>
+  </div>
 			
 	
-  <div class="container-fluid" id="main_page">
+  <div class="container" id="main_page">
     <%= render 'partials/notices' %>
 
     <%= yield %>
