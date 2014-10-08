@@ -177,7 +177,6 @@ hr{
 }
 
 .typeahead.subject{
-	width: 400px;
 	height: 38px;
 	font-size: 22px;
 }
@@ -185,7 +184,7 @@ hr{
 .typeahead.county{
 	height: 38px;
 	font-size: 22px;
-	width: 400px;
+	
 }
 
 .review_container{
