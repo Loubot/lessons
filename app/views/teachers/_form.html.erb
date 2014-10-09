@@ -19,12 +19,27 @@
 					  </div> <!-- end of col-xs-6 col-md-3 -->
 					  <div class="col-md-6">
 					  	<div class="row">
-					  		<span class="col-md-3">Name:</span><span class="col-md-9"><%= @context.first_name %></span>
-								<span class="col-md-3">Surname:</span><span class="col-md-9"><%= @context.last_name %></span>
-								
-								<span class="col-md-3">Email:</span><span class="col-md-9"><%= @context.email %></span>
-								<span class="col-md-3 form_address_label_col">Address:</span ><span class="col-md-9 form_address_col"><%= @context.address %></span>
-					  	</div>
+					  		<div class="table-responsive">
+					  			<table class="table table-hover">
+					  				<tr>
+					  					<td>Name:</td>
+					  					<td><%= @context.first_name %></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Surname:</td>
+					  					<td><%= @context.last_name %></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Email:</td>
+					  					<td><%= @context.email %></td>
+					  				</tr>
+					  				<tr>
+					  					<td>Address:</td>
+					  					<td><%= @context.address %></td>
+					  				</tr>
+					  			</table>
+					  		</div> <!-- end of table-responsive -->
+					  	</div> <!-- end or row -->
 					  </div><!--  end of col-md-6 -->
 					</div> <!-- end of row -->
 					
