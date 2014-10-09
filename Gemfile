@@ -11,7 +11,7 @@ gem 'bundler', '>= 1.3.0'
 # Use sqlite3 as the database for Active Record
 
 gem 'sqlite3', '1.3.9', platforms: [:mingw, :mswin], group: :development
-gem 'pg', '~> 0.17'
+gem 'pg', '~> 0.17', platforms: [:ruby]
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -62,9 +62,9 @@ gem 'validates_overlap', '~> 0.3.0'
 
 gem 'date_validator', '~> 0.7.0'
 
-gem 'rmagick', '~> 2.13.3'
+gem 'rmagick', '~> 2.13.3', platforms: [:ruby]
 
-gem 'mini_magick', '~> 3.8.0'
+gem 'mini_magick', '~> 3.8.0', platforms: [:ruby]
 
 gem "fog", '~> 1.23.0'
 
