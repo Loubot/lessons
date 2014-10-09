@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>  
+<head>
   <title>Lessons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-  <%= include_gon %>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>  
+  <%= include_gon %>   
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
+  <%= yield :header %> 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
   <%= render 'partials/shim' %>

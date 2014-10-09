@@ -1,6 +1,10 @@
 <%= @params %>
 <%= include_gon %><br>
 <%= "dddd #{@distance}"%><br>
+<%= content_for :header do %>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+<% end %>
+
 
 <div class="row">
   <div class="col-md-2">
