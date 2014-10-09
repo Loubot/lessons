@@ -3,14 +3,7 @@
 
 <div class="col-xs-6 col-md-3">
   
-  	<a hre='' class="profile_pic_popover" data-title="<%= photo.name %>" data-html='true' data-container="body" data-toggle="popover" data-placement="top" data-content="<%= popoverContent %>"><%= image_tag photo.avatar.url, size: "150x150", class: "img-responsive" %> </a>
-    
+  	<a href='#!' data-no-turbolink class="profile_pic_popover" tab-index="0" data-trigger="focus" data-title="<%= photo.name %>" data-html='true' data-container="body" data-toggle="popover" data-placement="top" data-content="<%= popoverContent %>"><%= image_tag photo.avatar.url, size: "150x150", class: "img-responsive" %> </a>  
     
   
 </div>
-
-<!--<%= link_to 'Delete',[@context, photo], class: 'btn btn-danger', data: { confirm: 'Are you sure?' }, method: :delete %>
-    <%= link_to 'Make profile', change_profile_pic_teacher_path(photo.id), method: 'post', class: 'btn btn-info' %> -->
-<!-- <button class="profile_pic_popover popover-dismiss" type="button" class="btn btn-default" data-html='true' data-container="body" data-toggle="popover" data-placement="right" data-content="<%= popoverContent %>">
-  Popover on right
-</button> -->
