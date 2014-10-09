@@ -1,1 +1,1 @@
-<li class="list-group-item clearfix"><%= subject.name %><span class="pull-right"><%= link_to 'Remove subject', remove_from_teacher_subject_path(subject.id), class: 'btn btn-sm btn-danger', method: 'delete' %> </li></span>
+<li class="list-group-item clearfix"><%= subject.name %><span class="pull-right"><%= link_to 'Remove subject', remove_from_teacher_subject_path(subject.id), class: 'btn btn-sm btn-danger', method: 'delete', data: { confirm: 'Are you sure' } %> </li></span>

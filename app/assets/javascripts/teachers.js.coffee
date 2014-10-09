@@ -87,21 +87,13 @@ teachersInfoReady = ->
     
       source: counties.ttAdapter()
 
-    # $('.typeahead.county').on 'keypress', (e) ->
-    #   if e.which is 13
-    #     $('.typeahead.county').typeahead 'val', $('.typeahead.county').val()
-    #     $('.typeahead.county').typeahead 'close'
-    #     #$('#main_subject_search').submit()
-    # $('.typeahead.subject').keypress (e) ->
-    #   if e.which is 13
-    #     $('.typeahead.subject').typeahead 'val', $('.typeahead.subject').val()
-    #     $('.typeahead.subject').typeahead 'close'
         
 
   $(document).on 'change', '.form-control.distance_rate', ->
     $('#main_subject_search').submit()
     
 #///////////End of root page subject search with typeahead
+
 
 #///////////////Teachers subject search
   $('#subject_search').keyup ->
