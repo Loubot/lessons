@@ -299,9 +299,25 @@ form .glyphicon {
 .ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
 
 /* end of login_modal page */
+@media (min-width: 250px){
+  body{
+    width: 100%;
+  }
+  #display_teachers_cal_date{
+    font-size: 12px;
+  }
+}
 
-@media (min-width: 500px) {
-	
+@media (min-width: 400px) {
+	#display_teachers_cal_date{
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 600px) {
+  #display_teachers_cal_date{
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 649px) {
@@ -311,8 +327,8 @@ form .glyphicon {
 }
 
 @media (min-width: 650px) {
-	.dhx_cal_date.teachers_area_cal_date{
-  	font-size: 12px !important;
+	#display_teachers_cal_date{
+  	font-size: 17px !important;
   }
 }
 
@@ -325,6 +341,9 @@ form .glyphicon {
   .dhx_cal_date.teachers_area_cal_date{
   	font-size: 14px !important;
   }
+  #display_teachers_cal_date{
+    font-size: 18px !important;
+  }
 }
   
 @media (min-width: 992px) {
@@ -332,8 +351,9 @@ form .glyphicon {
 	font-size:12px;
   text-align: center;
   }
-  .dhx_cal_date.display_teachers_cal_date{
-  	font-size: 13px !important;
+  #display_teachers_cal_date{
+  	font-size: 12px !important;
+    padding-left: 2px !important;
   }
   .dhx_cal_date.teachers_area_cal_date{
   	font-size: 13px !important;
@@ -341,15 +361,12 @@ form .glyphicon {
 }
  
 @media (min-width: 1200px) {
-  .btn_book_now {
-    
+  .btn_book_now {    
 	font-size:16px;
 	text-align: center;
-  } 
-  .dhx_cal_date.display_teachers_cal_date{
-  	font-size: 16px !important;
   }
-  .dhx_cal_date.teachers_area_cal_date{
-  	font-size: 18px !important;
+  #display_teachers_cal_date{
+    font-size: 18px !important;
+    
   }
 }
