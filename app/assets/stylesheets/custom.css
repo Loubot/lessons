@@ -1,4 +1,4 @@
-/*add font file*/
+add font file*/
 @font-face{
 	font-family: teachersFont;
 	
@@ -243,10 +243,6 @@ hr{
 	border: 1px solid #CCCCC0;
 }
 
-.teachers_area_scheduler{
-	height: 100%;
-}
-
 .row_teachers_area{
 	height: 100%;
 }
@@ -291,6 +287,12 @@ form .glyphicon {
 }
 
 /* end of teach page*/
+
+/*teachers/teachers_area*/
+#scheduler_here{
+  box-shadow: 2px 2px 5px #888888;
+}
+/*end of teachers/teachers_area*/
 
 /* login_modal page*/
 .ds-btn li{ list-style:none; float:left; padding:10px; }
@@ -374,4 +376,4 @@ form .glyphicon {
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
-/*hack for firefox tables*/
+/*hack for firefox tables
