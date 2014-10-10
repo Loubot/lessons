@@ -2,8 +2,7 @@ calendarReady = ->
   if $('.row_teachers_area').length > 0
     $(window).on 'resize', ->
       $('.teachers_area_scheduler').css 'height', ($('body').height() * .8)
-      alert $('body').height()
-      alert (parseFloat($('body').height()) * .8)
+      
     $('.teachers_area_scheduler').css 'height', ($('body').height() * .8)
 
     #scheduler config options
