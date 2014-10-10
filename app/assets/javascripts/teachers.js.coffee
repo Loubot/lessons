@@ -35,7 +35,7 @@ teachersInfoReady = ->
     $('#process_queue').on 'click', ->
       dropzone.processQueue()
 
-    $('.profile_pic_popover').popover()
+    
     $('.popover-dismiss').popover({
       trigger: 'focus'
     })
@@ -128,6 +128,23 @@ teachersInfoReady = ->
       $(this).find('.results_photos.back').animate opacity: 0, 50
 
 #////////////end of search results page
+
+#////////// teachers/form photo partial enable dismissable popover
+  if $('.profile_pic_popover').length > 0
+    $("html").click (e) ->
+      $(".profile_pic_popover").popover "hide"
+      
+
+    $(".profile_pic_popover").popover(
+      html: true
+      trigger: "manual"
+    ).click (e) ->
+      $('.profile_pic_popover').not(this).popover('hide')
+      $(this).popover "toggle"
+      e.stopPropagation()
+      
+    
+#////////// end of teachers/form photo partial enable dismissable popover
 
 
 #////////////////Teachers area block book checkbox
