@@ -16,6 +16,7 @@
 #
 
 class Transaction < ActiveRecord::Base
+  belongs_to :teacher
   validates :tracking_id, :trans_id,  uniqueness: true
   validates :sender, :user_id, :teacher_id, :pay_date, :whole_message, :trans_id, :tracking_id, :payStripe, :whole_message,  presence: true
 end

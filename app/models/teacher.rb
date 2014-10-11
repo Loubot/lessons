@@ -50,6 +50,7 @@ class Teacher < ActiveRecord::Base
   #has_many :events foreign_key: xyz
   has_many :qualifications
   has_many :openings
+  has_many :transactions, foreign_key: :user_id
   has_one :user_cart
 
   geocoded_by :address, :latitude  => :lat, :longitude => :lon
