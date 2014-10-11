@@ -163,4 +163,6 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.datetime "updated_at"
   end
 
+  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true
+
 end

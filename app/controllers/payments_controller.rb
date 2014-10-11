@@ -84,12 +84,12 @@ class PaymentsController < ApplicationController
   def store_stripe
     require 'json'
     json_response = JSON.parse(request.body.read)
-    p "%%%%%%%%%%%%%%%%% #{json_response['data']['object']['metadata']['tracking_id']}"
+    logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
     cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
     event = Event.create!(cart.params)
     
-    p "Event errors #{event.errors.full_messages}" if !event.valid?
-    p "Event created id: #{event.id}"   
+    logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
+    logger.info "Event created id: #{event.id}"   
     
     render status: 200, nothing: true
   end

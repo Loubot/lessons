@@ -7,5 +7,7 @@ class CreateUserCarts < ActiveRecord::Migration
       t.text :tracking_id
       t.timestamps
     end
+
+    add_index :user_carts, :tracking_id, unique: true
   end
 end
