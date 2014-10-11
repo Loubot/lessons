@@ -12,5 +12,7 @@ class CreateTransactions < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :transactions, :tracking_id, unique: true
   end
 end

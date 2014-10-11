@@ -152,6 +152,8 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.datetime "updated_at"
   end
 
+  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true
+
   create_table "user_carts", force: true do |t|
     t.integer  "teacher_id"
     t.integer  "student_id"
