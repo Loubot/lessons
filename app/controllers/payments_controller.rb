@@ -23,7 +23,9 @@ class PaymentsController < ApplicationController
     response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
                           'User-Agent' => 'My custom user agent').body
     p "paypal post params: #{params['tracking_id']}"
+    logger.info "paypal post params tracking id: #{params['transaction']['0']['.id_for_sender_txn']}"
     puts "Paypal verification response: #{response}"
+    logger.info "Paypal verification response: #{response}"
     if response == "VERIFIED"
       cart = UserCart.find_by(tracking_id: params['tracking_id'])
       event = Event.create!(cart.params)
@@ -36,25 +38,8 @@ class PaymentsController < ApplicationController
   end
 
   def paypal_return
+    puts "paypal return params #{params}"
     
-    # require "pp-adaptive"
-
-    # client = AdaptivePayments::Client.new(
-    #   :user_id       => "lllouis_api1.yahoo.com",
-    #   :password      => "MRXUGXEXHYX7JGHH",
-    #   :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-    #   :app_id        => "APP-80W284485P519543T",
-    #   :sandbox       => true
-    # )
-
-    # client.execute(:PaymentDetails, :pay_key => "AP-4TS489127N381100H") do |response|
-    #   if response.success?
-    #     puts "Payment status: #{response.inspect}"
-    #     flash[:success] = "Payment status: #{response.inspect}"
-    #   else
-    #     puts "#{response.ack_code}: #{response.error_message}"
-    #   end
-    # end
 
     flash[:success] = "Payment was successful. You will receive an email soon. Eventually. When I code it!"
     redirect_to root_url
@@ -65,11 +50,6 @@ class PaymentsController < ApplicationController
    # Amount in cents
    
     @amount = params[:amount].to_i * 100    
-
-    # customer = Stripe::Customer.create(
-    #   :email => 'lllouis@yahoo.com',
-    #   :card  => params[:stripeToken]
-    # )
 
     charge = Stripe::Charge.create({
       :amount             => @amount,
@@ -151,9 +131,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return",
-          :notify_URL      => 'http://learn-your-lesson.herokuapp.com/store-paypal',
-          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
+          :return_url      => "http://localhost:3000/paypal-return",
+          :ipn_notification_url => 'http://2ec9a6c7.ngrok.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -162,12 +141,15 @@ class PaymentsController < ApplicationController
 
           if response.success?
             puts "Pay key: #{response.pay_key}"
+            logger.info "create paypal response #{response.inspect}"
 
             # send the user to PayPal to make the payment
             # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
             redirect_to client.payment_url(response)
           else
+            flash[:danger] = "#{response.error_message}"
             puts "blabla #{response.ack_code}: #{response.error_message}"
+            redirect_to :back
           end
 
         end
