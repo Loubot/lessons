@@ -2,12 +2,13 @@
 #
 # Table name: user_carts
 #
-#  id         :integer          not null, primary key
-#  teacher_id :integer
-#  student_id :integer
-#  params     :text
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer          not null, primary key
+#  teacher_id  :integer
+#  student_id  :integer
+#  params      :text
+#  tracking_id :text
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
 class UserCart < ActiveRecord::Base
