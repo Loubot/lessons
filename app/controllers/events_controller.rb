@@ -56,12 +56,13 @@ class EventsController < ApplicationController
 		#student_format_time(params)
 		event_params = student_format_time(params[:event])
 		@event = Event.new(event_params)
-
+		puts "teacher #{params[:event][:teacher_id]}"
+		puts "student #{params[:event][:student_id]}"
 		if @event.valid?
 			@teacher = Teacher.find(params[:event][:teacher_id])			
 			@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
 			@cart.update_attributes(teacher_id: params[:event][:teacher_id],
-															student_id: params[:event][:student_id], params: event_params)
+															 params: event_params)
 			p "cart  #{@cart.inspect}"
 		else
 			@teacher = @event.errors.full_messages
@@ -90,7 +91,7 @@ class EventsController < ApplicationController
 			# p "$$$$$$$$$$$$ #{starttime}"
 			endtime = Time.zone.parse("#{date} #{params['end_time(4i)']}:#{params['end_time(5i)']}")
 			session[:event_params] = { time_off: params[:time_off], start_time: starttime,
-											 end_time: endtime, status: 'active',
+											 end_time: endtime, status: 'active',student_id: params[:student_id],
 											  teacher_id: params[:teacher_id]}
 
 		end

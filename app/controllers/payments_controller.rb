@@ -1,5 +1,7 @@
 class PaymentsController < ApplicationController
 
+  include PaymentsHelper
+
   protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create]
   before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
@@ -23,18 +25,27 @@ class PaymentsController < ApplicationController
     response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
                           'User-Agent' => 'My custom user agent').body
     p "paypal post params: #{params['tracking_id']}"
-    logger.info "paypal post params tracking id: #{params['transaction']['0']['.id_for_sender_txn']}"
+   
     puts "Paypal verification response: #{response}"
     logger.info "Paypal verification response: #{response}"
-    if response == "VERIFIED"
-      cart = UserCart.find_by(tracking_id: params['tracking_id'])
-      event = Event.create!(cart.params)
-      p "Event errors #{event.errors.full_messages}" if !event.valid?
-      p "Event created id: #{event.id}"
+    if !(Transaction.find_by(tracking_id: params['tracking_id']))
+      if response == "VERIFIED"
+        cart = UserCart.find_by(tracking_id: params['tracking_id'])
+        event = Event.create!(cart.params)
+        logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
+        logger.info "returned params #{create_transaction_params_paypal(params, event.student_id, event.teacher_id)}"
+        transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
+        p "Event errors #{event.errors.full_messages}" if !event.valid?
+        p "Event created id: #{event.id}"
+        render status: 200, nothing: true
+      else
+        p "Paypal payment didn't work out"
+        render nothing: true
+      end
     else
-      p "Paypal payment didn't work out"
-      render nothing: true
+      render status: 200, nothing: true
     end
+
   end
 
   def paypal_return

@@ -16,7 +16,7 @@ class UserCart < ActiveRecord::Base
   serialize :params
 
   before_update :increment_tracking_id
-  before_create :save_tracking_id
+  before_save :save_tracking_id
 
   def save_tracking_id
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)

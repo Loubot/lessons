@@ -48,7 +48,6 @@
                   <%= submit_tag 'save', id: 'event_submit' %>
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group  -->
-              <%= hidden_field_tag 'event[student_id]', current_teacher.id %>
               <%= hidden_field_tag 'event[teacher_id]', @teacher.id %>
               <%= hidden_field_tag 'event[student_id]', current_teacher.id if teacher_signed_in? %>
             <% end %> <!-- end of form_for -->
