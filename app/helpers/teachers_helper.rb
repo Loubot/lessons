@@ -74,4 +74,13 @@ module TeachersHelper
 			render layout: 'application', action: 'show_teacher_to_user'
 		end
 	end
+
+	def flash_class_name(name)
+		case name
+		when 'notice' then 'success'
+		when 'alert' 	then 'danger'
+		else name
+		end
+  end
+
 end
