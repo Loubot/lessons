@@ -92,7 +92,7 @@ class PaymentsController < ApplicationController
 
     logger.info "Stripe webhook response: #{json_response}"
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
-    
+
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
       event = Event.create!(cart.params)
@@ -179,3 +179,6 @@ class PaymentsController < ApplicationController
         
       end
 end
+
+
+# https://mandrillapp.com/api/docs/index.ruby.html
