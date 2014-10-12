@@ -28,7 +28,9 @@ class PaymentsController < ApplicationController
    
     puts "Paypal verification response: #{response}"
     logger.info "Paypal verification response: #{response}"
-    if !(Transaction.find_by(tracking_id: params['tracking_id']))
+    transaction = Transaction.find_by(tracking_id: params['tracking_id'])
+    
+    if transaction == nil
       if response == "VERIFIED"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
         event = Event.create!(cart.params)
@@ -42,8 +44,10 @@ class PaymentsController < ApplicationController
         p "Paypal payment didn't work out"
         render nothing: true
       end
-    else
+    elsif transaction
       render status: 200, nothing: true
+    else
+      logger.info "MAJOR ALERT: Transaction not found"
     end
 
   end
@@ -81,17 +85,25 @@ class PaymentsController < ApplicationController
     
   end
 
-  def store_stripe
-    require 'json'
+  def store_stripe    
     json_response = JSON.parse(request.body.read)
+
+    render status: 200, nothing: true and return if json_response['type'] == "application_fee.created"
+
+    logger.info "Stripe webhook response: #{json_response}"
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
-    cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
-    event = Event.create!(cart.params)
     
-    logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
-    logger.info "Event created id: #{event.id}"   
-    
-    render status: 200, nothing: true
+    if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
+      cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
+      event = Event.create!(cart.params)
+      Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
+      # Transaction.create!(json_response)
+      logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
+      logger.info "Event created id: #{event.id}"
+      render status: 200, nothing: true
+    else
+      render status: 200, nothing: true
+    end   
   end
 
   def stripe_auth_user
