@@ -89,18 +89,22 @@ class PaymentsController < ApplicationController
     json_response = JSON.parse(request.body.read)
 
     render status: 200, nothing: true and return if json_response['type'] == "application_fee.created"
+    render status: 200, nothing: true and return if json_response['type'] == "transfer.created"
 
     logger.info "Stripe webhook response: #{json_response}"
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
 
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
-      cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
-      event = Event.create!(cart.params)
-      Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
-      # Transaction.create!(json_response)
-      logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
-      logger.info "Event created id: #{event.id}"
-      render status: 200, nothing: true
+      begin
+        cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
+        event = Event.create!(cart.params)
+        Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
+        # Transaction.create!(json_response)
+        logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
+        logger.info "Event created id: #{event.id}"
+        render status: 200, nothing: true
+      rescue
+        render status: 200, nothing: true
     else
       render status: 200, nothing: true
     end   
@@ -182,3 +186,4 @@ end
 
 
 # https://mandrillapp.com/api/docs/index.ruby.html
+# http://help.mandrill.com/entries/23257181-Using-the-Mandrill-Ruby-Gem
