@@ -1,7 +1,26 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <%= @event.start_time.to_formatted_s(:long) %>
+     <div class="table-responsive">
+      <table class="table table-condensed table-hover">
+        <tr>
+          <td>Start time:</td>
+          <td><%= @event.start_time.to_formatted_s(:long) %></td>
+        </tr>
+        <tr>
+          <td>End time:</td>
+          <td><%= @event.end_time.to_formatted_s(:long) %></td>
+        </tr>
+        <tr>
+          <td>Length:</td>
+          <td><%= total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %> hours</td>
+        </tr>
+        <tr>
+          <td>Total price</td>
+          <td><%= number_to_currency('%.2f' % (@teacher.rate * total_time.to_f), unit:'€') %></td>
+        </tr>
+      </table>
+     </div>
     </div>
   </div>
   <div class="row">
