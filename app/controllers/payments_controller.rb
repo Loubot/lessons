@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
 
   include PaymentsHelper
 
-  protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create]
+  protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
 
@@ -39,7 +39,7 @@ class PaymentsController < ApplicationController
         transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
         p "Event errors #{event.errors.full_messages}" if !event.valid?
         p "Event created id: #{event.id}"
-        TeacherMailer.test_mail
+        TeacherMailer.test_mail(cart.teacher_email)
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"
@@ -98,6 +98,7 @@ class PaymentsController < ApplicationController
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
       event = Event.create!(cart.params)
       Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
+      TeacherMailer.test_mail(cart.student_email)
       # Transaction.create!(json_response)
       logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
       logger.info "Event created id: #{event.id}"
@@ -132,7 +133,7 @@ class PaymentsController < ApplicationController
       flash[:success] = "Successfully registered with Stripe"
       @teacher.update_attributes(stripe_access_token: json_resp['access_token'])
     end
-    flash[:success] = 'Your booking was successfull'
+    flash[:success] = 'Stripe code updated'
     redirect_to edit_teacher_path(id: params[:state])
   end
 

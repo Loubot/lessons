@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
 	include TeachersHelper
+	before_action :authenticate_teacher!
 	def create
 		if params[:date].blank? 
 			flash[:danger] = "Date can't be blank"
@@ -62,7 +63,8 @@ class EventsController < ApplicationController
 			@teacher = Teacher.find(params[:event][:teacher_id])			
 			@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
 			@cart.update_attributes(teacher_id: params[:event][:teacher_id],
-															 params: event_params)
+															 params: event_params, teacher_email: @teacher.email,
+															 student_email: current_teacher.email)
 			p "cart  #{@cart.inspect}"
 		else
 			@teacher = @event.errors.full_messages
