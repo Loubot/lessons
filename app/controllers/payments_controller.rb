@@ -38,6 +38,7 @@ class PaymentsController < ApplicationController
         transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
         p "Event errors #{event.errors.full_messages}" if !event.valid?
         p "Event created id: #{event.id}"
+        TeacherMailer.test_email
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"

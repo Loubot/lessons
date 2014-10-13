@@ -108,7 +108,7 @@ hr{
 
 .image_container{
 	color: black;
-	
+	height: 125px !important;
 }
 
 .search_results_left{
