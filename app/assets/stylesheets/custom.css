@@ -178,12 +178,13 @@ hr{
 .typeahead.subject{
 	height: 38px;
 	font-size: 22px;
+  min-width: 370px;
 }
 
 .typeahead.county{
 	height: 38px;
 	font-size: 22px;
-	
+	min-width: 370px;
 }
 
 .review_container{
@@ -319,6 +320,12 @@ form .glyphicon {
   #display_teachers_cal_date{
     font-size: 16px;
   }
+  .typeahead.subject{   /* keep subject search at 500px above 600px screens */
+    width: 500px;
+  }
+  .typeahead.county{
+    width: 500px;
+  } 
 }
 
 @media (max-width: 649px) {
@@ -345,12 +352,6 @@ form .glyphicon {
   #display_teachers_cal_date{
     font-size: 18px !important;
   }
-  .typeahead.subject{
-    width: 500px;
-  }
-  .typeahead.county{
-    width: 500px;
-  }
 }
   
 @media (min-width: 992px) {
@@ -365,12 +366,6 @@ form .glyphicon {
   .dhx_cal_date.teachers_area_cal_date{
   	font-size: 13px !important;
   }
-  .typeahead.subject{
-    width: 400px;
-  }
-  .typeahead.county{
-    width: 400px;
-  }
 }
  
 @media (min-width: 1200px) {
@@ -381,13 +376,7 @@ form .glyphicon {
   #display_teachers_cal_date{
     font-size: 18px !important;
     
-  }
-  .typeahead.subject{
-    width: 500px;
-  }
-  .typeahead.county{
-    width: 500px;
-  }
+  }  
 }
 
 /*hack for firefox tables*/
