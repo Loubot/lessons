@@ -15,6 +15,7 @@ class PaymentsController < ApplicationController
   end
 
   def store_paypal
+    
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
@@ -38,7 +39,6 @@ class PaymentsController < ApplicationController
         transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
         p "Event errors #{event.errors.full_messages}" if !event.valid?
         p "Event created id: #{event.id}"
-        TeacherMailer.test_email
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"
@@ -89,22 +89,18 @@ class PaymentsController < ApplicationController
     json_response = JSON.parse(request.body.read)
 
     render status: 200, nothing: true and return if json_response['type'] == "application_fee.created"
-    render status: 200, nothing: true and return if json_response['type'] == "transfer.created"
 
     logger.info "Stripe webhook response: #{json_response}"
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
-
+    
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
-      begin
-        cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
-        event = Event.create!(cart.params)
-        Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
-        # Transaction.create!(json_response)
-        logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
-        logger.info "Event created id: #{event.id}"
-        render status: 200, nothing: true
-      rescue
-        render status: 200, nothing: true
+      cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
+      event = Event.create!(cart.params)
+      Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
+      # Transaction.create!(json_response)
+      logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
+      logger.info "Event created id: #{event.id}"
+      render status: 200, nothing: true
     else
       render status: 200, nothing: true
     end   
@@ -183,7 +179,3 @@ class PaymentsController < ApplicationController
         
       end
 end
-
-
-# https://mandrillapp.com/api/docs/index.ruby.html
-# http://help.mandrill.com/entries/23257181-Using-the-Mandrill-Ruby-Gem
