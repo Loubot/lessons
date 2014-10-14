@@ -159,8 +159,9 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.integer  "student_id"
     t.text     "params"
     t.text     "tracking_id"
-    t.string   "teacher_email"
+    t.string   "student_name",  default: ""
     t.string   "student_email"
+    t.string   "teacher_email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

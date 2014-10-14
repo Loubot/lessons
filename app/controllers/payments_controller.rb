@@ -121,7 +121,7 @@ class PaymentsController < ApplicationController
     response = http.request(request).body
     json_resp = JSON.parse(response)
 
-    p "££££££££££££££££££££££ #{json_resp}"
+    p "Stripe authorise user respons: #{json_resp}"
     # params = {'client_secret' => 'sk_test_1ZTmwrLuejFto5JhzCS9UAWu', 'code' => 'ac_4qftwDWUN15L3DvnQIp0XxT7nXrKEX5Q',
     #   'grant_type' => 'authorization_code'}
     
