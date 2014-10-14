@@ -178,13 +178,13 @@ hr{
 .typeahead.subject{
 	height: 38px;
 	font-size: 22px;
-  min-width: 370px;
+  
 }
 
 .typeahead.county{
 	height: 38px;
 	font-size: 22px;
-	min-width: 370px;
+	
 }
 
 .review_container{
@@ -326,24 +326,29 @@ form .glyphicon {
   #display_teachers_cal_date{
     font-size: 12px;
   }
+  .typeahead.subject{   /* keep subject search at 500px above 600px screens */
+    width: 300px;
+  }
+  .typeahead.county{
+    width: 300px;
+  } 
 }
 
 @media (min-width: 400px) {
 	#display_teachers_cal_date{
     font-size: 14px;
+  }.typeahead.subject{   /* keep subject search at 500px above 600px screens */
+    width: 375px;
   }
+  .typeahead.county{
+    width: 375px;
+  } 
 }
 
 @media (min-width: 600px) {
   #display_teachers_cal_date{
     font-size: 16px;
-  }
-  .typeahead.subject{   /* keep subject search at 500px above 600px screens */
-    width: 500px;
-  }
-  .typeahead.county{
-    width: 500px;
-  } 
+  }  
 }
 
 @media (max-width: 649px) {
