@@ -1,18 +1,37 @@
-<div class="container-fluid">
+<div class="container-fluid ">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 teacher_reg_container">
       <h2><strong>Learn</strong></h2><span class="label label-primary">Register below to become a student</span>
-      <%= form_for(:teacher, :url => registration_path(:teacher)) do |f| %>
+      <%= form_for :teacher, :url => registration_path(:teacher), html: { class: 'form-horizontal' } do |f| %>
        <%= devise_error_messages! %>
+        <div class="form-group">
+          <div class="col-md-6">
+            <%= f.text_field :first_name, placeholder: 'First name', class: 'user_reg' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.text_field :last_name, placeholder: 'Last name', class: 'user_reg' %>
+          </div>
+        </div> <!-- end of form-group -->
 
-        <div><%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %></div>
-
-        <div><%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "off" %></div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <%= f.email_field :email, placeholder: 'Email', class: 'user_reg_email' %>
+          </div>
+        </div> <!-- end of form-group -->
+        
+        <div class="form-group">
+          <div class="col-md-6">
+            <%= f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'user_reg' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.password_field :password_confirmation, placeholder: 'Confirm password', autocomplete: "off", class: 'user_reg' %>
+          </div>
+        </div>
+        
+          
 
         <div><%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+          
           <%= hidden_field_tag 'is_teacher', false %>
         <div><%= f.submit "Sign up" %></div>
       <% end %>

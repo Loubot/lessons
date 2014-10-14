@@ -1,22 +1,24 @@
 class TeacherMailer < ActionMailer::Base
 
-  def test_mail(recipient)
+  def test_mail(student, student_name, teacher, start_time, end_time)
 
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
       message = {  
-       :subject=> "Hello from the Mandrill API",  
-       :from_name=> "Your name",  
-       :text=>"Hi message, how are you?",  
+       :subject=> "You have a booking",  
+       :from_name=> "Learn Your Lesson",  
+       :text=>"#{student_name} has booked a lesson.
+                #{start_time} to #{end_time}",  
        :to=>[  
          {  
-           :email=> recipient.to_s,
-           :name=> "Recipient1"  
+           :email=> teacher.to_s,
+           :name=> "#{student_name}"  
          }  
        ],  
-       :html=>"<html><h1>Hi <strong>message</strong>, how are you?</h1></html>",  
-       :from_email=>"sender@yourdomain.com"  
+       :html=>"<html>#{student_name} has booked a lesson.
+                #{start_time} to #{end_time}</html>",  
+       :from_email=>"admin@learn-your-lesson.ie"  
       }  
       sending = m.messages.send message  
       puts sending

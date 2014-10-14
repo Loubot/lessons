@@ -98,7 +98,7 @@ class PaymentsController < ApplicationController
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
       event = Event.create!(cart.params)
       Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
-      TeacherMailer.test_mail(cart.student_email)
+      TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email, event.start_time, event.end_time)
       # Transaction.create!(json_response)
       logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
       logger.info "Event created id: #{event.id}"

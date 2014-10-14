@@ -301,6 +301,24 @@ form .glyphicon {
 .ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
 
 /* end of login_modal page */
+
+/* static/learn page. User registration*/
+.teacher_reg_container{
+  box-shadow: 2px 2px 5px #888888;
+  padding-bottom: 5px;
+}
+
+.user_reg{
+  width: 100%;
+}
+
+.user_reg_email{
+  width: 95%;
+  margin: 0 5px;
+}
+
+/* end of static/learn page. User registration*/
+
 @media (min-width: 250px){
   body{
     width: 100%;

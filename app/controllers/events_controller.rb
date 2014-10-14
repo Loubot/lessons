@@ -64,7 +64,8 @@ class EventsController < ApplicationController
 			@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
 			@cart.update_attributes(teacher_id: params[:event][:teacher_id],
 															 params: event_params, teacher_email: @teacher.email,
-															 student_email: current_teacher.email)
+															 student_email: current_teacher.email,
+															 student_name: "#{current_teacher.first_name} #{current_teacher.last_name}")
 			p "cart  #{@cart.inspect}"
 		else
 			@teacher = @event.errors.full_messages
