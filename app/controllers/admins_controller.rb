@@ -14,13 +14,13 @@ class AdminsController < ApplicationController
 		@category = Category.new
 		@categories = Category.all
 		@subject = Subject.new
-		@teachers = Teacher.all
+		@teachers = Teacher.where(is_teacher: true)
 	end
 
 	def make_admin
 		flash[:notice] = params
-		redirect_to :back
 		(params[:teacher] && params[:teacher][:admin]) ? admins = params[:teacher][:admin] : admins = []
 		update_admins(admins)
+		redirect_to :back		
 	end
 end

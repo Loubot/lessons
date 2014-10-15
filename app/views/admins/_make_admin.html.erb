@@ -16,7 +16,7 @@
 						<ul class="list-group">
 							<%= form_tag make_admin_path, method: 'put' do %>
 								<% @teachers.each do |teacher| %>
-									<li class="list-group-item"><%= teacher.first_name %>
+									<li class="list-group-item"><%= %Q(#{teacher.first_name}  (#{teacher.email}))%>
 										<%= check_box_tag 'teacher[admin][]', teacher.id, teacher.admin, class: 'pull-right' %>
 									</li>
 								<% end %>
