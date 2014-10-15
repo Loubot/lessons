@@ -156,8 +156,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://localhost:3000/paypal-return",
-          :ipn_notification_url => 'http://2ec9a6c7.ngrok.com/store-paypal',
+          :return_url      => "http://10c416a6.ngrok.com/paypal-return",
+          :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -173,7 +173,7 @@ class PaymentsController < ApplicationController
             redirect_to client.payment_url(response)
           else
             flash[:danger] = "#{response.error_message}"
-            puts "blabla #{response.ack_code}: #{response.error_message}"
+            puts "Paypal error message: #{response.ack_code}: #{response.error_message}"
             redirect_to :back
           end
 

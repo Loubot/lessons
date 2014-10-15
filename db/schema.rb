@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141011005622) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -62,7 +65,7 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.datetime "updated_at"
   end
 
-  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true
+  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true, using: :btree
 
   create_table "photos", force: true do |t|
     t.string   "name"
@@ -105,7 +108,7 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.integer "teacher_id", null: false
   end
 
-  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id"
+  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id", using: :btree
 
   create_table "teachers", force: true do |t|
     t.string   "first_name"
@@ -114,12 +117,12 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.text     "overview"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                                          default: "", null: false
-    t.string   "encrypted_password",                             default: "", null: false
+    t.string   "email",                                          default: "",    null: false
+    t.string   "encrypted_password",                             default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                                  default: 0,  null: false
+    t.integer  "sign_in_count",                                  default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -131,13 +134,13 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.datetime "opening"
     t.datetime "closing"
     t.decimal  "rate",                   precision: 8, scale: 2
-    t.boolean  "is_teacher"
+    t.boolean  "is_teacher",                                     default: false, null: false
     t.string   "paypal_email",                                   default: ""
     t.string   "stripe_access_token",                            default: ""
   end
 
-  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
-  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
+  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
+  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
 
   create_table "transactions", force: true do |t|
     t.string   "sender"
@@ -152,7 +155,7 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.datetime "updated_at"
   end
 
-  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true
+  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true, using: :btree
 
   create_table "user_carts", force: true do |t|
     t.integer  "teacher_id"
@@ -166,6 +169,6 @@ ActiveRecord::Schema.define(version: 20141011005622) do
     t.datetime "updated_at"
   end
 
-  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true
+  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree
 
 end
