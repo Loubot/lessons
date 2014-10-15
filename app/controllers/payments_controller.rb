@@ -39,7 +39,7 @@ class PaymentsController < ApplicationController
         transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
         p "Event errors #{event.errors.full_messages}" if !event.valid?
         p "Event created id: #{event.id}"
-        TeacherMailer.test_mail(cart.teacher_email)
+        TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email, event.start_time, event.end_time)
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"
@@ -96,6 +96,7 @@ class PaymentsController < ApplicationController
     
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
+      render status: 200, nothing: true if !cart
       event = Event.create!(cart.params)
       Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
       TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email, event.start_time, event.end_time)
@@ -121,7 +122,7 @@ class PaymentsController < ApplicationController
     response = http.request(request).body
     json_resp = JSON.parse(response)
 
-    p "Stripe authorise user respons: #{json_resp}"
+    p "Stripe authorise user response: #{json_resp}"
     # params = {'client_secret' => 'sk_test_1ZTmwrLuejFto5JhzCS9UAWu', 'code' => 'ac_4qftwDWUN15L3DvnQIp0XxT7nXrKEX5Q',
     #   'grant_type' => 'authorization_code'}
     
@@ -129,7 +130,7 @@ class PaymentsController < ApplicationController
     # r = conn.post('/oauth/token', params)
     # p "(((((((((((((((((((( #{r}"
     if json_resp['access_token'].present?
-      @teacher = Teacher.find(current_teacher.id)
+      @teacher = Teacher.find(params['state'].to_i)
       flash[:success] = "Successfully registered with Stripe"
       @teacher.update_attributes(stripe_access_token: json_resp['access_token'])
     end
@@ -156,8 +157,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://10c416a6.ngrok.com/paypal-return",
-          :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
+          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return",
+          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
             { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }

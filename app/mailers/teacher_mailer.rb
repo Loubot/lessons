@@ -8,17 +8,17 @@ class TeacherMailer < ActionMailer::Base
       message = {  
        :subject=> "You have a booking",  
        :from_name=> "Learn Your Lesson",  
-       :text=>"#{student_name} has booked a lesson.
-                #{start_time} to #{end_time}",  
+       :text=> %Q(<html>#{student_name} has booked a lesson.
+                #{start_time.strftime("%d/%b/%y @%H:%M")} to #{end_time.strftime("%d/%b/%y @%H:%M")}</html>),  
        :to=>[  
          {  
            :email=> teacher.to_s,
            :name=> "#{student_name}"  
          }  
        ],  
-       :html=>"<html>#{student_name} has booked a lesson.
-                #{start_time} to #{end_time}</html>",  
-       :from_email=>"admin@learn-your-lesson.ie"  
+       :html=> %Q(<html>#{student_name} has booked a lesson.
+                #{start_time.strftime("%d/%b/%y @%H:%M")} to #{end_time.strftime("%d/%b/%y @%H:%M")}</html>),  
+       :from_email=> student.to_s  
       }  
       sending = m.messages.send message  
       puts sending
