@@ -5,9 +5,6 @@ class CreateUserCarts < ActiveRecord::Migration
       t.integer :student_id
       t.text :params
       t.text :tracking_id
-      t.string :student_name, default: ''
-      t.string :student_email
-      t.string :teacher_email      
       t.timestamps
     end
 
