@@ -160,7 +160,7 @@ class PaymentsController < ApplicationController
           :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return",
           :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
-            { :email => 'louisangelini@gmail.com', amount: params[:receiver_amount], primary: true },
+            { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
           ]
         ) do |response|
