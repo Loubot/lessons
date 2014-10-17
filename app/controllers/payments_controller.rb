@@ -33,6 +33,7 @@ class PaymentsController < ApplicationController
     if transaction == nil
       if response == "VERIFIED"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
+        render status: 200, nothing: true and return if !cart
         event = Event.create!(cart.params)
         logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
         logger.info "returned params #{create_transaction_params_paypal(params, event.student_id, event.teacher_id)}"
@@ -77,6 +78,11 @@ class PaymentsController < ApplicationController
       },
       Teacher.find(params[:teacher_id]).stripe_access_token
     )
+    if charge['paid'] == true
+      cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
+      event = Event.create!(cart.params)
+      puts "Stripe successful event created id: #{event.id}"
+    end
     flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
     redirect_to root_url
 
@@ -97,12 +103,16 @@ class PaymentsController < ApplicationController
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
       render status: 200, nothing: true if !cart
-      event = Event.create!(cart.params)
-      Transaction.create!(create_transaction_params_stripe(json_response, event.student_id, event.teacher_id))
-      TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email, event.start_time, event.end_time)
+
+      cart_params = cart.params
+      puts "cart params #{cart_params}"
+      puts "start time #{cart_params[:start_time]}"
+ 
+      
+      TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email,
+                              cart_params[:start_time],cart_params[:end_time])
+      Transaction.create!(create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id))
       # Transaction.create!(json_response)
-      logger.info "Event errors #{event.errors.full_messages}" if !event.valid?
-      logger.info "Event created id: #{event.id}"
       render status: 200, nothing: true
     else
       render status: 200, nothing: true
