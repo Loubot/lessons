@@ -168,7 +168,7 @@ class PaymentsController < ApplicationController
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => "http://10c416a6.ngrok.com/paypal-return",
-          :ipn_notification_url => 'cartstore-paypal',
+          :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
