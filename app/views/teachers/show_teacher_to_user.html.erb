@@ -23,7 +23,7 @@
             <% if teacher_signed_in? %>
               <button class="btn btn-lg btn-block btn-success btn_book_now" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</buton>
             <% else %>
-              <%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn-info' %>
+              <%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn-success' %>
             <% end %>
           </div>
         </div> <!-- end of panel panel_info  -->   
