@@ -55,8 +55,24 @@ class PaymentsController < ApplicationController
   end
 
   def paypal_return
-    puts "paypal return params #{params}"
-    
+    puts "paypal return params paykey: #{params[:payKey]}"
+    require "pp-adaptive"
+
+    client = AdaptivePayments::Client.new(
+      :user_id       => "lllouis_api1.yahoo.com",
+      :password      => "MRXUGXEXHYX7JGHH",
+      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
+      :app_id        => "APP-80W284485P519543T",
+      :sandbox       => true
+    )
+
+    client.execute(:PaymentDetails, :pay_key => params[:payKey]) do |response|
+      if response.success?
+        puts "Payment status: #{response.inspect}"
+      else
+        puts "#{response.ack_code}: #{response.error_message}"
+      end
+    end
 
     flash[:success] = "Payment was successful. You will receive an email soon. Eventually. When I code it!"
     redirect_to root_url
@@ -102,8 +118,7 @@ class PaymentsController < ApplicationController
     
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
-      render status: 200, nothing: true if !cart
-
+      render status: 200, nothing: true and return if !cart
       cart_params = cart.params
       puts "cart params #{cart_params}"
       puts "start time #{cart_params[:start_time]}"
@@ -167,7 +182,7 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://10c416a6.ngrok.com/paypal-return",
+          :return_url      => "http://10c416a6.ngrok.com/paypal-return?payKey=${payKey}",
           :ipn_notification_url => 'http://10c416a6.ngrok.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
