@@ -69,12 +69,14 @@ class PaymentsController < ApplicationController
     client.execute(:PaymentDetails, :pay_key => params[:payKey]) do |response|
       if response.success?
         puts "Payment status: #{response.inspect}"
+        flash[:success] = "Payment was successful. You will receive an email soon. Eventually. When I code it!"
       else
         puts "#{response.ack_code}: #{response.error_message}"
+        flash[:danger] = "Payment failed"
       end
     end
 
-    flash[:success] = "Payment was successful. You will receive an email soon. Eventually. When I code it!"
+    
     redirect_to root_url
   end
 
