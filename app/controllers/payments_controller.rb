@@ -44,7 +44,7 @@ class PaymentsController < ApplicationController
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"
-        render nothing: true
+        render status: 200, nothing: true
       end
     elsif transaction
       render status: 200, nothing: true

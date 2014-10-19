@@ -42,9 +42,10 @@ class StaticController < ApplicationController
 
 	def display_subjects
 		@params = params
-		@teachers = get_search_results(params)
-		
+		@teachers = get_search_results(params)		
 	end
+
+	
 
 	private
 
