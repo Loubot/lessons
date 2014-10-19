@@ -1,4 +1,4 @@
-add font file*/
+/*add font file*/
 @font-face{
 	font-family: teachersFont;
 	
@@ -326,9 +326,6 @@ form .glyphicon {
 /* end of static/learn page. User registration*/
 
 /* static/browse_categories*/
-.category_browse_row{
-  
-}
 
 .category_browse_name{
   border-bottom: 1px solid #888888;
