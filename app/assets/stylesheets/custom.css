@@ -254,21 +254,17 @@ hr{
 	height: 100%;
 }
 
-/*.dhx_cal_light{
-	max-width: 500px;
-}
 
-.dhx_cal_larea{
-	max-width: 100%;
-}
-*/
-/*.teacher_purchase_panel{
-	
-}*/
 
 
 /*end of show_teacher page*/
 
+/* teachers/show-teacher-to-user*/
+.btn_book_now{
+  color: white;
+  background: -webkit-linear-gradient(#5cb85c, #398439);
+}
+/* end of teachers/show-teacher-to-user*/
 
 /* teach page*/
 .teacher_registration_container{
