@@ -15,15 +15,14 @@ class UserCart < ActiveRecord::Base
   belongs_to :teacher
   serialize :params
 
-  before_update :increment_tracking_id
+  validates :teacher_id, :student_id, :params, :tracking_id, presence: true
+  validates :tracking_id, uniqueness: true
+
+  before_update :save_tracking_id
   before_save :save_tracking_id
 
   def save_tracking_id
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
 
-
-  def increment_tracking_id
-    self.tracking_id =  Digest::SHA1.hexdigest([Time.now, rand].join)
-  end
 end
