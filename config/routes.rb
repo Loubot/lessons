@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get         '/display-subjects'       =>  'static#display_subjects'
   get         '/how-it-works'           =>  'static#how_it_works'
   get         '/mailing-list'           =>  'static#mailing_list'
+  get         '/browse-categories'       =>  'static#browse_categories'
   post        '/add-to-list'            =>  'static#add_to_list'
 
   get         'paypal-create'           =>  'payments#paypal_create'

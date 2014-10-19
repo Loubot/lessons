@@ -1,4 +1,4 @@
-/*add font file*/
+add font file*/
 @font-face{
 	font-family: teachersFont;
 	
@@ -48,6 +48,12 @@ hr{
 /*standard layout page*/
 #standard_layout{
 	background-color: #f6f6f6;
+  
+}
+
+.main_page_containers{
+  margin: 0px auto;
+  max-width: 1100px;
 }
 /*end of standard layout page*/
 
@@ -319,6 +325,17 @@ form .glyphicon {
 
 /* end of static/learn page. User registration*/
 
+/* static/browse_categories*/
+.category_browse_row{
+  
+}
+
+.category_browse_name{
+  border-bottom: 1px solid #888888;
+}
+
+/* end of static/browse_categories*/
+
 @media (min-width: 250px){
   body{
     width: 100%;
@@ -438,4 +455,4 @@ form .glyphicon {
       padding-bottom: 10px;
   }
 }
-/* end of Change navbar collapse to stop skewed buttons*/
+/* end of Change navbar collapse to stop skewed buttons
