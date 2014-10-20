@@ -75,6 +75,9 @@ gem 'pp-adaptive', '~> 1.0.0'
 gem 'stripe', '~> 1.15'
 
 gem 'mandrill-api', '~> 1.0'
+
+gem 'omniauth-facebook'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

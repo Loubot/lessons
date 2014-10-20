@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for  :teachers, :controllers => { :registrations => 'registrations' }
+  devise_for  :teachers, :controllers => { :registrations => 'registrations' },
+              controllers: {omniauth_callbacks: "omniauth_callbacks"}
   resources   :teachers, only: [:update, :edit, :destroy] do
   	member do 
   		get     '/teachers-area'		      =>  'teachers#teachers_area'
