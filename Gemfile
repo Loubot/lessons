@@ -38,7 +38,7 @@ group :production do
 	gem 'unicorn', '4.8.3'
 end
 
-gem 'thin'
+gem 'thin', 					group: :development
 
 gem 'better_errors'
 
