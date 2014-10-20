@@ -27,7 +27,7 @@
       <%= text_field_tag :search_position, params[:search], placeholder: 'County', class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
     </div>
     <div class="container-fluid search_submit_container">
-      <%= submit_tag "I'm ready to learn",value: 'submit', name: 'nil', id: 'search_submit', class: 'btn btn-info' %>
+      <%= submit_tag "I'm ready to learn",type: 'submit', name: 'nil', id: 'search_submit', class: 'btn' %>
     </div>
   <% end %>
   <div id="display_search_results">

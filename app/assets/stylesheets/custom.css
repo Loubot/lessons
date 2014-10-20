@@ -41,8 +41,8 @@ hr{
 	/*background-color: blue !important;*/
 }
 
-#standard_nav_bar{
-	/*background-color: #3399FF !important;*/
+.home_page_nav{
+	background: linear-gradient(#fafafa,#fff);
 }
 
 /*standard layout page*/
@@ -108,9 +108,16 @@ hr{
 	text-align: center;
 }
 
-/*#search_submit{
+#search_submit{
+  color: #fff;
+  background: linear-gradient(#2b99cf,#1a5d7e);
+  border: 0px !important;
+}
 
-}*/
+#search_submit:hover{
+  color: #fff;
+  background: linear-gradient(#288bbd,#1a5d7e) !important;
+}
 
 .image_container{
 	color: black;
