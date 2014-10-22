@@ -132,7 +132,7 @@ teachersInfoReady = ->
 # ///////////welcome page
   if $(".stock_photos_container").length > 0
     $('.stock_photo_container').mouseover ->
-      $('.results_photos.back').animate opacity: .5, 50
+      $('.results_photos.back').animate opacity: .65, 50
 
     $('.stock_photo_container').mouseleave ->
       $('.results_photos.back').animate opacity: 0, 50
