@@ -35,6 +35,13 @@
   </div>
 </div> <!-- end of container-fluid main_page_search -->
 
+<div class="container-fluid stock_photos_container">
+  <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: "stock_photo_container" do %>
+    <%= image_tag "http://mrg.bz/UFUcCR", size: "125x125", class: 'stock_photo front' %>
+    <%= image_tag 'eye.png', size: '100x50', class: 'pull-left results_photos back' %>
+  <% end %> 
+</div> <!-- end of stock_photos_container -->
+
 <div class="fb-share-button" data-href="<%= request.original_url %>"></div>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://fathomless-wildwood-6928.herokuapp.com" data-text="What do you want to learn today?">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

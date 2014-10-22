@@ -129,6 +129,15 @@ teachersInfoReady = ->
 
 #////////////end of search results page
 
+# ///////////welcome page
+  if $(".stock_photos_container").length > 0
+    $('.stock_photo_container').mouseover ->
+      $('.results_photos.back').animate opacity: .5, 50
+
+    $('.stock_photo_container').mouseleave ->
+      $('.results_photos.back').animate opacity: 0, 50
+# //////////end of welcome page
+
 #////////// teachers/form photo partial enable dismissable popover
   if $('.profile_pic_popover').length > 0
     $("html").click (e) ->

@@ -499,3 +499,18 @@ form .glyphicon {
   }
 }
 /* end of Change navbar collapse to stop skewed buttons
+
+/*welcome page*/
+.stock_photo{
+  position: absolute;
+  margin-right: 10px;
+  clear: both;
+}
+
+.stock_photo.front{
+  z-index: 1;
+}
+
+
+
+/*end of welcome page*/
