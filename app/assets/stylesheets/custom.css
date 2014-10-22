@@ -1,4 +1,4 @@
-/*add font file*/
+add font file*/
 @font-face{
 	font-family: teachersFont;
 	
@@ -233,6 +233,12 @@ hr{
 }
 /*end of teachers-area page opening times modal*/
 
+/*teachers work area*/
+.row_teachers_area{
+  padding-left: 10px;
+}
+
+/*end of teachers work area*/
 /*show_teacher*/
 
 .table_header{
@@ -273,10 +279,6 @@ hr{
 .row_teachers_area{
 	height: 100%;
 }
-
-
-
-
 /*end of show_teacher page*/
 
 /* teachers/show-teacher-to-user*/
@@ -513,4 +515,4 @@ form .glyphicon {
 
 
 
-/*end of welcome page*/
+/*end of welcome page
