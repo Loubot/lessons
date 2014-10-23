@@ -522,7 +522,7 @@ form .glyphicon {
   z-index: 1;
 }
 #guitar{
-  background-image: url("http://lessons.photos.s3.amazonaws.com/stockPhotos/learn-guitar.jpg?AWSAccessKeyId=AKIAI3OXIEGQDZ7VHA7A&Expires=1414159801&Signature=OL7dLyEm%2B4H/vAl3fuqD72L7YTo%3D");
+  background-image: url("http://lessons.photos.s3.amazonaws.com/stockPhotos/learn-guitar.jpg");
   height: 200px;
 }
 
