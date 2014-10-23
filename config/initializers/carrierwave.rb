@@ -6,7 +6,7 @@ CarrierWave.configure do |config|
     :region => 'eu-west-1',
     :path_style => true
   }
-  config.fog_directory = 'lessons.photos' # required
+  config.fog_directory = 'lessons-photos' # required
   config.fog_public = false # optional, defaults to true
   config.fog_attributes = {'Cache-Control'=>'max-age=315576000'} #
 end
