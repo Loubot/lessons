@@ -199,6 +199,7 @@ hr{
 
 .main_page_search_container{
 	text-align: center;
+  margin-bottom: 50px;
 }
 
 .typeahead.subject{
@@ -503,6 +504,14 @@ form .glyphicon {
 /* end of Change navbar collapse to stop skewed buttons
 
 /*welcome page*/
+.stock_photos_container{
+  display: block;
+  padding: 0px 100px;
+  height: 150px;
+}
+.stock_photo_container{
+  position: relative;
+}
 .stock_photo{
   position: absolute;
   margin-right: 10px;
@@ -511,6 +520,10 @@ form .glyphicon {
 
 .stock_photo.front{
   z-index: 1;
+}
+#guitar{
+  background-image: url("http://lessons.photos.s3.amazonaws.com/stockPhotos/learn-guitar.jpg?AWSAccessKeyId=AKIAI3OXIEGQDZ7VHA7A&Expires=1414159801&Signature=OL7dLyEm%2B4H/vAl3fuqD72L7YTo%3D");
+  height: 200px;
 }
 
 

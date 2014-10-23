@@ -132,10 +132,10 @@ teachersInfoReady = ->
 # ///////////welcome page
   if $(".stock_photos_container").length > 0
     $('.stock_photo_container').mouseover ->
-      $('.results_photos.back').animate opacity: .65, 50
+      $(this).find('.results_photos.back').animate opacity: .65, 50
 
     $('.stock_photo_container').mouseleave ->
-      $('.results_photos.back').animate opacity: 0, 50
+      $(@).find('.results_photos.back').animate opacity: 0, 50
 # //////////end of welcome page
 
 #////////// teachers/form photo partial enable dismissable popover
