@@ -505,25 +505,44 @@ form .glyphicon {
 
 /*welcome page*/
 .stock_photos_container{
-  display: block;
   padding: 0px 100px;
-  height: 150px;
+  
 }
 .stock_photo_container{
-  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 200px;
 }
 .stock_photo{
-  position: absolute;
   margin-right: 10px;
-  clear: both;
+    
 }
 
 .stock_photo.front{
   z-index: 1;
 }
+
+.subject_pic_container{
+  margin-right: 5px;
+}
+
 #guitar{
-  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-guitar.jpg");
+  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-to-play-guitar.jpg");
   height: 200px;
+  width: 300px;
+  padding: 0 !important;
+}
+
+#drums{
+  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-to-play-drums.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+}
+
+.welcome_subject_image{
+  z-index: 3;
+  opacity: 0;
 }
 
 
