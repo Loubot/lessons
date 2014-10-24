@@ -36,20 +36,40 @@
 </div> <!-- end of container-fluid main_page_search -->
 
 <div class="container-fluid stock_photos_container">
-  <div class="row">
+  <div class="row subject_pic_row">
     <div class="col-md-3 subject_pic_container" id="guitar">
         <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: "stock_photo_container" do %>
           
           <%= image_tag 'view_more.png', class: 'welcome_subject_image' %>
         <% end %>
-    </div>
+    </div> <!-- end of guitar -->
     <div class="col-md-3 subject_pic_container" id="drums">
       <%= link_to display_subjects_path(search_subjects: 'drum', search_position: ''), class: "stock_photo_container" do %>
         
         <%= image_tag 'view_more.png', class: 'welcome_subject_image' %>
       <% end %> 
-    </div>
-  </div>  
+    </div> <!-- end of drums -->
+    <div class="col-md-3 subject_pic_container" id="piano">
+      <%= link_to display_subjects_path(search_subjects: 'piano', search_position: ''), class: "stock_photo_container" do %>
+        
+        <%= image_tag 'view_more.png', class: 'welcome_subject_image' %>
+      <% end %> 
+    </div> <!-- end of piano -->
+  </div>  <!-- end of row -->
+  <div class="row subject_pic_row">
+    <div class="col-md-3 subject_pic_container" id="french">
+        <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view_more.png', class: 'welcome_subject_image' %>
+        <% end %>
+    </div> <!-- end of french -->
+    <div class="col-md-3 subject_pic_container" id="italian">
+        <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view_more.png', class: 'welcome_subject_image' %>
+        <% end %>
+    </div> <!-- end of italian -->
+  </div>
 </div> <!-- end of stock_photos_container -->
 
 <div class="container-fluid clearfix">
