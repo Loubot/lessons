@@ -405,7 +405,7 @@ form .glyphicon {
   }
   .typeahead.county{
     width: 375px;
-  } 
+  }  
 }
 
 @media (min-width: 600px) {
@@ -516,6 +516,7 @@ form .glyphicon {
   padding: 0 !important;
   margin: 0 !important;
   width: 200px;
+  
 }
 .stock_photo{
   margin-right: 10px;
@@ -528,20 +529,21 @@ form .glyphicon {
 
 .subject_pic_container{
   margin-right: 5px;
+  min-width: 300px;
 }
 
 #guitar{
   background-image: image-url("learn-to-play-guitar.jpg");
+  padding: 0 !important;
   height: 200px;
   width: 300px;
-  padding: 0 !important;
 }
 
 #drums{
   background-image: image-url("learn-to-play-drums.jpg");
+  padding: 0 !important;
   height: 200px;
   width: 300px;
-  padding: 0 !important;
 }
 
 #piano{
@@ -549,6 +551,7 @@ form .glyphicon {
   height: 200px;
   width: 300px;
   padding: 0 !important;
+  background-size: 100% 100%;
 }
 
 #french{
@@ -556,6 +559,7 @@ form .glyphicon {
   height: 200px;
   width: 300px;
   padding: 0 !important;
+  background-size: 100% 100%;
 }
 
 #italian{
@@ -563,6 +567,8 @@ form .glyphicon {
   height: 200px;
   width: 300px;
   padding: 0 !important;
+  background-size: 100% 100%;
+
 }
 
 .welcome_subject_image{
