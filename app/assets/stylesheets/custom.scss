@@ -394,7 +394,10 @@ form .glyphicon {
   }
   .typeahead.county{
     width: 300px;
-  } 
+  }
+  .subject_pic_row{
+    display: none;
+  }
 }
 
 @media (min-width: 400px) {
@@ -459,9 +462,11 @@ form .glyphicon {
 	text-align: center;
   }
   #display_teachers_cal_date{
-    font-size: 18px !important;
-    
-  }  
+    font-size: 18px !important;    
+  }
+  .subject_pic_row{
+    display:inline;
+  }
 }
 
 //hack for firefox tables*/
