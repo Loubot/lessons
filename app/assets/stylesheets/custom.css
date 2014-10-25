@@ -532,21 +532,21 @@ form .glyphicon {
 }
 
 #guitar{
-  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-to-play-guitar.jpg");
+  background-image: url("learn-to-play-guitar.jpg");
   height: 200px;
   width: 300px;
   padding: 0 !important;
 }
 
 #drums{
-  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-to-play-drums.jpg");
+  background-image: url("learn-to-play-drums.jpg");
   height: 200px;
   width: 300px;
   padding: 0 !important;
 }
 
 #piano{
-  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-to-play-piano.png");
+  background-image: url("learn-to-play-piano.jpg");
   height: 200px;
   width: 300px;
   padding: 0 !important;
