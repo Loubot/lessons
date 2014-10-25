@@ -78,5 +78,13 @@
         <% end %>
       </div><!-- end of italian -->      
     </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 subject_pic_container">
+      <div id="german">
+        <%= link_to display_subjects_path(search_subjects: 'german', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of german -->      
+    </div> <!-- end of subject_pic_container -->
   </div><!-- end of subject_pic_row -->
 </div> <!-- end of stock_photos_container -->
