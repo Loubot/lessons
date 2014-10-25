@@ -78,6 +78,8 @@ gem 'mandrill-api', '~> 1.0'
 
 gem 'omniauth-facebook'
 
+gem "asset_sync"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

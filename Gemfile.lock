@@ -31,6 +31,10 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
+    asset_sync (1.1.0)
+      activemodel
+      fog (>= 1.8.0)
+      unf
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -80,7 +84,6 @@ GEM
     execjs (2.2.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.6)
     ffi (1.9.6-x86-mingw32)
     fog (1.23.0)
       fog-brightbox
@@ -234,7 +237,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.9)
     sqlite3 (1.3.9-x86-mingw32)
     stripe (1.16.0)
       json (~> 1.8.1)
@@ -260,6 +262,10 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
+    unf_ext (0.0.6-x86-mingw32)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
@@ -280,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  asset_sync
   better_errors
   binding_of_caller
   bundler (>= 1.3.0)
