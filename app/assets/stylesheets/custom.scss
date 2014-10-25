@@ -552,14 +552,14 @@ form .glyphicon {
 }
 
 #french{
-  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-to-speak-french.jpg");
+  background-image: image-url("learn-to-speak-french.jpg");
   height: 200px;
   width: 300px;
   padding: 0 !important;
 }
 
 #italian{
-  background-image: url("http://lessons-photos.s3.amazonaws.com/stockPhotos/learn-to-speak-italian.jpg");
+  background-image: image-url("learn-to-speak-italian.jpg");
   height: 200px;
   width: 300px;
   padding: 0 !important;
