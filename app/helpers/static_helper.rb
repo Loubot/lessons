@@ -43,9 +43,5 @@ module StaticHelper
   def get_subject(subject)
     @subject = subject == '' ? [] : Subject.where('name ILIKE ?', "%#{subject}%").first
   end
-
-  def display_subjects(subjects)
-    subjects.map { |s| s.name }
-  end
 end
 

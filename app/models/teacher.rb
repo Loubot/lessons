@@ -62,4 +62,9 @@ class Teacher < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def display_subjects
+    self.subjects.map { |s| s.name }.join(',')
+  end
+
 end
