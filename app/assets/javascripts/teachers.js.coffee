@@ -56,7 +56,9 @@ teachersInfoReady = ->
     bestPictures = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
       queryTokenizer: Bloodhound.tokenizers.whitespace
-      prefetch: "/subject-search"
+      prefetch: 
+        url: "/subject-search"
+        ttl: 3600000
     )
     bestPictures.initialize()
     $(".typeahead.subject").typeahead 
@@ -67,6 +69,7 @@ teachersInfoReady = ->
       name: "Subjects"
       displayKey: "name"
       source: bestPictures.ttAdapter()
+
 
   if $('.typeahead.county').length > 0
     countyList = getCounties()
