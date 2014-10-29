@@ -3,7 +3,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env["omniauth.auth"]
     puts "auth  #{auth['extra']['raw_info']['email']}"
     teacher = Teacher.find_or_initialize_by(email: auth['extra']['raw_info']['email'])
-    puts "current #{current_teacher.full_name}"
     if teacher.persisted?
       sign_in teacher
       flash[:success] = "Signed in successfully."
