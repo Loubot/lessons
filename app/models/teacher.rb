@@ -67,4 +67,17 @@ class Teacher < ActiveRecord::Base
     self.subjects.map { |s| s.name }.join(',')
   end
 
+  def omni_create(params)
+
+  end
+
+  def finish_reg(params)
+    puts "params #{params}"
+    
+    self.email = params['email']
+    self.first_name = params['first_name']
+    self.last_name = params['last_name']
+    self.valid?
+  end
+
 end
