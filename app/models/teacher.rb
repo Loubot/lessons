@@ -26,7 +26,7 @@
 #  opening                :datetime
 #  closing                :datetime
 #  rate                   :decimal(8, 2)
-#  is_teacher             :boolean
+#  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
 #
@@ -51,6 +51,7 @@ class Teacher < ActiveRecord::Base
   has_many :qualifications
   has_many :openings
   has_many :transactions, foreign_key: :user_id
+  has_many :identities, dependent: :destroy
   has_one :user_cart
 
   geocoded_by :address, :latitude  => :lat, :longitude => :lon
@@ -67,17 +68,8 @@ class Teacher < ActiveRecord::Base
     self.subjects.map { |s| s.name }.join(',')
   end
 
-  def omni_create(params)
-
-  end
-
-  def finish_reg(params)
-    puts "params #{params}"
-    
-    self.email = params['email']
-    self.first_name = params['first_name']
-    self.last_name = params['last_name']
-    self.valid?
+  def add_identity(auth)
+    Identity.create(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
   end
 
 end

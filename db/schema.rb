@@ -48,9 +48,12 @@ ActiveRecord::Schema.define(version: 20141029144614) do
   create_table "identities", force: true do |t|
     t.string   "uid"
     t.string   "provider"
+    t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id", using: :btree
 
   create_table "openings", force: true do |t|
     t.datetime "mon_open"
