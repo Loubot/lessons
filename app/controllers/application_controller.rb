@@ -11,15 +11,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :first_name, :last_name, :is_teacher) }
   end
 
- #  def after_sign_in_path_for(resource)
- #    case resource.is_teacher
- #    when false
- #      # root_path
- #    else
- #      # edit_teacher_path(resource)
- #      redirect_to 'back' and return
- #    end    
-	# end
 
   def after_sign_in_path_for(resource)
     # sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
@@ -40,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
     
   def after_sign_up_path_for(resource)
-    case resource.is_teacher
+    case resource.is_teacher == true
     when false
       root_path
     else

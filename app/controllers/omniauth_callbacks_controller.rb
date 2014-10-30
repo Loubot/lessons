@@ -26,6 +26,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           sign_in_and_redirect teacher
         else #could not find teacher and identity is new
           teacher = Teacher.create_new_with_omniauth(auth, URI(request.env['omniauth.origin']).path)
+          redirect_to :back if !teacher.valid?
           flash[:success] = "Registered succesfully using #{auth[:provider]}"
           sign_in_and_redirect teacher
         end

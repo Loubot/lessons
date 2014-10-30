@@ -73,12 +73,13 @@ class Teacher < ActiveRecord::Base
   end
 
   def self.create_new_with_omniauth(auth, source_address)
-    create! do |teacher|
+    new do |teacher|
       teacher.email = auth['extra']['raw_info']['email']
       teacher.first_name = auth['extra']['raw_info']['first_name'] 
       teacher.last_name = auth['extra']['raw_info']['last_name']
       source_address == "/teach" ? teacher.is_teacher = true : teacher.is_teacher = false
       teacher.add_identity(auth)
+      
       
     end
 
