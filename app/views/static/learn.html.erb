@@ -35,6 +35,7 @@
           <%= hidden_field_tag 'is_teacher', false %>
         <div><%= f.submit "Sign up" %></div>
       <% end %>
+      <%= link_to 'Register with facebook', "/teachers/auth/facebook?origin=#{request.original_url}" %>
     </div> <!-- end of col-md-6 -->
   </div> <!-- end of row -->
 </div> <!-- end of container-fluid -->

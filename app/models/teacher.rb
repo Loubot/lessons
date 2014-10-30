@@ -72,10 +72,13 @@ class Teacher < ActiveRecord::Base
     Identity.create(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
   end
 
-  def create_new_with_omniauth(auth)
-    self.email = auth['extra']['raw_info']['email']
-    self.first_name = auth['extra']['raw_info']['first_name'] 
-    self.last_name = auth['extra']['raw_info']['last_name'] 
+  def self.create_new_with_omniauth(auth, source_address)
+    create! do |teacher|
+      teacher.email = auth['extra']['raw_info']['email']
+      teacher.first_name = auth['extra']['raw_info']['first_name'] 
+      teacher.last_name = auth['extra']['raw_info']['last_name']
+      teacher.is_teacher = true if source_address == "http://localhost:3000/teach"
+    end
 
   end
 

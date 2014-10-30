@@ -32,6 +32,7 @@
         <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>
         <br><br>
       <% end %>
+      <%= link_to 'Register with facebook', "/teachers/auth/facebook?origin=#{request.original_url}" %>
     </div> <!-- end of col-md-6 teacher_registration_container -->
     
   </div> <!-- end of row -->
