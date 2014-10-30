@@ -72,4 +72,18 @@ class Teacher < ActiveRecord::Base
     Identity.create(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
   end
 
+  def create_new_with_omniauth(auth)
+    self.email = auth['extra']['raw_info']['email']
+    self.first_name = auth['extra']['raw_info']['first_name'] 
+    self.last_name = auth['extra']['raw_info']['last_name'] 
+
+  end
+
+  def self.check_if_valid
+    where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
+    # where("lat <> nil", "lon <> nil", "rate <> nil", "paypal_email <> nil OR stripe_access_token <> nil")
+  end
+
+  scope :active_and_valid, check_if_valid
+
 end
