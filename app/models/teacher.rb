@@ -77,7 +77,9 @@ class Teacher < ActiveRecord::Base
       teacher.email = auth['extra']['raw_info']['email']
       teacher.first_name = auth['extra']['raw_info']['first_name'] 
       teacher.last_name = auth['extra']['raw_info']['last_name']
-      teacher.is_teacher = true if source_address == "http://localhost:3000/teach"
+      source_address == "/teach" ? teacher.is_teacher = true : teacher.is_teacher = false
+      teacher.add_identity(auth)
+      
     end
 
   end
@@ -89,4 +91,7 @@ class Teacher < ActiveRecord::Base
 
   scope :active_and_valid, check_if_valid
 
+  def password_required?
+    super && self.identities.size > 0
+  end
 end
