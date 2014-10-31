@@ -12,6 +12,7 @@
 
 class Identity < ActiveRecord::Base
   belongs_to :teacher
+  validates :uid, :provider, :teacher_id, presence: true
 
 
   def self.create_with_omniauth(auth)

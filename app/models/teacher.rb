@@ -69,27 +69,28 @@ class Teacher < ActiveRecord::Base
   end
 
   def add_identity(auth)
-    Identity.create(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
+    Identity.create!(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
   end
 
   def self.create_new_with_omniauth(auth, source_address)
-    new do |teacher|
+    teacher = create! do |teacher|
       teacher.email = auth['extra']['raw_info']['email']
       teacher.first_name = auth['extra']['raw_info']['first_name'] 
       teacher.last_name = auth['extra']['raw_info']['last_name']
-      source_address == "/teach" ? teacher.is_teacher = true : teacher.is_teacher = false
-      teacher.add_identity(auth)    
-      
+      source_address == "/teach" ? teacher.is_teacher = true : teacher.is_teacher = false      
     end
 
+    teacher.add_identity(auth)
+    teacher
   end
 
-  def self.check_if_valid
-    where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
+  def self.check_if_valid(params)
+    teachers = where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
+    teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
     # where("lat <> nil", "lon <> nil", "rate <> nil", "paypal_email <> nil OR stripe_access_token <> nil")
   end
 
-  scope :active_and_valid, check_if_valid
+    
 
   def password_required?
     super && self.identities.size > 0
