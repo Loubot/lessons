@@ -43,7 +43,7 @@ class StaticController < ApplicationController
 	def display_subjects
 		
 		teachers = get_search_results(params)
-		@teachers = teachers.check_if_valid(params)	
+		@teachers = teachers.check_if_valid
 	end
 
 	def browse_categories

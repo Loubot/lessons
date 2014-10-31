@@ -84,7 +84,7 @@ class Teacher < ActiveRecord::Base
     teacher
   end
 
-  def self.check_if_valid(params)
+  def self.check_if_valid
     teachers = where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
     teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
     # where("lat <> nil", "lon <> nil", "rate <> nil", "paypal_email <> nil OR stripe_access_token <> nil")
