@@ -37,7 +37,7 @@ class Teacher < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :email, confirmation: true, uniqueness: { case_sensitive: false }
+  #validates :email, confirmation: true, uniqueness: { case_sensitive: false }
 
   has_many :photos, as: :imageable, dependent: :destroy
 
@@ -78,8 +78,7 @@ class Teacher < ActiveRecord::Base
       teacher.first_name = auth['extra']['raw_info']['first_name'] 
       teacher.last_name = auth['extra']['raw_info']['last_name']
       source_address == "/teach" ? teacher.is_teacher = true : teacher.is_teacher = false
-      teacher.add_identity(auth)
-      
+      teacher.add_identity(auth)    
       
     end
 
