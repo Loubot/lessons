@@ -3,7 +3,7 @@
 		<div class="col-md-9 search_results_left search_results_shadow nopadding">
 			
 			<%= silhouette_helper(teacher) %>		
-			<%= image_tag 'eye.png', size: '100x50', class: 'pull-left results_photos back' %>
+			<%= image_tag 'view-more-small.png',  class: 'pull-left results_photos back' %>
 			
 			<div class="search_results_teachers_info">
 				<h4 class="search_results_teachers_name"><%= "#{teacher.first_name} #{teacher.last_name}" %></h4>
@@ -18,7 +18,7 @@
 			<% if !params[:search_position].empty? %>
 				Distance: <br> <%= pluralize(teacher.distance_to(params[:search_position], :mi).round(), 'mile') %>
 			<% else %>
-				No specified location
+				No search location entered
 			<% end %><br>
 			<% if !teacher.reviews.empty? %>
 				<div class="review_container">					
