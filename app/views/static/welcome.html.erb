@@ -19,25 +19,25 @@
   fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 <div  class="container-fluid main_page_search_container">
-  <div class="welcome_page_form__header welcome_sprinkles">
+  <div class="welcome_page_form__header">
     <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
   </div> <!-- end of welcome_page_form__header -->
 
-    <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', class: 'form-inline' do %>
-      <div class="form-group">
-        <%= text_field_tag :search_subjects, params[:search], placeholder: 'What do you want to learn today?', class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
-      </div>
-      <div class="form-group">
-        <%= text_field_tag :search_position, params[:search], placeholder: 'County', class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
-      </div>
-      <div class="container-fluid search_submit_container">
-        <%= submit_tag "I'm ready to learn",type: 'submit', name: 'nil', id: 'search_submit', class: 'btn' %>
-      </div>
-    <% end %>
-  <div class="container-fluid welcome_prompt_container welcome_sprinkles">
-    <div class="col-md-4 welcome_page_prompts"><h4>Connect with local <br>teachers one to one</h4></div>
-    <div class="col-md-4 welcome_page_prompts"><h4>Choose from hundreds of skills</h4></div>
-    <div class="col-md-4 welcome_page_prompts"><h4>Book online lessons with confidence</h4></div>
+  <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', class: 'form-inline' do %>
+    <div class="form-group">
+      <%= text_field_tag :search_subjects, params[:search], placeholder: 'What do you want to learn today?', class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
+    </div>
+    <div class="form-group">
+      <%= text_field_tag :search_position, params[:search], placeholder: 'County', class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
+    </div>
+    <div class="container-fluid search_submit_container">
+      <%= submit_tag "I'm ready to learn",type: 'submit', name: 'nil', id: 'search_submit', class: 'btn' %>
+    </div>
+  <% end %>
+  <div class="container-fluid welcome_prompt_container">
+    <div class="col-md-4 welcome_page_prompts"><h4>&bull; Connect with local <br>teachers one to one</h4></div>
+    <div class="col-md-4 welcome_page_prompts"><h4>&bull; Choose from hundreds of skills</h4></div>
+    <div class="col-md-4 welcome_page_prompts"><h4>&bull; Book online lessons with confidence</h4></div>
   </div> <!-- end of welcome_prompt_container -->
   
   <div id="display_search_results">

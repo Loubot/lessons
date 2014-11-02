@@ -384,9 +384,6 @@ form .glyphicon {
   body{
     width: 100%;
   }
-  .welcome_sprinkles{
-    display: none;
-  }
   #display_teachers_cal_date{
     font-size: 12px;
   }
@@ -442,15 +439,18 @@ form .glyphicon {
   #display_teachers_cal_date{
     font-size: 18px !important;
   }
+  .typeahead.subject{   // keep subject search at 500px above 600px screens */
+    width: 400px;
+  }
+  .typeahead.county{
+    width: 400px;
+  }  
 }
   
 @media (min-width: 992px) {
   .btn_book_now {
 	font-size:12px;
   text-align: center;
-  }
-  .welcome_sprinkles{
-    display: inline;
   }
   #display_teachers_cal_date{
   	font-size: 12px !important;
@@ -513,6 +513,10 @@ form .glyphicon {
 // end of Change navbar collapse to stop skewed buttons
 
 //welcome page*/
+
+.welcome_page_form__header{
+  margin-bottom: 35px;
+}
 
 .welcome_prompt_container{
   margin-top: 25px;

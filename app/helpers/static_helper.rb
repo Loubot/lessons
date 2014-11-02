@@ -41,7 +41,7 @@ module StaticHelper
   end
 
   def get_subject(subject)
-    @subject = subject == '' ? [] : Subject.where('name LIKE ?', "%#{subject}%").first
+    @subject = subject == '' ? [] : Subject.where('name ILIKE ?', "%#{subject}%").first
   end
 end
 

@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
       if URI(request.env['omniauth.origin']).path == "/teach" || URI(request.env['omniauth.origin']).path == "/learn"
         '/'
       else
-        puts "zzzzzzzzzzz #{request.env['omniauth.origin']}"
+        puts "ApplicationController omniOrigin: #{request.env['omniauth.origin']}"
         request.env['omniauth.origin']
       end
     elsif
