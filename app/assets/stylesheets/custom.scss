@@ -201,14 +201,12 @@ hr{
 
 .typeahead.subject{
 	height: 38px;
-	font-size: 22px;
-  
+	font-size: 22px;  
 }
 
 .typeahead.county{
 	height: 38px;
-	font-size: 22px;
-	
+	font-size: 22px;	
 }
 
 .review_container{
@@ -380,138 +378,6 @@ form .glyphicon {
 
 // end of static/browse_categories*/
 
-@media (min-width: 250px){
-  body{
-    width: 100%;
-  }
-  #display_teachers_cal_date{
-    font-size: 12px;
-  }
-  .typeahead.subject{   // keep subject search at 500px above 600px screens */
-    width: 250px;
-  }
-  .typeahead.county{
-    width: 250px;
-  }
-  .subject_pic_row{
-    display: none;
-  }
-}
-
-@media (min-width: 400px) {
-	#display_teachers_cal_date{
-    font-size: 14px;
-  }
-  .typeahead.subject{   // keep subject search at 500px above 600px screens */
-    width: 275px;
-  }
-  .typeahead.county{
-    width: 275px;
-  }  
-}
-
-@media (min-width: 600px) {
-  #display_teachers_cal_date{
-    font-size: 16px;
-  }  
-}
-
-@media (max-width: 649px) {
-	.dhx_cal_date.teachers_area_cal_date{
-  	visibility: hidden;
-  }
-}
-
-@media (min-width: 650px) {
-	#display_teachers_cal_date{
-  	font-size: 17px !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .btn_book_now {
-	  font-size:16px;
-    text-align: center;
-  }
-  .dhx_cal_date.teachers_area_cal_date{
-  	font-size: 14px !important;
-  }
-  #display_teachers_cal_date{
-    font-size: 18px !important;
-  }
-  .typeahead.subject{   // keep subject search at 500px above 600px screens */
-    width: 400px;
-  }
-  .typeahead.county{
-    width: 400px;
-  }  
-}
-  
-@media (min-width: 992px) {
-  .btn_book_now {
-	font-size:12px;
-  text-align: center;
-  }
-  #display_teachers_cal_date{
-  	font-size: 12px !important;
-    padding-left: 2px !important;
-  }
-  .dhx_cal_date.teachers_area_cal_date{
-  	font-size: 13px !important;
-  }
-}
- 
-@media (min-width: 1200px) {
-  .btn_book_now {    
-	font-size:16px;
-	text-align: center;
-  }
-  #display_teachers_cal_date{
-    font-size: 18px !important;    
-  }
-  .subject_pic_row{
-    display:inline;
-  }
-}
-
-//hack for firefox tables*/
-@-moz-document url-prefix() {
-  fieldset { display: table-cell; }
-}
-//hack for firefox tables*/
-
-
-//Change navbar collapse to stop skewed buttons*/
-@media (max-width: 991px) {
-  .navbar-header {
-      float: none;
-  }
-  .navbar-toggle {
-      display: block;
-  }
-  .navbar-collapse {
-      border-top: 1px solid transparent;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-  }
-  .navbar-collapse.collapse {
-      display: none!important;
-  }
-  .navbar-collapse.collapse.in {
-      display: block!important;
-  }
-  .navbar-nav {
-      float: none!important;
-  }
-  .navbar-nav>li {
-      float: none;
-  }
-  .navbar-nav>li>a {
-      padding-top: 10px;
-      padding-bottom: 10px;
-  }
-}
-// end of Change navbar collapse to stop skewed buttons
-
 //welcome page*/
 
 .welcome_page_form__header{
@@ -520,10 +386,6 @@ form .glyphicon {
 
 .welcome_prompt_container{
   margin-top: 25px;
-}
-
-.welcome_page_prompts{
-
 }
 
 .subject_pic_row{
@@ -535,6 +397,14 @@ form .glyphicon {
   padding: 0px 100px;
   
 }
+
+.browse_topics{
+  border-top: 2px solid #CCCCC0;
+  border-bottom: 2px solid #CCCCC0;
+  font-size: 20px;
+  margin: 0 100px 0 100px;
+}
+
 .stock_photo_container{
   padding: 0 !important;
   margin: 0 !important;
@@ -609,6 +479,165 @@ form .glyphicon {
   opacity: 0;
 }
 
-
-
 //end of welcome page
+
+@media (min-width: 250px){
+  body{
+    width: 100%;
+  }
+  .welcome_sprinkles{
+    visibility: hidden;
+  }
+  .welcome_sprinkles_hidden{
+    display: none;
+  }
+  #display_teachers_cal_date{
+    font-size: 12px;
+  }
+  .typeahead.subject{   // keep subject search at 500px above 600px screens */
+    width: 250px;
+  }
+  .typeahead.county{
+    width: 250px;
+  }
+  .subject_pic_row{
+    display: none;
+  }
+  .typeahead.subject{
+    font-size: 14px;  
+  }
+
+  .typeahead.county{
+    font-size: 14px;  
+  }
+}
+
+@media (min-width: 400px) {
+  #display_teachers_cal_date{
+    font-size: 14px;
+  }
+  .typeahead.subject{   // keep subject search at 500px above 600px screens */
+    width: 275px;
+  }
+  .typeahead.county{
+    width: 275px;
+  }
+  .typeahead.subject{
+    font-size: 15px;  
+  }
+
+  .typeahead.county{
+    font-size: 15px;  
+  }
+}
+
+@media (min-width: 600px) {
+  #display_teachers_cal_date{
+    font-size: 16px;
+  }  
+}
+
+@media (max-width: 649px) {
+  .dhx_cal_date.teachers_area_cal_date{
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 650px) {
+  #display_teachers_cal_date{
+    font-size: 17px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn_book_now {
+    font-size:16px;
+    text-align: center;
+  }
+  .dhx_cal_date.teachers_area_cal_date{
+    font-size: 14px !important;
+  }
+  #display_teachers_cal_date{
+    font-size: 18px !important;
+  }
+  .typeahead.subject{   // keep subject search at 500px above 600px screens */
+    width: 400px;
+    font-size:22px;
+  }
+  .typeahead.county{
+    width: 400px;
+    font-size: 22px;
+  }
+
+}
+  
+@media (min-width: 992px) {
+  .btn_book_now {
+  font-size:12px;
+  text-align: center;
+  }
+  #display_teachers_cal_date{
+    font-size: 12px !important;
+    padding-left: 2px !important;
+  }
+  .dhx_cal_date.teachers_area_cal_date{
+    font-size: 13px !important;
+  }
+  .welcome_sprinkles{
+    visibility: visible;
+  }
+  .welcome_sprinkles_hidden{
+    display: inline;
+  }
+}
+ 
+@media (min-width: 1200px) {
+  .btn_book_now {    
+  font-size:16px;
+  text-align: center;
+  }
+  #display_teachers_cal_date{
+    font-size: 18px !important;    
+  }
+  .subject_pic_row{
+    display:inline;
+  }
+}
+
+//hack for firefox tables*/
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+//hack for firefox tables*/
+
+
+//Change navbar collapse to stop skewed buttons*/
+@media (max-width: 991px) {
+  .navbar-header {
+      float: none;
+  }
+  .navbar-toggle {
+      display: block;
+  }
+  .navbar-collapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-collapse.collapse {
+      display: none!important;
+  }
+  .navbar-collapse.collapse.in {
+      display: block!important;
+  }
+  .navbar-nav {
+      float: none!important;
+  }
+  .navbar-nav>li {
+      float: none;
+  }
+  .navbar-nav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+}
+// end of Change navbar collapse to stop skewed buttons
