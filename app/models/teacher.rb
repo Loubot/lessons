@@ -56,6 +56,8 @@ class Teacher < ActiveRecord::Base
 
   geocoded_by :address, :latitude  => :lat, :longitude => :lon
 
+  self.per_page = 5
+
   def self.address
     
   end
@@ -72,6 +74,10 @@ class Teacher < ActiveRecord::Base
     Identity.create!(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
   end
 
+  def is_teacher_valid
+    self.lat && self.lon && self.rate && self.paypal_email != "" && self.stripe_access_token != ""    
+  end
+
   def self.create_new_with_omniauth(auth, source_address)
     teacher = create! do |teacher|
       teacher.email = auth['extra']['raw_info']['email']
@@ -84,6 +90,7 @@ class Teacher < ActiveRecord::Base
     teacher
   end
 
+  
   def self.check_if_valid
     teachers = where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
     teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")

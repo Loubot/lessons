@@ -40,6 +40,8 @@ end
 
 gem 'thin', 					group: :development
 
+gem 'will_paginate'
+
 gem 'better_errors'
 
 gem 'binding_of_caller'

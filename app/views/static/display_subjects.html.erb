@@ -27,6 +27,7 @@
 	No results found
 <% else %>
 	<div id="display_search_results">
+    <%= will_paginate @teachers, :style => 'color:blue' %>
 		<%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
 	</div>
 <% end %>
