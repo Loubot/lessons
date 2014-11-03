@@ -38,6 +38,7 @@ class Teacher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   #validates :email, confirmation: true, uniqueness: { case_sensitive: false }
+  after_validation :reverse_geocode
 
   has_many :photos, as: :imageable, dependent: :destroy
 
@@ -54,12 +55,13 @@ class Teacher < ActiveRecord::Base
   has_many :identities, dependent: :destroy
   has_one :user_cart
 
-  geocoded_by :address, :latitude  => :lat, :longitude => :lon
+  geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
+  reverse_geocoded_by :lat, :lon
 
   self.per_page = 1
 
-  def self.address
-    
+  def full_street_address
+    self.address
   end
 
   def full_name

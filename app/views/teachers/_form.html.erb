@@ -35,7 +35,12 @@
 					  				</tr>
 					  				<tr>
 					  					<td>Address:</td>
-					  					<td><%= @context.address %></td>
+					  					<% if @context.address == "" %>
+					  						<td><%= link_to "Please enter your location", your_location_teacher_path(current_teacher), 'data-no-turbolink' => true %></td>
+					  					<% else %>
+					  						<td><%= @context.address %></td>
+					  					<% end %>
+					  					
 					  				</tr>
 					  			</table>
 					  		</div> <!-- end of table-responsive -->
