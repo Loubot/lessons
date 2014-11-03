@@ -56,7 +56,7 @@ class Teacher < ActiveRecord::Base
 
   geocoded_by :address, :latitude  => :lat, :longitude => :lon
 
-  self.per_page = 5
+  self.per_page = 1
 
   def self.address
     
@@ -75,7 +75,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    self.lat && self.lon && self.rate && self.paypal_email != "" && self.stripe_access_token != ""    
+    self.lat && self.lon && self.rate && (self.paypal_email != "" || self.stripe_access_token != "" )   
   end
 
   def self.create_new_with_omniauth(auth, source_address)
