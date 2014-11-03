@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
 			flash[:success] = "Category created successfully"
 			redirect_to :back
 		else
-			flash[:danger] = "Couldn't delete category @category.errors.full_messages"
+			flash[:danger] = "Couldn't delete category #{@category.errors.full_messages}"
 			redirect_to :back
 		end
 	end
@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
 			flash[:success] = "Category deleted successfully"
 			redirect_to :back
 		else
-			flash[:danger] = "Couldn't delete category @category.errors.full_messages"
+			flash[:danger] = "Couldn't delete category #{@category.errors.full_messages}"
 			redirect_to :back
 		end
 	end
