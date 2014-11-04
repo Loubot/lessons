@@ -1,0 +1,25 @@
+
+  <div class="row subject_pic_row" style="display: none;">
+    <div class="col-md-3 col-sm-6 subject_pic_container">
+      <div id="guitar">
+        <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: 'stock_photo_container' do %>
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of guitar -->
+    </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 col-sm-6 subject_pic_container">
+      <div id="drums">
+        <%= link_to display_subjects_path(search_subjects: 'drums', search_position: ''), class: 'stock_photo_container' do %>
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+      <% end %>
+      </div><!-- end of drums -->
+    </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 col-sm-6 subject_pic_container">
+      <div id="piano">
+        <%= link_to display_subjects_path(search_subjects: 'piano', search_position: ''), class: 'stock_photo_container' do %>
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+      <% end %>
+      </div><!-- end of piano -->
+    </div> <!-- end of subject_pic_container -->
+
+  </div> <!-- end of subject_pic_row -->

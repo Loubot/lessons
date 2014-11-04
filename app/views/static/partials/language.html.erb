@@ -1,0 +1,26 @@
+<div class="row subject_pic_row" style="display: none;">
+    <div class="col-md-3 subject_pic_container">
+      <div id="french">
+        <%= link_to display_subjects_path(search_subjects: 'french', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of french -->      
+    </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 subject_pic_container">
+      <div id="italian">
+        <%= link_to display_subjects_path(search_subjects: 'italian', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of italian -->      
+    </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 subject_pic_container">
+      <div id="german">
+        <%= link_to display_subjects_path(search_subjects: 'german', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of german -->      
+    </div> <!-- end of subject_pic_container -->
+  </div><!-- end of subject_pic_row -->
