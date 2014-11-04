@@ -136,6 +136,7 @@ teachersInfoReady = ->
   if $(".stock_photos_container").length > 0
     #/// ajax load browse options
     $(document).on 'click', '.browse_option', (e) ->
+      e.preventDefault()
       $.ajax
         url: 'refresh-welcome'
         data: { page: $(@).attr('id') }
@@ -147,9 +148,9 @@ teachersInfoReady = ->
           $('#main_page').height(868)
           $(html).appendTo('.stock_photos_container').show('slow')
           
-      e.preventDefault()
-      return false
       
+      return false
+
     $('.stock_photo_container').mouseover ->
       $(this).find('.welcome_subject_image').animate opacity: .7, 50
 
