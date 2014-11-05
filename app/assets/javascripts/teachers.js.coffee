@@ -134,16 +134,19 @@ teachersInfoReady = ->
 
 # ///////////welcome page
   if $(".stock_photos_container").length > 0
+    h = $('#main_page').height()
+    $('#main_page').height(h)
+    
     #/// ajax load browse options
     $(document).on 'click', '.browse_option', (e) ->
+      $('.browse_option').removeClass 'btn btn-success'
+      $(@).addClass 'btn btn-success'
       e.preventDefault()
       $.ajax
         url: 'refresh-welcome'
         data: { page: $(@).attr('id') }
         type: 'get'
         success: (html) ->
-          h = $('#main_page').height()
-          $('#main_page').height(868)
           $('.stock_photos_container').empty()
           
           $(html).appendTo('.stock_photos_container').show('slow')
