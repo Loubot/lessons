@@ -18,8 +18,7 @@
                 <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</buton></li>
                 
               <% else %>
-                <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>
-                
+                <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                
               <% end %>
           </ul>
         </div> <!-- end of panel panel_info  -->   
@@ -39,31 +38,37 @@
       </div> <!-- end of panel-body -->
     </div> <!-- end of panel panel-default -->
     
-    <div class="panel panel-default">
-      <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
-        
-      </div> <!-- end of panel heading -->
-      <div class="panel-body">
-        <ul class="list-group">     
-          <%= render partial: 'partials/experience', collection: @teacher.experiences %>
-        </ul>
-      </div> <!-- end of panel-body -->
-    </div> <!-- end of panel panel-default -->
-
-    <div class="container-fluid nopadding">
+    <% if !@teacher.experiences.empty? %>
       <div class="panel panel-default">
-        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
-        
-      </div> <!-- end of panel heading -->
-
+        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
+          
+        </div> <!-- end of panel heading -->
         <div class="panel-body">
-          <ul class="list-group">
-            <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
-          </ul> <!-- end of list-group -->
+          <ul class="list-group">     
+            <%= render partial: 'partials/experience', collection: @teacher.experiences %>
+          </ul>
         </div> <!-- end of panel-body -->
-      </div> <!-- end of panel-default -->
-      
-    </div> <!-- end of container-fluid -->
+      </div> <!-- end of panel panel-default -->
+    <% end %>
+
+
+    <% if !@teacher.qualifications.empty? %>
+      <div class="container-fluid nopadding">
+        <div class="panel panel-default">
+          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
+          
+        </div> <!-- end of panel heading -->
+
+          <div class="panel-body">
+            <ul class="list-group">
+              <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
+            </ul> <!-- end of list-group -->
+          </div> <!-- end of panel-body -->
+        </div> <!-- end of panel-default -->
+        
+      </div> <!-- end of container-fluid -->
+    <% end %>
+
     <% if !@teacher.reviews.empty? %>
       <div class="container-fluid nopadding">
         <table class="table table-bordered">
