@@ -15,8 +15,11 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     # sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     
-    if request.env['omniauth.origin']      
-      if URI(request.env['omniauth.origin']).path == "/teach" || URI(request.env['omniauth.origin']).path == "/learn"
+    if request.env['omniauth.origin']
+      if URI.parse(URI.encode(request.env['omniauth.origin'])).path == '/display-subjects' #create display_subjects url with params
+        params = request.env['omniauth.params']
+        display_subjects_path(:search_subjects => params['search_subjects'],:search_position => params['search_position'])
+      elsif URI(request.env['omniauth.origin']).path == "/teach" || URI(request.env['omniauth.origin']).path == "/learn"
         '/'
       else
         puts "ApplicationController omniOrigin: #{request.env['omniauth.origin']}"
