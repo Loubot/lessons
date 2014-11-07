@@ -1,4 +1,5 @@
-class StaticController < ApplicationController	
+class StaticController < ApplicationController
+	require 'will_paginate/array'	
 
 	include StaticHelper	
 	

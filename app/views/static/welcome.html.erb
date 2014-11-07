@@ -23,15 +23,15 @@
     <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
   </div> <!-- end of welcome_page_form__header -->
 
-  <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', class: 'form-inline' do %>
+  <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
     <div class="form-group">
-      <%= text_field_tag :search_subjects, params[:search], placeholder: 'What do you want to learn today?', class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
+      <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
     </div>
     <div class="form-group">
       <%= text_field_tag :search_position, params[:search], placeholder: 'County', class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
     </div>
     <div class="container-fluid search_submit_container">
-      <%= submit_tag "I'm ready to learn",type: 'submit', name: 'nil', id: 'search_submit', class: 'btn' %>
+      <%= submit_tag "I'm ready to learn",type: 'submit', name: 'submit', id: 'search_submit', class: 'btn' %>
     </div>
   <% end %>
   <div class="container-fluid welcome_prompt_container">
