@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head> 
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-  <%= include_gon %>
-  <title>Lessons</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <%= yield :head %>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <head> 
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <%= include_gon %>
+    <title>Lessons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= yield :head %>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-  <%= render 'partials/shim' %>
-</head>
-<body id="standard_layout">
-	
-	<div class="container main_page_nav">
-		<%= render 'partials/home_page_nav' %>
-	</div>
-	
-	
-  <div class="container main_page_containers" id="main_page">
-    <%= render 'partials/notices' %>
+    <%= render 'partials/shiv' %>
+  </head>
+  <body id="standard_layout">
+  	
+  	<div class="container main_page_nav">
+  		<%= render 'partials/home_page_nav' %>
+  	</div>
+  	
+  	
+    <div class="container main_page_containers" id="main_page">
+      <%= render 'partials/notices' %>
 
-    <%= yield %>
-  </div>
-		
-	 	
-		
-	
-</body>
+      <%= yield %>
+    </div>
+  		
+  	 	
+  		
+  	
+  </body>
 </html>
