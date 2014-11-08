@@ -188,7 +188,7 @@ class PaymentsController < ApplicationController
           :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
-            { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+            { :email => 'louisangelini@gmail.com',  amount: 10 }
           ]
         ) do |response|
 

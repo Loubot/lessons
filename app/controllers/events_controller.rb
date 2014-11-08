@@ -66,6 +66,7 @@ class EventsController < ApplicationController
 															 params: event_params, teacher_email: @teacher.email,
 															 student_email: current_teacher.email,
 															 student_name: "#{current_teacher.first_name} #{current_teacher.last_name}")
+			@cart.save!
 			p "cart  #{@cart.inspect}"
 		else
 			@teacher = @event.errors.full_messages

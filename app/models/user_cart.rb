@@ -23,8 +23,10 @@ class UserCart < ActiveRecord::Base
 
   before_update :save_tracking_id
   before_save :save_tracking_id
+  before_validation :save_tracking_id
 
   def save_tracking_id
+    puts "blvvalvavl"
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
 
