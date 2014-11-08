@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
         puts "ApplicationController omniOrigin: #{request.env['omniauth.origin']}"
         request.env['omniauth.origin']
       end
-    elsif URI(request.referer).path == '/teachers/sign_in'
+    elsif URI(request.referer).path ==  "/teachers/password/edit" ||  URI(request.referer).path == '/teachers/sign_in'
       '/'
     elsif URI(request.referer).path == teach_path || URI(request.referer).path == learn_path
       root_path 

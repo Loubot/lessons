@@ -40,14 +40,16 @@ class TeacherMailer < ActionMailer::Base
       message = {  
        :subject=> "Password reset",  
        :from_name=> "Learn Your Lesson",  
-       :text=> %Q(<html>Reset your password #{record} #{token} #{opts}</html>),  
+       :text=> %Q(<html>Reset your password #{record} #{token} #{opts} <br>
+
+                <a>http://localhost:3000/teachers/password/edit?reset_password_token=#{token}</a></html>),  
        :to=>[  
          {  
            :email=> record.email,
            :name=> "#{record.full_name}"  
          }  
        ],  
-       :html=> %Q(<html>Reset your password #{record} #{token} #{opts}</html>),  
+       :html=> %Q(<html>http://localhost:3000/teachers/password/edit?reset_password_token=#{token}</html>),  
        :from_email=> "learn@b.com"  
       }  
       sending = m.messages.send message  
