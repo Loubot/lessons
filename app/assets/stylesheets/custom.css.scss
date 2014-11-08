@@ -69,6 +69,7 @@ hr{
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus{
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#419741', endColorstr='#398539');
   background: -webkit-linear-gradient(#419741,#398539);
   background: -o-linear-gradient(#419741,#398539); 
   background: -moz-linear-gradient(#419741,#398539); 
@@ -142,6 +143,7 @@ hr{
 
 #search_submit{
   color: #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#2b99cf', endColorstr='#1a5d7e');
   background: linear-gradient(#2b99cf,#1a5d7e);
   background: -webkit-linear-gradient(#2b99cf,#1a5d7e);
   background: -o-linear-gradient(#2b99cf,#1a5d7e); 
@@ -151,6 +153,7 @@ hr{
 
 #search_submit:hover{
   color: #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#288bbd', endColorstr='#1a5d7e');
   background: linear-gradient(#288bbd,#1a5d7e) !important;
   background: -webkit-linear-gradient(#288bbd,#1a5d7e);
   background: -o-linear-gradient(#288bbd,#1a5d7e); 
@@ -306,6 +309,7 @@ hr{
 // teachers/show-teacher-to-user*/
 .btn_book_now{
   color: white;
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5cb85c', endColorstr='#398439');
   background: -webkit-linear-gradient(#5cb85c, #398439);
   background: -o-linear-gradient(#5cb85c, #398439); 
   background: -moz-linear-gradient(#5cb85c, #398439); 
@@ -313,6 +317,7 @@ hr{
 }
 .btn_book_now:hover{
   color: #fff;
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#48a548', endColorstr='#3f923f');
   background: -webkit-linear-gradient(#48a548, #3f923f);
   background: -o-linear-gradient(#48a548, #3f923f); 
   background: -moz-linear-gradient(#48a548, #3f923f); 
