@@ -77,7 +77,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    self.lat && self.lon && self.rate && (self.paypal_email != "" || self.stripe_access_token != "" )   
+    self.lat && self.lon && self.rate && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil 
   end
 
   def self.create_new_with_omniauth(auth, source_address)
