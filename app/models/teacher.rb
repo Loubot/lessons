@@ -86,10 +86,9 @@ class Teacher < ActiveRecord::Base
     error_message_array.push "location not entered" if !self.lat || !self.lon
     error_message_array.push "rate not set" if !self.rate
     error_message_array.push "profile picture not set" if !self.profile
-    error_message_array.push "payment option not specified" if !self.paypal_email || !self.stripe_access_token
-    error_message_array = error_message_array.join(',').capitalize if !error_message_array.empty?
+    error_message_array.push "payment option not specified" if !self.paypal_email || !self.stripe_access_token    
     
-    error_message_array.empty? ? false : error_message_array.insert(0, "Your profile is not visible: ")
+    error_message_array.empty? ? false : error_message_array.join(',').capitalize.insert(0, "Your profile is not visible: ")
   end
 
   def self.create_new_with_omniauth(auth, source_address)
