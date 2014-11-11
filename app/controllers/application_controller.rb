@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     logger.info "request.referer #{request.referer}"
-    flash[:danger] = resource.is_teacher_valid_message if resource.is_teacher_valid_message
+    flash[:danger] = resource.is_teacher_valid_message if resource.is_teacher_valid_message && resource.is_teacher
     
     # sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     if request.env['omniauth.origin']

@@ -79,7 +79,11 @@ class TeachersController < ApplicationController
 
 	def teacher_subject_search
 		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
-	end	
+	end
+
+	def lessons_taught
+		@events = current_teacher.events.order('end_time DESC')
+	end
 
 
 	private

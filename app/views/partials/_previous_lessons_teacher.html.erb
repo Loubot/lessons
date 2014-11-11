@@ -1,0 +1,10 @@
+<div class="panel-heading">
+  <h4 class="panel-title">
+    <a href="#<%= event.id.to_s.parameterize.underscore %>" data-parent="#accordian" data-toggle="collapse">Student name: <%= event.student_name %></a>
+  </h4>
+</div>
+<div id="<%= event.id.to_s.parameterize.underscore %>" class="panel-collapse collapse">
+  <div class="panel-body">
+    Date: <%= event.start_time.strftime("%d/%m/%Y %H:%M") %>
+  </div> <!-- end of panel-body -->
+</div>

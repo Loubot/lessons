@@ -1,0 +1,7 @@
+<div class="panel panel-default">
+  <% if current_teacher.is_teacher %>
+    <%= render partial: 'partials/previous_lessons_teacher', collection: current_teacher.events.order('start_time DESC'), as: :event %>
+  <% else %>
+    <%= render partial: 'partials/previous_lessons_student', collection: current_teacher.events, as: :event %>
+  <% end %>
+</div>

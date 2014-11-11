@@ -24,6 +24,9 @@ class Event < ActiveRecord::Base
 
   before_save :add_name
 
+def student_name
+  Teacher.find(self.student_id).full_name
+end
 
 private
 
