@@ -2,7 +2,7 @@ class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
-	before_action :check_is_teacher, except: [:show_teacher]
+	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons]
 	include TeachersHelper
 
 	def check_is_teacher
@@ -81,8 +81,12 @@ class TeachersController < ApplicationController
 		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
-	def lessons_taught
-		@events = current_teacher.events.order('end_time DESC')
+	def previous_lessons
+		if !current_teacher.is_teacher
+			render layout: 'application'
+		else 
+			render layout: 'teacher_layout'
+		end
 	end
 
 
