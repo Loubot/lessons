@@ -16,4 +16,9 @@ class Review < ActiveRecord::Base
 
   validates :rating, inclusion: 1..5
   validates :teacher_id, :rating, :user_id, presence: true
+  
+
+  def add_review_to_event(id)
+    Event.find(id).update_attributes(review_id: self.id)
+  end
 end
