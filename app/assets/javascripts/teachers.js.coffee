@@ -90,6 +90,14 @@ teachersInfoReady = ->
     
       source: counties.ttAdapter()
 
+  if $('.review_lesson').length > 0
+    $('.review_lesson_input').rating
+      filled: "glyphicon glyphicon-thumbs-up"
+      empty: "glyphicon glyphicon-thumbs-down"
+
+    $('.review_lesson_input').on 'change', ->
+      $('.rating_value').text (parseInt($(@).val()) + 1) + " thumbs up"
+
         
 
   $(document).on 'change', '.form-control.distance_rate', ->

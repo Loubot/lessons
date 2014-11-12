@@ -3,6 +3,7 @@ Rails.application.routes.draw do
                                             passwords: 'passwords',
                                          omniauth_callbacks: "omniauth_callbacks" }
   resources   :teachers, only: [:update, :edit, :destroy] do
+
   	member do 
   		get     '/teachers-area'		      =>  'teachers#teachers_area'
       get     '/edit-appointments'      =>  'teachers#edit_appointments'
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     resources :events
 
   end
+  
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
       delete  '/remove-from-teacher'  =>  'subjects#remove_subject_from_teacher'
     end
   end
-
+  resources :reviews, only: [:create, :destroy]
   get         '/learn'                  =>  'static#learn'
   get         '/teach'                  =>  'static#teach'
   get         '/welcome'                =>  'static#welcome'
