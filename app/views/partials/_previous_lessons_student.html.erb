@@ -6,6 +6,6 @@
 <div id="<%= event.id.to_s.parameterize.underscore %>" class="panel-collapse collapse">
   <div class="panel-body">
     Date: <%= event.start_time.strftime("%d/%m/%Y") %>
-    <%= render 'partials/create_review', event_id: event.teacher_id if !event.review %> 
+    <%= render 'partials/create_review', event: event if !event.review %> 
   </div> <!-- end of panel-body -->
 </div>

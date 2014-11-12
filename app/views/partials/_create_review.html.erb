@@ -1,8 +1,10 @@
 Add a review of your lesson. Be nice please!
 <%= form_tag reviews_path, class: 'review_lesson', method: 'post' do |f| %>
-  <%= text_area 'review[comment]', nil,  placeholder: "Comment", size: '50x5' %>
+  <%= text_area_tag 'review[comment]', nil,  placeholder: "Comment", size: '50x5' %>
   <%= hidden_field_tag 'help',nil,  {class: 'review_lesson_input'} %><span class="rating_value"></span>
   <%= hidden_field_tag 'review[user_id]', current_teacher.id %>
-  <%= hidden_field_tag 'review[teacher_id]', event_id %>
+  <%= hidden_field_tag 'review[teacher_id]', event.teacher_id %>
+  <%= hidden_field_tag 'review[event_id]', event.id %>
+
   <%= submit_tag  %>
 <% end %>
