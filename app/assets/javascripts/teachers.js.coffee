@@ -97,6 +97,7 @@ teachersInfoReady = ->
 
     $('.review_lesson_input').on 'change', ->
       $('.rating_value').text (parseInt($(@).val()) + 1) + " thumbs up"
+      $(@).closest('.review_lesson').append """<input name="review[rating]" type="hidden" value="#{$(@).val()}">"""
 
         
 
