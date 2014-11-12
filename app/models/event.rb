@@ -24,6 +24,8 @@ class Event < ActiveRecord::Base
 
   before_save :add_name
 
+  scope :student_events, ->(student_id) { where(student_id: student_id).order("end_time DESC")}
+
 def student_name
   Teacher.find(self.student_id).full_name
 end
