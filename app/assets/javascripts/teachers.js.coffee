@@ -188,7 +188,7 @@ teachersInfoReady = ->
 #////////// end of teachers/form photo partial enable dismissable popover
 
 #///////////Temporary review script previous_lessons_teacher
-  $('#plcaecat').mouseover ->    
+  $('#plcaecat').mouseover ->  
     $('#plcaecat').popover(content: 'hello')
     $('#plcaecat').popover 'show'
   $('#plcaecat').mouseleave ->

@@ -4,6 +4,6 @@
   <% if current_teacher.is_teacher %>
     <%= render partial: 'partials/previous_lessons_teacher', collection: current_teacher.events.order('end_time DESC'), as: :event %>
   <% else %>
-    <%= render partial: 'partials/previous_lessons_student', collection: current_teacher.events.student_events(current_teacher.id), as: :event %>
+    <%= render partial: 'partials/previous_lessons_student', collection: Event.student_events(current_teacher.id), as: :event %>
   <% end %>
 </div>
