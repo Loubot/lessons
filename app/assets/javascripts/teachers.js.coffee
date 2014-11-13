@@ -190,7 +190,6 @@ teachersInfoReady = ->
 
 #///////////Temporary review script previous_lessons_teacher
   $('#plcaecat').mouseover ->  
-    $('#plcaecat').popover(content: 'hello')
     $('#plcaecat').popover 'show'
   $('#plcaecat').mouseleave ->
     $('#plcaecat').popover 'hide'
