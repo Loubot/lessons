@@ -6,6 +6,10 @@
 <div id="<%= event.id.to_s.parameterize.underscore %>" class="panel-collapse collapse">
   <div class="panel-body">
     Date: <%= event.start_time.strftime("%d/%m/%Y") %>
-    <%= render 'partials/create_review', event: event if !event.review %> 
+    <% if !event.review %>    
+      <%= render 'partials/create_review', event: event if !event.review %>
+    <% else %>
+      <span class="pull-right">Review already created</span>
+    <% end %>
   </div> <!-- end of panel-body -->
 </div>

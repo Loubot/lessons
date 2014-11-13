@@ -96,8 +96,9 @@ teachersInfoReady = ->
       empty: "glyphicon glyphicon-thumbs-down"
 
     $('.review_lesson_input').on 'change', ->
-      $('.rating_value').text (parseInt($(@).val()) + 1) + " thumbs up"
-      $(@).closest('.review_lesson').append """<input name="review[rating]" type="hidden" value="#{$(@).val()}">"""
+      rating = parseInt($(@).val()) + 1
+      $('.rating_value').text (rating) + " thumbs up"
+      $(@).closest('.review_lesson').append """<input name="review[rating]" type="hidden" value="#{rating}">"""
 
         
 
