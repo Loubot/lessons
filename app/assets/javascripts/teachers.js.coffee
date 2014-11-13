@@ -187,6 +187,14 @@ teachersInfoReady = ->
     
 #////////// end of teachers/form photo partial enable dismissable popover
 
+#///////////Temporary review script previous_lessons_teacher
+  $('#plcaecat').mouseover ->    
+    $('#plcaecat').popover(content: 'hello')
+    $('#plcaecat').popover 'show'
+  $('#plcaecat').mouseleave ->
+    $('#plcaecat').popover 'hide'
+#////////// end of Temporary review script previous_lessons_teacher
+
 
 #////////////////Teachers area block book checkbox
 $(document).on 'change', '#Multiple', ->

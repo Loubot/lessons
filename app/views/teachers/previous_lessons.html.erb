@@ -1,4 +1,6 @@
-<div class="panel panel-default">
+<h2>List of your previous lessons <small>Click to expand</small></h2>
+<div class="panel panel-default">  
+
   <% if current_teacher.is_teacher %>
     <%= render partial: 'partials/previous_lessons_teacher', collection: current_teacher.events.order('end_time DESC'), as: :event %>
   <% else %>

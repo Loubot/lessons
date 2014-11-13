@@ -6,5 +6,8 @@
 <div id="<%= event.id.to_s.parameterize.underscore %>" class="panel-collapse collapse">
   <div class="panel-body">
     Date: <%= event.start_time.strftime("%d/%m/%Y %H:%M") %>
+    <% if event.review %>
+      <button id="plcaecat" data-content= "<%= event.review.comment %>" data-container="body">hello</button>
+    <% end %>
   </div> <!-- end of panel-body -->
 </div>
