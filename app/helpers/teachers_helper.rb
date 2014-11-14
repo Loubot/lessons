@@ -85,4 +85,12 @@ module TeachersHelper
 		end
   end
 
+  def star_helper(i)
+  	html = ""
+  	i.times do 
+  		html << "<span style='color:#ffaa00;font-size:140%;'>★</span>"
+  	end
+  	return html.html_safe
+  end
+
 end
