@@ -12,6 +12,12 @@ class ReviewsController < ApplicationController
     redirect_to :back
   end
 
+  def destroy
+    Review.find(params[:id]).destroy
+    flash[:success] = "Review deleted"
+    redirect_to :back
+  end
+
   private 
 
     def review_params

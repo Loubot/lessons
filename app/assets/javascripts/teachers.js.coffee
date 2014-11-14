@@ -189,12 +189,23 @@ teachersInfoReady = ->
 #////////// end of teachers/form photo partial enable dismissable popover
 
 #///////////Temporary review script previous_lessons_teacher
-  $('.review_hover').mouseover ->  
-    $(@).popover placement: 'left'
-    $(@).popover 'show'
+  $("html").click (e) ->
+      $(".review_hover").popover "hide"
+      
 
-  $('.review_hover').mouseleave ->
-    $(@).popover 'hide'
+    $(".review_hover").popover(
+      html: true
+      trigger: "manual"
+      placement: 'left'
+    ).click (e) ->
+      $('.review_hover').not(this).popover('hide')
+      $(this).popover "toggle"
+      e.stopPropagation()
+  
+
+
+  # $('.review_hover').mouseleave ->
+  #   $(@).popover 'hide'
 #////////// end of Temporary review script previous_lessons_teacher
 
 

@@ -9,7 +9,8 @@
     <% if !event.review %>    
       <%= render 'partials/create_review', event: event if !event.review %>
     <% else %>
-      <span class="pull-right">Review already created</span>
+      <span class="pull-right review_hover" data-html="true" data-content="<%= event.review.comment %> <a class='btn btn-danger btn-xs' href='<%= review_path(event.review.id) %>' data-method='DELETE' confirm('Delete review?')>Delete</a>" data-title="<%= event.student_name %>  <%= star_helper(event.review.rating).html_safe %>" data-container="body">Review already created</span>
     <% end %>
   </div> <!-- end of panel-body -->
 </div>
+
