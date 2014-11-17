@@ -82,6 +82,8 @@ gem 'omniauth-facebook'
 
 gem "asset_sync"
 
+gem 'paypal-sdk-adaptiveaccounts'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

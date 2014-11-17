@@ -14,6 +14,16 @@ class PaymentsController < ApplicationController
     create_paypal(params) if params[:paypal].present?
   end
 
+  def paypal_verify
+    puts params
+    PayPal::SDK::Core::Config.load('config/paypal.yml',  ENV['RACK_ENV'] || 'development')
+    api = PayPal::SDK::AdaptiveAccounts::API.new
+    get_verified_status_request = api.build_get_verified_status( :emailAddress => "lllouis@yahoo.com", :matchCriteria => "NONE" )
+    response = api.get_verified_status(get_verified_status_request)
+    puts "verified #{response.responseEnvelope.ack}"
+    redirect_to :back
+  end
+
   def store_paypal
     
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
