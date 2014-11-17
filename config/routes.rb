@@ -45,7 +45,6 @@ Rails.application.routes.draw do
   post        'store-paypal'            =>  'payments#store_paypal'
   post        'stripe-create'           =>  'payments#stripe_create'
   post        '/store-stripe'           =>  'payments#store_stripe'
-  post        'paypal-verify'           =>  'payments#paypal_verify'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
 
