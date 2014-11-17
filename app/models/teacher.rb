@@ -108,11 +108,18 @@ class Teacher < ActiveRecord::Base
     teachers = where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
     teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
     # where("lat <> nil", "lon <> nil", "rate <> nil", "paypal_email <> nil OR stripe_access_token <> nil")
-  end
-
-    
+  end    
 
   def password_required?
     super && self.identities.size > 0
+  end
+
+  def paypal_verify(params)
+    api = PayPal::SDK::AdaptiveAccounts::API.new
+    get_verified_status_request = api.build_get_verified_status( :emailAddress => params[:teacher][:paypal_email], :matchCriteria => "NONE" )
+    response = api.get_verified_status(get_verified_status_request)
+    self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?
+    response
+    
   end
 end

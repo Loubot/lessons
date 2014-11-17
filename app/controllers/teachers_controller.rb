@@ -25,7 +25,7 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@context = Teacher.find(current_teacher)
+		@context = current_teacher
 		@photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
@@ -36,21 +36,28 @@ class TeachersController < ApplicationController
 	end
 	
 	def update		
-		@teacher = Teacher.find(current_teacher)
+		@teacher = current_teacher
+		if params[:teacher][:paypal_email]
+			if current_teacher.paypal_verify(params).success?
+				flash[:success] = "Paypal email updated ok"
+			else
+				flash[:danger] = "That is not a valid Paypal merchant email"
+			end
+			redirect_to :back and return
+		end
+
+
 		if @teacher.update_attributes(teacher_params)
 			flash[:success] = 'Details updated ok'
 			
 		end
-		# if params[:teacher]['opening(5i)']
-		# 	(teacher_params = addTime(params)) 
-		# end
 		redirect_to :back
 		
 	end
 
 	def teachers_area
 		@params = params
-		@teacher = Teacher.find(current_teacher)
+		@teacher = current_teacher
 		gon.events = format_times(@teacher.events)
 		gon.openingTimes = open_close_times(@teacher.openings.first)
 		@event = @teacher.events.new
@@ -59,19 +66,19 @@ class TeachersController < ApplicationController
 	end
 
 	def qualification_form
-		@context = Teacher.find(current_teacher)
+		@context = current_teacher
 		@qualifications = Qualification.where(teacher_id: current_teacher.id)
 		@qualification = @context.qualifications.new
 	end
 
 	def your_location
-		@teacher = Teacher.find(current_teacher)
+		@teacher = current_teacher
 		gon.location = [@teacher.lat,@teacher.lon]
 	end
 
 	def change_profile_pic
 		@params = params
-		@teacher = Teacher.find(current_teacher)
+		@teacher = current_teacher
 		@teacher.update_attributes(profile: params[:id])
 		flash[:notice] = 'Profile picture updated'
 		redirect_to :back
