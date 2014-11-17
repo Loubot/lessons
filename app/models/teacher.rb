@@ -58,7 +58,7 @@ class Teacher < ActiveRecord::Base
   geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
   reverse_geocoded_by :lat, :lon
 
-  self.per_page = 1
+  self.per_page = 5
 
   def full_street_address
     self.address
