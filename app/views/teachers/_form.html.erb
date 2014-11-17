@@ -131,7 +131,12 @@
 					
 				</div>  end  of panel-body -->
 				<ul class="list-group clearfix">
-					<li class="list-group-item"><%= @context.overview %></li>
+					<% if !@context.overview.empty? %>
+						<li class="list-group-item"><%= @context.overview %></li>
+					<% else %>
+						<li class="list-group-item">Please fill in your overview</li>
+					<% end %>
+					
 					<li class="list-group-item">
 						Your rate: <span class="pull-right"><%= current_teacher.rate == nil ? "No price set yet" : number_to_currency(@context.rate,unit:'€') %></span>
 					</li>
