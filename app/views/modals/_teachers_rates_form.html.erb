@@ -1,0 +1,28 @@
+
+
+<div class="modal fade" id="teachers_rates_modal" tab-index="-1" role="dialog" aria-labelledby="teachers_rates" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="teachers_rates_modal_title">Edit rates</h4>
+      </div>
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <% @context.subjects.each do |s| %>
+              <label><%= s.name %> rate: </label>
+              <%= form_tag teacher_path(id: current_teacher), method: 'put', remote: true do %>
+                <%= select_tag "rate_select", "<option>Home rate:</option><option>Travel rate:</option>".html_safe,  class: 'form_input' %>
+                <%= text_field_tag 'rate', nil, placeholder: 'Your rate' %>
+                <%= hidden_field_tag 'teacher_id', current_teacher.id %>
+                <%= hidden_field_tag 'subject_id', s.id %>
+                <%= submit_tag 'Submit', class: 'btn' %>
+              <% end %>
+            <% end %>           
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

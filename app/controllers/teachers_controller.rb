@@ -32,13 +32,14 @@ class TeachersController < ApplicationController
 		@photos = @context.photos.all
 		@experience = Experience.new
 		@experiences = @context.experiences
-		@subjects = @context.subjects
+		@subjects = @context.subjects.includes(:price)
 	end
 	
 	def update
 		if params[:rate_select]
 			Teacher.add_prices(params)
-			render status: 200, nothing: true and return
+			flash[:success] = "Rate updated"
+			render status: 200 and return
 		end
 		@teacher = current_teacher
 		if params[:teacher][:paypal_email]
@@ -89,7 +90,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

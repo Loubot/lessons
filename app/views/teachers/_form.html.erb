@@ -151,13 +151,16 @@
 			<div class="panel panel-default">
 				<div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Your rates</h2>
 					<div class="btn-group pull-right">            
-		       	<button class="btn btn-default" data-toggle="modal" data-target="#teacher_about_you_modal"><span class="glyphicon glyphicon-euro"></span> Edit rates</button>
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teachers_rates_modal"><span class="glyphicon glyphicon-euro"></span> Edit rates</button>
 		      </div> <!-- end of btn-group pull-right -->
 				</div> <!-- end of panel heading -->
 				<div class="panel-body"><!-- <div class="panel-body"-->
 					<%# render partial: 'partials/teachers_subjects_partial', collection: @context.subjects, as: :subject %>
+					<ul class="list-group">
+  					<%= render partial: 'partials/teachers_subjects_partial', collection: @subjects, as: :subject %>
+					</ul>
 
-					<%= number_to_currency(@context.subjects.first.price.home_price,unit:'€') %>
+					<%# number_to_currency(@context.subjects.first.price.home_price,unit:'€') %>
 				</div>  <!-- end  of panel-body -->
 			</div> <!-- end of panel panel-default -->
 		</div> <!-- end of col-md-12 -->
@@ -208,3 +211,4 @@
 <%= render 'modals/teacher_about_you_form' %>
 <%= render 'modals/teachers_subjects_form' %>
 <%= render 'modals/teacher_select_payment' %>
+<%= render 'modals/teachers_rates_form' %>

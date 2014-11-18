@@ -1,12 +1,6 @@
-<div class="col-xs-12 col-sm-12 col-md-12">
-  <div class="form-group">
-    <label><%= subject.name %> rate: </label>
-    <%= form_tag teacher_path(id: current_teacher), method: 'put', remote: true do %>
-      <%= select_tag "rate_select", "<option>Home rate:</option><option>Travel rate:</option>".html_safe,  class: 'form_input' %>
-      <%= text_field_tag 'rate', nil, placeholder: 'Your rate' %>
-      <%= hidden_field_tag 'teacher_id', current_teacher.id %>
-      <%= hidden_field_tag 'subject_id', subject.id %>
-      <%= submit_tag 'Submit', class: 'btn' %>
-    <% end %>
-  </div>
-</div>
+
+<% if !subject.price == nil %>
+  <label><%= subject.name %> rate:</label>
+  <li class="list-group-item">Home price:<%= number_to_currency(subject.price.home_price, unit: '€') %></li>
+  <li class="list-group-item">Travel price:<%= number_to_currency(subject.price.travel_price, unit: '€') %></li>
+<% end %>
