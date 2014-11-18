@@ -137,9 +137,7 @@
 						<li class="list-group-item">Please fill in your overview</li>
 					<% end %>
 					
-					<li class="list-group-item">
-						Your rate: <span class="pull-right"><%= current_teacher.rate == nil ? "No price set yet" : number_to_currency(@context.rate,unit:'€') %></span>
-					</li>
+					
 				</ul>
 			</div> <!-- end of panel panel-default -->
 		</div> <!-- end of col-md-12 -->
@@ -148,18 +146,24 @@
 
 <div class="container-fluid">
 	<div class="row">
+		
 		<div class="col-md-12">
-			<div class="panel-default">
+			<div class="panel panel-default">
 				<div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Your rates</h2>
-					<div class="btn btn-default" data-toggle="modal" data-target="#teacher_selec_payment"><span class="glyphicon glyphicon-euro"></span>Edit rates</div>
-				</div> <!-- end of panel-heading -->
-			</div> <!-- end of panel default -->
-			<div class="panel-body">
-				
-			</div>
+					<div class="btn-group pull-right">            
+		       	<button class="btn btn-default" data-toggle="modal" data-target="#teacher_about_you_modal"><span class="glyphicon glyphicon-euro"></span> Edit rates</button>
+		      </div> <!-- end of btn-group pull-right -->
+				</div> <!-- end of panel heading -->
+				<div class="panel-body"><!-- <div class="panel-body"-->
+					<%# render partial: 'partials/teachers_subjects_partial', collection: @context.subjects, as: :subject %>
+
+					<%= number_to_currency(@context.subjects.first.price.home_price,unit:'€') %>
+				</div>  <!-- end  of panel-body -->
+			</div> <!-- end of panel panel-default -->
 		</div> <!-- end of col-md-12 -->
 	</div> <!-- end of row -->
 </div> <!-- end of container-fluid -->
+
 
 <div class="container-fluid">
 	<div class="row">
