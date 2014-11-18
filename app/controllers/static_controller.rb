@@ -37,14 +37,13 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 	end
 
-	def display_subjects
-		
+	def display_subjects		
 		teachers = get_search_results(params)
-		@teachers = teachers.paginate(:page => params[:page]).check_if_valid
+		@teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]).check_if_valid : []
 	end
 
 	def browse_categories
