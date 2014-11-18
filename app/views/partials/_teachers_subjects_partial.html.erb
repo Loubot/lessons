@@ -2,7 +2,7 @@
   <div class="form-group">
     <label><%= subject.name %> rate: </label>
     <%= form_tag teacher_path(id: current_teacher), method: 'put', remote: true do %>
-      <%= select_tag "rate_select", "<option>Home rate</option><option>Travel rate:</option>".html_safe,  class: 'form_input' %>
+      <%= select_tag "rate_select", "<option>Home rate:</option><option>Travel rate:</option>".html_safe,  class: 'form_input' %>
       <%= text_field_tag 'rate', nil, placeholder: 'Your rate' %>
       <%= hidden_field_tag 'teacher_id', current_teacher.id %>
       <%= hidden_field_tag 'subject_id', subject.id %>

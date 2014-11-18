@@ -25,7 +25,6 @@
 #  profile                :integer
 #  opening                :datetime
 #  closing                :datetime
-#  rate                   :decimal(8, 2)
 #  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
@@ -107,8 +106,8 @@ class Teacher < ActiveRecord::Base
   
   def self.add_prices(params)
     price = Price.find_or_initialize_by(teacher_id: params[:teacher_id], subject_id: params[:subject_id])
-    price.update_attributes(home_price: params[:rate]) if params[:rate_select] == "Home rate"
-    price.update_attributes(travel_price: params[:rate]) if params[:rate_select] == "Travel rate"
+    price.update_attributes(home_price: params[:rate]) if params[:rate_select] == "Home rate:"
+    price.update_attributes(travel_price: params[:rate]) if params[:rate_select] == "Travel rate:"
     price.save!
   end
 

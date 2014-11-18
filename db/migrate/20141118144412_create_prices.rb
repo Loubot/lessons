@@ -8,6 +8,8 @@ class CreatePrices < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    remove_column :teachers, :rate
     add_index :prices, :subject_id
     add_index :prices, :teacher_id
   end

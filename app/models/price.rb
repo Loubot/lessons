@@ -5,8 +5,8 @@
 #  id           :integer          not null, primary key
 #  subject_id   :integer
 #  teacher_id   :integer
-#  home_price   :decimal(, )
-#  travel_price :decimal(, )
+#  home_price   :decimal(8, 2)
+#  travel_price :decimal(8, 2)
 #  created_at   :datetime
 #  updated_at   :datetime
 #
