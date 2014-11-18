@@ -9,6 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  comment    :text
+#  event_id   :integer
 #
 
 class Review < ActiveRecord::Base

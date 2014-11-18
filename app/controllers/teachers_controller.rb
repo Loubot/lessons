@@ -35,7 +35,11 @@ class TeachersController < ApplicationController
 		@subjects = @context.subjects
 	end
 	
-	def update		
+	def update
+		if params[:rate_select]
+			Teacher.add_prices(params)
+			render status: 200, nothing: true and return
+		end
 		@teacher = current_teacher
 		if params[:teacher][:paypal_email]
 			if current_teacher.paypal_verify(params).success?

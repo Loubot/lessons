@@ -53,6 +53,7 @@ class Teacher < ActiveRecord::Base
   has_many :openings
   has_many :transactions, foreign_key: :user_id
   has_many :identities, dependent: :destroy
+  has_many :prices, dependent: :destroy
   has_one :user_cart
 
   geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
@@ -104,6 +105,13 @@ class Teacher < ActiveRecord::Base
   end
 
   
+  def self.add_prices(params)
+    price = Price.find_or_initialize_by(teacher_id: params[:teacher_id], subject_id: params[:subject_id])
+    price.update_attributes(home_price: params[:rate]) if params[:rate_select] == "Home rate"
+    price.update_attributes(travel_price: params[:rate]) if params[:rate_select] == "Travel rate"
+    price.save!
+  end
+
   def self.check_if_valid
     teachers = where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
     teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
