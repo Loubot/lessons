@@ -1,1 +1,16 @@
-location.reload();
+$('.rates_container').empty()
+$('.rates_container').append("<%= escape_javascript(render partial: 'partials/teachers_subjects_partial', collection: @subjects, as: :subject) %>")
+$('.modal-content').append("<div class='rate_update'><%= @params[:rate_select] %> updated</div>");
+
+
+
+
+
+
+setTimeout(function(){deleteAlert()},3000)
+
+
+
+deleteAlert = function(){
+  $(".rate_update").css('display', 'none');
+}

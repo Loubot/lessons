@@ -1,5 +1,5 @@
 
-<% if !subject.price == nil %>
+<% if !subject.price.blank? %>
   <label><%= subject.name %> rate:</label>
   <li class="list-group-item">Home price:<%= number_to_currency(subject.price.home_price, unit: '€') %></li>
   <li class="list-group-item">Travel price:<%= number_to_currency(subject.price.travel_price, unit: '€') %></li>

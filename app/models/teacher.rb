@@ -84,7 +84,6 @@ class Teacher < ActiveRecord::Base
     error_message_array = []
     
     error_message_array.push "location not entered" if !self.lat || !self.lon
-    error_message_array.push "rate not set" if !self.rate
     error_message_array.push "profile picture not set" if !self.profile
     error_message_array.push "payment option not specified" if !self.paypal_email || !self.stripe_access_token    
     
@@ -104,7 +103,7 @@ class Teacher < ActiveRecord::Base
   end
 
   
-  def self.add_prices(params)
+  def add_prices(params)
     price = Price.find_or_initialize_by(teacher_id: params[:teacher_id], subject_id: params[:subject_id])
     price.update_attributes(home_price: params[:rate]) if params[:rate_select] == "Home rate:"
     price.update_attributes(travel_price: params[:rate]) if params[:rate_select] == "Travel rate:"

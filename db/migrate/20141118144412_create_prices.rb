@@ -9,7 +9,8 @@ class CreatePrices < ActiveRecord::Migration
       t.timestamps
     end
 
-    remove_column :teachers, :rate
+    remove_column :teachers, :rate, :decimal, :precision => 8, scale: 2
+    add_column :teachers, :will_travel, :boolean, default: false, null: false
     add_index :prices, :subject_id
     add_index :prices, :teacher_id
   end

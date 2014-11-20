@@ -37,26 +37,29 @@ class TeachersController < ApplicationController
 	
 	def update
 		if params[:rate_select]
-			Teacher.add_prices(params)
+			current_teacher.add_prices(params)
 			flash[:success] = "Rate updated"
-			render status: 200 and return
-		end
-		@teacher = current_teacher
-		if params[:teacher][:paypal_email]
-			if current_teacher.paypal_verify(params).success?
-				flash[:success] = "Paypal email updated ok"
-			else
-				flash[:danger] = "That is not a valid Paypal merchant email"
-			end
-			redirect_to :back and return
-		end
+			@subjects = current_teacher.subjects
+			@params = params
+		else
+		  @teacher = current_teacher
+		  if params[:teacher][:paypal_email]
+		  	if current_teacher.paypal_verify(params).success?
+		  		flash[:success] = "Paypal email updated ok"
+		  	else
+		  		flash[:danger] = "That is not a valid Paypal merchant email"
+		  	end
+		  	redirect_to :back and return
+		  end
 
 
-		if @teacher.update_attributes(teacher_params)
-			flash[:success] = 'Details updated ok'
-			
+		  if @teacher.update_attributes(teacher_params)
+		  	flash[:success] = 'Details updated ok'
+		  	
+		  end
+		  redirect_to :back
 		end
-		redirect_to :back
+		
 		
 	end
 
@@ -90,7 +93,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

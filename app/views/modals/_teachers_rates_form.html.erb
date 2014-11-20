@@ -10,6 +10,7 @@
       <div class="modal-body">
         
           <div class="form-group">
+            <%= select_tag "will_travel", "<option>Home only</option><option>Will travel</option>".html_safe, class: 'form_input' %><br>
             <% @context.subjects.each do |s| %>
               <label><%= s.name %> rate: </label>
               <%= form_tag teacher_path(id: current_teacher), method: 'put', remote: true do %>
