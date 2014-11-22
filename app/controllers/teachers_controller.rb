@@ -18,8 +18,7 @@ class TeachersController < ApplicationController
 		@event = Event.new
 		
 		@subject = Subject.find(params[:subject_id])
-		@teacher = Teacher.includes(:events,:prices, :experiences, :qualifications, :reviews).find(params[:id])
-		puts @teacher.full_name
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews).find(params[:id])
 		gon.location= [@teacher.lat, @teacher.lon]
 		gon.events = public_format_times(@teacher.events)
 		gon.openingTimes = open_close_times(@teacher.openings.first)
@@ -28,14 +27,14 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@context = current_teacher
+		@context = Teacher.includes(:photos, :subjects, :prices, :experiences).find(params[:id])
 		@photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
 		@photos = @context.photos.all
 		@experience = Experience.new
 		@experiences = @context.experiences
-		@subjects = @context.subjects.includes(:price)
+		@subjects = @context.subjects
 	end
 	
 	def update
