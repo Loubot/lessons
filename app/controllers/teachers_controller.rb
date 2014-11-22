@@ -16,7 +16,10 @@ class TeachersController < ApplicationController
 	def show_teacher		
 		@params = params
 		@event = Event.new
-		@teacher = Teacher.find(params[:id])
+		
+		@subject = Subject.find(params[:subject_id])
+		@teacher = Teacher.includes(:events,:prices, :experiences, :qualifications, :reviews).find(params[:id])
+		puts @teacher.full_name
 		gon.location= [@teacher.lat, @teacher.lon]
 		gon.events = public_format_times(@teacher.events)
 		gon.openingTimes = open_close_times(@teacher.openings.first)
@@ -39,6 +42,10 @@ class TeachersController < ApplicationController
 		if params[:rate_select]
 			current_teacher.add_prices(params)
 			flash[:success] = "Rate updated"
+			@subjects = current_teacher.subjects
+			@params = params
+		elsif params[:will_travel]
+			current_teacher.set_will_travel(params)
 			@subjects = current_teacher.subjects
 			@params = params
 		else

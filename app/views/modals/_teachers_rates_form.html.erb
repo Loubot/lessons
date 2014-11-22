@@ -10,17 +10,15 @@
       <div class="modal-body">
         
           <div class="form-group">
-            <%= select_tag "will_travel", "<option>Home only</option><option>Will travel</option>".html_safe, class: 'form_input' %><br>
-            <% @context.subjects.each do |s| %>
-              <label><%= s.name %> rate: </label>
-              <%= form_tag teacher_path(id: current_teacher), method: 'put', remote: true do %>
-                <%= select_tag "rate_select", "<option>Home rate:</option><option>Travel rate:</option>".html_safe,  class: 'form_input' %>
-                <%= text_field_tag 'rate', nil, placeholder: 'Your rate' %>
-                <%= hidden_field_tag 'teacher_id', current_teacher.id %>
-                <%= hidden_field_tag 'subject_id', s.id %>
-                <%= submit_tag 'Submit', class: 'btn' %>
-              <% end %>
-            <% end %>           
+            <%= form_tag teacher_path(id: current_teacher), method: 'put', remote: true do %>
+              <%= select_tag "will_travel", "<option>Home only</option><option>Will travel</option>".html_safe, class: 'form_input' %>
+              <%= submit_tag 'Submit', class: 'btn' %>
+            <% end %>
+            Specify if you teach from from home only or if you're willing to travel <br>
+            
+            <div class="rate_selection_partial_container">
+              <%= render partial: 'partials/rate_selection', collection: @context.subjects, as: :subject %>
+              </div>    
           </div>
         
       </div>

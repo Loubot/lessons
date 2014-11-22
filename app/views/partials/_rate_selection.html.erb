@@ -1,0 +1,12 @@
+<label><%= subject.name %> rate: </label>
+<%= form_tag teacher_path(id: current_teacher), method: 'put', remote: true do %>
+  <% if current_teacher.will_travel %>
+    <%= select_tag "rate_select", "<option>Home rate:</option><option>Travel rate:</option>".html_safe,  class: 'form_input' %>
+  <% else %>
+    <%= select_tag "rate_select", "<option>Home rate:</option>".html_safe,  class: 'form_input' %>
+  <% end %>
+  <%= text_field_tag 'rate', nil, placeholder: 'Your rate' %>
+  <%= hidden_field_tag 'teacher_id', current_teacher.id %>
+  <%= hidden_field_tag 'subject_id', subject.id %>
+  <%= submit_tag 'Submit', class: 'btn' %>
+<% end %>

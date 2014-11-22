@@ -41,9 +41,10 @@ class StaticController < ApplicationController
 		render json: @subjects
 	end
 
-	def display_subjects		
-		teachers = get_search_results(params)
-		@teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]).check_if_valid : []
+	def display_subjects
+		@subject = params[:search_subjects] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%").first
+		teachers = get_search_results(params, @subject)
+		@teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []
 	end
 
 	def browse_categories

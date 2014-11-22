@@ -28,6 +28,7 @@
 #  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
+#  will_travel            :boolean          default(FALSE), not null
 #
 
 class Teacher < ActiveRecord::Base
@@ -110,8 +111,13 @@ class Teacher < ActiveRecord::Base
     price.save!
   end
 
+  def set_will_travel(params)
+    params[:will_travel] == "Home only" ? self.update_attributes!(will_travel: false) : self.update_attributes!(will_travel: true)
+    
+  end
+
   def self.check_if_valid
-    teachers = where("lat IS NOT NULL AND lon IS NOT NULL AND rate IS NOT NULL")
+    teachers = where("lat IS NOT NULL AND lon IS NOT NULL")
     teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
     # where("lat <> nil", "lon <> nil", "rate <> nil", "paypal_email <> nil OR stripe_access_token <> nil")
   end    

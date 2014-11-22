@@ -9,7 +9,7 @@
       <%= text_field_tag :search_position, params[:search], :utf8_enforce_tag => false,value: params[:search_position],placeholder: 'County', class: 'typeahead county', autocomplete: :off %>
     </div>
      <div class="container-fluid search_submit_container">
-      <%= submit_tag "I'm ready to learn", type: 'submit', name: 'submit', id: 'search_submit', class: 'btn btn-info' %>
+      <%= submit_tag "I'm ready to learn", id: 'search_submit', class: 'btn btn-info' %>
     </div>
     <div class="pull-right col-md-4">
       <label>Sort by:</label>

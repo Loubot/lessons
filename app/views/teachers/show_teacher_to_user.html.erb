@@ -11,7 +11,7 @@
           </div>
           <div class="panel-body text-center">
               <p class="lead">
-                <strong>Rate: <%= number_to_currency(@teacher.rate, unit: '€') %> / hour</strong></p>
+                <strong>Rate: <%= number_to_currency(@teacher.prices.where(subject_id: @subject.id).first.home_price,unit:'€') %> / hour</strong></p>
           </div>
           <ul class="list-group list-group-flush text-center">
               <% if teacher_signed_in? %>

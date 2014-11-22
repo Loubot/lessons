@@ -1,6 +1,12 @@
-$('.rates_container').empty()
+$('.rates_container').empty();
 $('.rates_container').append("<%= escape_javascript(render partial: 'partials/teachers_subjects_partial', collection: @subjects, as: :subject) %>")
-$('.modal-content').append("<div class='rate_update'><%= @params[:rate_select] %> updated</div>");
+$('.modal-content').append("<div class='rate_update'>Updated successfully</div>");
+<% if @params[:will_travel] %>
+  $('.rate_selection_partial_container').empty();
+  $('.rate_selection_partial_container').append("<%= escape_javascript(render partial: 'partials/rate_selection', collection: @subjects, as: :subject) %>");
+  $('.rates_container').empty();
+  $('.rates_container').append("<%= escape_javascript(render partial: 'partials/teachers_subjects_partial', collection: @subjects, as: :subject) %>")
+<% end %>
 
 
 
