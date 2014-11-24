@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(version: 20141118144412) do
     t.string   "teacher_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subject_id"
   end
 
   add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree

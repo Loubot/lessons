@@ -12,6 +12,7 @@
 #  teacher_email :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  subject_id    :integer
 #
 
 class UserCart < ActiveRecord::Base

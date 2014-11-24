@@ -109,7 +109,7 @@
 				</div> <!-- end of panel heading -->
 				<div class="panel-body">
 					<ul class="list-group">			
-						<%= render partial: 'partials/experience', collection: @experiences %>
+						<%= render partial: 'partials/experience', collection: @context.experiences %>
 					</ul>
 				</div> <!-- end of panel-body -->
 			</div> <!-- end of panel panel-default -->
@@ -158,7 +158,7 @@
 					<%# render partial: 'partials/teachers_subjects_partial', collection: @context.subjects, as: :subject %>
 					
 					<ul class="list-group rates_container">
-  					<%= render partial: 'partials/teachers_subjects_partial', collection: @subjects, as: :subject %>
+  					<%= render partial: 'partials/teachers_subjects_partial', collection: @context.subjects, as: :subject %>
 					</ul>
 
 					<%# number_to_currency(@context.subjects.first.price.home_price,unit:'€') %>

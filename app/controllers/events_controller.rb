@@ -66,7 +66,8 @@ class EventsController < ApplicationController
 			@cart.update_attributes(teacher_id: params[:event][:teacher_id],
 															 params: event_params, teacher_email: @teacher.email,
 															 student_email: current_teacher.email,
-															 student_name: "#{current_teacher.first_name} #{current_teacher.last_name}")
+															 student_name: "#{current_teacher.full_name}",
+															 subject_id: params[:event][:subject_id])
 			@cart.save!
 			p "cart  #{@cart.inspect}"
 		else

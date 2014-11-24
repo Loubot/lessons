@@ -1,6 +1,6 @@
 <%= @subject.name %>
 <% subject_price = @teacher.prices.find_by(subject_id: @subject.id) %>
-<% if !subject_price.travel_price.blank? %>
+<% if !subject_price.travel_price.present? %>
   <%= select_tag 'rates', "<option value='#{subject_price.home_price}'>Home price: #{ number_to_currency(subject_price.home_price,unit:'€')}</option><option value='#{subject_price.travel_price}'>Travel price: #{ number_to_currency(subject_price.travel_price,unit:'€') }</option>".html_safe %>
 <% else %>
   <%= select_tag 'rates', "<option value='#{subject_price.home_price}'>Home price: #{subject_price.home_price}</option>".html_safe %>

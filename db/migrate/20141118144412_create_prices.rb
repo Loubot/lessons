@@ -11,6 +11,7 @@ class CreatePrices < ActiveRecord::Migration
 
     remove_column :teachers, :rate, :decimal, :precision => 8, scale: 2
     add_column :teachers, :will_travel, :boolean, default: false, null: false
+    add_column :user_carts, :subject_id, :integer
     add_index :prices, :subject_id
     add_index :prices, :teacher_id
   end

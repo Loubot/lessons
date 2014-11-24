@@ -27,13 +27,12 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@context = Teacher.includes(:photos, :subjects, :prices, :experiences).find(params[:id])
+		@context = Teacher.includes(:experiences,:subjects).find(params[:id])
 		@photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
 		@photos = @context.photos.all
 		@experience = Experience.new
-		@experiences = @context.experiences
 		@subjects = @context.subjects
 	end
 	
