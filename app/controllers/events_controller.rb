@@ -54,11 +54,12 @@ class EventsController < ApplicationController
 
 	# ajax event booking
 	def create_event_and_book
-		#student_format_time(params)
 		event_params = student_format_time(params[:event])
 		@event = Event.new(event_params)
+		@rate = params[:event][:rate].to_f
 		puts "teacher #{params[:event][:teacher_id]}"
 		puts "student #{params[:event][:student_id]}"
+		puts "subject #{params[:event][:subject_id]}"
 		if @event.valid?
 			@teacher = Teacher.find(params[:event][:teacher_id])			
 			@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])

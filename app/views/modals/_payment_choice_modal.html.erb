@@ -9,7 +9,8 @@
         <div class="container-fluid">
           <% if teacher_signed_in? %>
             <h2>Check availability</h2>
-            <%= form_tag events_create_event_and_book_path, class: 'form-horizontal', method: 'post', remote: true do |f| %>
+            <%= form_tag events_create_event_and_book_path, class: 'form-horizontal', id: 'create_event_form', method: 'post', remote: true do |f| %>
+                            
               <div class="form-group">
                 <label for="date" class="col-sm-2 control-label">Date:</label>
                 <div class="col-sm-10">
@@ -41,25 +42,20 @@
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
                 <br>
+
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <%= submit_tag 'save', id: 'event_submit' %>
                 </div> <!-- end of col-sm-10 -->
               </div> <!-- end of form-group  -->
+              <%= hidden_field_tag 'event[subject_id]', @subject.id %>
               <%= hidden_field_tag 'event[teacher_id]', @teacher.id %>
               <%= hidden_field_tag 'event[student_id]', current_teacher.id if teacher_signed_in? %>
-            <% end %> <!-- end of form_for -->
+            <% end %> <!-- end of form_tag  -->
           <% end %> <!-- if teacher_signed_in? -->
 
         </div> <!-- end of container-fluid -->
       </div> <!-- end of modal-body -->
-      <!-- <div class="modal-footer"> 
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> --> <!-- end of modal-footer -->
     </div> <!-- end of modal-content -->
   </div> <!-- end of modal-dialog -->
 </div> <!-- end of modal fade -->
-
-<!-- stripe secret sk_test_1ZTmwrLuejFto5JhzCS9UAWu -->
-<!-- stripe publishable pk_test_bedFzS7vnmzthkrQolmUjXNn -->

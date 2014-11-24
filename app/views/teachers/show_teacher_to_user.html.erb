@@ -11,7 +11,7 @@
           </div>
           <div class="panel-body text-center">
               <p class="lead">
-                <%= render partial: 'partials/show_rates_to_users', collection: @teacher.subjects, as: :subject %>
+                <%= render partial: 'partials/teachers_rates' %>
           </div>
           <ul class="list-group list-group-flush text-center">
               <% if teacher_signed_in? %>

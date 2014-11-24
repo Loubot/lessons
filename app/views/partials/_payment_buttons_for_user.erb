@@ -17,7 +17,8 @@
         </tr>
         <tr>
           <td>Total price</td>
-          <td><%= number_to_currency('%.2f' % (@teacher.rate * total_time.to_f), unit:'€') %></td>
+          <% puts "rate #{@rate}" %>
+          <td><%= number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %></td>
         </tr>
       </table>
      </div>
@@ -28,7 +29,7 @@
       <div class="col-md-6">
         <%= form_tag paypal_create_path, method: 'get' do %>
           <%= hidden_field_tag :teacher, @teacher.paypal_email %>
-          <%= hidden_field_tag :receiver_amount, @teacher.rate %>
+          <%= hidden_field_tag :receiver_amount, @rate %>
           <%= hidden_field_tag :paypal, '1' %>
           <%= hidden_field_tag :tracking_id, @cart.tracking_id %>
           <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>

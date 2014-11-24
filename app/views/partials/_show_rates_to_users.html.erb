@@ -1,3 +1,0 @@
-<%= subject.name %>
-<% subject_price = @teacher.prices.find_by(subject_id: subject.id) %>
-<%= select_tag 'rates', "<option>Home price: #{subject_price.home_price}</option><option>Travel price: #{subject_price.travel_price}".html_safe %>

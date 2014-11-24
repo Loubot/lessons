@@ -188,6 +188,16 @@ teachersInfoReady = ->
     
 #////////// end of teachers/form photo partial enable dismissable popover
 
+#//// show_teacher_to_user add price to form modal
+
+  if $('.btn_book_now').length > 0
+    $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
+    $(document).on 'change', '#rates', ->
+      $('#create_event_form').find('#event_rate').remove()
+      $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
+
+#//// end of show_teacher_to_user add price to form modal
+
 #///////////Temporary review script previous_lessons_teacher
   $("html").click (e) ->
       $(".review_hover").popover "hide"
