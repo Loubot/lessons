@@ -45,7 +45,7 @@ class StaticController < ApplicationController
 		@subject = params[:search_subjects] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%").first
 
 		teachers = get_search_results(params, @subject)
-		teachers = teachers.map { |t| t if t.prices.is_valid? }
+		teachers = teachers.reject { |t| t if t.prices.is_valid?.empty? }
 		@teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []
 	end
 

@@ -1,13 +1,14 @@
 <% if experience.present == '1' %>
 	<li class="list-group-item clearfix"><strong>Title: <%= experience.title %></strong>
 		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - Present"%>
-      <%= link_to 'Delete', experience_path(experience.id), class: 'btn btn-danger btn-sm', method: 'DELETE', data: { confirm: 'Are you sure' } %></span>
+      <%= experience_delete_link(experience) %></span>
 	</li>
 	<div class="panel-footer"><%= experience.description %></div>
 <% else %>
 	<li class="list-group-item clearfix"><strong>Title: <%= experience.title %></strong>
-		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - #{experience.end.strftime('%Y %b')}"%>
-      <%= link_to 'Delete', experience_path(experience.id), class: 'btn btn-danger btn-sm', method: 'DELETE', data: { confirm: 'Are you sure' } %></span>
+		<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - #{experience.end.strftime('%Y %b')}"%> 
+		<%= experience_delete_link(experience) %> </span>
+      
 	</li>
 	<div class="panel-footer"><%= experience.description %></div>
 <% end %>

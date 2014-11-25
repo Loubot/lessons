@@ -93,4 +93,10 @@ module TeachersHelper
   	return html.html_safe
   end
 
+  def experience_delete_link(experience)
+  	if !current_page?(show_teacher_path)
+  		(link_to 'Delete', experience_path(experience.id), class: 'btn btn-danger btn-sm', method: 'DELETE', data: { confirm: 'Are you sure' }).html_safe
+  	end
+  end
+
 end

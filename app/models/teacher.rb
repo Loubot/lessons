@@ -103,7 +103,6 @@ class Teacher < ActiveRecord::Base
     teacher
   end
 
-  
   def add_prices(params)
     price = Price.find_or_initialize_by(teacher_id: params[:teacher_id], subject_id: params[:subject_id])
     price.update_attributes(home_price: params[:rate]) if params[:rate_select] == "Home rate:"

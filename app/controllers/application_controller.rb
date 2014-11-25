@@ -16,11 +16,18 @@ class ApplicationController < ActionController::Base
     logger.info "request.referer #{request.referer}"
     flash[:danger] = resource.is_teacher_valid_message if resource.is_teacher_valid_message && resource.is_teacher
     
+    puts "origin #{request.env['omniauth.origin']}"
+    puts "params #{request.env["omniauth.params"]}"
     # sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     if request.env['omniauth.origin']
       if URI.parse(URI.encode(request.env['omniauth.origin'])).path == '/display-subjects' #create display_subjects url with params
-        params = request.env['omniauth.params']
+
+        params = request.env['omniauth.params']        
         display_subjects_path(:search_subjects => params['search_subjects'],:search_position => params['search_position'])
+      elsif URI.parse(URI.encode(request.env['omniauth.origin'])).path == '/show-teacher'
+        params = request.env['omniauth.params']
+        # puts "params #{params}"
+        show_teacher_path(subject_id: params['subject_id'], id: params['id'])
       elsif URI(request.env['omniauth.origin']).path == "/teach" || URI(request.env['omniauth.origin']).path == "/learn"
         '/'
       else
