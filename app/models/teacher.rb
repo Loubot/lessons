@@ -64,8 +64,8 @@ class Teacher < ActiveRecord::Base
 
   #scope
   def self.check_if_valid
-    teachers = where("lat IS NOT NULL AND lon IS NOT NULL")
-    teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
+    teachers = where("is_active")
+    # teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
 
   end
 
@@ -83,6 +83,10 @@ class Teacher < ActiveRecord::Base
 
   def add_identity(auth)
     Identity.create!(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
+  end
+
+  def set_active
+    is_teacher_valid ? self.update_attributes(is_active: true) : self.update_attributes(is_active: false)
   end
 
   def is_teacher_valid
@@ -103,7 +107,8 @@ class Teacher < ActiveRecord::Base
     error_message_array.push "profile picture not set" if !self.profile
     error_message_array.push "payment option not specified" if !self.paypal_email || !self.stripe_access_token    
     
-    self.subjects.each do |s| error_message_array.push "you must set all your rates" if !Price.find_by(subject_id: s.id, teacher_id: self.id) end
+    error_message_array.push "you must set all your rates" if !check_rates
+    self.update_attributes(is_active: true) if error_message_array.empty?
     error_message_array.empty? ? false : error_message_array.join(',').capitalize.insert(0, "Your profile is not visible: ")
   end
 
