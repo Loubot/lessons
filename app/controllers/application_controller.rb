@@ -16,9 +16,6 @@ class ApplicationController < ActionController::Base
     logger.info "request.referer #{request.referer}"
     flash[:danger] = resource.is_teacher_valid_message if resource.is_teacher_valid_message && resource.is_teacher
     
-    puts "origin #{request.env['omniauth.origin']}"
-    puts "params #{request.env["omniauth.params"]}"
-    # sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     if request.env['omniauth.origin']
       if URI.parse(URI.encode(request.env['omniauth.origin'])).path == '/display-subjects' #create display_subjects url with params
 

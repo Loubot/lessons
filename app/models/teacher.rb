@@ -88,6 +88,7 @@ class Teacher < ActiveRecord::Base
     error_message_array.push "profile picture not set" if !self.profile
     error_message_array.push "payment option not specified" if !self.paypal_email || !self.stripe_access_token    
     
+    self.subjects.each do |s| error_message_array.push "you must set all your rates" if !Price.find_by(subject_id: s.id, teacher_id: self.id) end
     error_message_array.empty? ? false : error_message_array.join(',').capitalize.insert(0, "Your profile is not visible: ")
   end
 
