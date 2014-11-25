@@ -11,6 +11,7 @@
 
 class Subject < ActiveRecord::Base
 	belongs_to :category
+  has_many :prices
   validates :name, :category_id, presence: true
 
 	has_and_belongs_to_many :teachers

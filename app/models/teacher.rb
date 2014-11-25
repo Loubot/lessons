@@ -119,8 +119,9 @@ class Teacher < ActiveRecord::Base
   def self.check_if_valid
     teachers = where("lat IS NOT NULL AND lon IS NOT NULL")
     teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
+
     # where("lat <> nil", "lon <> nil", "rate <> nil", "paypal_email <> nil OR stripe_access_token <> nil")
-  end    
+  end
 
   def password_required?
     super && self.identities.size > 0

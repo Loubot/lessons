@@ -28,9 +28,9 @@ module StaticHelper
 
       if params[:sort_by] == 'Rate: lowest first'
         
-        @teachers = defined?(subject.teachers) ? subject.teachers.includes(:prices, :reviews).check_if_valid : []
+        @teachers = defined?(subject.teachers) ? subject.teachers.includes(:prices, :reviews).check_if_valid.order("prices.home_price ASC") : []
       elsif params[:sort_by] == 'Rate: highest first'
-        @teachers = defined?(subject.teachers) ? subject.teachers.includes(:prices, :reviews).check_if_valid : []
+        @teachers = defined?(subject.teachers) ? subject.teachers.includes(:prices, :reviews).check_if_valid.order("prices.home_price DESC") : []
       else
         p 'asdfsd'
         @teachers = defined?(subject.teachers) ? subject.teachers.check_if_valid.includes(:prices, :reviews) : []

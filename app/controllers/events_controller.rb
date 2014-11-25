@@ -98,7 +98,7 @@ class EventsController < ApplicationController
 			endtime = Time.zone.parse("#{date} #{params['end_time(4i)']}:#{params['end_time(5i)']}")
 			session[:event_params] = { time_off: params[:time_off], start_time: starttime,
 											 end_time: endtime, status: 'active',student_id: params[:student_id],
-											  teacher_id: params[:teacher_id]}
+											  teacher_id: params[:teacher_id], subject_id: params[:subject_id]}
 
 		end
 

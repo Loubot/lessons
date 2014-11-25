@@ -13,5 +13,9 @@
 
 class Price < ActiveRecord::Base
   belongs_to :teacher
+
+  def self.is_valid?
+    prices = where("home_price IS NOT NULL OR travel_price IS NOT NULL")
+  end
   
 end

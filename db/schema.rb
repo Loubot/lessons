@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20141118144412) do
     t.binary   "time_off"
     t.integer  "student_id"
     t.integer  "review_id"
+    t.integer  "subject_id"
   end
 
   add_index "events", ["review_id"], name: "index_events_on_review_id", using: :btree
@@ -142,7 +143,7 @@ ActiveRecord::Schema.define(version: 20141118144412) do
     t.string   "first_name"
     t.string   "last_name"
     t.text     "address"
-    t.text     "overview"
+    t.text     "overview",               default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: "",    null: false
