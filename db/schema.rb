@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20141118144412) do
     t.boolean  "is_teacher",             default: false, null: false
     t.string   "paypal_email",           default: ""
     t.string   "stripe_access_token",    default: ""
+    t.boolean  "is_active",              default: false, null: false
     t.boolean  "will_travel",            default: false, null: false
   end
 

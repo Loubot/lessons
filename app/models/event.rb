@@ -13,6 +13,7 @@
 #  time_off   :binary
 #  student_id :integer
 #  review_id  :integer
+#  subject_id :integer
 #
 
 class Event < ActiveRecord::Base

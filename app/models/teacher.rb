@@ -6,7 +6,7 @@
 #  first_name             :string(255)
 #  last_name              :string(255)
 #  address                :text
-#  overview               :text
+#  overview               :text             default("")
 #  created_at             :datetime
 #  updated_at             :datetime
 #  email                  :string(255)      default(""), not null
@@ -28,6 +28,7 @@
 #  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
+#  is_active              :boolean          default(FALSE), not null
 #  will_travel            :boolean          default(FALSE), not null
 #
 
@@ -61,6 +62,13 @@ class Teacher < ActiveRecord::Base
 
   self.per_page = 5
 
+  #scope
+  def self.check_if_valid
+    teachers = where("lat IS NOT NULL AND lon IS NOT NULL")
+    teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
+
+  end
+
   def full_street_address
     self.address
   end
@@ -78,7 +86,14 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    self.lat && self.lon && self.rate && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil 
+    self.lat && self.lon && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && check_rates #next method
+  end
+
+  def check_rates
+    self.subjects.each do |s| 
+      return false if !Price.find_by(subject_id: s.id, teacher_id: self.id) 
+    end
+    true
   end
 
   def is_teacher_valid_message
@@ -114,13 +129,6 @@ class Teacher < ActiveRecord::Base
   def set_will_travel(params)
     params[:will_travel] == "Home only" ? self.update_attributes!(will_travel: false) : self.update_attributes!(will_travel: true)
     
-  end
-
-  def self.check_if_valid
-    teachers = where("lat IS NOT NULL AND lon IS NOT NULL")
-    teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
-
-    # where("lat <> nil", "lon <> nil", "rate <> nil", "paypal_email <> nil OR stripe_access_token <> nil")
   end
 
   def password_required?

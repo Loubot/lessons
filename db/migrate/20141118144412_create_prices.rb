@@ -10,6 +10,7 @@ class CreatePrices < ActiveRecord::Migration
     end
 
     remove_column :teachers, :rate, :decimal, :precision => 8, scale: 2
+    add_column :teachers, :is_active, :boolean, default: false, null: false
     add_column :teachers, :will_travel, :boolean, default: false, null: false
     add_column :user_carts, :subject_id, :integer
     add_column :events, :subject_id, :integer
