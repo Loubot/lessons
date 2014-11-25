@@ -17,6 +17,8 @@ class Price < ActiveRecord::Base
   scope :is_valid?, -> { where("home_price IS NOT NULL OR travel_price IS NOT NULL") }
 
   after_destroy :update_teacher
+  after_update :update_teacher
+  after_create :update_teacher
 
   def update_teacher
     Teacher.find(self.teacher_id).set_active
