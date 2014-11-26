@@ -185,8 +185,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://14f74d72.ngrok.com/paypal-return?payKey=${payKey}",
-          :ipn_notification_url => 'http://14f74d72.ngrok.com/store-paypal',
+          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
+          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }

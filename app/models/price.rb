@@ -14,7 +14,7 @@
 class Price < ActiveRecord::Base
   belongs_to :teacher
 
-  scope :is_valid?, -> { where("home_price IS NOT NULL OR travel_price IS NOT NULL") }
+  scope :is_valid?, -> { where("home_price IS NOT NULL") }
 
   after_destroy :update_teacher
   after_update :update_teacher

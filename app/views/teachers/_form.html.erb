@@ -156,7 +156,7 @@
 				</div> <!-- end of panel heading -->
 				<div class="panel-body"><!-- <div class="panel-body"-->
 					<%# render partial: 'partials/teachers_subjects_partial', collection: @context.subjects, as: :subject %>
-					
+					Your travel status is currently set to: <%= @context.will_travel ? 'Will travel' : 'Home only' %><br>
 					<ul class="list-group rates_container">
   					<%= render partial: 'partials/teachers_subjects_partial', collection: @context.subjects, as: :subject %>
 					</ul>

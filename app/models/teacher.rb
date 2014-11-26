@@ -90,7 +90,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    self.lat && self.lon && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && check_rates #next method
+    self.lat && self.lon && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && check_rates #next method
   end
 
   def check_rates
@@ -108,8 +108,14 @@ class Teacher < ActiveRecord::Base
     error_message_array.push "payment option not specified" if !self.paypal_email || !self.stripe_access_token    
     
     error_message_array.push "you must set all your rates" if !check_rates
-    self.update_attributes(is_active: true) if error_message_array.empty?
-    error_message_array.empty? ? false : error_message_array.join(',').capitalize.insert(0, "Your profile is not visible: ")
+    if error_message_array.empty?
+      self.update_attributes(is_active: true) #update is active attribute
+      false
+    else
+      self.update_attributes(is_active: false) #update is active attributr
+      error_message_array.join(',').capitalize.insert(0, "Your profile is not visible: ")#return profile active message
+    end
+     
   end
 
   def self.create_new_with_omniauth(auth, source_address)
@@ -126,9 +132,13 @@ class Teacher < ActiveRecord::Base
 
   def add_prices(params)
     price = Price.find_or_initialize_by(teacher_id: params[:teacher_id], subject_id: params[:subject_id])
-    price.update_attributes(home_price: params[:rate]) if params[:rate_select] == "Home rate:"
-    price.update_attributes(travel_price: params[:rate]) if params[:rate_select] == "Travel rate:"
-    price.save!
+    if params[:rate_select] == "Home rate:"
+      price.update_attributes(home_price: params[:rate]) 
+
+    else
+      price.update_attributes(travel_price: params[:rate])
+    end
+    
   end
 
   def set_will_travel(params)

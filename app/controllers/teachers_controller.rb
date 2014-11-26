@@ -39,32 +39,26 @@ class TeachersController < ApplicationController
 	def update
 		if params[:rate_select]
 			current_teacher.add_prices(params)
-			flash[:success] = "Rate updated"
-			@subjects = current_teacher.subjects
+			@subjects = current_teacher.subjects.includes(:prices)
 			@params = params
 		elsif params[:will_travel]
 			current_teacher.set_will_travel(params)
-			@subjects = current_teacher.subjects
+			@subjects = current_teacher.subjects.includes(:prices)
 			@params = params
-		else
+		elsif params[:teacher][:paypal_email]
 		  @teacher = current_teacher
-		  if params[:teacher][:paypal_email]
-		  	if current_teacher.paypal_verify(params).success?
-		  		flash[:success] = "Paypal email updated ok"
-		  	else
-		  		flash[:danger] = "That is not a valid Paypal merchant email"
-		  	end
-		  	redirect_to :back and return
-		  end
-
-
-		  if @teacher.update_attributes(teacher_params)
-		  	flash[:success] = 'Details updated ok'
-		  	
-		  end
-		  redirect_to :back
-		end
-		
+		  
+	  	if current_teacher.paypal_verify(params).success?
+	  		flash[:success] = "Paypal email updated ok"
+	  	else
+	  		flash[:danger] = "That is not a valid Paypal merchant email"
+	  	end
+	  	redirect_to :back and return
+	  else current_teacher.update_attributes(teacher_params)
+	  	flash[:success] = 'Details updated ok'
+	  	redirect_to :back
+	  end
+	  current_teacher.set_active	
 		
 	end
 
@@ -91,8 +85,7 @@ class TeachersController < ApplicationController
 
 	def change_profile_pic
 		@params = params
-		@teacher = current_teacher
-		@teacher.update_attributes(profile: params[:id])
+		current_teacher.update_attributes(profile: params[:id])
 		flash[:notice] = 'Profile picture updated'
 		redirect_to :back
 	end
