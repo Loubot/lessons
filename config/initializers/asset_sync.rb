@@ -10,6 +10,8 @@ AssetSync.configure do |config|
   # config.cdn_distribution_id = "12345"
   # config.invalidate = ['file1.js']
 
+  Fog.credentials = { path_style: true }
+
   # Increase upload performance by configuring your region
   config.fog_region = 'eu-west-1'
   #
