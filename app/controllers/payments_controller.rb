@@ -14,7 +14,7 @@ class PaymentsController < ApplicationController
     create_paypal(params) if params[:paypal].present?
   end
   
-
+  
   def store_paypal
     
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')

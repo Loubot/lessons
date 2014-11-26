@@ -16,9 +16,9 @@
 /tmp
 /test
 /public/uploads
-config/initializers/carrierwave.rb
-app/uploaders/avatar_uploader.rb
-config/database.yml
+#config/initializers/carrierwave.rb
+#app/uploaders/avatar_uploader.rb
+#config/database.yml
 
 # git rm -r --cached .
 # git update-index --assume-unchanged
