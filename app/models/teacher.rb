@@ -32,6 +32,7 @@
 #  will_travel            :boolean          default(FALSE), not null
 #
 
+
 class Teacher < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
