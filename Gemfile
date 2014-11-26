@@ -84,8 +84,6 @@ gem "asset_sync"
 
 gem 'paypal-sdk-adaptiveaccounts'
 
-gem 'multi_json'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
