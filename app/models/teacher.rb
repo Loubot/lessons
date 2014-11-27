@@ -103,13 +103,13 @@ class Teacher < ActiveRecord::Base
     error_message_array.push "location not entered" if !self.lat || !self.lon
     error_message_array.push "profile picture not set" if !self.profile
     error_message_array.push "payment option not specified" if !self.paypal_email || !self.stripe_access_token    
-    
+    error_message_array.push "please fill in your overview" if self.overview == ""
     error_message_array.push "you must set all your rates" if !check_rates
     if error_message_array.empty?
-      self.update_attributes(is_active: true) #update is active attribute
+      self.update_attributes(is_active: true) #update is_active attribute
       false
     else
-      self.update_attributes(is_active: false) #update is active attributr
+      self.update_attributes(is_active: false) #update is active attribute
       error_message_array.join(',').capitalize.insert(0, "Your profile is not visible: ")#return profile active message
     end
      

@@ -10,16 +10,6 @@
   content= "http://learn-your-lesson.herokuapp.com//assets/silhouette-ebed8878a5f8318d49bb55efa8cfc014.jpg" />
 <% end %>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
-
-
 <div  class="container-fluid main_page_search_container home_welcome">
   <div class="welcome_page_form__header welcome_sprinkles_hidden">
     <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
@@ -112,9 +102,7 @@
 </div> <!-- end of stock_photos_container -->
 
 
-<div class="fb-share-button" data-href="<%= request.original_url %>"></div>
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://fathomless-wildwood-6928.herokuapp.com" data-text="What do you want to learn today?">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 
 
 <%= link_to 'hello', previous_lessons_teacher_path(id: 8) %>

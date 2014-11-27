@@ -553,6 +553,32 @@ form .glyphicon {
   float: left;
 }
 
+.share_buttons_close{
+  display: block;
+  height: 15px;
+  position: absolute;
+  padding-bottom: 5px;
+  right: 2px;
+  top: 2px;
+  width: 15px;
+}
+
+.share_buttons_close:hover{
+  -webkit-box-shadow: 2px 2px 2px #111;
+  -moz-box-shadow: 2px 2px 2px #111;
+  box-shadow: 2px 2px 2px #111;
+  cursor: pointer;
+}
+
+.share_buttons_close:active{
+  -webkit-box-shadow: 1px 1px 1px #111;
+  -moz-box-shadow: 1px 1px 1px #111;
+  box-shadow: 1px 1px 1px #111;
+  cursor: pointer;
+}
+
+
+
 //end of share_buttons
 
 @media (min-width: 250px){
