@@ -99,4 +99,9 @@ module TeachersHelper
   	end
   end
 
+  def display_subjects(subjects)
+    s = subjects.map { |s| content_tag(:u, s.name) }
+    s.join(',').html_safe
+  end
+
 end

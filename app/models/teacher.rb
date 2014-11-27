@@ -78,10 +78,6 @@ class Teacher < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
-  def display_subjects
-    self.subjects.map { |s| s.name }.join(',')
-  end
-
   def add_identity(auth)
     Identity.create!(uid: auth[:uid], provider: auth[:provider], teacher_id: self.id)
   end
