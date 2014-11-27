@@ -1,11 +1,14 @@
 $('.rates_container').empty();
 $('.rates_container').append("<%= escape_javascript(render partial: 'partials/teachers_subjects_partial', collection: @subjects, as: :subject) %>")
 $('.modal-content').append("<div class='rate_update'>Updated successfully</div>");
+$('#main_page').find(".active_message").remove().prepend("<%= escape_javascript(is_active_message) %>")
 <% if @params[:will_travel] %>
   $('.rate_selection_partial_container').empty();
   $('.rate_selection_partial_container').append("<%= escape_javascript(render partial: 'partials/rate_selection', collection: @subjects, as: :subject) %>");
+  $('.rate_selection_partial_container').append("Your travel status is currently set to: " +  "<%= escape_javascript(@teacher.will_travel ? 'Will travel' : 'Home only') %>");
   $('.rates_container').empty();
   $('.rates_container').append("<%= escape_javascript(render partial: 'partials/teachers_subjects_partial', collection: @subjects, as: :subject) %>")
+
 <% end %>
 
 

@@ -14,11 +14,11 @@
               <%= select_tag "will_travel", "<option>Home only</option><option>Will travel</option>".html_safe, class: 'form_input' %>
               <%= submit_tag 'Submit', class: 'btn' %>
             <% end %>
-            Specify if you teach from from home only or if you're willing to travel <br>
+            
             
             <div class="rate_selection_partial_container">
-              <%= render partial: 'partials/rate_selection', collection: @context.subjects, as: :subject %>
-              </div>    
+              <%= render partial: 'partials/rate_selection', collection: @context.subjects, as: :subject %>Your travel status is currently set to: <%= @context.will_travel ? 'Will travel' : 'Home only' %><br>
+            </div>    
           </div>
         
       </div>

@@ -198,25 +198,26 @@ teachersInfoReady = ->
 
 #//// end of show_teacher_to_user add price to form modal
 
-#///////////Temporary review script previous_lessons_teacher
-  $("html").click (e) ->
-      $(".review_hover").popover "hide"
-      
+#///////////jquery for popover previous_lessons_teacher
+  if ('.previous_lessons_header').length > 0
+    $("html").click (e) ->
+        $(".review_hover").popover "hide"
+        
 
-    $(".review_hover").popover(
-      html: true
-      trigger: "manual"
-      placement: 'left'
-    ).click (e) ->
-      $('.review_hover').not(this).popover('hide')
-      $(this).popover "toggle"
-      e.stopPropagation()
+      $(".review_hover").popover(
+        html: true
+        trigger: "manual"
+        placement: 'left'
+      ).click (e) ->
+        $('.review_hover').not(this).popover('hide')
+        $(this).popover "toggle"
+        e.stopPropagation()
   
 
 
   # $('.review_hover').mouseleave ->
   #   $(@).popover 'hide'
-#////////// end of Temporary review script previous_lessons_teacher
+#////////// end review script previous_lessons_teacher
 
 
 #////////////////Teachers area block book checkbox

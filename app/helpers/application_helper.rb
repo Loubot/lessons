@@ -33,4 +33,8 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:teacher]
   end
+
+   def is_active_message
+    content_tag(:p, current_teacher.is_teacher_valid_message, class: 'alert alert-danger active_message')
+  end
 end

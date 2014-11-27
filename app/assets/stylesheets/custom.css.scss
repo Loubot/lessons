@@ -20,6 +20,11 @@ hr{
   color: #FFF;
 }
 
+.alert.alert-danger.active_message{
+  background-color: #963b3b !important;
+  color: #FFF;
+}
+
 
 //edit bootstrap containers to wrap long sentences onto next line*/
 .list-group-item{
