@@ -531,6 +531,30 @@ form .glyphicon {
 
 //end of welcome page
 
+//share_buttons
+#share_buttons{
+  background: #f2f2f2;
+  bottom: 50px;
+  box-shadow: 0 0 0 10px rgba(150, 150, 150, 0.2), 0 0 3px rgba(0, 0, 0, 0.3);
+  float: right;
+  opacity: 0.5;
+  padding: 10px 0 5px 30px;
+  position: fixed;
+  right: 15px;
+  width: 310px;
+  z-index: 20;
+}
+
+#share_buttons:hover{
+  opacity: 1;
+}
+
+.fb-like{
+  float: left;
+}
+
+//end of share_buttons
+
 @media (min-width: 250px){
   body{
     width: 100%;
