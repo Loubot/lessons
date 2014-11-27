@@ -35,8 +35,9 @@ module ApplicationHelper
   end
 
    def is_active_message
-    message = current_teacher.is_teacher_valid_message
-    message ? content_tag(:p, message, class: 'alert alert-danger active_message') : nil
-      
+    if teacher_signed_in?
+      message = current_teacher.is_teacher_valid_message
+      message ? content_tag(:p, message, class: 'alert alert-danger active_message') : nil
+    end
   end
 end
