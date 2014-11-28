@@ -38,6 +38,7 @@ initializeFacebookSDK = ->
     $('#share_buttons').animate
       top: 53
       left: 0
+      height: 70
    
     return
 
