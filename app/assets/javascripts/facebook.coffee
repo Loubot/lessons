@@ -1,48 +1,46 @@
-class @Facebook
+fb_root = null
+fb_events_bound = false
 
-    rootElement = null
-    eventsBound = false
+$ ->
+  loadFacebookSDK()
+  bindFacebookEvents() unless fb_events_bound
 
-    @load: ->
-        unless $('#fb-root').size() > 0
-            initialRoot = $('<div>').attr('id', 'fb-root')
-            $('body').prepend initialRoot
+bindFacebookEvents = ->
+  $(document)
+    .on('page:fetch', saveFacebookRoot)
+    .on('page:change', restoreFacebookRoot)
+    .on('page:load', ->
+      FB?.XFBML.parse()
+    )
+  fb_events_bound = true
 
-        unless $('#facebook-jssdk').size() > 0
-            facebookScript = document.createElement("script")
-            facebookScript.id = 'facebook-jssdk'
-            facebookScript.async = 1
-            facebookScript.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=#{Facebook.appId()}&version=v2.0"
+saveFacebookRoot = ->
+  fb_root = $('#fb-root').detach()
 
-            firstScript = document.getElementsByTagName("script")[0]
-            firstScript.parentNode.insertBefore facebookScript, firstScript
+restoreFacebookRoot = ->
+  if $('#fb-root').length > 0
+    $('#fb-root').replaceWith fb_root
+  else
+    $('body').append fb_root
 
-        Facebook.bindEvents() unless Facebook.eventsBound
+loadFacebookSDK = ->
+  window.fbAsyncInit = initializeFacebookSDK
+  $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
 
-    @bindEvents = ->
-        if typeof Turbolinks isnt 'undefined' and Turbolinks.supported
-            $(document)
-                .on('page:fetch', Facebook.saveRoot)
-                .on('page:change', Facebook.restoreRoot)
-                .on('page:load', ->
-                    FB?.XFBML.parse()
-                )
+initializeFacebookSDK = ->
+  FB.init
+    appId     : '734492879977460'
+    channelUrl: '//learn-your-lesson.heroku.com/'
+    status    : true
+    cookie    : true
+    xfbml     : true
+  FB.Event.subscribe "edge.create", (href, widget) ->
+    $('#share_buttons').animate
+      top: 53
+      left: 0
+   
+    return
 
-        Facebook.eventsBound = true
-
-    @saveRoot = ->
-        Facebook.rootElement = $('#fb-root').detach()
-
-    @restoreRoot = ->
-        if $('#fb-root').length > 0
-            $('#fb-root').replaceWith Facebook.rootElement
-        else
-            $('body').append Facebook.rootElement
-
-    @appId = ->
-        'APP-ID'
-
-Facebook.load()
 
 twttr_events_bound = false
 
