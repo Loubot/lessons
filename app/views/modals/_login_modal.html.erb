@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <div class="col-md-6">
+          <div class="col-md-6 col-md-12 col-xs-12">
             <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal') do |f| %>
               <!-- <div class="heading">
                 <h4 class="form-heading">Sign In</h4>
@@ -37,32 +37,40 @@
               </div>
 
               <div class="control-group">
+                <div><%= f.submit "Sign in", class: 'btn btn-success sign_in_submit' %></div>
                 <div class="controls">
                   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
                     <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
                   <% end -%>
-                </div>
-              </div>
+                </div> <!-- end of controls -->
+              </div><!--  end of control-group -->
               <%= link_to 'Sign in with facebook', "/teachers/auth/facebook?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
-              <div><%= f.submit "Sign in", class: 'btn btn-success' %></div>
+              
             <% end %>
             
           </div> <!-- end of col-md-6 -->
-          <div class="col-md-6">
-            <ul class="ds-btn">                
-              <li>
-                <%= link_to(learn_path, html_options = { class: 'btn btn-lg btn-primary' }) do %>
-                  <i class="glyphicon glyphicon-user pull-left"></i><span>Students<br><small>Student registration</small></span>
-                <% end %>
-                      
-              </li>              
-              <li>
-                <%= link_to(teach_path, html_options = { class: 'btn btn-lg btn-info' }) do %>
-                  <i class="glyphicon glyphicon-user pull-left"></i><span>Teachers<br><small>Teacher registration</small></span>
-                <% end %>
-              </li>
-            </ul>
-          </div> <!-- end of col-md-6 -->
+          <% if !is_mobile? %>
+            <div class="col-md-6 col-md-12 col-xs-12">
+              <ul class="ds-btn">                
+                <li>
+                  <%= link_to(learn_path, html_options = { class: 'btn btn-lg btn-primary' }) do %>
+                    <i class="glyphicon glyphicon-user pull-left"></i><span>Students<br><small>Student registration</small></span>
+                  <% end %>
+                        
+                </li>              
+                <li>
+                  <%= link_to(teach_path, html_options = { class: 'btn btn-lg btn-info' }) do %>
+                    <i class="glyphicon glyphicon-user pull-left"></i><span>Teachers<br><small>Teacher registration</small></span>
+                  <% end %>
+                </li>
+              </ul>
+            </div> <!-- end of col-md-6 -->
+          <% else %>
+            <div class="mobile_reg_buttons col-xs-12">
+              <%= link_to 'Student registration', learn_path, class: 'btn btn-primary mobile_student_reg_link' %>
+              <%= link_to 'Teacher registration', teach_path, class: 'btn btn-info' %>
+            </div>
+          <% end %>
         </div> <!-- end of container-fluid-->
 
       </div> <!-- end of modal-body -->

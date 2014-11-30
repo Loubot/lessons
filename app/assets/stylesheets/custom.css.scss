@@ -388,6 +388,21 @@ form .glyphicon {
 .ds-btn li a span{padding-left:15px;padding-right:5px;width:100%;display:inline-block; text-align:left;}
 .ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
 
+.sign_in_submit{
+  display: block;
+  margin-left: 23%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.mobile_reg_buttons{
+  margin-top: 15px;
+}
+
+.mobile_student_reg_link{
+  margin-bottom: 5px;
+}
+
 // end of login_modal page */
 
 // static/learn page. User registration*/
@@ -534,7 +549,7 @@ form .glyphicon {
 //share_buttons
 #share_buttons{
   background: #f2f2f2;
-  bottom: 55px;
+  bottom: 30px;
   box-shadow: 0 0 0 10px rgba(150, 150, 150, 0.2), 0 0 3px rgba(0, 0, 0, 0.3);
   float: right;
   opacity: 0.5;

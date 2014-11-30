@@ -3,7 +3,25 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :check_mobile?
   include ApplicationHelper
+
+    def is_mobile?
+      session[:mobile] if session[:mobile]
+    end
+
+    helper_method :is_mobile?
+  private
+
+
+      def check_mobile?
+        session[:mobile] = request.user_agent =~ /Mobile|webOS/ ? '1' : false
+        puts "session #{session[:mobile]}"
+      end
+
+      def user_agent_list
+         /iPad|iPod|iPhone|Android|BlackBerry|SymbianOS|SCH-M\d+|Opera Mini|Windows CE|Nokia|SonyEricsson|webOS|PalmOS/
+      end
 
   protected
 
