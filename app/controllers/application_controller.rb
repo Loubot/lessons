@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
     def is_mobile?
-      session[:mobile] if session[:mobile]
+      session[:mobile]
     end
 
     helper_method :is_mobile?
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
 
       def check_mobile?
-        session[:mobile] = request.user_agent =~ /Mobile|webOS/ ? '1' : false
+        session[:mobile] = request.user_agent =~ /Mobile|webOS/ ? true : false
         puts "session #{session[:mobile]}"
       end
 

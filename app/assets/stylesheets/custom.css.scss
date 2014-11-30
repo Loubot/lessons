@@ -71,6 +71,16 @@ hr{
   color: #FFF;
 }
 
+// edit dropdown menu in nav for mobile view
+.drop_mobile > li > a{
+  color: #FFF !important;
+}
+
+.drop_mobile .active > a{
+  color: #111 !important;
+}
+// edit dropdown menu in nav for mobile view
+
 //active link in navbar
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -122,11 +132,7 @@ hr{
 	border-width: 1px;
 	border-color: #CCCCC0;
 }
-#qual_head{
-	border-bottom-width: 2px;
-	border-bottom-style: solid;
-	border-bottom-color: #eee;
-}
+
 
 #qual_left{
 	border-right-style: solid;
@@ -139,6 +145,11 @@ hr{
 
 }
 
+.qualifications_select_dates{
+  
+}
+
+//end of qualifications
 .gray_section{
 	background-color: 'grey';
 	opacity: 0.35;
