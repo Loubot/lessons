@@ -34,10 +34,15 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:teacher]
   end
 
-   def is_active_message
+  def is_active_message
     if teacher_signed_in?
       message = current_teacher.is_teacher_valid_message
-      message ? content_tag(:p, message, class: 'alert alert-danger active_message') : nil
+      message ? message_decider(message) : nil
     end
+  end
+
+  def message_decider(message)
+    message = current_teacher.is_teacher_valid_message
+    is_mobile? ? content_tag(:p, message, class: 'mobile_alert_message') : content_tag(:p, message, class: 'alert alert-danger active_message')
   end
 end
