@@ -66,8 +66,6 @@ class Teacher < ActiveRecord::Base
   #scope
   def self.check_if_valid
     teachers = where("is_active")
-    # teachers = teachers.where.not("paypal_email IS NULL AND stripe_access_token IS NULL")
-
   end
 
   def full_street_address

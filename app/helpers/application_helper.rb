@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   include ActionView::Helpers::AssetTagHelper 
-  def silhouette_helper(teacher)
+  def silhouette_helper(teacher) #same as next method but for non-teacher
     begin      
       teacher.profile == nil ? image_tag('silhouette.jpg', size: '125x125', class: 'pull-left results_photos front') : image_tag(Photo.find(teacher.profile).avatar.url, size: '125x125', class: 'pull-left results_photos front') 
     rescue 
@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   #silhoette helper for show teacher page
-  def show_teacher_silhouette_helper(teacher)
+  def show_teacher_silhouette_helper(teacher) #return silhouette pic if teacher has no profile pic set
     begin
       teacher.profile == nil ? image_tag('silhouette.jpg', class: 'media-object') : image_tag(Photo.find(teacher.profile).avatar.url, size: '125x125', class: 'media-object')
     rescue 

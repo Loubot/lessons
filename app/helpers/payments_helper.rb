@@ -1,5 +1,5 @@
-module PaymentsHelper
-  def create_transaction_params_paypal(params, student_id, teacher_id)
+module PaymentsHelper 
+  def create_transaction_params_paypal(params, student_id, teacher_id) #format params for transaction, paypal
     returnParams = { tracking_id: params[:tracking_id], trans_id: params['transaction']['0']['.id_for_sender_txn'],
       sender: params['sender_email'], payStripe: 'paypal', user_id: student_id, teacher_id: teacher_id,
        pay_date: params['payment_request_date'], tracking_id: params['tracking_id'], whole_message: params.to_s }
@@ -14,7 +14,7 @@ module PaymentsHelper
     returnParams
   end
 
-  def create_transaction_params_stripe(params, student_id, teacher_id)
+  def create_transaction_params_stripe(params, student_id, teacher_id) #format params for transaction, stripe
     returnParams = { tracking_id: params['data']['object']['metadata']['tracking_id'], trans_id: params['id'],
                     sender: params['data']['object']['card']['name'], payStripe: 'stripe', user_id: student_id,
                     teacher_id: teacher_id, pay_date: Time.at(params['created'].to_i),

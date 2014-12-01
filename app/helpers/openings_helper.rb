@@ -1,5 +1,5 @@
 module OpeningsHelper
-  def format_times(params)
+  def format_times(params) #set opening times
       date = Date.current()
       if params[:all_day_mon] == '1' 
         mon_open = Time.zone.parse("#{date} 00:00:00")

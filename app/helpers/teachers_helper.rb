@@ -1,9 +1,7 @@
 module TeachersHelper
-	def format_times(events)
-		#start_date: "2014-07-27 09:00", end_date: "2014-07-27 12:00",
+	def format_times(events) #create array of events with times formatted correctly
 		formatted_times = []
 		events.each do |event|
-			#event.time_off == '1' ? eventColor = '#e6e6e6' : eventColor = '#d9534f'
 			formatted_times << {id: event.id, text: event.title, textColor: 'white',
 										 start_date: event.start_time.strftime('%Y-%m-%d %H:%M'), 
 										end_date: event.end_time.strftime('%Y-%m-%d %H:%M'), color:'#0E64A0',
@@ -14,8 +12,7 @@ module TeachersHelper
 		formatted_times
 	end
 
-	def public_format_times(events)
-		#start_date: "2014-07-27 09:00", end_date: "2014-07-27 12:00",
+	def public_format_times(events) #return array of formatted times with name removed for privacy
 		formatted_times = []
 		events.each do |event|
 			#event.time_off == '1' ? eventColor = '#e6e6e6' : eventColor = '#d9534f'
@@ -29,7 +26,7 @@ module TeachersHelper
 		formatted_times
 	end
 
-	def open_close_times(openings)
+	def open_close_times(openings) #return formatted opening times
 		begin
 			[
 				{ days: 1, zones: [0,openings.mon_open.strftime("%H").to_i * 60,
