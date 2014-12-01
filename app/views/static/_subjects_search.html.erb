@@ -7,7 +7,7 @@
 			
 			<div class="search_results_teachers_info">
 				<h4 class="search_results_teachers_name"><%= "#{teacher.first_name} #{teacher.last_name}" %></h4>
-				<p>Subjects taught: <%= display_subjects(teacher.subjects) %></p>
+				<p>Subjects taught: <%= display_subjects(teacher.subjects, teacher.id) %></p>
 				<p><%= teacher.address %></p>
 			</div> <!-- end of search_results_teachers_info -->
 		</div> <!-- end of col-md-9 -->

@@ -99,8 +99,8 @@ module TeachersHelper
   	end
   end
 
-  def display_subjects(subjects)
-    s = subjects.map { |s| content_tag(:u, s.name) }
+  def display_subjects(subjects, id)
+    s = subjects.map { |s| link_to s.name, show_teacher_path(id: id, subject_id: s.id) }
     s.join(',').html_safe
   end
 
