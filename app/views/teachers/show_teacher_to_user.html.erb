@@ -24,6 +24,14 @@
           
       </div> <!-- end of booking_button_panel -->
     </div> <!-- end of teacher_purchase_panel -->
+    <div class="panel booking_button_panel">
+      <div class="panel-heading booking_button_panel_heading">
+        <h4 class="panel-title">Subject(s) taught</h4>
+      </div>
+      <div class="panel-body">
+        <%= display_subjects(@teacher.subjects, @teacher.id) %>
+      </div>
+    </div>
   </div> <!-- end of col-md-2 -->
   <div class="col-md-6">
     <div class="panel panel-default">

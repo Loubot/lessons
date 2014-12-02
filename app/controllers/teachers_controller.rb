@@ -22,7 +22,7 @@ class TeachersController < ApplicationController
 		gon.location= [@teacher.lat, @teacher.lon]
 		gon.events = public_format_times(@teacher.events)
 		gon.openingTimes = open_close_times(@teacher.openings.first)
-		@distance = @teacher.distance_to([51.886823, -8.472886],:km)
+		# @distance = @teacher.distance_to([51.886823, -8.472886],:km)
 		pick_show_teacher_view(params[:id])		
 	end
 
