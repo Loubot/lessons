@@ -86,11 +86,11 @@ calendarReady = ->
     #   "<b>Event:</b> " + event.text + "<br/><b>Start date:</b> " + format(start) + "<br/><b>End date:</b> " + format(end)
     
     # attach event to viewchange and mark time off after change
-    scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
-      switch new_mode
-        when 'day' then markTimespanDay(new_date.getDay())
-        when 'week' then markTimespanWeek(new_date.getDay())
-        else return
+    # scheduler.attachEvent "onViewChange", (new_mode, new_date) ->
+    #   switch new_mode
+    #     when 'day' then markTimespanDay(new_date.getDay())
+    #     when 'week' then markTimespanWeek(new_date.getDay())
+    #     else return
       
     #// end of viewchange function//
 
@@ -101,10 +101,10 @@ calendarReady = ->
     scheduler.attachEvent 'onAfterSchedulerResize', ->
       scheduler.update_view()
       state = scheduler.getState()
-      switch scheduler.getState().mode
-        when 'day' then markTimespanDay(state.date.getDay())
-        when 'week' then markTimespanWeek(state.date.getDay())
-        else return
+      # switch scheduler.getState().mode
+      #   when 'day' then markTimespanDay(state.date.getDay())
+      #   when 'week' then markTimespanWeek(state.date.getDay())
+      #   else return
 
       #if state.mode is 'day' then markTimespanDay(state.date.getDay()) else markTimespanWeek()
     #// end of onAfterSchedulerResize //
@@ -162,23 +162,24 @@ checkCloseMins = ->
 window.markedTimes = []
 
 # mark timespan for correct day in day view only
-window.markTimespanDay = (day) ->
-  switch day
-    when 1 then scheduler.markTimespan gon.openingTimes[0]
-    when 2 then scheduler.markTimespan gon.openingTimes[1]
-    when 3 then scheduler.markTimespan gon.openingTimes[2]
-    when 4 then scheduler.markTimespan gon.openingTimes[3]
-    when 5 then scheduler.markTimespan gon.openingTimes[4]
-    when 6 then scheduler.markTimespan gon.openingTimes[5]
-    when 0 then scheduler.markTimespan gon.openingTimes[6]
-    else return
+# window.markTimespanDay = (day) ->
+#   switch day
+#     when 1 then scheduler.markTimespan gon.openingTimes[0]
+#     when 2 then scheduler.markTimespan gon.openingTimes[1]
+#     when 3 then scheduler.markTimespan gon.openingTimes[2]
+#     when 4 then scheduler.markTimespan gon.openingTimes[3]
+#     when 5 then scheduler.markTimespan gon.openingTimes[4]
+#     when 6 then scheduler.markTimespan gon.openingTimes[5]
+#     when 0 then scheduler.markTimespan gon.openingTimes[6]
+#     else return
 #// end of mark timespan in dayview //
 
 # mark time span in week view only
 window.markTimespanWeek = ->
   $('#calendar_unmark_time').prop disabled: false
   for time in gon.openingTimes
-    window.markedTimes.push scheduler.markTimespan time
+    window.markedTimes.push scheduler.addMarkedTimespan time
+  scheduler.updateView()
 
   
 window.unmarkTimespan = ->

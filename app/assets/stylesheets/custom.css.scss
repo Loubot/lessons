@@ -155,9 +155,13 @@ hr{
 
 //end of qualifications
 .gray_section{
-	background-color: 'grey';
-	opacity: 0.35;
-	border: 1px solid #009fda;
+	background-color: #e70000 !important;
+	opacity: .9 !important;
+	border: 1px solid #1b0000 !important;
+}
+
+.dhx_cal_event{
+  z-index: 20 !important;
 }
 
 //display_subject _subject_search page*/
