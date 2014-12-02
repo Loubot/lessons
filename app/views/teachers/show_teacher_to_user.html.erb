@@ -6,24 +6,25 @@
   <div class="col-md-2">
     <div class="teacher_purchase_panel">        
       <div class="panel booking_button_panel">
-          <div class="panel-heading booking_button_panel_heading">
-              <h4 class="text-center"><strong><%= "#{@teacher.full_name}" %></strong></h4>
-          </div>
-          <div class="panel-body text-center">
-              <p class="lead">
-                <%= render partial: 'partials/teachers_rates' %>
-          </div>
-          <ul class="list-group list-group-flush text-center">
-              <% if teacher_signed_in? %>
-                <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</buton></li>
-                
-              <% else %>
-                <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                
-              <% end %>
-          </ul>
-        </div> <!-- end of panel panel_info  -->   
+        <div class="panel-heading booking_button_panel_heading">
+            <h4 class="text-center"><strong><%= "#{@teacher.full_name}" %></strong></h4>
+        </div> <!-- end of panel-heading -->
+        <div class="panel-body text-center">
+            <p class="lead">
+              <%= render partial: 'partials/teachers_rates' %>
+        </div> <!-- end of panel-body -->
+        <ul class="list-group list-group-flush text-center">
+          <% if teacher_signed_in? %>
+            <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</button></li>
+            
+          <% else %>
+            <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                
+          <% end %>
+        </ul> <!-- end of list-group -->
+          
+      </div> <!-- end of booking_button_panel -->
     </div> <!-- end of teacher_purchase_panel -->
-  </div> <!-- end of col-md-3 -->
+  </div> <!-- end of col-md-2 -->
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><%= @teacher.first_name %></div>
@@ -57,7 +58,7 @@
         <div class="panel panel-default">
           <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
           
-        </div> <!-- end of panel heading -->
+          </div> <!-- end of panel heading -->
 
           <div class="panel-body">
             <ul class="list-group">
@@ -103,7 +104,7 @@
       <div class="dhx_cal_header"></div>
       <div class="dhx_cal_data"></div>       
     </div> <!-- end of scheduler_here -->   
-  </div> <!-- end of col-md-3 -->
+  </div> <!-- end of col-md-4 -->
 </div> <!-- end of row -->
 
 <%= render 'modals/payment_choice_modal' %>
