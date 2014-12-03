@@ -23,15 +23,12 @@
 #  lat                    :float
 #  lon                    :float
 #  profile                :integer
-#  opening                :datetime
-#  closing                :datetime
 #  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
 #  is_active              :boolean          default(FALSE), not null
 #  will_travel            :boolean          default(FALSE), not null
 #
-
 
 class Teacher < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -52,11 +49,12 @@ class Teacher < ActiveRecord::Base
   has_many :events
   #has_many :events, foreign_key: :student_id
   has_many :qualifications
-  has_many :openings
+  
   has_many :transactions, foreign_key: :user_id
   has_many :identities, dependent: :destroy
   has_many :prices, dependent: :destroy
   has_one :user_cart
+  has_one :opening
 
   geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
   reverse_geocoded_by :lat, :lon
