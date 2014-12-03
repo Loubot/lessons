@@ -4,7 +4,7 @@ class OpeningsController < ApplicationController
 
 	def create
 		
-		@opening = Opening.new(format_times(params))
+		@opening = Opening.new(format_times(params)) #openings_helper
 		if @opening.save
 			flash[:success] = "Opening times updated"
 			redirect_to :back

@@ -88,7 +88,7 @@ class EventsController < ApplicationController
 			endtime = Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}")
 			@event_params = { time_off: params[:event][:time_off], start_time: starttime,
 											 end_time: endtime, status: 'active',
-											  teacher_id: params[:event][:teacher_id]}
+											  teacher_id: params[:event][:teacher_id], student_id: params[:event][:student_id]}
 		end
 
 		def student_format_time(params)

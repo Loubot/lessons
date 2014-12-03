@@ -29,26 +29,40 @@ module TeachersHelper
 	def open_close_times(openings) #return formatted opening times
 		begin
 			[
-				{ days: 1, zones: [0,openings.mon_open.strftime("%H").to_i * 60,
-					openings.mon_close.strftime("%H").to_i * 60, 24 *60 ], 
+				{ days: 1, zones: [0,openings.mon_open.strftime("%H").to_i * 60 +
+					(openings.mon_open.strftime("%M").to_i),
+					openings.mon_close.strftime("%H").to_i * 60 +
+					openings.mon_close.strftime("%M").to_i, 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" },
-				{ days: 2, zones: [0,openings.tues_open.strftime("%H").to_i * 60,
-					openings.tues_close.strftime("%H").to_i * 60, 24 *60 ], 
+				{ days: 2, zones: [0,openings.tues_open.strftime("%H").to_i * 60 +
+					(openings.tues_open.strftime("%M").to_i),
+					openings.tues_close.strftime("%H").to_i * 60 +
+					(openings.tues_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" },
-				{ days: 3, zones: [0,openings.wed_open.strftime("%H").to_i * 60,
-					openings.wed_close.strftime("%H").to_i * 60, 24 *60 ], 
+				{ days: 3, zones: [0,openings.wed_open.strftime("%H").to_i * 60 +
+					(openings.wed_open.strftime("%M").to_i),
+					openings.wed_close.strftime("%H").to_i * 60 +
+					(openings.wed_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" },
-				{ days: 4, zones: [0,openings.thur_open.strftime("%H").to_i * 60,
-					openings.thur_close.strftime("%H").to_i * 60, 24 *60 ], 
+				{ days: 4, zones: [0,openings.thur_open.strftime("%H").to_i * 60 +
+					(openings.thur_open.strftime("%M").to_i),
+					openings.thur_close.strftime("%H").to_i * 60 +
+					(openings.thur_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" },
-				{ days: 5, zones: [0,openings.fri_open.strftime("%H").to_i * 60,
-					openings.fri_close.strftime("%H").to_i * 60, 24 *60 ], 
+				{ days: 5, zones: [0,openings.fri_open.strftime("%H").to_i * 60 +
+					(openings.fri_open.strftime("%M").to_i),
+					openings.fri_close.strftime("%H").to_i * 60 +
+					(openings.fri_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" },
-				{ days: 6, zones: [0,openings.sat_open.strftime("%H").to_i * 60,
-					openings.sat_close.strftime("%H").to_i * 60, 24 *60 ], 
+				{ days: 6, zones: [0,openings.sat_open.strftime("%H").to_i * 60 +
+					(openings.sat_open.strftime("%M").to_i),
+					openings.sat_close.strftime("%H").to_i * 60 +
+					(openings.sat_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" },
-				{ days: 0, zones: [0,openings.sun_open.strftime("%H").to_i * 60,
-					openings.sun_close.strftime("%H").to_i * 60, 24 *60 ], 
+				{ days: 0, zones: [0,openings.sun_open.strftime("%H").to_i * 60 +
+					(openings.sun_open.strftime("%H").to_i),
+					openings.sun_close.strftime("%H").to_i * 60 +
+					(openings.sun_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" }
 			]
 		rescue NoMethodError => e
