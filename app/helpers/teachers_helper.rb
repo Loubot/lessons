@@ -60,7 +60,7 @@ module TeachersHelper
 					(openings.sat_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" },
 				{ days: 0, zones: [0,openings.sun_open.strftime("%H").to_i * 60 +
-					(openings.sun_open.strftime("%H").to_i),
+					(openings.sun_open.strftime("%M").to_i),
 					openings.sun_close.strftime("%H").to_i * 60 +
 					(openings.sun_close.strftime("%M").to_i), 24 *60 ], 
 					css: "gray_section", type: "dhx_time_block" }

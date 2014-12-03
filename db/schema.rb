@@ -77,6 +77,13 @@ ActiveRecord::Schema.define(version: 20141203214922) do
     t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "all_day_mon",  default: false
+    t.boolean  "all_day_tues", default: false
+    t.boolean  "all_day_wed",  default: false
+    t.boolean  "all_day_thur", default: false
+    t.boolean  "all_day_fri",  default: false
+    t.boolean  "all_day_sat",  default: false
+    t.boolean  "all_day_sun",  default: false
   end
 
   add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true, using: :btree

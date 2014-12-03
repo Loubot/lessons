@@ -225,8 +225,8 @@
 									<%= f.label :sun_open, 'Sunday opening time:', class: 'col-sm-5 control-label' %>
 									<div class="col-sm-3">
 										<%= f.time_select :sun_open,
-										  :combined => true,
-										  :default => Time.now.change(:hour => 9, :min => 30),
+                      combined: true,
+                      default: Time.now.change(hour: '15', min: '30'),
 										  :minute_interval => 30,
 										  :time_separator => "",
 										  :start_hour => 7,
