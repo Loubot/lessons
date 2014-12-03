@@ -63,11 +63,11 @@ class TeachersController < ApplicationController
 
 	def teachers_area
 		@params = params
-		@teacher = current_teacher
-		gon.events = format_times(@teacher.events)
-		gon.openingTimes = open_close_times(@teacher.openings.first)
+		@teacher = Teacher.includes(:events, :subjects, :prices).find(params[:id])
+		gon.events = format_times(@teacher.events) #teachers_helper
+		gon.openingTimes = open_close_times(@teacher.openings.first) #teachers_helper
 		@event = @teacher.events.new
-		@opening = checkOpeningExists()
+		@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)
 
 	end
 
@@ -113,7 +113,4 @@ class TeachersController < ApplicationController
 			returned_params = { opening: opening, closing: closing }
 		end
 
-		def checkOpeningExists	
-			@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)			
-		end
 end

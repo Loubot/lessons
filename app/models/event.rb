@@ -39,7 +39,7 @@ end
 
 private
 
-	def add_name
+	def add_name #add teachers name as the title
     puts "************ #{self.teacher_id}"
 		user = Teacher.find(self.teacher_id)
 		self.title = "#{user.first_name} #{user.last_name}"		
