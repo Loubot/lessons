@@ -43,6 +43,10 @@ hr{
 	word-wrap: break-word !important;
 }
 
+.panel-body{
+  word-wrap: break-word !important;
+}
+
 //end of edit bootstrap containers*/
 
 .navbar-default .navbar-brand{
@@ -346,8 +350,14 @@ hr{
   background: -moz-linear-gradient(#5cb85c, #398439); 
   background: linear-gradient(#5cb85c, #398439)
 }
+
+.btn_book_now:focus,
+.btn_book_now.focus {
+  color: #FFF !important;
+  text-decoration: none;
+}
 .btn_book_now:hover{
-  color: #fff;
+  color: #b1b1ff;
   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#48a548', endColorstr='#3f923f');
   background: -webkit-linear-gradient(#48a548, #3f923f);
   background: -o-linear-gradient(#48a548, #3f923f); 
