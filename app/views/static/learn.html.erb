@@ -6,7 +6,12 @@
        <%= devise_error_messages! %>
         <div class="form-group">
           <div class="col-md-6">
-            <%= f.text_field :first_name, placeholder: 'First name', class: 'user_reg' %>
+            <% if !is_mobile? %>
+              <%= f.text_field :first_name, :autofocus => true, placeholder: 'First name', class: 'user_reg' %>
+            <% else %>
+              <%= f.text_field :first_name, placeholder: 'First name', class: 'user_reg' %>
+            
+            <% end %>
           </div>
           <div class="col-md-6">
             <%= f.text_field :last_name, placeholder: 'Last name', class: 'user_reg' %>

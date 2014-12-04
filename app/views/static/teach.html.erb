@@ -5,7 +5,11 @@
       <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
         <div class="input-group">
           <span class="input-group-addon glyphicon glyphicon-envelope"></span>
-          <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+          <% if !is_mobile? %>
+            <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+          <% else %>
+            <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+          <% end %>
         </div><br>
              
         <div class="input-group">
