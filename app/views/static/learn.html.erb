@@ -1,6 +1,6 @@
 <div class="container-fluid ">
   <div class="row">
-    <div class="col-md-6 teacher_reg_container">
+    <div class="col-md-6 col-xs-12 col-sm-11 teacher_reg_container">
       <h2><strong>Learn</strong></h2><span class="label label-primary">Register below to become a student</span>
       <%= form_for :teacher, :url => registration_path(:teacher), html: { class: 'form-horizontal' } do |f| %>
        <%= devise_error_messages! %>
@@ -30,10 +30,12 @@
         
           
 
-        <div><%= f.label :password_confirmation %><br />
+        
           
           <%= hidden_field_tag 'is_teacher', false %>
-        <div><%= f.submit "Sign up" %></div>
+        <%= f.submit "Sign up", class: 'btn btn-success' %> or 
+        <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>
+        <br><br>
       <% end %>
       <%= link_to 'Register with facebook', "/teachers/auth/facebook?origin=#{request.original_url}" %>
     </div> <!-- end of col-md-6 -->
