@@ -14,6 +14,7 @@
 
 class Review < ActiveRecord::Base
   belongs_to :event
+  belongs_to :teacher
 
   validates :rating, inclusion: 1..5
   validates :teacher_id, :rating, :user_id, presence: true
