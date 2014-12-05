@@ -63,7 +63,7 @@ class Teacher < ActiveRecord::Base
 
   #scope
   def self.check_if_valid
-    teachers = where("is_active")
+    teachers = where(is_active: true)
   end
 
   def full_street_address
