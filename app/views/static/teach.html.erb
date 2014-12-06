@@ -1,6 +1,6 @@
 <div class="container-fluid ">
   <div class="row">    
-    <div class="teachers_reg_photo">
+    <div class="<%= 'teachers_reg_photo' if !is_mobile? %>">
       <div class="col-md-6 col-xs-12 col-sm-11 teacher_registration_container left">
         <h2><strong>Teach</strong></h2><span class="label label-primary">Register below to become a teacher</span><br><br>
         <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
