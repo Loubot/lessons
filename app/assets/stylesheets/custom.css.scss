@@ -383,12 +383,14 @@ hr{
 
 // teach page*/
 .teacher_registration_container{
+  background-color: #f3f3f3;
 	box-shadow: 2px 2px 5px #888888;
+  width: 48%;
 	
 }
 
 .teacher_registration_container.left{
-
+  opacity: .8;
 	//margin-right: 10px;
 }
 
@@ -402,6 +404,49 @@ form .glyphicon {
 
 .teach_page_login_link{
 	color: #47a447;
+}
+
+.teachers_reg_photo{
+  min-height: 447px;
+  background-image: image_url('teaching.jpg');
+}
+
+.teachers_blurb_container{
+  min-height: 447px;
+  width: 51%;
+  opacity: .7;
+  margin-left: 10px;
+  background-color: #f3f3f3;
+  box-shadow: 2px 2px 5px #888888;
+}
+
+.teachers_blurb_header{
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.teachers_blurb{
+  text-align: center;
+}
+
+.teachers_blurb_mini_headers{
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.teachers_pros_container{
+  min-height: 150px;
+  width: 32%;
+  margin-top: 10px;
+  background-color: #f3f3f3;
+}
+
+.teachers_pros_container.nleft{
+  margin-left: 22px;
+}
+
+.teachers_blurb_info{
+  font-size: 20px;
 }
 
 // end of teach page*/
