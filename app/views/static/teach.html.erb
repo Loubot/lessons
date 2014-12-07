@@ -1,7 +1,7 @@
 <div class="container-fluid ">
   <div class="row">    
     <div class="<%= 'teachers_reg_photo' if !is_mobile? %>">
-      <div class="col-md-6 col-xs-12 col-sm-11 teacher_registration_container left">
+      <div class="col-md-6 col-xs-12 col-sm-12 teacher_registration_container left">
         <h2><strong>Teach</strong></h2><span class="label label-primary">Register below to become a teacher</span><br><br>
         <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
           <div class="input-group">
@@ -39,10 +39,14 @@
         <% end %>
         <%= link_to 'Register with facebook', "/teachers/auth/facebook?origin=#{request.original_url}" %>
       </div> <!-- end of col-md-6 teacher_registration_container -->
-      <div class="col-md-6 col-xs-12 teachers_blurb_container hidden-xs">
+      <div class="col-md-6 col-xs-12 col-sm-12 teachers_blurb_container hidden-xs">
         <h2 class="teachers_blurb_header">Grow and market your teaching business in an online marketplace</h2>
         <h4 class="teachers_blurb">Connect with local students and teach what you love</h4>
-      </div> <!-- end of teachers_blurb_container -->   
+      </div> <!-- end of teachers_blurb_container -->
+      <div class="teachers_pros_container col-xs-12 visible-xs">
+        <h3 >Grow and market your teaching business in and online marketplace</h3>
+        <h4>Connect with local students and teach what you love</h4>
+      </div> <!-- end of teachers_pros_container -->
     </div> 
   </div> <!-- end of row -->  
 </div> <!-- end of container-fluid -->

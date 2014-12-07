@@ -385,8 +385,8 @@ hr{
 .teacher_registration_container{
   background-color: #f3f3f3;
 	box-shadow: 2px 2px 5px #888888;
-  
-	
+	padding: 0 !important;
+  margin: 0 !important;
 }
 
 .teacher_registration_container.left{
@@ -701,12 +701,16 @@ form .glyphicon {
 @media(min-width: 480px)
 {
   .teachers_reg_photo{
-  min-height: 447px;
-  background-image: image_url('teaching.jpg');
-}
-  .nleft{
-    margin-left: 20px;
-  } 
+    min-height: 447px;  
+    background-image: image_url('teaching3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .teachers_reg_photo{
+    min-height: 447px;  
+    
+  }
+   
 }
 @media (min-width: 600px) {
   #display_teachers_cal_date{
@@ -749,6 +753,9 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  .nleft{
+    margin-left: 20px;
+  }
   .lead{
     font-size: 10px;
   }
