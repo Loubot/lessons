@@ -702,8 +702,10 @@ form .glyphicon {
 {
   .teachers_reg_photo{
     min-height: 447px;  
-    background-image: image_url('teaching3.jpg');
-    background-size: cover;
+    background-image: image_url('teaching2.jpg');
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
   }
   .teachers_reg_photo{
@@ -731,6 +733,7 @@ form .glyphicon {
 }
 
 @media (min-width: 768px) {
+
   .btn_book_now {
     font-size:16px;
     text-align: center;
@@ -753,6 +756,14 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  .teachers_reg_photo{
+    min-height: 447px;  
+    background-image: image_url('teaching3.jpg');
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
   .nleft{
     margin-left: 20px;
   }
