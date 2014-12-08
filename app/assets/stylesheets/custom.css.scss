@@ -407,7 +407,7 @@ form .glyphicon {
 }
 
 .teachers_blurb_container{
-  min-height: 447px;
+  min-height: 440px;
   opacity: .7;
   background-color: #f3f3f3;
   box-shadow: 2px 2px 5px #888888;
@@ -438,6 +438,23 @@ form .glyphicon {
 }
 .teachers_blurb_info{
   font-size: 20px;
+}
+
+.teachers_reg_buttons{
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.fb_login_container{
+
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 3px;
+  margin-bottom: 2px;
+}
+
+.fbLogin_link{
+  color: #555 !important; 
 }
 
 // end of teach page*/
@@ -603,6 +620,14 @@ form .glyphicon {
 
 }
 
+#photography{
+  background-image: image-url("photography.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+}
+
 .welcome_subject_image{
   z-index: 3;
 
@@ -701,7 +726,7 @@ form .glyphicon {
 @media(min-width: 480px)
 {
   .teachers_reg_photo{
-    min-height: 447px;  
+    min-height: 440px;  
     background-image: image_url('teaching2.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
@@ -757,7 +782,7 @@ form .glyphicon {
   
 @media (min-width: 992px) {
   .teachers_reg_photo{
-    min-height: 447px;  
+    min-height: 440px;  
     background-image: image_url('teaching3.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
