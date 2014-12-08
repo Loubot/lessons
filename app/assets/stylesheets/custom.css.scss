@@ -49,6 +49,15 @@ hr{
 
 //end of edit bootstrap containers*/
 
+.dropdown-toggle:active, .open .dropdown-toggle {
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#419741', endColorstr='#398539');
+  background: -webkit-linear-gradient(#419741,#398539);
+  background: -o-linear-gradient(#419741,#398539); 
+  background: -moz-linear-gradient(#419741,#398539); 
+  background: linear-gradient(#419741,#398539); 
+  color: #FFF !important;
+  }
+
 .navbar-default .navbar-brand{
   color: #FFF;
 }
@@ -519,6 +528,11 @@ form .glyphicon {
 
 .mobile_student_reg_link{
   margin-bottom: 5px;
+}
+
+.login_fb_container{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 // end of login_modal page */
