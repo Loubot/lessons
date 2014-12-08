@@ -459,6 +459,42 @@ form .glyphicon {
 
 // end of teach page*/
 
+// static/learn page. User registration*/
+.teacher_reg_container{
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 380px;
+  opacity: .7;
+  background-color: #f3f3f3;
+  box-shadow: 2px 2px 5px #888888;
+  padding-bottom: 5px;
+}
+
+.user_reg{
+  width: 100%;
+}
+
+.user_reg_email{
+  width: 95%;
+  margin: 0 5px;
+}
+
+.learn_blurb{
+  background-color: #f3f3f3;
+  box-shadow: 2px 2px 5px #888888;
+  min-height: 380px;
+  opacity: .7;
+}
+.pad_left{
+  margin-left: 10px;
+}
+
+.learn_reg_container{
+  padding: 10px !important;
+}
+
+// end of static/learn page. User registration*/
+
 //teachers/teachers_area*/
 #scheduler_here{
   box-shadow: 2px 2px 5px #888888;
@@ -486,23 +522,6 @@ form .glyphicon {
 }
 
 // end of login_modal page */
-
-// static/learn page. User registration*/
-.teacher_reg_container{
-  box-shadow: 2px 2px 5px #888888;
-  padding-bottom: 5px;
-}
-
-.user_reg{
-  width: 100%;
-}
-
-.user_reg_email{
-  width: 95%;
-  margin: 0 5px;
-}
-
-// end of static/learn page. User registration*/
 
 // static/browse_categories*/
 
@@ -725,6 +744,14 @@ form .glyphicon {
 
 @media(min-width: 480px)
 {
+  .learn_reg_photo{
+    background-image: image_url('learn_reg.jpg');
+    min-height: 380px;  
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;  
+  }
   .teachers_reg_photo{
     min-height: 440px;  
     background-image: image_url('teaching2.jpg');
@@ -733,10 +760,7 @@ form .glyphicon {
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
-  .teachers_reg_photo{
-    min-height: 447px;  
-    
-  }
+  
    
 }
 @media (min-width: 600px) {

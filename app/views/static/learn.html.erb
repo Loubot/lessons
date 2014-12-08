@@ -1,48 +1,52 @@
 <div class="container-fluid ">
   <div class="row">
-    <div class="col-md-6 col-xs-12 col-sm-11 teacher_reg_container">
-      <h2><strong>Learn</strong></h2><span class="label label-primary">Register below to become a student</span>
-      <%= form_for :teacher, :url => registration_path(:teacher), html: { class: 'form-horizontal' } do |f| %>
-       <%= devise_error_messages! %>
-        <div class="form-group">
-          <div class="col-md-6">
-            <% if !is_mobile? %>
-              <%= f.text_field :first_name, :autofocus => true, placeholder: 'First name', class: 'user_reg' %>
-            <% else %>
-              <%= f.text_field :first_name, placeholder: 'First name', class: 'user_reg' %>
+    <div class="<%= 'learn_reg_photo' if !is_mobile? %>">
+      <div class="col-md-6 col-xs-12 col-sm-12 teacher_reg_container">
+        <h2 class="pad_left"><strong>Learn</strong></h2><span class="label label-primary pad_left">Register below to become a student</span>
+        <%= form_for :teacher, :url => registration_path(:teacher), html: { class: 'form-horizontal learn_reg_container' } do |f| %>
+         <%= devise_error_messages! %>
+          <div class="form-group">
+            <div class="col-md-6">
+              <% if !is_mobile? %>
+                <%= f.text_field :first_name, :autofocus => true, placeholder: 'First name', class: 'user_reg' %>
+              <% else %>
+                <%= f.text_field :first_name, placeholder: 'First name', class: 'user_reg' %>
+              
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <%= f.text_field :last_name, placeholder: 'Last name', class: 'user_reg' %>
+            </div>
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <div class="col-md-12">
+              <%= f.email_field :email, placeholder: 'Email', class: 'user_reg_email' %>
+            </div>
+          </div> <!-- end of form-group -->
+          
+          <div class="form-group">
+            <div class="col-md-6">
+              <%= f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'user_reg' %>
+            </div>
+            <div class="col-md-6">
+              <%= f.password_field :password_confirmation, placeholder: 'Confirm password', autocomplete: "off", class: 'user_reg' %>
+            </div>
+          </div>       
             
-            <% end %>
-          </div>
-          <div class="col-md-6">
-            <%= f.text_field :last_name, placeholder: 'Last name', class: 'user_reg' %>
-          </div>
-        </div> <!-- end of form-group -->
-
-        <div class="form-group">
-          <div class="col-md-12">
-            <%= f.email_field :email, placeholder: 'Email', class: 'user_reg_email' %>
-          </div>
-        </div> <!-- end of form-group -->
-        
-        <div class="form-group">
-          <div class="col-md-6">
-            <%= f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'user_reg' %>
-          </div>
-          <div class="col-md-6">
-            <%= f.password_field :password_confirmation, placeholder: 'Confirm password', autocomplete: "off", class: 'user_reg' %>
-          </div>
+            <%= hidden_field_tag 'is_teacher', false %>
+          <%= f.submit "Sign up", class: 'btn btn-success' %> or 
+          <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>
+          <br><br>
+        <% end %>
+        <div class="fb_login_container">
+          <%= link_to image_tag('fbLogin.png') + " Sign up with facebook", "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
+          
         </div>
-        
-          
+      </div> <!-- end of col-md-6 -->
+      <div class="col-md-6 col-sm-12 col-xs-12 learn_blurb">
 
-        
-          
-          <%= hidden_field_tag 'is_teacher', false %>
-        <%= f.submit "Sign up", class: 'btn btn-success' %> or 
-        <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>
-        <br><br>
-      <% end %>
-      <%= link_to 'Register with facebook', "/teachers/auth/facebook?origin=#{request.original_url}" %>
-    </div> <!-- end of col-md-6 -->
+      </div>
+    </div>
   </div> <!-- end of row -->
 </div> <!-- end of container-fluid -->
