@@ -392,15 +392,15 @@ hr{
 
 // teach page*/
 .teacher_registration_container{
-  background-color: #f3f3f3;
-	box-shadow: 2px 2px 5px #888888;
+  background-color: rgba(243, 243, 243,.7);
+	box-shadow: 2px 2px 5px #111;
 	padding: 0 !important;
   margin: 0 !important;
+  padding: 0 10px !important;
 }
 
-.teacher_registration_container.left{
-  opacity: .8;
-	//margin-right: 10px;
+.input-group-addon{
+  opacity: 1 !important;
 }
 
 .teacher_registration_form{
@@ -417,9 +417,8 @@ form .glyphicon {
 
 .teachers_blurb_container{
   min-height: 440px;
-  opacity: .7;
-  background-color: #f3f3f3;
-  box-shadow: 2px 2px 5px #888888;
+  background-color: rgba(243, 243, 243,.7);
+  box-shadow: 2px 2px 5px #111;
 }
 
 .teachers_blurb_header{
@@ -434,17 +433,14 @@ form .glyphicon {
 .teachers_blurb_mini_headers{
   text-decoration: underline;
   font-weight: bold;
+  margin: 0 !important;
 }
 
-.teachers_pros_container{
-  min-height: 150px;
-  margin-top: 10px;
-  background-color: #f3f3f3;
+.nleft{
+  margin-left: 10px !important;
 }
 
-.blabla{
-  text-align: center;
-}
+
 .teachers_blurb_info{
   font-size: 20px;
 }
@@ -459,12 +455,50 @@ form .glyphicon {
   margin-left: 10px;
   margin-right: 10px;
   padding: 3px;
-  margin-bottom: 2px;
+  
 }
 
 .fbLogin_link{
   color: #555 !important; 
 }
+
+
+.teachers_pros_container{
+  padding-top: 20px;
+  background-color: rgba(243, 243, 243,.5);
+  min-height: 200px;
+}
+
+
+.teachers_pros_picture{
+  size: 200px;
+  margin-top: 20px;
+  width: 32%;
+  position: relative;
+  float: left;
+}
+
+.teachers_pros_picture.left {
+  height: 200px;
+  background-image: image-url('loud_speaker.jpg');
+  background-size: 100% 100%;
+  
+}
+
+.teachers_pros_picture.middle {
+  height: 200px;
+  background-image: image-url('calendar.jpg');
+  background-size: 100% 100%;
+  
+}
+
+.teachers_pros_picture.right {
+  height: 200px;
+  background-image: image-url('money_bags.jpg');
+  background-size: 100% 100%;
+  
+}
+
 
 // end of teach page*/
 
@@ -473,8 +507,7 @@ form .glyphicon {
   padding: 0 !important;
   margin: 0 !important;
   min-height: 380px;
-  opacity: .7;
-  background-color: #f3f3f3;
+  background-color: rgba(243, 243, 243,.7);
   box-shadow: 2px 2px 5px #888888;
   padding-bottom: 5px;
 }
@@ -489,10 +522,10 @@ form .glyphicon {
 }
 
 .learn_blurb{
-  background-color: #f3f3f3;
+  background-color: rgba(243, 243, 243,.7);
   box-shadow: 2px 2px 5px #888888;
   min-height: 380px;
-  opacity: .7;
+  color: #111;
 }
 .pad_left{
   margin-left: 10px;
@@ -826,9 +859,6 @@ form .glyphicon {
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-  }
-  .nleft{
-    margin-left: 20px;
   }
   .lead{
     font-size: 10px;
