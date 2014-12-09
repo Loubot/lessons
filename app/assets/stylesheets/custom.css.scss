@@ -436,10 +436,6 @@ form .glyphicon {
   margin: 0 !important;
 }
 
-.nleft{
-  margin-left: 10px !important;
-}
-
 
 .teachers_blurb_info{
   font-size: 20px;
@@ -462,41 +458,28 @@ form .glyphicon {
   color: #555 !important; 
 }
 
+.teachers_pros_main_container{
+  margin-top: 20px;
+}
+
+.teachers_pros_photo{
+  height: 200px;
+  margin-right: 5px;
+}
+
+.teachers_pros_photo.left{
+  padding: 0 0 !important;
+  min-height: 200px;
+  background-image: image-url('loud_speaker.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 
 .teachers_pros_container{
   padding-top: 20px;
   background-color: rgba(243, 243, 243,.5);
-  min-height: 200px;
-}
-
-
-.teachers_pros_picture{
-  size: 200px;
-  margin-top: 20px;
-  width: 32%;
-  position: relative;
-  float: left;
-}
-
-.teachers_pros_picture.left {
-  height: 200px;
-  background-image: image-url('loud_speaker.jpg');
-  background-size: 100% 100%;
-  
-}
-
-.teachers_pros_picture.middle {
-  height: 200px;
-  background-image: image-url('calendar.jpg');
-  background-size: 100% 100%;
-  
-}
-
-.teachers_pros_picture.right {
-  height: 200px;
-  background-image: image-url('money_bags.jpg');
-  background-size: 100% 100%;
-  
+  height: 100%;
 }
 
 
