@@ -416,8 +416,8 @@ form .glyphicon {
 }
 
 .teachers_blurb_header{
-  text-align: center;
-  margin-bottom: 40px;
+  text-align: center !important;
+  margin-bottom: 20px;
 }
 
 .teachers_blurb{
@@ -433,7 +433,7 @@ form .glyphicon {
   margin-bottom: 5px;
 }
 
-.blabla{
+.teachers_pros_row{
   margin-left: auto;
   margin-right: auto;
 }
@@ -453,6 +453,7 @@ form .glyphicon {
  text-decoration: underline;
  font-weight: bold;
  margin: 0 !important;
+ text-align: center;
 }
 
 .teachers_pros_main_container{
@@ -728,6 +729,24 @@ form .glyphicon {
 //end of share_buttons
 
 @media (min-width: 250px){
+
+  .teachers_reg_photo{ //teach page
+    min-height: 440px;  
+    background-image: image_url('teaching2.jpg');
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  .learn_reg_photo{ //learn page
+    background-image: image_url('learn_reg.jpg');
+    min-height: 380px;  
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;  
+  }
   .teachers_blurb_container{ //teach page
     background-color: rgba(243, 243, 243,.7);
     box-shadow: 2px 2px 5px #111;
@@ -793,26 +812,10 @@ form .glyphicon {
 }
 
 @media(min-width: 480px)
-{
-  .learn_reg_photo{
-    background-image: image_url('learn_reg.jpg');
-    min-height: 380px;  
-    -moz-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;  
-  }
-  .teachers_reg_photo{
-    min-height: 440px;  
-    background-image: image_url('teaching2.jpg');
-    -moz-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
-  
+{  
    
 }
+
 @media (min-width: 600px) {
   #display_teachers_cal_date{
     font-size: 16px;

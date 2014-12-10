@@ -1,6 +1,6 @@
 <div class="container-fluid ">
   <div class="row">    
-    <div class="<%= 'teachers_reg_photo' if !is_mobile? %>">
+    <div class="teachers_reg_photo">
       <div class="col-md-6 col-xs-12 col-sm-12 teacher_registration_container left">
         <h2><strong>Teach</strong></h2><span class="label label-primary">Register below to become a teacher</span><br><br>
         <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
@@ -50,14 +50,14 @@
         <h4 class="teachers_blurb">Connect with local students and teach what you love</h4>
       </div> <!-- end of teachers_blurb_container -->
       <div class="teachers_pros_container col-xs-12 visible-xs">
-        <h3 >Grow and market your teaching business in and online marketplace</h3>
-        <h4>Connect with local students and teach what you love</h4>
+        <h3 class="teachers_blurb_header">Grow and market your teaching business in and online marketplace</h3>
+        <h4 class="teachers_blurb_header">Connect with local students and teach what you love</h4>
       </div> <!-- end of teachers_pros_container -->
     </div> 
   </div> <!-- end of row -->  
 </div> <!-- end of container-fluid -->
 <div class="container-fluid teachers_pros_main_container">
-  <div class="row blabla">
+  <div class="row teachers_pros_row">
     <div class="teachers_pros_photo left col-md-4">
       <div class="teachers_pros_container " >
         <h3 class="teachers_blurb_mini_headers">Create your free profile</h3>

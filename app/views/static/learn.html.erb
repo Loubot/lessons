@@ -1,6 +1,6 @@
 <div class="container-fluid ">
   <div class="row">
-    <div class="<%= 'learn_reg_photo' if !is_mobile? %>">
+    <div class="learn_reg_photo">
       <div class="col-md-6 col-xs-12 col-sm-12 teacher_reg_container">
         <h2 class="pad_left"><strong>Learn</strong></h2><span class="label label-primary pad_left">Register below to become a student</span>
         <%= form_for :teacher, :url => registration_path(:teacher), html: { class: 'form-horizontal learn_reg_container' } do |f| %>
@@ -44,7 +44,7 @@
           
         </div>
       </div> <!-- end of col-md-6 -->
-      <div class="col-md-6 col-sm-12 col-xs-12 learn_blurb">
+      <div class="col-md-6 col-sm-12 col-xs-12 learn_blurb hidden-xs">
 
       </div>
     </div>
