@@ -415,12 +415,6 @@ form .glyphicon {
 	color: #47a447;
 }
 
-.teachers_blurb_container{
-  min-height: 440px;
-  background-color: rgba(243, 243, 243,.7);
-  box-shadow: 2px 2px 5px #111;
-}
-
 .teachers_blurb_header{
   text-align: center;
   margin-bottom: 40px;
@@ -429,13 +423,6 @@ form .glyphicon {
 .teachers_blurb{
   text-align: center;
 }
-
-.teachers_blurb_mini_headers{
-  text-decoration: underline;
-  font-weight: bold;
-  margin: 0 !important;
-}
-
 
 .teachers_blurb_info{
   font-size: 20px;
@@ -446,6 +433,10 @@ form .glyphicon {
   margin-bottom: 5px;
 }
 
+.blabla{
+  margin-left: auto;
+  margin-right: auto;
+}
 .fb_login_container{
 
   margin-left: 10px;
@@ -458,26 +449,43 @@ form .glyphicon {
   color: #555 !important; 
 }
 
+.teachers_blurb_mini_headers{
+ text-decoration: underline;
+ font-weight: bold;
+ margin: 0 !important;
+}
+
 .teachers_pros_main_container{
   margin-top: 20px;
 }
 
-.teachers_pros_photo{
-  height: 200px;
-  margin-right: 5px;
-}
-
 .teachers_pros_photo.left{
   padding: 0 0 !important;
+
   min-height: 200px;
   background-image: image-url('loud_speaker.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 
+.teachers_pros_photo.middle{
+  padding: 0 0 !important;
+  min-height: 200px;
+  background-image: image-url('calendar.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.teachers_pros_photo.right{
+  padding: 0 0 !important;
+  min-height: 200px;
+  background-image: image-url('money_bags.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 
 .teachers_pros_container{
-  padding-top: 20px;
   background-color: rgba(243, 243, 243,.5);
   height: 100%;
 }
@@ -720,6 +728,18 @@ form .glyphicon {
 //end of share_buttons
 
 @media (min-width: 250px){
+  .teachers_blurb_container{ //teach page
+    background-color: rgba(243, 243, 243,.7);
+    box-shadow: 2px 2px 5px #111;
+    height: 200px;
+  }
+  .teachers_pros_photo{ //teach page
+    height: 200px;
+    margin-right: 10px;
+    width: 100%;
+    box-shadow: 2px 2px 5px #111;
+    //max-width: 320px;
+  }
   body{
     width: 100%;
   }
@@ -812,7 +832,14 @@ form .glyphicon {
 }
 
 @media (min-width: 768px) {
-
+  .teachers_pros_photo{ //teach page
+    height: 200px;
+    float: left;
+    // margin-right: 10px;
+    width: 30%;
+    box-shadow: 2px 2px 5px #111;
+    //max-width: 320px;
+  }
   .btn_book_now {
     font-size:16px;
     text-align: center;
@@ -835,6 +862,18 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  .teachers_blurb_container{ //teach page
+    min-height: 440px;
+    background-color: rgba(243, 243, 243,.7);
+    box-shadow: 2px 2px 5px #111;
+  }
+  .teachers_pros_photo{ //teach page
+    height: 200px;
+    margin-right: 10px;
+    width: 32%;
+    box-shadow: 2px 2px 5px #111;
+    //max-width: 320px;
+  }
   .teachers_reg_photo{
     min-height: 440px;  
     background-image: image_url('teaching3.jpg');
@@ -866,6 +905,13 @@ form .glyphicon {
 }
  
 @media (min-width: 1200px) {
+  .teachers_pros_photo{ //teach page
+    height: 200px;
+    margin-right: 10px;
+    width: 32%;
+    box-shadow: 2px 2px 5px #111;
+    //max-width: 320px;
+  }
   .lead{
     font-size: 13px;
   }
