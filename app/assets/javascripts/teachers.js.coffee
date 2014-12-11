@@ -57,12 +57,14 @@ teachersInfoReady = ->
       e.preventDefault() if e.which == 13
 
     bestPictures = new Bloodhound(
+
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name")
       queryTokenizer: Bloodhound.tokenizers.whitespace
       prefetch: 
         url: "/subject-search"
         ttl: 3600000
     )
+    bestPictures.clearPrefetchCache()
     bestPictures.initialize()
     $(".typeahead.subject").typeahead 
       hint: true

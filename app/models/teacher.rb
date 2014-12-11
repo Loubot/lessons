@@ -83,7 +83,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    self.lat && self.lon && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && check_rates #next method
+    self.lat && self.lon && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && check_rates #next method
   end
 
   def check_rates
@@ -98,9 +98,10 @@ class Teacher < ActiveRecord::Base
     
     error_message_array.push " location not entered" if !self.lat || !self.lon
     error_message_array.push " profile picture not set" if !self.profile
-    error_message_array.push " payment option not specified" if !self.paypal_email || !self.stripe_access_token    
+    error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""
     error_message_array.push " you must set all your rates" if !check_rates
+    error_message_array.push " you must select a subject" if self.subjects.size < 1
     if error_message_array.empty?
       self.update_attributes(is_active: true) #update is_active attribute
       false
