@@ -392,11 +392,12 @@ hr{
 
 // teach page*/
 .teacher_registration_container{
-  background-color: rgba(243, 243, 243,.7);
+  background-color: rgba(243, 243, 243,.2);
 	box-shadow: 2px 2px 5px #111;
 	padding: 0 !important;
   margin: 0 !important;
   padding: 0 10px !important;
+  height: 100%;
 }
 
 .input-group-addon{
@@ -458,7 +459,11 @@ form .glyphicon {
 }
 
 .teachers_pros_main_container{
-  margin-top: 20px;
+  margin-top: -50px;
+  position: absolute;
+  top: 100%;
+  
+  
 }
 
 .teachers_pros_photo.left{
@@ -488,7 +493,7 @@ form .glyphicon {
 
 
 .teachers_pros_container{
-  background-color: rgba(243, 243, 243,.5);
+  background-color: rgba(243, 243, 243,.2);
   height: 100%;
 }
 
@@ -868,7 +873,7 @@ form .glyphicon {
 @media (min-width: 992px) {
   .teachers_blurb_container{ //teach page
     min-height: 440px;
-    background-color: rgba(243, 243, 243,.7);
+    background-color: rgba(243, 243, 243,.2);
     box-shadow: 2px 2px 5px #111;
   }
   .teachers_pros_photo{ //teach page
@@ -879,12 +884,17 @@ form .glyphicon {
     //max-width: 320px;
   }
   .teachers_reg_photo{
-    min-height: 440px;  
-    background-image: image_url('teaching3.jpg');
+    margin-top: -70px;
+    height: 450px;  
+    background-image: image_url('table.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    position:absolute; 
+    z-index:999;
+    left: 0;
+    right: 0;
   }
   .lead{
     font-size: 10px;
