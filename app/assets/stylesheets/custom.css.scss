@@ -392,7 +392,8 @@ hr{
 
 // teach page*/
 .teacher_registration_container{
-  background-color: rgba(243, 243, 243,.2);
+  color: #FFF;
+  background-color: rgba(0, 0, 0,0);
 	box-shadow: 2px 2px 5px #111;
 	padding: 0 !important;
   margin: 0 !important;
@@ -458,14 +459,6 @@ form .glyphicon {
  text-align: center;
 }
 
-.teachers_pros_main_container{
-  margin-top: -50px;
-  position: absolute;
-  top: 100%;
-  
-  
-}
-
 .teachers_pros_photo.left{
   padding: 0 0 !important;
 
@@ -495,6 +488,15 @@ form .glyphicon {
 .teachers_pros_container{
   background-color: rgba(243, 243, 243,.2);
   height: 100%;
+}
+
+.container-fluid.teach_page{
+  padding: 0 !important;
+}
+
+.row.teach_page{
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 
@@ -736,9 +738,14 @@ form .glyphicon {
 
 @media (min-width: 250px){
 
+  .teachers_pros_main_container{
+    margin-top: 20px;
+    
+  }
+
   .teachers_reg_photo{ //teach page
     min-height: 440px;  
-    background-image: image_url('teaching2.jpg');
+    background-image: image_url('candle.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
@@ -871,9 +878,15 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  .teachers_pros_main_container{
+    // margin-top: -80px;
+    height: 200px;
+     
+  }
   .teachers_blurb_container{ //teach page
-    min-height: 440px;
-    background-color: rgba(243, 243, 243,.2);
+    height: 100%;
+    color: #FFF;
+    background-color: rgba(0, 0, 0,0);
     box-shadow: 2px 2px 5px #111;
   }
   .teachers_pros_photo{ //teach page
@@ -884,17 +897,14 @@ form .glyphicon {
     //max-width: 320px;
   }
   .teachers_reg_photo{
-    margin-top: -70px;
+    margin-bottom: 20px;
+    margin-top: -72px;
     height: 450px;  
-    background-image: image_url('table.jpg');
+    background-image: image_url('candle.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    position:absolute; 
-    z-index:999;
-    left: 0;
-    right: 0;
   }
   .lead{
     font-size: 10px;

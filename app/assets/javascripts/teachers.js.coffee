@@ -176,6 +176,14 @@ teachersInfoReady = ->
       $(@).find('.welcome_subject_image').animate opacity: 0, 50
 # //////////end of welcome page
 
+#////////// teach page
+  if $('.teachers_reg_photo').length > 0 #make photo full width of screen
+    $('.teachers_reg_photo').width $(window).width()+5
+    $('.teachers_reg_photo').css 'margin-left', -73
+
+
+#////////// end of teach page
+
 #////////// teachers/form photo partial enable dismissable popover
   if $('.profile_pic_popover').length > 0
     $("html").click (e) ->
