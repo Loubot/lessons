@@ -36,6 +36,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 group :production do
 	gem 'rails_12factor', '0.0.2'
 	gem 'unicorn', '4.8.3'
+	gem 'sitemap_generator'
 end
 
 gem 'thin', 					group: :development
