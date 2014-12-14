@@ -7,7 +7,7 @@
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-envelope"></span>
             <% if !is_mobile? %>
-              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
             <% else %>
               <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
             <% end %>
@@ -49,8 +49,8 @@
         <h2 class="teachers_blurb_header">Grow and market your teaching business in an online marketplace</h2>
         <h4 class="teachers_blurb">Connect with local students and teach what you love</h4>
       </div> <!-- end of teachers_blurb_container -->
-      <div class="teachers_pros_container col-xs-12 visible-xs">
-        <h3 class="teachers_blurb_header">Grow and market your teaching business in and online marketplace</h3>
+      <div class="teachers_small_blurb_container col-xs-12 visible-xs">
+        <h3 class="teachers_blurb_header">Grow and market your teaching business in an online marketplace</h3>
         <h4 class="teachers_blurb_header">Connect with local students and teach what you love</h4>
       </div> <!-- end of teachers_pros_container -->
     </div> <!-- end of teachers_reg_photo -->

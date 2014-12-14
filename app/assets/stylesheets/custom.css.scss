@@ -739,18 +739,31 @@ form .glyphicon {
 
 @media (min-width: 250px){
 
+  .teachers_small_blurb_container{
+    background-color: rgba(0,0,0,0);
+    color: #111;
+    box-shadow: 2px 2px 5px #111;
+    padding-bottom: 10px;
+    position: relative;
+  }
+
   .teachers_pros_main_container{
     margin-top: 20px;
     
   }
 
   .teachers_reg_photo{ //teach page
-    min-height: 440px;  
-    background-image: image_url('candle.jpg');
+    margin-bottom: 20px;
+    margin-top: -72px;
+    height: 450px;  
+    background-image: image_url('tree.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    position: relative;
+    width: 100vw;
+    left: calc(-50vw + 50%);
   }
 
   .learn_reg_photo{ //learn page
@@ -764,7 +777,7 @@ form .glyphicon {
   .teachers_blurb_container{ //teach page
     background-color: rgba(243, 243, 243,.7);
     box-shadow: 2px 2px 5px #111;
-    height: 200px;
+    
   }
   .teachers_pros_photo{ //teach page
     height: 200px;
@@ -879,6 +892,7 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  //teach page
   .teachers_pros_main_container{
     // margin-top: -80px;
     height: 200px;
@@ -910,7 +924,7 @@ form .glyphicon {
     position: relative;
     width: 100vw;
     left: calc(-50vw + 50%);
-  }
+  } //end of teach page
   .lead{
     font-size: 10px;
   }
