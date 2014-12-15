@@ -3,6 +3,7 @@ class TeachersController < ApplicationController
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
 	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons]
+	
 	include TeachersHelper
 
 	def check_is_teacher
@@ -90,7 +91,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
@@ -100,7 +101,6 @@ class TeachersController < ApplicationController
 			render layout: 'teacher_layout'
 		end
 	end
-
 
 	private
 		def teacher_params
@@ -112,5 +112,4 @@ class TeachersController < ApplicationController
 			closing = Time.zone.parse(params[:teacher]['closing(5i)'])
 			returned_params = { opening: opening, closing: closing }
 		end
-
 end

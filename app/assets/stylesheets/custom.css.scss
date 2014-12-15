@@ -14,10 +14,6 @@ hr{
 	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
-  color: blue;
-}
-
 .alert{
 
   margin-top: -72px;  
@@ -31,8 +27,12 @@ hr{
 }
 
 .alert.alert-danger.active_message{
-  background-color: #963b3b !important;
+  background-color: #ff4000 !important;
   color: #FFF;
+}
+
+.alert.alert-danger{
+  background-color: #ff4000 !important;
 }
 
 .mobile_alert_message{
@@ -97,9 +97,15 @@ hr{
 .user_nav .navbar-nav > li > a {
   color: #FFF;
 }
+.user_nav .navbar-nav > li > a:hover {
+  color: #80c0ff;
+}
 
 .teacher_nav .navbar-nav > li > a {
   color: #FFF;
+}
+.teacher_nav .navbar-nav > li > a:hover {
+  color: #80c0ff;
 }
 
 // edit dropdown menu in nav for mobile view
@@ -112,15 +118,34 @@ hr{
 }
 // edit dropdown menu in nav for mobile view
 
+
+// edit navbar collapse button colour
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
+  color: #80c0ff;
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+  background-color: #e0ebf4 !important;
+
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #FFF;
+
+}
+
+
+// end of edit navbar collapse button colour
+
 //active link in navbar
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus{
-  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#419741', endColorstr='#398539');
-  background: -webkit-linear-gradient(#419741,#398539);
-  background: -o-linear-gradient(#419741,#398539); 
-  background: -moz-linear-gradient(#419741,#398539); 
-  background: linear-gradient(#419741,#398539); 
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#398539', endColorstr='#398539');
+  background: -webkit-linear-gradient(#398539,#398539);
+  background: -o-linear-gradient(#398539,#398539); 
+  background: -moz-linear-gradient(#398539,#398539); 
+  background: linear-gradient(#398539,#398539); 
   color: #FFF;
 }
 
