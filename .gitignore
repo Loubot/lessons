@@ -19,6 +19,9 @@
 config/initializers/carrierwave.rb
 app/uploaders/avatar_uploader.rb
 config/database.yml
+public/sitemaps/site.xml
+public/sitemaps/sitemap.xml
+public/sitemaps/teachers.xml
 
 # git rm -r --cached .
 # git update-index --assume-unchanged
