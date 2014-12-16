@@ -1,6 +1,6 @@
 
 #////////////////////////////show teachers map
-initialise_show_teachers_map = ->
+window.initialise_show_teachers_map = ->
   mapCanvas = document.getElementById('teacher_display_map')
   mapOptions = setMapOptions()
   mapOptions.zoom = 14 #override setMapOptions zoom level
@@ -21,7 +21,7 @@ initialise_show_teachers_map = ->
 #///////////////////////////end of show teachers map
 
 #////////////////////////////teachers info map
-initialize = ->
+window.initialize = ->
   mapCanvas = document.getElementById("map_canvas")
   if gon.location[0] == null && gon.location[1] == null
     mapOptions = 
@@ -80,8 +80,15 @@ checkCoordsSet = () ->
 
 # Run initialize on dom ready if map_container is on screen
 $(document).on 'ready page:load', ->  
-  if $('#map_container').is(':visible')
-    initialize()
+  if $('#map_container').is(':visible')      
+    load_google_maps_api('initialize')
     checkCoordsSet()
   else if $('#teacher_display_map').is(':visible')
-    initialise_show_teachers_map()
+    load_google_maps_api('initialise_show_teachers_map')
+    
+
+load_google_maps_api = (name) ->
+  script = document.createElement("script")
+  script.type = "text/javascript"
+  script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + "callback=#{name}"
+  document.body.appendChild script
