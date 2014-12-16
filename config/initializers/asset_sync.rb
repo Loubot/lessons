@@ -6,6 +6,9 @@ AssetSync.configure do |config|
   # config.aws_reduced_redundancy = true
   config.fog_directory = ENV['FOG_DIRECTORY']
 
+  heroku config:add ASSET_SYNC_GZIP_COMPRESSION=true
+  heroku config:add ASSET_SYNC_MANIFEST=true
+  heroku config:add ASSET_SYNC_EXISTING_REMOTE_FILES=keep
   # Invalidate a file on a cdn after uploading files
   # config.cdn_distribution_id = "12345"
   # config.invalidate = ['file1.js']

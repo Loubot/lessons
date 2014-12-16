@@ -33,6 +33,7 @@ hr{
 
 .alert.alert-danger{
   background-color: #ff4000 !important;
+  color: #FFF;
 }
 
 .mobile_alert_message{
@@ -435,8 +436,7 @@ hr{
   
   background-color: rgba(0, 0, 0,0);
 	box-shadow: 2px 2px 5px #111;
-	padding: 0 !important;
-  margin: 0 !important;
+	margin: 0 !important;
   padding: 0 10px !important;
   height: 100%;
 }
@@ -458,7 +458,7 @@ form .glyphicon {
 }
 
 .teach_page_login_link{
-	color: #47a447;
+	color: #38aa38;
 }
 
 .teachers_blurb_header{
@@ -549,7 +549,7 @@ form .glyphicon {
 // static/learn page. User registration*/
 .student_reg_container{
   color: #111;
-  padding: 0 !important;
+  padding: 0 10px !important;
   margin: 0 !important;
   height: 100%;
   background-color: rgba(0,0,0,0);
