@@ -23,12 +23,10 @@ restoreFacebookRoot = ->
   else
     $('body').append fb_root
 
+
 loadFacebookSDK = ->
-  fbScript = document.createElement('script')
-  fbScript.type = "text/javascript"
-  # window.fbAsyncInit = initializeFacebookSDK
-  fbScript.src = ("//connect.facebook.net/en_US/all.js#xfbml=1" + "callback=initializeFacebookSDK")
-  document.body.appendChild fbScript
+  window.fbAsyncInit = initializeFacebookSDK
+  $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
 
 initializeFacebookSDK = ->
   FB.init
