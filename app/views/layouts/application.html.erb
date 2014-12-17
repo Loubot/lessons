@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head> 
-    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <%= include_gon %>
     <title><%= yield :title %> | Learn Your Lesson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
@@ -12,7 +12,7 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= csrf_meta_tags %>
     <%= yield :head %>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    
 
     <%= render 'partials/shiv' %>
   </head>
