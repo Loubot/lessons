@@ -24,8 +24,11 @@ restoreFacebookRoot = ->
     $('body').append fb_root
 
 loadFacebookSDK = ->
-  window.fbAsyncInit = initializeFacebookSDK
-  $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
+  fbScript = document.createElement('script')
+  fbScript.type = "text/javascript"
+  # window.fbAsyncInit = initializeFacebookSDK
+  fbScript.src = ("//connect.facebook.net/en_US/all.js#xfbml=1" + "callback=initializeFacebookSDK")
+  document.body.appendChild fbScript
 
 initializeFacebookSDK = ->
   FB.init
@@ -61,4 +64,8 @@ renderTweetButtons = ->
   twttr.widgets.load()
 
 loadTwitterSDK = ->
-  $.getScript("//platform.twitter.com/widgets.js")
+  twitterScript = document.createElement 'script'
+  twitterScript.type = "text/javascript"
+  twitterScript.src = "//platform.twitter.com/widgets.js"
+  # $.getScript("//platform.twitter.com/widgets.js")
+  document.body.appendChild twitterScript
