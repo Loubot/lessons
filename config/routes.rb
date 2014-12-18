@@ -56,5 +56,9 @@ Rails.application.routes.draw do
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
 
+  get         'sitemap.xml'             =>  'sitemaps#sitemap'
+  get         'sitemaps/site.xml'       =>  'sitemaps#site'
+  get         'sitemaps/teachers.xml'   =>  'sitemaps#teachers'
+
   root to: 'static#welcome'
 end
