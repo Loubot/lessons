@@ -86,7 +86,7 @@ gem "asset_sync"
 
 gem 'paypal-sdk-adaptiveaccounts'
 
-gem "dynamic_sitemaps"
+gem 'sitemap_generator'
 
 gem 'rufus-scheduler'
 

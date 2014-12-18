@@ -76,7 +76,6 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    dynamic_sitemaps (2.0.0)
     equalizer (0.0.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -85,7 +84,6 @@ GEM
     execjs (2.2.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.6)
     ffi (1.9.6-x86-mingw32)
     fog (1.23.0)
       fog-brightbox
@@ -241,6 +239,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sitemap_generator (5.0.5)
+      builder
     sprockets (2.11.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -250,7 +250,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.9)
     sqlite3 (1.3.9-x86-mingw32)
     stripe (1.16.0)
       json (~> 1.8.1)
@@ -311,7 +310,6 @@ DEPENDENCIES
   combined_time_select (~> 1.0.1)
   date_validator (~> 0.7.0)
   devise (~> 3.2.4)
-  dynamic_sitemaps
   fog (~> 1.23.0)
   geocoder (~> 1.2.4)
   gibbon (~> 1.1.3)
@@ -332,6 +330,7 @@ DEPENDENCIES
   rufus-scheduler
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  sitemap_generator
   sqlite3 (= 1.3.9)
   stripe (~> 1.15)
   thin

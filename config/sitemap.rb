@@ -1,41 +1,45 @@
-# Change this to your host. See the readme at https://github.com/lassebunk/dynamic_sitemaps
-# for examples of multiple hosts and folders.
-host "learn-your-lesson.herokuapp.com"
+# Set the host name for URL creation
+SitemapGenerator::Sitemap.default_host = "http://learn-your-lesson.herokuapp.com"
 
-sitemap :site do
-  url root_url, last_mod: Time.now, change_freq: "daily", priority: 1.0
-  # url teacher_url(:id) lastmod: Time.now, change_freq: 'daily', priority: 1.0
+SitemapGenerator::Sitemap.public_path = 'tmp/'
+# store on S3 using Fog
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new
+# inform the map cross-linking where to find the other maps
+SitemapGenerator::Sitemap.sitemaps_host = "http://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com/"
+# pick a namespace within your bucket to organize your maps
+SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
+
+SitemapGenerator::Sitemap.create do
+  # Put links creation logic here.
+  #
+  # The root path '/' and sitemap index file are added automatically for you.
+  # Links are added to the Sitemap in the order they are specified.
+  #
+  # Usage: add(path, options={})
+  #        (default options are used if you don't specify)
+  #
+  # Defaults: :priority => 0.5, :changefreq => 'weekly',
+  #           :lastmod => Time.now, :host => default_host
+  #
+  # Examples:
+  #
+  # Add '/articles'
+  #
+  #   add articles_path, :priority => 0.7, :changefreq => 'daily'
+  #
+  # Add all articles:
+
+  add how_it_works_path, :priority => 1, :changefreq => 'weekly'
+  add browse_categories_path, :priority => 1, changefreq: 'weekly'
+  add mailing_list_path, priority: 1, changefreq: 'weekly'
+
+  Teacher.check_if_valid.each do |t|
+    t.subjects.each do |s|
+      add show_teacher_path(id:t.id, subject_id: s.id), :priority => 0.9, :changefreq => 'daily'
+    end
+  end
+  #
+  #   Article.find_each do |article|
+  #     add article_path(article), :lastmod => article.updated_at
+  #   end
 end
-
-# You can have multiple sitemaps like the above – just make sure their names are different.
-
-# Automatically link to all pages using the routes specified
-# using "resources :pages" in config/routes.rb. This will also
-# automatically set <lastmod> to the date and time in page.updated_at:
-#
-  sitemap_for Teacher.check_if_valid
-
-# For products with special sitemap name and priority, and link to comments:
-#
-  # sitemap_for Teacher.check_if_valid, name: :active_teachers do |teacher|
-  #   url teacher, last_mod: teacher.updated_at, priority: 1.0
-  #   url show_teacher_path(teacher)
-  # end
-
-# If you want to generate multiple sitemaps in different folders (for example if you have
-# more than one domain, you can specify a folder before the sitemap definitions:
-# 
-#   Site.all.each do |site|
-#     folder "sitemaps/#{site.domain}"
-#     host site.domain
-#     
-#     sitemap :site do
-#       url root_url
-#     end
-# 
-#     sitemap_for site.products.scoped
-#   end
-
-# Ping search engines after sitemap generation:
-#
-  ping_with "http://#{host}/sitemap.xml"

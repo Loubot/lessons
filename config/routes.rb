@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   get         '/how-it-works'           =>  'static#how_it_works'
   get         '/mailing-list'           =>  'static#mailing_list'
   get         '/browse-categories'      =>  'static#browse_categories'
-  get         '/refresh-welcome'        =>  'static#refresh_welcome'
+  # get         '/refresh-welcome'        =>  'static#refresh_welcome'
   post        '/add-to-list'            =>  'static#add_to_list'
 
   get         'paypal-create'           =>  'payments#paypal_create'
@@ -55,10 +55,6 @@ Rails.application.routes.draw do
 
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
-
-  get         'sitemap.xml'             =>  'sitemaps#sitemap'
-  get         'sitemaps/site.xml'       =>  'sitemaps#site'
-  get         'sitemaps/teachers.xml'   =>  'sitemaps#teachers'
 
   root to: 'static#welcome'
 end
