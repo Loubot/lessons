@@ -1,3 +1,6 @@
 <% content_for :title, 'Browse our lessons' %>
 <% content_for :description, "Browse the featured subjects on LearnYourLesson and start learning a new skill today" %>
-<%= render partial: 'partials/categories_list', collection: @categories, as: :category %>
+
+<div class="col-md-12 category_main_container">
+	<%= render partial: 'partials/categories_list', collection: @categories, as: :category %>
+</div>
