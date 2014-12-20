@@ -549,7 +549,8 @@ form .glyphicon {
 // static/learn page. User registration*/
 
 .teachers_form_container{
-  padding: 0 10px;
+  padding-left:15px;
+  padding-right: 60px;
 }
 .student_reg_container{
   color: #FFF;
@@ -820,7 +821,7 @@ form .glyphicon {
   }
 
   .learn_reg_photo{ //learn page
-    background-image: image_url('test.jpg');
+    background-image: image_url('test2.jpg');
     margin-top: -72px;
     height: 450px;  
     -moz-background-size: 100% 100%;
