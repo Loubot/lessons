@@ -38,7 +38,7 @@ initializeFacebookSDK = ->
   FB.Event.subscribe "edge.create", (href, widget) ->
     $('#share_buttons').animate
       top: 53
-      left: 70
+      left: 350
       height: 70
    
     return
