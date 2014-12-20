@@ -5,7 +5,8 @@
     <div class="learn_reg_photo">
       <div class="col-md-6 col-xs-12 col-sm-12 student_reg_container">
         <h2 class="teacher_registration_container_header"><strong>Learn</strong></h2><span class="label label-primary">Register below to become a student</span><br><br>
-        <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
+        <div class="teachers_form_container">
+          <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-envelope"></span>
             <% if !is_mobile? %>
@@ -39,15 +40,16 @@
             <%= f.submit "Sign up", class: 'btn btn-success' %> or 
             <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>
            
-          </div>
+          </div> <!-- end of teachers_reg_buttons -->
         <% end %>
+        </div>
         <div class="fb_login_container">
           <%= link_to image_tag('facebook_reg.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
           
         </div>
       </div> <!-- end of col-md-6 -->
       <div class="col-md-6 col-sm-12 col-xs-12 learn_blurb hidden-xs">
-
+        <h2 class="students_blurb_header">What will I learn today?</h2>
       </div>
     </div>
   </div> <!-- end of row -->

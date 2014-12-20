@@ -547,6 +547,10 @@ form .glyphicon {
 // end of teach page*/
 
 // static/learn page. User registration*/
+
+.teachers_form_container{
+  padding: 0 10px;
+}
 .student_reg_container{
   color: #FFF;
   padding: 0 10px !important;
@@ -815,7 +819,7 @@ form .glyphicon {
   }
 
   .learn_reg_photo{ //learn page
-    background-image: image_url('learn.jpg');
+    background-image: image_url('test.jpg');
     margin-top: -72px;
     height: 450px;  
     -moz-background-size: 100% 100%;
@@ -825,6 +829,9 @@ form .glyphicon {
     position: relative;
     width: 100vw;
     left: calc(-50vw + 50%); 
+  }
+  .students_blurb_header{ //learn page
+    color: #FFF;
   }
   .teachers_blurb_container{ //teach page
     background-color: rgba(243, 243, 243,.7);
