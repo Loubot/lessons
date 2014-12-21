@@ -38,7 +38,8 @@ module StaticHelper
 
     elsif params[:search_position].empty? && params[:search_subjects].empty?
       []
-        
+    else
+      []
     end
   end
 
