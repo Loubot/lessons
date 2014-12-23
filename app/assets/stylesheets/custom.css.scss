@@ -838,7 +838,7 @@ form .glyphicon {
   }
 
   .learn_reg_photo{ //learn page
-    background-image: image_url('test2.jpg');
+    background-image: image_url('test.jpg');
     margin-top: -72px;
     height: 450px;  
     -moz-background-size: 100% 100%;
@@ -851,6 +851,11 @@ form .glyphicon {
   }
   .students_blurb_header{ //learn page
     color: #FFF;
+  }
+  .students_blurb_text{
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
   }
   .teachers_blurb_container{ //teach page
     background-color: rgba(243, 243, 243,.7);
