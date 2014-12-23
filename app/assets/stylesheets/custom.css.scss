@@ -548,6 +548,31 @@ form .glyphicon {
 
 // static/learn page. User registration*/
 
+.learn_pros_main_container{
+  margin-top: 20px;
+}
+
+.learn_pros_photo.left{
+  padding: 0 0 !important;
+  min-height: 200px;
+  background-image: image-url('students_connect.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.learn_pros_photo.right{
+  padding: 0 0 !important;
+  min-height: 200px;
+  background-image: image-url('money_back.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.learn_pros_container{
+  background-color: rgba(243, 243, 243,.2);
+  height: 100%;
+}
+
 .teachers_form_container{
   padding-left:15px;
   padding-right: 60px;
