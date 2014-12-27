@@ -6,27 +6,21 @@
 	<div class="col-md-12">
 		<div class="well">You can enter your address and click find address or use the map controls and click on 
 			your address. Please be as accurate as possible. Address should be in form: 1 High Street, town name. (The comma "," is important!)
-		</div>
-	</div>
-	
-	
-</div> <!-- end of map_container -->
-
-<div role="tabpanel">
+		</div> <!-- end of well -->
+	</div> <!-- end of col-md-12 -->
+	<div role="tabpanel">
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation"><a href="#profile" id="1" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    <li role="presentation" class="active"><a href="#main_location" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <!-- <li role="presentation"><a href="#profile" id="1" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li> -->
+    
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">...</div>
-    <div role="tabpanel" class="tab-pane" id="profile">
-    	<div class="col-md-8">
+    <div role="tabpanel" class="tab-pane active" id="main_location">
+    	<div class="col-md-8 nopadding">
 		
 				<div id="map_canvas" class="col-md-12" ></div>
 			</div> <!-- end of col-md-8 -->
@@ -54,11 +48,20 @@
 				<p class="text-center coordsHinter">No coordinates selected yet!!</p>
 			</div> <!-- end of col-md-4 -->
     </div>
-    <div role="tabpanel" class="tab-pane" id="messages">...</div>
-    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+    	
+    </div>
+    <!-- <div role="tabpanel" class="tab-pane" id="messages">...</div> -->
+    
   </div>
 
-</div>
+</div> <!-- end of tabpanel -->
+	
+</div> <!-- end of map_container -->
 
-<button id="add_tab">Tab</button>
+
+
+<div class="row">
+	<button id="add_tab" class="btn btn-success">Add Location</button>
+</div>
 
