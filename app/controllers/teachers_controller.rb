@@ -102,6 +102,12 @@ class TeachersController < ApplicationController
 		end
 	end
 
+	def add_map
+		@teacher = current_teacher
+		p request.to_s
+
+	end
+
 	private
 		def teacher_params
 			params.require(:teacher).permit!

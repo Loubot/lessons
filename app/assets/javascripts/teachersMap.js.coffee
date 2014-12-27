@@ -92,3 +92,10 @@ load_google_maps_api = (name) ->
   script.type = "text/javascript"
   script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + "callback=#{name}"
   document.body.appendChild script
+
+
+
+$(document).on 'click', '#add_tab', ->
+  $.ajax 
+    url: '/add-map'
+    data: { map: 'hello' }

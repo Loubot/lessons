@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
+  get         '/add-map'                =>  'teachers#add_map'
 
 
   get         'admin-panel'             =>  'admins#admin_panel'
