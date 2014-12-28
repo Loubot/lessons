@@ -72,7 +72,7 @@ gem 'mini_magick', '~> 3.8.0', platforms: [:ruby]
 
 gem "fog", '~> 1.23.0'
 
-gem 'geocoder', '~> 1.2.4'
+gem 'geocoder', '~> 1.2'
 
 gem 'pp-adaptive', '~> 1.0.0'
 
