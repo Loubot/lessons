@@ -17,7 +17,10 @@ Rails.application.routes.draw do
     resources :openings, only: [:create, :update]
     resources :events
 
+
   end
+
+  resources :locations
   
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]

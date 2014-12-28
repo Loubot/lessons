@@ -35,9 +35,11 @@ class Teacher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   #validates :email, confirmation: true, uniqueness: { case_sensitive: false }
-  after_validation :reverse_geocode
+  # after_validation :reverse_geocode
 
   has_many :photos, as: :imageable, dependent: :destroy
+
+  has_many :locations
 
   has_many :reviews, dependent: :destroy
 
@@ -54,9 +56,9 @@ class Teacher < ActiveRecord::Base
   has_one :user_cart
   has_one :opening
 
-  geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
-  reverse_geocoded_by :lat, :lon
-
+  # geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
+  # reverse_geocoded_by :lat, :lon
+  
   self.per_page = 5
 
   #scope
@@ -81,7 +83,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    self.lat && self.lon && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && check_rates #next method
+    (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && check_rates #next method
   end
 
   def check_rates
@@ -94,7 +96,7 @@ class Teacher < ActiveRecord::Base
   def is_teacher_valid_message
     error_message_array = []
     
-    error_message_array.push " location not entered" if !self.lat || !self.lon
+    # error_message_array.push " location not entered" if !self.lat || !self.lon
     error_message_array.push " profile picture not set" if !self.profile
     error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""

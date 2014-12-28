@@ -37,16 +37,21 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 	end
 
 	def display_subjects
-		@subject = params[:search_subjects] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%").first
+		require 'will_paginate/array' 
+		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
+		#Teacher.includes(:locations).where(id: ids)
+		@subject = params[:search_subjects] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
 
-		teachers = get_search_results(params, @subject)
+		ids = Location.near('cork', 10).select('id').map(&:teacher_id)
+		@teachers = Teacher.check_if_valid.includes(:locations).where(id: ids).paginate(page: params[:page])
+		# teachers = get_search_results(params, @subject)
 		
-		@teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []
+		# @teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []
 	end
 
 	def browse_categories

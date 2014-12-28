@@ -12,4 +12,15 @@
 #
 
 class Location < ActiveRecord::Base
+  belongs_to :teacher
+
+  geocoded_by :full_street_address
+
+  after_validation :geocode
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode  # auto-fetch address
+
+  def full_street_address
+    self.address
+  end
 end

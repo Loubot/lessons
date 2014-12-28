@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "name"
+    t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -157,7 +158,6 @@ ActiveRecord::Schema.define(version: 20141228113548) do
   create_table "teachers", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.text     "address"
     t.text     "overview",               default: ""
     t.datetime "created_at"
     t.datetime "updated_at"

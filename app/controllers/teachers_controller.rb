@@ -80,7 +80,12 @@ class TeachersController < ApplicationController
 
 	def your_location
 		@teacher = current_teacher
-		gon.location = [@teacher.lat,@teacher.lon]
+		@location = Location.new
+		if !current_teacher.locations.empty?
+			gon.location = [current_teacher.locations.last.latitude, current_teacher.locations.last.longitude]
+		else
+			gon.location = [nil, nil]
+		end
 	end
 
 	def change_profile_pic
@@ -91,7 +96,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
