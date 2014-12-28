@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203214922) do
+ActiveRecord::Schema.define(version: 20141228113548) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 20141203214922) do
   end
 
   add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id"
+
+  create_table "locations", force: true do |t|
+    t.integer  "teacher_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id"
 
   create_table "openings", force: true do |t|
     t.datetime "mon_open"
@@ -161,8 +172,6 @@ ActiveRecord::Schema.define(version: 20141203214922) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.boolean  "admin"
-    t.float    "lat"
-    t.float    "lon"
     t.integer  "profile"
     t.boolean  "is_teacher",             default: false, null: false
     t.string   "paypal_email",           default: ""

@@ -7,10 +7,9 @@ class CreateLocations < ActiveRecord::Migration
       t.string :name
 
       t.timestamps
-
-      add_index :locations, :teacher_id
     end
-    remove_column :teachers, :lat
-    remove_column :teachers, :lon
+    add_index :locations, :teacher_id
+    remove_column :teachers, :lat, :float
+    remove_column :teachers, :lon, :float
   end
 end
