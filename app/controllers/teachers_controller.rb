@@ -20,7 +20,12 @@ class TeachersController < ApplicationController
 		
 		@subject = Subject.find(params[:subject_id])
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews).find(params[:id])
-		gon.location= [@teacher.lat, @teacher.lon]
+		# gon.location= [@teacher.lat, @teacher.lon]
+		if !current_teacher.locations.empty?
+			gon.location = [current_teacher.locations.last.latitude, current_teacher.locations.last.longitude]
+		else
+			gon.location = [nil, nil]
+		end
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		# @distance = @teacher.distance_to([51.886823, -8.472886],:km)
