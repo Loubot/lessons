@@ -84,10 +84,11 @@ class TeachersController < ApplicationController
 	end
 
 	def your_location
-		@teacher = current_teacher
+		@teacher = Teacher.includes(:locations).find(params[:id])
 		@location = Location.new
+		session[:map_id] = @teacher.locations.empty? ? 0 : @teacher.locations.last.id #store id for tabs
 		if !current_teacher.locations.empty?
-			gon.location = [current_teacher.locations.last.latitude, current_teacher.locations.last.longitude]
+			gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
 		else
 			gon.location = [nil, nil]
 		end
@@ -114,6 +115,8 @@ class TeachersController < ApplicationController
 
 	def add_map
 		@teacher = current_teacher
+		@id = session[:map_id].to_i + 1 #set id for new tabs
+		@location = Location.new
 		p request.to_s
 
 	end
