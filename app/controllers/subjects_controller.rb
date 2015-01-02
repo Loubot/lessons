@@ -5,7 +5,7 @@ class SubjectsController < ApplicationController
 			flash[:success] = "Subject created successfully"
 			redirect_to :back
 		else
-			flash[:danger] = "Couldn't create subject @subject.errors.full_messages"
+			flash[:danger] = "Couldn't create subject #{@subject.errors.full_messages}"
 			redirect_to :back
 		end
 	end
@@ -16,7 +16,7 @@ class SubjectsController < ApplicationController
 			flash[:success] = "Subject deleted successfully"
 			redirect_to :back
 		else
-			flash[:danger] = "Couldn't delete subject @subject.erros.full_messages"
+			flash[:danger] = "Couldn't delete subject #{@subject.erros.full_messages}"
 			redirect_to :back
 		end
 	end
