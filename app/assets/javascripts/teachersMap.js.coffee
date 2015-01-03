@@ -59,9 +59,10 @@ window.start_address_search = (id = "") ->
   geocoder = new google.maps.Geocoder()
   geocoder.geocode address: $("#address#{id}").val(), (results, status) ->
     if status is google.maps.GeocoderStatus.OK
+      alert JSON.stringify results
       setMapPosition results[0].geometry.location, 16
-      $('#lat').val results[0].geometry.location.lat()
-      $('#lon').val results[0].geometry.location.lng()
+      $("#lat#{id}").val results[0].geometry.location.lat()
+      $("#lon#{id}").val results[0].geometry.location.lng()
     else
       alert "Geocode was not successful for the following reason: " + status
     return

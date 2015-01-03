@@ -1,4 +1,4 @@
-$('.nav.nav-tabs').append """ <li role="presentation"><a href="#meballs" aria-controls="settings" role="tab" data-toggle="tab">meballs</a></li> """
+$('.nav.nav-tabs').append """ <li role="presentation" class="location_tab"><a href="#meballs" aria-controls="settings" role="tab" data-toggle="tab">meballs</a></li> """
 $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
   <div class="col-md-8">  
     <p> <%= puts @id %> </p>    
@@ -12,13 +12,13 @@ $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
         <div class="form-group">
           <%= f.label :latitude, class: 'col-sm-2' %>
           <div class="col-sm-10">
-            <%= f.text_field :latitude, class: 'form-control', id: 'lat' %>
+            <%= f.text_field :latitude, class: 'form-control', id: "lat#{@id}" %>
           </div>
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :longitude, class: 'col-sm-2' %>
           <div class="col-sm-10">
-            <%= f.text_field :longitude, class: 'form-control', id: 'lon' %>
+            <%= f.text_field :longitude, class: 'form-control', id: "lon#{@id}" %>
           </div>
         </div>
         <div class="col-sm-offset-2 col-sm-10">
