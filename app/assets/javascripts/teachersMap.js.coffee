@@ -22,9 +22,13 @@ window.initialise_show_teachers_map = ->
 
 #////////////////////////////teachers info map
 window.initialize = (id = "")->
+  mapArray = []
   $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
-    google.maps.event.trigger(map, 'resize');
-    map.setCenter(mapOptions.center)
+    
+    for m in mapArray
+      google.maps.event.trigger(m, 'resize')
+      m.setCenter(mapOptions.center)
+    
     e.target # newly activated tab
     e.relatedTarget # previous active tab
   mapCanvas = document.getElementById("map_canvas#{id}")
@@ -37,6 +41,7 @@ window.initialize = (id = "")->
     mapOptions = setMapOptions()
   
   window.map = new google.maps.Map(mapCanvas, mapOptions)
+  mapArray.push map
   window.marker = new google.maps.Marker(
         map: map
         position: mapOptions.center       
@@ -59,7 +64,7 @@ window.start_address_search = (id = "") ->
   geocoder = new google.maps.Geocoder()
   geocoder.geocode address: $("#address#{id}").val(), (results, status) ->
     if status is google.maps.GeocoderStatus.OK
-      alert JSON.stringify results
+      # alert JSON.stringify results
       setMapPosition results[0].geometry.location, 16
       $("#lat#{id}").val results[0].geometry.location.lat()
       $("#lon#{id}").val results[0].geometry.location.lng()
@@ -102,7 +107,17 @@ load_google_maps_api = (name) ->
 
 
 
-$(document).on 'click', '#add_tab', ->
+
+window.getTab = ->  
   $.ajax 
     url: '/add-map'
     data: { map: 'hello' }
+
+  
+
+$(document).on 'click', 'a[href="#profile"]', ->
+  $.when(getTab()).done ->
+    $('#add_tab').attr disabled: 'disabled'
+    $('#1').hide()
+    setTimeout $('#location_tab').tab 'show'
+    
