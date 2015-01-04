@@ -13,7 +13,7 @@
 		</div> <!-- end of col-md-9 -->
 	
 	
-		<div class="col-md-3 search_restuls_right search_results_shadow">
+		<div class="col-md-3 search_restuls_right search_results_shadow">			
 
 			Price: <%= number_to_currency(teacher.prices.where(subject_id: @subject.id).first.home_price,unit:'€') %><br>
 			<% if !params[:search_position].empty? %>

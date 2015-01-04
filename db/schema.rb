@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141228113548) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -36,7 +33,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer  "subject_id"
   end
 
-  add_index "events", ["review_id"], name: "index_events_on_review_id", using: :btree
+  add_index "events", ["review_id"], name: "index_events_on_review_id"
 
   create_table "experiences", force: true do |t|
     t.string   "title"
@@ -57,7 +54,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.datetime "updated_at"
   end
 
-  add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id", using: :btree
+  add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id"
 
   create_table "locations", force: true do |t|
     t.integer  "teacher_id"
@@ -69,7 +66,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.datetime "updated_at"
   end
 
-  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id", using: :btree
+  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id"
 
   create_table "openings", force: true do |t|
     t.datetime "mon_open"
@@ -98,7 +95,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.boolean  "all_day_sun",  default: false
   end
 
-  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true, using: :btree
+  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true
 
   create_table "photos", force: true do |t|
     t.string   "name"
@@ -118,8 +115,8 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.datetime "updated_at"
   end
 
-  add_index "prices", ["subject_id"], name: "index_prices_on_subject_id", using: :btree
-  add_index "prices", ["teacher_id"], name: "index_prices_on_teacher_id", using: :btree
+  add_index "prices", ["subject_id"], name: "index_prices_on_subject_id"
+  add_index "prices", ["teacher_id"], name: "index_prices_on_teacher_id"
 
   create_table "qualifications", force: true do |t|
     t.string   "title"
@@ -142,7 +139,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer  "event_id"
   end
 
-  add_index "reviews", ["event_id"], name: "index_reviews_on_event_id", using: :btree
+  add_index "reviews", ["event_id"], name: "index_reviews_on_event_id"
 
   create_table "subjects", force: true do |t|
     t.string   "name"
@@ -156,7 +153,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer "teacher_id", null: false
   end
 
-  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id", using: :btree
+  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id"
 
   create_table "teachers", force: true do |t|
     t.string   "first_name"
@@ -183,8 +180,8 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.boolean  "will_travel",            default: false, null: false
   end
 
-  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
-  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
+  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
+  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
 
   create_table "transactions", force: true do |t|
     t.string   "sender"
@@ -199,7 +196,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.datetime "updated_at"
   end
 
-  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true, using: :btree
+  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true
 
   create_table "user_carts", force: true do |t|
     t.integer  "teacher_id"
@@ -214,6 +211,6 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer  "subject_id"
   end
 
-  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree
+  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true
 
 end

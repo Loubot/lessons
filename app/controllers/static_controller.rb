@@ -48,7 +48,7 @@ class StaticController < ApplicationController
 		@subject = params[:search_subjects] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
 
 		ids = Location.near('cork', 10).select('id').map(&:teacher_id)
-		@teachers = Teacher.check_if_valid.includes(:locations).where(id: ids).paginate(page: params[:page])
+		@teachers = @subject.teachers.check_if_valid.includes(:locations).where(id: ids).paginate(page: params[:page])
 		# teachers = get_search_results(params, @subject)
 		
 		# @teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []

@@ -85,7 +85,7 @@ class TeachersController < ApplicationController
 
 	def your_location
 		@teacher = Teacher.includes(:locations).find(params[:id])
-		@location = Location.new
+		@location = @teacher.locations.first
 		@locations = @teacher.locations
 		session[:map_id] = @teacher.locations.empty? ? 0 : @teacher.locations.last.id #store id for tabs
 		if !current_teacher.locations.empty?
