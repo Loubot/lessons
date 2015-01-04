@@ -12,14 +12,14 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs " role="tablist">
-    <li role="presentation" class="active location_tab"><a href="#main_location" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation"><a href="#profile" id="1" aria-controls="profile" role="tab" data-toggle="tab">Add new location</a></li>
+    <li role="presentation" class="active location_tab"><a href="#location1" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" id="1" aria-controls="location2" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new location</a></li>
     
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="main_location">
+    <div role="tabpanel" class="tab-pane active" id="location1">
     	<div class="col-md-8 nopadding">
 		
 				<div id="map_canvas" class="col-md-12 map_canvas" ></div>
@@ -49,8 +49,8 @@
 				<% end %>
 				<p class="text-center coordsHinter">No coordinates selected yet!!</p>
 			</div> <!-- end of col-md-4 -->
-    </div>
-    <div role="tabpanel" class="tab-pane" id="profile">
+    </div> <!-- end of tabpanel -->
+    <div role="tabpanel" class="tab-pane" id="location2">
     	
     </div>
     <!-- <div role="tabpanel" class="tab-pane" id="messages">...</div> -->
