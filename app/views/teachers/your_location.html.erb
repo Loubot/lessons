@@ -10,6 +10,7 @@
 	</div> <!-- end of col-md-12 -->
 	<div role="tabpanel">
 
+	<%= render partial: 'partials/your_location_map_tab', collection: @locations, as: :location  %>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs " role="tablist">
     <li role="presentation" class="active location_tab"><a href="#location1" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>

@@ -86,6 +86,7 @@ class TeachersController < ApplicationController
 	def your_location
 		@teacher = Teacher.includes(:locations).find(params[:id])
 		@location = Location.new
+		@locations = @teacher.locations
 		session[:map_id] = @teacher.locations.empty? ? 0 : @teacher.locations.last.id #store id for tabs
 		if !current_teacher.locations.empty?
 			gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
