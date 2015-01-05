@@ -42,16 +42,11 @@ class StaticController < ApplicationController
 	end
 
 	def display_subjects
-		require 'will_paginate/array' 
-		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
-		#Teacher.includes(:locations).where(id: ids)
-		@subject = params[:search_subjects] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search_subjects]}%").first
+		@subject = params[:search_subjects] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%").first
 
-		ids = Location.near('Cork', 10000).select('id').map(&:teacher_id)
-		@teachers = @subject.teachers.check_if_valid.includes(:locations).where(id: ids).paginate(page: params[:page])
-		# teachers = get_search_results(params, @subject)
+		teachers = get_search_results(params, @subject)
 		
-		# @teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []
+		@teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []
 	end
 
 	def browse_categories
