@@ -24,6 +24,7 @@ $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
         <div class="col-sm-offset-2 col-sm-10">
           <%= f.submit 'Update your coordinates', class: 'btn btn-info' %>
         </div>
+        <%= f.hidden_field :teacher_id, value: current_teacher.id %>
       <% end %>
       <p class="text-center coordsHinter">No coordinates selected yet!!</p>
     </div> <!-- end of col-md-4 -->
