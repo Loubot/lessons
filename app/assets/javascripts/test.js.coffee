@@ -35,6 +35,7 @@ window.getTab = ->
 $(document).on 'click', 'a[href="#profile"]', ->
   $.when(getTab()).done ->
     $("[href='#meballs']").tab 'show' #show tab after tab has been rendered
+    $("[href='#profile']").attr 'href', 'disabled'
 
 
 
