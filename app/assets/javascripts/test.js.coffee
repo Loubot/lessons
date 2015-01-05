@@ -15,7 +15,6 @@ window.initialize = (id= "") ->
     map.setCenter new google.maps.LatLng(52.904281, -8.023571)
 
   $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
-    alert 'b'
     google.maps.event.trigger map, "resize"
     map.setCenter new google.maps.LatLng(52.904281, -8.023571)
 
@@ -27,7 +26,7 @@ window.initialize = (id= "") ->
 
 
 window.getTab = ->  
-  $.ajax 
+  $.ajax #fetch tab from server
     url: '/add-map'
     data: { map: 'hello' }
 
@@ -35,7 +34,7 @@ window.getTab = ->
 
 $(document).on 'click', 'a[href="#profile"]', ->
   $.when(getTab()).done ->
-  
+    $("[href='#meballs']").tab 'show' #show tab after tab has been rendered
 
 
 
