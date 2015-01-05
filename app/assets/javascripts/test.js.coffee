@@ -1,3 +1,15 @@
+window.start_address_search = (id = "") ->
+  geocoder = new google.maps.Geocoder()
+  geocoder.geocode address: $("#address#{id}").val(), (results, status) ->
+    if status is google.maps.GeocoderStatus.OK
+      # alert JSON.stringify results
+      setMapPosition results[0].geometry.location, 16
+      $("#lat#{id}").val results[0].geometry.location.lat()
+      $("#lon#{id}").val results[0].geometry.location.lng()
+    else
+      alert "Geocode was not successful for the following reason: " + status
+    return
+
 window.initialize = (id= "") ->  
   
   map_options = 
@@ -5,7 +17,7 @@ window.initialize = (id= "") ->
      center: new google.maps.LatLng 52.904281, -8.023571
 
 
-  map = new google.maps.Map(document.getElementById("map_canvas#{id}"), map_options)
+  window.map = new google.maps.Map(document.getElementById("map_canvas#{id}"), map_options)
   window.marker = new google.maps.Marker(
       map: map
       position: map_options.center       
@@ -21,7 +33,10 @@ window.initialize = (id= "") ->
 
 
 
-
+setMapPosition = (latlng, zoom = 8) ->
+  map.setCenter latlng
+  map.setZoom zoom
+  marker.setPosition latlng
 
 
 
