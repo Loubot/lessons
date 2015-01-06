@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price",      precision: 8, scale: 2
+    t.decimal  "price",      precision: 2, scale: 2
   end
 
   add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id"
