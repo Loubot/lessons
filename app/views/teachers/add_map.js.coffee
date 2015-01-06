@@ -12,13 +12,13 @@ $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
         <div class="form-group">
           <%= f.label :latitude, class: 'col-sm-2' %>
           <div class="col-sm-10">
-            <%= f.text_field :latitude, class: 'form-control', id: "lat#{@id}" %>
+            <%= f.text_field :latitude, class: 'form-control', id: "lat_edit" %>
           </div>
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :longitude, class: 'col-sm-2' %>
           <div class="col-sm-10">
-            <%= f.text_field :longitude, class: 'form-control', id: "lon#{@id}" %>
+            <%= f.text_field :longitude, class: 'form-control', id: "lon_edit" %>
           </div>
         </div>
         <div class="col-sm-offset-2 col-sm-10">

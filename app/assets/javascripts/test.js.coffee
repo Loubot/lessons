@@ -21,15 +21,30 @@ window.initialize = (id= "") ->
   window.map = new google.maps.Map(document.getElementById("map_canvas#{id}"), map_options)
   window.marker = new google.maps.Marker(
       map: map
-      position: map_options.center       
+            
       )
   google.maps.event.addListenerOnce map, "idle", ->
     google.maps.event.trigger map, "resize"
     map.setCenter new google.maps.LatLng(52.904281, -8.023571)
 
-  $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
-    google.maps.event.trigger map, "resize"
-    map.setCenter new google.maps.LatLng(52.904281, -8.023571)
+  # $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
+  #   google.maps.event.trigger map, "resize"
+  #   map.setCenter new google.maps.LatLng(52.904281, -8.023571)
+
+  google.maps.event.addListener map, "click", (e) ->
+    geocoder = new google.maps.Geocoder()
+    geocoder.geocode location: e.latLng, (results, status) ->
+      if status is google.maps.GeocoderStatus.OK
+        # console.log results[0].formatted_address
+        $("#address#{id}").val results[0].formatted_address
+      marker.position = e.latLng
+        
+    lat = e.latLng.lat()
+    lon = e.latLng.lng()
+    $('#lat_edit').val(e.latLng.lat())
+    $('#lon_edit').val(e.latLng.lng())
+    setMapPosition e.latLng, map.getZoom()
+
 
 window.multiple_maps = ->
   mapArray = []
