@@ -29,7 +29,7 @@ $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
       <p class="text-center coordsHinter">No coordinates selected yet!!</p>
     </div> <!-- end of col-md-4 -->
       <script>
-        
+        window.initialize(<%= @id %>)
 
       </script>
   </div> """

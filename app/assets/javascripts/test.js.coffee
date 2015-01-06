@@ -10,11 +10,12 @@ window.start_address_search = (id = "") ->
       alert "Geocode was not successful for the following reason: " + status
     return
 
-window.initialize = (id= "") ->  
+window.initialize = (id= "") ->
+  console.log id
   
   map_options = 
-     zoom: 8
-     center: new google.maps.LatLng 52.904281, -8.023571
+    zoom: 8
+    center: new google.maps.LatLng 52.904281, -8.023571
 
 
   window.map = new google.maps.Map(document.getElementById("map_canvas#{id}"), map_options)
@@ -31,8 +32,20 @@ window.initialize = (id= "") ->
     map.setCenter new google.maps.LatLng(52.904281, -8.023571)
 
 window.multiple_maps = ->
-  for loc in gon.locations
-    console.log loc
+  mapArray = []
+  mapOptionsArray = []
+  for loc, i in gon.locations
+    # console.log "map_canvas#{i}"
+    map_options = 
+      zoom: 16
+      center: new google.maps.LatLng loc.latitude, loc.longitude
+    map = new google.maps.Map(document.getElementById("map_canvas#{i}"), map_options)
+
+    marker = new google.maps.Marker(
+      map: map
+      position: map_options.center
+      )
+    
 
 
 setMapPosition = (latlng, zoom = 8) ->
