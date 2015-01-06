@@ -26,7 +26,14 @@ $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
           <div class="col-sm-10">
             <%= f.text_field :longitude, class: 'form-control', id: "lon#{@id}" %>
           </div>
-        </div>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <%= f.label :price, class: 'col-sm-2 control-label' %>
+          <div class="col-sm-10">
+            <%= f.text_field :price, class: 'form-control', id: 'price', value: number_to_currency(f.object.price, precision: 2), placeholder: '€' %>
+            <span class="label label-warning">Set your price for this location</span>
+          </div> <!-- end of col-sm-10 -->
+        </div> <!-- end of form-group -->
         <div class="col-sm-offset-2 col-sm-10">
           <%= f.submit 'Update your coordinates', class: 'btn btn-info' %>
         </div>
