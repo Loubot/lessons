@@ -89,11 +89,7 @@ class TeachersController < ApplicationController
 		@locations = @teacher.locations
 		gon.locations = @locations
 		session[:map_id] = @teacher.locations.empty? ? 0 : @teacher.locations.last.id #store id for tabs
-		if !current_teacher.locations.empty?
-			gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
-		else
-			gon.location = [nil, nil]
-		end
+		
 	end
 
 	def change_profile_pic

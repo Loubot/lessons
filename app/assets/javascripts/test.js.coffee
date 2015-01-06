@@ -30,7 +30,9 @@ window.initialize = (id= "") ->
     google.maps.event.trigger map, "resize"
     map.setCenter new google.maps.LatLng(52.904281, -8.023571)
 
-
+window.multiple_maps = ->
+  for loc in gon.locations
+    console.log loc
 
 
 setMapPosition = (latlng, zoom = 8) ->
@@ -56,8 +58,12 @@ $(document).on 'click', 'a[href="#profile"]', ->
 
 # Run initialize on dom ready if map_container is on screen
 $(document).on 'ready page:load', ->  
-  if $('#map_container').is(':visible')      
-    load_google_maps_api('initialize')
+  if $('#map_container').is(':visible')
+    if gon.locations.length == 0
+      load_google_maps_api('initialize')
+    else
+      load_google_maps_api('multiple_maps')   
+    
     # checkCoordsSet()
   
     
