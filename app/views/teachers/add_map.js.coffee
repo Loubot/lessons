@@ -10,15 +10,21 @@ $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
       <h4>Or click on the map</h4><br>
       <%= form_for @location, html: { class: 'form-horizontal'} do |f| %>
         <div class="form-group">
+          <%= f.label :name, class: 'col-sm-2 control-label' %>
+          <div class="col-sm-10">
+            <%= f.text_field :name, class: 'form-control', id: 'lat' %>
+          </div>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
           <%= f.label :latitude, class: 'col-sm-2' %>
           <div class="col-sm-10">
-            <%= f.text_field :latitude, class: 'form-control', id: "lat_edit" %>
+            <%= f.text_field :latitude, class: 'form-control', id: "lat#{@id}" %>
           </div>
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :longitude, class: 'col-sm-2' %>
           <div class="col-sm-10">
-            <%= f.text_field :longitude, class: 'form-control', id: "lon_edit" %>
+            <%= f.text_field :longitude, class: 'form-control', id: "lon#{@id}" %>
           </div>
         </div>
         <div class="col-sm-offset-2 col-sm-10">

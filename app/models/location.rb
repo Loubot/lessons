@@ -7,8 +7,10 @@
 #  latitude   :float
 #  longitude  :float
 #  name       :string(255)
+#  address    :text
 #  created_at :datetime
 #  updated_at :datetime
+#  price      :decimal(8, 2)
 #
 
 class Location < ActiveRecord::Base

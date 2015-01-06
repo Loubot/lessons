@@ -10,6 +10,8 @@ window.start_address_search = (id = "") ->
       alert "Geocode was not successful for the following reason: " + status
     return
 
+
+
 window.initialize = (id= "") ->
   console.log id
   

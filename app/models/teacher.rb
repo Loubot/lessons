@@ -5,7 +5,6 @@
 #  id                     :integer          not null, primary key
 #  first_name             :string(255)
 #  last_name              :string(255)
-#  address                :text
 #  overview               :text             default("")
 #  created_at             :datetime
 #  updated_at             :datetime
