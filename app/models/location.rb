@@ -16,6 +16,8 @@
 class Location < ActiveRecord::Base
   belongs_to :teacher
 
+  validates :teacher_id, :latitude, :longitude, :name, :price, presence: true
+
   geocoded_by :full_street_address
 
   after_validation :geocode
