@@ -13,7 +13,7 @@
 	
   <!-- Nav tabs -->
   <ul class="nav nav-tabs " role="tablist">
-  	<%= render partial: 'partials/your_location_li_tags', collection: @locations, as: :location %>
+  	<%= render partial: 'partials/your_location/your_location_li_tags', collection: @locations, as: :location %>
     
     <li role="presentation"><a href="#profile" id="1" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new location</a></li>
     
@@ -21,7 +21,7 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
-  	<%= render partial: 'partials/your_location_map_tab', collection: @locations, as: :location  %>
+  	<%= render partial: 'partials/your_location/your_location_map_tab', collection: @locations, as: :location  %>
     
     <div role="tabpanel" class="tab-pane" id="location2">
     	
