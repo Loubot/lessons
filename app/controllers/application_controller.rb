@@ -41,7 +41,8 @@ class ApplicationController < ActionController::Base
         display_subjects_path(:search_subjects => params['search_subjects'],:search_position => params['search_position'])
       elsif URI.parse(URI.encode(request.env['omniauth.origin'])).path == '/show-teacher'
         params = request.env['omniauth.params']
-        # puts "params #{params}"
+        puts "params #{params}"
+        puts "id #{params['origin']['id']}"
         show_teacher_path(subject_id: params['subject_id'], id: params['id'])
       elsif URI(request.env['omniauth.origin']).path == "/teach" || URI(request.env['omniauth.origin']).path == "/learn"
         '/'

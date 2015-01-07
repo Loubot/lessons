@@ -3,7 +3,7 @@
 <%= "dddd #{@distance}"%><br>
 
 
-<div class="row">
+<div class="row show_teacher">
   <div role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
       <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
@@ -42,8 +42,8 @@
       </div>
       <div class="panel-body">
         <%= display_subjects(@teacher.subjects, @teacher.id) %> <%# teachers_helper %>
-      </div>
-    </div>
+      </div> <!-- end of panel-body -->
+    </div> <!-- end of booking_button_panel -->
   </div> <!-- end of col-md-2 -->
   <div class="col-md-6">
     <div class="panel panel-default">

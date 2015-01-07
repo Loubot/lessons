@@ -39,7 +39,7 @@
               <div class="control-group">
                 <div><%= f.submit "Sign in", class: 'btn btn-success sign_in_submit' %></div>
                 <div class="login_fb_container">
-                  <%= link_to image_tag('facebook_login.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>                
+                  <%= link_to image_tag('facebook_login.png'), "/teachers/auth/facebook?origin=#{request.original_url}&id=#{params['id'] if params['id']}", class: 'fbLogin_link' %>                
                 </div>
                 <div class="controls">
                   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
