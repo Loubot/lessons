@@ -103,10 +103,12 @@ load_google_maps_api = (name) ->
   script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + "callback=#{name}"
   document.body.appendChild script
 
-$("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->  
-  for m, i in mapArray
-    google.maps.event.trigger m, "resize"
-    m.setCenter mapOptionsArray[i].center
+$("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
+  console.log $(@).data 'index'
+  i = $(@).data 'index'
+  map = mapArray[i]
+  google.maps.event.trigger map, "resize"
+  map.setCenter mapOptionsArray[i].center
 # #////////////////////////////show teachers map
 # window.initialise_show_teachers_map = ->
 #   mapCanvas = document.getElementById('teacher_display_map')
