@@ -11,6 +11,10 @@ if $('#map_container').is(':visible')
         alert "Geocode was not successful for the following reason: " + status
       return
 
+  setMapPosition = (latlng, zoom = 8) ->
+    map.setCenter latlng
+    map.setZoom zoom
+    marker.setPosition latlng
 
 
   window.initialize = (id= "") ->
@@ -59,16 +63,7 @@ if $('#map_container').is(':visible')
       mapArray.push map
       marker = new google.maps.Marker(
         map: map
-        position: map_options.center
-        )
-      
-
-
-  setMapPosition = (latlng, zoom = 8) ->
-    map.setCenter latlng
-    map.setZoom zoom
-    marker.setPosition latlng
-
+        position: map_options.center ) 
 
 
   window.getTab = ->  
