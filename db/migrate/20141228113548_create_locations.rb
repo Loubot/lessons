@@ -11,6 +11,9 @@ class CreateLocations < ActiveRecord::Migration
     end
     add_index :locations, :teacher_id
     add_column :locations, :price, :decimal, :precision => 8, :scale => 2
+    add_column :prices, :location_id, :integer
+
+    remove_column :prices, :travel_price, :decimal, :precision => 8, :scale => 2
     remove_column :teachers, :lat, :float
     remove_column :teachers, :lon, :float
     remove_column :teachers, :address, :text

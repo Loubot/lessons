@@ -4,9 +4,9 @@
     <div id="map_canvas<%= location_counter %>" class="col-md-12 map_canvas" ></div>
   </div> <!-- end of col-md-8 -->
   <div class="col-md-4" >
-    <h2 class="h3">Where are you located?</h2><br>
+    <!-- <h2 class="h3">Where are you located?</h2><br>
     <input id="address" type="text"><button id="start_address_search" onclick="start_address_search()">Find address</button><br>
-    <h4>Or click on the map</h4><br>
+    <h4>Or click on the map</h4><br> -->
     <%= form_for location, html: { class: 'form-horizontal'} do |f| %>
       <div class="form-group">
         <%= f.label :name, class: 'col-sm-2 control-label' %>
@@ -33,10 +33,22 @@
         <%= f.hidden_field :teacher_id, value: current_teacher.id %>
         
         <%= f.submit 'Update your details', class: 'btn btn-info' %>
+        <%= link_to 'Delete this location', location, method: 'DELETE', class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
       </div>
 
-
+      
     <% end %>
+    <div class="row">
+      <% @teacher.subjects.each do |s| %>
+        <%= form_for Price.new do |p|, class: 'form-inline' %>
+          <%= label_tag 'home_price', "#{s.name} price:" %>
+          <%= p.text_field :home_price %>
+          <%= p.hidden_field :location_id, value: location.id %>
+          <%= p.hidden_field :teacher_id, value: @teacher.id %>
+        <% end %>
+      <% end %>
+    </div>
     <p class="text-center coordsHinter">No coordinates selected yet!!</p>
   </div> <!-- end of col-md-4 -->
 </div> <!-- end of tabpanel -->
+

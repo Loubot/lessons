@@ -2,13 +2,13 @@
 #
 # Table name: prices
 #
-#  id           :integer          not null, primary key
-#  subject_id   :integer
-#  teacher_id   :integer
-#  home_price   :decimal(8, 2)
-#  travel_price :decimal(8, 2)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id          :integer          not null, primary key
+#  subject_id  :integer
+#  teacher_id  :integer
+#  home_price  :decimal(8, 2)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  location_id :integer
 #
 
 class Price < ActiveRecord::Base

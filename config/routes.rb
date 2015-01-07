@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :locations
+  resources :prices, only: [:create, :update, :destroy]
   
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]

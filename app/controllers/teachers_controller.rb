@@ -86,7 +86,7 @@ class TeachersController < ApplicationController
 	end
 
 	def your_location
-		@teacher = Teacher.includes(:locations).find(params[:id])
+		@teacher = Teacher.includes(:locations, :subjects).find(params[:id])
 		@location = @teacher.locations.first
 		@locations = @teacher.locations
 		gon.locations = @locations

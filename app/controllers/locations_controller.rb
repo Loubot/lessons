@@ -23,6 +23,16 @@ class LocationsController < ApplicationController
     redirect_to :back
   end
 
+  def destroy
+    @location = Location.find(params[:id])
+    if @location.destroy
+      flash[:success] = "Location deleted!"
+    else
+      flash[:danger] = "Couldn't delete location: #{@location.errors.full_messages}"
+    end
+    redirect_to :back
+  end
+
 
   private
     def location_params
