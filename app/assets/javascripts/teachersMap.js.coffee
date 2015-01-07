@@ -48,8 +48,7 @@ if $('#map_container').is(':visible')
 
 
   window.multiple_maps = ->
-    window.mapArray = []
-    window.mapOptionsArray = []
+    
     for loc, i in gon.locations
       # console.log "map_canvas#{i}"
       map_options = 
@@ -79,11 +78,12 @@ if $('#map_container').is(':visible')
 
     
   $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
-    console.log $(@).data 'index'
-    i = $(@).data 'index'
-    map = mapArray[i]
-    google.maps.event.trigger map, "resize"
-    map.setCenter mapOptionsArray[i].center
+    if $(@).data 'index'
+      console.log $(@).data 'index'
+      i = $(@).data 'index'
+      map = mapArray[i]
+      google.maps.event.trigger map, "resize"
+      map.setCenter mapOptionsArray[i].center
     
   $(document).on 'click', 'a[href="#profile"]', ->
     $.when(getTab()).done ->
@@ -95,6 +95,8 @@ if $('#map_container').is(':visible')
 # Run initialize on dom ready if map_container is on screen
 $(document).on 'ready page:load', ->  
   if $('#map_container').is(':visible')
+    window.mapArray = []
+    window.mapOptionsArray = []
     if gon.locations.length == 0
       load_google_maps_api('initialize')
     else
