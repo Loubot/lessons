@@ -40,11 +40,21 @@
     <% end %>
     <div class="row">
       <% @teacher.subjects.each do |s| %>
-        <%= form_for Price.new do |p|, class: 'form-inline' %>
-          <%= label_tag 'home_price', "#{s.name} price:" %>
-          <%= p.text_field :home_price %>
+        <%= form_for Price.new, remote: true, html: { class: 'form-inline' } do |p| %>
+          <div class="form-group">
+            <div class="input-group">
+              <%# label_tag 'price_price', "#{s.name} price:" %>
+              <div class="input-group-addon">€</div>
+              
+              <%= p.text_field :price, class: "form-contol" %>
+            </div>
+
+          </div>
+          
+          
           <%= p.hidden_field :location_id, value: location.id %>
           <%= p.hidden_field :teacher_id, value: @teacher.id %>
+          <%= p.submit 'Submit details' %>
         <% end %>
       <% end %>
     </div>

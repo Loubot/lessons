@@ -113,10 +113,10 @@ ActiveRecord::Schema.define(version: 20141228113548) do
   create_table "prices", force: true do |t|
     t.integer  "subject_id"
     t.integer  "teacher_id"
-    t.decimal  "home_price",  precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
+    t.decimal  "price",       precision: 8, scale: 2
   end
 
   add_index "prices", ["subject_id"], name: "index_prices_on_subject_id", using: :btree
