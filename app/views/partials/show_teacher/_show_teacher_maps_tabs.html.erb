@@ -10,7 +10,7 @@
         </div> <!-- end of panel-heading -->
         <div class="panel-body text-center">
             <p class="lead">
-              Guitar <%= number_to_currency(location.price, unit: '€') %>
+              Guitar <p id="rates"><%= number_to_currency(location.price, unit: '€') %></p>
               <%# render partial: 'partials/teachers_rates' %>
         </div> <!-- end of panel-body -->
         <ul class="list-group list-group-flush text-center">
