@@ -29,9 +29,7 @@ window.initialize = (id= "") ->
     google.maps.event.trigger map, "resize"
     map.setCenter new google.maps.LatLng(52.904281, -8.023571)
 
-  # $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
-  #   google.maps.event.trigger map, "resize"
-  #   map.setCenter new google.maps.LatLng(52.904281, -8.023571)
+
 
   google.maps.event.addListener map, "click", (e) ->
     geocoder = new google.maps.Geocoder()
@@ -49,15 +47,16 @@ window.initialize = (id= "") ->
 
 
 window.multiple_maps = ->
-  mapArray = []
-  mapOptionsArray = []
+  window.mapArray = []
+  window.mapOptionsArray = []
   for loc, i in gon.locations
     # console.log "map_canvas#{i}"
     map_options = 
       zoom: 16
       center: new google.maps.LatLng loc.latitude, loc.longitude
+    mapOptionsArray.push map_options
     map = new google.maps.Map(document.getElementById("map_canvas#{i}"), map_options)
-
+    mapArray.push map
     marker = new google.maps.Marker(
       map: map
       position: map_options.center
@@ -103,6 +102,11 @@ load_google_maps_api = (name) ->
   script.type = "text/javascript"
   script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + "callback=#{name}"
   document.body.appendChild script
+
+$("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->  
+  for m, i in mapArray
+    google.maps.event.trigger m, "resize"
+    m.setCenter mapOptionsArray[i].center
 # #////////////////////////////show teachers map
 # window.initialise_show_teachers_map = ->
 #   mapCanvas = document.getElementById('teacher_display_map')

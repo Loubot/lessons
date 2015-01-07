@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="location<%= location_counter %>">
+<div role="tabpanel" class="tab-pane <%= 'active' if location_counter == 0 %>" id="location<%= location_counter %>">
   <div class="col-md-8 nopadding">
 
     <div id="map_canvas<%= location_counter %>" class="col-md-12 map_canvas" ></div>
