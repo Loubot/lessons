@@ -1,4 +1,4 @@
-if $('#map_container').is(':visible')
+if $('#map_container').is(':visible') || $('.show_teacher').length > 0
   window.start_address_search = (id = "") ->
     geocoder = new google.maps.Geocoder()
     geocoder.geocode address: $("#address#{id}").val(), (results, status) ->
@@ -58,12 +58,14 @@ if $('#map_container').is(':visible')
       map_options = 
         zoom: 16
         center: new google.maps.LatLng loc.latitude, loc.longitude
-      mapOptionsArray.push map_options
+      
       map = new google.maps.Map(document.getElementById("map_canvas#{i}"), map_options)
       mapArray.push map
+      mapOptionsArray.push map_options
       marker = new google.maps.Marker(
         map: map
-        position: map_options.center ) 
+        position: map_options.center )
+    console.log mapArray
 
 
   window.getTab = ->  
@@ -95,7 +97,11 @@ $(document).on 'ready page:load', ->
     if gon.locations.length == 0
       load_google_maps_api('initialize')
     else
-      load_google_maps_api('multiple_maps')   
+      load_google_maps_api('multiple_maps')
+  else if $('.show_teacher').length > 0
+    window.mapArray = []
+    window.mapOptionsArray = []
+    load_google_maps_api('multiple_maps') 
     
     # checkCoordsSet()
   
