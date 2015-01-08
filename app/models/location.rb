@@ -10,7 +10,6 @@
 #  address    :text
 #  created_at :datetime
 #  updated_at :datetime
-#  price      :decimal(8, 2)
 #
 
 class Location < ActiveRecord::Base
@@ -18,7 +17,7 @@ class Location < ActiveRecord::Base
 
   has_many :prices
 
-  validates :teacher_id, :latitude, :longitude, :name, :price, presence: true
+  validates :teacher_id, :latitude, :longitude, :name, presence: true
 
   geocoded_by :full_street_address
 

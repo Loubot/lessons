@@ -21,6 +21,7 @@ class TeachersController < ApplicationController
 		@subject = Subject.find(params[:subject_id])
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews, :locations).find(params[:id])
 		@locations = @teacher.locations
+		@prices = @teacher.prices
 		gon.locations = @locations
 		# gon.location= [@teacher.lat, @teacher.lon]
 		if !@teacher.locations.empty?

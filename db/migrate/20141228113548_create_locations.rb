@@ -10,7 +10,6 @@ class CreateLocations < ActiveRecord::Migration
       t.timestamps
     end
     add_index :locations, :teacher_id
-    add_column :locations, :price, :decimal, :precision => 8, :scale => 2
     add_column :prices, :location_id, :integer
     add_column :prices, :price, :decimal, :precision => 8, :scale => 2
 
