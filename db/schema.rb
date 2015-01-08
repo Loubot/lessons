@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228113548) do
+ActiveRecord::Schema.define(version: 20141203214922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,19 +59,6 @@ ActiveRecord::Schema.define(version: 20141228113548) do
 
   add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id", using: :btree
 
-  create_table "locations", force: true do |t|
-    t.integer  "teacher_id"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "name"
-    t.text     "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "price",      precision: 8, scale: 2
-  end
-
-  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id", using: :btree
-
   create_table "openings", force: true do |t|
     t.datetime "mon_open"
     t.datetime "mon_close"
@@ -115,8 +102,8 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "location_id"
-    t.decimal  "price",       precision: 8, scale: 2
+    t.decimal  "home_price",   precision: 8, scale: 2
+    t.decimal  "travel_price", precision: 8, scale: 2
   end
 
   add_index "prices", ["subject_id"], name: "index_prices_on_subject_id", using: :btree
@@ -182,6 +169,9 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.string   "stripe_access_token",    default: ""
     t.boolean  "is_active",              default: false, null: false
     t.boolean  "will_travel",            default: false, null: false
+    t.text     "address"
+    t.float    "lon"
+    t.float    "lat"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
