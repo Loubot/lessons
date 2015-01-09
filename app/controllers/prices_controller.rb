@@ -7,8 +7,17 @@ class PricesController < ApplicationController
 			p "Well done Louis"
 		else
 			p "Not quite Louis"
+		end		
+	end
+
+	def update
+		@price = Price.find(params[:id])
+		if @price.update(price_params)
+			p "Well done Louis"
+		else
+			p "Not quite Louis"
 		end
-		
+		render nothing: true
 	end
 
 	private
