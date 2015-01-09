@@ -86,10 +86,10 @@ class Teacher < ActiveRecord::Base
   end
 
   def check_rates
-    self.subjects.each do |s| 
-      return false if !Price.find_by(subject_id: s.id, teacher_id: self.id) 
+    self.locations.each do |l|
+      return false if l.prices.size == 0
     end
-    true
+    return true
   end
 
   def is_teacher_valid_message
