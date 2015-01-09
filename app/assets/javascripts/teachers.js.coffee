@@ -199,7 +199,7 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
 
   if $('.btn_book_now').length > 0
-    alert $('#rates').text()
+    # alert $('#rates').text()
     $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
     # $(document).on 'change', '#rates', ->
     #   $('#create_event_form').find('#event_rate').remove()
