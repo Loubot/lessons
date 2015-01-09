@@ -38,18 +38,18 @@ class Teacher < ActiveRecord::Base
 
   has_many :photos, as: :imageable, dependent: :destroy
 
-  has_many :locations
+  has_many :locations, dependent: :destroy
 
   has_many :reviews, dependent: :destroy
 
   has_and_belongs_to_many :subjects
 
-  has_many :experiences
-  has_many :events
+  has_many :experiences, dependent: :destroy
+  has_many :events, dependent: :destroy
   #has_many :events, foreign_key: :student_id
-  has_many :qualifications
+  has_many :qualifications, dependent: :destroy
   
-  has_many :transactions, foreign_key: :user_id
+  has_many :transactions, foreign_key: :user_id, dependent: :destroy
   has_many :identities, dependent: :destroy
   has_many :prices, dependent: :destroy
   has_one :user_cart

@@ -15,7 +15,7 @@
 class Location < ActiveRecord::Base
   belongs_to :teacher
 
-  has_many :prices
+  has_many :prices, dependent: :destroy
 
   validates :teacher_id, :latitude, :longitude, :name, presence: true
 
