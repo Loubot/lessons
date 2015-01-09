@@ -17,7 +17,7 @@ class PricesController < ApplicationController
 		else
 			p "Not quite Louis"
 		end
-		render nothing: true
+		
 	end
 
 	private

@@ -89,7 +89,7 @@ class TeachersController < ApplicationController
 	def your_location
 		@teacher = Teacher.includes(:locations, :subjects).find(params[:id])
 		@location = @teacher.locations.first
-		@locations = @teacher.locations
+		@locations = @teacher.locations.order("created_at ASC")
 		gon.locations = @locations
 		session[:map_id] = @teacher.locations.empty? ? 0 : @teacher.locations.last.id #store id for tabs
 		
