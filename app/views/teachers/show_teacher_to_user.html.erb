@@ -4,21 +4,20 @@
 
 
 <div class="row show_teacher">
-  <div role="tabpanel">
-    <ul class="nav nav-tabs" role="tablist">
-      <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
-    </ul> <!-- emd of nav nav-tabs -->
-    <div class="tab-content">
-      <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
-    </div> <!-- end of tab-content -->
-  </div> <!-- end of tabpanel -->
+  <div class="col-md-12">
+    <div role="tabpanel">
+      <ul class="nav nav-tabs" role="tablist">
+        <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
+      </ul> <!-- emd of nav nav-tabs -->
+      <div class="tab-content">
+        <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
+      </div> <!-- end of tab-content -->
+    </div> <!-- end of tabpanel -->
+  </div>
 </div> <!-- end of row -->
 
-<div class="row">
-  <div class="col-md-2">
-    
-  </div> <!-- end of col-md-2 -->
-  <div class="col-md-6">
+<div class="row">  
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading"><%= @teacher.first_name %></div>
       <div class="panel-body">
@@ -80,7 +79,7 @@
       </div> <!-- end of container fluid -->
     <% end %>
     
-  </div> <!-- end of col-md-9 -->
+  </div> <!-- end of col-md-6 -->
 
 
   <div class="col-md-4">
