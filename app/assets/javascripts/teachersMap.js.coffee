@@ -1,4 +1,4 @@
-if $('#map_container').is(':visible') || $('.show_teacher').length > 0
+window.init_teachers_maps = ->
   window.start_address_search = (id = "") ->
     geocoder = new google.maps.Geocoder()
     geocoder.geocode address: $("#address#{id}").val(), (results, status) ->
@@ -95,13 +95,17 @@ $(document).on 'ready page:load', ->
     window.mapArray = []
     window.mapOptionsArray = []
     if gon.locations.length == 0
-      load_google_maps_api('initialize')
+      $.when(load_google_maps_api('initialize')).done ->
+        init_teachers_maps()
     else
-      load_google_maps_api('multiple_maps')
+      $.when(load_google_maps_api('multiple_maps')).done ->
+        init_teachers_maps()
   else if $('.show_teacher').length > 0
     window.mapArray = []
     window.mapOptionsArray = []
-    load_google_maps_api('multiple_maps') 
+    $.when(load_google_maps_api('multiple_maps')).done ->
+      init_teachers_maps()
+    
     
     # checkCoordsSet()
   

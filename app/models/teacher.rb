@@ -82,7 +82,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && check_rates #next method
+    (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && self.locations.size != 0 && check_rates #next method
   end
 
   def check_rates
@@ -101,6 +101,7 @@ class Teacher < ActiveRecord::Base
     error_message_array.push " please fill in your overview" if self.overview == ""
     error_message_array.push " you must set all your rates" if !check_rates
     error_message_array.push " you must select a subject" if self.subjects.size < 1
+    error_message_array.push " you must enter at least one location" if self.locations.size < 1
     if error_message_array.empty?
       self.update_attributes(is_active: true) #update is_active attribute
       false
