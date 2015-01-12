@@ -1,4 +1,5 @@
-if $('#map_container').is(':visible') || $('.show_teacher').length > 0
+if $('#map_container').is(':visible') or $('.show_teacher').length > 0
+  alert 'b'
   window.start_address_search = (id = "") ->
     geocoder = new google.maps.Geocoder()
     geocoder.geocode address: $("#address#{id}").val(), (results, status) ->
@@ -90,6 +91,7 @@ if $('#map_container').is(':visible') || $('.show_teacher').length > 0
 
 
 # Run initialize on dom ready if map_container is on screen
+
 $(document).on 'ready page:load', ->  
   if $('#map_container').is(':visible')
     window.mapArray = []
@@ -110,7 +112,8 @@ $(document).on 'ready page:load', ->
 load_google_maps_api = (name) ->
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + "callback=#{name}"
+  script.src = "http://maps.googleapis.com/maps/api/js?v=3&sensor=false&" + "callback=#{name}"
+ 
   document.body.appendChild script
 
 
