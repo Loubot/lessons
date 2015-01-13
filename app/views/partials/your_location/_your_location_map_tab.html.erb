@@ -37,8 +37,8 @@
       <% @teacher.subjects.each do |s| %>
         <%= form_for Price.find_or_initialize_by(location_id: location.id, subject_id: s.id), remote: true, html: { class: 'form-horizontal prices_form' } do |p| %>
           <div class="form-group">
-            <%= p.label "#{s.name} price:", class: 'col-sm-2 control-label' %>
-            <div class="col-sm-10">
+            <%= p.label "#{s.name} price:", class: 'col-sm-4 control-label' %>
+            <div class="col-sm-8">
               <%= p.text_field :price, class: 'form-control' %> 
             </div>
             
