@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     resources :openings, only: [:create, :update]
     resources :events
 
+
   end
+
+  resources :locations
+  resources :prices, only: [:create, :update, :destroy]
   
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]
@@ -51,6 +55,7 @@ Rails.application.routes.draw do
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
+  get         '/add-map'                =>  'teachers#add_map'
 
 
   get         'admin-panel'             =>  'admins#admin_panel'

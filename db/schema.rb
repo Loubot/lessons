@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203214922) do
+ActiveRecord::Schema.define(version: 20141228113548) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -56,6 +56,18 @@ ActiveRecord::Schema.define(version: 20141203214922) do
 
   add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id"
 
+  create_table "locations", force: true do |t|
+    t.integer  "teacher_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "name"
+    t.text     "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id"
+
   create_table "openings", force: true do |t|
     t.datetime "mon_open"
     t.datetime "mon_close"
@@ -97,10 +109,10 @@ ActiveRecord::Schema.define(version: 20141203214922) do
   create_table "prices", force: true do |t|
     t.integer  "subject_id"
     t.integer  "teacher_id"
-    t.decimal  "home_price",   precision: 8, scale: 2
-    t.decimal  "travel_price", precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "location_id"
+    t.decimal  "price",       precision: 8, scale: 2
   end
 
   add_index "prices", ["subject_id"], name: "index_prices_on_subject_id"
@@ -144,7 +156,6 @@ ActiveRecord::Schema.define(version: 20141203214922) do
   create_table "teachers", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.text     "address"
     t.text     "overview",               default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -159,8 +170,6 @@ ActiveRecord::Schema.define(version: 20141203214922) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.boolean  "admin"
-    t.float    "lat"
-    t.float    "lon"
     t.integer  "profile"
     t.boolean  "is_teacher",             default: false, null: false
     t.string   "paypal_email",           default: ""

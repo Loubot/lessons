@@ -37,9 +37,12 @@
 	margin-top:20px;
 }
 
-#map_canvas{
-	// width:500px;
-	height:500px;
+.bla{
+	padding: 0 !important;
+}
+
+.nav-tabs > li > a{
+	background-color: #f5f5f5;
 }
 
 .coordsHinter{
@@ -48,6 +51,28 @@
 	color: #ee5f5b;
 }
 
+.location_tab{
+	padding: 0;
+	margin: 0;
+}
+
+.delete_location{
+	margin-bottom: 50px !important;
+}
+
+.prices_form{
+	padding: 3px;
+	border-bottom: 1px solid #CCCCC0;
+	border-top: 1px solid #CCCCC0;
+	
+}
+
+.location_forms_container{
+	
+	border: 1px solid #CCCCC0;
+	
+	
+}
 //end of teachers-area
 
 //lower nav buttons
@@ -78,24 +103,6 @@
 // Teachers _form page _teachers_select_payment modal /view/teachers
 .teacher_payment_registration_details{
 	position: relative;
-}
-
-.paypal_choice{
-	border: solid 1px #888888;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	width: 49%;
-	margin-right: 2px;
-	box-shadow: 2px 2px 10px #888888;
-}
-
-.stripe_choice{
-	border: solid 1px #888888;
-	box-shadow: 2px 2px 10px #888888;
-	width: 49%;
-	padding-bottom: 5px;
 }
 
 .paypal_reg_explanation{
@@ -137,3 +144,28 @@
 }
 
 //Teachers _form page teachers_rates_form modal
+
+
+
+@media (max-width: 500px) {
+	.map_canvas{
+	// width:500px;
+	height:300px;
+	
+	}
+}
+
+@media (min-width: 500px) {
+	.map_canvas{
+		height: 400px;
+	}
+}
+
+@media (min-width: 992px) {
+	.map_canvas{
+	// width:500px;
+	height:500px;
+	
+}
+
+}

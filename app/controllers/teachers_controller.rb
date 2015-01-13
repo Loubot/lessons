@@ -19,8 +19,16 @@ class TeachersController < ApplicationController
 		@event = Event.new
 		
 		@subject = Subject.find(params[:subject_id])
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews).find(params[:id])
-		gon.location= [@teacher.lat, @teacher.lon]
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews, :locations).find(params[:id])
+		@locations = @teacher.locations
+		@prices = @teacher.prices
+		gon.locations = @locations
+		# gon.location= [@teacher.lat, @teacher.lon]
+		if !@teacher.locations.empty?
+			gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
+		else
+			gon.location = [nil, nil]
+		end
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		# @distance = @teacher.distance_to([51.886823, -8.472886],:km)
@@ -79,8 +87,12 @@ class TeachersController < ApplicationController
 	end
 
 	def your_location
-		@teacher = current_teacher
-		gon.location = [@teacher.lat,@teacher.lon]
+		@teacher = Teacher.includes(:locations, :subjects).find(params[:id])
+		# @location = @teacher.locations.first
+		@locations = @teacher.locations.order("created_at ASC")
+		gon.locations = @locations
+		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
+		
 	end
 
 	def change_profile_pic
@@ -91,7 +103,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
@@ -100,6 +112,14 @@ class TeachersController < ApplicationController
 		else 
 			render layout: 'teacher_layout'
 		end
+	end
+
+	def add_map
+		@teacher = current_teacher
+		@id = session[:map_id].to_i + 1 #set id for new tabs
+		@location = Location.new
+		p request.to_s
+
 	end
 
 	private

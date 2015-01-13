@@ -5,7 +5,6 @@
 #  id                     :integer          not null, primary key
 #  first_name             :string(255)
 #  last_name              :string(255)
-#  address                :text
 #  overview               :text             default("")
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -20,8 +19,6 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  admin                  :boolean
-#  lat                    :float
-#  lon                    :float
 #  profile                :integer
 #  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
@@ -37,28 +34,30 @@ class Teacher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   #validates :email, confirmation: true, uniqueness: { case_sensitive: false }
-  after_validation :reverse_geocode
+  # after_validation :reverse_geocode
 
   has_many :photos, as: :imageable, dependent: :destroy
+
+  has_many :locations, dependent: :destroy
 
   has_many :reviews, dependent: :destroy
 
   has_and_belongs_to_many :subjects
 
-  has_many :experiences
-  has_many :events
+  has_many :experiences, dependent: :destroy
+  has_many :events, dependent: :destroy
   #has_many :events, foreign_key: :student_id
-  has_many :qualifications
+  has_many :qualifications, dependent: :destroy
   
-  has_many :transactions, foreign_key: :user_id
+  has_many :transactions, foreign_key: :user_id, dependent: :destroy
   has_many :identities, dependent: :destroy
   has_many :prices, dependent: :destroy
   has_one :user_cart
   has_one :opening
 
-  geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
-  reverse_geocoded_by :lat, :lon
-
+  # geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
+  # reverse_geocoded_by :lat, :lon
+  
   self.per_page = 5
 
   #scope
@@ -83,25 +82,26 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    self.lat && self.lon && (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && check_rates #next method
+    (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && self.locations.size != 0 && check_rates #next method
   end
 
   def check_rates
-    self.subjects.each do |s| 
-      return false if !Price.find_by(subject_id: s.id, teacher_id: self.id) 
+    self.locations.each do |l|
+      return false if l.prices.size != self.subjects.size
     end
-    true
+    return true
   end
 
   def is_teacher_valid_message
     error_message_array = []
     
-    error_message_array.push " location not entered" if !self.lat || !self.lon
+    # error_message_array.push " location not entered" if !self.lat || !self.lon
     error_message_array.push " profile picture not set" if !self.profile
     error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""
     error_message_array.push " you must set all your rates" if !check_rates
     error_message_array.push " you must select a subject" if self.subjects.size < 1
+    error_message_array.push " you must enter at least one location" if self.locations.size < 1
     if error_message_array.empty?
       self.update_attributes(is_active: true) #update is_active attribute
       false

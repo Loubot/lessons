@@ -2,45 +2,29 @@
 <%= include_gon %><br>
 <%= "dddd #{@distance}"%><br>
 
-<div class="row">
-  <div class="col-md-2">
-    <div class="teacher_purchase_panel">        
-      <div class="panel booking_button_panel">
-        <div class="panel-heading booking_button_panel_heading">
-            <h4 class="text-center"><strong><%= "#{@teacher.full_name}" %></strong></h4>
-        </div> <!-- end of panel-heading -->
-        <div class="panel-body text-center">
-            <p class="lead">
-              <%= render partial: 'partials/teachers_rates' %>
-        </div> <!-- end of panel-body -->
-        <ul class="list-group list-group-flush text-center">
-          <% if teacher_signed_in? %>
-            <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</button></li>
-            
-          <% else %>
-            <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                
-          <% end %>
-        </ul> <!-- end of list-group -->
-          
-      </div> <!-- end of booking_button_panel -->
-    </div> <!-- end of teacher_purchase_panel -->
-    <div class="panel booking_button_panel">
-      <div class="panel-heading booking_button_panel_heading">
-        <h4 class="panel-title">Subject(s) taught</h4>
-      </div>
-      <div class="panel-body">
-        <%= display_subjects(@teacher.subjects, @teacher.id) %> <%# teachers_helper %>
-      </div>
-    </div>
-  </div> <!-- end of col-md-2 -->
-  <div class="col-md-6">
+
+<div class="row show_teacher">
+  <div class="col-md-12">
+    <div role="tabpanel">
+      <ul class="nav nav-tabs" role="tablist">
+        <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
+      </ul> <!-- emd of nav nav-tabs -->
+      <div class="tab-content">
+        <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
+      </div> <!-- end of tab-content -->
+    </div> <!-- end of tabpanel -->
+  </div>
+</div> <!-- end of row -->
+
+<div class="row">  
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading"><%= @teacher.first_name %></div>
       <div class="panel-body">
         <div class="media">
           <span class="pull-left"><%= show_teacher_silhouette_helper(@teacher) %> </span>     
           <div class="media-body">
-            <%= @teacher.address %><br>
+            <%# @teacher.address %><br>
             <%= @teacher.overview %><br>
           </div> <!-- end of media-body -->
         </div> <!-- end of media -->
@@ -95,12 +79,12 @@
       </div> <!-- end of container fluid -->
     <% end %>
     
-  </div> <!-- end of col-md-9 -->
+  </div> <!-- end of col-md-6 -->
 
 
   <div class="col-md-4">
-    <div id="teacher_display_map">
-    </div> <!-- end of teacher_display_map -->
+    <!-- <div id="teacher_display_map">
+    </div> --> <!-- end of teacher_display_map -->
     <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
       <div class="dhx_cal_navline" >
           <div class="dhx_cal_prev_button">&nbsp;</div>

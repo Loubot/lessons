@@ -1,7 +1,7 @@
 <% home_price = Price.find_by(subject_id: subject.id,teacher_id:current_teacher.id) %>
 <% if !home_price.blank? %>
   <label><%= subject.name %> rate:</label>
-  <li class="list-group-item">Home price:<%= number_to_currency(home_price.home_price, unit: '€') %></li>
+  <li class="list-group-item">Home price:<%= number_to_currency(home_price.price, unit: '€') %></li>
   <% if current_teacher.will_travel %>
     <li class="list-group-item">Travel price:<%= number_to_currency(Price.find_by(subject_id: subject.id,teacher_id:@current_teacher.id).travel_price, unit: '€') %></li>
   <% end %>

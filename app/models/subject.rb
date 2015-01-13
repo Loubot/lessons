@@ -11,7 +11,7 @@
 
 class Subject < ActiveRecord::Base
 	belongs_to :category
-  has_many :prices
+  has_many :prices, dependent: :destroy
   validates :name, :category_id, presence: true
   validates :name, uniqueness: true
 

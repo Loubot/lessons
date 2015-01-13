@@ -1,41 +1,33 @@
 <%= content_for :title, 'Tell us where you are' %>
-<%= content_for :header do %>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-<% end %>
+
 <div class="row" id="map_container">
 	<div class="col-md-12">
 		<div class="well">You can enter your address and click find address or use the map controls and click on 
-			your address. Please be as accurate as possible. Address should be in form: 1 High Street, town name. (The comma "," is important!)
-		</div>
-	</div>
+			your address. Please be as accurate as possible. Address should be in form: 1 High Street, town name. (The comma "," is important!). You can also set prices for each subject at each location. 
+		</div> <!-- end of well -->
+	</div> <!-- end of col-md-12 -->
+	<div role="tabpanel">
+
 	
-	<div class="col-md-8">
-		
-		<div id="map_canvas" class="col-md-12" ></div>
-	</div> <!-- end of col-md-8 -->
-	<div class="col-md-4" >
-		<h2 class="h3">Where are you located?</h2><br>
-		<input id="address" type="text"><button id="start_address_search" onclick="start_address_search()">Find address</button><br>
-		<h4>Or click on the map</h4><br>
-		<%= form_for @teacher, html: { class: 'form-horizontal'} do |f| %>
-			<div class="form-group">
-				<%= f.label :lat, class: 'col-sm-2' %>
-				<div class="col-sm-10">
-					<%= f.text_field :lat, class: 'form-control', id: 'lat' %>
-				</div>
-			</div> <!-- end of form-group -->
-			<div class="form-group">
-				<%= f.label :lon, class: 'col-sm-2' %>
-				<div class="col-sm-10">
-					<%= f.text_field :lon, class: 'form-control', id: 'lon' %>
-				</div>
-			</div>
-			<div class="col-sm-offset-2 col-sm-10">
-				<%= f.submit 'Update your coordinates', class: 'btn btn-info' %>
-			</div>
-		<% end %>
-		<p class="text-center coordsHinter">No coordinates selected yet!!</p>
-	</div> <!-- end of col-md-4 -->
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs " role="tablist">
+  	<%= render partial: 'partials/your_location/your_location_li_tags', collection: @locations, as: :location %>
+    
+    <li role="presentation"><a href="#profile" id="1" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new location</a></li>
+    
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+  	<%= render partial: 'partials/your_location/your_location_map_tab', collection: @locations, as: :location  %>
+    
+    <div role="tabpanel" class="tab-pane" id="location2">
+    	
+    </div>
+    
+    
+  </div>
+
+</div> <!-- end of tabpanel -->
 	
 </div> <!-- end of map_container -->
-
