@@ -3,7 +3,7 @@
 
     <div id="map_canvas<%= location_counter %>" class="col-md-12 map_canvas" ></div>
   </div> <!-- end of col-md-8 -->
-  <div class="col-md-4" >
+  <div class="col-md-4 location_forms_container" >
     <!-- <h2 class="h3">Where are you located?</h2><br>
     <input id="address" type="text"><button id="start_address_search" onclick="start_address_search()">Find address</button><br>
     <h4>Or click on the map</h4><br> -->
@@ -26,30 +26,35 @@
       <div class="col-sm-offset-2 col-sm-10">
         <%= f.hidden_field :teacher_id, value: current_teacher.id %>
         
-        <%= f.submit 'Update your details', class: 'btn btn-info' %>
-        <%= link_to 'Delete this location', location, method: 'DELETE', class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+        <%= f.submit 'Update your details', class: 'btn btn-info' %><br><br>
+        <%= link_to 'Delete this location', location, method: 'DELETE', class: 'btn btn-danger delete_location', data: { confirm: 'Are you sure?' } %>
       </div>
 
       
     <% end %>
     <%= puts "path #{price_path}" %>
-    <div class="row">
+    <div class="row add_col_padding">
       <% @teacher.subjects.each do |s| %>
-        <%= form_for Price.find_or_initialize_by(location_id: location.id, subject_id: s.id), remote: true, html: { class: 'form-inline' } do |p| %>
+        <%= form_for Price.find_or_initialize_by(location_id: location.id, subject_id: s.id), remote: true, html: { class: 'form-horizontal prices_form' } do |p| %>
           <div class="form-group">
-            <div class="input-group">
-              <%# label_tag 'price_price', "#{s.name} price:" %>
-              <div class="input-group-addon">€</div>
-              
-              <%= p.text_field :price, class: "form-contol" %>
+            <%= p.label "#{s.name} price:", class: 'col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= p.text_field :price, class: 'form-control' %> 
             </div>
+            
+            
 
           </div>
           
           <%= p.hidden_field :subject_id, value: s.id %>
           <%= p.hidden_field :location_id, value: location.id %>
           <%= p.hidden_field :teacher_id, value: @teacher.id %>
-          <%= p.submit "#{s.name} price", class: 'btn btn-xs btn-info' %>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <%= p.submit "Update #{s.name} price", class: 'btn btn-info' %>
+            </div>
+          </div>
+          
         <% end %>
       <% end %>
     </div>

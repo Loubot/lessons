@@ -14,6 +14,10 @@ hr{
 	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 
+.add_col_padding{
+  padding: 0 15px;
+}
+
 .alert{
 
   margin-top: -72px;  
@@ -364,6 +368,14 @@ hr{
 // 	border: 1px solid #CCCCC0;
 // 	margin-bottom: 5px; 
 // }
+
+.show_teacher{
+  margin-bottom: 50px;
+}
+
+.map_canvas{
+  border: 1px solid #CCCCC0;
+}
 
 .teachers_display_scheduler{
 	height: 500px;
