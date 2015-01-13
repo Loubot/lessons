@@ -139,8 +139,6 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer  "event_id"
   end
 
-  add_index "reviews", ["event_id"], name: "index_reviews_on_event_id"
-
   create_table "subjects", force: true do |t|
     t.string   "name"
     t.integer  "category_id"

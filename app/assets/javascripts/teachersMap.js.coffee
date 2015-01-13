@@ -1,4 +1,3 @@
-
 window.init_teachers_maps = ->
   window.start_address_search = (id = "") ->
     geocoder = new google.maps.Geocoder()
@@ -18,55 +17,58 @@ window.init_teachers_maps = ->
     marker.setPosition latlng
 
 
-window.initialize = (id= "") ->
-  console.log id
-  
-  map_options = 
-    zoom: 8
-    center: new google.maps.LatLng 52.904281, -8.023571
-
-
-  window.map = new google.maps.Map(document.getElementById("map_canvas#{id}"), map_options)
-  window.marker = new google.maps.Marker(
-      map: map
-            
-      )
-  google.maps.event.addListenerOnce map, "idle", ->
-    google.maps.event.trigger map, "resize"
-    map.setCenter new google.maps.LatLng(52.904281, -8.023571)
-
-
-
-  google.maps.event.addListener map, "click", (e) ->
-    geocoder = new google.maps.Geocoder()
-    geocoder.geocode location: e.latLng, (results, status) ->
-      if status is google.maps.GeocoderStatus.OK
-        # console.log results[0].formatted_address
-        $("#address#{id}").val results[0].formatted_address
-      marker.position = e.latLng
-        
-    lat = e.latLng.lat()
-    lon = e.latLng.lng()
-    $('#lat_edit').val(e.latLng.lat())
-    $('#lon_edit').val(e.latLng.lng())
-    setMapPosition e.latLng, map.getZoom()
-
-
-window.multiple_maps = ->
+  window.initialize = (id= "") ->
+    console.log id
     
-  for loc, i in gon.locations
-    # console.log "map_canvas#{i}"
     map_options = 
-      zoom: 16
-      center: new google.maps.LatLng loc.latitude, loc.longitude
+      zoom: 8
+      center: new google.maps.LatLng 52.904281, -8.023571
+
+
+    window.map = new google.maps.Map(document.getElementById("map_canvas#{id}"), map_options)
+    window.marker = new google.maps.Marker(
+        map: map
+              
+        )
+    google.maps.event.addListenerOnce map, "idle", ->
+      google.maps.event.trigger map, "resize"
+      map.setCenter new google.maps.LatLng(52.904281, -8.023571)
+
+
+
+    google.maps.event.addListener map, "click", (e) ->
+      geocoder = new google.maps.Geocoder()
+      geocoder.geocode location: e.latLng, (results, status) ->
+        if status is google.maps.GeocoderStatus.OK
+          # console.log results[0].formatted_address
+          $("#address#{id}").val results[0].formatted_address
+        marker.position = e.latLng
+          
+      lat = e.latLng.lat()
+      lon = e.latLng.lng()
+      $('#lat_edit').val(e.latLng.lat())
+      $('#lon_edit').val(e.latLng.lng())
+      setMapPosition e.latLng, map.getZoom()
+
+
+  window.multiple_maps = ->
     
-    map = new google.maps.Map(document.getElementById("map_canvas#{i}"), map_options)
-    mapArray.push map
-    mapOptionsArray.push map_options
-    marker = new google.maps.Marker(
-      map: map
-      position: map_options.center )
-  console.log mapArray
+    for loc, i in gon.locations
+      # console.log "map_canvas#{i}"
+      map_options = 
+        zoom: 16
+        center: new google.maps.LatLng loc.latitude, loc.longitude
+      
+      map = new google.maps.Map(document.getElementById("map_canvas#{i}"), map_options)
+      mapArray.push map
+      mapOptionsArray.push map_options
+      marker = new google.maps.Marker(
+        map: map
+        position: map_options.center )
+    console.log mapArray
+
+  window.doNothin = ->
+  console.log "Maps loaded"
 
 
   window.getTab = ->  
@@ -91,13 +93,12 @@ window.multiple_maps = ->
 
 
 # Run initialize on dom ready if map_container is on screen
-
 $(document).on 'ready page:load', ->  
   if $('#map_container').is(':visible')
     window.mapArray = []
     window.mapOptionsArray = []
     if gon.locations.length == 0
-      $.when(load_google_maps_api('initialize')).done ->
+      $.when(load_google_maps_api()).done ->
         init_teachers_maps()
     else
       $.when(load_google_maps_api('multiple_maps')).done ->
@@ -111,13 +112,14 @@ $(document).on 'ready page:load', ->
     
     # checkCoordsSet()
   
-    
+
 
 load_google_maps_api = (name) ->
+  callback = (if (name?) then "callback=#{name}" else "callback=doNothin")
+  
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "http://maps.googleapis.com/maps/api/js?v=3&sensor=false&" + "callback=#{name}"
- 
+  script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + callback
   document.body.appendChild script
 
 
