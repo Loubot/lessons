@@ -45,13 +45,6 @@
 	background-color: #f5f5f5;
 }
 
-
-.map_canvas{
-	// width:500px;
-	height:500px;
-	
-}
-
 .coordsHinter{
 	bottom: 0; left: 0;
 	visibility: hidden;
@@ -61,6 +54,10 @@
 .location_tab{
 	padding: 0;
 	margin: 0;
+}
+
+.delete_location{
+	margin-bottom: 50px !important;
 }
 //end of teachers-area
 
@@ -151,3 +148,28 @@
 }
 
 //Teachers _form page teachers_rates_form modal
+
+
+
+@media (max-width: 500px) {
+	.map_canvas{
+	// width:500px;
+	height:300px;
+	
+	}
+}
+
+@media (min-width: 500px) {
+	.map_canvas{
+		height: 400px;
+	}
+}
+
+@media (min-width: 992px) {
+	.map_canvas{
+	// width:500px;
+	height:500px;
+	
+}
+
+}
