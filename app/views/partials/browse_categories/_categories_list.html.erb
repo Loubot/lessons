@@ -1,6 +1,7 @@
+<!-- List of subjects -->
 <div class="container-fluid category_browse_container">
   <div class="row category_browse_row">
     <h3 class="col-md-12 category_browse_name"><%= category.name %></h3>
   </div>
-  <%= render partial: 'partials/subject_list', collection: category.subjects, as: :subject %>
+  <%= render partial: 'partials/browse_categories/subject_list', collection: category.subjects, as: :subject %>
 </div>
