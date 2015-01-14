@@ -18,7 +18,7 @@ window.init_teachers_maps = ->
 
 
   window.initialize = (id= "") ->
-    console.log id
+    # console.log id
     
     map_options = 
       zoom: 8
@@ -65,7 +65,7 @@ window.init_teachers_maps = ->
       marker = new google.maps.Marker(
         map: map
         position: map_options.center )
-    console.log mapArray
+    # console.log mapArray
 
   window.doNothin = ->
   console.log "Maps loaded"
@@ -116,7 +116,7 @@ $(document).on 'ready page:load', ->
 
 load_google_maps_api = (name) ->
   callback = (if (name?) then "callback=#{name}" else "callback=doNothin")
-  
+  console.log 'loading'
   script = document.createElement("script")
   script.type = "text/javascript"
   script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + callback
