@@ -58,10 +58,10 @@ class StaticController < ApplicationController
 		@categories = Category.order(name: :asc)
 	end
 
-	# def refresh_welcome
-	# 	render "static/partials/#{params[:page]}", :layout => false
+	def refresh_welcome
+		render "static/partials/#{params[:page]}", :layout => false
 		
-	# end
+	end
 
 	private
 
