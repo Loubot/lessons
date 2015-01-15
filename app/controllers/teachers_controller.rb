@@ -24,15 +24,14 @@ class TeachersController < ApplicationController
 		@prices = @teacher.prices
 		gon.locations = @locations
 		# gon.location= [@teacher.lat, @teacher.lon]
-		if !@teacher.locations.empty?
-			gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
-		else
-			gon.location = [nil, nil]
-		end
+		# if !@teacher.locations.empty?
+		# 	gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
+		# else
+		# 	gon.location = [nil, nil]
+		# end
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
-		# @distance = @teacher.distance_to([51.886823, -8.472886],:km)
-		pick_show_teacher_view(params[:id])		
+		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
 	end
 
 	def edit
@@ -103,7 +102,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

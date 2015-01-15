@@ -713,6 +713,10 @@ form .glyphicon {
   margin-bottom: 50px;
 }
 
+.subject_link{
+  margin-top:  30px;
+}
+
 // end of static/browse_categories*/
 
 //welcome page*/
@@ -899,7 +903,7 @@ form .glyphicon {
   }
 
   .learn_reg_photo{ //learn page
-    background-image: image_url('test.jpg');
+    background-image: image_url('learn_bubble.jpg');
     margin-top: -72px;
     height: 500px;  
     -moz-background-size: 100% 100%;

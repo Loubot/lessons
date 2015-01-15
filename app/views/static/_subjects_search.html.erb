@@ -17,7 +17,7 @@
 
 			Price: <%= number_to_currency(teacher.prices.where(subject_id: @subject.id).first.price,unit:'€') %><br>
 			<% if !params[:search_position].empty? %>
-				Distance: <br> <%= pluralize(teacher.distance_to(params[:search_position], :mi).round(), 'mile') %>
+				Distance: <br> <%= pluralize(teacher.locations.first.distance_to(params[:search_position], :mi).round(), 'mile') %>
 			<% else %>
 				No search location entered
 			<% end %><br>
