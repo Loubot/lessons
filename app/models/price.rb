@@ -24,6 +24,8 @@ class Price < ActiveRecord::Base
   after_update :update_teacher
   after_create :update_teacher
 
+  
+
   def update_teacher
     Teacher.find(self.teacher_id).set_active
   end

@@ -45,15 +45,16 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subject = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%")
-		
-		if @subject.empty?
+		@subjects = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%")
+		@subject = @subjects.first
+		if @subjects.empty?
 			
-			@teachers = @subject.paginate(page: params[:page])
+			@teachers = @subjects.paginate(page: params[:page])
 		else
 			
-			ids = Location.near('cork', 10).select('id').map(&:teacher_id)
-			@teachers = @subject.teachers.check_if_valid.includes(:locations).where(id: ids).paginate(page: params[:page])
+			
+			@teachers = get_search_results(params, @subjects)
+			
 		end
 		# teachers = get_search_results(params, @subject)
 		
