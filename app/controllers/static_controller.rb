@@ -54,6 +54,7 @@ class StaticController < ApplicationController
 			
 			
 			@teachers = get_search_results(params, @subjects)
+			@teachers.paginate(page: params[:page])
 			
 		end
 		# teachers = get_search_results(params, @subject)

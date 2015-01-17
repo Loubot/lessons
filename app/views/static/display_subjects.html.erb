@@ -35,10 +35,6 @@
       </div>
       <%= will_paginate @teachers, :container => false %>
     </div>
-
-    <% @teachers.each do |t| %>
-      <%= puts "teacher #{t.id}" %>
-    <% end %>
     
 		<%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
 	</div>

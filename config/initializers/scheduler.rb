@@ -5,7 +5,7 @@ require 'rufus-scheduler'
 s = Rufus::Scheduler.singleton
 
 
-s.cron '* * 17 * *' do
+s.cron '* 3 17 * *' do
 	puts "rake sitemap:generate"
   system "rake sitemap:refresh"
 end
