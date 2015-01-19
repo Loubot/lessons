@@ -60,34 +60,42 @@
     </div> <!-- end of teachers_reg_photo -->
   </div> <!-- end of row -->  
 </div> <!-- end of container-fluid -->
-<div class="container-fluid teachers_pros_main_container">
-  <div class="row teachers_pros_row">
-    <div class="teachers_pros_photo pros_photo left col-md-4">
-      <div class="teachers_pros_container " >
-        <h3 class="teachers_blurb_mini_headers">Create your free profile</h3>
-        <h4 class="teachers_blurb_info">
-          Increase your reach and don't worry about finding new students
-        </h4>
-      </div> <!-- end of teachers_pros_container -->
-    </div> <!-- end of teachers_pros_photo left -->
-    <div class="teachers_pros_photo pros_photo middle col-md-4">
-      <div class="teachers_pros_container " >
-        <h3 class="teachers_blurb_mini_headers">Manage your clients</h3>
-        <h4 class="teachers_blurb_info">
-          Keep track of students and lessons with our calendar and booking system
-        </h4>
-      </div> <!-- end of teachers_pros_container -->
-    </div> <!-- end of teachers_pros_photo middle -->
-    <div class="teachers_pros_photo pros_photo right col-md-4">
-      <div class="teachers_pros_container" >
-        <h3 class="teachers_blurb_mini_headers">Increase your earnings</h3>
-        <h4 class="teachers_blurb_info">
-          Keep 90% of lesson fee when booked through the website; 100% when booked with the student directly
-        </h4>
-      </div> <!-- end of teachers_pros_container -->
-    </div> <!-- end of teachers_pros_photo right -->
-  </div> <!-- end of row -->
-</div> <!-- end of teachers_pros_main_container -->
+
+<div class="container-fluid teach_page_pros_row">
+  <div class="row teach_page">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= image_tag 'loud_speaker.jpg', alt: 'Create a free profile' %>
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Create your free profile</strong></h1>
+        <p class="center_text">Increase your reach and don't worry about finding new students</p>
+      </div> <!-- end of teach_header -->
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+  <div class="row teach_page">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Manage your clients</strong></h1>
+        <p class="center_text">Keep track of students and lessons with our calendar and booking system</p>
+      </div> <!-- end of teach_header -->
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= image_tag 'calendar.jpg', alt: 'Manage your clients' %>      
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+  <div class="row teach_page">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= image_tag 'money_bags.jpg', alt: 'Increase your earnings' %>
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Increase your earnings</strong></h1>
+        <p class="center_text">Keep 90% of lesson fee when booked through the website; 100% when booked with the student directly</p>
+      </div> <!-- end of teach_header -->
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+</div> <!-- end of container-fluid teach_page_pros_row -->
 
 <div class="row">
   <h1 class="teach_exp_header">How it works for the teacher</h1>
