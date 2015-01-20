@@ -514,7 +514,7 @@ form .glyphicon {
   text-decoration: underline;
 }
 
-.teach_page_pros_row{
+.teach_page_pros_container{
   font-size: 20px;
 }
 
@@ -534,39 +534,6 @@ form .glyphicon {
 
 // static/learn page. User registration*/
 
-.learn_pros_main_container{
-  margin-top: 20px;
-}
-
-.learn_pros_photo.left{
-  padding: 0 0 !important;
-  min-height: 200px;
-  background-image: image-url('students_connect.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-.learn_pros_photo.middle{
-  padding: 0 0 !important;
-  min-height: 200px;
-  background-image: image-url('share_brain.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-.learn_pros_photo.right{
-  padding: 0 0 !important;
-  min-height: 200px;
-  background-image: image-url('money_back.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-
-.learn_pros_container{
-  background-color: rgba(243, 243, 243,.2);
-  height: 100%;
-}
 
 .teachers_form_container{
   padding-left:15px;
@@ -604,6 +571,22 @@ form .glyphicon {
 
 .learn_reg_container{
   padding: 10px !important;
+}
+
+.learn_header{
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.learn_page_pros_row{
+  font-size: 20px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.learn_page_pros_container{
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 // end of static/learn page. User registration*/
@@ -858,6 +841,7 @@ form .glyphicon {
     position: relative;
     width: 100vw;
     left: calc(-50vw + 50%); 
+    margin-bottom: 20px;
   }
   .students_blurb_header{ //learn page
     color: #FFF;
@@ -868,16 +852,8 @@ form .glyphicon {
     font-weight: bold;
   }
   
-  .pros_photo{ //teach page
-    height: 200px;
-    margin-right: 10px;
-    width: 100%;
-    box-shadow: 2px 2px 5px #111;
-    //max-width: 320px;
-  }
-  body{
-    width: 100%;
-  }
+  
+ 
   .lead{
     font-size: 20px;
   }
@@ -951,14 +927,7 @@ form .glyphicon {
 }
 
 @media (min-width: 768px) {
-  .pros_photo{ //teach page
-    height: 200px;
-    float: left;
-    // margin-right: 10px;
-    width: 30%;
-    box-shadow: 2px 2px 5px #111;
-    //max-width: 320px;
-  }
+  
   .btn_book_now {
     font-size:16px;
     text-align: center;
@@ -982,15 +951,6 @@ form .glyphicon {
   
 @media (min-width: 992px) {
   //teach page
-
-  
-  .pros_photo{ //teach page
-    height: 200px;
-    margin-right: 10px;
-    width: 32%;
-    box-shadow: 2px 2px 5px #111;
-    //max-width: 320px;
-  }
   .teachers_reg_photo{
     margin-bottom: 20px;
     margin-top: -72px;
@@ -1027,13 +987,7 @@ form .glyphicon {
 }
  
 @media (min-width: 1200px) {
-  .pros_photo{ //teach page
-    height: 200px;
-    margin-right: 10px;
-    width: 32%;
-    box-shadow: 2px 2px 5px #111;
-    //max-width: 320px;
-  }
+  
   .lead{
     font-size: 13px;
   }
