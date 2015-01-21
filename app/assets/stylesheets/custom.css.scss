@@ -851,8 +851,11 @@ form .glyphicon {
     font-size: 18px;
     font-weight: bold;
   }
-  
-  
+
+  .teachers_blurb_container{ //teach page
+    background-color: rgba(243, 243, 243,.7);
+    box-shadow: 2px 2px 5px #111;
+  }
  
   .lead{
     font-size: 20px;
@@ -951,6 +954,14 @@ form .glyphicon {
   
 @media (min-width: 992px) {
   //teach page
+
+  .teachers_blurb_container{ //teach page
+    height: 100%;
+    color: #111;
+    text-shadow: 1px 1px 3px #888888;
+    background-color: rgba(0, 0, 0,0);
+    box-shadow: 2px 2px 5px #111;
+  }
   .teachers_reg_photo{
     margin-bottom: 20px;
     margin-top: -72px;
