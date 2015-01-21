@@ -16,11 +16,12 @@ class StaticController < ApplicationController
 	end	
 
 	def learn
+		render 'static/mobile_views/mobile_learn' if is_mobile?
 
 	end
 
 	def teach
-
+		render 'static/mobile_views/mobile_teach' if is_mobile?
 	end
 
 	def add_to_list
