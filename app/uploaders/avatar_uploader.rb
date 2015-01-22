@@ -23,13 +23,13 @@ end
 # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
 # end
 # Process files as they are uploaded:
-process :resize_to_fill => [125, 125]
+process :resize_to_fill => [200, 200]
 #
 # def scale(width, height)
 # # do something
 # end
 version :thumb do
-  process :resize_to_fill => [200, 200]
+  process :resize_to_fill => [50, 50]
 end
 #Create different versions of your uploaded files:
 # version :thumb do
