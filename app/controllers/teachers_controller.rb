@@ -19,10 +19,11 @@ class TeachersController < ApplicationController
 		@event = Event.new
 		
 		@subject = Subject.find(params[:subject_id])
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews, :locations).find(params[:id])
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews, :locations, :photos).find(params[:id])
 		@locations = @teacher.locations
 		@prices = @teacher.prices
 		gon.locations = @locations
+		@photos = @teacher.photos
 		# gon.location= [@teacher.lat, @teacher.lon]
 		# if !@teacher.locations.empty?
 		# 	gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
@@ -102,7 +103,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

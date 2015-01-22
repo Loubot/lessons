@@ -1,23 +1,21 @@
 
 <%= include_gon %><br>
 
-
-
-<div class="row show_teacher">
-  <div class="col-md-12">
-    <div role="tabpanel">
-      <ul class="nav nav-tabs" role="tablist">
-        <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
-      </ul> <!-- emd of nav nav-tabs -->
-      <div class="tab-content">
-        <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
-      </div> <!-- end of tab-content -->
-    </div> <!-- end of tabpanel -->
+<div class="row">
+  <div id="teachers_pic_carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <%= render partial: 'partials/show_teacher/show_teacher_li_tags', collection: @photos, as: :photo %>
+    </ol> 
+    <div class="carousel-inner" role="listbox">
+      <%= render partial: 'partials/show_teacher/show_teacher_carousel_items', collection: @photos, as: :photo %>
+    </div>   
   </div>
-</div> <!-- end of row -->
+</div>
+
+
 
 <div class="row">  
-  <div class="col-md-8 col-xs-12">
+  <div class="col-md-12 col-xs-12">
     <div class="panel panel-default">
       <div class="panel-heading"><%= @teacher.first_name %></div>
       <div class="panel-body">
@@ -30,7 +28,20 @@
         </div> <!-- end of media -->
       </div> <!-- end of panel-body -->
     </div> <!-- end of panel panel-default -->
-    
+
+    <div class="row show_teacher">
+      <div class="col-md-12">
+        <div role="tabpanel">
+          <ul class="nav nav-tabs" role="tablist">
+            <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
+          </ul> <!-- emd of nav nav-tabs -->
+          <div class="tab-content">
+            <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
+          </div> <!-- end of tab-content -->
+        </div> <!-- end of tabpanel -->
+      </div>
+    </div> <!-- end of row -->
+        
     <% if !@teacher.experiences.empty? %>
       <div class="panel panel-default">
         <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
@@ -82,7 +93,7 @@
   </div> <!-- end of col-md-6 -->
 
 
-  <div class="col-md-4">
+  <div class="col-md-12">
     <!-- <div id="teacher_display_map">
     </div> --> <!-- end of teacher_display_map -->
     <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >

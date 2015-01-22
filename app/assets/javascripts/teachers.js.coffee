@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 teachersInfoReady = ->
+  console.log '1'
   #////////// remove fb/twitter share buttons
   $(document).on 'click', '.share_buttons_close', ->
     $('#share_buttons').hide()
@@ -17,9 +18,9 @@ teachersInfoReady = ->
 # end of qualification form checkbox
 
   $('#qual_left').css('height', $('#qual_form').height())
-  if $('#dropzone').length > 0
+  if $('#dropzonea').length > 0
     try
-      dropzone = new Dropzone('#dropzone', {
+      dropzone = new Dropzone('#dropzonea', {
         paramName: "photo[avatar]"
         addRemoveLinks: true
         parallelUploads: 10

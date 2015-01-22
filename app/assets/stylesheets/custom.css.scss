@@ -24,6 +24,14 @@ hr{
   margin-bottom: 80px;
 }
 
+
+//customise carousel
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+// end of customise carousel
+
 // customise alert-success colour
 .alert.alert-success{
   background-color: #5cb85c !important;
