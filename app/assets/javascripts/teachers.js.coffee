@@ -208,6 +208,13 @@ teachersInfoReady = ->
 
 #//// end of show_teacher_to_user add price to form modal
 
+#// show_teach_to_user
+  if $('#teachers_pic_carousel').length
+    $('.carousel').carousel #start boostrap carousel
+      interval: 2000
+      wrap: true
+      pause: 'hover'
+
 #///////////jquery for popover previous_lessons_teacher
   if ('.previous_lessons_header').length > 0
     $("html").click (e) ->

@@ -2,16 +2,10 @@
 <%= include_gon %><br>
 
 <div class="row">
-  <div id="teachers_pic_carousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <%= render partial: 'partials/show_teacher/show_teacher_li_tags', collection: @photos, as: :photo %>
-    </ol> 
-    <div class="carousel-inner" role="listbox">
-      <%= render partial: 'partials/show_teacher/show_teacher_carousel_items', collection: @photos, as: :photo %>
-    </div>   
-  </div>
+  
 </div>
 
+<%# http://www.pixedelic.com/plugins/camera/ %>
 
 
 <div class="row">  
@@ -19,13 +13,25 @@
     <div class="panel panel-default">
       <div class="panel-heading"><%= @teacher.first_name %></div>
       <div class="panel-body">
-        <div class="media">
-          <span class="pull-left"><%= show_teacher_silhouette_helper(@teacher) %> </span>     
-          <div class="media-body">
-            <%# @teacher.address %><br>
-            <%= @teacher.overview %><br>
-          </div> <!-- end of media-body -->
-        </div> <!-- end of media -->
+        <div class="col-xs-6">
+          <div class="media">
+            <span class="pull-left"><%= show_teacher_silhouette_helper(@teacher) %> </span>     
+            <div class="media-body">
+              <%# @teacher.address %><br>
+              <%= @teacher.overview %><br>
+            </div> <!-- end of media-body -->
+          </div> <!-- end of media -->
+        </div> <!-- end of col-xs-6 -->
+        <div class="col-xs-6">
+          <div id="teachers_pic_carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <%= render partial: 'partials/show_teacher/show_teacher_li_tags', collection: @photos, as: :photo %>
+            </ol> 
+            <div class="carousel-inner" role="listbox">
+              <%= render partial: 'partials/show_teacher/show_teacher_carousel_items', collection: @photos, as: :photo %>
+            </div>   
+          </div>
+        </div>
       </div> <!-- end of panel-body -->
     </div> <!-- end of panel panel-default -->
 
