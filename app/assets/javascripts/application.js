@@ -18,3 +18,6 @@
 //= require moment.min.js
 //= require anytime.js
 //= require_tree .
+
+
+Dropzone.autoDiscover = false // Disable dropzone autoDiscover option
