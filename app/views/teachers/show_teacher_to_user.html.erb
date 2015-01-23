@@ -4,11 +4,14 @@
 <%# http://fotorama.io/set-up/ %>
 
 <div class="row show_teacher_profile_container">
-  <div class="fotorama" >
+  <div class="fotorama">
     <% @photos.each do |p| %>
       <%= image_tag p.avatar.url, size: '300x300' %>
     <% end %>
   </div> <!-- end of fotrama -->
+  <div class="col-xs-6">
+    <p><%= @teacher.full_name %></p>
+  </div>
 </div> <!-- end of row -->
 
 

@@ -215,7 +215,10 @@ teachersInfoReady = ->
       allowfullscreen: true
       height: 333
       arrows: true
-      
+      margin: 50
+      fit: 'cover'
+      thumbfit: 'cover'
+
 
 #//// end of show_teacher_to_user add price to form modal
 
