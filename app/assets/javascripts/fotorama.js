@@ -1,18 +1,4 @@
-/*!
- * Fotorama 4.6.3 | http://fotorama.io/license/
- */
 
- fotoramaDefaults = {
-    width: 333,
-    maxwidth: '100%',
-    transition: 'crossfade',
-    loop: true,
-    autoplay: true,
-    nav: 'thumbs',
-    allowfullscreen: true,
-    height: 333,
-    arrows: 'always'
-  }
 fotoramaVersion = '4.6.3';
 (function (window, document, location, $, undefined) {
   "use strict";

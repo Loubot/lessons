@@ -206,6 +206,17 @@ teachersInfoReady = ->
     #   $('#create_event_form').find('#event_rate').remove()
     # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
 
+    $('.fotorama').fotorama  #initiate fotorama picture displayer
+      width: 333
+      transition: "crossfade"
+      loop: true
+      autoplay: true
+      nav: "thumbs"
+      allowfullscreen: true
+      height: 333
+      arrows: true
+      
+
 #//// end of show_teacher_to_user add price to form modal
 
 #///////////jquery for popover previous_lessons_teacher
