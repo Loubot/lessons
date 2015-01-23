@@ -4,12 +4,18 @@
 <%# http://fotorama.io/set-up/ %>
 
 <div class="row show_teacher_profile_container">
-  <div class="fotorama col-xs-6 nopadding">
-    <% @photos.each do |p| %>
-      <%= image_tag p.avatar.url, size: '300x300' %>
-    <% end %>
-  </div> <!-- end of fotrama -->
-  <div class="col-xs-6 show_teacher_profile_section">
+  <div class="col-xs-5 white_back">
+    <div class="col-xs-12">
+      <p>hello</p>
+    </div>
+    <div class="fotorama col-xs-12 nopadding">
+      <% @photos.each do |p| %>
+        <%= image_tag p.avatar.url, size: '300x300' %>
+      <% end %>
+    </div> <!-- end of fotrama -->
+  </div>
+  <div class="col-xs-4"></div>
+  <div class="col-xs-3 show_teacher_profile_section">
     
     <%= image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left', size:'150x150' %>
   </div>

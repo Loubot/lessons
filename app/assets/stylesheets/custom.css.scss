@@ -410,10 +410,9 @@ hr{
 }
 
 .show_teacher_profile_container{
-  height: 100%;
-  background-color: #FFF;
+  height: 100%;  
   margin-bottom: 20px;
-  border:1px solid #CECECE;
+  
 }
 
 //end of show_teacher page*/
@@ -456,14 +455,27 @@ hr{
   -o-text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
 }
 
+.white_back{
+  background-color: #FFF;
+  border:1px solid #CECECE;
+}
+
 .fotorama{
   float: left;
   
+  
+  
 }
 
+.fotorama__wrap {
+    margin: 0 auto;
+}
+
+
 .show_teacher_profile_section{
-  height: 100%;
+  
   background-color: #f2f2f2;
+  height: 486px;
 }
 
 // end of teachers/show-teacher-to-user*/
