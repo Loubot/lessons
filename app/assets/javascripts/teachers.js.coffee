@@ -206,6 +206,8 @@ teachersInfoReady = ->
     #   $('#create_event_form').find('#event_rate').remove()
     # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
 
+    
+    
     $('.fotorama').fotorama  #initiate fotorama picture displayer
       width: 333
       transition: "crossfade"
@@ -215,9 +217,12 @@ teachersInfoReady = ->
       allowfullscreen: true
       height: 333
       arrows: true
-      margin: 50
+     
       fit: 'cover'
       thumbfit: 'cover'
+    $(".fotorama").on "fotorama:load", (e, fotorama) ->
+      $('.show_teacher_profile_section').css 'height', $('.fotorama').css 'height'
+      return
 
 
 #//// end of show_teacher_to_user add price to form modal

@@ -410,6 +410,7 @@ hr{
 }
 
 .show_teacher_profile_container{
+  height: 100%;
   background-color: #FFF;
   margin-bottom: 20px;
   border:1px solid #CECECE;
@@ -457,6 +458,12 @@ hr{
 
 .fotorama{
   float: left;
+  
+}
+
+.show_teacher_profile_section{
+  height: 100%;
+  background-color: #d8d8d8;
 }
 
 // end of teachers/show-teacher-to-user*/
