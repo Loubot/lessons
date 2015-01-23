@@ -222,7 +222,7 @@ teachersInfoReady = ->
       thumbfit: 'cover'
     $(".fotorama").on "fotorama:load", (e, fotorama) ->
       $('.show_teacher_profile_section').css 'height', $('.fotorama').css 'height'
-      return
+      
 
 
 #//// end of show_teacher_to_user add price to form modal
