@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require fotorama
 //= require turbolinks
 //= require jquery.ui.slider
 //= require jquery.ui.datepicker
