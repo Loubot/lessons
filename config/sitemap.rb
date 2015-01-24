@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://learn-your-lesson.herokuapp.com"
+SitemapGenerator::Sitemap.default_host = "https://learn-your-lesson.herokuapp.com"
 
 SitemapGenerator::Sitemap.public_path = 'tmp/'
 # store on S3 using Fog

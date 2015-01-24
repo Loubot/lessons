@@ -72,6 +72,10 @@ class StaticController < ApplicationController
 		
 	end
 
+	def robots
+		render 'public/robots.txt'
+	end
+
 	private
 
 		def valid_email?(email)
