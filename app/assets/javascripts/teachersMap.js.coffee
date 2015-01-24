@@ -79,7 +79,7 @@ window.init_teachers_maps = ->
     
   $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
     if $(@).data 'index'
-      console.log $(@).data 'index'
+      # console.log $(@).data 'index'
       i = $(@).data 'index'
       map = mapArray[i]
       google.maps.event.trigger map, "resize"
