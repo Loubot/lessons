@@ -112,7 +112,7 @@ module TeachersHelper
 
   def display_subjects(subjects, id) #create links to all teachers subjects
     subjects_list = subjects.map { |s| content_tag :u do 
-    										link_to s.name, show_teacher_path(id: id, subject_id: s.id)
+    										link_to s.name, show_teacher_path(id: id, subject_id: s.id), class: 'teachers_subject_list'
     									end }
     subjects_list.join(',').html_safe
   end

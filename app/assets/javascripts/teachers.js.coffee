@@ -216,9 +216,7 @@ teachersInfoReady = ->
       nav: "thumbs"
       allowfullscreen: true
       height: 333
-      arrows: true
-      
-     
+      arrows: true     
       fit: 'cover'
       thumbfit: 'cover'
     # $(".fotorama").on "fotorama:load", (e, fotorama) ->

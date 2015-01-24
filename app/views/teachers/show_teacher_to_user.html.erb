@@ -1,50 +1,25 @@
-
+<%= content_for :title,  @teacher.full_name %>
 <%= include_gon %><br>
+ <style>
+  .profile_pic_container{
+    background-image: url(<%= Photo.find(@teacher.profile).avatar.url %>);
+    min-height: 300px;
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    
+    margin-bottom: 20px;
+  }
+</style>
 
 <%# http://fotorama.io/set-up/ %>
 
-<div class="row show_teacher_profile_container">
-  <div class="col-xs-5 white_back">
-    <div class="col-xs-12">
-      <p>hello</p>
-    </div>
-    <div class="fotorama col-xs-12 nopadding">
-      <% @photos.each do |p| %>
-        <%= image_tag p.avatar.url, size: '300x300' %>
-      <% end %>
-    </div> <!-- end of fotrama -->
-  </div>
-  <div class="col-xs-4"></div>
-  <div class="col-xs-3 show_teacher_profile_section">
-    
-    <%= image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left', size:'150x150' %>
-  </div>
-</div> <!-- end of row -->
-
-
-<div class="row">  
-  <div class="col-md-12 col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= @teacher.first_name %><%= image_tag Photo.find(@teacher.profile).avatar.url, size: '50x50' %></div>
-      <div class="panel-body">
-        <div class="col-xs-6">
-          
-        </div> <!-- end of col-xs-6 -->
-        <div class="col-xs-6">
-          
-          <div class="media">
-            <span class="pull-left"><%= show_teacher_silhouette_helper(@teacher) %> </span>     
-            <div class="media-body">
-              
-              <%= @teacher.overview %><br>
-            </div> <!-- end of media-body -->
-          </div> <!-- end of media -->
-        </div> <!-- end of col-xs-6 -->
-      </div> <!-- end of panel-body -->
-    </div> <!-- end of panel panel-default -->
-
+<div class="row show_teacher_profile_container">  
+  <div class="col-sm-9 nopadding">    
     <div class="row show_teacher">
-      <div class="col-xs-6">
+      <div class="col-xs-12">
         <div role="tabpanel">
           <ul class="nav nav-tabs" role="tablist">
             <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
@@ -54,22 +29,60 @@
           </div> <!-- end of tab-content -->
         </div> <!-- end of tabpanel -->
       </div> <!-- end of col- -->
-      <div class="col-xs-6">
+      
+    </div> <!-- end of row show_teacher -->
+  </div> <!-- end of col-sm-9 -->
+  <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding">
+    
+    <div class="col-xs-12 profile_pic_container">
+      <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
+      <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
 
-      </div>
-    </div> <!-- end of row -->
+    </div>
+   
+    <table class="table table-bordered table-striped table-hover">
+      <tr>
+        <td>Overview: </td>
+        <td><%= @teacher.overview %></td>        
+      </tr>
+      <tr>
+        <td>Address: </td>
+        <td><%# @teacher. %></td>
+      </tr>
+    </table>
+  </div> <!-- end of show_teacher_profile_section -->  
+  
+</div> <!-- end of row show_teacher_profile_container -->
+
+
+<div class="row">  
+  <div class="col-md-12 col-xs-12 nopadding">   
         
     <% if !@teacher.experiences.empty? %>
-      <div class="panel panel-default">
-        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
+    <div class="row">
+      <div class="col-sm-8 col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
+            
+          </div> <!-- end of panel heading -->
+          <div class="panel-body">
+            <ul class="list-group">     
+              <%= render partial: 'partials/experience', collection: @teacher.experiences %>
+            </ul>
+          </div> <!-- end of panel-body -->
+        </div> <!-- end of panel panel-default -->
+      </div>
+      <div class="col-sm-4 col-xs-12">
           
-        </div> <!-- end of panel heading -->
-        <div class="panel-body">
-          <ul class="list-group">     
-            <%= render partial: 'partials/experience', collection: @teacher.experiences %>
-          </ul>
-        </div> <!-- end of panel-body -->
-      </div> <!-- end of panel panel-default -->
+          <div class="fotorama col-xs-12 nopadding white_back">
+            <% @photos.each do |p| %>
+              <%= image_tag p.avatar.url,  class: 'img-responsive' %>
+            <% end %>
+          </div> <!-- end of fotrama -->
+        
+      </div>
+    </div>
+      
     <% end %>
 
 
@@ -110,7 +123,7 @@
   </div> <!-- end of col-md-6 -->
 
 
-  <div class="col-md-12">
+  <div class="col-md-12 col-xs-12 nopadding">
     <!-- <div id="teacher_display_map">
     </div> --> <!-- end of teacher_display_map -->
     <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >

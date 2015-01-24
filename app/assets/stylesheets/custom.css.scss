@@ -178,7 +178,7 @@ hr{
 //end of standard layout page*/
 
 #main_page{
-	padding-top: 50px;
+	// padding-top: 50px;
   //background-color:#fafafa;*/
 	background-color:#e0ebf4;
 	min-height: 90%;
@@ -417,7 +417,7 @@ hr{
 
 //end of show_teacher page*/
 
-// teachers/show-teacher-to-user*/
+// teachers/show_teacher_to_user*/
 .btn_book_now{
   color: white;
   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5cb85c', endColorstr='#398439');
@@ -442,6 +442,7 @@ hr{
 }
 
 .booking_button_panel{
+  margin-bottom: 0 !important;
   border-style: solid;
   border-width: 1px;
   border-color: #CCCCC0;  
@@ -457,13 +458,11 @@ hr{
 
 .white_back{
   background-color: #FFF;
-  border:1px solid #CECECE;
+  
 }
 
 .fotorama{
-  float: left;
-  
-  
+  float: left;  
   
 }
 
@@ -471,14 +470,24 @@ hr{
     margin: 0 auto;
 }
 
-
-.show_teacher_profile_section{
-  
-  background-color: #f2f2f2;
-  height: 486px;
+.teachers_name{
+  font-size: 20px;
+  margin-left: 5px;
+  color: #FFF;
 }
 
-// end of teachers/show-teacher-to-user*/
+.profile_pic_container{
+  margin-bottom: 30px;
+}
+.teachers_subject_list{
+  font-size: 20px;
+}
+
+.row.show_teacher{ // remove margin-bottom from row for booking panel teachers profile pic border
+  margin-bottom: 0 !important;
+}
+
+// end of teachers/show_teacher_to_user*/
 
 // teach page*/
 .teacher_registration_container{
@@ -854,9 +863,13 @@ form .glyphicon {
 //end of share_buttons
 
 @media (min-width: 250px){
+  .show_teacher_profile_section{ //teachers profile pic on show_teacher_to_user page
+    background-color: #f2f2f2;
+    height: 486px;
+  }
   .teachers_reg_photo{ //teach page
     margin-bottom: 20px;
-    margin-top: -72px;
+    margin-top: -22px;
     height: 450px;  
     background-image: image_url('tree.jpg');
     -moz-background-size: 100% 100%;
@@ -969,6 +982,11 @@ form .glyphicon {
 
 @media (min-width: 768px) {
   
+  .show_teacher_profile_section{ //teachers profile pic on show_teacher_to_user page
+    margin-top: 42px;
+    background-color: #f2f2f2;
+    height: 486px;
+  }
   .btn_book_now {
     font-size:16px;
     text-align: center;
