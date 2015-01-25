@@ -219,6 +219,22 @@ hr{
 }
 
 //end of qualifications
+
+//locations page
+
+.price_alert{
+  border: 2px solid green;
+  color: green;
+  visibility: hidden;
+  height: 50px;
+  right: 60px;
+  top: 180px;
+  position: fixed;
+  z-index: 100;
+}
+
+//end of locations page
+
 .gray_section{
 	background-color: #ff7e64 !important;
 	opacity: .9 !important;

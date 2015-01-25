@@ -12,6 +12,7 @@ class PricesController < ApplicationController
 
 	def update
 		@price = Price.find(params[:id])
+		@name = @price.subject.name
 		if @price.update(price_params)
 			p "Well done Louis"
 		else
