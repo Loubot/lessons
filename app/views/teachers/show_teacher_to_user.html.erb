@@ -22,9 +22,9 @@
       
     
   </div> <!-- end of col-sm-9 -->
-  <div class="col-sm-3 col-xs-12 show_teacher_profile_section mob_no_padding">
+  <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">
     
-    <div class="col-xs-12 profile_pic_container">
+    <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
       <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
       <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
 

@@ -23,6 +23,7 @@ class TeachersController < ApplicationController
 		@locations = @teacher.locations
 		@prices = @teacher.prices
 		gon.profile_pic_url = @teacher.photos.find(@teacher.profile).avatar.url
+		@profilePic = @teacher.photos.find(@teacher.profile).avatar.url
 		gon.locations = @locations
 		@photos = @teacher.photos
 		# gon.location= [@teacher.lat, @teacher.lon]
@@ -104,7 +105,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

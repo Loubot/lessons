@@ -209,10 +209,17 @@ teachersInfoReady = ->
     do () ->
       img = new Image()
       img.src = gon.profile_pic_url
-      console.log img
-      $('.profile_pic_container').css 'height', img.height
+      w = $('.show_teacher_profile_section').outerWidth()
+      console.log w
+      $('.profile_pic_container').css 'height', w
+      $('.profile_pic_container').css 'width', w
+    $(window).resize ->      
+      w = $('.show_teacher_profile_section').outerWidth()
+      console.log w
+      $('.profile_pic_container').css 'height', w
+      $('.profile_pic_container').css 'width', w
       
-      $('.profile_pic_container').css 'background-image', "url(#{img.src})"
+      # $('.profile_pic_container').css 'background-image', "url(#{img.src})"
     
     
     $('.fotorama').fotorama  #initiate fotorama picture displayer
