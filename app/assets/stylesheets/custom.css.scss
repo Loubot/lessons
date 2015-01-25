@@ -463,7 +463,7 @@ hr{
 
 .fotorama{
   float: left;  
-  
+  min-height: 370px;
 }
 
 .fotorama__wrap {
@@ -871,6 +871,11 @@ form .glyphicon {
 //end of share_buttons
 
 @media (min-width: 250px){
+  .container{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   .show_teacher_profile_section{ //teachers profile pic on show_teacher_to_user page
     background-color: #f2f2f2;
     height: 486px;
