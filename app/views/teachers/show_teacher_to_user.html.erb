@@ -45,45 +45,41 @@
 </div> <!-- end of row show_teacher_profile_container -->
 
 
-<div class="row">  
-    
-        
-    <% if !@teacher.experiences.empty? %>
-    
-      <div class="col-sm-8 col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
-            
-          </div> <!-- end of panel heading -->
-          <div class="panel-body">
-            <ul class="list-group">     
-              <%= render partial: 'partials/experience', collection: @teacher.experiences %>
-            </ul>
-          </div> <!-- end of panel-body -->
-        </div> <!-- end of panel panel-default -->
-      </div>
-      <div class="col-sm-4 col-xs-12">
+<div class="row">        
+  <% if !@teacher.experiences.empty? %>
+  
+    <div class="col-sm-8 col-xs-12 mob_no_padding">
+      <div class="panel panel-default mobile">
+        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
           
-          <div class="fotorama col-xs-12  white_back">
-            <% @photos.each do |p| %>
-              <%= image_tag p.avatar.url,  class: 'img-responsive' %>
-            <% end %>
-          </div> <!-- end of fotrama -->
+        </div> <!-- end of panel heading -->
+        <div class="panel-body mobile">
+          <ul class="list-group">     
+            <%= render partial: 'partials/experience', collection: @teacher.experiences %>
+          </ul>
+        </div> <!-- end of panel-body -->
+      </div> <!-- end of panel panel-default -->
+    </div>
+    <div class="col-sm-4 col-xs-12 mob_no_padding">
         
-      </div>
-    
+      <div class="fotorama col-xs-12  white_back">
+        <% @photos.each do |p| %>
+          <%= image_tag p.avatar.url,  class: 'img-responsive' %>
+        <% end %>
+      </div> <!-- end of fotrama -->
       
-    <% end %>
+    </div>    
+  <% end %>
 
 
     <% if !@teacher.qualifications.empty? %>
-      <div class="container-fluid ">
-        <div class="panel panel-default">
+      <div class="container-fluid mobile">
+        <div class="panel panel-default mobile">
           <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
           
           </div> <!-- end of panel heading -->
 
-          <div class="panel-body">
+          <div class="mobile panel-body">
             <ul class="list-group">
               <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
             </ul> <!-- end of list-group -->
@@ -113,7 +109,7 @@
   
 
 
-  <div class="col-md-12 col-xs-12 ">
+  <div class="col-md-12 col-xs-12 mob_no_padding">
     <!-- <div id="teacher_display_map">
     </div> --> <!-- end of teacher_display_map -->
     <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >

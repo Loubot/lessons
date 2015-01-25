@@ -409,11 +409,6 @@ hr{
 	height: 100%;
 }
 
-.show_teacher_profile_container{
-  height: 100%;  
-  margin-bottom: 20px;
-  
-}
 
 //end of show_teacher page*/
 
@@ -870,8 +865,21 @@ form .glyphicon {
 }
 //end of share_buttons
 
-@media (min-width: 250px){  
-  .mob_no_padding{
+@media (min-width: 250px){
+  .mobile.container-fluid{
+    padding:0;
+  }
+  .show_teacher_profile_container{ //show_teacher_to_user page
+    height: 100%;  
+    // margin-bottom: 20px;    
+  }
+  .mobile.panel-body{ //show_teacher_to_user page
+    padding: 0;
+  }
+  .mobile.panel-default{ //show_teacher_to_user page
+    margin-bottom: 0;
+  }
+  .mob_no_padding{ //show_teacher_to_user page
     padding: 0;
   }
 
@@ -997,7 +1005,20 @@ form .glyphicon {
 }
 
 @media (min-width: 768px) {
-  .mob_no_padding{
+  .mobile.container-fluid{
+    padding:0 15px;
+  }
+  .show_teacher_profile_container{ //show_teacher_to_user page
+    height: 100%;  
+    margin-bottom: 20px;    
+  }
+  .mobile.panel-default{ //show_teacher_to_user page
+    margin-bottom: 0;
+  }
+  .mobile.panel-body{ //show_teacher_to_user page
+    padding: 15px;
+  }
+  .mob_no_padding{ //show_teacher_to_user page
     padding: 0 15px;
   }
   
