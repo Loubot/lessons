@@ -486,13 +486,13 @@ hr{
 
 .profile_pic_container{
   
-  min-height: 300px;
-  -moz-background-size: 100% 100%;
-  -webkit-background-size: 100% 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  position: relative;
+  // min-height: 300px;
+  
     
+  }
+
+  .teacher_profile_table{
+    margin-bottom: 0;
   }
 
 // end of teachers/show_teacher_to_user*/
@@ -870,15 +870,15 @@ form .glyphicon {
 }
 //end of share_buttons
 
-@media (min-width: 250px){
-  .container{
-    margin: 0 !important;
-    padding: 0 !important;
+@media (min-width: 250px){  
+  .mob_no_padding{
+    padding: 0;
   }
 
   .show_teacher_profile_section{ //teachers profile pic on show_teacher_to_user page
     background-color: #f2f2f2;
-    height: 486px;
+    // padding: 0;
+    // height: 486px;
   }
   .teachers_reg_photo{ //teach page
     margin-bottom: 20px;
@@ -997,11 +997,15 @@ form .glyphicon {
 }
 
 @media (min-width: 768px) {
+  .mob_no_padding{
+    padding: 0 15px;
+  }
   
   .show_teacher_profile_section{ //teachers profile pic on show_teacher_to_user page
     margin-top: 42px;
     background-color: #f2f2f2;
-    height: 486px;
+    // height: 486px;
+    // padding: 0;
   }
   .btn_book_now {
     font-size:16px;

@@ -206,6 +206,13 @@ teachersInfoReady = ->
     #   $('#create_event_form').find('#event_rate').remove()
     # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
 
+    do () ->
+      img = new Image()
+      img.src = gon.profile_pic_url
+      console.log img
+      $('.profile_pic_container').css 'height', img.height
+      
+      $('.profile_pic_container').css 'background-image', "url(#{img.src})"
     
     
     $('.fotorama').fotorama  #initiate fotorama picture displayer

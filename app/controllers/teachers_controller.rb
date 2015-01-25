@@ -22,6 +22,7 @@ class TeachersController < ApplicationController
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews, :locations, :photos).find(params[:id])
 		@locations = @teacher.locations
 		@prices = @teacher.prices
+		gon.profile_pic_url = @teacher.photos.find(@teacher.profile).avatar.url
 		gon.locations = @locations
 		@photos = @teacher.photos
 		# gon.location= [@teacher.lat, @teacher.lon]

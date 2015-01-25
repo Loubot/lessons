@@ -7,9 +7,9 @@
 <%# http://fotorama.io/set-up/ %>
 
 <div class="row show_teacher_profile_container">  
-  <div class="col-sm-9 nopadding">    
-    <div class="row show_teacher">
-      <div class="col-xs-12">
+  <div class="col-sm-9 mob_no_padding">    
+    
+      <div class="col-xs-12 mob_no_padding">
         <div role="tabpanel">
           <ul class="nav nav-tabs" role="tablist">
             <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
@@ -20,17 +20,17 @@
         </div> <!-- end of tabpanel -->
       </div> <!-- end of col- -->
       
-    </div> <!-- end of row show_teacher -->
-  </div> <!-- end of col-sm-9 -->
-  <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding">
     
-    <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= Photo.find(@teacher.profile).avatar.url %>);">
+  </div> <!-- end of col-sm-9 -->
+  <div class="col-sm-3 col-xs-12 show_teacher_profile_section mob_no_padding">
+    
+    <div class="col-xs-12 profile_pic_container">
       <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
       <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
 
     </div>
    
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped table-hover teacher_profile_table col-xs-12">
       <tr>
         <td>Overview: </td>
         <td><%= @teacher.overview %></td>        
@@ -46,10 +46,10 @@
 
 
 <div class="row">  
-  <div class="col-md-12 col-xs-12 nopadding">   
+    
         
     <% if !@teacher.experiences.empty? %>
-    <div class="row">
+    
       <div class="col-sm-8 col-xs-12">
         <div class="panel panel-default">
           <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
@@ -64,20 +64,20 @@
       </div>
       <div class="col-sm-4 col-xs-12">
           
-          <div class="fotorama col-xs-12 nopadding white_back">
+          <div class="fotorama col-xs-12  white_back">
             <% @photos.each do |p| %>
               <%= image_tag p.avatar.url,  class: 'img-responsive' %>
             <% end %>
           </div> <!-- end of fotrama -->
         
       </div>
-    </div>
+    
       
     <% end %>
 
 
     <% if !@teacher.qualifications.empty? %>
-      <div class="container-fluid nopadding">
+      <div class="container-fluid ">
         <div class="panel panel-default">
           <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
           
@@ -94,7 +94,7 @@
     <% end %>
 
     <% if !@teacher.reviews.empty? %>
-      <div class="container-fluid nopadding">
+      <div class="container-fluid ">
         <table class="table table-bordered">
           <thead class="table_header">
             <tr>
@@ -110,10 +110,10 @@
       </div> <!-- end of container fluid -->
     <% end %>
     
-  </div> <!-- end of col-md-6 -->
+  
 
 
-  <div class="col-md-12 col-xs-12 nopadding">
+  <div class="col-md-12 col-xs-12 ">
     <!-- <div id="teacher_display_map">
     </div> --> <!-- end of teacher_display_map -->
     <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >

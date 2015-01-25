@@ -103,7 +103,7 @@ $(document).on 'ready page:load', ->
     else
       $.when(load_google_maps_api('multiple_maps')).done ->
         init_teachers_maps()
-  else if $('.show_teacher').length > 0
+  else if $('.show_teacher_profile_container').length > 0
     window.mapArray = []
     window.mapOptionsArray = []
     $.when(load_google_maps_api('multiple_maps')).done ->
