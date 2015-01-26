@@ -223,13 +223,17 @@ hr{
 //locations page
 
 .price_alert{
-  border: 2px solid green;
-  color: green;
-  visibility: hidden;
-  height: 50px;
-  right: 60px;
-  top: 180px;
+  background: #ebffeb;
+  
+  box-shadow: 0 0 0 10px rgba(196,255,196, 0.2), 0 0 3px rgba(0, 0, 0, 0.3);
+  float: right;
+  opacity: 0.7;
+  padding: 5px 5px;
   position: fixed;
+  right: 60px;
+  top:180px;
+  visibility: hidden;
+  // width: 310px;
   z-index: 100;
 }
 
