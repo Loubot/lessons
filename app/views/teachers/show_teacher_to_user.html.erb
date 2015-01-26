@@ -53,16 +53,47 @@
         <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
           
         </div> <!-- end of panel heading -->
-        <div class="panel-body mobile">
+        <div class="panel-body ">
           <ul class="list-group">     
             <%= render partial: 'partials/experience', collection: @teacher.experiences %>
           </ul>
         </div> <!-- end of panel-body -->
       </div> <!-- end of panel panel-default -->
+      <% if !@teacher.qualifications.empty? %>
+      
+        <div class="panel panel-default mobile">
+          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
+          
+          </div> <!-- end of panel heading -->
+
+          <div class=" panel-body">
+            <ul class="list-group">
+              <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
+            </ul> <!-- end of list-group -->
+          </div> <!-- end of panel-body -->
+        </div> <!-- end of panel-default -->
+
+        <% if !@teacher.reviews.empty? %>
+          
+          <table class="table table-bordered teacher_profile_table">
+            <thead class="table_header">
+              <tr>
+                <th class="col-md-8">Review</th>
+                <th>When</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: 'partials/review_row_partial', collection: @teacher.reviews, as: :review %>
+            </tbody>
+          </table>
+
+          
+        <% end %>    
+    <% end %>
     </div> <!-- end of col-sm-8 col-xs-12 mob_no_padding -->
     <div class="col-sm-4 col-xs-12 mob_no_padding">
         
-      <div class="fotorama col-xs-12  white_back">
+      <div class="fotorama col-xs-12 white_back">
         <% @photos.each do |p| %>
           <%= image_tag p.avatar.url,  class: 'img-responsive' %>
         <% end %>
@@ -72,39 +103,9 @@
   <% end %>
 
 
-    <% if !@teacher.qualifications.empty? %>
-      <div class="container-fluid mobile">
-        <div class="panel panel-default mobile">
-          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
-          
-          </div> <!-- end of panel heading -->
+    
 
-          <div class="mobile panel-body">
-            <ul class="list-group">
-              <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
-            </ul> <!-- end of list-group -->
-          </div> <!-- end of panel-body -->
-        </div> <!-- end of panel-default -->
-        
-      </div> <!-- end of container-fluid -->
-    <% end %>
-
-    <% if !@teacher.reviews.empty? %>
-      <div class="container-fluid ">
-        <table class="table table-bordered">
-          <thead class="table_header">
-            <tr>
-              <th class="col-md-8">Review</th>
-              <th>When</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render partial: 'partials/review_row_partial', collection: @teacher.reviews, as: :review %>
-          </tbody>
-        </table>
-
-      </div> <!-- end of container fluid -->
-    <% end %>
+    
     
   
 

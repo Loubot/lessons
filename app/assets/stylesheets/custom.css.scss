@@ -479,10 +479,15 @@ hr{
 .fotorama{
   float: left;  
   min-height: 375px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #CCCCC0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .fotorama__wrap {
-    margin: 0 auto;
+    margin: 0 auto !important;
 }
 
 .teachers_name{
