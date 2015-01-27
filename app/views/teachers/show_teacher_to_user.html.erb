@@ -6,9 +6,9 @@
 
 <%# http://fotorama.io/set-up/ %>
 
-<div class="row show_teacher_profile_container">  
+<div class="row show_teacher_profile_container">
+
   <div class="col-sm-9 mob_no_padding">    
-    
       <div class="col-xs-12 mob_no_padding">
         <div role="tabpanel">
           <ul class="nav nav-tabs" role="tablist">
@@ -18,18 +18,14 @@
             <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
           </div> <!-- end of tab-content -->
         </div> <!-- end of tabpanel -->
-      </div> <!-- end of col- -->
-      
-    
+      </div> <!-- end of col- -->    
   </div> <!-- end of col-sm-9 -->
-  <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">
-    
+
+  <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
     <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
       <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
       <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
-
-    </div>
-   
+    </div> <!-- end of col-xs-12 profile_pic_container -->   
     <table class="table table-bordered table-striped table-hover teacher_profile_table col-xs-12">
       <tr>
         <td>Overview: </td>
@@ -45,10 +41,9 @@
 </div> <!-- end of row show_teacher_profile_container -->
 
 
-<div class="row">        
-  <% if !@teacher.experiences.empty? %>
-  
-    <div class="col-sm-8 col-xs-12 mob_no_padding">
+<div class="row">  
+  <div class="col-sm-8 col-xs-12 mob_no_padding">
+    <% if !@teacher.experiences.empty? %>
       <div class="panel panel-default mobile">
         <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
           
@@ -59,57 +54,51 @@
           </ul>
         </div> <!-- end of panel-body -->
       </div> <!-- end of panel panel-default -->
-      <% if !@teacher.qualifications.empty? %>
-      
-        <div class="panel panel-default mobile">
-          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
-          
-          </div> <!-- end of panel heading -->
-
-          <div class=" panel-body">
-            <ul class="list-group">
-              <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
-            </ul> <!-- end of list-group -->
-          </div> <!-- end of panel-body -->
-        </div> <!-- end of panel-default -->
-
-        <% if !@teacher.reviews.empty? %>
-          
-          <table class="table table-bordered teacher_profile_table">
-            <thead class="table_header">
-              <tr>
-                <th class="col-md-8">Review</th>
-                <th>When</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render partial: 'partials/review_row_partial', collection: @teacher.reviews, as: :review %>
-            </tbody>
-          </table>
-
-          
-        <% end %>    
     <% end %>
-    </div> <!-- end of col-sm-8 col-xs-12 mob_no_padding -->
-    <div class="col-sm-4 col-xs-12 mob_no_padding">
+    <% if !@teacher.qualifications.empty? %>
+    
+      <div class="panel panel-default mobile">
+        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
         
-      <div class="fotorama col-xs-12 white_back">
-        <% @photos.each do |p| %>
-          <%= image_tag p.avatar.url,  class: 'img-responsive' %>
-        <% end %>
-      </div> <!-- end of fotrama -->
-      
-    </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
-  <% end %>
+        </div> <!-- end of panel heading -->
 
+        <div class=" panel-body">
+          <ul class="list-group">
+            <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
+          </ul> <!-- end of list-group -->
+        </div> <!-- end of panel-body -->
+      </div> <!-- end of panel-default -->
+    <% end %>
+    <% if !@teacher.reviews.empty? %>
+        
+      <table class="table table-bordered teacher_profile_table">
+        <thead class="table_header">
+          <tr>
+            <th class="col-md-8">Review</th>
+            <th>When</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'partials/review_row_partial', collection: @teacher.reviews, as: :review %>
+        </tbody>
+      </table>      
+    <% end %>    
+  </div> <!-- end of col-sm-8 col-xs-12 mob_no_padding --> 
+   
+  <div class="col-sm-4 col-xs-12 mob_no_padding">        
+    <div class="fotorama col-xs-12 white_back">
+      <% @photos.each do |p| %>
+        <%= image_tag p.avatar.url,  class: 'img-responsive' %>
+      <% end %>
+    </div> <!-- end of fotrama -->
+    
+  </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
 
-    
-
-    
-    
+  
+</div> <!-- end of row -->     
   
 
-
+<div class="row"></div>
   <div class="col-md-12 col-xs-12 mob_no_padding">
     <!-- <div id="teacher_display_map">
     </div> --> <!-- end of teacher_display_map -->
@@ -125,5 +114,6 @@
     </div> <!-- end of scheduler_here -->   
   </div> <!-- end of col-md-4 -->
 </div> <!-- end of row -->
+
 
 <%= render 'modals/payment_choice_modal' %>
