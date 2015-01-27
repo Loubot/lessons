@@ -115,6 +115,7 @@ $(document).on 'ready page:load', ->
 
 
 load_google_maps_api = (name) ->
+  google = undefined
   callback = (if (name?) then "callback=#{name}" else "callback=doNothin")
   console.log 'loading'
   script = document.createElement("script")
