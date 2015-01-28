@@ -19,13 +19,14 @@ class TeachersController < ApplicationController
 		@event = Event.new
 		
 		@subject = Subject.find(params[:subject_id])
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications, :reviews, :locations, :photos).find(params[:id])
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos).find(params[:id])
+		@reviews = @teacher.reviews.take(3)
 		@locations = @teacher.locations
 		@prices = @teacher.prices
 		gon.profile_pic_url = @teacher.photos.find(@teacher.profile).avatar.url
-		@profilePic = @teacher.photos.find(@teacher.profile).avatar.url
+		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		gon.locations = @locations
-		@photos = @teacher.photos.where.not(id: @teacher.profile)
+		@photos = @teacher.photos { |p| p.id != @teacher.profile }
 		# gon.location= [@teacher.lat, @teacher.lon]
 		# if !@teacher.locations.empty?
 		# 	gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
@@ -38,11 +39,11 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@context = Teacher.includes(:experiences,:subjects).find(params[:id])
+		@context = Teacher.includes(:experiences,:subjects, :photos).find(params[:id])
 		@photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
-		@photos = @context.photos.all
+		@photos = @context.photos
 		@experience = Experience.new
 		@subjects = @context.subjects
 	end
