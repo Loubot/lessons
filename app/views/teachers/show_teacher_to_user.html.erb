@@ -9,7 +9,7 @@
 <div class="row show_teacher_profile_container">
 
   <div class="col-sm-9 mob_no_padding">    
-      <div class="col-xs-12 mob_no_padding">
+      <div class="col-xs-12 mob_no_padding nopadding">
         <div role="tabpanel">
           <ul class="nav nav-tabs" role="tablist">
             <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
@@ -98,21 +98,21 @@
 </div> <!-- end of row -->     
   
 
-<div class="row"></div>
-  <div class="col-md-12 col-xs-12 mob_no_padding">
-    <!-- <div id="teacher_display_map">
-    </div> --> <!-- end of teacher_display_map -->
-    <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
-      <div class="dhx_cal_navline" >
-          <div class="dhx_cal_prev_button">&nbsp;</div>
-          <div class="dhx_cal_next_button">&nbsp;</div>
-          <div class="dhx_cal_date display_teachers_cal_date pull-left" id="display_teachers_cal_date"></div>
-          
-      </div> <!-- end of dhx_cal_navline -->
-      <div class="dhx_cal_header"></div>
-      <div class="dhx_cal_data"></div>       
-    </div> <!-- end of scheduler_here -->   
-  </div> <!-- end of col-md-4 -->
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 mob_no_padding">
+      <!-- <div id="teacher_display_map">
+      </div> --> <!-- end of teacher_display_map -->
+      <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
+        <div class="dhx_cal_navline" >
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_date display_teachers_cal_date pull-left" id="display_teachers_cal_date"></div>
+            
+        </div> <!-- end of dhx_cal_navline -->
+        <div class="dhx_cal_header"></div>
+        <div class="dhx_cal_data"></div>       
+      </div> <!-- end of scheduler_here -->   
+    </div>
 </div> <!-- end of row -->
 
 
