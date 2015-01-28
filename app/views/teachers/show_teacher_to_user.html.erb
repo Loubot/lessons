@@ -85,14 +85,16 @@
     <% end %>    
   </div> <!-- end of col-sm-8 col-xs-12 mob_no_padding --> 
    
-  <div class="col-sm-4 col-xs-12 mob_no_padding">        
-    <div class="fotorama col-xs-12 white_back">
-      <% @photos.each do |p| %>
-        <%= image_tag p.avatar.url,  class: 'img-responsive' %>
-      <% end %>
-    </div> <!-- end of fotrama -->
-    
-  </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
+  <% if !@photos.empty? %>
+    <div class="col-sm-4 col-xs-12 mob_no_padding">        
+      <div class="fotorama col-xs-12 white_back">
+        <% @photos.each do |p| %>
+          <%= image_tag p.avatar.url,  class: 'img-responsive' %>
+        <% end %>
+      </div> <!-- end of fotrama -->
+      
+    </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
+  <% end %>
 
   
 </div> <!-- end of row -->     
