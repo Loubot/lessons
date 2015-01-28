@@ -23,10 +23,10 @@ class TeachersController < ApplicationController
 		@reviews = @teacher.reviews.take(3)
 		@locations = @teacher.locations
 		@prices = @teacher.prices
-		gon.profile_pic_url = @teacher.photos.find(@teacher.profile).avatar.url
+		gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		gon.locations = @locations
-		@photos = @teacher.photos { |p| p.id != @teacher.profile }
+		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		# gon.location= [@teacher.lat, @teacher.lon]
 		# if !@teacher.locations.empty?
 		# 	gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
