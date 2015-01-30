@@ -57,6 +57,7 @@ class EventsController < ApplicationController
 		event_params = student_format_time(params[:event])
 		@event = Event.new(event_params)
 		@rate = params[:event][:rate].to_f
+		puts "rate #{@rate}"
 		puts "teacher #{params[:event][:teacher_id]}"
 		puts "student #{params[:event][:student_id]}"
 		puts "subject #{params[:event][:subject_id]}"
