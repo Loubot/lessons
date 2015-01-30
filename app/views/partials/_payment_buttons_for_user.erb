@@ -47,7 +47,7 @@
             data-currency="eur"
             data-description="This is the description"
             data-amount="<%= (@teacher.rate * 100).to_i %>"></script>
-          <%= hidden_field_tag :amount, @teacher.rate %>
+          <%= hidden_field_tag :amount, @rate %>
           <%= hidden_field_tag :teacher_id, @teacher.id %>
           <%= hidden_field_tag :tracking_id, @cart.tracking_id %>        
           <%= hidden_field_tag :current_teacher, current_teacher.id if teacher_signed_in? %>

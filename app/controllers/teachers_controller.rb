@@ -40,10 +40,11 @@ class TeachersController < ApplicationController
 
 	def edit
 		@context = Teacher.includes(:experiences,:subjects, :photos).find(params[:id])
-		@photo = @context.photos.new
+		@photos = @context.photos
+		# @photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
-		@photos = @context.photos
+		
 		@experience = Experience.new
 		@subjects = @context.subjects
 	end
@@ -106,7 +107,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

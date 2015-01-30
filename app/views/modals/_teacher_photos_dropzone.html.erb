@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div  class="container-fluid">
           <div class="dropzone-container">
-            <%= form_for [@context, @photo], html: { id: 'dropzone', class: 'dropzone' } do |p| %>
+            <%= form_for [@context, Photo.new], html: { id: 'dropzone', class: 'dropzone' } do |p| %>
               <div class="form-group fallback">
                   
                    <%= p.file_field :avatar %>
