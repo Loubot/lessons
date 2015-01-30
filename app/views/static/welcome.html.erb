@@ -119,8 +119,34 @@
       </div><!-- end of italian -->      
     </div> <!-- end of subject_pic_container -->
     <div class="col-md-3 subject_pic_container">
-      <div id="studio-painting">
-        <%= link_to display_subjects_path(search_subjects: 'studio-painting', search_position: ''), class: "stock_photo_container" do %>
+      <div id="studio_painting">
+        <%= link_to display_subjects_path(search_subjects: 'studio_painting', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of german -->      
+    </div> <!-- end of subject_pic_container -->
+  </div><!-- end of subject_pic_row -->
+  <div class="row subject_pic_row">
+    <div class="col-md-3 subject_pic_container">
+      <div id="swimming">
+        <%= link_to display_subjects_path(search_subjects: 'swimming', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of french -->      
+    </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 subject_pic_container">
+      <div id="dancing">
+        <%= link_to display_subjects_path(search_subjects: 'dancing', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of italian -->      
+    </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 subject_pic_container">
+      <div id="studio_painting">
+        <%= link_to display_subjects_path(search_subjects: 'studio_painting', search_position: ''), class: "stock_photo_container" do %>
           
           <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
         <% end %>

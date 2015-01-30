@@ -868,8 +868,24 @@ form .glyphicon {
   background-size: 100% 100%;
 }
 
-#studio-painting{
-  background-image: image-url("studio-painting.jpg");
+#studio_painting{
+  background-image: image-url("studio_painting.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+}
+
+#swimming{
+  background-image: image-url("swimming.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+}
+
+#dancing{
+  background-image: image-url("dancing.jpg");
   height: 200px;
   width: 300px;
   padding: 0 !important;
