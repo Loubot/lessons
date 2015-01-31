@@ -145,7 +145,7 @@ class Teacher < ActiveRecord::Base
     super && self.identities.size > 0
   end
 
-  def self.from_omniauth(auth)
+  def self.from_omniauth(auth) #find or initialize new teacher for omniauth registration
     where(provider: auth['provider'], uid: auth['uid']).first_or_initialize do |t|
       t.email = auth['info']['email']
       t.password = Devise.friendly_token[0,20]

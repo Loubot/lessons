@@ -176,8 +176,8 @@ ActiveRecord::Schema.define(version: 20150131004711) do
     t.string   "stripe_access_token",    default: ""
     t.boolean  "is_active",              default: false, null: false
     t.boolean  "will_travel",            default: false, null: false
-    t.string   "uid"
-    t.string   "provider"
+    t.string   "uid",                    default: ""
+    t.string   "provider",               default: ""
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
