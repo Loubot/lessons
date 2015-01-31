@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for  :teachers, :controllers => { :registrations => "registrations", 
-                                            passwords: 'passwords',
-                                         omniauth_callbacks: "omniauth_callbacks" }
+  devise_for  :teachers, :controllers => { omniauth_callbacks: "authentications",
+                                          :registrations => "registrations", 
+                                            passwords: 'passwords' }
   resources   :teachers, only: [:update, :edit, :destroy] do
 
   	member do 
