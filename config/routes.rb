@@ -41,7 +41,10 @@ Rails.application.routes.draw do
   get         '/mailing-list'           =>  'static#mailing_list'
   get         '/browse-categories'      =>  'static#browse_categories'
   get         '/refresh-welcome'        =>  'static#refresh_welcome'
+  get         '/new-registration'       =>  'static#new_registration'
   post        '/add-to-list'            =>  'static#add_to_list'
+  post        '/confirm-registration'   =>  'static#confirm_registration'
+  
 
   get         'paypal-create'           =>  'payments#paypal_create'
   get         'paypal-return'           =>  'payments#paypal_return' 

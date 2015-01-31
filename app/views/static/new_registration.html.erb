@@ -1,0 +1,8 @@
+You are about to create a new account.
+
+You will be registered using your Facebook email: <%= @stuff['info']['email'] %>
+
+<%= form_tag confirm_registration_path do |f| %>
+  <%= select_tag "teacher", "<option value='1'>Register as a teacher</option><option value='2'>Register as a student</option>".html_safe %>
+  <%= submit_tag "Decision time!", class: 'btn btn-info' %>
+<% end %>

@@ -73,6 +73,38 @@ class StaticController < ApplicationController
 		render 'public/robots.txt'
 	end
 
+	def new_registration
+		@stuff = session['devise.facebook_data']
+		# @teacher = Teacher.find_or_initialize_by(email: @stuff['info']['email'])
+	end
+
+	def confirm_registration
+		@teacher = Teacher.from_omniauth(session['devise.facebook_data'])
+		if params[:teacher].to_i == 2
+			puts "session #{session['devise.facebook_data']}"
+			
+			@teacher.save
+			if @teacher.save
+				flash[:success] = "Registered successfully"
+				sign_in @teacher
+				redirect_to root_url
+			else
+				flash[:danger] = "Registration failed: #{@teacher.errors.full_messages}"
+				redirect_to :back
+			end
+		else
+			@teacher.update_attributes(is_teacher: true)
+			if @teacher.save
+				flash[:success] = "Registered as a teacher successfully"
+				sign_in @teacher
+				redirect_to root_url
+			else
+				flash[:danger] = "Registraion failed #{@teacher.errors.full_messages}"
+				redirect_to :back
+			end
+		end
+	end
+
 	private
 
 		def valid_email?(email)

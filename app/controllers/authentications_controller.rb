@@ -7,13 +7,10 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
       redirect_to root_url
       flash[:success] = "Signed in successfully"
     else
-      if @teacher.save
-        flash[:success] = "successfully registered"
-        redirect_to root_url
-      else
-        flash[:danger] = "#{@teacher.errors.full_messages}"
-        redirect_to root_url
-      end
+      
+      session["devise.facebook_data"] = request.env['omniauth.auth']
+      puts "Session  #{session["devise.facebook_data"]}"
+      redirect_to new_registration_path
     end
   end
 end

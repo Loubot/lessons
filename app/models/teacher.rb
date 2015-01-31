@@ -146,11 +146,11 @@ class Teacher < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |t|
-      t.email = auth.info.email
+    where(provider: auth['provider'], uid: auth['uid']).first_or_initialize do |t|
+      t.email = auth['info']['email']
       t.password = Devise.friendly_token[0,20]
-      t.first_name = auth.info.first_name
-      t.last_name = auth.info.last_name
+      t.first_name = auth['info']['first_name']
+      t.last_name = auth['info']['last_name']
     end
   end
 
