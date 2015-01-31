@@ -1,8 +1,11 @@
-You are about to create a new account.
+<div class="jumbotron">
+  <h2><strong>You are about to create a new account.</strong></h2>
 
-You will be registered using your Facebook email: <%= @stuff['info']['email'] %>
+  <h3>You will be registered using your Facebook email: <%= @stuff['info']['email'] %></h3>
 
-<%= form_tag confirm_registration_path do |f| %>
-  <%= select_tag "teacher", "<option value='1'>Register as a teacher</option><option value='2'>Register as a student</option>".html_safe %>
-  <%= submit_tag "Decision time!", class: 'btn btn-info' %>
-<% end %>
+  <h4>Would you like to register as a teacher or a student?</h4>
+  <%= form_tag confirm_registration_path do |f| %>
+    <%= select_tag "teacher", "<option value='1'>Register as a teacher</option><option value='2'>Register as a student</option>".html_safe %>
+    <%= submit_tag "Decision time!", class: 'btn btn-info' %>
+  <% end %>
+</div>

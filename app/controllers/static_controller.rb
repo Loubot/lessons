@@ -81,12 +81,13 @@ class StaticController < ApplicationController
 	def confirm_registration
 		@teacher = Teacher.from_omniauth(session['devise.facebook_data'])
 		if params[:teacher].to_i == 2
-			puts "session #{session['devise.facebook_data']}"
+			
 			
 			@teacher.save
 			if @teacher.save
-				flash[:success] = "Registered successfully"
+				flash[:success] = "Registered as student successfully"
 				sign_in @teacher
+				session['devise.facebook_data'] = nil
 				redirect_to root_url
 			else
 				flash[:danger] = "Registration failed: #{@teacher.errors.full_messages}"
@@ -97,6 +98,7 @@ class StaticController < ApplicationController
 			if @teacher.save
 				flash[:success] = "Registered as a teacher successfully"
 				sign_in @teacher
+				session['devise.facebook_data'] = nil
 				redirect_to root_url
 			else
 				flash[:danger] = "Registraion failed #{@teacher.errors.full_messages}"
