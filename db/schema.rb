@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228113548) do
+ActiveRecord::Schema.define(version: 20150131004711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,8 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.string   "stripe_access_token",    default: ""
     t.boolean  "is_active",              default: false, null: false
     t.boolean  "will_travel",            default: false, null: false
+    t.string   "uid",                    default: ""
+    t.string   "provider",               default: ""
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
