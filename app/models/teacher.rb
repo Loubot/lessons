@@ -34,7 +34,8 @@ class Teacher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email,  uniqueness: { case_sensitive: false }
-  validates :email, :is_teacher, :first_name, :last_name, presence: true
+  validates :email, :first_name, :last_name, presence: true
+  validates :is_teacher, inclusion: { in: [true, false], message: "%{value} must be set true or false" }
   # after_validation :reverse_geocode
 
   has_many :photos, as: :imageable, dependent: :destroy

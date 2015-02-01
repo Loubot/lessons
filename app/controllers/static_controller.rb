@@ -84,7 +84,10 @@ class StaticController < ApplicationController
 		@teacher = Teacher.from_omniauth(session['devise.facebook_data']) #action in the teacher model
 		
 		
-		if params[:teacher].to_i == 2			
+		if params[:teacher].to_i == 2
+			p "adasdfad"
+		@teacher.update_attributes(is_teacher: false)
+		p @teacher.inspect
 			if @teacher.save
 				@identity = @teacher.identities.create_with_omniauth(session['devise.facebook_data'])
 				@identity.save!
