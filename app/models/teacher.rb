@@ -25,6 +25,8 @@
 #  stripe_access_token    :string(255)      default("")
 #  is_active              :boolean          default(FALSE), not null
 #  will_travel            :boolean          default(FALSE), not null
+#  uid                    :string(255)      default("")
+#  provider               :string(255)      default("")
 #
 
 class Teacher < ActiveRecord::Base
