@@ -79,12 +79,15 @@ class StaticController < ApplicationController
 	end
 
 	def confirm_registration
+		puts "facebook_data #{session['devise.facebook_data']}"
 		@teacher = Teacher.from_omniauth(session['devise.facebook_data']) #action in the teacher model
-		if params[:teacher].to_i == 2
-			
-			
-			@teacher.save
+		
+		
+		if params[:teacher].to_i == 2			
 			if @teacher.save
+				@identity = @teacher.identities.create_with_omniauth(session['devise.facebook_data'])
+				@identity.save!
+				p "Identity #{@identity.inspect}"
 				flash[:success] = "Registered as student successfully"
 				sign_in @teacher
 				session['devise.facebook_data'] = nil
@@ -96,6 +99,9 @@ class StaticController < ApplicationController
 		else
 			@teacher.update_attributes(is_teacher: true)
 			if @teacher.save
+				@identity = @teacher.identities.create_with_omniauth(session['devise.facebook_data'])
+				@identity.save!
+				p "Identity #{@identity.inspect}"
 				flash[:success] = "Registered as a teacher successfully"
 				sign_in @teacher
 				session['devise.facebook_data'] = nil

@@ -11,7 +11,7 @@
 <% end %>
 <% content_for :title, "The place to connect with local teachers and learn" %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
-
+<%= link_to image_tag('facebook_login.png'), "/teachers/auth/facebook?origin=#{request.original_url}&id=#{params['id'] if params['id']}", class: 'fbLogin_link' %>
 <div  class="container-fluid main_page_search_container home_welcome">
   <div class="welcome_page_form__header welcome_sprinkles_hidden">
     <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>

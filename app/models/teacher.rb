@@ -33,7 +33,8 @@ class Teacher < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  #validates :email, confirmation: true, uniqueness: { case_sensitive: false }
+  validates :email,  uniqueness: { case_sensitive: false }
+  validates :email, :is_teacher, :first_name, :last_name, presence: true
   # after_validation :reverse_geocode
 
   has_many :photos, as: :imageable, dependent: :destroy
@@ -41,6 +42,8 @@ class Teacher < ActiveRecord::Base
   has_many :locations, dependent: :destroy
 
   has_many :reviews, dependent: :destroy
+
+  has_many :identities, dependent: :destroy
 
   has_and_belongs_to_many :subjects
 
@@ -146,7 +149,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth) #find or initialize new teacher for omniauth registration
-    where(provider: auth['provider'], uid: auth['uid']).first_or_initialize do |t|
+    where(email: auth['info']['email']).first_or_initialize do |t|
       t.email = auth['info']['email']
       t.password = Devise.friendly_token[0,20]
       t.first_name = auth['info']['first_name']
