@@ -74,7 +74,7 @@ window.init_teachers_maps = ->
   window.getTab = ->  
     $.ajax #fetch tab from server
       url: '/add-map'
-      data: { map: 'hello' }
+      
 
     
   $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
@@ -86,7 +86,7 @@ window.init_teachers_maps = ->
       map.setCenter mapOptionsArray[i].center
     
   $(document).on 'click', 'a[href="#profile"]', ->
-    $.when(getTab()).done ->
+    $.when(getTab()).done -> #call getTab
       $("[href='#meballs']").tab 'show' #show tab after tab has been rendered
       $("[href='#profile']").hide()
 
