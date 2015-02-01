@@ -47,5 +47,9 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
     #   redirect_to new_registration_path
     # end
   end
+
+  def google_oauth2
+    puts "hello hello"
+  end
 end
 
