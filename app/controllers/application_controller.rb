@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
   before_action :check_mobile?
   include ApplicationHelper
 
-    def is_mobile?
-      session[:mobile]
-    end
+  def is_mobile?
+    session[:mobile]
+  end
 
-    helper_method :is_mobile?
+  helper_method :is_mobile?
   private
 
 

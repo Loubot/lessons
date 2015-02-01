@@ -74,7 +74,8 @@ class StaticController < ApplicationController
 	end
 
 	def new_registration
-		@stuff = session['devise.facebook_data']
+		@oauth = session['devise.facebook_data']
+		@provider = session['devise.facebook_data']['provider'] == 'facebook' ? "facebook" : "Google"
 		# @teacher = Teacher.find_or_initialize_by(email: @stuff['info']['email'])
 	end
 

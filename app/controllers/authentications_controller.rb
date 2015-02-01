@@ -1,6 +1,6 @@
 class AuthenticationsController < Devise::OmniauthCallbacksController
   
-  def facebook
+  def oauth
     if teacher_signed_in?
       @identity = current_teacher.identities.find_or_create_identity(request.env["omniauth.auth"]) 
       
@@ -48,8 +48,10 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
     # end
   end
 
-  def google_oauth2
-    puts "hello hello"
-  end
+  alias_method :facebook, :oauth
+  alias_method :google_oauth2, :oauth
+
+  # [:google_oauth2, :facebook, :oauth].each { |ali| alias_method ali, :oauth }
+
 end
 
