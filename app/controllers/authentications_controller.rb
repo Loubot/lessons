@@ -1,18 +1,19 @@
 class AuthenticationsController < Devise::OmniauthCallbacksController
   
   def oauth
+    puts "provider #{request.env["omniauth.auth"]['provider']}"
     puts "referrer #{request.env['omniauth.origin']}"
     if teacher_signed_in?
       @identity = current_teacher.identities.find_or_create_identity(request.env["omniauth.auth"]) 
-      p "1"
+      
 
       if @identity.persisted?
-        p "2"
+        
         flash[:success] = "Signed in successfully"
         sign_in_and_redirect @identity.teacher
       else
         @identity.save!
-        p "3"
+        
         flash[:success] = "#{get_provider_name(request.env["omniauth.auth"]['provider'])} added to login methods."
         sign_in_and_redirect current_teacher
       end
@@ -41,6 +42,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
 
   alias_method :facebook, :oauth
   alias_method :google_oauth2, :oauth
+  alias_method :twitter, :oauth
 
 
   private
@@ -48,6 +50,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
       case request
       when 'facebook'
         'Facebook'
+      when 'twitter'
+        'Twitter'
       else
         'Google'
       end
