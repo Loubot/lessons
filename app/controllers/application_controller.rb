@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     logger.info "request.referer #{request.referer}"
+    # puts "request #{request.env['omniauth.origin']}"
     # flash[:danger] = resource.is_teacher_valid_message if resource.is_teacher_valid_message && resource.is_teacher
     
     if request.env['omniauth.origin']
