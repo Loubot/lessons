@@ -951,6 +951,19 @@ form .glyphicon {
 //end of share_buttons
 
 @media (min-width: 250px){
+  //alter navbar dropdown on small screens
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+    color: #FFF ;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a{
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#3b893b', endColorstr='#317331');
+    background: -webkit-linear-gradient(#3b893b,#317331);
+    background: -o-linear-gradient(#3b893b,#317331); 
+    background: -moz-linear-gradient(#3b893b,#317331); 
+    background: linear-gradient(#3b893b,#317331); 
+    color: #FFF !important;
+  }
+  // end of alter navbar dropdown on small screens
   .mobile.container-fluid{
     padding:0;
   }
@@ -1091,6 +1104,34 @@ form .glyphicon {
 }
 
 @media (min-width: 768px) {
+  .dropdown-menu{
+    width:100%;
+    background: -webkit-linear-gradient(#5cb85c, #398439);
+    background: -o-linear-gradient(#5cb85c, #398439); 
+    background: -moz-linear-gradient(#5cb85c, #398439); 
+    background: linear-gradient(#5cb85c, #398439);  
+  
+  }
+  
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+    width:100%;
+    color: #FFF;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover{
+    background: -webkit-linear-gradient(#5cb85c, #398439);
+    background: -o-linear-gradient(#5cb85c, #398439); 
+    background: -moz-linear-gradient(#5cb85c, #398439); 
+    background: linear-gradient(#5cb85c, #398439);  
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a{
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#3b893b', endColorstr='#317331');
+    background: -webkit-linear-gradient(#3b893b,#317331);
+    background: -o-linear-gradient(#3b893b,#317331); 
+    background: -moz-linear-gradient(#3b893b,#317331); 
+    background: linear-gradient(#3b893b,#317331); 
+    color: #FFF ;
+    width:100%;
+  }
   .mobile.container-fluid{
     padding:0 15px;
   }
