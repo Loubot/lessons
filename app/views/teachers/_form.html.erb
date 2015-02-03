@@ -181,24 +181,26 @@
 				<div class="panel-body">
 					
 					<div class="row">
-						<div class="col-xs-3">
+						<div class="col-xs-4">
 	      			<%= image_tag('facebook_login.jpg', class: 'img-responsive') %>
 	      			
 	      		</div> <!-- end of col-xs-3 -->
-	      		<div class="col-xs-3 auth_pics">
+	      		<div class="col-xs-4">
 	            <%= image_tag('google_login.jpg', class: 'img-responsive') %>
 	            
 	          </div> <!-- end of col-xs-3 -->
-	          <div class="col-xs-3 auth_pics">
+	          <div class="col-xs-4">
 	      			<%= image_tag('twitter.jpg', class: 'img-responsive') %>
 	      			
 	      		</div> <!-- end of col-xs-3 -->
 					</div> <!-- end of row -->
 					<div class="row">
-						<% @auths.each do |a| %>
-							<div class="col-xs-3">
-								<% if @context.identities.find { |ident| ident.provider == a } %>
-									
+						<% @auths.each do |auth| %>
+							<div class="col-xs-4">
+								<% if ident = @context.identities.find { |ident| ident.provider == auth } %>
+									<%= get_auth_delete_links(ident) %>
+								<% else %>
+									<%= get_auth_add_links(auth) %>
 								<% end %>
 							</div>
 						<% end %>

@@ -117,4 +117,12 @@ module TeachersHelper
     subjects_list.join(',').html_safe
   end
 
+  def get_auth_add_links(auth)
+  	link_to("Add authentication", "/teachers/auth/#{auth}").html_safe
+  end
+
+  def get_auth_delete_links(ident)
+  	link_to("Delete authentictation",teacher_identity_path(current_teacher, ident.id), method: :delete, data: { confirm: 'Are you sure?' }).html_safe
+  end
+
 end
