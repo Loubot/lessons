@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :qualifications, only: [:create, :destroy, :edit]
     resources :openings, only: [:create, :update]
     resources :events
+    resources :identities, only: [:destroy]
 
 
   end

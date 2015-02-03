@@ -41,7 +41,12 @@
                 <div class="login_fb_container">
                   <%= link_to image_tag('facebook_login.png'), "/teachers/auth/facebook?origin=#{request.original_url}&id=#{params['id'] if params['id']}", class: 'fbLogin_link' %>                
                 </div>
-                <%= link_to "Sign in with Google", "teachers/auth/google_oauth2" %>
+                <div class="login_container">
+                  <%= link_to image_tag('google_sign_in.jpg'), "teachers/auth/google_oauth2?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
+                </div>
+                <div class="login_container">
+                  <%= link_to image_tag('twitter_sign_in.jpg'), "teachers/auth/twitter?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
+                </div>
                 <div class="controls">
                   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
                     <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />

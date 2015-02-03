@@ -1,4 +1,6 @@
 class AuthenticationsController < Devise::OmniauthCallbacksController
+
+  before_action :authenticate_teacher!, only:[:destroy]
   
   def oauth
     puts "provider #{request.env["omniauth.auth"]['provider']}"
@@ -43,6 +45,11 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
   alias_method :facebook, :oauth
   alias_method :google_oauth2, :oauth
   alias_method :twitter, :oauth
+
+  def destroy
+    puts "hello"
+    redirect_to :back
+  end
 
 
   private
