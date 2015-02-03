@@ -42,7 +42,7 @@ class TeacherMailer < ActionMailer::Base
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>Reset your password #{record} #{token} #{opts} <br>
 
-                <a>http://localhost:3000/teachers/password/edit?reset_password_token=#{token}</a></html>),  
+                <a>https://learn-your-lesson.herokuapp.com/teachers/password/edit?reset_password_token=#{token}</a></html>),  
        :to=>[  
          {  
            :email=> record.email,
