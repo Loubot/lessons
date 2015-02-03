@@ -22,5 +22,23 @@
           <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
         <% end %>
       </div><!-- end of german -->      
-    </div> <!-- end of subject_pic_container -->
+    </div> <!-- end of subject_pic_container -->   
   </div><!-- end of subject_pic_row -->
+  <div class="row subject_pic_row">
+    <div class="col-md-3 subject_pic_container">
+      <div id="spanish">
+        <%= link_to display_subjects_path(search_subjects: 'spanish', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of spanish -->      
+    </div> <!-- end of subject_pic_container -->
+    <div class="col-md-3 subject_pic_container">
+      <div id="english">
+        <%= link_to display_subjects_path(search_subjects: 'english', search_position: ''), class: "stock_photo_container" do %>
+          
+          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
+        <% end %>
+      </div><!-- end of english -->      
+    </div> <!-- end of subject_pic_container -->
+  </div> <!-- end of subject_pic_row -->

@@ -767,7 +767,7 @@ form .glyphicon {
 }
 
 .stock_photos_container{
-  margin: 0px 50px;
+  margin: 0px 83px;
   
 }
 
@@ -829,6 +829,22 @@ form .glyphicon {
   background-size: 100% 100%;
 }
 
+#violin{
+  background-image: image-url("learn-to-play-violin.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+}
+
+#singing{
+  background-image: image-url("learn-to-sing.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+}
+
 #french{
   background-image: image-url("learn-to-speak-french.jpg");
   height: 200px;
@@ -848,6 +864,24 @@ form .glyphicon {
 
 #german{
   background-image: image-url("learn-to-speak-german.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+
+}
+
+#spanish{
+  background-image: image-url("learn-to-speak-spanish.jpg");
+  height: 200px;
+  width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+
+}
+
+#english{
+  background-image: image-url("learn-to-speak-english.jpg");
   height: 200px;
   width: 300px;
   padding: 0 !important;
