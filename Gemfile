@@ -48,7 +48,7 @@ gem 'better_errors'
 
 gem 'binding_of_caller'
 
-gem 'devise', '~> 3.2.4'
+gem 'devise', '~> 3.2'
 
 gem 'carrierwave', '~> 0.10.0'
 

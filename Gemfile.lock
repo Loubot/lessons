@@ -321,7 +321,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   combined_time_select (~> 1.0.1)
   date_validator (~> 0.7.0)
-  devise (~> 3.2.4)
+  devise (~> 3.2)
   fog (~> 1.23.0)
   fotoramajs
   geocoder (~> 1.2)
