@@ -49,14 +49,15 @@
   </div> <!-- end of display_search_results -->
 </div> <!-- end of container-fluid main_page_search -->
 
-<div class="container-fluid stock_photos_container hidden-sm">
+<div class="container-fluid stock_photos_container hidden-xs">
   <div class="row subject_pic_row">
     <div class="col-md-3 col-sm-6 subject_pic_container">
-      <div id="guitar">
-        <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: 'stock_photo_container' do %>
+      <div id="all_lessons">
+        <%= link_to browse_categories_path, class: "stock_photo_container" do %>
+          
           <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
         <% end %>
-      </div><!-- end of guitar -->
+      </div><!-- end of all_lesson -->   
     </div> <!-- end of subject_pic_container -->
     <div class="col-md-3 col-sm-6 subject_pic_container">
       <div id="drums">
@@ -145,12 +146,11 @@
       </div><!-- end of italian -->      
     </div> <!-- end of subject_pic_container -->
     <div class="col-md-3 subject_pic_container">
-      <div id="all_lessons">
-        <%= link_to browse_categories_path, class: "stock_photo_container" do %>
-          
+      <div id="guitar">
+        <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: 'stock_photo_container' do %>
           <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
         <% end %>
-      </div><!-- end of german -->      
+      </div><!-- end of guitar -->         
     </div> <!-- end of subject_pic_container -->
   </div><!-- end of subject_pic_row -->
 </div> <!-- end of stock_photos_container -->
