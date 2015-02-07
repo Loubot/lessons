@@ -250,7 +250,9 @@ hr{
 }
 
 //display_subject _subject_search page*/
-
+#search_submit_container{
+	text-align: center;
+}
 
 #search_submit{
   color: #fff;
@@ -336,7 +338,21 @@ hr{
 	font-family: "HelveticaNeue", "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.main_page_search_container{
+	text-align: center;
+  margin-bottom: 50px;
+  
+}
 
+.typeahead.subject{
+	height: 45px;
+	font-size: 22px;  
+}
+
+.typeahead.county{
+	height: 45px;
+	font-size: 22px;	
+}
 
 .review_container{
 		
@@ -736,6 +752,10 @@ form .glyphicon {
 // end of static/browse_categories*/
 
 //welcome page*/
+
+.welcome_page_form__header{
+  margin-bottom: 35px;
+}
 
 .welcome_prompt_container{
   margin-top: 25px;
@@ -1250,7 +1270,9 @@ form .glyphicon {
   .welcome_sprinkles{
     visibility: visible;
   }
-  
+  .welcome_sprinkles_hidden{
+    display: inline;
+  }
 }
  
 @media (min-width: 1200px) {
