@@ -762,12 +762,12 @@ form .glyphicon {
 }
 
 .subject_pic_row{
-  height:200px;
-  margin-bottom: 10px;
+  // height:200px;
+  // margin-bottom: 10px;
 }
 
 .stock_photos_container{
-  margin: 0px 83px;
+  // margin: 0px 83px;
   
 }
 
@@ -780,9 +780,11 @@ form .glyphicon {
 }
 
 .stock_photo_container{
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  // padding: 0 !important;
+  // margin: 0 !important;
+  // width: 200px;
   
 }
 .stock_photo{
@@ -795,9 +797,9 @@ form .glyphicon {
 }
 
 .subject_pic_container{
-  margin-right: 5px;
-  margin-bottom: 20px;
-  min-width: 300px;
+  // margin-right: 5px;
+  // margin-bottom: 20px;
+  // min-width: 300px;
 }
 
 .browse_option:not(.btn-success):hover{
@@ -807,26 +809,38 @@ form .glyphicon {
   transform: scale(1.1);
 }
 
-#guitar{
-  background-image: image-url("learn-to-play-guitar.jpg");
+#all_lessons{
+  background-image: image-url("all_lessons.jpg");
+  // height: 200px;
+  // width: 300px;
+  background-repeat: no-repeat;
   padding: 0 !important;
-  height: 200px;
-  width: 300px;
+  background-size:cover;
+  background-position: 50%;
+  left:0;right:0;;top:0;bottom:0;
 }
 
 #drums{
   background-image: image-url("learn-to-play-drums.jpg");
   padding: 0 !important;
-  height: 200px;
-  width: 300px;
+  // height: 200px;
+  // width: 300px;
+  background-size: 100% 100%;
 }
 
 #piano{
   background-image: image-url("learn-to-play-piano.jpg");
-  height: 200px;
-  width: 300px;
+  // height: 200px;
+  // width: 300px;
   padding: 0 !important;
   background-size: 100% 100%;
+}
+
+#guitar{
+  background-image: image-url("learn-to-play-guitar.jpg");
+  padding: 0 !important;
+  height: 200px;
+  width: 300px;
 }
 
 #violin{
@@ -978,17 +992,8 @@ form .glyphicon {
   background-size: 100% 100%;
 }
 
-#all_lessons{
-  background-image: image-url("all_lessons.jpg");
-  height: 200px;
-  width: 300px;
-  padding: 0 !important;
-  background-size: 100% 100%;
-}
-
 .welcome_subject_image{
   z-index: 3;
-
   opacity: 0;
 }
 

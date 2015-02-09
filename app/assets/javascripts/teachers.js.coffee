@@ -169,9 +169,8 @@ teachersInfoReady = ->
           $('.stock_photos_container').empty()
           
           $(html).appendTo('.stock_photos_container').show('slow')
-          return false 
-            
-      return false
+          return false
+    
 
     $('.stock_photo_container').mouseover ->
       $(this).find('.welcome_subject_image').animate opacity: .7, 50
