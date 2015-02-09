@@ -50,107 +50,65 @@
 </div> <!-- end of container-fluid main_page_search -->
 
 <div class="container-fluid stock_photos_container hidden-xs">
-  <div class="row subject_pic_row">
-    <div class="col-md-3 col-sm-6 subject_pic_container">
-      <div id="all_lessons">
-        <%= link_to browse_categories_path, class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of all_lesson -->   
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 col-sm-6 subject_pic_container">
-      <div id="drums">
-        <%= link_to display_subjects_path(search_subjects: 'drums', search_position: ''), class: 'stock_photo_container' do %>
-        <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-      <% end %>
-      </div><!-- end of drums -->
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 col-sm-6 subject_pic_container">
-      <div id="piano">
-        <%= link_to display_subjects_path(search_subjects: 'piano', search_position: ''), class: 'stock_photo_container' do %>
-        <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-      <% end %>
-      </div><!-- end of piano -->
-    </div> <!-- end of subject_pic_container -->
-
-  </div> <!-- end of subject_pic_row -->
   
-  <div class="row subject_pic_row">
-    <div class="col-md-3 subject_pic_container">
-      <div id="french">
-        <%= link_to display_subjects_path(search_subjects: 'french', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of french -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="italian">
-        <%= link_to display_subjects_path(search_subjects: 'italian', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of italian -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="photography">
-        <%= link_to display_subjects_path(search_subjects: 'photography', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of german -->      
-    </div> <!-- end of subject_pic_container -->
-  </div><!-- end of subject_pic_row -->
-  <div class="row subject_pic_row">
-    <div class="col-md-3 subject_pic_container">
-      <div id="cooking">
-        <%= link_to display_subjects_path(search_subjects: 'cooking', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of french -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="yoga">
-        <%= link_to display_subjects_path(search_subjects: 'yoga', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of italian -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="studio_painting">
-        <%= link_to display_subjects_path(search_subjects: 'studio_painting', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of german -->      
-    </div> <!-- end of subject_pic_container -->
-  </div><!-- end of subject_pic_row -->
-  <div class="row subject_pic_row">
-    <div class="col-md-3 subject_pic_container">
-      <div id="swimming">
-        <%= link_to display_subjects_path(search_subjects: 'swimming', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of french -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="dancing">
-        <%= link_to display_subjects_path(search_subjects: 'dancing', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of italian -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="guitar">
-        <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: 'stock_photo_container' do %>
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of guitar -->         
-    </div> <!-- end of subject_pic_container -->
-  </div><!-- end of subject_pic_row -->
+  <div class="center-me">
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="all_lessons">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="guitar">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="piano">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    
+  </div> <!-- end of center-me -->  
+</div> <!-- end of stock_photos_container -->
+<div class="container-fluid stock_photos_container hidden-xs">
+  
+  <div class="center-me">
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="violin">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="electric-guitar">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="singing">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    
+  </div> <!-- end of center-me -->  
+</div> <!-- end of stock_photos_container -->
+<div class="container-fluid stock_photos_container hidden-xs">
+  
+  <div class="center-me">
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="swimming">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="studio_painting">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    <div class="add_padding col-md-4 col-sm-4" >
+      <div  class="col-md-12 stock_photo_container" id="yoga">
+        <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+      </div> <!-- end of stock_photo_container -->      
+    </div> <!-- end of add_padding -->
+    
+  </div> <!-- end of center-me -->  
 </div> <!-- end of stock_photos_container -->

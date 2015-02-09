@@ -11,7 +11,7 @@ body {
 }
 
 hr{
-	border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 
 .add_col_padding{
@@ -55,15 +55,15 @@ hr{
 
 //edit bootstrap containers to wrap long sentences onto next line*/
 .list-group-item{
-	word-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .media-body{
-	word-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .panel-footer{
-	word-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
 .panel-body{
@@ -91,7 +91,7 @@ hr{
 
 .teacher_nav{
   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5cb85c', endColorstr='#398439');
-	background: -webkit-linear-gradient(#5cb85c, #398439);
+  background: -webkit-linear-gradient(#5cb85c, #398439);
   background: -o-linear-gradient(#5cb85c, #398439); 
   background: -moz-linear-gradient(#5cb85c, #398439); 
   background: linear-gradient(#5cb85c, #398439);  
@@ -100,7 +100,7 @@ hr{
 .user_nav{
   border-color: #2a602a;
   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5cb85c', endColorstr='#398439');
-	background: -webkit-linear-gradient(#5cb85c, #398439);
+  background: -webkit-linear-gradient(#5cb85c, #398439);
   background: -o-linear-gradient(#5cb85c, #398439); 
   background: -moz-linear-gradient(#5cb85c, #398439); 
   background: linear-gradient(#5cb85c, #398439);
@@ -167,7 +167,7 @@ hr{
 
 
 #standard_layout{
-	background-color: #e0ebf4;  
+  background-color: #e0ebf4;  
 }
 
 .main_page_nav{
@@ -178,39 +178,39 @@ hr{
 //end of standard layout page*/
 
 #main_page{
-	// padding-top: 50px;
+  // padding-top: 50px;
   //background-color:#fafafa;*/
-	background-color:#e0ebf4;
-	min-height: 90%;
-	margin: 0 auto;
-	
+  background-color:#e0ebf4;
+  min-height: 90%;
+  margin: 0 auto;
+  
 }
 .jumbotron{
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .this-one{
-	margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 // qualifications  */
 
 #qual_container{
-	background-color: white;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #CCCCC0;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #CCCCC0;
 }
 
 
 #qual_left{
-	border-right-style: solid;
-	border-right-width: 2px;
-	border-right-color: #eee;
-	
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #eee;
+  
 }
 #qual_form{
-	min-height: 20px;
+  min-height: 20px;
 
 }
 
@@ -240,9 +240,9 @@ hr{
 //end of locations page
 
 .gray_section{
-	background-color: #ff7e64 !important;
-	opacity: .9 !important;
-	border: 1px solid #1b0000 !important;
+  background-color: #ff7e64 !important;
+  opacity: .9 !important;
+  border: 1px solid #1b0000 !important;
 }
 
 .dhx_cal_event{
@@ -251,7 +251,7 @@ hr{
 
 //display_subject _subject_search page*/
 #search_submit_container{
-	text-align: center;
+  text-align: center;
 }
 
 #search_submit{
@@ -274,103 +274,103 @@ hr{
 }
 
 .image_container{
-	color: black;
-	height: 125px !important;
+  color: black;
+  height: 125px !important;
 }
 
 .search_results_left{
   overflow: auto;
   height: 125px;
-	background-color: white;
-	border-style: solid;
-	border-width: 1px;
-	//margin-top: 9px;*/
-	border-color: #E6E6E6;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  //margin-top: 9px;*/
+  border-color: #E6E6E6;
   overflow-y:hidden;
 }
 
 .search_restuls_right{
-	height: 125px;
-	background-color: white;
-	border-top: solid;	
-	border-right: solid;
-	border-bottom: solid;
-	border-width: .1em;
-	border-color: #E6E6E6;
-	position: relative;
-	//margin-top: 9px;*/
+  height: 125px;
+  background-color: white;
+  border-top: solid;  
+  border-right: solid;
+  border-bottom: solid;
+  border-width: .1em;
+  border-color: #E6E6E6;
+  position: relative;
+  //margin-top: 9px;*/
 }
 
 .nopadding {
-	padding: 0 !important;
-	//margin: 0 !important;*/
+  padding: 0 !important;
+  //margin: 0 !important;*/
 }
 
 .results_photos{
-	position: absolute;
-	margin-right: 10px;
-	clear: both;
+  position: absolute;
+  margin-right: 10px;
+  clear: both;
 }
 
 .results_photos.front{
-	z-index: 1;
+  z-index: 1;
 }
 
 .results_photos.back{
-	z-index: 3;
-	opacity: 0;
+  z-index: 3;
+  opacity: 0;
 }
 
 .search_results_row:hover {
-	box-shadow: 2px 2px 10px #888888;
-	
+  box-shadow: 2px 2px 10px #888888;
+  
 }
 
 .search_results_row{
-	margin: 9px;
+  margin: 9px;
 }
 
 .search_results_teachers_info{
-	margin-left: 135px;
+  margin-left: 135px;
 }
 
 .search_results_teachers_name{
-	font-family: "HelveticaNeue", "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "HelveticaNeue", "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .main_page_search_container{
-	text-align: center;
+  text-align: center;
   margin-bottom: 50px;
   
 }
 
 .typeahead.subject{
-	height: 45px;
-	font-size: 22px;  
+  height: 45px;
+  font-size: 22px;  
 }
 
 .typeahead.county{
-	height: 45px;
-	font-size: 22px;	
+  height: 45px;
+  font-size: 22px;  
 }
 
 .review_container{
-		
-	right: 0;
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	border-top: 1px solid #CCCCC0;
+    
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  border-top: 1px solid #CCCCC0;
 }
 //end of subject search page*/
 
 //teachers-area page opening times modal*/
 .second_day{
-	border-bottom: 1px solid #CCCCC0;
+  border-bottom: 1px solid #CCCCC0;
 }
 
 .modal-body.opening_times{
-	padding: 0;
+  padding: 0;
 }
 //end of teachers-area page opening times modal*/
 
@@ -383,18 +383,18 @@ hr{
 //show_teacher*/
 
 .table_header{
-	background-color: #fff;
+  background-color: #fff;
 }
 
 .table_row{
-	background-color: #fff;
+  background-color: #fff;
 }
 
 // #teacher_display_map{ possibly removing this for new locations views
-// 	height: 350px;
-// 	width: 100%;
-// 	border: 1px solid #CCCCC0;
-// 	margin-bottom: 5px; 
+//  height: 350px;
+//  width: 100%;
+//  border: 1px solid #CCCCC0;
+//  margin-bottom: 5px; 
 // }
 
 .show_teacher{
@@ -406,27 +406,27 @@ hr{
 }
 
 .teachers_display_scheduler{
-	height: 500px;
-	width: 100%;
-	border: 1px solid #CCCCC0;
-	margin-bottom: 5px;
+  height: 500px;
+  width: 100%;
+  border: 1px solid #CCCCC0;
+  margin-bottom: 5px;
 }
 
 .dhx_cal_date.display_teachers_cal_date{
-	padding-left: 5%;
-	height:30px !important;
-	line-height:30px !important;
-	background:0 0;
-	border:1px solid #CECECE;
-	text-align: left !important;
+  padding-left: 5%;
+  height:30px !important;
+  line-height:30px !important;
+  background:0 0;
+  border:1px solid #CECECE;
+  text-align: left !important;
 }
 
 .dhx_cal_container.teachers_display_scheduler{
-	border: 1px solid #CCCCC0;
+  border: 1px solid #CCCCC0;
 }
 
 .row_teachers_area{
-	height: 100%;
+  height: 100%;
 }
 
 
@@ -526,8 +526,8 @@ hr{
   color: #111;
   
   background-color: rgba(0, 0, 0,0);
-	box-shadow: 2px 2px 5px #111;
-	margin: 0 !important;
+  box-shadow: 2px 2px 5px #111;
+  margin: 0 !important;
   padding: 0 10px !important;
   height: 100%;
 }
@@ -541,7 +541,7 @@ hr{
 }
 
 .teacher_registration_form{
-	font-size: 14px;
+  font-size: 14px;
 }
 
 form .glyphicon {
@@ -549,7 +549,7 @@ form .glyphicon {
 }
 
 .teach_page_login_link{
-	color: #38aa38;
+  color: #38aa38;
 }
 
 
