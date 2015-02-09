@@ -761,14 +761,15 @@ form .glyphicon {
   margin-top: 25px;
 }
 
-.subject_pic_row{
-  // height:200px;
-  // margin-bottom: 10px;
-}
-
 .stock_photos_container{
+  width: 100%;
+  text-align: center !important;
   // margin: 0px 83px;
   
+}
+
+.center-me{
+   display: inline-block !important;
 }
 
 .browse_topics{
@@ -780,8 +781,7 @@ form .glyphicon {
 }
 
 .stock_photo_container{
-  margin-left: auto;
-  margin-right: auto;
+  padding: 10px 0 !important;
   // padding: 0 !important;
   // margin: 0 !important;
   // width: 200px;
@@ -814,15 +814,15 @@ form .glyphicon {
   // height: 200px;
   // width: 300px;
   background-repeat: no-repeat;
-  padding: 0 !important;
-  background-size:cover;
-  background-position: 50%;
-  left:0;right:0;;top:0;bottom:0;
+  // padding: 0 !important;
+  // background-size:cover;
+  // background-position: 50%;
+  background-size: 100% 100%;
 }
 
 #drums{
   background-image: image-url("learn-to-play-drums.jpg");
-  padding: 0 !important;
+  // padding: 0 !important;
   // height: 200px;
   // width: 300px;
   background-size: 100% 100%;
@@ -832,15 +832,18 @@ form .glyphicon {
   background-image: image-url("learn-to-play-piano.jpg");
   // height: 200px;
   // width: 300px;
-  padding: 0 !important;
+  // padding: 0 !important;
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #guitar{
   background-image: image-url("learn-to-play-guitar.jpg");
-  padding: 0 !important;
-  height: 200px;
-  width: 300px;
+  // padding: 0 !important;
+  // height: 200px;
+  // width: 300px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #violin{
@@ -1132,9 +1135,7 @@ form .glyphicon {
   .typeahead.county{
     width: 250px;
   }
-  .subject_pic_row{
-    display: none;
-  }
+
   .typeahead.subject{
     font-size: 14px;  
   }
@@ -1315,9 +1316,6 @@ form .glyphicon {
   }
   #display_teachers_cal_date{
     font-size: 18px !important;    
-  }
-  .subject_pic_row{
-    display:inline;
   }
 }
 
