@@ -81,6 +81,16 @@ hr{
   color: #FFF !important;
   }
 
+.dropdown-menu > li > a:hover, //clicked dropdown menu link
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  background: -webkit-linear-gradient(#5cb85c, #398439);
+  background: -o-linear-gradient(#5cb85c, #398439); 
+  background: -moz-linear-gradient(#5cb85c, #398439); 
+  background: linear-gradient(#5cb85c, #398439);
+}
+
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
   background-color:#398539 !important;
 }
@@ -1123,12 +1133,7 @@ form .glyphicon {
   #rates{
     font-size: 30px;
   }
-  .welcome_sprinkles{
-    visibility: hidden;
-  }
-  .welcome_sprinkles_hidden{
-    display: none;
-  }
+  
   #display_teachers_cal_date{
     font-size: 12px;
   }
@@ -1196,7 +1201,7 @@ form .glyphicon {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) {  
   .dropdown-menu{
     width:100%;
     background: -webkit-linear-gradient(#5cb85c, #398439);
@@ -1270,6 +1275,12 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555555;
+    background-color: #e7e7e7;
+  }
   //teach page
 
   .teachers_blurb_container{ //teach page
