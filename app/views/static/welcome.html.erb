@@ -7,13 +7,13 @@
   <meta property="og:description" content="What do you want to learn today?" />
   <meta property="og:type" content="article" />
   <meta property="og:image"
-  content= "http://learn-your-lesson.herokuapp.com/assets/silhouette-ebed8878a5f8318d49bb55efa8cfc014.jpg" />
+  content= "https://learn-your-lesson.herokuapp.com/assets/silhouette-ebed8878a5f8318d49bb55efa8cfc014.jpg" />
 <% end %>
 <% content_for :title, "The place to connect with local teachers and learn" %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
 
 <div  class="container-fluid main_page_search_container home_welcome">
-  <div class="welcome_page_form__header welcome_sprinkles_hidden">
+  <div class="welcome_page_form__header">
     <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
   </div> <!-- end of welcome_page_form__header -->
 
@@ -28,13 +28,13 @@
       <%= submit_tag "I'm ready to learn",type: 'submit', name: 'submit', id: 'search_submit', class: 'btn' %>
     </div>
   <% end %>
-  <div class="container-fluid welcome_prompt_container welcome_sprinkles">
+  <div class="container-fluid welcome_prompt_container ">
     <div class="col-md-4 welcome_page_prompts"><h4>&bull; Connect with local <br>teachers one to one</h4></div>
     <div class="col-md-4 welcome_page_prompts"><h4>&bull; Choose from hundreds of skills</h4></div>
     <div class="col-md-4 welcome_page_prompts"><h4>&bull; Book online lessons with confidence</h4></div>
   </div> <!-- end of welcome_prompt_container -->
 
-  <div class="browse_topics welcome_sprinkles">
+  <div class="browse_topics hidden-xs">
     <ul class="list-inline">
       <li>Browse:</li>
       <li class="browse_option btn btn-success" id="popular">Popular</li>
