@@ -1149,6 +1149,12 @@ form .glyphicon {
 }
 
 @media (min-width: 400px) {
+  .welcome_sprinkles{
+    visibility: visible;
+  }
+  .welcome_sprinkles_hidden{
+    display: inline;
+  }
   #display_teachers_cal_date{
     font-size: 14px;
   }
@@ -1299,12 +1305,6 @@ form .glyphicon {
   }
   .dhx_cal_date.teachers_area_cal_date{
     font-size: 13px !important;
-  }
-  .welcome_sprinkles{
-    visibility: visible;
-  }
-  .welcome_sprinkles_hidden{
-    display: inline;
   }
 }
  
