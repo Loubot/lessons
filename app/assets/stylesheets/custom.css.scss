@@ -833,6 +833,7 @@ form .glyphicon {
 .add_padding{ //welcome page
   padding: 10px;
 }
+
 #drums{
   background-image: image-url("learn-to-play-drums.jpg");
   // padding: 0 !important;
@@ -1010,6 +1011,14 @@ form .glyphicon {
 
 #biology{
   background-image: image-url("learn-biology.jpg");
+  // height: 200px;
+  // width: 300px;
+  padding: 0 !important;
+  background-size: 100% 100%;
+}
+
+#accountancy{
+  background-image: image-url("learn-accounting.jpg");
   // height: 200px;
   // width: 300px;
   padding: 0 !important;
