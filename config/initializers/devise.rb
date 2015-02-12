@@ -234,7 +234,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], { access_type: "offline", approval_prompt: "" }
   config.omniauth :twitter, ENV["TWITTER_API_KEY"], ENV["TWITTER_API_SECRET"]
   # OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-  
+  #
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
