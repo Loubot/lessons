@@ -42,7 +42,7 @@
       <%= puts "Stripe should be here" %>
       <div class="col-md-6">
         <%= form_tag stripe_create_path do %>
-          <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
             data-description="Book your lesson"
             data-currency="eur"
@@ -53,7 +53,7 @@
           <%= hidden_field_tag :teacher_id, @teacher.id %>
           <%= hidden_field_tag :tracking_id, @cart.tracking_id %>        
           <%= hidden_field_tag :current_teacher, current_teacher.id if teacher_signed_in? %>
-          
+          <%= image_submit_tag 'stripe.png' %>
           
         <% end %>
       </div> <!-- end of col-md-6-->
