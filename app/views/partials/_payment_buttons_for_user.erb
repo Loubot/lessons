@@ -48,7 +48,7 @@
             data-currency="eur"
             data-description="This is the description"
             data-amount="<%= (@rate * 100).to_i %>"
-            data-image="/128x128.png">></script>
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"></script>
           <%= hidden_field_tag :amount, @rate %>
           <%= hidden_field_tag :teacher_id, @teacher.id %>
           <%= hidden_field_tag :tracking_id, @cart.tracking_id %>        
