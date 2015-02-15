@@ -22,8 +22,8 @@ class UserCart < ActiveRecord::Base
   validates :teacher_id, :student_id, :params, :tracking_id, presence: true
   validates :tracking_id, uniqueness: true
 
-  before_update :save_tracking_id
-  before_save :save_tracking_id
+  # before_update :save_tracking_id
+  # before_save :save_tracking_id
   before_validation :save_tracking_id
 
   def save_tracking_id
