@@ -241,7 +241,14 @@ teachersInfoReady = ->
       # e.relatedTarget # previous active tab
       $('#address').empty().append gon.locations[$(@).data('index')].address
 
-      
+  #// Initialise stripe when stripe pay button is clicked
+
+  $(document).on 'click', '#stripe_pay_button', (e)->
+    e.preventDefault()
+    alert 'z'
+
+
+  #// End of Initialise stripe when stripe pay button is clicked
 
 
 #//// end of show_teacher_to_user add price to form modal
