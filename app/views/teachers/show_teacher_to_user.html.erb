@@ -1,8 +1,5 @@
 <%= content_for :title,  @teacher.full_name %>
 <%= include_gon %><br>
- <style>
-  
-</style>
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
@@ -119,3 +116,4 @@
 
 
 <%= render 'modals/payment_choice_modal' %>
+<%= render 'modals/payments_modal_for_users' %>

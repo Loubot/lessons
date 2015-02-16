@@ -245,7 +245,17 @@ teachersInfoReady = ->
 
   $(document).on 'click', '#stripe_pay_button', (e)->
     e.preventDefault()
-    alert 'z'
+    StripeCheckout.open
+      key: 'pk_test_bedFzS7vnmzthkrQolmUjXNn'
+      amount: 5000
+      name: 'The Store'
+      description: 'A whole bag of awesome ($50.00)'
+      panelLabel: 'Pay Now'
+      token: (res) ->
+        # Do something with res.id
+        # Store it in Mongo and/or create a charge on the server-side
+        console.info res
+        return
 
 
   #// End of Initialise stripe when stripe pay button is clicked

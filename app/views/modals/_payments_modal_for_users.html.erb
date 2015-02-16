@@ -1,0 +1,64 @@
+<div class="modal fade" id="payments_modal_for_users" tab-index="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="payments_modal_title">Review your booking</h4>
+      </div> <!-- end of modal-header -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+           <div class="table-responsive">
+            <table class="table table-condensed table-hover">
+              <tr>
+                <td>Start time:</td>
+                <td><%# @event.start_time.to_formatted_s(:long) %></td>
+              </tr>
+              <tr>
+                <td>End time:</td>
+                <td><%# @event.end_time.to_formatted_s(:long) %></td>
+              </tr>
+              <tr>
+                <td>Length:</td>
+                <td><%# total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %> hours</td>
+              </tr>
+              <tr>
+                <td>Total price</td>
+                <% puts "rate #{@rate}" %>
+                <td><%# number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %></td>
+              </tr>
+            </table>
+           </div>
+          </div>
+        </div>
+        <div class="row">
+          <% if @teacher.paypal_email != "" %>
+            <div class="col-md-6">
+              <%= form_tag paypal_create_path, method: 'get' do %>
+                <%# hidden_field_tag :teacher, @teacher.paypal_email %>
+                <%# hidden_field_tag :receiver_amount, @rate %>
+                <%# hidden_field_tag :paypal, '1' %>
+                <%# hidden_field_tag :tracking_id, @cart.tracking_id %>
+                <%# image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
+              <% end %>
+            </div> <!-- end of col-md-6-->
+          <% end %>
+
+          
+          <% if @teacher.stripe_access_token != "" %>
+            
+            <div class="col-md-6">
+              <%= link_to image_tag('stripe.png'), '#',id: "stripe_pay_button" %>
+            </div> <!-- end of col-md-6-->
+
+          <% end %>
+        </div> <!-- end of row -->
+      </div> <!-- end of modal-body -->
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>        
+      </div>
+    </div> <!-- end of modal-content -->
+  </div> <!-- end of modal-dialog -->
+</div> <!-- end of modal fade -->
