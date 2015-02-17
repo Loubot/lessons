@@ -28,6 +28,8 @@ class TeacherMailer < ActionMailer::Base
         # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
     raise
     end
+
+    logger.info "Mail sent to #{teacher.to_s}"
   end
 
   def reset_password_instructions(record, token, opts={})
