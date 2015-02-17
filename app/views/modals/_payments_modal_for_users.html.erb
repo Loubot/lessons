@@ -35,10 +35,10 @@
           <% if @teacher.paypal_email != "" %>
             <div class="col-md-6">
               <%= form_tag paypal_create_path, method: 'get' do %>
-                <%= hidden_field_tag :teacher, '' %>
-                <%= hidden_field_tag :receiver_amount, '' %>
+                <%= hidden_field_tag :teacher, '', class: 'paypal_teacher_email' %>
+                <%= hidden_field_tag :receiver_amount, '', class: 'rate' %>
                 <%= hidden_field_tag :paypal, '1' %>
-                <%= hidden_field_tag :tracking_id, '' %>
+                <%= hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
                 <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
               <% end %>
             </div> <!-- end of col-md-6-->
@@ -56,14 +56,13 @@
                 data-description="This is the description"
                 data-imgage="<%= asset_url 'stripe.png' %>"
                 ></script>
-                <%= hidden_field_tag :amount, '' %>
-                <%= hidden_field_tag :teacher_id, '' %>
-                <%= hidden_field_tag :tracking_id, '' %>        
-                <%= hidden_field_tag :current_teacher, '' %>
-        
+                <%= hidden_field_tag :amount, '', class: 'rate' %>                
+                <%= hidden_field_tag :tracking_id, '', class: 'tracking_id' %>        
+                <%= hidden_field_tag :current_teacher, '', class: 'stripe_teacher' %> 
+                <%= hidden_field_tag :teacher_id, params['id'] %> 
           
           
-        <% end %>
+              <% end %>
             </div> <!-- end of col-md-6-->
 
           <% end %>

@@ -62,7 +62,7 @@ class EventsController < ApplicationController
 		puts "student #{params[:event][:student_id]}"
 		puts "subject #{params[:event][:subject_id]}"
 		if @event.valid?
-			@teacher = Teacher.find(params[:event][:teacher_id])			
+			@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
 			@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
 			@cart.update_attributes(teacher_id: params[:event][:teacher_id],
 															 params: event_params, teacher_email: @teacher.email,

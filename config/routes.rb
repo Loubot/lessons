@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   get         'stripe-auth-user'        =>  'payments#stripe_auth_user' 
   post        'store-paypal'            =>  'payments#store_paypal'
   post        'stripe-create'           =>  'payments#stripe_create'
-  post        '/store-stripe'           =>  'payments#store_stripe'
+  post        'store-stripe'           =>  'payments#store_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
 

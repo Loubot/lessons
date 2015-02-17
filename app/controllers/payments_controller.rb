@@ -5,6 +5,8 @@ class PaymentsController < ApplicationController
   protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
+  before_action :fix_json_params, only: [:store_stripe]
+
 
   def get_event_id
     @event_id = session[:event_params] || []
@@ -111,7 +113,8 @@ class PaymentsController < ApplicationController
     
   end
 
-  def store_stripe    
+  def store_stripe
+    
     json_response = JSON.parse(request.body.read)
 
     render status: 200, nothing: true and return if json_response['type'] == "application_fee.created"
@@ -167,8 +170,17 @@ class PaymentsController < ApplicationController
   end
 
 
+  
+
+  
+
+  
+
 
   private
+  def params
+    @reparsed_params || super
+  end
 
       def create_paypal(params)
         require "pp-adaptive"
@@ -185,8 +197,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
+          :return_url      => "http://771852a9.ngrok.com/paypal-return?payKey=${payKey}",
+          :ipn_notification_url => 'http://771852a9.ngrok.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -209,4 +221,12 @@ class PaymentsController < ApplicationController
         end
         
       end
+
+      protected
+
+        def fix_json_params
+          if request.content_type == "application/json"
+            @reparsed_params = JSON.parse(request.body.string).with_indifferent_access
+          end
+        end
 end
