@@ -72,11 +72,15 @@ loadTwitterSDK = ->
   # $.getScript("//platform.twitter.com/widgets.js")
   document.body.appendChild twitterScript
 
-  $ ->
-    loadTwitterSDK()
-    bindTwitterEventHandlers() unless twttr_events_bound
+  
 
+loadSocials = ->
+  loadTwitterSDK()
+  bindTwitterEventHandlers() unless twttr_events_bound
 
-  $ ->
-    loadFacebookSDK()
-    bindFacebookEvents() unless fb_events_bound
+  loadFacebookSDK()
+  bindFacebookEvents() unless fb_events_bound
+
+$(document).ready loadSocials
+$(document).on 'page:load', loadSocials
+
