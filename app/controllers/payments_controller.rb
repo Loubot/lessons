@@ -86,7 +86,6 @@ class PaymentsController < ApplicationController
 
   def stripe_create
    # Amount in cents
-    puts 'whoop whoop'
     @amount = params[:amount].to_i * 100    
 
     charge = Stripe::Charge.create({
