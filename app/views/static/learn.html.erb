@@ -9,11 +9,11 @@
           <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-envelope"></span>
-            <% if !is_mobile? %>
+            
               <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
-            <% else %>
-              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
-            <% end %>
+            
+              
+            
           </div><br>
                
           <div class="input-group">
@@ -45,8 +45,9 @@
         </div>
         <div class="fb_login_container">
           <%= link_to image_tag('facebook_reg.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
-          
-        </div>
+                    <%= link_to image_tag('google_signup.jpg'), "/teachers/auth/google_oauth2?origin=#{request.original_url}", class: 'fbLogin_link' %>
+        </div> <!-- end of fb_log_container -->
+        
       </div> <!-- end of col-md-6 -->
       <div class="col-md-6 col-sm-12 col-xs-12 learn_blurb hidden-xs">
         <h1 class="students_blurb_header">What will I learn today?</h1>

@@ -45,8 +45,9 @@
         </div>
         <div class="fb_login_container">
           <%= link_to image_tag('facebook_reg.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
-          
+          <%= link_to image_tag('google_signup.jpg'), "/teachers/auth/google_oauth2?origin=#{request.original_url}", class: 'fbLogin_link' %>
         </div> <!-- end of fb_login_container -->
+        
         
       </div> <!-- end of col-md-6 teacher_registration_container -->
       <div class="col-md-6 col-xs-12 col-sm-12 teachers_blurb_container hidden-xs">
