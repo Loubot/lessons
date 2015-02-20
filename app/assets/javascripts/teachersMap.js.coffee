@@ -96,7 +96,6 @@ window.init_teachers_maps = ->
 
 
 ready = ->
-  console.log 'google page'
   if $('#map_container').is(':visible')
     window.mapArray = []
     window.mapOptionsArray = []
