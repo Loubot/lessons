@@ -96,6 +96,12 @@ gem 'rufus-scheduler'
 
 gem 'fotoramajs'
 
+gem 'dalli'
+
+gem 'actionpack-action_caching'
+
+gem 'actionpack-page_caching'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

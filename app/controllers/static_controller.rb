@@ -1,7 +1,11 @@
 class StaticController < ApplicationController
 	require 'will_paginate/array'	
 
-	include StaticHelper	
+	include StaticHelper
+
+	caches_page :welcome, :how_it_works, :mailing_list, :learn, :teach, :browse_categories
+
+	caches_action :subject_search, :display_subjects
 	
 	def how_it_works
 
