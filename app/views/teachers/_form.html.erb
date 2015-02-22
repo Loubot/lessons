@@ -33,10 +33,6 @@
 						  					<td>Email:</td>
 						  					<td><%= @context.email %></td>
 						  				</tr>
-						  				<tr>
-						  					
-						  					
-						  				</tr>
 						  			</table>
 						  		</div> <!-- end of table-responsive -->
 						  	</div> <!-- end or row -->
@@ -120,7 +116,7 @@
 	</div> <!-- end of container-fluid -->
 <% end %> <%# end of experienc cache %>
 
-<% cache [@context, 'overview'] %>
+<% cache [@context, 'overview'] do %>
 	<div class="container-fluid">
 		<div class="row">
 			
