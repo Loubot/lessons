@@ -56,11 +56,14 @@
 </div>
 <hr>
 <div class="container-fluid">
-	<% if @qualifications.length != 0 %>
-		<%= render @qualifications %>
-	<% else %>
-		<h2>Your qualifications will appear here </h2>
+	<% cache @qualifications do %>
+		<% if @qualifications.length != 0 %>
+			<%= render @qualifications %>
+		<% else %>
+			<h2>Your qualifications will appear here </h2>
+		<% end %>
 	<% end %>
+	
 </div>
 
 <hr>
