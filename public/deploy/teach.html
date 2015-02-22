@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang='en-IE'>
+  <head> 
+    <meta http-equiv="content-language" content="en">
+    
+    <title>Connect with local students and teach what you love | Learn Your Lesson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <meta name="description" content="Grow and market your teaching business in an online marketplace">
+    <link href="/assets/application.css" media="screen" rel="stylesheet" />
+    <script async="async" src="/assets/application.js"></script>
+    <link href="/assets/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="26+iKerosi22pf9hlwGQ0HCeHxWOMn6XFqkq/oHeBtI=" name="csrf-token" />
+    
+    
+
+    <!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+  <body id="standard_layout">
+  	<script>
+      WebFontConfig = {
+        google: { families: ['Open+Sans']}
+      };
+
+      (function() {
+
+         var wf = document.createElement('script');
+
+         wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+
+             '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+
+         wf.type = 'text/javascript';
+
+         wf.async = 'true';
+
+         var s = document.getElementsByTagName('script')[0];
+
+         s.parentNode.insertBefore(wf, s);
+
+       })();
+    </script> 
+  	
+  	<nav class="navbar user_nav navbar-default" id="standard_nav_bar" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">learnyourlesson.ie</a>
+
+    </div> <!-- end of navbar-header -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="/mailing-list">Subscribe to mailing list</a></li>
+        
+        <li><a href="/browse-categories">Subjects</a></li>      
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/how-it-works">How it works</a></li>
+
+          <li><a href="/teach">Become a teacher</a></li>
+          <li><a data-target="#login_modal" data-toggle="modal" href="#">Login</a></li>
+          <li><a href="/learn">Sign Up</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Login</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="col-md-6 col-md-12 col-xs-12">
+            <form accept-charset="UTF-8" action="/teachers/sign_in" class="new_teacher" id="new_teacher" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="26+iKerosi22pf9hlwGQ0HCeHxWOMn6XFqkq/oHeBtI=" /></div>
+              <!-- <div class="heading">
+                <h4 class="form-heading">Sign In</h4>
+              </div> --> <!-- end of heading -->
+
+              <div class="control-group">
+                <label class="control-label" for="teacher_email" id="login_modal_email">Email</label>
+                <div class="controls">
+                  <input id="teacher_email" name="teacher[email]" type="email" value="" />
+                </div> <!-- end of controls -->
+              </div> <!-- end of control-group --> 
+              <div class="control-group">
+                <label class="control-label" for="teacher_password">Password</label>
+                <div class="controls">
+                  <input id="teacher_password" name="teacher[password]" type="password" />
+                </div> <!-- end of controls -->
+              </div> <!-- end of control-group -->
+
+              
+
+              <div class="control-group">
+                <div class="controls">
+                    <div><input name="teacher[remember_me]" type="hidden" value="0" /><input id="teacher_remember_me" name="teacher[remember_me]" type="checkbox" value="1" /> <label for="teacher_remember_me">Remember me</label></div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <div><input class="btn btn-success sign_in_submit" name="commit" type="submit" value="Sign in" /></div>
+                <div class="login_fb_container">
+                  <a class="fbLogin_link" href="/teachers/auth/facebook?origin=http://localhost:3000/teach&amp;id="><img alt="Facebook login" src="/assets/facebook_login.png" /></a>                
+                </div>
+                <div class="login_container">
+                  <a href="teachers/auth/google_oauth2?origin=http://localhost:3000/teach&amp;id="><img alt="Google sign in" src="/assets/google_sign_in.jpg" /></a>
+                </div>
+                <div class="login_container">
+                  <a href="teachers/auth/twitter?origin=http://localhost:3000/teach&amp;id="><img alt="Twitter sign in" src="/assets/twitter_sign_in.jpg" /></a>
+                </div>
+                <div class="controls">
+                    <a href="/teachers/password/new">Forgot your password?</a><br />
+                </div> <!-- end of controls -->
+              </div><!--  end of control-group -->
+              
+              
+</form>            
+          </div> <!-- end of col-md-6 -->
+            <div class="col-md-6 col-md-12 col-xs-12">
+              <ul class="ds-btn">                
+                <li>
+                  <a class="btn btn-lg btn-primary" href="/learn">
+                    <i class="glyphicon glyphicon-user pull-left"></i><span>Students<br><small>Student registration</small></span>
+</a>                        
+                </li>              
+                <li>
+                  <a class="btn btn-lg btn-info" href="/teach">
+                    <i class="glyphicon glyphicon-user pull-left"></i><span>Teachers<br><small>Teacher registration</small></span>
+</a>                </li>
+              </ul>
+            </div> <!-- end of col-md-6 -->
+        </div> <!-- end of container-fluid-->
+
+      </div> <!-- end of modal-body -->
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div> <!-- end of modal-content -->
+  </div> <!-- end of modal-dialog -->
+</div> <!-- end of login_modal -->
+  	
+  	
+  	
+    <div class="container main_page_containers" id="main_page">
+      <div class="container-fluid flash_message_div">
+   <!-- application helper -->
+</div>
+
+      <div class="container-fluid teach_page">
+  <div class="row teach_page">    
+    <div class="teachers_reg_photo">
+      <div class="col-md-6 col-xs-12 col-sm-12 teacher_registration_container left">
+        <h2 class="teacher_registration_container_header"><strong>Teach</strong></h2><span class="label label-primary">Register below to become a teacher</span><br><br>
+        <div class="teachers_form_container">
+          <form accept-charset="UTF-8" action="/teachers" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="26+iKerosi22pf9hlwGQ0HCeHxWOMn6XFqkq/oHeBtI=" /></div>
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+              <input class="form-control" id="teacher_email" name="teacher[email]" placeholder="Email" type="email" />
+          </div><br>
+               
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-user"></span>
+            <input class="form-control" id="teacher_first_name" name="teacher[first_name]" placeholder="First name" type="text" />
+          </div><br>
+          
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-user"></span>
+            <input class="form-control" id="teacher_last_name" name="teacher[last_name]" placeholder="Last name" type="text" />
+          </div><br>
+          
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+            <input autocomplete="off" class="form-control" id="teacher_password" name="teacher[password]" placeholder="Password" type="password" />
+          </div><br>
+          
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+            <input autocomplete="off" class="form-control" id="teacher_password_confirmation" name="teacher[password_confirmation]" placeholder="Confirm password" type="password" />
+          </div><br>        
+          <input id="teacher_is_teacher" name="teacher[is_teacher]" type="hidden" value="true" />
+          <div class="teachers_reg_buttons">
+            <input class="btn btn-success" name="commit" type="submit" value="Sign up" /> or 
+            <a class="teach_page_login_link" data-target="#login_modal" data-toggle="modal" href="#">Login</a>
+           
+          </div>
+</form>        </div>
+        <div class="fb_login_container">
+          <a class="fbLogin_link" href="/teachers/auth/facebook?origin=http://localhost:3000/teach"><img alt="Facebook reg" src="/assets/facebook_reg.png" /></a>
+          <a class="fbLogin_link" href="/teachers/auth/google_oauth2?origin=http://localhost:3000/teach"><img alt="Google signup" src="/assets/google_signup.jpg" /></a>
+        </div> <!-- end of fb_login_container -->
+        
+        
+      </div> <!-- end of col-md-6 teacher_registration_container -->
+      <div class="col-md-6 col-xs-12 col-sm-12 teachers_blurb_container hidden-xs">
+        <h2 class="teachers_blurb_header">Grow and market your teaching business in an online marketplace</h2>
+        <h4 class="teachers_blurb">Connect with local students and teach what you love</h4>
+      </div> <!-- end of teachers_blurb_container -->
+      <div class="teachers_small_blurb_container col-xs-12 visible-xs">
+        <h3 class="teachers_blurb_header">Grow and market your teaching business in an online marketplace</h3>
+        <h4 class="teachers_blurb_header">Connect with local students and teach what you love</h4>
+      </div> <!-- end of teachers_pros_container -->
+    </div> <!-- end of teachers_reg_photo -->
+  </div> <!-- end of row -->  
+</div> <!-- end of container-fluid -->
+
+<div class="container-fluid teach_page_pros_container">
+  <div class="row teach_page">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <img alt="Create a free profile" src="/assets/loud_speaker.jpg" />
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Create your free profile</strong></h1>
+        <p class="center_text">Increase your reach and don't worry about finding new students.</p>
+      </div> <!-- end of center_text -->
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+  <div class="row teach_page">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Manage your clients</strong></h1>
+        <p class="center_text">Keep track of your students and lessons with our calendar and booking system.</p>
+      </div> <!-- end of center_text -->
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <img alt="Manage your clients" src="/assets/calendar.jpg" />      
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+  <div class="row teach_page">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <img alt="Increase your earnings" src="/assets/money_bags.jpg" />
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Increase your earnings</strong></h1>
+        <p class="center_text">Keep 100% of the lesson fee when booked through the website and 100% when booked with the student directly.</p>
+      </div> <!-- end of center_text -->
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+</div> <!-- end of container-fluid teach_page_pros_container -->
+
+<div class="row">
+  <h1 class="teach_exp_header">How it works for the teacher</h1>
+  <div class="teach_exp_table_container">
+    <table class="table teach_exp_table">
+      <tr>
+        <td class="col-md-1">1</td>
+        <td class="col-md-11">Create your profile in minutes</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">2</td>
+        <td class="col-md-11">Make sure to sell yourself! Add in your pictures, location, experience and qualifications.
+         Go on, brag about yourself, don't be shy!
+        </td>
+      </tr>
+      <tr>
+        <td class="col-md-1">3</td>
+        <td class="col-md-11">Share the page and market yourself to the world, via Facebook and twitter.</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">4</td>
+        <td class="col-md-11">Watch as the bookings roll in. Keep your students happy with timely communication and quality service and you will receive great reviews.</td>
+      </tr>
+  </table>
+  </div>
+
+</div> <!-- end of row -->
+
+        <div id="fb-root"></div>
+  <div id="share_buttons">
+    
+    <div class="fb-like" data-href="http://localhost:3000/teach" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
+  	
+    
+
+    <div>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://learn-your-lesson.herokuapp.com" data-text="Learn Your Lesson" data-count="none" data-hashtags="whatwitllyoulearn">Tweet</a>
+      
+    </div>
+    <p>Recommend on Facebook or Twitter</p>
+    <button type="button" class="close share_buttons_close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    
+  </div> <!-- end of share_buttons -->
+   
+    </div>
+
+    
+  </body>
+</html>
+
