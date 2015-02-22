@@ -20,6 +20,7 @@ config/initializers/carrierwave.rb
 app/uploaders/avatar_uploader.rb
 config/database.yml
 public/sitemaps/
+public/deploy
 
 # git rm -r --cached .
 # git update-index --assume-unchanged
