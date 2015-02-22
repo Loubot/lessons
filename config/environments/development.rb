@@ -13,6 +13,8 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
   config.cache_store = :dalli_store, { :expires_in => 1.day }
+  #Set page cache directory
+  config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
