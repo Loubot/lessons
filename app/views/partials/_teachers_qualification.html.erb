@@ -1,8 +1,10 @@
 <% endTime = qualification.present == '1' ? 'Present' : qualification.end.strftime('%Y %b') %>
 
-<li class="list-group-item">
- 	<strong>School: <%= qualification.school %></strong>
- 	<span class="pull-right"><%= "#{qualification.start.strftime('%Y %b')} - #{endTime}"%></span>
- 	
-</li>
-<div class="panel-footer"><%= qualification.title %></div>
+<% cache [qualification, 'show_teacher_qualification'] do %>
+	<li class="list-group-item">
+	 	<strong>School: <%= qualification.school %></strong>
+	 	<span class="pull-right"><%= "#{qualification.start.strftime('%Y %b')} - #{endTime}"%></span>
+	 	
+	</li>
+	<div class="panel-footer"><%= qualification.title %></div>
+<% end %>
