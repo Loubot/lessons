@@ -22,7 +22,7 @@ class Event < ActiveRecord::Base
   validates :start_time, :end_time, :overlap => {:exclude_edges => ["start_time", "end_time"]}
   validates :start_time, date: { before: :end_time, message: 'must be after end time' }
   has_one :review
-  belongs_to :teacher
+  belongs_to :teacher, touch: true
   #belongs_to :teacher, foreign_key: :student_id
 
   before_save :add_name

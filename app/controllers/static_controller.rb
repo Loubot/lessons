@@ -3,6 +3,10 @@ class StaticController < ApplicationController
 
 	include StaticHelper
 
+	caches_page :teach, :learn
+
+	caches_action :welcome, layout: false
+
 	def how_it_works
 
 	end

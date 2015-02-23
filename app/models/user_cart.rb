@@ -16,7 +16,7 @@
 #
 
 class UserCart < ActiveRecord::Base
-  belongs_to :teacher
+  belongs_to :teacher, touch: true
   serialize :params
 
   validates :teacher_id, :student_id, :params, :tracking_id, presence: true

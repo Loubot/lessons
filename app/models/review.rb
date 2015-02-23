@@ -13,8 +13,8 @@
 #
 
 class Review < ActiveRecord::Base
-  belongs_to :event
-  belongs_to :teacher
+  belongs_to :event, touch: true
+  belongs_to :teacher, touch: true
 
   validates :rating, inclusion: 1..5
   validates :teacher_id, :rating, :user_id, presence: true

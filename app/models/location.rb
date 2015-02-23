@@ -13,7 +13,7 @@
 #
 
 class Location < ActiveRecord::Base
-  belongs_to :teacher
+  belongs_to :teacher, touch: true
 
   has_many :prices, dependent: :destroy
 
