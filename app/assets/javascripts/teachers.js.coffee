@@ -240,6 +240,13 @@ teachersInfoReady = ->
       # e.target # newly activated tab
       # e.relatedTarget # previous active tab
       $('#address').empty().append gon.locations[$(@).data('index')].address
+  if $('#this_date').length > 0
+    AnyTime.noPicker 'this_date'
+    $("#this_date").AnyTime_picker
+      format: "%Y-%m-%d"
+      placement: 'inline'
+      hideInput: true
+
 
   #// Initialise stripe when stripe pay button is clicked
 

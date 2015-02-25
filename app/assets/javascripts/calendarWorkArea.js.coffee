@@ -143,6 +143,9 @@ checkEvents = () ->
 
 #// enable datepicker
 datePicker = ->
+  AnyTime.noPicker 'date'
+  AnyTime.noPicker 'start_time'
+  AnyTime.noPicker 'end_time'
   $("#date").AnyTime_picker
     format: "%Y-%m-%d"
   $('#start_time').AnyTime_picker
