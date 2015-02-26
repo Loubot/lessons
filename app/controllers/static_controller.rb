@@ -3,9 +3,11 @@ class StaticController < ApplicationController
 
 	include StaticHelper
 
+
 	caches_page :teach, :learn, gzip: true
 
-	caches_action :welcome, :mailing_list, :categories, :how_it_works, layout: false
+	caches_action :welcome, layout: false
+
 
 	def how_it_works
 

@@ -22,5 +22,6 @@ config/database.yml
 public/sitemaps/
 public/deploy/
 
+
 # git rm -r --cached .
 # git update-index --assume-unchanged

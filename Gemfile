@@ -102,6 +102,8 @@ gem 'actionpack-action_caching'
 
 gem 'actionpack-page_caching'
 
+gem 'rack-zippy'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

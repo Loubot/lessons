@@ -16,6 +16,9 @@ Rails.application.configure do
   #Set page cache directory
   config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
 
+  #set page caching file
+  config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
