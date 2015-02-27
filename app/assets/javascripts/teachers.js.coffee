@@ -16,6 +16,11 @@ teachersInfoReady = ->
 
 # end of qualification form checkbox
 
+  # if $('#website-title').length > 0 
+    # $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
+    # $(window).resize ->
+    #   $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
+
   $('#qual_left').css('height', $('#qual_form').height())
   if $('#dropzone').length > 0
     # Dropzone.autoDiscover = false

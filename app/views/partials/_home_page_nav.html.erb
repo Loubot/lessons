@@ -17,7 +17,22 @@
       <ul class="nav navbar-nav">
         <li ><a href="/mailing-list">Subscribe to mailing list</a></li>
         
-        <li><%= link_to 'Subjects', browse_categories_path %></li>      
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Subjects <span class="caret"></span></a>
+          <ul class="dropdown-menu extra" role="menu">
+            <% @categories.each do |c| %>
+              <li class="dropdown-submenu">
+                <a href="#" tab-index="-1"><%= c.name %></a>
+                <ul class="dropdown-menu">
+                  <% c.subjects.each do |s| %>
+                    <li><%= link_to s.name, display_subjects_path(search_subjects: s.name, search_position: '') %></li>
+                  <% end %>
+                </ul>
+              </li>
+            <% end %>
+          </ul>
+        </li>  
       </ul>
       
       <ul class="nav navbar-nav navbar-right">

@@ -1,7 +1,6 @@
 <%= include_gon %>  
+<%= content_for :title,  @teacher.full_name %>
 <% cache [@context, 'show_teacher_to_user'] do %>
-  <%= content_for :title,  @teacher.full_name %>
-  <br>
 
   <script src="https://checkout.stripe.com/checkout.js"></script>
 
@@ -43,104 +42,83 @@
 <% end %> <%# end of show_teacher_user_profile cache %>
 
 
-
-  <div class="row">  
-    <div class="col-sm-8 col-xs-12 mob_no_padding">
-      <% if !@teacher.experiences.empty? %>
-        <div class="panel panel-default mobile">
-          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
-            
-          </div> <!-- end of panel heading -->
-          <div class="panel-body ">
-            <ul class="list-group">     
-              <%= render partial: 'partials/experience', collection: @teacher.experiences %>
-            </ul>
-          </div> <!-- end of panel-body -->
-        </div> <!-- end of panel panel-default -->
-      <% end %>
-      <% if !@teacher.qualifications.empty? %>
-      
-        <div class="panel panel-default mobile">
-          <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
+<div class="row">  
+  <div class="col-sm-8 col-xs-12 mob_no_padding">
+    <% if !@teacher.experiences.empty? %>
+      <div class="panel panel-default mobile">
+        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Experience</h2>
           
-          </div> <!-- end of panel heading -->
-
-          <div class=" panel-body">
-            <ul class="list-group">
-              <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
-            </ul> <!-- end of list-group -->
-          </div> <!-- end of panel-body -->
-        </div> <!-- end of panel-default -->
-      <% end %>
-      <% if !@reviews.empty? %>
-          
-        <table class="table table-bordered teacher_profile_table">
-          <thead class="table_header">
-            <tr>
-              <th class="col-md-8">Review</th>
-              <th>When</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render partial: 'partials/review_row_partial', collection: @reviews, as: :review %>
-          </tbody>
-        </table>      
-      <% end %>    
-    </div> <!-- end of col-sm-8 col-xs-12 mob_no_padding --> 
-     
-    <% if !@photos.empty? %>
-      <div class="col-sm-4 col-xs-12 mob_no_padding">        
-        <div class="fotorama col-xs-12 white_back">
-          <% @photos.each do |p| %>
-            <%= image_tag p.avatar.url,  class: 'img-responsive' %>
-          <% end %>
-        </div> <!-- end of fotrama -->
-        
-      </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
+        </div> <!-- end of panel heading -->
+        <div class="panel-body ">
+          <ul class="list-group">     
+            <%= render partial: 'partials/experience', collection: @teacher.experiences %>
+          </ul>
+        </div> <!-- end of panel-body -->
+      </div> <!-- end of panel panel-default -->
     <% end %>
-
-<<<<<<< HEAD
+    <% if !@teacher.qualifications.empty? %>
     
-  </div> <!-- end of row -->     
-    
-=======
-  <% cache('show_teacher_user_scheduler') do %>
-    <div class="row">
-      <div class="col-sm-12 col-xs-12 mob_no_padding">
-        <!-- <div id="teacher_display_map">
-        </div> --> <!-- end of teacher_display_map -->
-        <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
-          <div class="dhx_cal_navline" >
-              <div class="dhx_cal_prev_button">&nbsp;</div>
-              <div class="dhx_cal_next_button">&nbsp;</div>
-              <div class="dhx_cal_date display_teachers_cal_date pull-left" id="display_teachers_cal_date"></div>
-              
-          </div> <!-- end of dhx_cal_navline -->
-          <div class="dhx_cal_header"></div>
-          <div class="dhx_cal_data"></div>       
-        </div> <!-- end of scheduler_here -->   
-      </div>
-    </div> <!-- end of row -->
-  <% end %> <%# end of show_teacher_scheduler cache %>
->>>>>>> c46c51eb3877dfd056d6c129661977880e8d7dac
+      <div class="panel panel-default mobile">
+        <div class="panel-heading teachers_info"><h2 class="panel-title pull-left">Education</h2>
+        
+        </div> <!-- end of panel heading -->
 
-    <div class="row">
-      <div class="col-sm-12 col-xs-12 mob_no_padding">
-        <!-- <div id="teacher_display_map">
-        </div> --> <!-- end of teacher_display_map -->
-        <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
-          <div class="dhx_cal_navline" >
-              <div class="dhx_cal_prev_button">&nbsp;</div>
-              <div class="dhx_cal_next_button">&nbsp;</div>
-              <div class="dhx_cal_date display_teachers_cal_date pull-left" id="display_teachers_cal_date"></div>
-              
-          </div> <!-- end of dhx_cal_navline -->
-          <div class="dhx_cal_header"></div>
-          <div class="dhx_cal_data"></div>       
-        </div> <!-- end of scheduler_here -->   
-      </div>
+        <div class=" panel-body">
+          <ul class="list-group">
+            <%= render partial: 'partials/teachers_qualification', collection: @teacher.qualifications, as: :qualification %>
+          </ul> <!-- end of list-group -->
+        </div> <!-- end of panel-body -->
+      </div> <!-- end of panel-default -->
+    <% end %>
+    <% if !@reviews.empty? %>
+        
+      <table class="table table-bordered teacher_profile_table">
+        <thead class="table_header">
+          <tr>
+            <th class="col-md-8">Review</th>
+            <th>When</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'partials/review_row_partial', collection: @reviews, as: :review %>
+        </tbody>
+      </table>      
+    <% end %>    
+  </div> <!-- end of col-sm-8 col-xs-12 mob_no_padding --> 
+   
+  <% if !@photos.empty? %>
+    <div class="col-sm-4 col-xs-12 mob_no_padding">        
+      <div class="fotorama col-xs-12 white_back">
+        <% @photos.each do |p| %>
+          <%= image_tag p.avatar.url,  class: 'img-responsive' %>
+        <% end %>
+      </div> <!-- end of fotrama -->
+      
+    </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
+  <% end %>
+
+  
+</div> <!-- end of row -->     
+  
+<% cache('show_teacher_user_scheduler') do %>
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 mob_no_padding">
+      <!-- <div id="teacher_display_map">
+      </div> --> <!-- end of teacher_display_map -->
+      <div id="scheduler_here" class="dhx_cal_container teachers_display_scheduler" >
+        <div class="dhx_cal_navline" >
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_date display_teachers_cal_date pull-left" id="display_teachers_cal_date"></div>
+            
+        </div> <!-- end of dhx_cal_navline -->
+        <div class="dhx_cal_header"></div>
+        <div class="dhx_cal_data"></div>       
+      </div> <!-- end of scheduler_here -->   
+    </div>
   </div> <!-- end of row -->
-<% end %> <%# end of show_teacher_to_user cache %>
+<% end %> <%# end of show_teacher_scheduler cache %>
+
 
 <%= render 'modals/payment_choice_modal' %>
 <%= render 'modals/payments_modal_for_users' %>
