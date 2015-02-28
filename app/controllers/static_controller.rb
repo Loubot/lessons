@@ -3,6 +3,18 @@ class StaticController < ApplicationController
 
 	include StaticHelper
 
+
+	caches_page :teach, :learn, gzip: true
+
+	caches_action :welcome, layout: false
+
+	before_action :get_categories
+
+	def get_categories
+		@categories = Category.includes(:subjects).all
+	end
+
+
 	def how_it_works
 
 	end
@@ -38,7 +50,7 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 	end
 
@@ -46,7 +58,7 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%")
+		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
 		@subject = @subjects.first
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
