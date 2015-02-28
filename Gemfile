@@ -25,7 +25,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 3.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.2.2'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -37,7 +37,7 @@ group :production do
 	gem 'rails_12factor', '0.0.2'
 	gem 'unicorn', '4.8.3'
   gem 'heroku_rails_deflate'
-	gem 'rack-zippy'
+	# gem 'rack-zippy'
 end
 
 gem 'thin', 					group: :development
@@ -85,6 +85,8 @@ gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 
 gem 'omniauth-twitter'
+
+gem 'omniauth-linkedin-oauth2'
 
 gem "asset_sync"
 

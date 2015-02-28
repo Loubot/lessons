@@ -48,6 +48,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
   alias_method :facebook, :oauth
   alias_method :google_oauth2, :oauth
   alias_method :twitter, :oauth
+  alias_method :linkedin, :oauth
 
   def destroy
     puts "hello"
@@ -62,6 +63,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         'Facebook'
       when 'twitter'
         'Twitter'
+      when 'linkedin'
+        'Linkedin'
       else
         'Google'
       end
