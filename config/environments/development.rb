@@ -13,6 +13,8 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
   config.cache_store = :dalli_store, { :expires_in => 1.day }
+  #Set page cache directory
+  config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
 
   #set page caching file
   config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
@@ -22,6 +24,8 @@ Rails.application.configure do
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+
+  config.active_record.raise_in_transactional_callbacks = true
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load

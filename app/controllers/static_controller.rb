@@ -3,9 +3,17 @@ class StaticController < ApplicationController
 
 	include StaticHelper
 
-	caches_page :teach, :learn
+
+	caches_page :teach, :learn, gzip: true
 
 	caches_action :welcome, layout: false
+
+	before_action :get_categories
+
+	def get_categories
+		@categories = Category.includes(:subjects).all
+	end
+
 
 	def how_it_works
 

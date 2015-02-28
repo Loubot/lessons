@@ -1,3 +1,5 @@
-<li role="presentation" class="<%= 'active' if location_counter == 0 %>">
-  <a href="#location<%= location_counter %>" data-index="<%= location_counter %>" aria-controls="home" role="tab" data-toggle="tab"><%= location.name %> </a>
-</li> <!-- end of presentation -->
+ <% cache [location, 'show_teacher_to_user_li_tags'] do %> 
+  <li role="presentation" class="<%= 'active' if location_counter == 0 %>">
+    <a href="#location<%= location_counter %>" data-index="<%= location_counter %>" aria-controls="home" role="tab" data-toggle="tab"><%= location.name %> </a>
+  </li> <!-- end of presentation -->
+<% end %> 

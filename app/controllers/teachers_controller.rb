@@ -17,7 +17,7 @@ class TeachersController < ApplicationController
 	def show_teacher		
 		@params = params
 		@event = Event.new
-		
+		@categories = Category.includes(:subjects).all
 		@subject = Subject.find(params[:subject_id])
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos).find(params[:id])
 		@reviews = @teacher.reviews.take(3)
@@ -45,7 +45,7 @@ class TeachersController < ApplicationController
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
 
-		@auths = ['facebook', 'google_oauth2', 'twitter']
+		@auths = ['facebook', 'google_oauth2', 'twitter', 'linkedin']
 		
 		@experience = Experience.new
 		@subjects = @context.subjects

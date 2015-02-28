@@ -15,8 +15,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         sign_in_and_redirect @identity.teacher
       else
         @identity.save!
-        flash[:success] = "#{ current_teacher.email } signed in successfully. "
-        flash[:success] << "#{get_provider_name(request.env["omniauth.auth"]['provider'])} added to login methods."
+        # flash[:success] = "#{ current_teacher.email } signed in successfully. "
+        flash[:success] = "#{get_provider_name(request.env["omniauth.auth"]['provider'])} added to login methods."
         sign_in_and_redirect current_teacher
       end
     else 
@@ -48,6 +48,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
   alias_method :facebook, :oauth
   alias_method :google_oauth2, :oauth
   alias_method :twitter, :oauth
+  alias_method :linkedin, :oauth
 
   def destroy
     puts "hello"
@@ -62,6 +63,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         'Facebook'
       when 'twitter'
         'Twitter'
+      when 'linkedin'
+        'Linkedin'
       else
         'Google'
       end
