@@ -8,7 +8,7 @@ class StaticController < ApplicationController
 
 	caches_action :welcome, layout: false
 
-	before_action :get_categories
+	before_filter :get_categories
 
 	def get_categories
 		@categories = Category.includes(:subjects)
