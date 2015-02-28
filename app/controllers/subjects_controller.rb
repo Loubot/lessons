@@ -24,7 +24,7 @@ class SubjectsController < ApplicationController
 	def subject_search
 		#@subjects = Subject.all
 
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name IILIKE ?', "%#{params[:search]}%")
 	end
 
 	
