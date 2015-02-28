@@ -11,7 +11,7 @@ class StaticController < ApplicationController
 	before_action :get_categories
 
 	def get_categories
-		@categories = Category.includes(:subjects).all
+		@categories = Category.includes(:subjects)
 	end
 
 
@@ -23,9 +23,8 @@ class StaticController < ApplicationController
 		
 	end
 
-	def welcome		
-		@categories = Category.includes(:subjects).all
-	
+	def welcome
+		@categories = Category.includes(:subjects)	
 	end	
 
 	def learn
