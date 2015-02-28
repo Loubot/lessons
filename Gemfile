@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
 ruby '2.0.0'
-gem 'rails', '4.1.2'
+gem 'rails', '~> 4.2'
 
 gem 'bundler', '>= 1.3.0'
 # Use sqlite3 as the database for Active Record
@@ -25,7 +25,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 3.1'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.2.2'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -37,7 +37,7 @@ group :production do
 	gem 'rails_12factor', '0.0.2'
 	gem 'unicorn', '4.8.3'
   gem 'heroku_rails_deflate'
-	
+	# gem 'rack-zippy'
 end
 
 gem 'thin', 					group: :development
@@ -86,6 +86,8 @@ gem "omniauth-google-oauth2"
 
 gem 'omniauth-twitter'
 
+gem 'omniauth-linkedin-oauth2'
+
 gem "asset_sync"
 
 gem 'paypal-sdk-adaptiveaccounts'
@@ -96,11 +98,13 @@ gem 'rufus-scheduler'
 
 gem 'fotoramajs'
 
-# gem 'dalli'
+gem 'dalli'
 
-# gem 'actionpack-action_caching'
+gem 'actionpack-action_caching'
 
-# gem 'actionpack-page_caching'
+gem 'actionpack-page_caching'
+
+gem 'rack-zippy'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
