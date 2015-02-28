@@ -372,7 +372,7 @@ DEPENDENCIES
   pg (~> 0.17)
   pp-adaptive (~> 1.0.0)
   rack-zippy
-  rails (~> 4.2)
+  rails (~> 4.1)
   rails_12factor (= 0.0.2)
   rmagick (~> 2.13.3)
   rufus-scheduler
