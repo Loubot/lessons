@@ -11,7 +11,6 @@ class StaticController < ApplicationController
 	before_filter :get_categories
 
 	def get_categories
-		puts 'before 1'
 		@categories = Category.includes(:subjects)
 	end
 
@@ -25,8 +24,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-		puts 'before 2'
-		@categories = Category.includes(:subjects)	
+
 	end	
 
 	def learn
