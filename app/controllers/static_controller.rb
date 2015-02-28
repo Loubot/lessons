@@ -6,7 +6,7 @@ class StaticController < ApplicationController
 
 	caches_page :teach, :learn, gzip: true
 
-	caches_action :welcome, layout: false
+	# caches_action :welcome, layout: false
 
 	before_filter :get_categories
 
