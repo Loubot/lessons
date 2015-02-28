@@ -15,8 +15,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         sign_in_and_redirect @identity.teacher
       else
         @identity.save!
-        flash[:success] = "#{ current_teacher.email } signed in successfully. "
-        flash[:success] << "#{get_provider_name(request.env["omniauth.auth"]['provider'])} added to login methods."
+        # flash[:success] = "#{ current_teacher.email } signed in successfully. "
+        flash[:success] = "#{get_provider_name(request.env["omniauth.auth"]['provider'])} added to login methods."
         sign_in_and_redirect current_teacher
       end
     else 
