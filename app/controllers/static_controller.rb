@@ -24,7 +24,8 @@ class StaticController < ApplicationController
 	end
 
 	def welcome		
-		
+		@categories = Category.includes(:subjects).all
+	end
 	end	
 
 	def learn
