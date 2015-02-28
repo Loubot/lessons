@@ -45,7 +45,7 @@ class TeachersController < ApplicationController
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
 
-		@auths = ['facebook', 'google_oauth2', 'twitter']
+		@auths = ['facebook', 'google_oauth2', 'twitter', 'linkedin']
 		
 		@experience = Experience.new
 		@subjects = @context.subjects
