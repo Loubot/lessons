@@ -1,41 +1,45 @@
+<%= include_gon %>  
 <%= content_for :title,  @teacher.full_name %>
-<%= include_gon %><br>
+<% cache [@context, 'show_teacher_to_user'] do %>
 
-<script src="https://checkout.stripe.com/checkout.js"></script>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
 
-<div class="row show_teacher_profile_container">
+  <div class="row show_teacher_profile_container">
 
-  <div class="col-sm-9 mob_no_padding">    
-      <div class="col-xs-12 mob_no_padding nopadding">
-        <div role="tabpanel">
-          <ul class="nav nav-tabs" role="tablist">
-            <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
-          </ul> <!-- emd of nav nav-tabs -->
-          <div class="tab-content">
-            <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
-          </div> <!-- end of tab-content -->
-        </div> <!-- end of tabpanel -->
-      </div> <!-- end of col- -->    
-  </div> <!-- end of col-sm-9 -->
+    <div class="col-sm-9 mob_no_padding">    
+        <div class="col-xs-12 mob_no_padding nopadding">
+          <div role="tabpanel">
+            <ul class="nav nav-tabs" role="tablist">
+              <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
+            </ul> <!-- emd of nav nav-tabs -->
+            <div class="tab-content">
+              <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
+            </div> <!-- end of tab-content -->
+          </div> <!-- end of tabpanel -->
+        </div> <!-- end of col- -->    
+    </div> <!-- end of col-sm-9 -->
 
-  <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
-    <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
-      <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
-      <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
-    </div> <!-- end of col-xs-12 profile_pic_container -->   
-    <table class="table table-bordered table-striped table-hover teacher_profile_table col-xs-12">
-      <tr>
-        <td>Overview: </td>
-        <td><%= @teacher.overview %></td>        
-      </tr>
-      <tr>
-        <td >Address: </td>
-        <td id="address"><%= @locations.first.address %></td>
-      </tr>
-    </table>
-  </div> <!-- end of show_teacher_profile_section -->  
-  
-</div> <!-- end of row show_teacher_profile_container -->
+    <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
+      <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
+        <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
+        <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
+      </div> <!-- end of col-xs-12 profile_pic_container -->   
+      <table class="table table-bordered table-striped table-hover teacher_profile_table col-xs-12">
+        <tr>
+          <td>Overview: </td>
+          <td><%= @teacher.overview %></td>        
+        </tr>
+        <tr>
+          <td >Address: </td>
+          <td id="address"><%= @locations.first.address %></td>
+        </tr>
+      </table>
+    </div> <!-- end of show_teacher_profile_section -->  
+    
+  </div> <!-- end of row show_teacher_profile_container -->
+
+<% end %> <%# end of show_teacher_user_profile cache %>
+
 
 
 <div class="row">  
@@ -96,7 +100,7 @@
   
 </div> <!-- end of row -->     
   
-
+<% cache('show_teacher_user_scheduler') do %>
   <div class="row">
     <div class="col-sm-12 col-xs-12 mob_no_padding">
       <!-- <div id="teacher_display_map">
@@ -112,7 +116,8 @@
         <div class="dhx_cal_data"></div>       
       </div> <!-- end of scheduler_here -->   
     </div>
-</div> <!-- end of row -->
+  </div> <!-- end of row -->
+<% end %> <%# end of show_teacher_scheduler cache %>
 
 
 <%= render 'modals/payment_choice_modal' %>

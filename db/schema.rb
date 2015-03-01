@@ -11,22 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228113548) do
+ActiveRecord::Schema.define(version: 20150301011355) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "categories", force: true do |t|
-    t.string   "name"
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "events", force: true do |t|
-    t.string   "title"
+  create_table "events", force: :cascade do |t|
+    t.string   "title",      limit: 255
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "status"
+    t.string   "status",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "teacher_id"
@@ -36,10 +33,10 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer  "subject_id"
   end
 
-  add_index "events", ["review_id"], name: "index_events_on_review_id", using: :btree
+  add_index "events", ["review_id"], name: "index_events_on_review_id"
 
-  create_table "experiences", force: true do |t|
-    t.string   "title"
+  create_table "experiences", force: :cascade do |t|
+    t.string   "title",       limit: 255
     t.text     "description"
     t.integer  "teacher_id"
     t.datetime "start"
@@ -49,29 +46,29 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.datetime "updated_at"
   end
 
-  create_table "identities", force: true do |t|
-    t.string   "uid"
-    t.string   "provider"
+  create_table "identities", force: :cascade do |t|
+    t.string   "uid",        limit: 255
+    t.string   "provider",   limit: 255
     t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id", using: :btree
+  add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id"
 
-  create_table "locations", force: true do |t|
+  create_table "locations", force: :cascade do |t|
     t.integer  "teacher_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id", using: :btree
+  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id"
 
-  create_table "openings", force: true do |t|
+  create_table "openings", force: :cascade do |t|
     t.datetime "mon_open"
     t.datetime "mon_close"
     t.datetime "tues_open"
@@ -98,18 +95,18 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.boolean  "all_day_sun",  default: false
   end
 
-  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true, using: :btree
+  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true
 
-  create_table "photos", force: true do |t|
-    t.string   "name"
+  create_table "photos", force: :cascade do |t|
+    t.string   "name",           limit: 255
     t.integer  "imageable_id"
-    t.string   "imageable_type"
+    t.string   "imageable_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar"
+    t.string   "avatar",         limit: 255
   end
 
-  create_table "prices", force: true do |t|
+  create_table "prices", force: :cascade do |t|
     t.integer  "subject_id"
     t.integer  "teacher_id"
     t.datetime "created_at"
@@ -118,12 +115,12 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.decimal  "price",       precision: 8, scale: 2
   end
 
-  add_index "prices", ["subject_id"], name: "index_prices_on_subject_id", using: :btree
-  add_index "prices", ["teacher_id"], name: "index_prices_on_teacher_id", using: :btree
+  add_index "prices", ["subject_id"], name: "index_prices_on_subject_id"
+  add_index "prices", ["teacher_id"], name: "index_prices_on_teacher_id"
 
-  create_table "qualifications", force: true do |t|
-    t.string   "title"
-    t.string   "school"
+  create_table "qualifications", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "school",     limit: 255
     t.datetime "start"
     t.datetime "end"
     t.integer  "teacher_id"
@@ -132,7 +129,7 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.binary   "present"
   end
 
-  create_table "reviews", force: true do |t|
+  create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
     t.integer  "user_id"
     t.integer  "teacher_id"
@@ -142,78 +139,77 @@ ActiveRecord::Schema.define(version: 20141228113548) do
     t.integer  "event_id"
   end
 
-  add_index "reviews", ["event_id"], name: "index_reviews_on_event_id", using: :btree
-
-  create_table "subjects", force: true do |t|
-    t.string   "name"
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name",        limit: 255
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "subjects_teachers", id: false, force: true do |t|
+  create_table "subjects_teachers", id: false, force: :cascade do |t|
     t.integer "subject_id", null: false
     t.integer "teacher_id", null: false
   end
 
-  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id", using: :btree
+  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id"
 
-  create_table "teachers", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.text     "overview",               default: ""
+  create_table "teachers", force: :cascade do |t|
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
+    t.text     "overview",                           default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: "",    null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",                      default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.boolean  "admin"
     t.integer  "profile"
-    t.boolean  "is_teacher",             default: false, null: false
-    t.string   "paypal_email",           default: ""
-    t.string   "stripe_access_token",    default: ""
-    t.boolean  "is_active",              default: false, null: false
-    t.boolean  "will_travel",            default: false, null: false
+    t.boolean  "is_teacher",                         default: false, null: false
+    t.string   "paypal_email",           limit: 255, default: ""
+    t.string   "stripe_access_token",    limit: 255, default: ""
+    t.boolean  "is_active",                          default: false, null: false
+    t.boolean  "will_travel",                        default: false, null: false
+    t.string   "stripe_user_id"
   end
 
-  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
-  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
+  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
+  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
 
-  create_table "transactions", force: true do |t|
-    t.string   "sender"
-    t.string   "trans_id"
-    t.string   "payStripe"
+  create_table "transactions", force: :cascade do |t|
+    t.string   "sender",        limit: 255
+    t.string   "trans_id",      limit: 255
+    t.string   "payStripe",     limit: 255
     t.integer  "user_id"
     t.integer  "teacher_id"
     t.datetime "pay_date"
-    t.string   "tracking_id"
+    t.string   "tracking_id",   limit: 255
     t.text     "whole_message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true, using: :btree
+  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true
 
-  create_table "user_carts", force: true do |t|
+  create_table "user_carts", force: :cascade do |t|
     t.integer  "teacher_id"
     t.integer  "student_id"
     t.text     "params"
     t.text     "tracking_id"
-    t.string   "student_name",  default: ""
-    t.string   "student_email"
-    t.string   "teacher_email"
+    t.string   "student_name",  limit: 255, default: ""
+    t.string   "student_email", limit: 255
+    t.string   "teacher_email", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "subject_id"
   end
 
-  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree
+  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true
 
 end

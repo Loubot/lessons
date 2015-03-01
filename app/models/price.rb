@@ -13,8 +13,8 @@
 
 class Price < ActiveRecord::Base
   # belongs_to :teacher
-  belongs_to :location
-  belongs_to :subject
+  belongs_to :location, touch: true
+  belongs_to :subject, touch: true
 
   validates :subject_id, :teacher_id, :price, :location_id, presence: true
 

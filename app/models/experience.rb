@@ -14,7 +14,7 @@
 #
 
 class Experience < ActiveRecord::Base
-	belongs_to :teacher
+	belongs_to :teacher, touch: true
 
 	before_save :addTime
 
