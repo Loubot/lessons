@@ -6,7 +6,7 @@ class StaticController < ApplicationController
 
 	caches_page :teach, :learn, gzip: true
 
-	caches_action :welcome, layout: false, gzip: true
+	# caches_action :welcome, layout: false, gzip: true
 
 	before_filter :get_categories
 
@@ -24,7 +24,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-
+		TeacherMailer.do_it()
 	end	
 
 	def learn

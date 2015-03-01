@@ -80,7 +80,7 @@ gem 'pp-adaptive', '~> 1.0.0'
 
 gem 'stripe', '~> 1'
 
-gem 'mandrill-api', '~> 1.0'
+gem 'mandrill-api', '~> 1'
 
 gem 'omniauth-facebook'
 
