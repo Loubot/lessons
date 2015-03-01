@@ -1,6 +1,6 @@
 <%= include_gon %>  
 <%= content_for :title,  @teacher.full_name %>
-
+<% cache [@teacher, 'show_teacher_to_user'] do %>
 
   <script src="https://checkout.stripe.com/checkout.js"></script>
 
@@ -38,7 +38,7 @@
     
   </div> <!-- end of row show_teacher_profile_container -->
 
-
+<% end %> <%# end of show_teacher_user_profile cache %>
 
 
 
