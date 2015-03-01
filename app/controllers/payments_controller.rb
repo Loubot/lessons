@@ -87,16 +87,16 @@ class PaymentsController < ApplicationController
   def stripe_create
    # Amount in cents
     @amount = params[:amount].to_i * 100    
-
+    @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
       :amount             => @amount,
       :description        => "{}",
       :currency           => 'eur',
       :application_fee    => 300,
-      :card               => params[:stripeToken],
+      :source             => params[:stripeToken],
       :metadata           => { tracking_id: params[:tracking_id] }
       },
-      Teacher.find(params[:teacher_id]).stripe_access_token
+      @teacher.stripe_access_token
     )
     if charge['paid'] == true
       cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
@@ -119,7 +119,7 @@ class PaymentsController < ApplicationController
     render status: 200, nothing: true and return if json_response['type'] == "application_fee.created"
     render status: 200, nothing: true and return if json_response['data']['object']['object'] == 'balance'
 
-    logger.info "Stripe webhook response: #{json_response}"
+    # logger.info "Stripe webhook response: #{json_response}"
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
     
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
@@ -163,16 +163,11 @@ class PaymentsController < ApplicationController
     if json_resp['access_token'].present?
       @teacher = Teacher.find(params['state'].to_i)
       flash[:success] = "Successfully registered with Stripe"
-      @teacher.update_attributes(stripe_access_token: json_resp['access_token'])
+      @teacher.update_attributes(stripe_access_token: json_resp['access_token'], stripe_user_id: json_resp['stripe_user_id'])
     end
     flash[:success] = 'Stripe code updated'
     redirect_to edit_teacher_path(id: params[:state])
   end
-
-
-  
-
-  
 
   
 
