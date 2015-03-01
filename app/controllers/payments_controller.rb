@@ -119,7 +119,7 @@ class PaymentsController < ApplicationController
     render status: 200, nothing: true and return if json_response['type'] == "application_fee.created"
     render status: 200, nothing: true and return if json_response['data']['object']['object'] == 'balance'
 
-    logger.info "Stripe webhook response: #{json_response}"
+    # logger.info "Stripe webhook response: #{json_response}"
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
     
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
