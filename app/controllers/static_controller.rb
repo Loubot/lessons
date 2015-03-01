@@ -24,7 +24,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-		TeacherMailer.do_it()
+		
 	end	
 
 	def learn

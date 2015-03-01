@@ -32,34 +32,7 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{teacher.to_s}"
   end
 
-  def do_it
-    p 'test mail start'
-    begin
-      require 'mandrill'
-      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      message = {  
-       :subject=> "You have a booking",  
-       :from_name=> "Learn Your Lesson",  
-       :text=> "hello",  
-       :to=>[  
-         {  
-           :email=> 'lllouis@yahoo.com',
-           :name=> "Louis"  
-         }  
-       ],  
-       :html=> "hello",  
-       :from_email=> 'louisangelini@gmail.com'  
-      }  
-      sending = m.messages.send message  
-      puts sending
-    rescue Mandrill::Error => e
-        # Mandrill errors are thrown as exceptions
-        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
-        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
-    raise
-    puts 'the end'
-  end
-  end
+  
 
   def reset_password_instructions(record, token, opts={})
     puts "record: #{record.first_name} token: #{token} opts: #{opts}  #{:reset_password_instructions}"

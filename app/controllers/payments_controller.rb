@@ -43,7 +43,8 @@ class PaymentsController < ApplicationController
         transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
         p "Event errors #{event.errors.full_messages}" if !event.valid?
         p "Event created id: #{event.id}"
-        TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email, event.start_time, event.end_time)
+        TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email,
+                                 event.start_time, event.end_time).deliver
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"
@@ -131,7 +132,7 @@ class PaymentsController < ApplicationController
  
       
       TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email,
-                              cart_params[:start_time],cart_params[:end_time])
+                              cart_params[:start_time],cart_params[:end_time]).deliver
       Transaction.create!(create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id))
       # Transaction.create!(json_response)
       render status: 200, nothing: true
