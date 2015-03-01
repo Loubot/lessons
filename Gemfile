@@ -76,7 +76,7 @@ gem 'geocoder', '~> 1.2'
 
 gem 'pp-adaptive', '~> 1.0.0'
 
-gem 'stripe', '~> 1.15'
+gem 'stripe', '~> 1'
 
 gem 'mandrill-api', '~> 1.0'
 

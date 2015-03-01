@@ -23,7 +23,7 @@ class StaticController < ApplicationController
 		
 	end
 
-	def welcome		
+	def welcome
 		
 	end	
 

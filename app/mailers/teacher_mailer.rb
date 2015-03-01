@@ -1,7 +1,7 @@
 class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
   def test_mail(student, student_name, teacher, start_time, end_time)
-
+    p 'test mail start'
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']

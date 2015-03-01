@@ -13,18 +13,19 @@
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
+#  sign_in_count          :integer          default("0"), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  admin                  :boolean
 #  profile                :integer
-#  is_teacher             :boolean          default(FALSE), not null
+#  is_teacher             :boolean          default("f"), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
-#  is_active              :boolean          default(FALSE), not null
-#  will_travel            :boolean          default(FALSE), not null
+#  is_active              :boolean          default("f"), not null
+#  will_travel            :boolean          default("f"), not null
+#  stripe_user_id         :string
 #
 
 class Teacher < ActiveRecord::Base
