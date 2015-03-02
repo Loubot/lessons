@@ -2,7 +2,7 @@
 <%= @distance %>
 <% content_for :title, "The place to connect with local teachers and learn" %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
-<div  class="container-fluid main_page_search_container">
+<div  class="container-fluid search_page_results">
   <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', class: 'form-inline' do %>
     <div class="form-group">
       <%= text_field_tag :search_subjects, params[:search], :utf8_enforcer_tag => false,value: params[:search_subjects], placeholder: 'What do you want to learn today?', class: 'typeahead subject', autocomplete: :off %>

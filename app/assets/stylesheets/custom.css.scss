@@ -365,6 +365,13 @@ hr{
   width: 100%;;
   // left: calc(-50vw + 50%);
 }
+.search_page_results{
+  color: #FFF;
+  text-align: center;
+  // margin-bottom: 50px;
+  margin-bottom: 20px;
+  margin-top: -22px;
+}
 .main_page_search_container small{
   color: #FFF;
 }
@@ -785,6 +792,10 @@ form .glyphicon {
 // end of static/browse_categories*/
 
 //welcome page*/
+
+#main_subject_search{
+  color: #000;
+}
 
 .welcome_page_form__header{
   margin-bottom: 35px;
