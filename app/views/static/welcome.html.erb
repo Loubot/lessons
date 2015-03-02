@@ -16,7 +16,7 @@
   <div  class="container-fluid main_page_search_container home_welcome">
     <div class="welcome_page_form__header">
       <h1>What will you learn today?</h1>
-      <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
+      <h1>Find teachers and book lessons near you! <br><small>Book in confidence with us</small></h1>
     </div> <!-- end of welcome_page_form__header -->
 
     <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
@@ -30,7 +30,7 @@
         <%= submit_tag "I'm ready to learn",type: 'submit', name: 'submit', id: 'search_submit', class: 'btn' %>
       </div>
     <% end %>
-    <div class="container-fluid welcome_prompt_container ">
+    <div class="container-fluid welcome_prompt_container hidden-xs">
       <div class="col-md-4 welcome_page_prompts"><h4>&bull; Connect with local <br>teachers one to one</h4></div>
       <div class="col-md-4 welcome_page_prompts"><h4>&bull; Choose from hundreds of skills</h4></div>
       <div class="col-md-4 welcome_page_prompts"><h4>&bull; Book online lessons with confidence</h4></div>
@@ -44,7 +44,8 @@
     </div> <!-- end of display_search_results -->
   </div> <!-- end of container-fluid main_page_search -->
 
-  <div class="row fav_subjects_container">
+  <div class="container-fluid">
+    <div class="row fav_subjects_container">
     <div class="container-fluid stock_photos_container hidden-xs"> 
     <div class="browse_topics">
 
@@ -189,4 +190,5 @@
       </div> <!-- end of center-me -->  
     </div> <!-- end of stock_photos_container -->
 
+  </div> <!-- end of fav_subjects_container -->
   </div>
