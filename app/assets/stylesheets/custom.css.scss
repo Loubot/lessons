@@ -25,6 +25,11 @@ hr{
 }
 
 
+//center imag-responisve
+.img-responsive.center{
+  margin: 0 auto;
+}
+
 //customise carousel
 
 .carousel-inner > .item > img {
@@ -1150,6 +1155,7 @@ form .glyphicon {
     // left: calc(-50vw + 50%);
   }
 
+
   .learn_reg_photo{ //learn page
     margin-bottom: 20px;
     margin-top: -22px;
@@ -1163,6 +1169,11 @@ form .glyphicon {
     width: 100%;
     // left: calc(-50vw + 50%); 
     
+  }//250px
+
+  //teach page 
+  .teachers_small_blurb_container{
+    padding: 0 30px !important;
   }
   .students_blurb_header{ //learn page
     color: #FFF;
@@ -1252,7 +1263,8 @@ form .glyphicon {
   }
 }
 
-@media (min-width: 768px) {  
+@media (min-width: 768px) {
+
   .dropdown-menu{
     width:100%;
     background: -webkit-linear-gradient(#5cb85c, #398439);
@@ -1326,6 +1338,11 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  //teach_page
+  .teach_page_pros_container{
+    font-size: 20px;
+    padding: 0 40px; //indent pros on wider screens
+  }
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
