@@ -192,8 +192,9 @@ hr{
   //background-color:#fafafa;*/
   background-color:#e0ebf4;
   min-height: 90%;
-  margin: 0 auto;
-  
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
 }
 .jumbotron{
   margin-bottom: 0;
@@ -349,9 +350,23 @@ hr{
 }
 
 .main_page_search_container{
+  color: #FFF;
   text-align: center;
   margin-bottom: 50px;
-  
+  margin-bottom: 20px;
+  margin-top: -22px;
+  height: 450px;  
+  background-image: image_url('blackboard.jpg');
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 100vw;
+  left: calc(-50vw + 50%);
+}
+.main_page_search_container small{
+  color: #FFF;
 }
 
 .typeahead.subject{
@@ -544,6 +559,11 @@ hr{
 
 .teacher_registration_container_header{
   text-shadow: 1px 1px 1px #888888;
+  padding-left: 15px;
+}
+
+.teach_label{
+  margin-left: 15px;
 }
 
 .input-group-addon{
@@ -586,11 +606,14 @@ form .glyphicon {
 
 .container-fluid.teach_page{
   padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
 }
 
 .row.teach_page{
   padding: 0 !important;
   margin: 0 !important;
+  width: 100%;
 }
 
 .teach_exp_header{
@@ -674,8 +697,8 @@ form .glyphicon {
 }
 
 .learn_page_pros_container{
-  // padding-left: 15px;
-  // padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 // end of static/learn page. User registration*/
@@ -1105,30 +1128,30 @@ form .glyphicon {
   .teachers_reg_photo{ //teach page
     margin-bottom: 20px;
     margin-top: -22px;
-    height: 450px;  
+    height: 500px;  
     background-image: image_url('tree.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
-    width: 100vw;
-    left: calc(-50vw + 50%);
+    width: 100%;
+    // left: calc(-50vw + 50%);
   }
 
   .learn_reg_photo{ //learn page
-    box-shadow: 2px 2px 5px #888888;
-    background-image: image_url('learn_bubble.jpg');
+    margin-bottom: 20px;
     margin-top: -22px;
     height: 500px;  
+    background-image: image_url('learn_bubble.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
-    width: 100vw;
-    left: calc(-50vw + 50%); 
-    margin-bottom: 20px;
+    width: 100%;
+    // left: calc(-50vw + 50%); 
+    
   }
   .students_blurb_header{ //learn page
     color: #FFF;
@@ -1317,8 +1340,8 @@ form .glyphicon {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
-    width: 100vw;
-    left: calc(-50vw + 50%);
+    width: 100%;
+    // left: calc(-50vw + 50%);
   } //end of teach page
   .lead{
     font-size: 10px;
