@@ -355,13 +355,13 @@ hr{
 }
 
 .main_page_search_container{
-  color: #FFF;
+  color: #000;
   text-align: center;
   // margin-bottom: 50px;
   margin-bottom: 20px;
-  margin-top: -22px;
-  height: 500px;  
-  background-image: asset_url('blackboard.jpg');
+  // margin-top: -22px;
+  height: 420px;  
+  // background-image: asset_url('blackboard.jpg');
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;
   background-size: 100% 100%;
@@ -378,7 +378,7 @@ hr{
   margin-top: -22px;
 }
 .main_page_search_container small{
-  color: #FFF;
+  color: #000;
 }
 
 .typeahead.subject{
