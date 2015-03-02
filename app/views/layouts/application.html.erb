@@ -44,13 +44,13 @@
   	
   	
   	
-    <div class="container main_page_containers" id="main_page">
+    
       <%= render 'partials/notices' %>
 
       <%= yield %>
 
       <%= render 'partials/share_buttons' %>
-    </div>
+    
 
     <% if Rails.env.production? %>
       <%= render 'partials/google_analytics' %>

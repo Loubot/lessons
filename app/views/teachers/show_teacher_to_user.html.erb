@@ -1,5 +1,7 @@
 <%= include_gon %>  
 <%= content_for :title,  @teacher.full_name %>
+
+<div class="container-fluid">
 <% cache [@teacher, 'show_teacher_to_user'] do %>
 
   <script src="https://checkout.stripe.com/checkout.js"></script>
@@ -119,6 +121,6 @@
   </div> <!-- end of row -->
 <% end %> <%# end of show_teacher_scheduler cache %>
 
-
+</div>
 <%= render 'modals/payment_choice_modal' %>
 <%= render 'modals/payments_modal_for_users' %>
