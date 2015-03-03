@@ -29,7 +29,7 @@ teachersInfoReady = ->
         paramName: "photo[avatar]"
         addRemoveLinks: true
         parallelUploads: 10
-        thumbnailWidth: 274
+        thumbnailWidth: 150
         thumbnailHeight:180
         autoProcessQueue: false
         })  
