@@ -19,8 +19,21 @@ module EventsHelper
 
   end
 
-  def studentDoMultipleBookings(params)
-    p "say hello to my little friend"
+  def studentDoMultipleBookings(event_params, params)
+    puts "params #{params}"
+    date = Date.parse(params[:event][:date])
+    startTime = Time.parse("#{date}, #{params[:event]['start_time(5i)']}")
+    endTime = Time.parse("#{date}, #{params[:event]['end_time(5i)']}")
+   
+    weeks = params[:booking_length].to_i - 1
+    
+    for i in 0..weeks
+      newStart = startTime + (i*7.days)
+      newEnd = endTime + (i*7.days)
+      e = Event.new(start_time: newStart, end_time: newEnd, status: 'active',
+                   teacher_id: current_teacher.id)
+      p "hello i'm good" if e.valid?
+    end
   end
 
 
