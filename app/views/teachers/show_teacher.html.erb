@@ -1,9 +1,10 @@
-
+<%= @params %>
 <%= include_gon %><br>
+<%= "dddd #{@distance}"%><br>
+
 
 <div class="row">
 	<% cache [@teacher, 'show_teacher_profile'] do %>
-
 		<div class="col-md-8">
 			<div class="panel panel-default">
 				<div class="panel-heading"><%= @teacher.first_name %></div>
@@ -59,20 +60,11 @@
 
 				</div> <!-- end of container fluid -->
 			<% end %>
-<<<<<<< HEAD
 			
-		</div> <!-- end of col-md-9 -->
-
-
-=======
-		
 		</div> <!-- end of col-md-8 -->
 	<% end %> <%# end of show_teacher_profile cache %>
 
-
-
 	<% cache('teachers_scheduler') do %>
->>>>>>> c46c51eb3877dfd056d6c129661977880e8d7dac
 		<div class="col-md-4">
 			<div id="teacher_display_map">
 			</div> <!-- end of teacher_display_map -->
@@ -87,12 +79,6 @@
 		    <div class="dhx_cal_header"></div>
 		    <div class="dhx_cal_data"></div>       
 			</div> <!-- end of scheduler_here -->		
-<<<<<<< HEAD
-		</div> <!-- end of col-md-3 -->
-	</div> <!-- end of row -->
-<% end %> <%# end of show_teacher cache %>
-=======
 		</div> <!-- end of col-md-4 -->
 	<% end %> <%# end of teachers_scheduler cache %>
 </div> <!-- end of row -->
->>>>>>> c46c51eb3877dfd056d6c129661977880e8d7dac

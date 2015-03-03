@@ -1106,6 +1106,10 @@ form .glyphicon {
 //end of share_buttons
 
 @media (min-width: 250px){
+  // set gutter width  
+  .outer-container{
+    padding: 0;
+  }
   //alter navbar dropdown on small screens
   .navbar-default .navbar-nav .open .dropdown-menu > li > a{
     color: #FFF ;
@@ -1338,6 +1342,10 @@ form .glyphicon {
 }
   
 @media (min-width: 992px) {
+  //set gutter width
+  .outer-container{
+    padding: 0 100px;
+  }
   //teach_page
   .teach_page_pros_container{
     font-size: 20px;
