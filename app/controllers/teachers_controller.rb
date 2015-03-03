@@ -27,12 +27,8 @@ class TeachersController < ApplicationController
 		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		gon.locations = @locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
-		# gon.location= [@teacher.lat, @teacher.lon]
-		# if !@teacher.locations.empty?
-		# 	gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
-		# else
-		# 	gon.location = [nil, nil]
-		# end
+		
+		
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view

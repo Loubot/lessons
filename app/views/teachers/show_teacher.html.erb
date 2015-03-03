@@ -1,9 +1,7 @@
-<%= @params %>
-<%= include_gon %><br>
-<%= "dddd #{@distance}"%><br>
 
+<%= include_gon %>
 
-<div class="row">
+<div class="outer-container">
 	<% cache [@teacher, 'show_teacher_profile'] do %>
 		<div class="col-md-8">
 			<div class="panel panel-default">
@@ -81,4 +79,4 @@
 			</div> <!-- end of scheduler_here -->		
 		</div> <!-- end of col-md-4 -->
 	<% end %> <%# end of teachers_scheduler cache %>
-</div> <!-- end of row -->
+</div>

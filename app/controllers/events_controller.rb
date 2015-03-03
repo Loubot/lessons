@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
 	include TeachersHelper
+	include	EventsHelper
 	before_action :authenticate_teacher!
 	def create
 		if params[:date].blank? 
@@ -55,25 +56,30 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book
 		event_params = student_format_time(params[:event])
-		@event = Event.new(event_params)
-		@rate = params[:event][:rate].to_f
-		puts "rate #{@rate}"
-		puts "teacher #{params[:event][:teacher_id]}"
-		puts "student #{params[:event][:student_id]}"
-		puts "subject #{params[:event][:subject_id]}"
-		if @event.valid?
-			@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-			@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
-			@cart.update_attributes(teacher_id: params[:event][:teacher_id],
-															 params: event_params, teacher_email: @teacher.email,
-															 student_email: current_teacher.email,
-															 student_name: "#{current_teacher.full_name}",
-															 subject_id: params[:event][:subject_id])
-			@cart.save!
-			p "cart  #{@cart.inspect}"
+		p "event params #{event_params.inspect}"
+
+		if params['Multiple'] == '1'
+			studentDoMultipleBookings(params)
+			render status: 200, nothing: true
 		else
-			@teacher = @event.errors.full_messages
+			@event = Event.new(event_params)
+			@rate = params[:event][:rate].to_f
+			
+			if @event.valid?
+				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
+				@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
+				@cart.update_attributes(teacher_id: params[:event][:teacher_id],
+																 params: event_params, teacher_email: @teacher.email,
+																 student_email: current_teacher.email,
+																 student_name: "#{current_teacher.full_name}",
+																 subject_id: params[:event][:subject_id])
+				@cart.save!
+				p "cart  #{@cart.inspect}"
+			else
+				@teacher = @event.errors.full_messages
+			end
 		end
+		
 		
 	end
 
@@ -83,52 +89,5 @@ class EventsController < ApplicationController
 			params.require(:event).permit!
 		end
 
-		def format_time(params)
-			date = params[:date]
-			starttime = Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}")
-			endtime = Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}")
-			@event_params = { time_off: params[:event][:time_off], start_time: starttime,
-											 end_time: endtime, status: 'active',
-											  teacher_id: params[:event][:teacher_id], student_id: params[:event][:student_id] }
-		end
-
-		def student_format_time(params)
-			date = params[:date]
-			starttime = Time.zone.parse("#{date} #{params['start_time(4i)']}:#{params['start_time(5i)']}")
-			# p "$$$$$$$$$$$$ #{starttime}"
-			endtime = Time.zone.parse("#{date} #{params['end_time(4i)']}:#{params['end_time(5i)']}")
-			session[:event_params] = { time_off: params[:time_off], start_time: starttime,
-											 end_time: endtime, status: 'active',student_id: params[:student_id],
-											  teacher_id: params[:teacher_id], subject_id: params[:subject_id]}
-
-		end
-
-		def doMultipleBookings(params)
-			ids = []
-			continue = true
-			date = Date.parse(params[:date])
-			startTime = Time.parse("#{date}, #{params[:event]['start_time(5i)']}")
-			endTime = Time.parse("#{date}, #{params[:event]['end_time(5i)']}")
-			puts startTime + 7.days
-			puts endTime + 7.days
-			weeks = params[:booking_length].to_i - 1
-			for i in 0..weeks
-				newStart = startTime + (i*7.days)
-				newEnd = endTime + (i*7.days)
-				e = Event.new(start_time: newStart, end_time: newEnd, status: 'active',
-										 teacher_id: current_teacher.id)
-				if e.save
-					ids << e.id
-				else 
-					flash[:danger] = "There was a booking conflict #{e.errors.full_messages}"
-					ids.each do |id|
-						Event.find(id).destroy					
-					end
-					continue = false
-					return
-				end
-				return unless continue
-			end
-
-		end
+		
 end
