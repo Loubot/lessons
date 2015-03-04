@@ -64,7 +64,7 @@ gem 'jquery-ui-rails', '~> 4.2.1'
 
 gem "combined_time_select", "~> 1.0.1"
 
-gem 'validates_overlap', '~> 0.3.0'
+gem 'validates_overlap', '~> 0'
 
 gem 'date_validator', '~> 0.7.0'
 

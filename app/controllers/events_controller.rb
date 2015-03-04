@@ -59,7 +59,7 @@ class EventsController < ApplicationController
 		p "event params #{event_params.inspect}"
 
 		if params['Multiple'] == '1'
-			studentDoMultipleBookings(event_params, params)
+			studentDoMultipleBookings(params)
 			render status: 200, nothing: true
 		else
 			@event = Event.new(event_params)

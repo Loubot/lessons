@@ -10,30 +10,37 @@ module EventsHelper
 
   def student_format_time(params)
     date = params[:date]
-    starttime = Time.zone.parse("#{date} #{params['start_time(4i)']}:#{params['start_time(5i)']}")
+    
+    starttime = Time.zone.parse("#{date} #{params['start_time(5i)']}")
     # p "$$$$$$$$$$$$ #{starttime}"
-    endtime = Time.zone.parse("#{date} #{params['end_time(4i)']}:#{params['end_time(5i)']}")
+    endtime = Time.zone.parse("#{date} #{params['end_time(5i)']}")
     session[:event_params] = { time_off: params[:time_off], start_time: starttime,
                      end_time: endtime, status: 'active',student_id: params[:student_id],
                       teacher_id: params[:teacher_id], subject_id: params[:subject_id]}
 
   end
 
-  def studentDoMultipleBookings(event_params, params)
-    puts "params #{params}"
-    date = Date.parse(params[:event][:date])
-    startTime = Time.parse("#{date}, #{params[:event]['start_time(5i)']}")
-    endTime = Time.parse("#{date}, #{params[:event]['end_time(5i)']}")
+  def studentDoMultipleBookings(params)
+    
+    eventParams = student_format_time(params{:event})
+    
+
+    e = Event.new(eventParams)
+    
+    p "hello #{e.errors.full_messages}" if !e.valid?
    
     weeks = params[:booking_length].to_i - 1
     
-    for i in 0..weeks
-      newStart = startTime + (i*7.days)
-      newEnd = endTime + (i*7.days)
-      e = Event.new(start_time: newStart, end_time: newEnd, status: 'active',
-                   teacher_id: current_teacher.id)
-      p "hello i'm good" if e.valid?
-    end
+    # for i in 0..weeks
+      
+    #   newStart = startTime + ((i*7).days) #add a week
+    #   newEnd = endTime + ((i*7).days) #add a week
+    #   p "startTime #{startTime}"
+    #   p "newStart #{newStart}"
+    #   # e = Event.new(start_time: newStart, end_time: newEnd, status: 'active',
+    #   #              teacher_id: current_teacher.id)
+    #   # p e.errors.full_messages if !e.valid?
+    # end
   end
 
 
