@@ -2,7 +2,7 @@
 <%= content_for :title,  @teacher.full_name %>
 
 <div class="outer-container">
-<% cache [@teacher, 'show_teacher_to_user'] do %>
+
 
   <script src="https://checkout.stripe.com/checkout.js"></script>
 
@@ -20,7 +20,7 @@
           </div> <!-- end of tabpanel -->
         </div> <!-- end of col- -->    
     </div> <!-- end of col-sm-9 -->
-
+<% cache [@teacher, 'show_teacher_to_user'] do %>
     <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
       <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
         <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
