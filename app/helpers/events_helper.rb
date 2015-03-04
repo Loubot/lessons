@@ -22,14 +22,14 @@ module EventsHelper
 
   def studentDoMultipleBookings(params)
     
-    eventParams = student_format_time(params{:event})
+    # eventParams = student_format_time(params{:event})
     
 
-    e = Event.new(eventParams)
+    # e = Event.new(eventParams)
     
-    p "hello #{e.errors.full_messages}" if !e.valid?
+    # p "hello #{e.errors.full_messages}" if !e.valid?
    
-    weeks = params[:booking_length].to_i - 1
+    # weeks = params[:booking_length].to_i - 1
     
     # for i in 0..weeks
       
