@@ -11,7 +11,7 @@ class PricesController < ApplicationController
 	end
 
 	def update
-		logger.info "price here #{@price.inspect}"
+		logger.info "you hit update"
 		p "You hit update"
 		@price = Price.find(params[:id])
 		logger.info "price here #{@price.inspect}"
