@@ -59,8 +59,10 @@ class EventsController < ApplicationController
 		p "event params #{event_params.inspect}"
 
 		if params['Multiple'] == '1'
-			studentDoMultipleBookings(params)
-			render status: 200, nothing: true
+			if studentDoMultipleBookings(params)
+				@teacher = 'hello'
+				render 'events/multiple_events.js.coffee'
+			end
 		else
 			@event = Event.new(event_params)
 			@rate = params[:event][:rate].to_f
