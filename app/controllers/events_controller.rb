@@ -59,13 +59,18 @@ class EventsController < ApplicationController
 		@rate = params[:event][:rate].to_f #set instance variable of rate
 
 		if params['Multiple'] == '1'
-			if @teacher = studentDoMultipleBookings(params)
+			event = studentDoMultipleBookings(params)
+			if event.valid?
+				@event = event
+				@weeks = params[:booking_length]
+				puts "weeks #{@weeks.to_i} rate #{@rate.to_f}"
+				@total_rate = @weeks.to_i * @rate.to_f
 				
-				render 'events/multiple_events.js.coffee'
 			else
-				puts @teacher
-				return
+				puts event
+				@event = event.errors.full_messages
 			end
+			render 'events/multiple_events.js.coffee'
 		else
 			event_params = student_format_time(params[:event])
 			p "event params #{event_params.inspect}"
