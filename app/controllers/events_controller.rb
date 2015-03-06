@@ -54,18 +54,23 @@ class EventsController < ApplicationController
 	end
 
 	# ajax event booking
-	def create_event_and_book
-		event_params = student_format_time(params[:event])
-		p "event params #{event_params.inspect}"
+	def create_event_and_book		
+		
+		@rate = params[:event][:rate].to_f #set instance variable of rate
 
 		if params['Multiple'] == '1'
-			if studentDoMultipleBookings(params)
-				@teacher = 'hello'
+			if @teacher = studentDoMultipleBookings(params)
+				
 				render 'events/multiple_events.js.coffee'
+			else
+				puts @teacher
+				return
 			end
 		else
+			event_params = student_format_time(params[:event])
+			p "event params #{event_params.inspect}"
 			@event = Event.new(event_params)
-			@rate = params[:event][:rate].to_f
+			
 			
 			if @event.valid?
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		

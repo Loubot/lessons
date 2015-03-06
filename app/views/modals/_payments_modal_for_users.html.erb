@@ -23,10 +23,14 @@
                 <td id="event_table_length"><%# total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %> hours</td>
               </tr>
               <tr>
+                <td>No. of weeks</td>                
+                <td id="event_table_weeks"><%# number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %></td>
+              </tr>
+              <tr>
                 <td>Total price</td>
                 <% puts "rate #{@rate}" %>
                 <td id="event_table_price"><%# number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %></td>
-              </tr>
+              </tr>              
             </table>
            </div>
           </div>

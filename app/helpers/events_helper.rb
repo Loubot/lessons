@@ -38,6 +38,8 @@ module EventsHelper
       p "newStart #{newEnd}"
       e = Event.new(start_time: newStart, end_time: newEnd, status: 'active',
                    teacher_id: params[:event][:teacher_id], student_id: params[:event][:student_id])
+      # e.save
+
       return e.errors.full_messages if !e.valid? 
     end
     return true
