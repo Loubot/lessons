@@ -213,6 +213,8 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "subject_id"
+    t.boolean  "multiple",                  default: false
+    t.integer  "weeks",                     default: 0
   end
 
   add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree

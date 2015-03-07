@@ -40,8 +40,9 @@ module EventsHelper
                    teacher_id: params[:event][:teacher_id], student_id: params[:event][:student_id])
       # e.save
       return event if !event.valid?
-      return event
-    end    
+      
+    end
+    return event  
   end
 
 

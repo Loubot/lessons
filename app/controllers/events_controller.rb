@@ -58,13 +58,27 @@ class EventsController < ApplicationController
 		
 		@rate = params[:event][:rate].to_f #set instance variable of rate
 
-		if params['Multiple'] == '1'
+		if params['Multiple'] == 'true'
 			event = studentDoMultipleBookings(params)
 			if event.valid?
 				@event = event
 				@weeks = params[:booking_length]
 				puts "weeks #{@weeks.to_i} rate #{@rate.to_f}"
 				@total_rate = @weeks.to_i * @rate.to_f
+
+				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
+				@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
+				@cart.update_attributes(teacher_id: params[:event][:teacher_id],
+																 teacher_email: @teacher.email,
+																 params: params,
+																 student_email: current_teacher.email,
+																 student_name: "#{current_teacher.full_name}",
+																 subject_id: params[:event][:subject_id],
+																 multiple: true,
+																 weeks: params[:booking_length]
+																 )
+				@cart.save!
+				p "cart multiple #{@cart.inspect}"
 				
 			else
 				puts event
