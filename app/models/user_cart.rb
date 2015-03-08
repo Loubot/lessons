@@ -31,4 +31,27 @@ class UserCart < ActiveRecord::Base
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
 
+  def self.create_single_cart(params)
+    where(student_id: params[:event][:student_id]).first_or_initialize do |u|
+    
+    u.teacher_id = params[:event][:teacher_id]
+    u.params = event_params, teacher_email: @teacher.email
+    u.student_email = current_teacher.email
+    u.student_name = "#{current_teacher.full_name}"
+    u.subject_id = params[:event][:subject_id])
+  end
+
+  def self.create_multiple_cart(params)
+    where(student_id: params[:event][:student_id]).first_or_initialize do |u|
+      u.teacher_id = params[:event][:teacher_id]
+      u.teacher_email = @teacher.email
+      u.params = params
+      u.student_email = current_teacher.email
+      u.student_name = "#{current_teacher.full_name}"
+      u.subject_id = params[:event][:subject_id]
+      u.multiple = true
+      u.weeks = params[:booking_length]
+    end
+  end
+
 end

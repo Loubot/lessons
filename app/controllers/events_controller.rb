@@ -59,7 +59,7 @@ class EventsController < ApplicationController
 		@rate = params[:event][:rate].to_f #set instance variable of rate
 
 		if params['Multiple'] == 'true'
-			event = studentDoMultipleBookings(params)
+			event = Event.studentDoMultipleBookings(params)
 			if event.valid?
 				@event = event
 				@weeks = params[:booking_length]
@@ -67,17 +67,8 @@ class EventsController < ApplicationController
 				@total_rate = @weeks.to_i * @rate.to_f
 
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
-				@cart.update_attributes(teacher_id: params[:event][:teacher_id],
-																 teacher_email: @teacher.email,
-																 params: params,
-																 student_email: current_teacher.email,
-																 student_name: "#{current_teacher.full_name}",
-																 subject_id: params[:event][:subject_id],
-																 multiple: true,
-																 weeks: params[:booking_length]
-																 )
-				@cart.save!
+				@cart = UserCart.create_multiple_cart(params)
+				
 				p "cart multiple #{@cart.inspect}"
 				
 			else
@@ -93,13 +84,8 @@ class EventsController < ApplicationController
 			
 			if @event.valid?
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
-				@cart.update_attributes(teacher_id: params[:event][:teacher_id],
-																 params: event_params, teacher_email: @teacher.email,
-																 student_email: current_teacher.email,
-																 student_name: "#{current_teacher.full_name}",
-																 subject_id: params[:event][:subject_id])
-				@cart.save!
+				@cart = UserCart.create_single_cart(params)
+				
 				p "cart  #{@cart.inspect}"
 			else
 				@teacher = @event.errors.full_messages
