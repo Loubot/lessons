@@ -29,18 +29,17 @@ class Event < ActiveRecord::Base
 
   scope :student_events, ->(student_id) { where(student_id: student_id).order("end_time DESC")}
 
-def student_name
-  Teacher.find(self.student_id).full_name
-end
+  def student_name
+    Teacher.find(self.student_id).full_name
+  end
 
-def teacher_name
-  Teacher.find(self.teacher_id).full_name
-end
+  def teacher_name
+    Teacher.find(self.teacher_id).full_name
+  end
 
-def self.studentDoMultipleBookings(params)
-    date = params[:date]
-    startTime = Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}")
-    endTime = Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}")
+  def self.studentDoMultipleBookings(params)
+    event_params = get_event_params(params)
+    
     # e = Event.new(start_time: startTime, end_time: endTime, teacher_id: params[:event][:teacher_id])
     
     # p "errorsssssssss #{e.errors.full_messages}" if !e.valid?
@@ -49,8 +48,8 @@ def self.studentDoMultipleBookings(params)
     
     for i in 0..weeks
       
-      newStart = startTime + ((i*7).days) #add a week
-      newEnd = endTime + ((i*7).days) #add a week
+      newStart = event_params[:start_time] + ((i*7).days) #add a week
+      newEnd = event_params[:end_time] + ((i*7).days) #add a week
       p "startTime #{newStart}"
       p "newStart #{newEnd}"
       event = Event.new(start_time: newStart, end_time: newEnd, status: 'active',
@@ -62,6 +61,24 @@ def self.studentDoMultipleBookings(params)
     return event  
   end
 
+  def self.get_event_params(params)
+    date = params[:date]
+    { start_time: Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}"),
+      end_time: Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}"),
+      teacher_id: params[:event][:teacher_id],
+      student_id: params[:event][:student_id],
+      status: 'active'
+     }
+  end
+
+
+  def self.create_confirmed_events(cart)
+    if cart[:multiple] == true
+      
+      create_multiple_events_and_save(cart)
+    end
+  end
+
 private
 
 	def add_name #add teachers name as the title
@@ -69,4 +86,38 @@ private
 		user = Teacher.find(self.teacher_id)
 		self.title = "#{user.first_name} #{user.last_name}"		
 	end
+
+  def self.create_multiple_events_and_save(cart) #teachers area block booking
+    ids = []
+    continue = true  
+    
+    
+    weeks = cart[:weeks].to_i - 1
+    for i in 0..weeks
+      newStart = cart.params[:start_time] + (i*7.days)
+      newEnd = cart.params[:end_time] + (i*7.days)
+      e = Event.new(
+                      start_time: newStart, 
+                      end_time: newEnd,                      
+                      teacher_id: cart.params[:teacher_id],
+                      student_id: cart.params[:student_id],
+                      subject_id: cart.params[:subject_id],
+                      status: 'active'
+                    )
+      if e.save
+        ids << e.id
+      else 
+        flash[:danger] = "There was a booking conflict #{e.errors.full_messages}"
+        ids.each do |id|
+          Event.find(id).destroy          
+        end
+        continue = false
+        return
+      end
+      return unless continue
+    end
+
+  end
+
+
 end

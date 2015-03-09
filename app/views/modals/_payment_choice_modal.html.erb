@@ -9,7 +9,7 @@
         <div class="container-fluid">
           <% if teacher_signed_in? %>
             <h2>Check availability</h2>
-            <%= form_for @event, url: events_create_event_and_book_path, class: 'form-horizontal', id: 'create_event_form', method: 'post', remote: true do |f| %>
+            <%= form_for(@event, url: events_create_event_and_book_path, remote: true, html: { class: 'form-horizontal', id: 'create_event_form'}, method: 'post') do |f| %>
                             
               <div class="form-group">
                 <label for="date" class="col-sm-2 control-label">Date:</label>
