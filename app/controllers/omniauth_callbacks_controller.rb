@@ -23,16 +23,17 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else  #teacher not signed in
       if !(identity.new_record?) #identitiy is not new and teacher is not signed in
         puts "££££££££££££££££££3"
+        @teacher = identity.teacher
         redirect_to '/', notice: "no teacher id" and return if !(identity.teacher_id) 
-        flash[:success] = "Signed in succesfully"
+        flash[:success] = "#{ @teacher.email } signed in succesfully"
 
-        sign_in_and_redirect identity.teacher
+        sign_in_and_redirect @teacher
         
       else # identity is new and teacher is not signed in
         if (teacher = Teacher.find_by(email: auth['extra']['raw_info']['email'])) #can find a teacher
           teacher.add_identity(auth)
           puts "££££££££££££££££££4"
-          flash[:success] = "Signed in with #{auth[:provider]}"
+          flash[:success] = "#{ teacher.email } signed in with #{auth[:provider]}"
           sign_in_and_redirect teacher
           
         else #could not find teacher and identity is new

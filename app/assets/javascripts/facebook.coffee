@@ -1,9 +1,9 @@
 fb_root = null
 fb_events_bound = false
 
-$ ->
-  loadFacebookSDK()
-  bindFacebookEvents() unless fb_events_bound
+loadFacebookSDK = ->
+  window.fbAsyncInit = initializeFacebookSDK
+  $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
 
 bindFacebookEvents = ->
   $(document)
@@ -13,6 +13,12 @@ bindFacebookEvents = ->
       FB?.XFBML.parse()
     )
   fb_events_bound = true
+
+
+
+
+
+
 
 saveFacebookRoot = ->
   fb_root = $('#fb-root').detach()
@@ -24,9 +30,7 @@ restoreFacebookRoot = ->
     $('body').append fb_root
 
 
-loadFacebookSDK = ->
-  window.fbAsyncInit = initializeFacebookSDK
-  $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
+
 
 initializeFacebookSDK = ->
   FB.init
@@ -43,12 +47,12 @@ initializeFacebookSDK = ->
    
     return
 
+# twitter starts here
+
 
 twttr_events_bound = false
 
-$ ->
-  loadTwitterSDK()
-  bindTwitterEventHandlers() unless twttr_events_bound
+
 
 bindTwitterEventHandlers = ->
   $(document).on 'page:load', renderTweetButtons
@@ -67,3 +71,16 @@ loadTwitterSDK = ->
   twitterScript.src = "//platform.twitter.com/widgets.js"
   # $.getScript("//platform.twitter.com/widgets.js")
   document.body.appendChild twitterScript
+
+  
+
+loadSocials = ->
+  loadTwitterSDK()
+  bindTwitterEventHandlers() unless twttr_events_bound
+
+  loadFacebookSDK()
+  bindFacebookEvents() unless fb_events_bound
+
+$(document).ready loadSocials
+$(document).on 'page:load', loadSocials
+

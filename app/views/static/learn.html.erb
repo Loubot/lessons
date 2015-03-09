@@ -1,7 +1,8 @@
 <% content_for :title, 'Login, Sign up to connect with teachers, expand your knowledge' %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
-<div class="container-fluid ">
-  <div class="row">
+
+<div class="container-fluid teach_page">
+  <div class="row teach_page">
     <div class="learn_reg_photo">
       <div class="col-md-6 col-xs-12 col-sm-12 student_reg_container">
         <h2 class="teacher_registration_container_header"><strong>Learn</strong></h2><span class="label label-primary">Register below to become a student</span><br><br>
@@ -9,11 +10,11 @@
           <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-envelope"></span>
-            <% if !is_mobile? %>
+            
               <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
-            <% else %>
-              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
-            <% end %>
+            
+              
+            
           </div><br>
                
           <div class="input-group">
@@ -45,10 +46,11 @@
         </div>
         <div class="fb_login_container">
           <%= link_to image_tag('facebook_reg.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
-          
-        </div>
+                    <%= link_to image_tag('google_signup.jpg'), "/teachers/auth/google_oauth2?origin=#{request.original_url}", class: 'fbLogin_link' %>
+        </div> <!-- end of fb_log_container -->
+        
       </div> <!-- end of col-md-6 -->
-      <div class="col-md-6 col-sm-12 col-xs-12 learn_blurb hidden-xs">
+      <div class="col-md-6 col-xs-12 learn_blurb hidden-xs hidden-sm">
         <h1 class="students_blurb_header">What will I learn today?</h1>
         <p class="students_blurb_text">Arrange a 1-on-1 lesson on the subject you want to learn today</p>
       </div>
@@ -56,37 +58,38 @@
   </div> <!-- end of row -->
 </div> <!-- end of container-fluid -->
 
-<div class="contianer-fluid learn_page_pros_container">
+<div class="contianer-fluid learn_page_pros_container">  
   <div class="row learn_page_pros_row">
     <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'students_connect.jpg', alt: 'Find the right teacher for you' %>
+      <%= image_tag 'share_brain.jpg', alt: 'Choose from scores of subjects', class: 'img-responsive center' %>            
     </div> <!-- end of col-md-4 -->
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-8 col-xs-12">
       <div class="center_text">
-        <h1 class="learn_header">Find the right teacher for you</h1>
-        <p class="center_text">Blurb here</p>
+        <h1 class="learn_header">Choose from scores of subjects</h1>
+        <p class="center_text">Thinking about learning a new skill? Search for the lessons, courses and subjects you want to learn in your county using our unique search engine. </p>
       </div> <!-- end of center_text -->
     </div> <!-- end of col-md-8 -->
   </div> <!-- end of row  learn_page_pros_row-->
   <div class="row learn_page_pros_row">
     <div class="col-md-8 col-sm-8 col-xs-12">
       <div class="center_text">
-        <h1 class="learn_header">Choose from scores of subjects</h1>
-        <p class="center_text">Blurb here</p>
-      </div> <!-- end of center_text -->      
+        <h1 class="learn_header">Find the right teacher for you</h1>
+        <p class="center_text">Compare the location and experience of each teacher in your chosen subject and choose the teacher that is right for you.</p>
+      </div> <!-- end of center_text -->
     </div> <!-- end of col-md-4 -->
     <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'share_brain.jpg', alt: 'Choose from scores of subjects' %>
+      <%= image_tag 'students_connect.jpg', alt: 'Find the right teacher for you', class: 'img-responsive center' %>
+      
     </div> <!-- end of col-md-8 -->
   </div> <!-- end of row  learn_page_pros_row-->
   <div class="row learn_page_pros_row">
     <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'money_back.jpg', alt: 'Satisfaction guaranteed' %>
+      <%= image_tag 'money_back.jpg', alt: 'Satisfaction guaranteed', class: 'img-responsive center' %>
     </div> <!-- end of col-md-4 -->
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-8 col-xs-12">
       <div class="center_text">
         <h1 class="learn_header">Satisfaction guaranteed</h1>
-        <p class="center_text">Blurb here</p>
+        <p class="center_text">If you pay online and you are not 100% happy with the lesson, email us within 7 days and we will refund the cost.</p>
       </div> <!-- end of center_text -->
     </div> <!-- end of col-md-8 -->
   </div> <!-- end of row  learn_page_pros_row-->

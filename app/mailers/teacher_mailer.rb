@@ -1,7 +1,7 @@
 class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
   def test_mail(student, student_name, teacher, start_time, end_time)
-
+    p 'test mail start'
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -28,7 +28,11 @@ class TeacherMailer < ActionMailer::Base
         # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
     raise
     end
+
+    logger.info "Mail sent to #{teacher.to_s}"
   end
+
+  
 
   def reset_password_instructions(record, token, opts={})
     puts "record: #{record.first_name} token: #{token} opts: #{opts}  #{:reset_password_instructions}"
@@ -42,7 +46,7 @@ class TeacherMailer < ActionMailer::Base
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>Reset your password #{record} #{token} #{opts} <br>
 
-                <a>http://localhost:3000/teachers/password/edit?reset_password_token=#{token}</a></html>),  
+                <a>https://learn-your-lesson.herokuapp.com/teachers/password/edit?reset_password_token=#{token}</a></html>),  
        :to=>[  
          {  
            :email=> record.email,

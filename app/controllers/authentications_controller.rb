@@ -1,4 +1,6 @@
 class AuthenticationsController < Devise::OmniauthCallbacksController
+
+  before_action :authenticate_teacher!, only:[:destroy]
   
   def oauth
     puts "provider #{request.env["omniauth.auth"]['provider']}"
@@ -9,27 +11,30 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
 
       if @identity.persisted?
         
-        flash[:success] = "Signed in successfully"
+        flash[:success] = "#{ current_teacher.email } signed in successfully"
         sign_in_and_redirect @identity.teacher
       else
         @identity.save!
-        
+        # flash[:success] = "#{ current_teacher.email } signed in successfully. "
         flash[:success] = "#{get_provider_name(request.env["omniauth.auth"]['provider'])} added to login methods."
         sign_in_and_redirect current_teacher
       end
     else 
       @identity = Identity.find_or_create_identity(request.env["omniauth.auth"])
       if @identity.persisted?
-        flash[:success] = "Signed in successfully."
+        flash[:success] = "#{ @identity.teacher.email } signed in successfully."
         sign_in_and_redirect @identity.teacher
       else
         @teacher = Teacher.from_omniauth(request.env["omniauth.auth"])
         if @teacher.persisted?
           @identity.update_attributes(teacher_id: @teacher.id)
           @identity.save!
-          flash[:success] = "Signed in successfully. "
+          flash[:success] = "#{ @teacher.email } signed in successfully. "
           flash[:success] << "#{get_provider_name(request.env["omniauth.auth"]['provider'])} added to login methods."
           sign_in_and_redirect @teacher
+        elsif !@teacher.persisted? && request.env["omniauth.auth"]['provider'] == 'twitter'
+          flash[:danger] = "You can't register using twitter. Please register using an email and you can add twitter as an authenitcation method after!"
+          redirect_to root_url
         else
           session["devise.facebook_data"] = request.env['omniauth.auth']
           puts "Session  #{session["devise.facebook_data"]}"
@@ -43,6 +48,12 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
   alias_method :facebook, :oauth
   alias_method :google_oauth2, :oauth
   alias_method :twitter, :oauth
+  alias_method :linkedin, :oauth
+
+  def destroy
+    puts "hello"
+    redirect_to :back
+  end
 
 
   private
@@ -52,6 +63,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         'Facebook'
       when 'twitter'
         'Twitter'
+      when 'linkedin'
+        'Linkedin'
       else
         'Google'
       end

@@ -1,10 +1,11 @@
 <% content_for :title, 'Connect with local students and teach what you love' %>
 <% content_for :description, "Grow and market your teaching business in an online marketplace" %>
-<div class="container-fluid teach_page">
+
+
   <div class="row teach_page">    
     <div class="teachers_reg_photo">
       <div class="col-md-6 col-xs-12 col-sm-12 teacher_registration_container left">
-        <h2 class="teacher_registration_container_header"><strong>Teach</strong></h2><span class="label label-primary">Register below to become a teacher</span><br><br>
+        <h2 class="teacher_registration_container_header"><strong>Teach</strong></h2><span class="label label-primary teach_label">Register below to become a teacher</span><br><br>
         <div class="teachers_form_container">
           <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
           <div class="input-group">
@@ -45,8 +46,9 @@
         </div>
         <div class="fb_login_container">
           <%= link_to image_tag('facebook_reg.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
-          
+          <%= link_to image_tag('google_signup.jpg'), "/teachers/auth/google_oauth2?origin=#{request.original_url}", class: 'fbLogin_link' %>
         </div> <!-- end of fb_login_container -->
+        
         
       </div> <!-- end of col-md-6 teacher_registration_container -->
       <div class="col-md-6 col-xs-12 col-sm-12 teachers_blurb_container hidden-xs">
@@ -59,17 +61,17 @@
       </div> <!-- end of teachers_pros_container -->
     </div> <!-- end of teachers_reg_photo -->
   </div> <!-- end of row -->  
-</div> <!-- end of container-fluid -->
+
 
 <div class="container-fluid teach_page_pros_container">
   <div class="row teach_page">
     <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'loud_speaker.jpg', alt: 'Create a free profile' %>
+      <%= image_tag 'loud_speaker.jpg', alt: 'Create a free profile', class: 'img-responsive center' %>
     </div> <!-- end of col-md-4 -->
     <div class="col-md-8 col-sm-8 col-xs-12">
       <div class="center_text">
         <h1 class="teach_header"><strong>Create your free profile</strong></h1>
-        <p class="center_text">Increase your reach and don't worry about finding new students</p>
+        <p class="center_text">Increase your reach and don't worry about finding new students.</p>
       </div> <!-- end of center_text -->
     </div> <!-- end of col-md-8 -->
   </div> <!--end of row teach_page -->
@@ -77,21 +79,21 @@
     <div class="col-md-8 col-sm-8 col-xs-12">
       <div class="center_text">
         <h1 class="teach_header"><strong>Manage your clients</strong></h1>
-        <p class="center_text">Keep track of students and lessons with our calendar and booking system</p>
+        <p class="center_text">Keep track of your students and lessons with our calendar and booking system.</p>
       </div> <!-- end of center_text -->
     </div> <!-- end of col-md-4 -->
     <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'calendar.jpg', alt: 'Manage your clients' %>      
+      <%= image_tag 'calendar.jpg', alt: 'Manage your clients', class: 'img-responsive center' %>      
     </div> <!-- end of col-md-8 -->
   </div> <!--end of row teach_page -->
   <div class="row teach_page">
     <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= image_tag 'money_bags.jpg', alt: 'Increase your earnings' %>
+      <%= image_tag 'money_bags.jpg', alt: 'Increase your earnings', class: 'img-responsive center' %>
     </div> <!-- end of col-md-4 -->
     <div class="col-md-8 col-sm-8 col-xs-12">
       <div class="center_text">
         <h1 class="teach_header"><strong>Increase your earnings</strong></h1>
-        <p class="center_text">Keep 90% of lesson fee when booked through the website; 100% when booked with the student directly</p>
+        <p class="center_text">Keep 100% of the lesson fee when booked through the website and 100% when booked with the student directly.</p>
       </div> <!-- end of center_text -->
     </div> <!-- end of col-md-8 -->
   </div> <!--end of row teach_page -->
@@ -107,7 +109,9 @@
       </tr>
       <tr>
         <td class="col-md-1">2</td>
-        <td class="col-md-11">Make sure to sell yourself! Add in your pictures, experience and qualifications. Go on, brag about yourself, don't be shy!</td>
+        <td class="col-md-11">Make sure to sell yourself! Add in your pictures, location, experience and qualifications.
+         Go on, brag about yourself, don't be shy!
+        </td>
       </tr>
       <tr>
         <td class="col-md-1">3</td>

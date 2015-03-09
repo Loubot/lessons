@@ -1,156 +1,188 @@
-<% content_for :head do %>
-  <meta property="og:title"
-  content="Learn Your Lesson" />
-  <meta property="og:site_name" content="Learn your lesson" />
-  <meta property="og:url"
-  content="<%= request.original_url %>" />
-  <meta property="og:description" content="What do you want to learn today?" />
-  <meta property="og:type" content="article" />
-  <meta property="og:image"
-  content= "http://learn-your-lesson.herokuapp.com/assets/silhouette-ebed8878a5f8318d49bb55efa8cfc014.jpg" />
-<% end %>
-<% content_for :title, "The place to connect with local teachers and learn" %>
-<% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
 
-<div  class="container-fluid main_page_search_container home_welcome">
-  <div class="welcome_page_form__header welcome_sprinkles_hidden">
-    <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
-  </div> <!-- end of welcome_page_form__header -->
-
-  <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
-    <div class="form-group">
-      <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
-    </div>
-    <div class="form-group">
-      <%= text_field_tag :search_position, params[:search], placeholder: 'County', class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
-    </div>
-    <div class="container-fluid search_submit_container">
-      <%= submit_tag "I'm ready to learn",type: 'submit', name: 'submit', id: 'search_submit', class: 'btn' %>
-    </div>
+  <% content_for :head do %>
+    <meta property="og:title"
+    content="Learn Your Lesson" />
+    <meta property="og:site_name" content="Learn your lesson" />
+    <meta property="og:url"
+    content="<%= request.original_url %>" />
+    <meta property="og:description" content="What do you want to learn today?" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image"
+    content= "https://learn-your-lesson.herokuapp.com/assets/silhouette-ebed8878a5f8318d49bb55efa8cfc014.jpg" />
   <% end %>
-  <div class="container-fluid welcome_prompt_container welcome_sprinkles">
-    <div class="col-md-4 welcome_page_prompts"><h4>&bull; Connect with local <br>teachers one to one</h4></div>
-    <div class="col-md-4 welcome_page_prompts"><h4>&bull; Choose from hundreds of skills</h4></div>
-    <div class="col-md-4 welcome_page_prompts"><h4>&bull; Book online lessons with confidence</h4></div>
-  </div> <!-- end of welcome_prompt_container -->
+  <% content_for :title, "The place to connect with local teachers and learn" %>
+  <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
 
-  <div class="browse_topics welcome_sprinkles">
-    <ul class="list-inline">
-      <li>Browse:</li>
-      <li class="browse_option btn btn-success" id="popular">Popular</li>
-      <li class="browse_option" id="music">Music</li>
-      <li class="browse_option" id="language">Language</li>
-      <li class="browse_option" id="academic">Academic Grinds</li>
-    </ul>
+  <div  class="container-fluid main_page_search_container home_welcome">
+    <div class="welcome_page_form__header">
+      <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
+      
+    </div> <!-- end of welcome_page_form__header -->
+
+
+    <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
+      <div class="form-group">
+        <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
+      </div>
+      <div class="form-group">
+        <%= text_field_tag :search_position, params[:search], placeholder: 'County', class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
+      </div>
+      <div class="container-fluid search_submit_container">
+        <%= submit_tag "I'm ready to learn",type: 'submit', name: 'submit', id: 'search_submit', class: 'btn' %>
+      </div>
+    <% end %>
+    <div class="container-fluid welcome_prompt_container hidden-xs">
+      <div class="col-md-4 welcome_page_prompts"><h4>&bull; Connect with local <br>teachers one to one</h4></div>
+      <div class="col-md-4 welcome_page_prompts"><h4>&bull; Choose from hundreds of skills</h4></div>
+      <div class="col-md-4 welcome_page_prompts"><h4>&bull; Book lessons online with confidence</h4></div>
+    </div> <!-- end of welcome_prompt_container -->
+  </div> <!-- end of container-fluid main_page_search -->
+
+  <div class="container-fluid">
+    <div class="row fav_subjects_container">
+    <div class="container-fluid stock_photos_container hidden-xs"> 
+    <div class="browse_topics">
+
+      <ul class="list-inline">
+        <li>Browse:</li>
+        <li class="browse_option btn btn-success" id="popular">Popular</li>
+        <li class="browse_option" id="music">Music</li>
+        <li class="browse_option" id="language">Language</li>
+        <li class="browse_option" id="academic">Academic Grinds</li>
+      </ul>
+    </div>   
+      <div class="center-me">
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="all_lessons">
+            <%= link_to browse_categories_path, class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="guitar">
+            <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="piano">
+            <%= link_to display_subjects_path(search_subjects: 'piano', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        
+      </div> <!-- end of center-me -->  
+    </div> <!-- end of stock_photos_container -->
+    <div class="container-fluid stock_photos_container hidden-xs">
+      
+      <div class="center-me">
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="italian">
+            <%= link_to display_subjects_path(search_subjects: 'italian', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="photography">
+            <%= link_to display_subjects_path(search_subjects: 'photography', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="cooking">
+            <%= link_to display_subjects_path(search_subjects: 'cooking', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        
+      </div> <!-- end of center-me -->  
+    </div> <!-- end of stock_photos_container -->
+    <div class="container-fluid stock_photos_container hidden-xs">
+      
+      <div class="center-me">
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="yoga">
+            <%= link_to display_subjects_path(search_subjects: 'yoga', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="studio_painting">
+            <%= link_to display_subjects_path(search_subjects: 'studio painting', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="swimming">
+            <%= link_to display_subjects_path(search_subjects: 'swimming', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        
+      </div> <!-- end of center-me -->  
+    </div> <!-- end of stock_photos_container -->
+    <div class="container-fluid stock_photos_container hidden-xs">
+      
+      <div class="center-me">
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="dancing">
+            <%= link_to display_subjects_path(search_subjects: 'dancing', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="chemistry">
+            <%= link_to display_subjects_path(search_subjects: 'chemistry', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="electric-guitar">
+            <%= link_to display_subjects_path(search_subjects: 'electric guitar', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        
+      </div> <!-- end of center-me -->  
+    </div> <!-- end of stock_photos_container --><div class="container-fluid stock_photos_container hidden-xs">
+      
+      <div class="center-me">
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="english">
+            <%= link_to display_subjects_path(search_subjects: 'english', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="biology">
+            <%= link_to display_subjects_path(search_subjects: 'biology', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        <div class="add_padding col-md-4 col-sm-4" >
+          <div  class="col-md-12 stock_photo_container" id="maths">
+            <%= link_to display_subjects_path(search_subjects: 'maths', search_position: ''), class: "stock_photo_container" do %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+            <% end %>
+          </div> <!-- end of stock_photo_container -->      
+        </div> <!-- end of add_padding -->
+        
+      </div> <!-- end of center-me -->  
+    </div> <!-- end of stock_photos_container -->
+
+  </div> <!-- end of fav_subjects_container -->
   </div>
-  
-  <div id="display_search_results">
-
-  </div> <!-- end of display_search_results -->
-</div> <!-- end of container-fluid main_page_search -->
-
-<div class="container-fluid stock_photos_container hidden-sm">
-  <div class="row subject_pic_row">
-    <div class="col-md-3 col-sm-6 subject_pic_container">
-      <div id="guitar">
-        <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: 'stock_photo_container' do %>
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of guitar -->
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 col-sm-6 subject_pic_container">
-      <div id="drums">
-        <%= link_to display_subjects_path(search_subjects: 'drums', search_position: ''), class: 'stock_photo_container' do %>
-        <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-      <% end %>
-      </div><!-- end of drums -->
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 col-sm-6 subject_pic_container">
-      <div id="piano">
-        <%= link_to display_subjects_path(search_subjects: 'piano', search_position: ''), class: 'stock_photo_container' do %>
-        <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-      <% end %>
-      </div><!-- end of piano -->
-    </div> <!-- end of subject_pic_container -->
-
-  </div> <!-- end of subject_pic_row -->
-  
-  <div class="row subject_pic_row">
-    <div class="col-md-3 subject_pic_container">
-      <div id="french">
-        <%= link_to display_subjects_path(search_subjects: 'french', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of french -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="italian">
-        <%= link_to display_subjects_path(search_subjects: 'italian', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of italian -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="photography">
-        <%= link_to display_subjects_path(search_subjects: 'photography', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of german -->      
-    </div> <!-- end of subject_pic_container -->
-  </div><!-- end of subject_pic_row -->
-  <div class="row subject_pic_row">
-    <div class="col-md-3 subject_pic_container">
-      <div id="cooking">
-        <%= link_to display_subjects_path(search_subjects: 'cooking', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of french -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="yoga">
-        <%= link_to display_subjects_path(search_subjects: 'yoga', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of italian -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="studio_painting">
-        <%= link_to display_subjects_path(search_subjects: 'studio_painting', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of german -->      
-    </div> <!-- end of subject_pic_container -->
-  </div><!-- end of subject_pic_row -->
-  <div class="row subject_pic_row">
-    <div class="col-md-3 subject_pic_container">
-      <div id="swimming">
-        <%= link_to display_subjects_path(search_subjects: 'swimming', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of french -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="dancing">
-        <%= link_to display_subjects_path(search_subjects: 'dancing', search_position: ''), class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of italian -->      
-    </div> <!-- end of subject_pic_container -->
-    <div class="col-md-3 subject_pic_container">
-      <div id="all_lessons">
-        <%= link_to browse_categories_path, class: "stock_photo_container" do %>
-          
-          <%= image_tag 'view-more.png', class: 'welcome_subject_image' %>
-        <% end %>
-      </div><!-- end of german -->      
-    </div> <!-- end of subject_pic_container -->
-  </div><!-- end of subject_pic_row -->
-</div> <!-- end of stock_photos_container -->

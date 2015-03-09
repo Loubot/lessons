@@ -1,3 +1,9 @@
+#function to mark teachers opening times
+markTime = ->
+  for time in gon.openingTimes
+    scheduler.markTimespan time
+#end of function to mark teachers openingTimes 
+
 calendarDisplayTeacherReady = ->
   if $('.teachers_display_scheduler').length > 0
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"
@@ -36,10 +42,3 @@ calendarDisplayTeacherReady = ->
 
 $(document).ready calendarDisplayTeacherReady
 $(document).on('page:load', calendarDisplayTeacherReady)
-
-
-#function to mark teachers opening times
-markTime = ->
-  for time in gon.openingTimes
-    scheduler.markTimespan time
-#end of function to mark teachers openingTimes 

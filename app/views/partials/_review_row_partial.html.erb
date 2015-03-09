@@ -1,3 +1,4 @@
+<% cache review do %>  
   <tr class="table_row">
     <td>
       <%= star_helper(review.rating) %> <%= content_tag :span, review.teacher.full_name, class: 'review_name' %><%# teachers_helper %><br>
@@ -7,3 +8,4 @@
     
     <td><%= distance_of_time_in_words(Time.now, review.created_at) %> ago</td>
   </tr>
+<% end %>

@@ -11,9 +11,9 @@
 #
 
 class Identity < ActiveRecord::Base
-  belongs_to :teacher
+  belongs_to :teacher, touch: true
   validates :uid, :provider, :teacher_id, presence: true
-
+  validates_uniqueness_of :uid, :scope => :provider
 
   def self.create_with_omniauth(auth)
     create(uid: auth['uid'], provider: auth['provider'])

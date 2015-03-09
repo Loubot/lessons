@@ -1,8 +1,8 @@
 module StaticHelper  
   
 
-  def get_subject(subject) #return first subject LIKE name passed in
-    @subject = subject == '' ? [] : Subject.where('name LIKE ?', "%#{subject}%").first
+  def get_subject(subject) #return first subject ILIKE name passed in
+    @subject = subject == '' ? [] : Subject.where('name ILIKE ?', "%#{subject}%").first
   end
 end
 
@@ -10,6 +10,9 @@ end
 
 def get_search_results(params, subject) #return list of valid teachers ordered by params
   puts "postion #{params[:search_position]}"
+  
+  # new_params = params
+  params.merge!({ :search_position => '' }) if params[:search_position].blank? #add search positiong if it's missing
   
   
     if !params[:search_position].empty? && !params[:search_subjects].empty? #subject and location

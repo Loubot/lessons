@@ -5,6 +5,8 @@ class PaymentsController < ApplicationController
   protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
+  before_action :fix_json_params, only: [:store_stripe]
+
 
   def get_event_id
     @event_id = session[:event_params] || []
@@ -41,7 +43,8 @@ class PaymentsController < ApplicationController
         transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
         p "Event errors #{event.errors.full_messages}" if !event.valid?
         p "Event created id: #{event.id}"
-        TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email, event.start_time, event.end_time)
+        TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email,
+                                 event.start_time, event.end_time).deliver
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"
@@ -84,18 +87,17 @@ class PaymentsController < ApplicationController
 
   def stripe_create
    # Amount in cents
-   
     @amount = params[:amount].to_i * 100    
-
+    @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
       :amount             => @amount,
       :description        => "{}",
       :currency           => 'eur',
       :application_fee    => 300,
-      :card               => params[:stripeToken],
+      :source             => params[:stripeToken],
       :metadata           => { tracking_id: params[:tracking_id] }
       },
-      Teacher.find(params[:teacher_id]).stripe_access_token
+      @teacher.stripe_access_token
     )
     if charge['paid'] == true
       cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
@@ -111,12 +113,14 @@ class PaymentsController < ApplicationController
     
   end
 
-  def store_stripe    
+  def store_stripe
+    
     json_response = JSON.parse(request.body.read)
 
     render status: 200, nothing: true and return if json_response['type'] == "application_fee.created"
+    render status: 200, nothing: true and return if json_response['data']['object']['object'] == 'balance'
 
-    logger.info "Stripe webhook response: #{json_response}"
+    # logger.info "Stripe webhook response: #{json_response}"
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
     
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
@@ -128,7 +132,7 @@ class PaymentsController < ApplicationController
  
       
       TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email,
-                              cart_params[:start_time],cart_params[:end_time])
+                              cart_params[:start_time],cart_params[:end_time]).deliver
       Transaction.create!(create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id))
       # Transaction.create!(json_response)
       render status: 200, nothing: true
@@ -160,15 +164,19 @@ class PaymentsController < ApplicationController
     if json_resp['access_token'].present?
       @teacher = Teacher.find(params['state'].to_i)
       flash[:success] = "Successfully registered with Stripe"
-      @teacher.update_attributes(stripe_access_token: json_resp['access_token'])
+      @teacher.update_attributes(stripe_access_token: json_resp['access_token'], stripe_user_id: json_resp['stripe_user_id'])
     end
     flash[:success] = 'Stripe code updated'
     redirect_to edit_teacher_path(id: params[:state])
   end
 
+  
 
 
   private
+  def params
+    @reparsed_params || super
+  end
 
       def create_paypal(params)
         require "pp-adaptive"
@@ -185,8 +193,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "http://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-          :ipn_notification_url => 'http://learn-your-lesson.herokuapp.com/store-paypal',
+          :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
+          :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -209,4 +217,12 @@ class PaymentsController < ApplicationController
         end
         
       end
+
+      protected
+
+        def fix_json_params
+          if request.content_type == "application/json"
+            @reparsed_params = JSON.parse(request.body.string).with_indifferent_access
+          end
+        end
 end

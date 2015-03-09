@@ -93,7 +93,9 @@ window.init_teachers_maps = ->
 
 
 # Run initialize on dom ready if map_container is on screen
-$(document).on 'ready page:load', ->  
+
+
+ready = ->
   if $('#map_container').is(':visible')
     window.mapArray = []
     window.mapOptionsArray = []
@@ -126,6 +128,11 @@ load_google_maps_api = (name) ->
   script.type = "text/javascript"
   script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + callback
   document.body.appendChild script
+
+
+
+$(document).ready ready
+$(document).on 'page:load', ready
 
 
 # #////////////////////////////show teachers map

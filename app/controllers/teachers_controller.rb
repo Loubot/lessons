@@ -17,7 +17,7 @@ class TeachersController < ApplicationController
 	def show_teacher		
 		@params = params
 		@event = Event.new
-		
+		@categories = Category.includes(:subjects).all
 		@subject = Subject.find(params[:subject_id])
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos).find(params[:id])
 		@reviews = @teacher.reviews.take(3)
@@ -27,23 +27,21 @@ class TeachersController < ApplicationController
 		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		gon.locations = @locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
-		# gon.location= [@teacher.lat, @teacher.lon]
-		# if !@teacher.locations.empty?
-		# 	gon.location = [@teacher.locations.last.latitude, @teacher.locations.last.longitude]
-		# else
-		# 	gon.location = [nil, nil]
-		# end
+		
+		
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
 	end
 
 	def edit
-		@context = Teacher.includes(:experiences,:subjects, :photos).find(params[:id])
+		@context = Teacher.includes(:experiences,:subjects, :photos, :identities).find(params[:id])
 		@photos = @context.photos
 		# @photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
+
+		@auths = ['facebook', 'google_oauth2', 'twitter', 'linkedin']
 		
 		@experience = Experience.new
 		@subjects = @context.subjects
@@ -107,7 +105,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

@@ -35,7 +35,7 @@
     <%= puts "path #{price_path}" %>
     <div class="row add_col_padding">
       <% @teacher.subjects.each do |s| %>
-        <%= form_for Price.find_or_initialize_by(location_id: location.id, subject_id: s.id), remote: true, html: { class: 'form-horizontal prices_form' } do |p| %>
+        <%= form_for Price.find_or_initialize_by(location_id: location.id, subject_id: s.id),data: {remote: true, type: 'script' }, html: { class: 'form-horizontal prices_form' } do |p| %>
           <div class="form-group">
             <%= p.label "#{s.name} price:", class: 'col-sm-4 control-label' %>
             <div class="col-sm-8">

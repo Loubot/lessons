@@ -16,6 +16,11 @@ teachersInfoReady = ->
 
 # end of qualification form checkbox
 
+  # if $('#website-title').length > 0 
+    # $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
+    # $(window).resize ->
+    #   $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
+
   $('#qual_left').css('height', $('#qual_form').height())
   if $('#dropzone').length > 0
     # Dropzone.autoDiscover = false
@@ -24,7 +29,7 @@ teachersInfoReady = ->
         paramName: "photo[avatar]"
         addRemoveLinks: true
         parallelUploads: 10
-        thumbnailWidth: 274
+        thumbnailWidth: 150
         thumbnailHeight:180
         autoProcessQueue: false
         })  
@@ -166,12 +171,11 @@ teachersInfoReady = ->
         data: { page: $(@).attr('id') }
         type: 'get'
         success: (html) ->
-          $('.stock_photos_container').empty()
+          $('.fav_subjects_container').empty()
           
-          $(html).appendTo('.stock_photos_container').show('slow')
-          return false 
-            
-      return false
+          $(html).appendTo('.fav_subjects_container').show('slow')
+          return false
+    
 
     $('.stock_photo_container').mouseover ->
       $(this).find('.welcome_subject_image').animate opacity: .7, 50
@@ -241,8 +245,34 @@ teachersInfoReady = ->
       # e.target # newly activated tab
       # e.relatedTarget # previous active tab
       $('#address').empty().append gon.locations[$(@).data('index')].address
+  if $('#this_date').length > 0
+    AnyTime.noPicker 'this_date'
+    $("#this_date").AnyTime_picker
+      format: "%Y-%m-%d"
+      placement: 'inline'
+      hideInput: true
 
-      
+
+  #// Initialise stripe when stripe pay button is clicked
+
+  # $(document).on 'click', '.stripe-button-el', (e)->
+  #   alert 'b'
+  #   e.preventDefault()
+  #   StripeCheckout.open
+  #     key: 'pk_test_bedFzS7vnmzthkrQolmUjXNn'
+  #     amount: (parseFloat $('#event_table_price').text().replace(/[^\d.]/g,"")) * 100
+  #     name: 'The Store'
+  #     currency: 'EUR'
+  #     description: 'A whole bag of awesome ($50.00)'
+  #     panelLabel: 'Pay Now'
+  #     token: (res) ->
+  #       # Do something with res.id
+  #       # Store it in Mongo and/or create a charge on the server-side
+  #       console.info res
+  #       return
+
+
+  #// End of Initialise stripe when stripe pay button is clicked
 
 
 #//// end of show_teacher_to_user add price to form modal

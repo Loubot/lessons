@@ -22,7 +22,9 @@
                   <%= hidden_field_tag :response_type, 'code' %>
                   <%= hidden_field_tag :client_id, 'ca_4qQTgrfr1l9xHgK7qnrNZbpXz2tpBecX' %>
                   <%= hidden_field_tag :scope, 'read_write' %>
-                  <%= hidden_field_tag :redirect_uri, 'http://learn-your-lesson.herokuapp.com/stripe-auth-user' %>
+
+                  <%= hidden_field_tag :redirect_uri, 'https://learn-your-lesson.herokuapp.com/stripe-auth-user' %>
+
                   <%= hidden_field_tag :stripe_landing, 'login' %>
                   <%= hidden_field_tag :state, current_teacher.id %>
                   <%= submit_tag 'Stripe Registration', class: 'btn btn-info' %>
