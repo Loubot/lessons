@@ -79,6 +79,8 @@ class Event < ActiveRecord::Base
     end
   end
 
+  
+
 private
 
 	def add_name #add teachers name as the title
