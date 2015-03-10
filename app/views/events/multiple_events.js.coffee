@@ -11,6 +11,7 @@
   $('#event_table_start_time_multiple').text('<%= @event.start_time.to_formatted_s(:long) %>')
   $('#event_table_length_multiple').text("<%= total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %> hour(s)")
   $('#event_table_price_multiple').text "<%= @total_rate.to_s %>"
+  $('.paypal_teacher_email').val '<%= @teacher.email %>'
   $('.rate').val('<%= @rate %>')
   $('.tracking_id').val('<%= @cart.tracking_id %>')
 <% end %> 

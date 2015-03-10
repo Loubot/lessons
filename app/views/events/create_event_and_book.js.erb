@@ -3,6 +3,7 @@
   $('.payment_choice_error').append("<%= escape_javascript(@teacher[0].to_s) %>");
   $('.payment_choice_error').append("</div>");
 <% else %>
+  $('.payment_choice_error').remove()
 	$('#payment_choice_modal').modal('hide'); //hide availability modal
 	$('#payments_modal_for_users').modal('show'); //show payment modal
 	$('#event_table_start_time').text('<%= @event.start_time.to_formatted_s(:long) %>');

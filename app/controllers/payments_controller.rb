@@ -25,28 +25,45 @@ class PaymentsController < ApplicationController
     http.read_timeout = 60
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl = true
-    response = http.post(uri.request_uri, request.raw_post, 'Content-Length' => "#{request.raw_post.size}",
-                          'User-Agent' => 'My custom user agent').body
+    response = http.post(
+                          uri.request_uri, 
+                          request.raw_post, 
+                          'Content-Length' => "#{request.raw_post.size}",
+                          'User-Agent' => 'My custom user agent'
+                        ).body
+
     p "paypal post params: #{params['tracking_id']}"
    
     puts "Paypal verification response: #{response}"
     logger.info "Paypal verification response: #{response}"
-    transaction = Transaction.find_by(tracking_id: params['tracking_id'])
     
-    if transaction == nil
+    
+    if !(Transaction.find_by(tracking_id: params['tracking_id']))
       if response == "VERIFIED"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
+
         render status: 200, nothing: true and return if !cart
 
-        # event = Event.create_confirmed_bookings(cart.params)
 
-        logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
-        logger.info "returned params #{create_transaction_params_paypal(params, event.student_id, event.teacher_id)}"
-        transaction = Transaction.create!(create_transaction_params_paypal(params, event.student_id, event.teacher_id))
-        p "Event errors #{event.errors.full_messages}" if !event.valid?
-        p "Event created id: #{event.id}"
-        TeacherMailer.test_mail(cart.student_email,cart.student_name,cart.teacher_email,
-                                 event.start_time, event.end_time).deliver
+        # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
+        logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
+
+        Event.create_confirmed_events(cart)
+
+        transaction = Transaction.create( #payments_helper
+                                          create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
+                                        )
+
+        # p "Event errors #{event.errors.full_messages}" if !event.valid?
+        # p "Event created id: #{event.id}"
+        TeacherMailer.mail_teacher(
+                                    cart.student_email,
+                                    cart.student_name,
+                                    cart.teacher_email,
+                                    cart.params[:start_time],
+                                    cart.params[:end_time]
+                                  ).deliver_now
+
         render status: 200, nothing: true
       else
         p "Paypal payment didn't work out"
@@ -141,16 +158,18 @@ class PaymentsController < ApplicationController
       puts "start time #{cart_params[:start_time]}"
  
       
-      # TeacherMailer.test_mail( 
-      #                           cart.student_email,cart.student_name,
-      #                           cart.teacher_email,
-      #                           cart_params[:start_time],
-      #                           cart_params[:end_time]
-      #                         ).deliver_now
+      Transaction.create(
+                        create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id)
+                        )
 
-      Transaction.create!(
-                            create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id)
-                          )
+      TeacherMailer.mail_teacher(
+                                  cart.student_email,
+                                  cart.student_name,
+                                  cart.teacher_email,
+                                  cart.params[:start_time],
+                                  cart.params[:end_time]
+                                ).deliver_now
+
       # Transaction.create!(json_response)
       render status: 200, nothing: true
     else
@@ -210,8 +229,8 @@ class PaymentsController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-          :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
+          :return_url      => "http://7ed17f44.ngrok.com/paypal-return?payKey=${payKey}",
+          :ipn_notification_url => 'http://7ed17f44.ngrok.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }
