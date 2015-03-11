@@ -13,7 +13,9 @@ class ApplicationController < ActionController::Base
   def share_linkedin
     require 'linkedin'
     client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
-    redirect_to :back
+    client.add_share(:comment => 'Sample Job',
+                            :content => { :title => 'LinkedIn Developers Documentation On Using the Share API', :description => 'Leverage the Share API to maximize engagement on user-generated content on LinkedIn', :'submitted-url' => 'https://developer.linkedin.com/documents/share-api', :'submitted-image-url' => 'http://m3.licdn.com/media/p/3/000/124/1a6/089a29a.png' } )
+    render nothing: true
   end
 
   helper_method :is_mobile?
