@@ -45,6 +45,8 @@ Rails.application.routes.draw do
   get         '/new-registration'       =>  'static#new_registration'
   post        '/add-to-list'            =>  'static#add_to_list'
   post        '/confirm-registration'   =>  'static#confirm_registration'
+
+  post        '/share-linkedin'         =>  'application#share_linkedin'
   
 
   get         'paypal-create'           =>  'payments#paypal_create'

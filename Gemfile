@@ -90,6 +90,8 @@ gem 'omniauth-twitter'
 
 gem 'omniauth-linkedin-oauth2'
 
+gem 'linkedin'
+
 gem "asset_sync"
 
 gem 'paypal-sdk-adaptiveaccounts'

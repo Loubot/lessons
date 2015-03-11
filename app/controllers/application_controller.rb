@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
     session[:mobile]
   end
 
+  def share_linkedin
+    require 'linkedin'
+    client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
+    redirect_to :back
+  end
+
   helper_method :is_mobile?
   private
 
