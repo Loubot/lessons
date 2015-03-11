@@ -1,4 +1,4 @@
-<div class="modal fade" id="payments_modal_for_users" tab-index="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="payments_modal_for_users_multiple" tab-index="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,20 +12,20 @@
             <table class="table table-condensed table-hover">
               <tr>
                 <td>Start time:</td>
-                <td id="event_table_start_time"><%# @event.start_time.to_formatted_s(:long) %></td>
-              </tr>
-              <tr id="event_table_end_time_row">
-                <td>End time:</td>
-                <td id="event_table_end_time"><%# @event.end_time.to_formatted_s(:long) %></td>
+                <td id="event_table_start_time_multiple"><%# @event.start_time.to_formatted_s(:long) %></td>
               </tr>
               <tr>
                 <td>Length:</td>
-                <td id="event_table_length"><%# total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %> hours</td>
+                <td id="event_table_length_multiple"><%# total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %> hours</td>
+              </tr>
+              <tr id="event_table_weeks_row_multiple">
+                <td>No. of weeks</td>                
+                <td id="event_table_weeks_multiple"><%# number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %></td>
               </tr>
               <tr>
                 <td>Total price</td>
                 <% puts "rate #{@rate}" %>
-                <td id="event_table_price"><%# number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %></td>
+                <td id="event_table_price_multiple"><%# number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %></td>
               </tr>              
             </table>
            </div>
