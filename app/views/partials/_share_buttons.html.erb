@@ -1,12 +1,17 @@
 <% if !is_mobile? %>
-  <% cache('share_buttons_true') do %>
+  
     <div id="fb-root"></div>
     <div id="share_buttons">
       
-      <div class="fb-like" data-href="<%= request.original_url %>" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
+      <div class="fb-like" data-href="<%= request.original_url %>" data-layout="button" data-action="like" data-show-faces="false" data-share="true">
+      </div>
     	
+      <div class="fb-like">
+        <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+        <script type="IN/Share" ></script>
+      </div>
+
       
-<% cache('share_buttons') do %>
       <div>
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://learn-your-lesson.herokuapp.com" data-text="Learn Your Lesson" data-count="none" data-hashtags="whatwitllyoulearn">Tweet</a>
         
@@ -15,7 +20,5 @@
       <button type="button" class="close share_buttons_close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       
     </div> <!-- end of share_buttons -->
-  <% end %>
-<% end %>
-
-<% end %>
+  
+<% end %>   
