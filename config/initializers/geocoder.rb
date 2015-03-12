@@ -1,7 +1,7 @@
-Geocoder.configure(
-  Geocoder.configure(
-  
-  :http_proxy => ENV['QUOTAGUARD_URL'],
+Geocoder.configure(  
+  :lookup => :bing, 
+  :api_key => ENV['BING_KEY'],
+  # :http_proxy => ENV['QUOTAGUARD_URL'],
   :timeout => 5
 )
   # geocoding options
@@ -23,4 +23,4 @@ Geocoder.configure(
   # calculation options
   # :units     => :mi,       # :km for kilometers or :mi for miles
   # :distances => :linear    # :spherical or :linear
-)
+

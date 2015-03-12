@@ -13,6 +13,8 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  subject_id    :integer
+#  multiple      :boolean          default("false")
+#  weeks         :integer          default("0")
 #
 
 class UserCart < ActiveRecord::Base
