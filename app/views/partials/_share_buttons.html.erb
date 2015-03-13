@@ -7,8 +7,14 @@
       </div>
     	
       <div class="fb-like">
-        <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-        <script type="IN/Share" ></script>
+        <script type="IN/Share" data-url="<%= request.original_url %>" >
+
+        </script>
+        
+        <script type="text/javascript" src="http://platform.linkedin.com/in.js?async=true"></script>
+        <script type="text/javascript">
+            IN.init({api_key:'77iyb2qd8pdh8f'});            
+        </script>
       </div>
 
       

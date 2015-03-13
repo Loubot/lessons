@@ -3,6 +3,7 @@ class PricesController < ApplicationController
 
 	def create
 		@price = Price.find_or_initialize_by(price_params)
+		@name = @price.subject.name
 		if @price.save
 			p "Well done Louis"
 		else
