@@ -19,9 +19,8 @@ hr{
 }
 
 .alert{
-
   margin-top: -22px;  
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
 
@@ -1121,7 +1120,12 @@ form .glyphicon {
   .mobile.container-fluid{
     padding:0;
   }
+
+  .row.show_teacher_to_user{
+    margin: 0;
+  }
   .show_teacher_profile_container{ //show_teacher_to_user page
+    margin: 0;
     height: 100%;  
     // margin-bottom: 20px;    
   }

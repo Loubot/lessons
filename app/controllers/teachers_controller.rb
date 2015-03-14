@@ -14,7 +14,8 @@ class TeachersController < ApplicationController
 		redirect_to root_path unless current_teacher.id == params[:id].to_i
 	end
 
-	def show_teacher		
+	def show_teacher
+
 		@params = params
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
@@ -32,6 +33,7 @@ class TeachersController < ApplicationController
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
+		fresh_when([@teacher, @profilePic], :public => true)
 	end
 
 	def edit
@@ -45,6 +47,8 @@ class TeachersController < ApplicationController
 		
 		@experience = Experience.new
 		@subjects = @context.subjects
+
+		fresh_when(@teacher, @photos)
 	end
 	
 	def update
@@ -86,6 +90,7 @@ class TeachersController < ApplicationController
 		@context = current_teacher
 		@qualifications = Qualification.where(teacher_id: current_teacher.id)
 		@qualification = @context.qualifications.new
+		fresh_when @qualifications
 	end
 
 	def your_location

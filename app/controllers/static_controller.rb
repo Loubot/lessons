@@ -24,16 +24,17 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-		
+		fresh_when(:etag => ['welcome-page', current_teacher, flash], :public => true)
 	end	
 
 	def learn
 		render 'static/mobile_views/mobile_learn' if is_mobile?
-
+		fresh_when(:etag => ['learn-page', current_teacher, flash], :public => true)
 	end
 
 	def teach
 		render 'static/mobile_views/mobile_teach' if is_mobile?
+		fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
 	end
 
 	def add_to_list
