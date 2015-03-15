@@ -1,6 +1,7 @@
 class AdminsController < ApplicationController
 
 	include AdminsHelper
+	before_action :authenticate_teacher!
 	before_action :is_admin?
 
 	def is_admin?

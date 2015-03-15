@@ -1,4 +1,7 @@
 class SubjectsController < ApplicationController
+
+	before_action :authenticate_teacher!
+	
 	def create
 		@subject = Subject.new(subject_params)
 		if @subject.save
