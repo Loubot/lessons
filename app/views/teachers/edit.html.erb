@@ -1,5 +1,6 @@
+<% cache [@context, @context.profile, @subjects.size] do %>
 <div class="outer-container">
-	<% cache [@context, 'profile'] do %>	
+		
 		<div class="container-fluid teacher_edit_profile">
 			<div class="row">
 				
@@ -45,9 +46,9 @@
 				</div> <!-- end of col-md-10 -->
 			</div> <!-- end of row -->
 		</div> <!-- end of teacher_edit_profile -->
-	<% end %> <%# end of profile cache %>
+	
 
-	<% cache [@context, 'subjects'] do %>
+	
 		<div class="container-fluid">
 			<div class="row">
 				
@@ -69,7 +70,7 @@
 			</div>
 			
 		</div> <!-- end of container fluid -->
-	<% end %> <%# end of subjects cache %>
+
 
 	<!-- start of profile picture panel -->
 
@@ -98,7 +99,7 @@
 
 	<!-- end of profile picture panel -->
 
-	<% cache [@context, 'experience'] do %>
+	
 		<div class="container-fluid">
 			<div class="row">
 				
@@ -118,9 +119,9 @@
 				</div> <!-- end of col-md-10 -->
 			</div> <!-- end of row -->
 		</div> <!-- end of container-fluid -->
-	<% end %> <%# end of experienc cache %>
+	
 
-	<% cache [@context, 'overview'] do %>
+	
 		<div class="container-fluid">
 			<div class="row">
 				
@@ -147,9 +148,9 @@
 				</div> <!-- end of col-md-12 -->
 			</div> <!-- end of row -->
 		</div> <!-- end of container-fluid -->
-	<% end %> <%# end of overview cache %>
+	
 
-	<% cache [@context, 'payments'] do %>
+	
 		<div class="container-fluid">
 			<div class="row">
 				
@@ -181,7 +182,7 @@
 				</div> <!-- end of col-md-12 -->
 			</div> <!-- end of row -->
 		</div> <!-- end of container-fluid -->
-	<% end %>
+	
 
 	<div class="container-fluid">
 		<div class="row">
@@ -227,7 +228,7 @@
 		</div> <!-- end of row -->
 	</div> <!-- end of container-fluid -->
 </div>
-
+<% end %> <%# end of cache %>
 
 <%= render 'modals/teacher_photos_dropzone' %>
 <%= render 'modals/teacher_info_form' %>

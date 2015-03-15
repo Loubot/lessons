@@ -47,7 +47,7 @@ class Teacher < ActiveRecord::Base
 
   has_many :identities, dependent: :destroy
 
-  has_and_belongs_to_many :subjects
+  has_and_belongs_to_many :subjects, touch: true
 
   has_many :experiences, dependent: :destroy
   has_many :events, dependent: :destroy
@@ -92,6 +92,7 @@ class Teacher < ActiveRecord::Base
 
   def check_rates
     self.locations.each do |l|
+      puts "locations #{l.prices.size} subjects #{self.subjects.size}"
       return false if l.prices.size != self.subjects.size
     end
     return true
@@ -104,7 +105,7 @@ class Teacher < ActiveRecord::Base
     error_message_array.push " profile picture not set" if !self.profile
     error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""
-    error_message_array.push " you must set all your rates" if !check_rates
+    error_message_array.push " you must set all your rates" if !self.check_rates
     error_message_array.push " you must select a subject" if self.subjects.size < 1
     error_message_array.push " you must enter some experience" if self.experiences.size < 1
     error_message_array.push " you must enter at least one location" if self.locations.size < 1

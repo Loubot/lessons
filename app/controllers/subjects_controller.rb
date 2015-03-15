@@ -48,6 +48,7 @@ class SubjectsController < ApplicationController
 	def remove_subject_from_teacher
 		subject = Subject.find(params[:id])
 		if current_teacher.subjects.destroy(subject)
+			Price.remove_prices_after_subject_delete(subject.id, current_teacher.id)
 			flash[:success] = "#{subject.name} deleted from your list of subjects"
 		else
 			flash[:danger] = "Couldn't remove subject"

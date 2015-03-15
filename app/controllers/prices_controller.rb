@@ -24,6 +24,11 @@ class PricesController < ApplicationController
 		
 	end
 
+	def destroy
+		@price = Price.find(params[:id])
+		@price.destroy
+	end
+
 	private
 
 			def price_params

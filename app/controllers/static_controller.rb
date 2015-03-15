@@ -24,7 +24,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-		fresh_when(:etag => ['welcome-page', current_teacher, flash], :public => true)
+		fresh_when([current_teacher, flash])
 	end	
 
 	def learn

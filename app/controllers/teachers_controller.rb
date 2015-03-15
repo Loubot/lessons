@@ -48,7 +48,7 @@ class TeachersController < ApplicationController
 		@experience = Experience.new
 		@subjects = @context.subjects
 
-		fresh_when(@teacher, @photos)
+		fresh_when([@context, @context.profile, @subjects.maximum(:updated_at),flash])
 	end
 	
 	def update
