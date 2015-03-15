@@ -171,9 +171,9 @@ teachersInfoReady = ->
         data: { page: $(@).attr('id') }
         type: 'get'
         success: (html) ->
-          $('.fav_subjects_container').empty()
+          $('.popular_subjects_anchor').empty()
           
-          $(html).appendTo('.fav_subjects_container').show('slow')
+          $(html).appendTo('.popular_subjects_anchor').show('slow')
           return false
     
 
