@@ -24,7 +24,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
-		# fresh_when([current_teacher, flash])
+		fresh_when([current_teacher, flash])
 	end	
 
 	def learn
