@@ -171,11 +171,10 @@ teachersInfoReady = ->
         data: { page: $(@).attr('id') }
         type: 'get'
         success: (html) ->
-          $('.popular_subjects_anchor').empty()
+          $('.fav_subjects_container').empty()
           
-          $(html).appendTo('.popular_subjects_anchor').show('slow')
-          return false
-    
+          $(html).appendTo('.fav_subjects_container').show('slow')
+             
 
     $('.stock_photo_container').mouseover ->
       $(this).find('.welcome_subject_image').animate opacity: .7, 50
