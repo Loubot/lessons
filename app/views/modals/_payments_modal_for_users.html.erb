@@ -33,7 +33,7 @@
         </div>
         <div class="row">
           <% if @teacher.paypal_email != "" %>
-            <div class="col-md-6">
+            <div class="col-xs-6">
               <%= form_tag paypal_create_path, method: 'get' do %>
                 <%= hidden_field_tag :teacher, '', class: 'paypal_teacher_email' %>
                 <%= hidden_field_tag :receiver_amount, '', class: 'rate' %>
@@ -47,7 +47,7 @@
           
           <% if @teacher.stripe_access_token != "" %>
             
-            <div class="col-md-6">
+            <div class="col-xs-6">
               <%= form_tag stripe_create_path do %>
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
