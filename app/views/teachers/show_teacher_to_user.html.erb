@@ -1,6 +1,7 @@
 <%= include_gon %>  
 <%= content_for :title,  @teacher.full_name %>
 
+<% cache [@teacher, @profilePic, @photos] do %>
 <div class="outer-container">
 
 
@@ -117,7 +118,7 @@
     </div> <!-- end of row -->
 </div>
 
-
+<% end %> <%# end of cache %>
 <%= render 'modals/payment_choice_modal' %>
 <%= render 'modals/payments_modal_for_users' %>
 <%= render 'modals/payments_modal_for_users_multiple' %>
