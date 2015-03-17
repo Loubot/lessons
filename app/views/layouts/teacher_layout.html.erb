@@ -13,8 +13,8 @@
     <%= yield :head %>    
 
     <%= render 'partials/shiv' %>
-  </head>
-  <body id="standard_layout">
+    <%= render 'partials/share_buttons' %>
+
     <script>
       WebFontConfig = {
         google: { families: ['Open+Sans']}
@@ -37,7 +37,13 @@
          s.parentNode.insertBefore(wf, s);
 
        })();
-    </script> 
+    </script>
+    <% if Rails.env.production? %>
+      <%= render 'partials/google_analytics' %>
+    <% end %>
+  </head>
+  <body id="standard_layout">
+    
   	
     <%= render 'partials/navs/teacher_nav' %>  	
     
@@ -48,13 +54,8 @@
       
       
 
-      <%= yield %>
-
-      <%= render 'partials/share_buttons' %>
+      <%= yield %>    
     
-    <% if Rails.env.production? %>
-      <%= render 'partials/google_analytics' %>
-    <% end %>
   </body>
 </html>
 
