@@ -24,6 +24,7 @@ class StaticController < ApplicationController
 	end
 
 	def welcome
+		p request.headers
 		fresh_when([current_teacher, flash])
 	end	
 
