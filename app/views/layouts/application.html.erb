@@ -14,7 +14,7 @@
     
 
     <%= render 'partials/shiv' %>
-    <%= render 'partials/share_buttons' if !is_mobile? %>
+    
     
     <% if Rails.env.production? %>
       <%= render 'partials/google_analytics' %>
@@ -36,7 +36,7 @@
       <%= yield %>  
 
     
-    
+      <%= render 'partials/share_buttons' if !is_mobile? %>
   </body>
 </html>
 

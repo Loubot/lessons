@@ -12,11 +12,7 @@
     <%= csrf_meta_tags %>
     <%= yield :head %>    
 
-    <%= render 'partials/shiv' %>
-    
-    <%= render 'partials/share_buttons' if !is_mobile? %>
-
-    
+    <%= render 'partials/shiv' %>    
     <% if Rails.env.production? %>
       <%= render 'partials/google_analytics' %>
     <% end %>
@@ -34,7 +30,7 @@
       
 
       <%= yield %>    
-    
+      <%= render 'partials/share_buttons' if !is_mobile? %>
   </body>
 </html>
 

@@ -1,10 +1,3 @@
-
-
-
-window.linkedin = ->
-  console.log 'd'
-
-
 fb_root = null
 fb_events_bound = false
 
@@ -82,7 +75,6 @@ loadTwitterSDK = ->
   
 
 loadSocials = ->
-  # loadLinkedIn()
 
   loadTwitterSDK()
   bindTwitterEventHandlers() unless twttr_events_bound
