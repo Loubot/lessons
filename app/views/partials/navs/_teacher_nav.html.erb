@@ -1,47 +1,49 @@
-<nav class="navbar teacher_nav navbar-default" id="teacher_nav_bar" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to(root_url, class: 'navbar-brand') do %>
-        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>  Learn Your Lesson
-      <% end %>
-       
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Personal info', edit_teacher_path(current_teacher) %></li>
-        <li><%= link_to 'Qualifications', qualification_form_teacher_path(current_teacher) %></li>
-        <li><%= link_to 'Your Business', your_location_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
-        <li><%= link_to 'Work area', teachers_area_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
-    
-      </ul>
-      
-       <ul class="nav navbar-nav navbar-right">
-        
-        <% if current_teacher %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= current_teacher.email %><span class="caret"></span></a>
-            <ul class="dropdown-menu <%= 'drop_mobile' if is_mobile? %>" role="menu">            
-              <li><%= link_to 'History', previous_lessons_teacher_path(current_teacher.id) %></li>
-              <li><%=link_to 'Edit info', edit_teacher_path(current_teacher) %></li>
-              <li class="divider"></li>              
-              <li><%= link_to 'Logout', destroy_teacher_session_path, method: :delete %></li>
-              <li class="divider"></li>
-              <li><a href="#" data-target="#add_authentication_modal" data-toggle="modal">Add authentications</a></li>
-        <% else %>
-                <li><%= link_to 'Login', new_teacher_session_path %></li>
+<% cache(['teacher_nav', current_teacher]) do %>
+  <nav class="navbar teacher_nav navbar-default" id="teacher_nav_bar" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to(root_url, class: 'navbar-brand') do %>
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>  Learn Your Lesson
         <% end %>
-            </ul> <!-- end of dropdown-menu -->
-          </li> <!-- end of dropdown -->
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+         
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Personal info', edit_teacher_path(current_teacher) %></li>
+          <li><%= link_to 'Qualifications', qualification_form_teacher_path(current_teacher) %></li>
+          <li><%= link_to 'Your Business', your_location_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
+          <li><%= link_to 'Work area', teachers_area_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
+      
+        </ul>
+        
+         <ul class="nav navbar-nav navbar-right">
+          
+          <% if current_teacher %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= current_teacher.email %><span class="caret"></span></a>
+              <ul class="dropdown-menu <%= 'drop_mobile' if is_mobile? %>" role="menu">            
+                <li><%= link_to 'History', previous_lessons_teacher_path(current_teacher.id) %></li>
+                <li><%=link_to 'Edit info', edit_teacher_path(current_teacher) %></li>
+                <li class="divider"></li>              
+                <li><%= link_to 'Logout', destroy_teacher_session_path, method: :delete %></li>
+                <li class="divider"></li>
+                <li><a href="#" data-target="#add_authentication_modal" data-toggle="modal">Add authentications</a></li>
+          <% else %>
+                  <li><%= link_to 'Login', new_teacher_session_path %></li>
+          <% end %>
+              </ul> <!-- end of dropdown-menu -->
+            </li> <!-- end of dropdown -->
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+<% end %> <%# end of cache %>
