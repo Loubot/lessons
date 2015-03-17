@@ -13,7 +13,8 @@
     <%= yield :head %>    
 
     <%= render 'partials/shiv' %>
-    <%= render 'partials/share_buttons' %>
+    
+    <%= render 'partials/share_buttons' if !is_mobile? %>
 
     <script>
       WebFontConfig = {
