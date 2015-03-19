@@ -33,7 +33,7 @@ class TeachersController < ApplicationController
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
-		fresh_when([@teacher, @profilePic])
+		fresh_when([current_teacher, @profilePic, flash])
 	end
 
 	def edit
@@ -48,7 +48,7 @@ class TeachersController < ApplicationController
 		@experience = Experience.new
 		@subjects = @context.subjects
 
-		fresh_when([@context, @context.profile, @subjects.maximum(:updated_at),flash])
+		# fresh_when([@context, @context.profile, @subjects.maximum(:updated_at),flash])
 	end
 	
 	def update
@@ -110,7 +110,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

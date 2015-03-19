@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.integer  "teacher_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -138,8 +138,6 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.text     "comment"
     t.integer  "event_id"
   end
-
-  add_index "reviews", ["event_id"], name: "index_reviews_on_event_id"
 
   create_table "subjects", force: :cascade do |t|
     t.string   "name",        limit: 255

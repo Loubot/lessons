@@ -132,18 +132,19 @@
 				       	<button class="btn btn-default" data-toggle="modal" data-target="#teacher_about_you_modal"><span class="glyphicon glyphicon-pencil"></span>Edit</button>
 				      </div> <!-- end of btn-group pull-right -->
 						</div> <!-- end of panel heading -->
-						<!-- <div class="panel-body">
-							
-						</div>  end  of panel-body -->
-						<ul class="list-group clearfix">
-							<% if !@context.overview.empty? %>
-								<li class="list-group-item"><%= @context.overview %></li>
-							<% else %>
-								<li class="list-group-item">Please fill in your overview</li>
-							<% end %>
-							
-							
-						</ul>
+						<div class="panel-body">
+							<ul class="list-group clearfix">
+								<% if !@context.overview.empty? %>
+									<li class="list-group-item"><%= @context.overview %></li>
+								<% else %>
+									<li class="list-group-item">Please fill in your overview</li>
+								<% end %>							
+							</ul>
+						</div>  <!-- end  of panel-body -->
+						
+						<div class="panel-footer">
+							Please be thorough in your overview. Sell yourself! List all your experiences and tell us why you're a good teacher. What sort of equipment do you have (if it's relevant), will you travel to the students house. 
+						</div>
 					</div> <!-- end of panel panel-default -->
 				</div> <!-- end of col-md-12 -->
 			</div> <!-- end of row -->
