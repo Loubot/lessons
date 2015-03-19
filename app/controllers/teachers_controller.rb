@@ -96,10 +96,10 @@ class TeachersController < ApplicationController
 	def your_location
 		@teacher = Teacher.includes(:locations, :subjects).find(params[:id])
 		# @location = @teacher.locations.first
-		@locations = @teacher.locations.order("created_at ASC")
+		@locations = @teacher.locations.reorder("created_at ASC")
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
-		fresh_when [@locations, @teacher.subjects]
+		fresh_when [@locations, @teacher.subjects.maximum(:updated_at)]
 	end
 
 	def change_profile_pic
