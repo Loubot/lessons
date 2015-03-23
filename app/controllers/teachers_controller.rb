@@ -94,9 +94,10 @@ class TeachersController < ApplicationController
 	end
 
 	def your_location
-		@teacher = Teacher.includes(:locations, :subjects).find(params[:id])
+		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id])
 		# @location = @teacher.locations.first
 		@locations = @teacher.locations.reorder("created_at ASC")
+		@subjects = @teacher.subjects
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
 		fresh_when [@locations, @teacher.subjects.maximum(:updated_at)]
@@ -110,7 +111,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

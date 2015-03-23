@@ -9,6 +9,7 @@
 #  updated_at  :datetime
 #  location_id :integer
 #  price       :decimal(8, 2)
+#  no_map      :boolean          default("false")
 #
 
 class Price < ActiveRecord::Base
@@ -16,7 +17,7 @@ class Price < ActiveRecord::Base
   belongs_to :location, touch: true
   belongs_to :subject, touch: true
 
-  validates :subject_id, :teacher_id, :price, :location_id, presence: true
+  validates :subject_id, :teacher_id, :price, presence: true
 
   scope :is_valid?, -> { where("home_price IS NOT NULL") }
 

@@ -3,5 +3,6 @@ class AddStripeUserIdToTeacher < ActiveRecord::Migration
     add_column :teachers, :stripe_user_id, :string
     add_column :user_carts, :multiple, :boolean, default: false
     add_column :user_carts, :weeks, :integer, default: 0
+    add_column :prices, :no_map, :boolean, default: false
   end
 end

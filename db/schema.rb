@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.datetime "updated_at"
     t.integer  "location_id"
     t.decimal  "price",       precision: 8, scale: 2
+    t.boolean  "no_map",                              default: false
   end
 
   add_index "prices", ["subject_id"], name: "index_prices_on_subject_id", using: :btree

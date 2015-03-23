@@ -91,9 +91,14 @@ class Teacher < ActiveRecord::Base
   end
 
   def check_rates
-    self.locations.each do |l|
-      puts "locations #{l.prices.size} subjects #{self.subjects.size}"
-      return false if l.prices.size != self.subjects.size
+    # self.locations.each do |l|
+    #   puts "locations #{l.prices.size} subjects #{self.subjects.size}"
+    #   return false if l.prices.size != self.subjects.size
+    # end
+    # return true
+    
+    self.subjects.each do |s|
+      return false if s.prices.size == 0
     end
     return true
   end

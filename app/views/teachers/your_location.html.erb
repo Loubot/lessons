@@ -30,9 +30,29 @@
         </div>
         
         
-      </div>
+      </div> <!-- end of tab-content -->
 
     </div> <!-- end of tabpanel -->
   	
   </div> <!-- end of map_container -->
+
+  <div class="container-fluid home_schooling">
+    <div class="well">
+      You can enter a price that you charge if you are willing to travel to a students house to give this lesson
+    </div>
+    <% @subjects.each do |s| %>
+      <div class="col-xs-6">
+        <%= form_for Price.find_or_initialize_by(subject_id: s.id, no_map: true), html: { class: 'form-inline' }, remote: true do |f| %>
+          <div class="form-group">
+            <%= f.label "#{s.name} price" %>
+            <%= f.number_field :price, class: 'form-control' %>
+            <%= f.hidden_field :no_map, value: true %>
+            <%= f.hidden_field :subject_id, value: s.id %>
+            <%= f.hidden_field :teacher_id, value: @teacher.id %>
+            <%= f.submit "Update #{s.name} price", class: 'btn btn-info' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
