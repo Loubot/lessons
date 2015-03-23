@@ -125,4 +125,13 @@ module TeachersHelper
   	link_to("Delete authentictation",teacher_identity_path(current_teacher, ident.id), method: :delete, data: { confirm: 'Are you sure?' }).html_safe
   end
 
+  def check_if_price(prices, location)
+    prices.any? { |p| p.location_id == location && p.subject_id == subject.id }
+  end
+
+  def get_price_or_message(prices, location, subject, teacher)
+    p =  prices.find_by(location_id: location, subject_id: subject, teacher_id: teacher)
+    p ? number_to_currency(p.price, unit: '€') : "Teacher does not teach this subject here"
+  end
+
 end

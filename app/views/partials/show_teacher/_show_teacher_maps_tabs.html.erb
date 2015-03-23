@@ -12,7 +12,10 @@
           </div> <!-- end of panel-heading -->
           <div class="panel-body text-center">
               <p class="lead">
-                <%= @subject.name %> <p id="rates"><%= number_to_currency(@prices.find_by(location_id: location, subject_id: @subject).price, unit: '€') %></p>
+                <%= @subject.name %> <p id="rates">
+                <%= get_price_or_message(@prices, location.id, @subject.id, @teacher.id) %>
+                <%# number_to_currency(@prices.find_by(location_id: location, subject_id: @subject).price, unit: '€') %>
+              </p>
                 <%# render partial: 'partials/teachers_rates' %>
           </div> <!-- end of panel-body -->
           <ul class="list-group list-group-flush text-center">
