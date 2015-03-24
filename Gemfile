@@ -37,12 +37,14 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :production do
 	gem 'rails_12factor', '~> 0.0'
-	gem 'unicorn', '4.8.3'
+	
   gem 'heroku_rails_deflate'
 	# gem 'rack-zippy'
 end
 
-gem 'thin', 					group: :development
+gem 'thin', 					platforms: [:mingw, :mswin]
+
+gem 'unicorn', '~> 4.8', platforms: [:ruby]
 
 gem 'will_paginate'
 
