@@ -134,4 +134,8 @@ module TeachersHelper
     p ? number_to_currency(p.price, unit: '€') : "Teacher does not teach this subject here"
   end
 
+  def check_home_school?(prices, subject, teacher)
+    prices.any? { |p| p.subject_id ==  subject && p.teacher_id == teacher && p.no_map == true }
+  end
+
 end

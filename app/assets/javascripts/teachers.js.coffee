@@ -40,7 +40,7 @@ teachersInfoReady = ->
       dropzone.on 'sending', (file, xhr, formData) ->
         formData.append 'profile', 'true'
       dropzone.on 'success', (file) ->
-        console.log 'File uploaded successfully'
+        # console.log 'File uploaded successfully'
         location.reload()
       $('#process_queue').on 'click', ->
         dropzone.processQueue()
@@ -50,7 +50,7 @@ teachersInfoReady = ->
         trigger: 'focus'
       })
     catch error
-      console.log "Error: #{error}"
+      # console.log "Error: #{error}"
 
 #/////////////Qualifications visibility checkbox
   $('#visible_check').on 'click', () ->
@@ -203,8 +203,8 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
 
   if $('.btn_book_now').length > 0
-    console.log $('#rates').text().replace(/[^\d.]/g,"")
-    console.log """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').text()}"> """ 
+    # console.log $('#rates').text().replace(/[^\d.]/g,"")
+    # console.log """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').text()}"> """ 
     $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{ $('#rates').text().replace(/[^\d.]/g,"") }"> """ 
     # $(document).on 'change', '#rates', ->
     #   $('#create_event_form').find('#event_rate').remove()
@@ -214,12 +214,12 @@ teachersInfoReady = ->
       img = new Image()
       img.src = gon.profile_pic_url
       w = $('.show_teacher_profile_section').outerWidth()
-      console.log w
+      # console.log w
       $('.profile_pic_container').css 'height', w
       $('.profile_pic_container').css 'width', w
     $(window).resize ->      
       w = $('.show_teacher_profile_section').outerWidth()
-      console.log w
+      # console.log w
       $('.profile_pic_container').css 'height', w
       $('.profile_pic_container').css 'width', w
       
@@ -244,6 +244,20 @@ teachersInfoReady = ->
       # e.target # newly activated tab
       # e.relatedTarget # previous active tab
       $('#address').empty().append gon.locations[$(@).data('index')].address
+
+    #display appropraite booking option from dropdown select in payment_choice_modal
+    
+    $('#location_choice').on 'change', ->
+      if @.value == 'At location'
+        $('.select_teachers_location').css 'display', 'inline'
+        $('.select_home_lesson').css 'display', 'none'
+      else
+        $('.select_teachers_location').css 'display', 'none'
+        $('.select_home_lesson').css 'display', 'inline'
+        
+
+    #// end of display appropraite booking option
+
   if $('#this_date').length > 0
     AnyTime.noPicker 'this_date'
     $("#this_date").AnyTime_picker
@@ -252,26 +266,6 @@ teachersInfoReady = ->
       hideInput: true
 
 
-  #// Initialise stripe when stripe pay button is clicked
-
-  # $(document).on 'click', '.stripe-button-el', (e)->
-  #   alert 'b'
-  #   e.preventDefault()
-  #   StripeCheckout.open
-  #     key: 'pk_test_bedFzS7vnmzthkrQolmUjXNn'
-  #     amount: (parseFloat $('#event_table_price').text().replace(/[^\d.]/g,"")) * 100
-  #     name: 'The Store'
-  #     currency: 'EUR'
-  #     description: 'A whole bag of awesome ($50.00)'
-  #     panelLabel: 'Pay Now'
-  #     token: (res) ->
-  #       # Do something with res.id
-  #       # Store it in Mongo and/or create a charge on the server-side
-  #       console.info res
-  #       return
-
-
-  #// End of Initialise stripe when stripe pay button is clicked
 
 
 #//// end of show_teacher_to_user add price to form modal
