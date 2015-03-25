@@ -33,7 +33,7 @@ class TeachersController < ApplicationController
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
-		fresh_when([current_teacher, @profilePic, flash])
+		fresh_when([current_teacher,flash])
 	end
 
 	def edit
