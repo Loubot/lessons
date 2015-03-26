@@ -110,7 +110,7 @@ class Teacher < ActiveRecord::Base
     error_message_array.push " profile picture not set" if !self.profile
     error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""
-    error_message_array.push " you must set all your rates" if !self.check_rates
+    error_message_array.push " you must set at least one price per subject" if !self.check_rates
     error_message_array.push " you must select a subject" if self.subjects.size < 1
     error_message_array.push " you must enter some experience" if self.experiences.size < 1
     error_message_array.push " you must enter at least one location" if self.locations.size < 1

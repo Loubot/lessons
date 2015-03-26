@@ -125,17 +125,25 @@ module TeachersHelper
   	link_to("Delete authentictation",teacher_identity_path(current_teacher, ident.id), method: :delete, data: { confirm: 'Are you sure?' }).html_safe
   end
 
-  def check_if_price(prices, location)
-    prices.any? { |p| p.location_id == location && p.subject_id == subject.id }
+  def check_if_price(prices, location, subject, teacher)
+    # p = prices.select { |p| p.subject_id == subject && p.teacher_id == teacher }
+    if prices.any? { |p| p.subject_id == subject && p.no_map == true }
+      "#payment_choice_modal".html_safe
+    else
+      p "$$$$$$$$$$$$$ 2"
+    end
   end
 
   def get_price_or_message(prices, location, subject, teacher)
-    p =  prices.find_by(location_id: location, subject_id: subject, teacher_id: teacher)
+    p =  prices.select { |p| p.location_id == location && p.subject_id == subject && p.teacher_id == teacher }.first
     p ? number_to_currency(p.price, unit: '€') : "Teacher does not teach this subject here"
   end
 
-  def check_home_school?(prices, subject, teacher)
-    prices.any? { |p| p.subject_id ==  subject && p.teacher_id == teacher && p.no_map == true }
+  def check_teachers_options(prices, subject, teacher)
+    p =  prices.find_by(subject_id: subject, teacher_id: teacher)
+    
+
+    # prices.any? { |p| p.subject_id ==  subject && p.teacher_id == teacher && p.no_map == true }
   end
 
 end

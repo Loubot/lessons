@@ -9,9 +9,9 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid">
-              <% if check_home_school?(@prices, @subject.id, @teacher.id) %>
+              
                 <%= select_tag 'location_choice', "<option>Home</option><option>At location</option>".html_safe %>
-              <% end %>
+              
               <div class="row select_teachers_location">
                 <h2>Check availability</h2>
                 <%= form_for(@event, url: events_create_event_and_book_path, remote: true, html: { class: 'form-horizontal', id: 'create_event_form'}, method: 'post') do |f| %>
