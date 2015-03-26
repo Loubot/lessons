@@ -15,25 +15,30 @@ class TeachersController < ApplicationController
 	end
 
 	def show_teacher
-
-		@params = params
-		@event = Event.new
-		@categories = Category.includes(:subjects).all
-		@subject = Subject.find(params[:subject_id])
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos).find(params[:id])
-		@reviews = @teacher.reviews.take(3)
-		@locations = @teacher.locations
-		@prices = @teacher.prices
-		gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
-		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
-		gon.locations = @locations
-		@photos = @teacher.photos.where.not(id: @teacher.profile)
+		begin
+			@params = params
+			@event = Event.new
+			@categories = Category.includes(:subjects).all
+			@subject = Subject.find(params[:subject_id])
+			@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos).find(params[:id])
+			@reviews = @teacher.reviews.take(3)
+			@locations = @teacher.locations
+			@prices = @teacher.prices
+			gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
+			@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
+			gon.locations = @locations
+			@photos = @teacher.photos.where.not(id: @teacher.profile)
+			
+			
+			gon.events = public_format_times(@teacher.events) #teachers_helper
+			gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
+			pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
+			fresh_when([current_teacher,flash])
+		rescue
+			flash[:danger] = "That teacher does not teach that subject"
+			redirect_to root_path
+		end
 		
-		
-		gon.events = public_format_times(@teacher.events) #teachers_helper
-		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
-		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
-		# fresh_when([current_teacher,flash])
 	end
 
 	def edit
