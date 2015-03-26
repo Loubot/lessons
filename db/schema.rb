@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301011355) do
+ActiveRecord::Schema.define(version: 20141228113548) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -178,7 +178,6 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.string   "stripe_access_token",    default: ""
     t.boolean  "is_active",              default: false, null: false
     t.boolean  "will_travel",            default: false, null: false
-    t.string   "stripe_user_id"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
@@ -210,8 +209,6 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "subject_id"
-    t.boolean  "multiple",      default: false
-    t.integer  "weeks",         default: 0
   end
 
   add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true
