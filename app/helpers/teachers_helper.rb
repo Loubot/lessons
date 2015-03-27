@@ -127,10 +127,12 @@ module TeachersHelper
 
   def check_if_price(prices, location, subject, teacher)
     # p = prices.select { |p| p.subject_id == subject && p.teacher_id == teacher }
-    if prices.any? { |p| p.subject_id == subject && p.no_map == true }
+    if prices.any? { |p| p.subject_id == subject && p.location_id == location }      
       "#payment_choice_modal".html_safe
+    elsif prices.any? { |p| p.subject_id == subject && p.no_map == true }
+      "#payment_no_location_modal".html_safe
     else
-      p "$$$$$$$$$$$$$ 2"
+      "#payment_location_only_modal".html_safe
     end
   end
 

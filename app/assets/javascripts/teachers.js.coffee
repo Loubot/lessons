@@ -248,7 +248,7 @@ teachersInfoReady = ->
     #display appropraite booking option from dropdown select in payment_choice_modal
     
     $('#location_choice').on 'change', ->
-      if @.value == 'At location'
+      if @.value == 'Teachers house'
         $('.select_teachers_location').css 'display', 'inline'
         $('.select_home_lesson').css 'display', 'none'
       else

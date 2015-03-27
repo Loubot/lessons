@@ -1,0 +1,21 @@
+<% cache [current_teacher, 'payment_no_location_choice_modal'] do %>
+  <% if teacher_signed_in? %>  
+    <div class="modal fade" id="payment_no_location_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Payment Options</h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                To do !
+              </div>
+            </div> <!-- end of container-fluid -->
+          </div> <!-- end of modal-body -->
+        </div> <!-- end of modal-content -->
+      </div> <!-- end of modal-dialog -->
+    </div> <!-- end of modal fade -->
+  <% end %> <!-- if teacher_signed_in? -->
+<% end %> <%# end of cache %>

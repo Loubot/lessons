@@ -1,6 +1,6 @@
-<% cache [current_teacher, 'payment_choice_modal'] do %>
+<% cache [current_teacher, 'payment_location_only_modal'] do %>
   <% if teacher_signed_in? %>  
-    <div class="modal fade" id="payment_choice_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="payment_location_only_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -9,9 +9,6 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid">
-              
-                <%= select_tag 'location_choice', "<option>The where</option><option>My house</option><option>Teachers house</option>".html_safe %>
-              
               <div class="row select_teachers_location">
                 <h2>Check availability</h2>
                 <%= form_for(@event, url: events_create_event_and_book_path, remote: true, html: { class: 'form-horizontal', id: 'create_event_form'}, method: 'post') do |f| %>
@@ -80,10 +77,6 @@
                   <%= hidden_field_tag 'event[student_id]', current_teacher.id if teacher_signed_in? %>
                 <% end %> <!-- end of form_tag  -->
               </div> <!-- end of select_teachers_location -->
-
-              <div class="row select_home_lesson">
-                To do !
-              </div>
             </div> <!-- end of container-fluid -->
           </div> <!-- end of modal-body -->
         </div> <!-- end of modal-content -->
