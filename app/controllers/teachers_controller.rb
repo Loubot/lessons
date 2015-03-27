@@ -29,7 +29,7 @@ class TeachersController < ApplicationController
 		gon.locations = @locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		
-		
+		@home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first.price
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view

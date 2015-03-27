@@ -10,7 +10,17 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
-                To do !
+                <% if @teacher.paypal_email != "" %>
+                  <div class="col-md-6">
+                    <%= form_tag single_booking_paypal_path, method: 'post' do %>
+                      <%= hidden_field_tag :teacher, @teacher.email %>
+                      <%= hidden_field_tag :receiver_amount, @home_price.to_f %>
+                      <%= hidden_field_tag :paypal, '1' %>
+                      <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
+                      <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
+                    <% end %>
+                  </div> <!-- end of col-md-6-->
+                <% end %>
               </div>
             </div> <!-- end of container-fluid -->
           </div> <!-- end of modal-body -->
