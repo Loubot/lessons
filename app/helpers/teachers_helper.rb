@@ -127,7 +127,7 @@ module TeachersHelper
 
   def check_if_price(prices, location, subject, teacher)
     # p = prices.select { |p| p.subject_id == subject && p.teacher_id == teacher }
-    if prices.any? { |p| p.subject_id == subject && p.location_id == location }      
+    if prices.any? { |p| p.subject_id == subject && p.location_id == location } && prices.any? { |p| p.subject_id == subject && p.no_map == true }
       "#payment_choice_modal".html_safe
     elsif prices.any? { |p| p.subject_id == subject && p.no_map == true }
       "#payment_no_location_modal".html_safe
@@ -137,6 +137,7 @@ module TeachersHelper
   end
 
   def get_price_or_message(prices, location, subject, teacher)
+    p "location %%%%%%%%% #{location}"
     p =  prices.select { |p| p.location_id == location && p.subject_id == subject && p.teacher_id == teacher }.first
     p ? number_to_currency(p.price, unit: '€') : "Teacher does not teach this subject here"
   end

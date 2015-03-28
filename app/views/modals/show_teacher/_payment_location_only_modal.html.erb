@@ -8,8 +8,8 @@
             <h4 class="modal-title" id="myModalLabel">Payment Options</h4>
           </div>
           <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row select_teachers_location">
+            
+              
                 <h2>Check availability</h2>
                 <%= form_for(@event, url: events_create_event_and_book_path, remote: true, html: { class: 'form-horizontal', id: 'create_event_form'}, method: 'post') do |f| %>
                                 
@@ -20,41 +20,41 @@
                     </div>
                   </div> <!-- end of form-group -->
                 
-                  <div class="row">
-                    <div class='form-group'>
-                      <%= label_tag 'start_time', 'Start time:', class: 'col-sm-2 control-label' %>
-                      <div class="col-sm-10">
-                        <%= f.time_select :start_time,
-                              :combined => true,
-                              :default => Time.now.change(:hour => 11, :min => 30),
-                              :minute_interval => 30,
-                              :time_separator => "",
-                              :start_hour => 10,
-                              :start_minute => 30,
-                              :end_hour => 14,
-                              :end_minute => 30
-                            %>
-                      </div> <!-- end of col-sm-8 -->
-                    </div> <!-- end of form-group -->
-                  </div>
+                  
+                  <div class='form-group'>
+                    <%= label_tag 'start_time', 'Start time:', class: 'col-sm-2 control-label' %>
+                    <div class="col-sm-10">
+                      <%= f.time_select :start_time,
+                            :combined => true,
+                            :default => Time.now.change(:hour => 11, :min => 30),
+                            :minute_interval => 30,
+                            :time_separator => "",
+                            :start_hour => 10,
+                            :start_minute => 30,
+                            :end_hour => 14,
+                            :end_minute => 30
+                          %>
+                    </div> <!-- end of col-sm-8 -->
+                  </div> <!-- end of form-group -->
+                  
 
-                  <div class="row">
-                    <div class="form-group">
-                      <%= label_tag 'end_time', 'End time:', class: 'col-sm-2 control-label' %>
-                      <div class="col-sm-10">
-                        <%= f.time_select :end_time,
-                                      :combined => true,
-                                      :default => Time.now.change(:hour => 12, :min => 30),
-                                      :minute_interval => 30,
-                                      :time_separator => "",
-                                      :start_hour => 10,
-                                      :start_minute => 30,
-                                      :end_hour => 14,
-                                      :end_minute => 30
-                                    %>
-                      </div> <!-- end of col-sm-10 -->
-                    </div> <!-- end of form-group -->
-                  </div>
+                  
+                  <div class="form-group">
+                    <%= label_tag 'end_time', 'End time:', class: 'col-sm-2 control-label' %>
+                    <div class="col-sm-10">
+                      <%= f.time_select :end_time,
+                                    :combined => true,
+                                    :default => Time.now.change(:hour => 12, :min => 30),
+                                    :minute_interval => 30,
+                                    :time_separator => "",
+                                    :start_hour => 10,
+                                    :start_minute => 30,
+                                    :end_hour => 14,
+                                    :end_minute => 30
+                                  %>
+                    </div> <!-- end of col-sm-10 -->
+                  </div> <!-- end of form-group -->
+                  
                     
                   <div class="form-group">
                     <div class="col-sm-10">
@@ -76,8 +76,8 @@
                   <%= hidden_field_tag 'event[teacher_id]', @teacher.id %>
                   <%= hidden_field_tag 'event[student_id]', current_teacher.id if teacher_signed_in? %>
                 <% end %> <!-- end of form_tag  -->
-              </div> <!-- end of select_teachers_location -->
-            </div> <!-- end of container-fluid -->
+              
+            
           </div> <!-- end of modal-body -->
         </div> <!-- end of modal-content -->
       </div> <!-- end of modal-dialog -->
