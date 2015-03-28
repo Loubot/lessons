@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
 
+  before_action :authenticate_teacher!
 
   def create
     

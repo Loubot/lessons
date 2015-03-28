@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
       def check_mobile?
         session[:mobile] = request.user_agent =~ /Mobile|webOS/ ? true : false
-        puts "Mobile? #{session[:mobile]}"
+        # puts "Mobile? #{session[:mobile]}"
       end
 
       def user_agent_list

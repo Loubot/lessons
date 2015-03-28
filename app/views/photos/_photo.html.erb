@@ -1,7 +1,7 @@
 <% popoverContent = "#{link_to 'Delete', [@context, photo], data: { :confirm => 'Are you sure?' }, method: :delete} <br>
 			#{link_to 'Make profile', change_profile_pic_teacher_path(photo.id), method: 'post'}" %>
 
-
+<% cache(photo.avatar.url) do %>
   <div class="col-xs-6 col-md-2 form_page_pic_collection">
     
     	<a href='#!' class="profile_pic_popover" tab-index="0"  data-title="<%= photo.name %>" data-html='true' data-container="body" data-toggle="popover" data-placement="top" data-content="<%= popoverContent %>"><%= image_tag photo.avatar.url, class: 'img-responsive' %> </a>  
@@ -9,3 +9,4 @@
     
   </div>
 
+<% end %>

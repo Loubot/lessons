@@ -1,8 +1,8 @@
 module StaticHelper  
   
 
-  def get_subject(subject) #return first subject ILIKE name passed in
-    @subject = subject == '' ? [] : Subject.where('name ILIKE ?', "%#{subject}%").first
+  def get_subject(subject) #return first subject LIKE name passed in
+    @subject = subject == '' ? [] : Subject.where('name LIKE ?', "%#{subject}%").first
   end
 end
 
@@ -17,7 +17,7 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
   
     if !params[:search_position].empty? && !params[:search_subjects].empty? #subject and location
       ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
-      @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects).where(id: ids).paginate(page: params[:page])
+      @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
       
       if params[:sort_by] == 'Rate: lowest first'   
         @teachers.reorder('prices.price ASC')
@@ -29,7 +29,7 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
 
     elsif !params[:search_position].empty? && params[:search_subjects].empty? #location but not subject
       ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
-      @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects).where(id: ids).paginate(page: params[:page])
+      @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
 
       if params[:sort_by] == 'Rate: lowest first'
         @teachers.reorder('prices.price ASC')
@@ -41,7 +41,7 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
 
     elsif params[:search_position].empty? && !params[:search_subjects].empty? #no location and subject
       # ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
-      @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects).paginate(page: params[:page])
+      @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).paginate(page: params[:page])
 
       puts 'yaya'
       if params[:sort_by] == 'Rate: lowest first'

@@ -1,5 +1,7 @@
 class OpeningsController < ApplicationController
 
+	before_action :authenticate_teacher!
+
 	include OpeningsHelper
 
 	def create

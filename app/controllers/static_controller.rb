@@ -25,15 +25,17 @@ class StaticController < ApplicationController
 
 	def welcome
 		
+		fresh_when([current_teacher, flash])
 	end	
 
 	def learn
 		render 'static/mobile_views/mobile_learn' if is_mobile?
-
+		fresh_when(:etag => ['learn-page', current_teacher, flash], :public => true)
 	end
 
 	def teach
 		render 'static/mobile_views/mobile_teach' if is_mobile?
+		fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
 	end
 
 	def add_to_list
@@ -50,15 +52,16 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
+		fresh_when [params[:search_subjects], params[:position]]
 	end
 
 	def display_subjects
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%")
+		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
 		@subject = @subjects.first
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
@@ -67,9 +70,7 @@ class StaticController < ApplicationController
 			@teachers.paginate(page: params[:page])
 			
 		end
-		# teachers = get_search_results(params, @subject)
-		
-		# @teachers = !teachers.empty? ? teachers.paginate(:page => params[:page]) : []
+		fresh_when [params[:search_subjects], params[:position]]
 	end
 
 	def browse_categories

@@ -30,4 +30,10 @@ class Price < ActiveRecord::Base
     Teacher.find(self.teacher_id).set_active
   end
 
+  def self.remove_prices_after_subject_delete(subject, teacher)
+    self.where(subject_id: subject, teacher_id: teacher).each do |p|
+      p.destroy
+    end
+  end
+
 end

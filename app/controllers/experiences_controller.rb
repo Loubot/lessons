@@ -1,5 +1,7 @@
 class ExperiencesController < ApplicationController
 
+	before_action :authenticate_teacher!
+
 	def create		
 		@experience = Experience.new(experience_params)
 		if @experience.save

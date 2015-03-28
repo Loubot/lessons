@@ -12,48 +12,25 @@
     <%= csrf_meta_tags %>
     <%= yield :head %>    
 
-    <%= render 'partials/shiv' %>
-  </head>
-  <body id="standard_layout">
-    <script>
-      WebFontConfig = {
-        google: { families: ['Open+Sans']}
-      };
-
-      (function() {
-
-         var wf = document.createElement('script');
-
-         wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-
-             '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-
-         wf.type = 'text/javascript';
-
-         wf.async = 'true';
-
-         var s = document.getElementsByTagName('script')[0];
-
-         s.parentNode.insertBefore(wf, s);
-
-       })();
-    </script> 
-  	
-    <%= render 'partials/teacher_nav' %>
-    
-  	 
-  	
-    <div class="container main_page_containers" id="main_page">
-      
-      <%= render 'partials/notices' %>
-
-      <%= yield %>
-
-      <%= render 'partials/share_buttons' %>
-    </div>
+    <%= render 'partials/shiv' %>    
     <% if Rails.env.production? %>
       <%= render 'partials/google_analytics' %>
     <% end %>
+  </head>
+  <body id="standard_layout">
+    
+  	
+    <%= render 'partials/navs/teacher_nav' %>  	
+    
+
+      <div class="outer-container">
+        <%= render 'partials/notices' %>        
+      </div>
+      
+      
+
+      <%= yield %>    
+      <%= render 'partials/share_buttons' if !is_mobile? %>
   </body>
 </html>
 

@@ -1,5 +1,8 @@
 class PhotosController < ApplicationController
 	include PhotosHelper
+
+	before_action :authenticate_teacher!
+	
 	def new 
 		@context = context
 		@photo = Photo.new	

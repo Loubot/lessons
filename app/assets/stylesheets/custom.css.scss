@@ -1,4 +1,4 @@
-
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 html{
   height: 100%;
 }
@@ -6,7 +6,7 @@ body {
   background-color: #e0ebf4; 
   min-height: 100%;
   height: 100%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
   //background-color: #CCCCC0;*/
 }
 
@@ -19,9 +19,8 @@ hr{
 }
 
 .alert{
-
   margin-top: -22px;  
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
 
@@ -192,15 +191,6 @@ hr{
 }
 //end of standard layout page*/
 
-#main_page{
-  // padding-top: 50px;
-  //background-color:#fafafa;*/
-  background-color:#e0ebf4;
-  min-height: 90%;
-  margin: 0 !important;
-  // padding: 0 !important;
-  width: 100%;
-}
 .jumbotron{
   margin-bottom: 0;
 }
@@ -361,7 +351,7 @@ hr{
   // margin-bottom: 20px;
   // margin-top: -22px;
   height: 350px;  
-  // background-image: asset_url('blackboard.jpg');
+  // background-image: asset_url('background1.jpg');
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;
   background-size: 100% 100%;
@@ -822,6 +812,7 @@ form .glyphicon {
 }
 
 .browse_topics{
+  text-align:center;
   padding-top: 10px;
   border-top: 2px solid #FFF;
   border-bottom: 2px solid #FFF;
@@ -1085,6 +1076,10 @@ form .glyphicon {
   z-index: 20;
 }
 
+.share_message{
+  clear: both;
+}
+
 #share_buttons:hover{
   opacity: 1;
 }
@@ -1126,7 +1121,12 @@ form .glyphicon {
   .mobile.container-fluid{
     padding:0;
   }
+
+  .row.show_teacher_to_user{
+    margin: 0;
+  }
   .show_teacher_profile_container{ //show_teacher_to_user page
+    margin: 0;
     height: 100%;  
     // margin-bottom: 20px;    
   }
@@ -1299,7 +1299,7 @@ form .glyphicon {
     margin-bottom: 20px;    
   }
   .mobile.panel-default{ //show_teacher_to_user page
-    margin-bottom: 0;
+    margin-bottom: 15px;
   }
   .mobile.panel-body{ //show_teacher_to_user page
     padding: 15px;

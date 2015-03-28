@@ -75,6 +75,7 @@ loadTwitterSDK = ->
   
 
 loadSocials = ->
+
   loadTwitterSDK()
   bindTwitterEventHandlers() unless twttr_events_bound
 

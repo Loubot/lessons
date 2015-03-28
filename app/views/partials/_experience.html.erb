@@ -1,4 +1,4 @@
-<% cache experience do %>	
+
 	<% if experience.present == '1' %>
 		<li class="list-group-item clearfix"><strong>Title: <%= experience.title %></strong>
 			<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - Present"%>
@@ -14,4 +14,3 @@
 		<div class="panel-footer"><%= experience.description %></div>
 	<% end %>
 
-<% end %>

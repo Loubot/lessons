@@ -1,5 +1,7 @@
 class QualificationsController < ApplicationController
 
+	before_action :authenticate_teacher!
+
 	def create
 		@qualification = Qualification.new(qualification_params)
 		if @qualification.save

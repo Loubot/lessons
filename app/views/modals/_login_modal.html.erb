@@ -1,95 +1,97 @@
-<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Login</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="col-md-6 col-md-12 col-xs-12">
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal') do |f| %>
-              <!-- <div class="heading">
-                <h4 class="form-heading">Sign In</h4>
-              </div> --> <!-- end of heading -->
-
-              <div class="control-group">
-                <%= f.label :email, class: 'control-label', id: 'login_modal_email' %>
-                <div class="controls">
-                  <%= f.email_field :email %>
-                </div> <!-- end of controls -->
-              </div> <!-- end of control-group --> 
-              <div class="control-group">
-                <%= f.label :password, class: 'control-label' %>
-                <div class="controls">
-                  <%= f.password_field :password %>
-                </div> <!-- end of controls -->
-              </div> <!-- end of control-group -->
-
-              
-
-              <div class="control-group">
-                <div class="controls">
-                  <% if devise_mapping.rememberable? -%>
-                    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-                  <% end -%>
-                </div>
-              </div>
-
-              <div class="control-group">
-                <div><%= f.submit "Sign in", class: 'btn btn-success sign_in_submit' %></div>
-                <div class="login_fb_container">
-                  <%= link_to image_tag('facebook_login.png'), "/teachers/auth/facebook?origin=#{request.original_url}&id=#{params['id'] if params['id']}", class: 'fbLogin_link' %>                
-                </div>
-                <div class="login_container">
-                  <%= link_to image_tag('google_sign_in.jpg'), "teachers/auth/google_oauth2?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
-                </div>
-                <div class="login_container">
-                  <%= link_to image_tag('twitter_sign_in.jpg'), "teachers/auth/twitter?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
-                </div>
-                <div class="login_container">
-                  <%= link_to image_tag('linkedin_login.jpg'), "teachers/auth/linkedin?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
-                </div>
-                <div class="controls">
-                  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-                  <% end -%>
-                </div> <!-- end of controls -->
-              </div><!--  end of control-group -->
-              
-              
-            <% end %>
-            
-          </div> <!-- end of col-md-6 -->
-          <% if !is_mobile? %>
+<% cache('login_modal') do %>
+  <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Login</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
             <div class="col-md-6 col-md-12 col-xs-12">
-              <ul class="ds-btn">                
-                <li>
-                  <%= link_to(learn_path, html_options = { class: 'btn btn-lg btn-primary' }) do %>
-                    <i class="glyphicon glyphicon-user pull-left"></i><span>Students<br><small>Student registration</small></span>
-                  <% end %>
-                        
-                </li>              
-                <li>
-                  <%= link_to(teach_path, html_options = { class: 'btn btn-lg btn-info' }) do %>
-                    <i class="glyphicon glyphicon-user pull-left"></i><span>Teachers<br><small>Teacher registration</small></span>
-                  <% end %>
-                </li>
-              </ul>
-            </div> <!-- end of col-md-6 -->
-          <% else %>
-            <div class="mobile_reg_buttons col-xs-12">
-              <%= link_to 'Student registration', learn_path, class: 'btn btn-primary mobile_student_reg_link' %>
-              <%= link_to 'Teacher registration', teach_path, class: 'btn btn-info' %>
-            </div>
-          <% end %>
-        </div> <!-- end of container-fluid-->
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal') do |f| %>
+                <!-- <div class="heading">
+                  <h4 class="form-heading">Sign In</h4>
+                </div> --> <!-- end of heading -->
 
-      </div> <!-- end of modal-body -->
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
-    </div> <!-- end of modal-content -->
-  </div> <!-- end of modal-dialog -->
-</div> <!-- end of login_modal -->
+                <div class="control-group">
+                  <%= f.label :email, class: 'control-label', id: 'login_modal_email' %>
+                  <div class="controls">
+                    <%= f.email_field :email %>
+                  </div> <!-- end of controls -->
+                </div> <!-- end of control-group --> 
+                <div class="control-group">
+                  <%= f.label :password, class: 'control-label' %>
+                  <div class="controls">
+                    <%= f.password_field :password %>
+                  </div> <!-- end of controls -->
+                </div> <!-- end of control-group -->
+
+                
+
+                <div class="control-group">
+                  <div class="controls">
+                    <% if devise_mapping.rememberable? -%>
+                      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+                    <% end -%>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <div><%= f.submit "Sign in", class: 'btn btn-success sign_in_submit' %></div>
+                  <div class="login_fb_container">
+                    <%= link_to image_tag('facebook_login.png'), "/teachers/auth/facebook?origin=#{request.original_url}&id=#{params['id'] if params['id']}", class: 'fbLogin_link' %>                
+                  </div>
+                  <div class="login_container">
+                    <%= link_to image_tag('google_sign_in.jpg'), "teachers/auth/google_oauth2?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
+                  </div>
+                  <div class="login_container">
+                    <%= link_to image_tag('twitter_sign_in.jpg'), "teachers/auth/twitter?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
+                  </div>
+                  <div class="login_container">
+                    <%= link_to image_tag('linkedin_login.jpg'), "teachers/auth/linkedin?origin=#{request.original_url}&id=#{params['id'] if params['id']}" %>
+                  </div>
+                  <div class="controls">
+                    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                      <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                    <% end -%>
+                  </div> <!-- end of controls -->
+                </div><!--  end of control-group -->
+                
+                
+              <% end %>
+              
+            </div> <!-- end of col-md-6 -->
+            <% if !is_mobile? %>
+              <div class="col-md-6 col-md-12 col-xs-12">
+                <ul class="ds-btn">                
+                  <li>
+                    <%= link_to(learn_path, html_options = { class: 'btn btn-lg btn-primary' }) do %>
+                      <i class="glyphicon glyphicon-user pull-left"></i><span>Students<br><small>Student registration</small></span>
+                    <% end %>
+                          
+                  </li>              
+                  <li>
+                    <%= link_to(teach_path, html_options = { class: 'btn btn-lg btn-info' }) do %>
+                      <i class="glyphicon glyphicon-user pull-left"></i><span>Teachers<br><small>Teacher registration</small></span>
+                    <% end %>
+                  </li>
+                </ul>
+              </div> <!-- end of col-md-6 -->
+            <% else %>
+              <div class="mobile_reg_buttons col-xs-12">
+                <%= link_to 'Student registration', learn_path, class: 'btn btn-primary mobile_student_reg_link' %>
+                <%= link_to 'Teacher registration', teach_path, class: 'btn btn-info' %>
+              </div>
+            <% end %>
+          </div> <!-- end of container-fluid-->
+
+        </div> <!-- end of modal-body -->
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div> <!-- end of modal-content -->
+    </div> <!-- end of modal-dialog -->
+  </div> <!-- end of login_modal -->
+<% end %> <%# end of cache %>

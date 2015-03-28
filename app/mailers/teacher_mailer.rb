@@ -1,6 +1,6 @@
 class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
-  def test_mail(student, student_name, teacher, start_time, end_time)
+  def mail_teacher(student, student_name, teacher, start_time, end_time)
     p 'test mail start'
     begin
       require 'mandrill'

@@ -174,8 +174,7 @@ teachersInfoReady = ->
           $('.fav_subjects_container').empty()
           
           $(html).appendTo('.fav_subjects_container').show('slow')
-          return false
-    
+             
 
     $('.stock_photo_container').mouseover ->
       $(this).find('.welcome_subject_image').animate opacity: .7, 50

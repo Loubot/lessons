@@ -54,26 +54,37 @@ class EventsController < ApplicationController
 	end
 
 	# ajax event booking
-	def create_event_and_book
-		event_params = student_format_time(params[:event])
-		p "event params #{event_params.inspect}"
+	def create_event_and_book		
+		
+		@rate = params[:event][:rate].to_f #set instance variable of rate
 
-		if params['Multiple'] == '1'
-			studentDoMultipleBookings(params)
-			render status: 200, nothing: true
-		else
-			@event = Event.new(event_params)
-			@rate = params[:event][:rate].to_f
+		if params['Multiple'] == 'true'
+			event = Event.student_do_multiple_bookings(params)
+			if event.valid?
+				@event = event
+				@weeks = params[:booking_length]
+				puts "weeks #{@weeks.to_i} rate #{@rate.to_f}"
+				@total_rate = @weeks.to_i * @rate.to_f
+
+				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
+				@cart = UserCart.create_multiple_cart(params, @teacher.email, current_teacher)
+				
+				# p "cart multiple #{@cart.inspect}"
+				
+			else
+				puts event
+				@event = event.errors.full_messages
+			end
+			render 'events/multiple_events.js.coffee'
+		else #single booking		
+			
+			@event = Event.student_do_single_booking(params)
+			
 			
 			if @event.valid?
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.find_or_initialize_by(student_id: params[:event][:student_id])
-				@cart.update_attributes(teacher_id: params[:event][:teacher_id],
-																 params: event_params, teacher_email: @teacher.email,
-																 student_email: current_teacher.email,
-																 student_name: "#{current_teacher.full_name}",
-																 subject_id: params[:event][:subject_id])
-				@cart.save!
+				@cart = UserCart.create_single_cart(params, @teacher.email, current_teacher)
+				
 				p "cart  #{@cart.inspect}"
 			else
 				@teacher = @event.errors.full_messages

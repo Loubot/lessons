@@ -3,11 +3,12 @@
   $('.payment_choice_error').append("<%= escape_javascript(@teacher[0].to_s) %>");
   $('.payment_choice_error').append("</div>");
 <% else %>
+  $('.payment_choice_error').remove()
 	$('#payment_choice_modal').modal('hide'); //hide availability modal
 	$('#payments_modal_for_users').modal('show'); //show payment modal
 	$('#event_table_start_time').text('<%= @event.start_time.to_formatted_s(:long) %>');
 	$('#event_table_end_time').text('<%= @event.end_time.to_formatted_s(:long) %>');
-	$('#event_table_length').text("<%= total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %>");
+	$('#event_table_length').text("<%= total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600) %> hours(s)");
 	$('#event_table_price').text("<%= number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€') %>");
 
 	//Update all hidden fields in payments_modal_for_users

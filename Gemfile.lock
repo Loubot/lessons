@@ -224,6 +224,7 @@ GEM
       rest-client
       virtus (~> 1.0.0)
     rack (1.6.0)
+    rack-pratchett (0.1.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-zippy (2.0.2)
@@ -371,6 +372,7 @@ DEPENDENCIES
   paypal-sdk-adaptiveaccounts
   pg (~> 0.17)
   pp-adaptive (~> 1.0.0)
+  rack-pratchett
   rack-zippy
   rails (~> 4.2)
   rails_12factor (~> 0.0)

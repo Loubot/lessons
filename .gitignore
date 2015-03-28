@@ -21,6 +21,7 @@ app/uploaders/avatar_uploader.rb
 config/database.yml
 public/sitemaps/
 public/deploy/
+.env
 
 
 # git rm -r --cached .

@@ -14,7 +14,8 @@ class TeachersController < ApplicationController
 		redirect_to root_path unless current_teacher.id == params[:id].to_i
 	end
 
-	def show_teacher		
+	def show_teacher
+
 		@params = params
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
@@ -32,6 +33,7 @@ class TeachersController < ApplicationController
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
+		fresh_when([current_teacher, @profilePic, flash])
 	end
 
 	def edit
@@ -45,6 +47,8 @@ class TeachersController < ApplicationController
 		
 		@experience = Experience.new
 		@subjects = @context.subjects
+
+		# fresh_when([@context, @context.profile, @subjects.maximum(:updated_at),flash])
 	end
 	
 	def update
@@ -79,13 +83,14 @@ class TeachersController < ApplicationController
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		@event = @teacher.events.new
 		@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)
-
+		fresh_when [@teacher, @teacher.events]
 	end
 
 	def qualification_form
 		@context = current_teacher
 		@qualifications = Qualification.where(teacher_id: current_teacher.id)
 		@qualification = @context.qualifications.new
+		fresh_when @qualifications
 	end
 
 	def your_location
@@ -94,7 +99,7 @@ class TeachersController < ApplicationController
 		@locations = @teacher.locations.order("created_at ASC")
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
-		
+		fresh_when [@locations, @teacher.subjects]
 	end
 
 	def change_profile_pic
@@ -105,7 +110,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

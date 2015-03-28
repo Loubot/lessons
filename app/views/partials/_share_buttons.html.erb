@@ -1,19 +1,28 @@
-<% if !is_mobile? %>
-  <% cache('share_buttons_true') do %>
-    <div id="fb-root"></div>
-    <div id="share_buttons">
-      
-      <div class="fb-like" data-href="<%= request.original_url %>" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
-    	
-      
+<div id="fb-root"></div>
+<div id="share_buttons">
+  
+  <div class="fb-like" data-href="<%= request.original_url %>" data-layout="button" data-action="like" data-show-faces="false" data-share="true">
+  </div>
+	
+  <div class="fb-like">
+    <script type="IN/Share" data-url="<%= request.original_url %>" >
 
-      <div>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://learn-your-lesson.herokuapp.com" data-text="Learn Your Lesson" data-count="none" data-hashtags="whatwitllyoulearn">Tweet</a>
-        
-      </div>
-      <p>Recommend on Facebook or Twitter</p>
-      <button type="button" class="close share_buttons_close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      
-    </div> <!-- end of share_buttons -->
-  <% end %>
-<% end %>   
+    </script>
+    
+    <script type="text/javascript" src="https://platform.linkedin.com/in.js?async=true"></script>
+    <script type="text/javascript">
+        IN.init({api_key:'77iyb2qd8pdh8f'});            
+    </script>
+  </div>
+
+  
+  <div class="fb-like">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://learn-your-lesson.herokuapp.com" data-text="Learn Your Lesson" data-count="none" data-hashtags="whatwitllyoulearn">Tweet</a>
+    
+  </div>
+  <div class="share_message">
+    <p>Recommend on Facebook, LinkedIn or Twitter</p>
+    <button type="button" class="close share_buttons_close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  </div>
+  
+</div> <!-- end of share_buttons --> 

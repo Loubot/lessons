@@ -20,28 +20,7 @@ module EventsHelper
 
   end
 
-  def studentDoMultipleBookings(params)
-    
-    # eventParams = student_format_time(params{:event})
-    
-
-    # e = Event.new(eventParams)
-    
-    # p "hello #{e.errors.full_messages}" if !e.valid?
-   
-    # weeks = params[:booking_length].to_i - 1
-    
-    # for i in 0..weeks
-      
-    #   newStart = startTime + ((i*7).days) #add a week
-    #   newEnd = endTime + ((i*7).days) #add a week
-    #   p "startTime #{startTime}"
-    #   p "newStart #{newStart}"
-    #   # e = Event.new(start_time: newStart, end_time: newEnd, status: 'active',
-    #   #              teacher_id: current_teacher.id)
-    #   # p e.errors.full_messages if !e.valid?
-    # end
-  end
+  
 
 
   def doMultipleBookings(params) #teachers area block booking
