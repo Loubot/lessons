@@ -70,7 +70,7 @@ class StaticController < ApplicationController
 			@teachers.paginate(page: params[:page])
 			
 		end
-		fresh_when [params[:search_subjects], params[:position]]
+		fresh_when [params[:search_subjects], params[:position], @teachers.maximum(:updated_at)]
 	end
 
 	def browse_categories

@@ -139,7 +139,8 @@ module TeachersHelper
   def get_price_or_message(prices, location, subject, teacher)
     p "location %%%%%%%%% #{location}"
     p =  prices.select { |p| p.location_id == location && p.subject_id == subject && p.teacher_id == teacher }.first
-    p ? number_to_currency(p.price, unit: '€') : "Teacher does not teach this subject here"
+    home_price = prices.select { |p| p.subject_id == subject && p.no_map == true }.first
+    p ? number_to_currency(p.price, unit: '€') : "Only home lesson available <br> #{ number_to_currency(home_price.price, unit: '€')}".html_safe
   end
 
   def check_teachers_options(prices, subject, teacher)

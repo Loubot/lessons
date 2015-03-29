@@ -22,9 +22,9 @@ class Location < ActiveRecord::Base
   geocoded_by :full_street_address
 
 
-  after_validation :geocode
+  # after_create :geocode
   reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode  # auto-fetch address
+  before_create :reverse_geocode  # auto-fetch address
 
   def full_street_address
     self.address

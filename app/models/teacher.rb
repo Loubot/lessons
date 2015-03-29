@@ -91,16 +91,17 @@ class Teacher < ActiveRecord::Base
   end
 
   def check_rates
-    # self.locations.each do |l|
-    #   puts "locations #{l.prices.size} subjects #{self.subjects.size}"
-    #   return false if l.prices.size != self.subjects.size
-    # end
-    # return true
-    
-    self.subjects.each do |s|
-      return false if s.prices.size == 0
+    prices = self.prices
+    self.locations.each do |l|
+      self.subjects.each do |s|
+        if !(prices.any? { |p| p.location_id == l.id && p.subject_id == s.id } ||
+               prices.any? { |p| p.subject_id == s.id && p.no_map == true })
+          return false
+        end
+
+      end    
     end
-    return true
+
   end
 
   def is_teacher_valid_message

@@ -83,7 +83,7 @@ class TeachersController < ApplicationController
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		@event = @teacher.events.new
 		@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)
-		fresh_when [@teacher, @teacher.events]
+		fresh_when [@teacher, @teacher.events.maximum(:updated_at)]
 	end
 
 	def qualification_form
@@ -100,7 +100,7 @@ class TeachersController < ApplicationController
 		@subjects = @teacher.subjects
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
-		fresh_when [@locations, @teacher.subjects.maximum(:updated_at)]
+		# fresh_when [@locations.maximum(:updated_at), @teacher.subjects.maximum(:updated_at)]
 	end
 
 	def change_profile_pic
