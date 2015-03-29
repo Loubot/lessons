@@ -13,16 +13,50 @@
                 <% if @teacher.paypal_email != "" %>
                   <div class="col-xs-6">
                     <%= form_tag single_booking_paypal_path, method: 'post' do %>
-                      <%= hidden_field_tag :teacher, @teacher.email %>
+                      
+                      <%= hidden_field_tag :teacher_id, @teacher.id %>
+                      <%= hidden_field_tag :student_id, current_teacher.id %>
+                      <%= hidden_field_tag :student_name, current_teacher.full_name %>
+                      <%= hidden_field_tag :student_email, @current_teacher.email %>
+                      <%= hidden_field_tag :teacher_email, @teacher.email %>
                       <% if defined? @home_price.price %>
                         <%= hidden_field_tag :receiver_amount, @home_price.price.to_f %>
                       <% end %>
+
                       <%= hidden_field_tag :paypal, '1' %>
                       <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
                       <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
                     <% end %>
                   </div> <!-- end of col-md-6-->
-                <% end %>
+                <% end %> <%# end of @teacher.paypal_email != "" %>
+
+                <% if @teacher.stripe_access_token != "" %>
+                  
+                  <div class="col-xs-6">
+                    <%= form_tag single_booking_stripe_path, method: 'post' do %>
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
+                      data-description="Book your lesson"
+                      data-currency="eur"
+                      data-description="This is the description"
+                      data-imgage="<%= asset_url 'stripe.png' %>"
+                      ></script>
+                      <%= hidden_field_tag :teacher_id, @teacher.id %>
+                      <%= hidden_field_tag :student_id, current_teacher.id %>
+                      <%= hidden_field_tag :student_name, current_teacher.full_name %>
+                      <%= hidden_field_tag :student_email, @current_teacher.email %>
+                      <%= hidden_field_tag :teacher_email, @teacher.email %>
+                      <% if defined? @home_price.price %>
+                        <%= hidden_field_tag :amount, @home_price.price.to_f %>
+                      <% end %>              
+                             
+                      <%= hidden_field_tag :current_teacher, current_teacher.id %> 
+                                      
+                
+                    <% end %>
+                  </div> <!-- end of col-xs-6-->
+
+                <% end %> <%# end of  @teacher.stripe_access_token != "" %>
             </div> <!-- end of container-fluid -->
           </div> <!-- end of modal-body -->
         </div> <!-- end of modal-content -->

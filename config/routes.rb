@@ -49,13 +49,17 @@ Rails.application.routes.draw do
   post        '/share-linkedin'         =>  'application#share_linkedin'
   
 
-  get         'paypal-create'           =>  'payments#paypal_create'
-  get         'paypal-return'           =>  'payments#paypal_return' 
-  get         'stripe-auth-user'        =>  'payments#stripe_auth_user' 
-  post        'store-paypal'            =>  'payments#store_paypal'
-  post        'single-booking-paypal'   =>  'payments#single_booking_paypal'
-  post        'stripe-create'           =>  'payments#stripe_create'
-  post        'store-stripe'           =>  'payments#store_stripe'
+  #Paypal
+  get         'paypal-create'           =>  'paypal#paypal_create'
+  get         'paypal-return'           =>  'paypal#paypal_return' 
+  post        'single-booking-paypal'   =>  'paypal#single_booking_paypal'
+  post        'store-paypal'            =>  'paypal#store_paypal'
+
+  #Stripe
+  get         'stripe-auth-user'        =>  'stripe#stripe_auth_user'  
+  post        'stripe-create'           =>  'stripe#stripe_create'
+  post        'single-booking-stripe'   =>  'stripe#single_booking_stripe'
+  post        'store-stripe'            =>  'stripe#store_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
 

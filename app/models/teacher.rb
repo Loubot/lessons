@@ -20,11 +20,11 @@
 #  last_sign_in_ip        :string(255)
 #  admin                  :boolean
 #  profile                :integer
-#  is_teacher             :boolean          default("false"), not null
+#  is_teacher             :boolean          default("f"), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
-#  is_active              :boolean          default("false"), not null
-#  will_travel            :boolean          default("false"), not null
+#  is_active              :boolean          default("f"), not null
+#  will_travel            :boolean          default("f"), not null
 #  stripe_user_id         :string
 #
 

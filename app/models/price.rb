@@ -9,7 +9,7 @@
 #  updated_at  :datetime
 #  location_id :integer
 #  price       :decimal(8, 2)
-#  no_map      :boolean          default("false")
+#  no_map      :boolean          default("f")
 #
 
 class Price < ActiveRecord::Base
