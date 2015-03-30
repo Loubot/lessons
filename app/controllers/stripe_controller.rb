@@ -45,8 +45,35 @@ class StripeController < ApplicationController
   def single_booking_stripe
   	p "params %%%%%%%%%%%% #{params}"
   	cart = UserCart.home_booking_cart(params)
-    p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
-  	render status: 200, nothing: true
+    p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
+  	# 
+
+  	@amount = params[:amount].to_i * 100    
+    @teacher = Teacher.find(params[:teacher_id])
+    charge = Stripe::Charge.create({
+      :metadata           => { :tracking_id => cart.tracking_id },
+      :amount             => @amount,
+      :description        => cart.tracking_id,
+      :currency           => 'eur',
+      :application_fee    => 300,
+      :source             => params[:stripeToken]
+      
+      },
+      @teacher.stripe_access_token
+    )
+    puts charge.inspect
+    if charge['paid'] == true
+      # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
+      # event = Event.create!(cart.params)
+      # puts "Stripe successful event created id: #{event.id}"
+    end
+    flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+    redirect_to root_url
+
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to charges_path
+
   end #end of single_booking_stripe
 
   def store_stripe
@@ -62,6 +89,7 @@ class StripeController < ApplicationController
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
       puts "Cart %%%  #{cart.inspect}"
+      p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
       render status: 200, nothing: true and return if !cart
       # event = Event.create_confirmed_bookings(cart.params)
 

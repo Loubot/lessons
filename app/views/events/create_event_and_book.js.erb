@@ -1,5 +1,7 @@
 <% if @teacher.instance_of? Array %>
+	$('.payment_choice_error').remove()
   $('.modal-body').prepend("<div class='payment_choice_error'>");
+
   $('.payment_choice_error').append("<%= escape_javascript(@teacher[0].to_s) %>");
   $('.payment_choice_error').append("</div>");
 <% else %>

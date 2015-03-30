@@ -2,6 +2,11 @@ class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
   def mail_teacher(student, student_name, teacher, start_time, end_time)
     p 'test mail start'
+
+    p "start time #{start_time} end time #{end_time}"
+
+    startTime = Date.parse(start_time).strftime("%d/%b/%y @%H:%M")
+    endTime = Date.parse(end_time).strftime("%d/%b/%y @%H:%M")
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -9,7 +14,7 @@ class TeacherMailer < ActionMailer::Base
        :subject=> "You have a booking",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>#{student_name} has booked a lesson.
-                #{start_time.strftime("%d/%b/%y @%H:%M")} to #{end_time.strftime("%d/%b/%y @%H:%M")}</html>),  
+                #{startTime} to #{endTime}</html>),  
        :to=>[  
          {  
            :email=> teacher.to_s,
@@ -17,7 +22,7 @@ class TeacherMailer < ActionMailer::Base
          }  
        ],  
        :html=> %Q(<html>#{student_name} has booked a lesson.
-                #{start_time.strftime("%d/%b/%y @%H:%M")} to #{end_time.strftime("%d/%b/%y @%H:%M")}</html>),  
+                #{startTime} to #{endTime}</html>),  
        :from_email=> student.to_s  
       }  
       sending = m.messages.send message  

@@ -97,6 +97,7 @@ class PaypalController < ApplicationController
     client.execute(:Pay,
       :action_type     => "PAY",
       :currency_code   => "GBP",
+      :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
       :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
       :ipn_notification_url => 'http://6659c9f3.ngrok.com/store-paypal',
