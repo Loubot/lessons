@@ -1,6 +1,6 @@
 class StripeController < ApplicationController
-
-  include PaymentsHelper
+	include StripeHelper
+  
   protect_from_forgery except: [:store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_stripe]
 
@@ -42,7 +42,7 @@ class StripeController < ApplicationController
     
   end #end of stripe_create
 
-  def single_booking_stripe
+  def home_booking_stripe
   	p "params %%%%%%%%%%%% #{params}"
   	cart = UserCart.home_booking_cart(params)
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
@@ -51,7 +51,7 @@ class StripeController < ApplicationController
   	@amount = params[:amount].to_i * 100    
     @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
-      :metadata           => { :tracking_id => cart.tracking_id },
+      :metadata           => { :tracking_id => cart.tracking_id, home_booking: true },
       :amount             => @amount,
       :description        => cart.tracking_id,
       :currency           => 'eur',
@@ -91,33 +91,31 @@ class StripeController < ApplicationController
       puts "Cart %%%  #{cart.inspect}"
       p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
       render status: 200, nothing: true and return if !cart
+
+      if json_response['data']['object']['metadata']['home_booking'] == true #if it's a home booking
+      	home_booking_transaction_and_mail(json_response, cart) #stripe helper
+
+      else #it's not a home booking
+      	Event.create_confirmed_events(cart)
+      	
+      	cart_params = cart.params
+      	puts "cart params #{cart_params}"
+      	puts "start time #{cart_params[:start_time]}"
+
+      	transaction_and_mail(json_response, cart) #stripe_helper      
+      	
+
+      	# Transaction.create!(json_response)
+      	render status: 200, nothing: true
+
+      end
       # event = Event.create_confirmed_bookings(cart.params)
 
-      Event.create_confirmed_events(cart)
       
-      cart_params = cart.params
-      puts "cart params #{cart_params}"
-      puts "start time #{cart_params[:start_time]}"
-  
-      
-      Transaction.create(
-                        create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id)
-                        )
-
-      TeacherMailer.mail_teacher(
-                                  cart.student_email,
-                                  cart.student_name,
-                                  cart.teacher_email,
-                                  cart.params[:start_time],
-                                  cart.params[:end_time]
-                                ).deliver_now
-
-      # Transaction.create!(json_response)
+    else #no transaction found, render nothing
       render status: 200, nothing: true
-    else
-      render status: 200, nothing: true
-    end   
-  end
+    end   #end of !if Transaction
+  end #end of store_stripe
 
 
   def stripe_auth_user

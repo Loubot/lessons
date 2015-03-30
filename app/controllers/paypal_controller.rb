@@ -78,7 +78,7 @@ class PaypalController < ApplicationController
   end
 
 
-  def single_booking_paypal
+  def home_booking_paypal
     p "params %%%%%%%%%%%%%%%%% #{params}"
     cart = UserCart.home_booking_cart(params)
     p cart.home_booking

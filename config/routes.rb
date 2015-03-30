@@ -52,13 +52,13 @@ Rails.application.routes.draw do
   #Paypal
   get         'paypal-create'           =>  'paypal#paypal_create'
   get         'paypal-return'           =>  'paypal#paypal_return' 
-  post        'single-booking-paypal'   =>  'paypal#single_booking_paypal'
+  post        'home-booking-paypal'     =>  'paypal#home_booking_paypal'
   post        'store-paypal'            =>  'paypal#store_paypal'
 
   #Stripe
   get         'stripe-auth-user'        =>  'stripe#stripe_auth_user'  
   post        'stripe-create'           =>  'stripe#stripe_create'
-  post        'single-booking-stripe'   =>  'stripe#single_booking_stripe'
+  post        'home-booking-stripe'     =>  'stripe#home_booking_stripe'
   post        'store-stripe'            =>  'stripe#store_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'

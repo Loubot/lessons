@@ -12,7 +12,7 @@
               
                 <% if @teacher.paypal_email != "" %>
                   <div class="col-xs-6">
-                    <%= form_tag single_booking_paypal_path, method: 'post' do %>
+                    <%= form_tag home_booking_paypal_path, method: 'post' do %>
                       
                       <%= hidden_field_tag :teacher_id, @teacher.id %>
                       <%= hidden_field_tag :student_id, current_teacher.id %>
@@ -35,7 +35,7 @@
                 <% if @teacher.stripe_access_token != "" %>
                   
                   <div class="col-xs-6">
-                    <%= form_tag single_booking_stripe_path, method: 'post' do %>
+                    <%= form_tag home_booking_stripe_path, method: 'post' do %>
                     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                       data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
                       data-description="Book your lesson"

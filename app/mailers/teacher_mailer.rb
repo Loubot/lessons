@@ -5,8 +5,8 @@ class TeacherMailer < ActionMailer::Base
 
     p "start time #{start_time} end time #{end_time}"
 
-    startTime = Date.parse(start_time).strftime("%d/%b/%y @%H:%M")
-    endTime = Date.parse(end_time).strftime("%d/%b/%y @%H:%M")
+    startTime = Time.parse(start_time)
+    endTime = Time.parse(end_time)
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -35,6 +35,12 @@ class TeacherMailer < ActionMailer::Base
     end
 
     logger.info "Mail sent to #{teacher.to_s}"
+  end
+
+  def home_booking_stripe
+    
+
+
   end
 
   
