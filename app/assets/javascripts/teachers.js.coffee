@@ -270,18 +270,19 @@ teachersInfoReady = ->
     $('.home_booking_form').submit (e) ->
       address = null
       e.preventDefault()
+      $('.home_address').val $('#home_booking_address').val()
+
+      if $('#remember').is ':checked'
+        $('.save_address').val 'true'
+        
       address = $('#home_booking_address').val() 
       if !address 
         alert "Address cannot be blank" 
       else 
-        @.submit()
+        # @.submit()
 
 
-    $('#home_booking_address').keyup ->
-      $('.home_address').val $('#home_booking_address').val()
 
-
-    $('#home_booking_checkbox').click ->
 
 
 #//// end of show_teacher_to_user add price to form modal

@@ -27,8 +27,9 @@
                       <%= hidden_field_tag :end_time, Time.now %>
                       <%= hidden_field_tag :paypal, '1' %>
                       <%= hidden_field_tag :home_address, '1', class: 'home_address' %>
+                      <%= hidden_field_tag :save_address, '1', class: 'save_address' %>
                       <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
-                      <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
+                      <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
                     <% end %>
                   </div> <!-- end of col-md-6-->
                 <% end %> <%# end of @teacher.paypal_email != "" %>
@@ -57,7 +58,7 @@
                       <%= hidden_field_tag :start_time, Time.now %>           
                       <%= hidden_field_tag :end_time, Time.now %>   
                       <%= hidden_field_tag :home_address, '1', class: 'home_address' %>        
-                
+                      <%= hidden_field_tag :save_address, '1', class: 'save_address' %>
                     <% end %>
                   </div> <!-- end of col-xs-6-->
 
@@ -70,7 +71,8 @@
               <div class="form-group">
                 <label for="address" class="col-sm-2 control-label">Address</label>
                 <div class="col-sm-10">
-                  <input type="adderss" required class="form-control" id="home_booking_address" placeholder="Address">
+                  <%= text_field_tag 'address', current_teacher.address, placeholder: 'Address',size: 40, id: 'home_booking_address' %>
+                  
                 </div>
               </div>
 
@@ -78,7 +80,7 @@
                 <div class="col-sm-offset-2 col-sm-10">
                   <div class="checkbox">
                     <label>
-                      <%= check_box_tag 'Remember', 'Remember address' %>Remember Address
+                      <%= check_box_tag 'Remember', 'Remember address', current_teacher.address != '', id:'remember' %>Remember Address
                     </label>
                   </div>
                 </div>

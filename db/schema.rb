@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.boolean  "is_active",                          default: false, null: false
     t.boolean  "will_travel",                        default: false, null: false
     t.string   "stripe_user_id"
+    t.string   "address",                            default: ""
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
