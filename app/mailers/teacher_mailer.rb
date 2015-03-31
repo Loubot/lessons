@@ -37,8 +37,8 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{teacher.to_s}"
   end
 
-  def home_booking_stripe
-    
+  def home_booking_stripe_mail
+    #name, address
 
 
   end

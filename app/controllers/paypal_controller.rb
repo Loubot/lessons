@@ -80,6 +80,7 @@ class PaypalController < ApplicationController
 
   def home_booking_paypal
     p "params %%%%%%%%%%%%%%%%% #{params}"
+    redirect_to :back and return
     cart = UserCart.home_booking_cart(params)
     p cart.home_booking
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"

@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.integer  "teacher_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
