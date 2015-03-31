@@ -26,6 +26,7 @@
 #  is_active              :boolean          default("f"), not null
 #  will_travel            :boolean          default("f"), not null
 #  stripe_user_id         :string
+#  address                :string           default("")
 #
 
 class Teacher < ActiveRecord::Base

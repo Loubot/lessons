@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 20150301011355) do
     t.integer  "subject_id"
     t.boolean  "multiple",                  default: false
     t.integer  "weeks",                     default: 0
+    t.string   "address",                   default: ""
     t.boolean  "home_booking"
   end
 

@@ -21,6 +21,8 @@ module StripeHelper
   	Transaction.create(
 		                  	create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id)
 		                  )
+
+    TeacherMailer.home_booking_stripe_mail
   end
 
 	def transaction_and_mail(json_response, cart)

@@ -15,6 +15,54 @@ class PaypalController < ApplicationController
   def paypal_create    
     create_paypal(params) if params[:paypal].present?
   end
+
+  def home_booking_paypal
+    p "params %%%%%%%%%%%%%%%%% #{params}"
+    current_teacher.update_attributes(address: params[:home_address]) if params[:save_address] == 'true'
+    
+    redirect_to :back and return
+    cart = UserCart.home_booking_cart(params)
+    p cart.home_booking
+    p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
+    # render status: 200, nothing: true
+    
+    
+    client = AdaptivePayments::Client.new(
+      :user_id       => "lllouis_api1.yahoo.com",
+      :password      => "MRXUGXEXHYX7JGHH",
+      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
+      :app_id        => "APP-80W284485P519543T",
+      :sandbox       => true
+    )
+
+    client.execute(:Pay,
+      :action_type     => "PAY",
+      :currency_code   => "GBP",
+      :tracking_id     => cart.tracking_id,
+      :cancel_url      => "https://learn-your-lesson.herokuapp.com",
+      :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
+      :ipn_notification_url => 'http://6659c9f3.ngrok.com/store-paypal',
+      :receivers => [
+        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
+        { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+      ]
+    ) do |response|
+
+      if response.success?
+        puts "Pay key: #{response.pay_key}"
+        logger.info "create paypal response #{response.inspect}"
+
+        # send the user to PayPal to make the payment
+        # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
+        redirect_to client.payment_url(response)
+      else
+        flash[:danger] = "#{response.error_message}"
+        puts "Paypal error message: #{response.ack_code}: #{response.error_message}"
+        redirect_to :back
+      end
+
+    end
+  end #end of home_booking_paypal
   
   
   def store_paypal
@@ -75,54 +123,6 @@ class PaypalController < ApplicationController
       logger.info "MAJOR ALERT: Transaction not found"
     end
 
-  end
-
-
-  def home_booking_paypal
-    p "params %%%%%%%%%%%%%%%%% #{params}"
-    current_teacher.update_attributes(address: params[:home_address])
-    redirect_to :back and return
-    cart = UserCart.home_booking_cart(params)
-    p cart.home_booking
-    p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
-    # render status: 200, nothing: true
-    
-    
-    client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
-      :sandbox       => true
-    )
-
-    client.execute(:Pay,
-      :action_type     => "PAY",
-      :currency_code   => "GBP",
-      :tracking_id     => cart.tracking_id,
-      :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-      :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'http://6659c9f3.ngrok.com/store-paypal',
-      :receivers => [
-        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
-        { :email => 'loubotsjobs@gmail.com',  amount: 10 }
-      ]
-    ) do |response|
-
-      if response.success?
-        puts "Pay key: #{response.pay_key}"
-        logger.info "create paypal response #{response.inspect}"
-
-        # send the user to PayPal to make the payment
-        # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
-        redirect_to client.payment_url(response)
-      else
-        flash[:danger] = "#{response.error_message}"
-        puts "Paypal error message: #{response.ack_code}: #{response.error_message}"
-        redirect_to :back
-      end
-
-    end
   end
 
   def paypal_return

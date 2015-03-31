@@ -3,7 +3,7 @@ class StripeController < ApplicationController
   
   protect_from_forgery except: [:store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_stripe]
-
+  before_action :authenticate_teacher!, only: [:stripe_create, :home_booking_stripe, :stripe_auth_user]
   before_action :fix_json_params, only: [:store_stripe]
 
   def get_event_id
@@ -43,6 +43,7 @@ class StripeController < ApplicationController
   end #end of stripe_create
 
   def home_booking_stripe
+    current_teacher.update_attributes(address: params[:home_address]) if params[:save_address] == 'true'
   	p "params %%%%%%%%%%%% #{params}"
   	cart = UserCart.home_booking_cart(params)
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
@@ -88,13 +89,16 @@ class StripeController < ApplicationController
     
     if !(Transaction.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id']))
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
-      puts "Cart %%%  #{cart.inspect}"
-      p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
+      # puts "Cart %%%  #{cart.inspect}"
+      # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
       render status: 200, nothing: true and return if !cart
 
-      if json_response['data']['object']['metadata']['home_booking'] == true #if it's a home booking
-      	home_booking_transaction_and_mail(json_response, cart) #stripe helper
+      p "%%%%%%%% #{json_response['data']['object']['metadata']['home_booking']}"
 
+      if json_response['data']['object']['metadata']['home_booking'] == 'true' #if it's a home booking
+      	home_booking_transaction_and_mail(json_response, cart) #stripe helper
+        p "***************** single booking"
+        render status: 200, nothing: true
       else #it's not a home booking
       	Event.create_confirmed_events(cart)
       	
