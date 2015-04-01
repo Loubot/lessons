@@ -17,13 +17,12 @@ class PaypalController < ApplicationController
   end
 
   def home_booking_paypal
-    p "params %%%%%%%%%%%%%%%%% #{params}"
-    current_teacher.update_attributes(address: params[:home_address]) if params[:save_address] == 'true'
+    update_student_address(params) #application controller
+
     
-    redirect_to :back and return
     cart = UserCart.home_booking_cart(params)
     p cart.home_booking
-    p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
+    # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
     # render status: 200, nothing: true
     
     

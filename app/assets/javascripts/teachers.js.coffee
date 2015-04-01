@@ -267,19 +267,26 @@ teachersInfoReady = ->
 
   if $('#payment_no_location_modal').length
 
+
+
     $('.home_booking_form').submit (e) ->
+      e.preventDefault()      
+      
       address = null
-      e.preventDefault()
+      
+      
       $('.home_address').val $('#home_booking_address').val()
 
       if $('#remember').is ':checked'
         $('.save_address').val 'true'
+      else
+        $('.save_address').val 'false'
         
       address = $('#home_booking_address').val() 
       if !address 
         alert "Address cannot be blank" 
       else 
-        # @.submit()
+        @.submit()
 
 
 

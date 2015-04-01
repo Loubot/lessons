@@ -44,18 +44,19 @@ class TeacherMailer < ActionMailer::Base
       message = {  
        :subject=> "You have a booking request",  
        :from_name=> "Learn Your Lesson",  
-       :text=> %Q(<html>#{student_name} has requested a lesson.
-                #{student_name} would like to book a lesson at their own house.
-                Their address is ),  
+       :text=> %Q(<html>#{cart.student_name} has requested a lesson.
+                #{cart.student_name} would like to book a lesson at their own house.
+                Their address is #{cart.address}. Please contact them via email to arrange a time.),  
        :to=>[  
          {  
-           :email=> teacher.to_s,
-           :name=> "#{student_name}"  
+           :email=> cart.teacher_email,
+           :name=> "#{cart.student_email}"  
          }  
        ],  
-       :html=> %Q(<html>#{student_name} has booked a lesson.
-                #{startTime} to #{endTime}</html>),  
-       :from_email=> student.to_s  
+       :html=> %Q(<html>#{cart.student_name} has requested a lesson.
+                #{cart.student_name} would like to book a lesson at their own house.
+                Their address is #{cart.address}. Please contact them via email to arrange a time.),  
+       :from_email=> cart.student_email 
       }  
       sending = m.messages.send message  
       puts sending
@@ -66,7 +67,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{teacher.to_s}"
+    logger.info "Mail sent to #{cart.teacher_email}"
 
   end
 

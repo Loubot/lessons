@@ -10,6 +10,18 @@ class ApplicationController < ActionController::Base
     session[:mobile]
   end
 
+  def update_student_address(params) #update teacher address if 
+    if params[:save_address] == 'true'
+      if current_teacher.address != params[:home_address]
+        
+        current_teacher.update_attributes(address: params[:home_address]) 
+      end
+    else #set student address to '' if save address checkbox isn't ticked
+      p 'aaaaaaaaaaaaaaaaaa'
+      current_teacher.update_attributes(address: '') if current_teacher.address != ''
+    end
+  end
+
   helper_method :is_mobile?
   private
 

@@ -26,8 +26,8 @@
                       <%= hidden_field_tag :start_time, Time.now %>
                       <%= hidden_field_tag :end_time, Time.now %>
                       <%= hidden_field_tag :paypal, '1' %>
-                      <%= hidden_field_tag :home_address, '1', class: 'home_address' %>
-                      <%= hidden_field_tag :save_address, '1', class: 'save_address' %>
+                      <%= hidden_field_tag :home_address, '', class: 'home_address' %>
+                      <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
                       <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
                       <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
                     <% end %>
@@ -57,8 +57,8 @@
                       <%= hidden_field_tag :current_teacher, current_teacher.id %> 
                       <%= hidden_field_tag :start_time, Time.now %>           
                       <%= hidden_field_tag :end_time, Time.now %>   
-                      <%= hidden_field_tag :home_address, '1', class: 'home_address' %>        
-                      <%= hidden_field_tag :save_address, '1', class: 'save_address' %>
+                      <%= hidden_field_tag :home_address, '', class: 'home_address' %>        
+                      <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
                     <% end %>
                   </div> <!-- end of col-xs-6-->
 

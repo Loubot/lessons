@@ -43,8 +43,14 @@ class StripeController < ApplicationController
   end #end of stripe_create
 
   def home_booking_stripe
-    current_teacher.update_attributes(address: params[:home_address]) if params[:save_address] == 'true'
-  	p "params %%%%%%%%%%%% #{params}"
+
+    update_student_address(params) #application controller
+
+    if params[:home_address] == ''
+      flash[:danger] = "Address can't be blank"
+      redirect_to :back and return
+    end
+    
   	cart = UserCart.home_booking_cart(params)
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
   	# 
