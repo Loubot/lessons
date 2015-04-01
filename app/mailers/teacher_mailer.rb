@@ -2,6 +2,11 @@ class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
   def mail_teacher(student, student_name, teacher, start_time, end_time)
     p 'test mail start'
+
+    p "start time #{start_time} end time #{end_time}"
+
+    startTime = Time.parse(start_time)
+    endTime = Time.parse(end_time)
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -9,7 +14,7 @@ class TeacherMailer < ActionMailer::Base
        :subject=> "You have a booking",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>#{student_name} has booked a lesson.
-                #{start_time.strftime("%d/%b/%y @%H:%M")} to #{end_time.strftime("%d/%b/%y @%H:%M")}</html>),  
+                #{startTime} to #{endTime}</html>),  
        :to=>[  
          {  
            :email=> teacher.to_s,
@@ -17,7 +22,7 @@ class TeacherMailer < ActionMailer::Base
          }  
        ],  
        :html=> %Q(<html>#{student_name} has booked a lesson.
-                #{start_time.strftime("%d/%b/%y @%H:%M")} to #{end_time.strftime("%d/%b/%y @%H:%M")}</html>),  
+                #{startTime} to #{endTime}</html>),  
        :from_email=> student.to_s  
       }  
       sending = m.messages.send message  
@@ -30,6 +35,39 @@ class TeacherMailer < ActionMailer::Base
     end
 
     logger.info "Mail sent to #{teacher.to_s}"
+  end
+
+  def home_booking_stripe_mail(json_response, cart)    
+    begin
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      message = {  
+       :subject=> "You have a booking request",  
+       :from_name=> "Learn Your Lesson",  
+       :text=> %Q(<html>#{student_name} has requested a lesson.
+                #{student_name} would like to book a lesson at their own house.
+                Their address is ),  
+       :to=>[  
+         {  
+           :email=> teacher.to_s,
+           :name=> "#{student_name}"  
+         }  
+       ],  
+       :html=> %Q(<html>#{student_name} has booked a lesson.
+                #{startTime} to #{endTime}</html>),  
+       :from_email=> student.to_s  
+      }  
+      sending = m.messages.send message  
+      puts sending
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Mail sent to #{teacher.to_s}"
+
   end
 
   

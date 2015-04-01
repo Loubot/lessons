@@ -133,7 +133,7 @@ private
 
   end
 
-  def create_single_event_and_save(cart)
+  def self.create_single_event_and_save(cart)
     Event.new(
                 start_time: cart.params[:start_time],
                 end_time: cart.params[:end_time],

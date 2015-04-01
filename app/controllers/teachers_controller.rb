@@ -15,7 +15,7 @@ class TeachersController < ApplicationController
 	end
 
 	def show_teacher
-
+		
 		@params = params
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
@@ -29,11 +29,11 @@ class TeachersController < ApplicationController
 		gon.locations = @locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		
-		
+		@home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
-		fresh_when([current_teacher,flash])
+		# fresh_when([current_teacher,flash])		
 	end
 
 	def edit
@@ -83,7 +83,7 @@ class TeachersController < ApplicationController
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		@event = @teacher.events.new
 		@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)
-		fresh_when [@teacher, @teacher.events]
+		fresh_when [@teacher, @teacher.events.maximum(:updated_at)]
 	end
 
 	def qualification_form
@@ -100,7 +100,7 @@ class TeachersController < ApplicationController
 		@subjects = @teacher.subjects
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
-		fresh_when [@locations, @teacher.subjects.maximum(:updated_at)]
+		# fresh_when [@locations.maximum(:updated_at), @teacher.subjects.maximum(:updated_at)]
 	end
 
 	def change_profile_pic
@@ -111,7 +111,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

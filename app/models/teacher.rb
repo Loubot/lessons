@@ -20,12 +20,13 @@
 #  last_sign_in_ip        :string(255)
 #  admin                  :boolean
 #  profile                :integer
-#  is_teacher             :boolean          default("false"), not null
+#  is_teacher             :boolean          default("f"), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
-#  is_active              :boolean          default("false"), not null
-#  will_travel            :boolean          default("false"), not null
+#  is_active              :boolean          default("f"), not null
+#  will_travel            :boolean          default("f"), not null
 #  stripe_user_id         :string
+#  address                :string           default("")
 #
 
 class Teacher < ActiveRecord::Base
@@ -91,16 +92,17 @@ class Teacher < ActiveRecord::Base
   end
 
   def check_rates
-    # self.locations.each do |l|
-    #   puts "locations #{l.prices.size} subjects #{self.subjects.size}"
-    #   return false if l.prices.size != self.subjects.size
-    # end
-    # return true
-    
-    self.subjects.each do |s|
-      return false if s.prices.size == 0
+    prices = self.prices
+    self.locations.each do |l|
+      self.subjects.each do |s|
+        if !(prices.any? { |p| p.location_id == l.id && p.subject_id == s.id } ||
+               prices.any? { |p| p.subject_id == s.id && p.no_map == true })
+          return false
+        end
+
+      end    
     end
-    return true
+
   end
 
   def is_teacher_valid_message
@@ -110,7 +112,7 @@ class Teacher < ActiveRecord::Base
     error_message_array.push " profile picture not set" if !self.profile
     error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""
-    error_message_array.push " you must set all your rates" if !self.check_rates
+    error_message_array.push " you must set at least one price per subject" if !self.check_rates
     error_message_array.push " you must select a subject" if self.subjects.size < 1
     error_message_array.push " you must enter some experience" if self.experiences.size < 1
     error_message_array.push " you must enter at least one location" if self.locations.size < 1

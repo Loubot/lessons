@@ -16,11 +16,12 @@
                 <%= get_price_or_message(@prices, location.id, @subject.id, @teacher.id) %>
                 <%# number_to_currency(@prices.find_by(location_id: location, subject_id: @subject).price, unit: '€') %>
               </p>
+
                 <%# render partial: 'partials/teachers_rates' %>
           </div> <!-- end of panel-body -->
           <ul class="list-group list-group-flush text-center">
             <% if teacher_signed_in? %>
-              <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="#payment_choice_modal">BOOK NOW!</button></li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="<%= check_if_price(@prices, location.id, @subject.id, @teacher.id) %>">BOOK NOW!</button></li>
               
             <% else %>
               <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                

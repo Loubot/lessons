@@ -248,7 +248,7 @@ teachersInfoReady = ->
     #display appropraite booking option from dropdown select in payment_choice_modal
     
     $('#location_choice').on 'change', ->
-      if @.value == 'At location'
+      if @.value == 'Teachers house'
         $('.select_teachers_location').css 'display', 'inline'
         $('.select_home_lesson').css 'display', 'none'
       else
@@ -264,6 +264,23 @@ teachersInfoReady = ->
       format: "%Y-%m-%d"
       placement: 'inline'
       hideInput: true
+
+  if $('#payment_no_location_modal').length
+
+    $('.home_booking_form').submit (e) ->
+      address = null
+      e.preventDefault()
+      $('.home_address').val $('#home_booking_address').val()
+
+      if $('#remember').is ':checked'
+        $('.save_address').val 'true'
+        
+      address = $('#home_booking_address').val() 
+      if !address 
+        alert "Address cannot be blank" 
+      else 
+        # @.submit()
+
 
 
 

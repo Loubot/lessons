@@ -13,8 +13,9 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  subject_id    :integer
-#  multiple      :boolean          default("false")
+#  multiple      :boolean          default("f")
 #  weeks         :integer          default("0")
+#  home_booking  :boolean
 #
 
 class UserCart < ActiveRecord::Base
@@ -31,6 +32,22 @@ class UserCart < ActiveRecord::Base
   def save_tracking_id
     puts "blvvalvavl"
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)
+  end
+
+  def self.home_booking_cart(params)
+    cart = where(student_id: params[:student_id]).first_or_create
+    cart.update_attributes(
+                            teacher_id: params[:teacher_id],
+                            student_id: params[:student_id],
+                            params: params,
+                            student_name: params[:student_name],
+                            student_email: params[:student_email],
+                            teacher_email: params[:teacher_email],
+                            address: params[:home_address],
+                            home_booking: true
+                          )
+
+    cart
   end
 
   def self.create_single_cart(params, teacher_email, current_teacher)
