@@ -258,16 +258,19 @@ teachersInfoReady = ->
 
     #// end of display appropraite booking option
 
-  if $('#this_date').length > 0
-    AnyTime.noPicker 'this_date'
-    $("#this_date").AnyTime_picker
+  if $('.show_teacher_profile_container').length
+    AnyTime.noPicker 'payment_choice_datepicker'
+    AnyTime.noPicker 'location_only_datepicker'
+    $("#payment_choice_datepicker").AnyTime_picker
+      format: "%Y-%m-%d"
+      placement: 'inline'
+      hideInput: true
+    $("#location_only_datepicker").AnyTime_picker
       format: "%Y-%m-%d"
       placement: 'inline'
       hideInput: true
 
   if $('#payment_no_location_modal').length
-
-
 
     $('.home_booking_form').submit (e) ->
       e.preventDefault()      

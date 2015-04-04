@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
         current_teacher.update_attributes(address: params[:home_address]) 
       end
     else #set student address to '' if save address checkbox isn't ticked
-      p 'aaaaaaaaaaaaaaaaaa'
+      
       current_teacher.update_attributes(address: '') if current_teacher.address != ''
     end
   end
