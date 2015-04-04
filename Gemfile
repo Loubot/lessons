@@ -37,7 +37,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :production do
 	gem 'rails_12factor', '~> 0.0'
-	
+	gem 'rack-pratchett'
   gem 'heroku_rails_deflate'
 	# gem 'rack-zippy'
 end
@@ -109,8 +109,6 @@ gem 'actionpack-action_caching'
 gem 'actionpack-page_caching'
 
 gem 'rack-zippy'
-
-gem 'rack-pratchett'
 
 
 
