@@ -91,11 +91,17 @@ class Teacher < ActiveRecord::Base
   end
 
   def check_rates
+    prices = self.prices
     self.locations.each do |l|
-      puts "locations #{l.prices.size} subjects #{self.subjects.size}"
-      return false if l.prices.size != self.subjects.size
+      self.subjects.each do |s|
+        if !(prices.any? { |p| p.location_id == l.id && p.subject_id == s.id } ||
+               prices.any? { |p| p.subject_id == s.id && p.no_map == true })
+          return false
+        end
+
+      end    
     end
-    return true
+
   end
 
   def is_teacher_valid_message
@@ -105,7 +111,7 @@ class Teacher < ActiveRecord::Base
     error_message_array.push " profile picture not set" if !self.profile
     error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""
-    error_message_array.push " you must set all your rates" if !self.check_rates
+    error_message_array.push " you must set at least one price per subject" if !self.check_rates
     error_message_array.push " you must select a subject" if self.subjects.size < 1
     error_message_array.push " you must enter some experience" if self.experiences.size < 1
     error_message_array.push " you must enter at least one location" if self.locations.size < 1
