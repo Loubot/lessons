@@ -72,8 +72,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_event_params(params)
-    date = params[:date]
-    { start_time: Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}"),
+    date = params[:event][:date]
+    dates = { start_time: Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}"),
       end_time: Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}"),
       teacher_id: params[:event][:teacher_id],
       student_id: params[:event][:student_id],
@@ -84,10 +84,11 @@ class Event < ActiveRecord::Base
 
   def self.create_confirmed_events(cart)
     if cart[:multiple] == true
-      
+      p "heeeeeeelllll1"
       create_multiple_events_and_save(cart)
     else
       create_single_event_and_save(cart)
+      p "heeeeeeellllll2"
     end
   end
 
@@ -134,7 +135,7 @@ private
   end
 
   def self.create_single_event_and_save(cart)
-    Event.new(
+    Event.create!(
                 start_time: cart.params[:start_time],
                 end_time: cart.params[:end_time],
                 teacher_id: cart.params[:teacher_id],

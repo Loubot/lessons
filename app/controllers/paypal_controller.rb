@@ -40,7 +40,7 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
       :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'http://6659c9f3.ngrok.com/store-paypal',
+      :ipn_notification_url => 'http://3bfdc0a2.ngrok.com/store-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
         { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -120,6 +120,7 @@ class PaypalController < ApplicationController
       render status: 200, nothing: true
     else
       logger.info "MAJOR ALERT: Transaction not found"
+      render status: 200, nothing: true
     end
 
   end
@@ -172,7 +173,7 @@ class PaypalController < ApplicationController
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-          :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
+          :ipn_notification_url => 'http://3bfdc0a2.ngrok.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }

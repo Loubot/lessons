@@ -5,8 +5,8 @@ class TeacherMailer < ActionMailer::Base
 
     p "start time #{start_time} end time #{end_time}"
 
-    startTime = Time.parse(start_time)
-    endTime = Time.parse(end_time)
+    startTime = start_time
+    endTime = end_time
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']

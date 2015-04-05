@@ -80,6 +80,8 @@ gem 'geocoder', '~> 1.2'
 
 gem 'pp-adaptive', '~> 1.0.0'
 
+gem 'paypal-sdk-adaptiveaccounts'
+
 gem 'stripe', '~> 1'
 
 gem 'mandrill-api', '~> 1'
@@ -93,8 +95,6 @@ gem 'omniauth-twitter'
 gem 'omniauth-linkedin-oauth2'
 
 gem "asset_sync"
-
-gem 'paypal-sdk-adaptiveaccounts'
 
 gem 'sitemap_generator'
 
