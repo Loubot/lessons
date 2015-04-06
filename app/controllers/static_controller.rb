@@ -4,7 +4,7 @@ class StaticController < ApplicationController
 	include StaticHelper
 
 
-	caches_page :teach, :learn, gzip: true
+	caches_page :teach, :learn, :landing_page, gzip: true
 
 	# caches_action :welcome, layout: false, gzip: true
 
@@ -16,6 +16,7 @@ class StaticController < ApplicationController
 
 	def landing_page
 		render layout: 'landing_page_layout'
+		fresh_when flash
 	end
 
 
