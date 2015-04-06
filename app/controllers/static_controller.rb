@@ -14,6 +14,10 @@ class StaticController < ApplicationController
 		@categories = Category.includes(:subjects)
 	end
 
+	def landing_page
+		render layout: 'landing_page_layout'
+	end
+
 
 	def how_it_works
 
