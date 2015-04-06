@@ -5,11 +5,11 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="payment_no_location_modal-title">Book a lesson at your home.</h4>
+            <h4 class="modal-title" id="payment_no_location_modal-title">Book a lesson at your home. <%= get_home_price(@prices, @subject.id) %></h4>
           </div>
           <div class="modal-body">
             <div class="container-fluid">
-              
+                <%= get_home_price(@prices, @subject.id) %>
                 <% if @teacher.paypal_email != "" %>
                   <div class="col-xs-6">
                     <%= form_tag home_booking_paypal_path, class: 'home_booking_form', method: 'post' do %>

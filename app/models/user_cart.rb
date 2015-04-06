@@ -13,8 +13,9 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  subject_id    :integer
-#  multiple      :boolean          default("f")
+#  multiple      :boolean          default("false")
 #  weeks         :integer          default("0")
+#  address       :string           default("")
 #  home_booking  :boolean
 #
 

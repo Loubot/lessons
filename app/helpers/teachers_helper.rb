@@ -143,11 +143,14 @@ module TeachersHelper
     p ? number_to_currency(p.price, unit: '€') : "Only home lesson available <br> #{ number_to_currency(home_price.price, unit: '€')}".html_safe
   end
 
-  def check_teachers_options(prices, subject, teacher)
-    p =  prices.find_by(subject_id: subject, teacher_id: teacher)
-    
+  def check_home_price(prices, subject) #check if home price defined for this subject
+    prices.any? { |p| p.subject_id == subject && p.no_map == true }
+  
+  end
 
-    # prices.any? { |p| p.subject_id ==  subject && p.teacher_id == teacher && p.no_map == true }
+  def get_home_price(prices, subject)
+    p = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
+    number_to_currency(p.price, unit: '€')
   end
 
 end
