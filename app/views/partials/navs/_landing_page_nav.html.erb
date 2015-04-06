@@ -1,0 +1,23 @@
+<% cache(['teacher_nav', current_teacher]) do %>
+  <nav class="navbar teacher_nav navbar-default" id="teacher_nav_bar" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to(root_url, class: 'pull-left') do %>
+          <%= image_tag 'lylLogo.png' %>
+        <% end %>
+        <%= link_to 'Learn Your Lesson', root_url, class: 'navbar-brand' %>
+         
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      
+    </div><!-- /.container-fluid -->
+  </nav>
+<% end %> <%# end of cache %>

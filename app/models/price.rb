@@ -16,6 +16,7 @@ class Price < ActiveRecord::Base
   # belongs_to :teacher
   belongs_to :location, touch: true
   belongs_to :subject, touch: true
+  belongs_to :teacher, touch: true
 
   validates :subject_id, :teacher_id, :price, presence: true
 
@@ -23,9 +24,7 @@ class Price < ActiveRecord::Base
 
   after_destroy :update_teacher
   after_update :update_teacher
-  after_create :update_teacher
-
-  
+  after_create :update_teacher  
 
   def update_teacher
     Teacher.find(self.teacher_id).set_active

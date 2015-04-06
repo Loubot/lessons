@@ -1,0 +1,127 @@
+<% content_for :title, 'Connect with local students and teach what you love' %>
+<% content_for :description, "Grow and market your teaching business in an online marketplace" %>
+
+
+  <div class="row teach_page">    
+    <div class="teachers_reg_photo">
+      <div class="col-md-6 col-xs-12 col-sm-12 teacher_registration_container left">
+        <h2 class="teacher_registration_container_header"><strong>Teach</strong></h2><span class="label label-primary teach_label">Register below to become a teacher</span><br><br>
+        <div class="teachers_form_container">
+          <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+            <% if !is_mobile? %>
+              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+            <% else %>
+              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+            <% end %>
+          </div><br>
+               
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-user"></span>
+            <%= f.text_field :first_name, class: 'form-control', placeholder: 'First name' %>
+          </div><br>
+          
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-user"></span>
+            <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last name' %>
+          </div><br>
+          
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+            <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control' %>
+          </div><br>
+          
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm password', class: 'form-control' %>
+          </div><br>        
+          <%= f.hidden_field(:is_teacher, value: true) %>
+          <div class="teachers_reg_buttons">
+            <%= f.submit "Sign up", class: 'btn btn-success' %> or 
+            <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>
+           
+          </div>
+        <% end %>
+        </div>
+        <div class="fb_login_container">
+          <%= link_to image_tag('facebook_reg.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
+          <%= link_to image_tag('google_signup.jpg'), "/teachers/auth/google_oauth2?origin=#{request.original_url}", class: 'fbLogin_link' %>
+        </div> <!-- end of fb_login_container -->
+        
+        
+      </div> <!-- end of col-md-6 teacher_registration_container -->
+      <div class="col-md-6 col-xs-12 col-sm-12 teachers_blurb_container hidden-xs">
+        <h2 class="teachers_blurb_header">Grow and market your teaching business in an online marketplace</h2>
+        <h4 class="teachers_blurb">Connect with local students and teach what you love</h4>
+      </div> <!-- end of teachers_blurb_container -->
+      <div class="teachers_small_blurb_container col-xs-12 visible-xs">
+        <h3 class="teachers_blurb_header">Grow and market your teaching business in an online marketplace</h3>
+        <h4 class="teachers_blurb_header">Connect with local students and teach what you love</h4>
+      </div> <!-- end of teachers_pros_container -->
+    </div> <!-- end of teachers_reg_photo -->
+  </div> <!-- end of row -->  
+
+
+<div class="container-fluid teach_page_pros_container">
+  <div class="row teach_page">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= image_tag 'loud_speaker.jpg', alt: 'Create a free profile', class: 'img-responsive center' %>
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Create your free profile</strong></h1>
+        <p class="center_text">Increase your reach and don't worry about finding new students.</p>
+      </div> <!-- end of center_text -->
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+  <div class="row teach_page">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Manage your clients</strong></h1>
+        <p class="center_text">Keep track of your students and lessons with our calendar and booking system.</p>
+      </div> <!-- end of center_text -->
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= image_tag 'calendar.jpg', alt: 'Manage your clients', class: 'img-responsive center' %>      
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+  <div class="row teach_page">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= image_tag 'money_bags.jpg', alt: 'Increase your earnings', class: 'img-responsive center' %>
+    </div> <!-- end of col-md-4 -->
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="center_text">
+        <h1 class="teach_header"><strong>Increase your earnings</strong></h1>
+        <p class="center_text">Keep 100% of the lesson fee when booked through the website and 100% when booked with the student directly.</p>
+      </div> <!-- end of center_text -->
+    </div> <!-- end of col-md-8 -->
+  </div> <!--end of row teach_page -->
+</div> <!-- end of container-fluid teach_page_pros_container -->
+
+<div class="row">
+  <h1 class="teach_exp_header">How it works for the teacher</h1>
+  <div class="teach_exp_table_container">
+    <table class="table teach_exp_table">
+      <tr>
+        <td class="col-md-1">1</td>
+        <td class="col-md-11">Create your profile in minutes</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">2</td>
+        <td class="col-md-11">Make sure to sell yourself! Add in your pictures, location, experience and qualifications.
+         Go on, brag about yourself, don't be shy!
+        </td>
+      </tr>
+      <tr>
+        <td class="col-md-1">3</td>
+        <td class="col-md-11">Share the page and market yourself to the world, via Facebook and twitter.</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">4</td>
+        <td class="col-md-11">Watch as the bookings roll in. Keep your students happy with timely communication and quality service and you will receive great reviews.</td>
+      </tr>
+  </table>
+  </div>
+
+</div> <!-- end of row -->
