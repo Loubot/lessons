@@ -27,15 +27,7 @@
             <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last name' %>
           </div><br>
           
-          <div class="input-group">
-            <span class="input-group-addon glyphicon glyphicon-lock"></span>
-            <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control' %>
-          </div><br>
-          
-          <div class="input-group">
-            <span class="input-group-addon glyphicon glyphicon-lock"></span>
-            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm password', class: 'form-control' %>
-          </div><br>        
+        <br>        
           <%= f.hidden_field(:is_teacher, value: true) %>
           <div class="teachers_reg_buttons">
             <%= f.submit "Sign up", class: 'btn btn-success' %> or 
