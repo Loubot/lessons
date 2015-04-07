@@ -56,15 +56,11 @@ class StaticController < ApplicationController
 														 :email => {
 																				:email => params[:email] 
 																				},
-															:merge_vars => {
-																								:FNAME => params[:first_name],
-																								:LNAME => params[:last_name]
-																							},
 															:double_optin => false
 														})
 
 				
-				flash[:success] = "You have registered with us successfully"
+				flash[:success] = "Thank you, your sign-up request was successful! Please check your e-mail inbox."
 			rescue Gibbon::MailChimpError, StandardError => e
 				
 				flash[:danger] = e.to_s
