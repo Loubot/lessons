@@ -7,39 +7,32 @@
       <div class="col-md-6 col-xs-12 col-sm-12 teacher_registration_container left">
         <h2 class="teacher_registration_container_header"><strong>Teach</strong></h2><span class="label label-primary teach_label">Register below to become a teacher</span><br><br>
         <div class="teachers_form_container">
-          <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
+          <%= form_tag add_to_list_path, class: 'teacher_registration_form' do %>
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-envelope"></span>
-            <% if !is_mobile? %>
-              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
-            <% else %>
-              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
-            <% end %>
+            
+            <%= email_field_tag 'email',nil, class: 'form-control', placeholder: 'Email' %>
+            
           </div><br>
                
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-user"></span>
-            <%= f.text_field :first_name, class: 'form-control', placeholder: 'First name' %>
+            <%= text_field_tag :first_name,nil, class: 'form-control', placeholder: 'First name' %>
           </div><br>
           
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-user"></span>
-            <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last name' %>
+            <%= text_field_tag :last_name,nil, class: 'form-control', placeholder: 'Last name' %>
           </div><br>
           
         <br>        
-          <%= f.hidden_field(:is_teacher, value: true) %>
+          
           <div class="teachers_reg_buttons">
-            <%= f.submit "Sign up", class: 'btn btn-success' %> or 
-            <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>
+            <%= submit_tag "Sign up", class: 'btn btn-success' %>
            
           </div>
         <% end %>
         </div>
-        <div class="fb_login_container">
-          <%= link_to image_tag('facebook_reg.png'), "/teachers/auth/facebook?origin=#{request.original_url}", class: 'fbLogin_link' %>
-          <%= link_to image_tag('google_signup.jpg'), "/teachers/auth/google_oauth2?origin=#{request.original_url}", class: 'fbLogin_link' %>
-        </div> <!-- end of fb_login_container -->
         
         
       </div> <!-- end of col-md-6 teacher_registration_container -->

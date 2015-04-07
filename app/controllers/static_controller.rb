@@ -4,7 +4,7 @@ class StaticController < ApplicationController
 	include StaticHelper
 
 
-	caches_page :teach, :learn, :landing_page, gzip: true
+	caches_page :teach, :learn, gzip: true
 
 	# caches_action :welcome, layout: false, gzip: true
 
@@ -16,6 +16,9 @@ class StaticController < ApplicationController
 
 	def landing_page
 		render layout: 'landing_page_layout'
+
+		
+
 		fresh_when flash
 	end
 
@@ -45,19 +48,33 @@ class StaticController < ApplicationController
 
 	def add_to_list
 		gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
-		flash[:notice] = params
+		
 		if valid_email?(params[:email])
 			begin
-				gb.lists.subscribe({:id => ENV['_mail_chimp_list'], :email => {:email => params[:email] },:double_optin => false})
+				gb.lists.subscribe({
+														:id => ENV['_mail_chimp_list'],
+														 :email => {
+																				:email => params[:email] 
+																				},
+															:merge_vars => {
+																								:FNAME => params[:first_name],
+																								:LNAME => params[:last_name]
+																							},
+															:double_optin => false
+														})
+
+				
+				flash[:success] = "You have registered with us successfully"
 			rescue Gibbon::MailChimpError, StandardError => e
-				flash[:danger] = e
+				
+				flash[:danger] = e.to_s
 			end
 		end
 		redirect_to :back
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
 	end
@@ -66,7 +83,7 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
+		@subjects = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%")
 		@subject = @subjects.first
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])

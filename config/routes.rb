@@ -73,5 +73,5 @@ Rails.application.routes.draw do
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
 
-  root to: 'static#welcome'
+  root to: 'static#landing_page'
 end
