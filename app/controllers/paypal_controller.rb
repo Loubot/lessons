@@ -39,8 +39,8 @@ class PaypalController < ApplicationController
       :currency_code   => "GBP",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-      :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'http://3bfdc0a2.ngrok.com/store-paypal',
+      :return_url      => "http://6ca588d1.ngrok.com/paypal-return?payKey=${payKey}",
+      :ipn_notification_url => 'http://6ca588d1.ngrok.com/store-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
         { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -172,8 +172,8 @@ class PaypalController < ApplicationController
           :currency_code   => "GBP",
           :tracking_id     => params[:tracking_id],
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-          :ipn_notification_url => 'http://3bfdc0a2.ngrok.com/store-paypal',
+          :return_url      => "http://6ca588d1.ngrok.com/paypal-return?payKey=${payKey}",
+          :ipn_notification_url => 'http://6ca588d1.ngrok.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
             { :email => 'loubotsjobs@gmail.com',  amount: 10 }

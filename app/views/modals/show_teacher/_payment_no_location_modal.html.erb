@@ -9,7 +9,7 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid">
-                <%= get_home_price(@prices, @subject.id) %>
+                
                 <% if @teacher.paypal_email != "" %>
                   <div class="col-xs-6">
                     <%= form_tag home_booking_paypal_path, class: 'home_booking_form', method: 'post' do %>
@@ -24,7 +24,7 @@
                         <%= hidden_field_tag :receiver_amount, @home_price.price.to_f %>
                       <% end %>
                       <%= hidden_field_tag :start_time, Time.now %>
-                      <%= hidden_field_tag :end_time, Time.now %>
+                      <%= hidden_field_tag :end_time, Time.now + 5.minutes %>
                       <%= hidden_field_tag :paypal, '1' %>
                       <%= hidden_field_tag :home_address, '', class: 'home_address' %>
                       <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
@@ -56,7 +56,7 @@
                              
                       <%= hidden_field_tag :current_teacher, current_teacher.id %> 
                       <%= hidden_field_tag :start_time, Time.now %>           
-                      <%= hidden_field_tag :end_time, Time.now %>   
+                      <%= hidden_field_tag :end_time, Time.now + 5.minutes %>   
                       <%= hidden_field_tag :home_address, '', class: 'home_address' %>        
                       <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
                     <% end %>

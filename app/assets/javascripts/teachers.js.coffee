@@ -202,7 +202,7 @@ teachersInfoReady = ->
 
 #//// show_teacher_to_user add price to form modal
 
-  if $('.btn_book_now').length > 0
+  if $('.btn_book_now').length
     # console.log $('#rates').text().replace(/[^\d.]/g,"")
     # console.log """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').text()}"> """ 
     $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{ $('#rates').text().replace(/[^\d.]/g,"") }"> """ 
@@ -247,6 +247,7 @@ teachersInfoReady = ->
 
     #display appropraite booking option from dropdown select in payment_choice_modal
     
+    document.getElementById("location_choice").selectedIndex = 0
     $('#location_choice').on 'change', ->
       if @.value == 'Teachers house'
         $('.select_teachers_location').css 'display', 'inline'
@@ -268,28 +269,37 @@ teachersInfoReady = ->
     $("#location_only_datepicker").AnyTime_picker
       format: "%Y-%m-%d"
       placement: 'inline'
-      hideInput: true
+      hideInput: true  
+    
 
-  if $('#payment_no_location_modal').length
-
-    $('.home_booking_form').submit (e) ->
+    $('.home_booking_form').submit (e) -> #prevent paypal for submitting
       e.preventDefault()      
       
       address = null
       
       
-      $('.home_address').val $('#home_booking_address').val()
+      $('.home_address').val $('#home_booking_address').val() #append address to booking form
 
       if $('#remember').is ':checked'
-        $('.save_address').val 'true'
+        $('.save_address').val 'true' #set value of hidden field to tell server to save address
       else
         $('.save_address').val 'false'
         
       address = $('#home_booking_address').val() 
-      if !address 
+      if !address #alert user if no address entered
         alert "Address cannot be blank" 
       else 
         @.submit()
+
+    $(document).on 'click', '.stripe-button-el', ->  #function on stripe button click. 
+      
+      $('.home_address').val $('#home_booking_address').val()
+      if $('#remember').is ':checked'
+        
+        $('.save_address').val 'true'
+      else
+        
+        $('.save_address').val 'false'
 
 
 
@@ -329,6 +339,7 @@ $(document).on 'change', '#Multiple', ->
 
 $(document).ready(teachersInfoReady)
 $(document).on('page:load', teachersInfoReady)
+$(window).unload(teachersInfoReady)
 
 getCounties = () ->
   return ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',

@@ -111,7 +111,7 @@
                     <% if @teacher.stripe_access_token != "" %>
                       
                       <div class="col-xs-6">
-                        <%= form_tag home_booking_stripe_path, class: 'home_booking_form', method: 'post' do %>
+                        <%= form_tag home_booking_stripe_path, id: 'stripe_booking_form', method: 'post' do %>
                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
                           data-description="Book your lesson"

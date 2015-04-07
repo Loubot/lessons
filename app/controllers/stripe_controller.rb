@@ -45,7 +45,7 @@ class StripeController < ApplicationController
   def home_booking_stripe
 
     update_student_address(params) #application controller
-
+    
     if params[:home_address] == ''
       flash[:danger] = "Address can't be blank"
       redirect_to :back and return
