@@ -203,9 +203,12 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
 
   if $('.btn_book_now').length
-    # console.log $('#rates').text().replace(/[^\d.]/g,"")
-    # console.log """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').text()}"> """ 
-    $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{ $('#rates').text().replace(/[^\d.]/g,"") }"> """ 
+    currency = $('#teachers_rate').text()
+    
+    result = currency.replace(/[^\d.]/g,"")
+    # result = parseFloat(currency)
+    
+    $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value=#{result}> """ 
     # $(document).on 'change', '#rates', ->
     #   $('#create_event_form').find('#event_rate').remove()
     # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 

@@ -47,7 +47,7 @@ class EventsController < ApplicationController
 			 end
 		end
 		
-	end
+	end 
 
 	def destroy
 		Event.find(params[:id]).destroy

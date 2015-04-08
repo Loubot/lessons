@@ -13,7 +13,7 @@
           <div class="panel-body text-center">
               <p class="lead">
                 <%= @subject.name %> <p id="rates">
-                <%= get_price_or_message(@prices, location.id, @subject.id, @teacher.id) %> <%# teachers helper %>
+                <span id="teachers_rate"><%= get_price_or_message(@prices, location.id, @subject.id, @teacher.id) %></span> <%# teachers helper %>
                 <% if check_home_price(@prices, @subject.id) %> <%# teachers_helper %>
                   <br>Home lesson price <br>
                   <%= get_home_price(@prices, @subject.id) %>
