@@ -27,12 +27,8 @@ class ApplicationController < ActionController::Base
 
 
       def check_mobile?
-        session[:mobile] = request.user_agent =~ /Mobile|webOS/ ? true : false
-        # puts "Mobile? #{session[:mobile]}"
-      end
 
-      def user_agent_list
-         /iPad|iPod|iPhone|Android|BlackBerry|SymbianOS|SCH-M\d+|Opera Mini|Windows CE|Nokia|SonyEricsson|webOS|PalmOS/
+        session[:mobile] = browser.mobile? # gem browser
       end
 
   protected
