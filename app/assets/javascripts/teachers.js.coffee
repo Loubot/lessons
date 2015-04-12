@@ -250,7 +250,8 @@ teachersInfoReady = ->
 
     #display appropraite booking option from dropdown select in payment_choice_modal
     
-    document.getElementById("location_choice").selectedIndex = 0
+    if $('#location_choice').length
+      document.getElementById("location_choice").selectedIndex = 0
     $('#location_choice').on 'change', ->
       if @.value == 'Teachers house'
         $('.select_teachers_location').css 'display', 'inline'
