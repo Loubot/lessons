@@ -140,7 +140,7 @@ module TeachersHelper
     p "location %%%%%%%%% #{location}"
     p =  prices.select { |p| p.location_id == location && p.subject_id == subject && p.teacher_id == teacher }.first
     home_price = prices.select { |p| p.subject_id == subject && p.no_map == true }.first
-    p ? number_to_currency(p.price, unit: '€') : "Only home lesson available".html_safe
+    p ? number_to_currency(p.price, unit: '€').html_safe : "Only home lesson available".html_safe
   end
 
   def check_home_price(prices, subject) #check if home price defined for this subject

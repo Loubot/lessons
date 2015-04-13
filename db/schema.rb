@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301011355) do
+ActiveRecord::Schema.define(version: 20150413221045) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -96,6 +96,16 @@ ActiveRecord::Schema.define(version: 20150301011355) do
   end
 
   add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true
+
+  create_table "packages", force: :cascade do |t|
+    t.string   "subject_name",  default: ""
+    t.integer  "teacher_id"
+    t.integer  "subject_id"
+    t.decimal  "price",         default: 0.0
+    t.integer  "no_of_lessons", default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "photos", force: :cascade do |t|
     t.string   "name"

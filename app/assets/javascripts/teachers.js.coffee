@@ -203,7 +203,7 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
 
   if $('.btn_book_now').length
-    currency = $('#teachers_rate').text()
+    currency = $('.teachers_rate').text()
     
     result = currency.replace(/[^\d.]/g,"")
     # result = parseFloat(currency)
