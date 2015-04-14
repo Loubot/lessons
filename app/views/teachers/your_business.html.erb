@@ -53,5 +53,19 @@
 
     </div> <!-- end of tabpanel -->
   	
-  </div> <!-- end of map_container -->  
+  </div> <!-- end of map_container -->
+  <div class="row">
+    <div class="well">
+      Create bundles of lessons for specific rates.
+      <%= form_for @package do |f| %>
+        <%= f.label :subject_id, 'Subject?' %>
+        <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }) %>
+        <%= f.label :no_of_lessons, 'No. of lessons?' %>
+        <%= f.select :no_of_lessons, options_for_select(0..52) %>
+        <%= f.label :price, 'Total price?' %>
+        <%= f.number_field :price, placeholder: 'Total price?' %>
+        <%= f.submit 'Submit' %>
+      <% end %>
+    </div>
+  </div> 
 </div> <!-- end of outer-container -->

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :locations
   resources :prices, only: [:create, :update, :destroy]
-  
+  resources :packages, only: [:create, :destroy]
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
