@@ -16,5 +16,5 @@ class Package < ActiveRecord::Base
   belongs_to :teacher
   belongs_to :subject
 
-  verifies :price, :teacher_id, :subject_id, presence: true
+  validates :price, :teacher_id, :subject_id, presence: true
 end

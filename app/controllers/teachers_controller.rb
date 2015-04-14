@@ -93,7 +93,7 @@ class TeachersController < ApplicationController
 		fresh_when @qualifications
 	end
 
-	def your_location
+	def your_business
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id])
 		# @location = @teacher.locations.first
 		@locations = @teacher.locations.reorder("created_at ASC")
