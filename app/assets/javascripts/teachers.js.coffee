@@ -325,13 +325,19 @@ teachersInfoReady = ->
         $('.review_hover').not(this).popover('hide')
         $(this).popover "toggle"
         e.stopPropagation()
-  
-
-
-  # $('.review_hover').mouseleave ->
-  #   $(@).popover 'hide'
 #////////// end review script previous_lessons_teacher
 
+  # teachers business page, add subject name to for before submitting
+  if $('.create_package_form')
+    $('.create_package_form').submit (e)->
+      e.preventDefault()
+      subject_name = $('.package_subject_name :selected').text()
+      $('.create_package_form').append """ 
+                  <input value="#{ subject_name }" type="hidden" name="package[subject_name]">
+                                        """
+      @.submit()
+
+#end of  teachers business page, add subject name to for before submitting
 
 #////////////////Teachers area block book checkbox
 $(document).on 'change', '#Multiple', ->
