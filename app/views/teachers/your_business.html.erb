@@ -55,22 +55,31 @@
   	
   </div> <!-- end of map_container -->
   <div class="row">
-    <div class="well">
-      Create bundles of lessons for specific rates.
+    <div class="well package_form_well">
+      <span class='package_form_label'>Create bundles of lessons for specific rates.</span>
+    
       <%# see teachers.js, subject name appended using jquery %>
       <%= form_for @package, html: { class: 'create_package_form' } do |f| %>
-        <%= f.label :subject_id, 'Subject?' %>
+        <%= f.label :subject_id, 'Subject?', class: 'package_form_label' %>
         <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'package_subject_name' } %>
-        <%= f.label :no_of_lessons, 'No. of lessons?' %>
+        <%= f.label :no_of_lessons, 'No. of lessons?', class: 'package_form_label' %>
         <%= f.select :no_of_lessons, options_for_select(0..52) %>
-        <%= f.label :price, 'Total price?' %>
+        <%= f.label :price, 'Total price?', class: 'package_form_label' %>
         <%= f.number_field :price, placeholder: 'Total price?' %>
         <%= f.hidden_field :teacher_id, value: current_teacher.id %>
-        <%= f.submit 'Submit' %>
+        <%= f.submit 'Submit', class: 'btn btn-warning' %>
       <% end %>
     </div> <!-- end of well -->
-    <div class="saved_packages">
-      <%= @teacher.packages.size %>
+    <div class="saved_packages_container">
+     <div class="saved_packages">
+       <% @teacher.packages.each do |p| %>
+        <%= %Q(You are offering a package of #{p.no_of_lessons}*#{p.subject_name} lessons for
+          #{number_to_currency(p.price, unit:'€')}) 
+
+        %><br>
+
+      <% end %>
+     </div>
     </div> <!-- end of saved_packages -->
   </div> <!-- end of row -->
 </div> <!-- end of outer-container -->
