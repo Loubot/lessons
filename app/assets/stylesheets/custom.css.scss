@@ -247,13 +247,17 @@ hr{
   margin-bottom: 50px;
 }
 
+.package_form_row{
+  margin-top: 20px;
+}
+
 .package_form_well{
   background-color: #326EA7 !important;
 } 
 
-.create_package_form{
-  background-color: #326EA7;
-
+.package_form_header{
+  color: #FFF;
+  text-align: center;
 }
 
 .package_form_label{
@@ -263,6 +267,16 @@ hr{
 .saved_packages{
   background-color: #5491CD;
   color: #FFF;
+}
+
+
+.display_saved_packages{
+  height: 150px;
+  padding: 30px;
+  border-style: solid;
+  border-width: 1px;
+  //margin-top: 9px;*/
+  border-color: #E6E6E6;
 }
 
 //end of your_business page
