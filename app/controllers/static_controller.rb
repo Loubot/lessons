@@ -19,7 +19,7 @@ class StaticController < ApplicationController
 
 		
 
-		fresh_when flash
+		# fresh_when flash
 	end
 
 
