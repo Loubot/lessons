@@ -20,7 +20,7 @@ class TeachersController < ApplicationController
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
 		@subject = Subject.find(params[:subject_id])
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos).find(params[:id])
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
 		@reviews = @teacher.reviews.take(3)
 		@locations = @teacher.locations
 		@prices = @teacher.prices
@@ -112,7 +112,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

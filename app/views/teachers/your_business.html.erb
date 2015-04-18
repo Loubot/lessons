@@ -19,6 +19,7 @@
         <% end %>
       </div> <!-- end of col-xs-6 -->
     <% end %>
+    <%= "Go to personal info and choose your subjects first" if @subjects.size == 0 %>
   </div> <!-- end of home_schooling -->
   <div class="price_alert">
     
@@ -61,7 +62,7 @@
      <span class='package_form_label'>Create bundles of lessons for specific rates.</span>
     
       <%# see teachers.js, subject name appended using jquery %>
-      <%= form_for @package, html: { class: 'form-inline' } do |f| %>
+      <%= form_for @package, html: { class: 'form-inline create_package_form' } do |f| %>
         <div class="form-group">
           <%= f.label :subject_id, 'Subject?', class: 'package_form_label' %>
           <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'package_subject_name form-control' } %>
