@@ -1,0 +1,42 @@
+<div class="modal fade" id="payment_packages_modal" tab-index="-2" role="dialog" aria-labelledby="payment_packages_label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="payment_packages_modal_title">Select package</h4>
+      </div> <!-- end of modal-header -->
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="package_selection_container">
+            Select your package <br>
+            <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }, {}, { class: 'package_select_box'}) %> <br>
+
+            Select your payment method <br>
+
+          </div>
+          <div class="col-xs-6">
+            <%= form_for package_paypal_path, html: { class: 'package_booking_form'} do |f| %>
+
+              <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
+            <% end %>
+
+          </div>
+          <div class="col-xs-6">
+            
+          </div>
+            
+          
+            
+          
+        </div>
+        
+      </div> <!-- end of modal-body -->
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>        
+      </div>
+    </div> <!-- end of modal-content -->
+  </div> <!-- end of modal-dialog -->
+</div> <!-- end of modal fade -->

@@ -262,6 +262,7 @@ teachersInfoReady = ->
         
 
     #// end of display appropraite booking option
+  
 
   if $('.show_teacher_profile_container').length
     AnyTime.noPicker 'payment_choice_datepicker'
@@ -305,6 +306,16 @@ teachersInfoReady = ->
         
         $('.save_address').val 'false'
 
+        # append package id to packages modal when packages modal is opened
+    $('#payment_packages_modal').on 'shown.bs.modal', ->
+      
+      $('.package_booking_form').append """ 
+                        <input type="hidden" name="package_id" class="package_id" value="#{ $('.package_select_box').val() }"> 
+                                    """
+
+    $('.package_select_box').on 'change', ->
+        #change id passed to controller when dropdown menu is changed
+      $('.package_id').val $(@).val()
 
 
 
@@ -347,7 +358,7 @@ $(document).on 'change', '#Multiple', ->
 #///////////////End of Teachers area block book checkbox
 
 
-$(document).ready(teachersInfoReady)
+$(document).on('ready', teachersInfoReady)
 $(document).on('page:load', teachersInfoReady)
 $(window).unload(teachersInfoReady)
 

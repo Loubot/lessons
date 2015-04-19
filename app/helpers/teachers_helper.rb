@@ -153,4 +153,8 @@ module TeachersHelper
     number_to_currency(p.price, unit: '€') if p
   end
 
+  def get_select_text(p)
+  	["#{p.no_of_lessons}x#{p.subject_name} lessons for #{ number_to_currency(p.price, unit: '€') }", p.id]
+  end
+
 end

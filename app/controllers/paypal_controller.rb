@@ -16,6 +16,11 @@ class PaypalController < ApplicationController
     create_paypal(params) if params[:paypal].present?
   end
 
+  def create_package_booking
+    puts "params #{params}"
+    redirect_to :back
+  end
+
   def home_booking_paypal
     update_student_address(params) #application controller
 
