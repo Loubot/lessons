@@ -150,7 +150,7 @@ module TeachersHelper
 
   def get_home_price(prices, subject)
     p = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
-    number_to_currency(p.price, unit: '€')
+    number_to_currency(p.price, unit: '€') if p
   end
 
 end

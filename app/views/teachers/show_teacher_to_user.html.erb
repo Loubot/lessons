@@ -35,10 +35,12 @@
         </tr>
       </table>
     </div> <!-- end of show_teacher_profile_section -->  
-    <div class="col-sm-3 col-xs-12 package_form_well">
-      <h3 class="package_form_header">Teachers special offers</h3>
-      <%= select_tag "packages", options_from_collection_for_select(@teacher.packages, 'id', 'subject_name', 1) %>
-    </div>
+    <% if @teacher.packages.size != 0 %>
+      <div class="col-sm-3 col-xs-12 package_form_well">
+        <h3 class="package_form_header">Teachers special offers</h3>
+        <%= select_tag "packages", options_from_collection_for_select(@teacher.packages, 'id', 'subject_name', 1) %>
+      </div> <!-- end of package_form_well -->
+    <% end %>
   </div> <!-- end of row show_teacher_profile_container -->
 
   <div class="row show_teacher_to_user">  
