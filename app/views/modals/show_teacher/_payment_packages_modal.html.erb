@@ -16,18 +16,19 @@
 
           </div>
           <div class="col-xs-6">
-            <%= form_for package_paypal_path, html: { class: 'package_booking_form'} do |f| %>
-
+            <%= form_tag package_paypal_path,  class: 'package_booking_form', method: 'post' do |f| %>
+              <%= hidden_field_tag :teacher_id, @teacher.id %>
+              <%= hidden_field_tag :student_id, current_teacher.id %>
+              <%= hidden_field_tag :student_name, current_teacher.full_name %>
+              <%= hidden_field_tag :student_email, @current_teacher.email %>
+              <%= hidden_field_tag :teacher_email, @teacher.email %>
               <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
             <% end %>
 
-          </div>
+          </div> <!-- end of col-xs-6 -->
           <div class="col-xs-6">
             
-          </div>
-            
-          
-            
+          </div> <!-- end of col-xs-6 -->
           
         </div>
         

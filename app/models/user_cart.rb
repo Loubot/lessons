@@ -79,4 +79,17 @@ class UserCart < ActiveRecord::Base
     cart
   end
 
+  def self.create_package_cart(params, current_teacher, package)
+    cart = where(student_id: params[:student_id]).first_or_create
+    cart.update_attributes(
+                            teacher_id: params[:teacher_id],
+                            teacher_email: params[:teacher_email],
+                            params: params,
+                            student_email: current_teacher.email,
+                            student_name: current_teacher.full_name,
+                            subject_id: package.subject_id
+                          )
+    cart
+  end
+
 end

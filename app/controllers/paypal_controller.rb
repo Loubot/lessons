@@ -1,7 +1,7 @@
 class PaypalController < ApplicationController
 
   include PaymentsHelper
-  before_action :authenticate_teacher!, only: [:paypal_create, :single_booking_paypal]
+  before_action :authenticate_teacher!, only: [:paypal_create, :single_booking_paypal, :create_package_booking]
   protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
@@ -17,8 +17,44 @@ class PaypalController < ApplicationController
   end
 
   def create_package_booking
-    puts "params #{params}"
-    redirect_to :back
+    package = Package.find(params[:package_id])
+    cart = UserCart.create_package_cart(params, current_teacher, package)
+    
+    client = AdaptivePayments::Client.new(
+      :user_id       => "lllouis_api1.yahoo.com",
+      :password      => "MRXUGXEXHYX7JGHH",
+      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
+      :app_id        => "APP-80W284485P519543T",
+      :sandbox       => true
+    )
+
+    client.execute(:Pay,
+      :action_type     => "PAY",
+      :currency_code   => "GBP",
+      :tracking_id     => cart.tracking_id,
+      :cancel_url      => "https://learn-your-lesson.herokuapp.com",
+      :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
+      :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
+      :receivers => [
+        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
+        { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+      ]
+    ) do |response|
+
+      if response.success?
+        puts "Pay key: #{response.pay_key}"
+        logger.info "create paypal response #{response.inspect}"
+
+        # send the user to PayPal to make the payment
+        # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
+        redirect_to client.payment_url(response)
+      else
+        flash[:danger] = "#{response.error_message}"
+        puts "Paypal error message: #{response.ack_code}: #{response.error_message}"
+        redirect_to :back
+      end
+
+    end
   end
 
   def home_booking_paypal
