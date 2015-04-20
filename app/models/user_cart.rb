@@ -13,9 +13,10 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  subject_id    :integer
-#  multiple      :boolean          default("f")
+#  address       :string           default("")
 #  weeks         :integer          default("0")
-#  home_booking  :boolean
+#  multiple      :boolean          default("false")
+#  booking_type  :string           default("")
 #
 
 class UserCart < ActiveRecord::Base
@@ -30,7 +31,7 @@ class UserCart < ActiveRecord::Base
   before_validation :save_tracking_id
 
   def save_tracking_id
-    puts "blvvalvavl"
+    
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
 
@@ -44,7 +45,8 @@ class UserCart < ActiveRecord::Base
                             student_email: params[:student_email],
                             teacher_email: params[:teacher_email],
                             address: params[:home_address],
-                            home_booking: true
+                            booking_type: 'home',
+                            multiple: false
                           )
 
     cart
@@ -58,7 +60,9 @@ class UserCart < ActiveRecord::Base
                             teacher_email: teacher_email,
                             student_email: current_teacher.email,
                             student_name: "#{current_teacher.full_name}",
-                            subject_id: params[:event][:subject_id]
+                            subject_id: params[:event][:subject_id],
+                            multiple: false,
+                            booking_type: 'single'
                           )
     cart
   end
@@ -74,7 +78,8 @@ class UserCart < ActiveRecord::Base
                             student_name: "#{current_teacher.full_name}",
                             subject_id: params[:event][:subject_id],
                             multiple: true,
-                            weeks: params[:booking_length]
+                            weeks: params[:booking_length],
+                            booking_type: 'multiple'
                           )
     cart
   end
@@ -87,7 +92,10 @@ class UserCart < ActiveRecord::Base
                             params: params,
                             student_email: current_teacher.email,
                             student_name: current_teacher.full_name,
-                            subject_id: package.subject_id
+                            subject_id: package.subject_id,
+                            address: '',
+                            multiple: false,
+                            booking_type: 'package'
                           )
     cart
   end

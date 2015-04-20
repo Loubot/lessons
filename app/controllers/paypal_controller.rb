@@ -17,9 +17,11 @@ class PaypalController < ApplicationController
   end
 
   def create_package_booking
+    p "params #{params}"
+    
     package = Package.find(params[:package_id])
     cart = UserCart.create_package_cart(params, current_teacher, package)
-    
+    redirect_to :back
     client = AdaptivePayments::Client.new(
       :user_id       => "lllouis_api1.yahoo.com",
       :password      => "MRXUGXEXHYX7JGHH",

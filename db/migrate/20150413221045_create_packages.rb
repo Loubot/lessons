@@ -9,5 +9,7 @@ class CreatePackages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :packages, :teacher_id
+    add_index :packages, :subject_id
   end
 end
