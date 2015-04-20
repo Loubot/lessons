@@ -88,7 +88,7 @@ class UserCart < ActiveRecord::Base
     cart
   end
 
-  def self.create_package_cart(params, current_teacher, package_id)
+  def self.create_package_cart(params, current_teacher, package)
     cart = where(student_id: params[:student_id]).first_or_create
     cart.update_attributes(
                             teacher_id: params[:teacher_id],
@@ -100,7 +100,7 @@ class UserCart < ActiveRecord::Base
                             address: '',
                             multiple: false,
                             booking_type: 'package',
-                            package_id: package_id
+                            package_id: package.id
                           )
     cart
   end

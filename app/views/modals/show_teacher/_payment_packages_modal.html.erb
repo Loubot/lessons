@@ -15,6 +15,7 @@
             Select your payment method <br>
 
           </div>
+          <!-- package id appended to form using js on shown.bs.modal -->
           <div class="col-xs-6">
             <%= form_tag package_paypal_path,  class: 'package_booking_form', method: 'post' do |f| %>
               <%= hidden_field_tag :teacher_id, @teacher.id %>
