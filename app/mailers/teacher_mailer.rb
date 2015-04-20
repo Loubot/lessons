@@ -71,6 +71,38 @@ class TeacherMailer < ActionMailer::Base
 
   end
 
+  def paypal_package_email(student, student_name, teacher)
+    begin
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      message = {  
+       :subject=> "You sold a package",  
+       :from_name=> "Learn Your Lesson",  
+       :text=> %Q(<html>#{student_name} has purchased a package.
+                ),  
+       :to=>[  
+         {  
+           :email=> cart.teacher_email,
+           :name=> "#{cart.student_email}"  
+         }  
+       ],  
+       :html=> %Q(<html>#{cart.student_name} has requested a lesson.
+                #{cart.student_name} would like to book a lesson at their own house.
+                Their address is #{cart.address}. Please contact them via email to arrange a time.),  
+       :from_email=> cart.student_email 
+      }  
+      sending = m.messages.send message  
+      puts sending
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Mail sent to #{cart.teacher_email}"
+  end
+
   
 
   def reset_password_instructions(record, token, opts={})

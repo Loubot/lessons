@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 20150420152010) do
     t.integer  "weeks",                     default: 0
     t.boolean  "multiple",                  default: false
     t.string   "booking_type",              default: ""
+    t.integer  "package_id",                default: 0
   end
 
   add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree

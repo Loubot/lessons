@@ -2,7 +2,7 @@ class PaypalController < ApplicationController
 
   include PaymentsHelper
   before_action :authenticate_teacher!, only: [:paypal_create, :single_booking_paypal, :create_package_booking]
-  protect_from_forgery except: [:store_paypal, :store_stripe, :stripe_create, :stripe_auth_user]
+  protect_from_forgery except: [:store_paypal, :store_package_paypal]
   before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
   # before_action :fix_json_params, only: [:store_stripe]
@@ -16,11 +16,11 @@ class PaypalController < ApplicationController
     create_paypal(params) if params[:paypal].present?
   end
 
-  def create_package_booking
+  def create_package_booking_paypal
     p "params #{params}"
     
     package = Package.find(params[:package_id])
-    cart = UserCart.create_package_cart(params, current_teacher, package)
+    cart = UserCart.create_package_cart(params, current_teacher, package.id)
     redirect_to :back
     client = AdaptivePayments::Client.new(
       :user_id       => "lllouis_api1.yahoo.com",
@@ -36,7 +36,7 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
       :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
+      :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-package-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
         { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -164,6 +164,41 @@ class PaypalController < ApplicationController
     else
       logger.info "MAJOR ALERT: Transaction not found"
       render status: 200, nothing: true
+    end
+
+  end
+
+  def store_package_paypal #ipn destination for package bookings
+    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    http = Net::HTTP.new(uri.host,uri.port)
+    http.open_timeout = 60
+    http.read_timeout = 60
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl = true
+    response = http.post(
+                          uri.request_uri, 
+                          request.raw_post, 
+                          'Content-Length' => "#{request.raw_post.size}",
+                          'User-Agent' => 'My custom user agent'
+                        ).body
+
+    if !Transaction.find_by(tracking_id: params['tracking_id'])
+      if response == 'VERIFIED'
+        cart = UserCart.find_by(tracking_id: params['tracking_id'])
+        render status: 200, nothing: true and return if !cart
+
+        p "MAJOR ERROR. ROUTED TO WRONG PAYPAL METHOD" if cart.booking_type != 'package'
+
+        Transaction.create(
+                            create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
+                          )
+
+        TeacherMailer.paypal_package_email(
+                                            cart.student_email,
+                                            cart.student_name,
+                                            cart.teacher_email
+                                          ).deliver_now
+      end
     end
 
   end

@@ -55,7 +55,8 @@ Rails.application.routes.draw do
   get         'paypal-return'           =>  'paypal#paypal_return' 
   post        'home-booking-paypal'     =>  'paypal#home_booking_paypal'
   post        'store-paypal'            =>  'paypal#store_paypal'
-  post        'package-paypal'          =>  'paypal#create_package_booking'
+  post        'package-paypal'          =>  'paypal#create_package_booking_paypal'
+  post        'store-package-paypal'    =>  'paypal#store_package_paypal'
 
   #Stripe
   get         'stripe-auth-user'        =>  'stripe#stripe_auth_user'  
