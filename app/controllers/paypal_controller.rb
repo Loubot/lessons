@@ -188,7 +188,7 @@ class PaypalController < ApplicationController
         render status: 200, nothing: true and return if !cart
 
         p "MAJOR ERROR. ROUTED TO WRONG PAYPAL METHOD" if cart.booking_type != 'package'
-
+        package = Package.find(cart.package_id)
         Transaction.create(
                             create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
                           )
@@ -196,14 +196,17 @@ class PaypalController < ApplicationController
         TeacherMailer.paypal_package_email(
                                             cart.student_email,
                                             cart.student_name,
-                                            cart.teacher_email
+                                            cart.teacher_email,
+                                            package
                                           ).deliver_now
         render status: 200, nothing: true
-      else 
+      else #end of response == 'verified'
         p "nope 2"
+        render status: 200, nothing: true
       end
-    else 
+    else #end of find transaction
       p "nope 1"
+      render status: 200, nothing: true
     end
 
   end

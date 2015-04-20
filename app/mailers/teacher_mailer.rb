@@ -71,7 +71,7 @@ class TeacherMailer < ActionMailer::Base
 
   end
 
-  def paypal_package_email(student, student_name, teacher)
+  def paypal_package_email(student_email, student_name, teacher_email, package)
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -79,17 +79,18 @@ class TeacherMailer < ActionMailer::Base
        :subject=> "You sold a package",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>#{student_name} has purchased a package.
+                  "#{package.no_of_lessons}x#{package.subject_name} lessons"
                 ),  
        :to=>[  
          {  
-           :email=> cart.teacher_email,
-           :name=> "#{cart.student_email}"  
+           :email=> teacher_email,
+           :name=> "#{student_email}"  
          }  
        ],  
-       :html=> %Q(<html>#{cart.student_name} has requested a lesson.
-                #{cart.student_name} would like to book a lesson at their own house.
-                Their address is #{cart.address}. Please contact them via email to arrange a time.),  
-       :from_email=> cart.student_email 
+       :html=> %Q(<html>#{student_name} has purchased a package.
+                  "#{package.no_of_lessons}x#{package.subject_name} lessons"
+                ),  
+       :from_email=> student_email 
       }  
       sending = m.messages.send message  
       puts sending
@@ -100,7 +101,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{cart.teacher_email}"
+    logger.info "Mail sent to #{teacher_email}"
   end
 
   

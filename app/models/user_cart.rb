@@ -33,7 +33,7 @@ class UserCart < ActiveRecord::Base
 
   def save_tracking_id
     
-    self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)
+    self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand, self.id].join)
   end
 
   def self.home_booking_cart(params)
