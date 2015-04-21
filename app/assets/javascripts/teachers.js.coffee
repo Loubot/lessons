@@ -314,7 +314,7 @@ teachersInfoReady = ->
                                     """
 
     $('.package_select_box').on 'change', ->
-        #change id passed to controller when dropdown menu is changed
+        #change package_id passed to controller when dropdown menu is changed
       $('.package_id').val $(@).val()
 
 

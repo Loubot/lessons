@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   post        'stripe-create'           =>  'stripe#stripe_create'
   post        'home-booking-stripe'     =>  'stripe#home_booking_stripe'
   post        'store-stripe'            =>  'stripe#store_stripe'
+  post        'package-stripe'          =>  'stripe#create_package_booking_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
 
