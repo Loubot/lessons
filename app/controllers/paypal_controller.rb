@@ -35,8 +35,8 @@ class PaypalController < ApplicationController
       :currency_code   => "GBP",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-      :return_url      => "http://330ec2c5.ngrok.com/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'http://330ec2c5.ngrok.com/store-package-paypal',
+      :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
+      :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-package-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: package.price.to_f, primary: true },
         { :email => 'loubotsjobs@gmail.com',  amount: 10 }

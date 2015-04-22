@@ -79,7 +79,8 @@ class TeacherMailer < ActionMailer::Base
        :subject=> "You sold a package",  
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>#{student_name} has purchased a package.
-                  "#{package.no_of_lessons}x#{package.subject_name} lessons"
+                  "#{package.no_of_lessons}x#{package.subject_name} lessons".
+                  Please contact them at #{student_email} to arrange a lesson.
                 ),  
        :to=>[  
          {  
@@ -88,7 +89,8 @@ class TeacherMailer < ActionMailer::Base
          }  
        ],  
        :html=> %Q(<html>#{student_name} has purchased a package.
-                  "#{package.no_of_lessons}x#{package.subject_name} lessons"
+                  "#{package.no_of_lessons}x#{package.subject_name} lessons".
+                  Please contact them at #{student_email} to arrange a lesson.
                 ),  
        :from_email=> student_email 
       }  

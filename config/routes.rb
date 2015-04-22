@@ -9,8 +9,9 @@ Rails.application.routes.draw do
       get     '/edit-appointments'      =>  'teachers#edit_appointments'
       get     '/qualification-form'     =>  'teachers#qualification_form'
       get     '/your-business'          =>  'teachers#your_business'
-      get     'previous-lessons'        =>  'teachers#previous_lessons'  
-      post    '/change-profile-pic'     =>  'teachers#change_profile_pic'        
+      get     'previous-lessons'        =>  'teachers#previous_lessons'
+      get     'modal'                   =>  'teachers#modals'      
+      post    '/change-profile-pic'     =>  'teachers#change_profile_pic'       
   	end
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
@@ -75,6 +76,6 @@ Rails.application.routes.draw do
 
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
-
+  
   root to: 'static#landing_page'
 end

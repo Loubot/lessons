@@ -1,6 +1,4 @@
-<div class="modal fade" id="payment_packages_modal" tab-index="-2" role="dialog" aria-labelledby="payment_packages_label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="payment_packages_modal_title">Select package</h4>
@@ -20,8 +18,8 @@
             <% if @teacher.paypal_email != "" %>
               <%= form_tag package_paypal_path,  class: 'package_booking_form', method: 'post' do |f| %>
                 <%= hidden_field_tag :teacher_id, @teacher.id %>
-                <%= hidden_field_tag :student_id, current_teacher.id %>
-                <%= hidden_field_tag :student_name, current_teacher.full_name %>
+                <%= hidden_field_tag :student_id, @current_teacher.id %>
+                <%= hidden_field_tag :student_name, @current_teacher.full_name %>
                 <%= hidden_field_tag :student_email, @current_teacher.email %>
                 <%= hidden_field_tag :teacher_email, @teacher.email %>
                 <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
@@ -39,8 +37,8 @@
                       data-imgage="<%= asset_url 'stripe.png' %>"
                       ></script>
                 <%= hidden_field_tag :teacher_id, @teacher.id %>
-                <%= hidden_field_tag :student_id, current_teacher.id %>
-                <%= hidden_field_tag :student_name, current_teacher.full_name %>
+                <%= hidden_field_tag :student_id, @current_teacher.id %>
+                <%= hidden_field_tag :student_name, @current_teacher.full_name %>
                 <%= hidden_field_tag :student_email, @current_teacher.email %>
                 <%= hidden_field_tag :teacher_email, @teacher.email %>
               
@@ -56,6 +54,4 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>        
       </div>
-    </div> <!-- end of modal-content -->
-  </div> <!-- end of modal-dialog -->
-</div> <!-- end of modal fade -->
+    

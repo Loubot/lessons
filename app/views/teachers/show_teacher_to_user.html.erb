@@ -39,7 +39,7 @@
       <div class="col-sm-3 col-xs-12 package_form_well">
         <h3 class="package_form_header">Teachers special offers</h3>
         <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %>
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
           Book your package
         </button>
       </div> <!-- end of package_form_well -->
@@ -139,4 +139,12 @@
 <%= render 'modals/show_teacher/payments_modal_for_users_multiple' %>
 <%= render 'modals/show_teacher/payment_no_location_modal' %>
 <%= render 'modals/show_teacher/payment_location_only_modal' %>
-<%= render 'modals/show_teacher/payment_packages_modal' %>
+
+
+<!-- outline of payment packages modal. content is loaded dynamically -->
+<div class="modal fade" id="payment_packages_modal" tab-index="-2" role="dialog" aria-labelledby="payment_packages_label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      </div> <!-- end of modal-content -->
+  </div> <!-- end of modal-dialog -->
+</div> <!-- end of modal fade -->

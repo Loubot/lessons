@@ -2,7 +2,7 @@ class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
-	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons]
+	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals]
 	
 	include TeachersHelper
 
@@ -129,6 +129,12 @@ class TeachersController < ApplicationController
 		@location = Location.new
 		p request.to_s
 
+	end
+
+	def modals #render modal content 
+		@teacher = Teacher.find(params[:id])
+		@current_teacher = current_teacher
+		render 'modals/show_teacher/_payment_packages_modal', layout: false
 	end
 
 	private

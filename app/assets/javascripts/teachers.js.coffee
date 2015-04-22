@@ -313,7 +313,8 @@ teachersInfoReady = ->
                         <input type="hidden" name="package_id" class="package_id" value="#{ $('.package_select_box').val() }"> 
                                     """
 
-    $('.package_select_box').on 'change', ->
+    $(document).on 'change', '.package_select_box', ->
+      
         #change package_id passed to controller when dropdown menu is changed
       $('.package_id').val $(@).val()
 
