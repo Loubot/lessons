@@ -39,9 +39,11 @@
       <div class="col-sm-3 col-xs-12 package_form_well">
         <h3 class="package_form_header">Teachers special offers</h3>
         <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %>
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
-          Book your package
-        </button>
+        <div class="text-center">
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
+            Book your package
+          </button>
+        </div>
       </div> <!-- end of package_form_well -->
     <% end %>
   </div> <!-- end of row show_teacher_profile_container -->

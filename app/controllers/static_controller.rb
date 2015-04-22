@@ -54,8 +54,9 @@ class StaticController < ApplicationController
 				gb.lists.subscribe({
 														:id => ENV['_mail_chimp_list'],
 														 :email => {
-																				:email => params[:email] 
+																				:email => params[:email]																				
 																				},
+																				:merge_vars => { :FNAME => params[:name] },
 															:double_optin => false
 														})
 
