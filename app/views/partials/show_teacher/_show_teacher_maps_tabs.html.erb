@@ -1,50 +1,9 @@
 
 
   <div role="tabpanel" class="tab-pane <%= 'active' if location_counter == 0 %>" id="location<%= location_counter %>">
-    <div class="mob_no_padding nopadding col-md-8 col-xs-12">
+    <div class="mob_no_padding nopadding col-xs-12">
       <div id="map_canvas<%= location_counter %>" class="col-xs-12 map_canvas"></div>
     </div> <!-- end of col-md-8 -->
-    <div class="mob_no_padding col-md-4 col-xs-12 nopadding">
-      <div class="teacher_purchase_panel">        
-        <div class="panel booking_button_panel">
-          <div class="panel-heading booking_button_panel_heading">
-              <h4 class="text-center"><strong><%= "#{@teacher.full_name}" %></strong></h4>
-          </div> <!-- end of panel-heading -->
-          <div class="panel-body text-center">
-              <p class="lead">
-                <%= @subject.name %>
-              </p> 
-              <div class="rates">
-                <span class="teachers_rate"><%= get_price_or_message(@prices, location.id, @subject.id, @teacher.id) %></span> <%# teachers helper %>
-                <hr>
-                <% if check_home_price(@prices, @subject.id) %> <%# teachers_helper %>
-                  Home lesson price <br>
-                  <%= get_home_price(@prices, @subject.id) %>
-                <% end %>                
-              </div>
-
-                <%# render partial: 'partials/teachers_rates' %>
-          </div> <!-- end of panel-body -->
-          <ul class="list-group list-group-flush text-center">
-            <% if teacher_signed_in? %>
-              <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="<%= check_if_price(@prices, location.id, @subject.id, @teacher.id) %>">BOOK NOW!</button></li>
-              
-            <% else %>
-              <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                
-            <% end %>
-          </ul> <!-- end of list-group -->
-            
-        </div> <!-- end of booking_button_panel -->
-      </div> <!-- end of teacher_purchase_panel -->
-
-      <div class="panel booking_button_panel">
-        <div class="panel-heading booking_button_panel_heading">
-          <h4 class="panel-title">Subject(s) taught</h4>
-        </div>
-        <div class="panel-body">
-          <%= display_subjects(@teacher.subjects, @teacher.id) %> <%# teachers_helper %>
-        </div> <!-- end of panel-body -->
-      </div> <!-- end of booking_button_panel -->
-    </div>
+    
   </div> <!-- end of tabpanel -->
 

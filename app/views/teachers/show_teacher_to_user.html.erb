@@ -8,21 +8,7 @@
   <script src="https://checkout.stripe.com/checkout.js"></script>
 
   <div class="row show_teacher_profile_container">
-
-    <div class="col-sm-9 mob_no_padding">    
-        <div class="col-xs-12 mob_no_padding nopadding">
-          <div role="tabpanel">
-            <ul class="nav nav-tabs" role="tablist">
-              <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
-            </ul> <!-- emd of nav nav-tabs -->
-            <div class="tab-content">
-              <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
-            </div> <!-- end of tab-content -->
-          </div> <!-- end of tabpanel -->
-        </div> <!-- end of col- -->    
-    </div> <!-- end of col-sm-9 -->
-
-    <div class="col-sm-3 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
+    <div class="col-sm-4 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
       <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
         <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
         <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
@@ -34,18 +20,19 @@
           <td id="address"><%= @locations.first.address %></td>
         </tr>
       </table>
-    </div> <!-- end of show_teacher_profile_section -->  
-    <% if @teacher.packages.size != 0 %>
-      <div class="col-sm-3 col-xs-12 package_form_well">
-        <h3 class="package_form_header">Teachers special offers</h3>
-        <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %>
-        <div class="text-center">
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
-            Book your package
-          </button>
-        </div>
-      </div> <!-- end of package_form_well -->
-    <% end %>
+    </div> <!-- end of show_teacher_profile_section -->
+    <div class="col-sm-8 mob_no_padding">    
+        <div class="col-xs-12 mob_no_padding nopadding">
+          <div role="tabpanel">
+            <ul class="nav nav-tabs" role="tablist">
+              <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
+            </ul> <!-- emd of nav nav-tabs -->
+            <div class="tab-content">
+              <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
+            </div> <!-- end of tab-content -->
+          </div> <!-- end of tabpanel -->
+        </div> <!-- end of col- -->    
+    </div> <!-- end of col-sm-9 -->   
   </div> <!-- end of row show_teacher_profile_container -->
 
   <div class="row show_teacher_to_user">  
@@ -99,22 +86,80 @@
             <%= render partial: 'partials/review_row_partial', collection: @reviews, as: :review %>
           </tbody>
         </table>      
-      <% end %>    
+      <% end %> <%# end of reviews %>
+      <% if !@photos.empty? %>
+        <div class="col-xs-12 nopadding mob_no_padding">        
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Photos</h3>
+            </div> <!-- end of panel heading -->
+            <div class="panel-body">
+              <div class="fotorama col-xs-12 white_back">
+                <% @photos.each do |p| %>
+                  <%= image_tag p.avatar.url,  class: 'img-responsive' %>
+                <% end %>
+              </div> <!-- end of fotrama -->
+            </div> <!-- end of panel-body -->
+          </div> <!-- end of panel panel-default -->
+          
+        </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
+      <% end %> <%# end of photos %>  
     </div> <!-- end of col-sm-8 col-xs-12 mob_no_padding --> 
-     
-    <% if !@photos.empty? %>
-      <div class="col-sm-4 col-xs-12 mob_no_padding">        
-        <div class="fotorama col-xs-12 white_back">
-          <% @photos.each do |p| %>
-            <%= image_tag p.avatar.url,  class: 'img-responsive' %>
-          <% end %>
-        </div> <!-- end of fotrama -->
-        
-      </div> <!-- end of col-sm-4 col-xs-12 mob_no_padding -->
-    <% end %>
 
-    
-  </div> <!-- end of row -->     
+    <div class="mob_no_padding col-md-4 col-xs-12 nopadding">
+      <div class="teacher_purchase_panel">        
+        <div class="panel booking_button_panel">
+          <div class="panel-heading booking_button_panel_heading">
+              <h4 class="text-center"><strong><%= "#{@teacher.full_name}" %></strong></h4>
+          </div> <!-- end of panel-heading -->
+          <div class="panel-body text-center">
+              <p class="lead">
+                <%= @subject.name %>
+              </p> 
+              <div class="rates">
+                <span class="teachers_rate">From <%= get_lowest_price(@prices) %></span> <%# teachers helper %>
+                <hr>
+                <%# if check_home_price(@prices, @subject.id) %> <%# teachers_helper %>
+                  <!-- Home lesson price <br> -->
+                  <%# get_home_price(@prices, @subject.id) %>
+                <%# end %>                
+              </div>
+
+                <%# render partial: 'partials/teachers_rates' %>
+          </div> <!-- end of panel-body -->
+          <ul class="list-group list-group-flush text-center">
+            <% if teacher_signed_in? %>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="">BOOK NOW!</button></li>
+              
+            <% else %>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                
+            <% end %>
+          </ul> <!-- end of list-group -->
+            
+        </div> <!-- end of booking_button_panel -->
+      </div> <!-- end of teacher_purchase_panel -->
+
+      <div class="panel booking_button_panel">
+        <div class="panel-heading booking_button_panel_heading">
+          <h4 class="panel-title">Subject(s) taught</h4>
+        </div>
+        <div class="panel-body">
+          <%= display_subjects(@teacher.subjects, @teacher.id) %> <%# teachers_helper %>
+        </div> <!-- end of panel-body -->
+      </div> <!-- end of booking_button_panel -->
+      <% if @teacher.packages.size != 0 %>
+        <div class="col-xs-12 package_form_well">
+          <h3 class="package_form_header">Teachers special offers</h3>
+          <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %>
+          <div class="text-center">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
+              Book your package
+            </button>
+          </div> <!-- end of text-center -->
+        </div> <!-- end of package_form_well -->
+      <% end %> <%# end of packages loop %>
+    </div> <!-- end of mob_no_padding col-md-4 col-xs-12 nopadding -->    
+  </div> <!-- end of row show_teacher_to_user -->     
   
 
     <div class="row show_teacher_to_user">
