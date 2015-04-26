@@ -1,0 +1,24 @@
+<% cache [current_teacher, 'the_one_modal'] do %>
+  <% if teacher_signed_in? %>  
+    <div class="modal fade" id="the_one_modal" tabindex="-1" role="dialog" aria-labelledby="the_one_modal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="the_one_modal">Lets get you learning</h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+                <%= select 'location', 'id', options_for_select([['Home lesson', 1], ['Teachers house', '2']]), { include_blank: true }, { class: 'form-control select_location'} %>
+                <%= select('packages', 'id', @teacher.subjects.collect { |p| get_subjects_list(p) }, { include_blank: true }, { class: 'select_subjects form-control' }) %> <%# teachers helper %>
+                <input type="hidden" name="Select subject" value="<%= @teacher.id %>" id="select_subjects_teacher_id">
+                <div class="returned_locations_container">
+                  <!-- ajax -->
+                </div>
+            </div> <!-- end of container-fluid -->
+          </div> <!-- end of modal-body -->
+        </div> <!-- end of modal-content -->
+      </div> <!-- end of modal-dialog -->
+    </div> <!-- end of modal fade -->
+  <% end %> <!-- if teacher_signed_in? -->
+<% end %> <%# end of cache %>

@@ -145,12 +145,17 @@ module TeachersHelper
 
   def get_lowest_price(prices)
     number_to_currency(prices.min.price, unit: '€')
+    #p.select { |p| p.subject_id == 1 }
   end
 
   # def check_home_price(prices, subject) #check if home price defined for this subject
   #   prices.any? { |p| p.subject_id == subject && p.no_map == true }
   
   # end
+
+  def get_subjects_list(subject) #the_one_modal get subject list
+    ["#{subject.name}", subject.id]
+  end
 
   def get_home_price(prices, subject)
     p = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first

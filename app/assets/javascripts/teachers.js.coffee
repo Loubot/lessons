@@ -265,7 +265,19 @@ teachersInfoReady = ->
         
 
     #// end of display appropraite booking option
-  
+
+    #the_one_modal
+    if $('#the_one_modal').length
+      $(document).on 'change', '.select_subjects', ->
+        
+        $.ajax(
+                url: 'return-locations'
+                data: { id: $('#select_subjects_teacher_id').val() }
+                success: (data, textStatus, xhr) ->
+                  console.log ("status " + xhr.status)
+              )
+
+    # end of the_one_modal
 
   if $('.show_teacher_profile_container').length
     AnyTime.noPicker 'payment_choice_datepicker'
