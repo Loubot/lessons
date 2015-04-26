@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   end
 
+  get         '/show-teacher'           =>  'teachers#show_teacher'  
+  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
+  get         '/add-map'                =>  'teachers#add_map'
+
   resources :locations
   resources :prices, only: [:create, :update, :destroy]
   resources :packages, only: [:create, :destroy]
@@ -67,13 +71,6 @@ Rails.application.routes.draw do
   post        'package-stripe'          =>  'stripe#create_package_booking_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
-
-
-  get         '/show-teacher'           =>  'teachers#show_teacher'  
-  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
-  get         '/add-map'                =>  'teachers#add_map'
-  get         'return-subjects'         =>  'teachers#return_subjects'
-  get         'return-prices'           =>  'teachers#return_prices'
 
 
   get         'admin-panel'             =>  'admins#admin_panel'
