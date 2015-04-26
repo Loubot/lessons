@@ -118,7 +118,7 @@
               </p> 
               <div class="rates">
                 <span class="teachers_rate">From <%= get_lowest_price(@prices) %></span> <%# teachers helper %>
-                <hr>
+                
                 <%# if check_home_price(@prices, @subject.id) %> <%# teachers_helper %>
                   <!-- Home lesson price <br> -->
                   <%# get_home_price(@prices, @subject.id) %>
@@ -129,7 +129,7 @@
           </div> <!-- end of panel-body -->
           <ul class="list-group list-group-flush text-center">
             <% if teacher_signed_in? %>
-              <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="">BOOK NOW!</button></li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i><button class="btn btn-lg btn-block btn_book_now" data-toggle="modal" data-target="#the_one_modal">BOOK NOW!</button></li>
               
             <% else %>
               <li class="list-group-item"><i class="icon-ok text-danger"></i><%= link_to 'BOOK NOW!', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'btn btn-lg btn-block btn_book_now ' %></li>                
@@ -186,6 +186,8 @@
 <%= render 'modals/show_teacher/payments_modal_for_users_multiple' %>
 <%= render 'modals/show_teacher/payment_no_location_modal' %>
 <%= render 'modals/show_teacher/payment_location_only_modal' %>
+
+<%= render 'modals/show_teacher/the_one_modal' %>
 
 
 <!-- outline of payment packages modal. content is loaded dynamically -->
