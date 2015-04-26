@@ -10,11 +10,18 @@
           <div class="modal-body">
             <div class="container-fluid">
                 <%= select 'location', 'id', options_for_select([['Home lesson', 1], ['Teachers house', '2']]), { include_blank: true }, { class: 'form-control select_location'} %>
-                <%= select('packages', 'id', @teacher.subjects.collect { |p| get_subjects_list(p) }, { include_blank: true }, { class: 'select_subjects form-control' }) %> <%# teachers helper %>
+                 <%# teachers helper %>
                 <input type="hidden" name="Select subject" value="<%= @teacher.id %>" id="select_subjects_teacher_id">
                 <div class="returned_locations_container">
                   <!-- ajax -->
-                </div>
+                </div> <!-- end of returned_locations_container -->
+                <div class="payment_form_container">
+                  <%= form_for home_booking_paypal_path do %>
+
+
+                  <% end %>
+                  <!-- ajax -->
+                </div> <!-- end of payment_form_container -->
             </div> <!-- end of container-fluid -->
           </div> <!-- end of modal-body -->
         </div> <!-- end of modal-content -->

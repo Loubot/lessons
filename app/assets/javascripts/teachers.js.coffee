@@ -268,14 +268,30 @@ teachersInfoReady = ->
 
     #the_one_modal
     if $('#the_one_modal').length
-      $(document).on 'change', '.select_subjects', ->
+      $(document).on 'change', '.select_location', -> #fetch subjects when locatin is selected
         
         $.ajax(
-                url: 'return-locations'
-                data: { id: $('#select_subjects_teacher_id').val() }
+                url: 'return-subjects'
+                data: 
+                  id: $('#select_subjects_teacher_id').val()
+                  location_id: $('#location_id').val()
+                  
                 success: (data, textStatus, xhr) ->
                   console.log ("status " + xhr.status)
               )
+        #end of fetch subjects when locatin is selected
+      $(document).on 'change', '.select_subject', -> #fetch stuff
+
+        $.ajax(
+            url: 'return-prices'
+            data:
+              subject_id: $('.select_subject').val()
+              id: $('.teacher_id').val()
+              location: $('.location_value').val()
+            success: (data, textStatus, xhr) ->
+              console.log ("status " + xhr.status)
+          )
+        
 
     # end of the_one_modal
 

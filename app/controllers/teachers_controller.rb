@@ -2,7 +2,7 @@ class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
-	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :return_locations]
+	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :return_subjects, :return_prices]
 	
 	include TeachersHelper
 
@@ -131,10 +131,26 @@ class TeachersController < ApplicationController
 
 	end
 
-	def return_locations #the_one_modal return teahers locations
-		@teacher = Teacher.includes(:locations).find(params[:id])
-		@locations = @teacher.locations
-		render 'modals/payment_selections/_return_locations.js.coffee'
+	def return_subjects #the_one_modal return teahers locations
+		@teacher = Teacher.includes(:subjects, :prices).find(params[:id])
+		if params[:location_id] == '1'
+			prices = @teacher.prices.collect { |p| p.subject_id if  p.no_map == true }.compact
+			@subjects = @teacher.subjects.find(prices)
+			render 'modals/payment_selections/_return_subjects_home.js.coffee'
+		else
+			# @subjects = @teacher.subjects.select { |s| s.no_map == true && s.location_id = params[:location_id]}
+		end		
+	end
+
+	def return_prices
+		@teacher = Teacher.includes(:subjects, :prices).find(params[:id])
+		p "params #{@teacher.prices.select { |p| p.no_map == true && p.subject_id == 1}}"
+		if params[:location] == 'home'
+			@prices = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params['subject_id'].to_i }
+		else
+
+		end
+		render 'modals/payment_selections/_return_prices.js.coffee'
 	end
 
 	def modals #render modal content 
