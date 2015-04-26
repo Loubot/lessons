@@ -13,11 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require fotorama
 //= require jquery.ui.slider
 //= require jquery.ui.datepicker
 //= require moment.min.js
 //= require anytime.js
-//= require fotorama
 //= require_tree .
 
 
