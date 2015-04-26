@@ -268,6 +268,9 @@ teachersInfoReady = ->
 
     #the_one_modal
     if $('#the_one_modal').length
+      # document.getElementById("select_location").selectedIndex = 0
+      # document.getElementById("select_subject").selectedIndex = 0
+      
       $(document).on 'change', '.select_location', -> #fetch subjects when locatin is selected
         
         $.ajax(
