@@ -267,7 +267,22 @@ teachersInfoReady = ->
     if $('#the_one_modal').length
       # document.getElementById("select_location").selectedIndex = 0
       # document.getElementById("select_subject").selectedIndex = 0     
-        
+      $(document).on 'change', '.select_subject', ->
+        $.ajax
+          url: 'get-locations'
+          data:            
+            subject_id: $('.select_subject').val()
+            id: $('#select_subjects_teacher_id').val()
+
+      $(document).on 'change', '.select_home_or_location', ->
+        $.ajax
+          url: 'get-subjects'
+          data:
+           id: $('#select_subjects_teacher_id').val()
+           subject_id: $('.select_subject').val()
+           location_choice: $('.select_home_or_location').val()
+ 
+          
 
     # end of the_one_modal
 
