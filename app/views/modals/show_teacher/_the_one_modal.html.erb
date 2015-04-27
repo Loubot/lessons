@@ -9,10 +9,11 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid">
+                <%= select 'subject', 'id', options_from_collection_for_select(@teacher.subjects, 'id', 'name'), { include_blank: true }, { class: 'form-control select_subject' } %>
                 <%# select 'location', 'id', options_for_select([['Home lesson', 1], ['Teachers house', '2']]), { include_blank: true }, { class: 'form-control select_location'} %>
                  <%# teachers helper %>
                 <input type="hidden" name="Select subject" value="<%= @teacher.id %>" id="select_subjects_teacher_id">
-                <div class="returned_subjects_container">
+                <div class="returned_locations_container">
                   <!-- ajax -->
                 </div> <!-- end of returned_locations_container -->
                 <div class="payment_form_container">

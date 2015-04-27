@@ -21,10 +21,11 @@ Rails.application.routes.draw do
 
 
   end
-
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
   get         '/add-map'                =>  'teachers#add_map'
+  get         'get-locations'           =>  'teachers#get_locations'
+  get         'get-subjects'            =>  'teachers#get_subjects'
 
   resources :locations
   resources :prices, only: [:create, :update, :destroy]
