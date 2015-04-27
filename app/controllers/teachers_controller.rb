@@ -154,9 +154,11 @@ class TeachersController < ApplicationController
 		if params[:location_choice].to_i == 1 #home lesson
 			@prices = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
 			p @prices
-			render 'modals/payment_selections/_return_prices.js.coffee'
+			render 'modals/payment_selections/_return_home_price.js.coffee'
 		else
-			p 'location'
+			@event = Event.new
+			@subject_id = params[:subject_id]
+			render 'modals/payment_selections/_return_locations_price.js.coffee'
 		end
 		
 		# render status: 200, nothing: true

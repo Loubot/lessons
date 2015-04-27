@@ -243,8 +243,7 @@ teachersInfoReady = ->
       arrows: true     
       fit: 'cover'
       thumbfit: 'cover'
-    # $(".fotorama").on "fotorama:load", (e, fotorama) ->
-    #   $('.show_teacher_profile_section').css 'height', $('.fotorama').css 'height'
+    
 
     $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
       # e.target # newly activated tab
