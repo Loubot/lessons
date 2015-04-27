@@ -12,7 +12,7 @@ $('.payment_form_container').append """
         <%= hidden_field_tag :teacher_email, @teacher.email %>
         
         
-        <%= hidden_field_tag :receiver_amount, @prices.first.price %>
+        <%= hidden_field_tag :receiver_amount, @prices.price %>
         
         <%= hidden_field_tag :start_time, Time.now %>
         <%= hidden_field_tag :end_time, Time.now + 5.minutes %>
@@ -46,7 +46,7 @@ $('.payment_form_container').append """
         <%= hidden_field_tag :student_email, current_teacher.email %>
         <%= hidden_field_tag :teacher_email, @teacher.email %>
         
-        <%= hidden_field_tag :amount, @prices.first.price %>
+        <%= hidden_field_tag :amount, @prices.price %>
                     
                
         <%= hidden_field_tag :current_teacher, current_teacher.id %> 
