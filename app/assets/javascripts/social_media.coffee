@@ -75,12 +75,13 @@ loadTwitterSDK = ->
   
 
 loadSocials = ->
+  if(jQuery.cookieBar('cookies'))  #jquery cookie bar for eu law
 
-  loadTwitterSDK()
-  bindTwitterEventHandlers() unless twttr_events_bound
+    loadTwitterSDK()
+    bindTwitterEventHandlers() unless twttr_events_bound
 
-  # loadFacebookSDK()
-  # bindFacebookEvents() unless fb_events_bound
+    loadFacebookSDK()
+    bindFacebookEvents() unless fb_events_bound
 
 $(document).ready loadSocials
 $(document).on 'page:load', loadSocials
