@@ -71,4 +71,26 @@ $('.payment_form_container').append """
 
     <% end %>
   </div> <%# end of col-xs-6 %>
+
+
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="address" class="col-sm-2 control-label">Address</label>
+      <div class="col-sm-10">
+        <%= text_field_tag 'address', current_teacher.address, placeholder: 'Address',size: 40, id: 'home_booking_address' %>
+        
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <%= check_box_tag 'Remember', 'Remember address', current_teacher.address != '', id:'remember' %>Remember Address
+          </label>
+        </div>
+      </div>
+    </div>
+    
+  </form>
                             """
