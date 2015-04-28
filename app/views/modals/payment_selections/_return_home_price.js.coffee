@@ -1,7 +1,10 @@
 $('.payment_form_container').empty()
+$('.payment_form_container').empty()
+$('.display_teachers_location').empty()
 
 
 $('.payment_form_container').append """
+  <h1>Price: <%= @price.price %><br>
   <div class="col-xs-6">
     <% if @teacher.paypal_email != "" %>
       <%= form_tag home_booking_paypal_path, class: 'home_booking_form', method: 'post' do %>
@@ -12,7 +15,7 @@ $('.payment_form_container').append """
         <%= hidden_field_tag :teacher_email, @teacher.email %>
         
         
-        <%= hidden_field_tag :receiver_amount, @prices.price %>
+        <%= hidden_field_tag :receiver_amount, @price.price %>
         
         <%= hidden_field_tag :start_time, Time.now %>
         <%= hidden_field_tag :end_time, Time.now + 5.minutes %>
@@ -46,7 +49,7 @@ $('.payment_form_container').append """
         <%= hidden_field_tag :student_email, current_teacher.email %>
         <%= hidden_field_tag :teacher_email, @teacher.email %>
         
-        <%= hidden_field_tag :amount, @prices.price %>
+        <%= hidden_field_tag :amount, @price.price %>
                     
                
         <%= hidden_field_tag :current_teacher, current_teacher.id %> 

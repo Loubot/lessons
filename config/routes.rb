@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get         '/add-map'                =>  'teachers#add_map'
   get         'get-locations'           =>  'teachers#get_locations'
   get         'get-subjects'            =>  'teachers#get_subjects'
+  get         'get-locations-price'     =>  'teachers#get_locations_price'
 
   resources :locations
   resources :prices, only: [:create, :update, :destroy]

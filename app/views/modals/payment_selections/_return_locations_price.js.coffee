@@ -8,7 +8,7 @@ $('.payment_form_container').append """
       <div class="form-group">
         <label for="date" class="col-sm-2 control-label">Date:</label>
         <div class="col-sm-10">
-          <input name="event[date]" type="text" id='location_only_datepicker' placeholder='Click to select date' class="payment_choice_date_picker" >
+          <input name="event[date]" type="text" id='location_only_datepicker' placeholder='Click to select date' class="1payment_choice_date_picker" >
         </div>
       </div> <!-- end of form-group -->
     

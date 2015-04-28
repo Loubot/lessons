@@ -203,12 +203,12 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
 
   if $('.btn_book_now').length
-    currency = $('.teachers_rate').text()
+    # currency = $('.teachers_rate').text()
     
-    result = currency.replace(/[^\d.]/g,"")
-    # result = parseFloat(currency)
+    # result = currency.replace(/[^\d.]/g,"")
+    # # result = parseFloat(currency)
     
-    $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value=#{result}> """ 
+    # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value=#{result}> """ 
     # $(document).on 'change', '#rates', ->
     #   $('#create_event_form').find('#event_rate').remove()
     # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
@@ -264,7 +264,11 @@ teachersInfoReady = ->
 
     #the_one_modal
     if $('#the_one_modal').length
-      # document.getElementById("select_location").selectedIndex = 0
+      $('#the_one_modal').on 'shown.bs.modal', ->
+        $('.payment_form_container').empty()
+        $('.display_teachers_location').empty()
+        $('.returned_locations_container').empty()
+        document.getElementById("subject_id").selectedIndex = 0
       # document.getElementById("select_subject").selectedIndex = 0     
       $(document).on 'change', '.select_subject', ->
         $.ajax
@@ -280,22 +284,25 @@ teachersInfoReady = ->
            id: $('#select_subjects_teacher_id').val()
            subject_id: $('.select_subject').val()
            location_choice: $('.select_home_or_location').val()
- 
-          
+      
+      $(document).on 'click', '#location_only_datepicker', ->
+        console.log 'a'
+        AnyTime.noPicker 'location_only_datepicker'
+        $("#location_only_datepicker").AnyTime_picker
+          format: "%Y-%m-%d"
+          placement: 'inline'
+          hideInput: true
+
+      $(document).on 'change', '.teachers_location_selection', ->
+        $.ajax
+          url: 'get-locations-price'
+          data:
+            id: $('#select_subjects_teacher_id').val()
+            subject_id: $('.select_subject').val()
+            location_id: $('.teachers_location_selection').val()
 
     # end of the_one_modal
 
-  if $('.show_teacher_profile_container').length
-    AnyTime.noPicker 'payment_choice_datepicker'
-    AnyTime.noPicker 'location_only_datepicker'
-    $("#payment_choice_datepicker").AnyTime_picker
-      format: "%Y-%m-%d"
-      placement: 'inline'
-      hideInput: true
-    $("#location_only_datepicker").AnyTime_picker
-      format: "%Y-%m-%d"
-      placement: 'inline'
-      hideInput: true  
     
 
     $('.home_booking_form').submit (e) -> #prevent paypal for submitting
