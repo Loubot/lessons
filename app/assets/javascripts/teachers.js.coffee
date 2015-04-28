@@ -16,13 +16,13 @@ teachersInfoReady = ->
 
 # end of qualification form checkbox
 
-  # if $('#website-title').length > 0 
+  # if $('#website-title').length 
     # $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
     # $(window).resize ->
     #   $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
 
   $('#qual_left').css('height', $('#qual_form').height())
-  if $('#dropzone').length > 0
+  if $('#dropzone').length
     # Dropzone.autoDiscover = false
     try
       dropzone = new Dropzone('#dropzone', {
@@ -61,7 +61,7 @@ teachersInfoReady = ->
 #/////////////End of qualifications visibility checkbox
   
 #////////////Root page subject search with typeahead
-  if $('.typeahead.subject').length > 0
+  if $('.typeahead.subject').length
     $('#main_subject_search').on 'keypress', (e) ->
       e.preventDefault() if e.which == 13
 
@@ -85,7 +85,7 @@ teachersInfoReady = ->
       source: bestPictures.ttAdapter()
 
 
-  if $('.typeahead.county').length > 0
+  if $('.typeahead.county').length
     countyList = getCounties()
     counties = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value")
@@ -104,7 +104,7 @@ teachersInfoReady = ->
     
       source: counties.ttAdapter()
 
-  if $('.review_lesson').length > 0
+  if $('.review_lesson').length
     $('.review_lesson_input').rating
       filled: "glyphicon glyphicon-thumbs-up"
       empty: "glyphicon glyphicon-thumbs-down"
@@ -129,20 +129,20 @@ teachersInfoReady = ->
 #///////////////End of teachers subject_search
 
 #///////////////Autofocus on login modal
-  if $('#login_modal_email').length > 0
+  if $('#login_modal_email').length
     $('#login_modal').on 'shown.bs.modal', ->
       document.getElementById('login_modal_email').focus()
 
 #//////////////End of autofocus on login modal
 
 #///////////////Autofocus teachers subject search input field
-  if $('#teachers_subjects_modal').length > 0
+  if $('#teachers_subjects_modal').length
     $('#teachers_subjects_modal').on 'shown.bs.modal', ->
       document.getElementById('teachers_search_input').focus()
 #///////////////End of autofocus function
 
 #/////////////search results page
-  if $('.search_results_row').length > 0
+  if $('.search_results_row').length
 
     $('.search_results_row').mouseover ->
       $('.image_container').css 'color', 'black'
@@ -157,7 +157,7 @@ teachersInfoReady = ->
 #////////////end of search results page
 
 # ///////////welcome page
-  if $(".stock_photos_container").length > 0
+  if $(".stock_photos_container").length
     h = $('#main_page').height()
     $('#main_page').height(h)
     
@@ -184,7 +184,7 @@ teachersInfoReady = ->
 # //////////end of welcome page
 
 #////////// teachers/form photo partial enable dismissable popover
-  if $('.profile_pic_popover').length > 0
+  if $('.profile_pic_popover').length
     $("html").click (e) ->
       $(".profile_pic_popover").popover "hide"
       
@@ -228,8 +228,8 @@ teachersInfoReady = ->
       
       # $('.profile_pic_container').css 'background-image', "url(#{img.src})"
     
-    
-    $('.fotorama').fotorama  #initiate fotorama picture displayer
+    #initiate fotorama picture displayer
+    $('.fotorama').fotorama  
       width: 333
       transition: "crossfade"
       loop: true
@@ -352,9 +352,10 @@ teachersInfoReady = ->
 #//// end of show_teacher_to_user add price to form modal
 
 #///////////jquery for popover previous_lessons_teacher
-  if ('.previous_lessons_header').length > 0
-    $("html").click (e) ->
-        $(".review_hover").popover "hide"
+  if ('.previous_lessons_header').length
+    if $('.review_hover').length
+      $("html").click (e) ->
+          $(".review_hover").popover "hide"
         
 
       $(".review_hover").popover(
