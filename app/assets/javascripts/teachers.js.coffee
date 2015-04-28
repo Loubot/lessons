@@ -310,7 +310,8 @@ teachersInfoReady = ->
 
     
 
-    $('.home_booking_form').submit (e) -> #prevent paypal for submitting
+    $(document).on 'submit', '.home_booking_form', (e) -> #prevent paypal for submitting
+      
       e.preventDefault()      
       
       address = null
