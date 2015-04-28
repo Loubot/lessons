@@ -79,8 +79,8 @@ loadSocials = ->
   loadTwitterSDK()
   bindTwitterEventHandlers() unless twttr_events_bound
 
-  loadFacebookSDK()
-  bindFacebookEvents() unless fb_events_bound
+  # loadFacebookSDK()
+  # bindFacebookEvents() unless fb_events_bound
 
 $(document).ready loadSocials
 $(document).on 'page:load', loadSocials

@@ -40,9 +40,9 @@
 
     
       <%= render 'partials/share_buttons' if !is_mobile? %>
+      <% if teacher_signed_in? %>
+        <%= render partial: 'modals/add_authentications_modal' %>
+      <% end %>
   </body>
 </html>
 
-<% if teacher_signed_in? %>
-  <%= render partial: 'modals/add_authentications_modal' %>
-<% end %>
