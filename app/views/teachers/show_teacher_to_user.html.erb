@@ -150,8 +150,9 @@
       <% if @teacher.packages.size != 0 %>
         <div class="col-xs-12 package_form_well">
           <h3 class="package_form_header">Teachers special offers</h3>
-          <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %>
+          
           <div class="text-center">
+            <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %><br>
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
               Book your package
             </button>
@@ -181,11 +182,11 @@
 </div>
 
 <% end %> <%# end of cache %>
-<%= render 'modals/show_teacher/payment_choice_modal' %>
-<%= render 'modals/show_teacher/payments_modal_for_users' %>
+<%# render 'modals/show_teacher/payment_choice_modal' %>
+<%# render 'modals/show_teacher/payments_modal_for_users' %>
 <%= render 'modals/show_teacher/payments_modal_for_users_multiple' %>
-<%= render 'modals/show_teacher/payment_no_location_modal' %>
-<%= render 'modals/show_teacher/payment_location_only_modal' %>
+<%# render 'modals/show_teacher/payment_no_location_modal' %>
+<%# render 'modals/show_teacher/payment_location_only_modal' %>
 
 <%= render 'modals/show_teacher/the_one_modal' %>
 

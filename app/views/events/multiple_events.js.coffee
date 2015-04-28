@@ -6,6 +6,7 @@
 <% else %>
   $('.payment_choice_error').remove()
   $('#payment_choice_modal').modal 'hide'  #hide availability moda
+  $('#the_one_modal').modal 'hide'
   $('#payments_modal_for_users_multiple').modal 'show'
   $('#event_table_weeks_multiple').text "<%= @weeks.to_s %>"
   $('#event_table_start_time_multiple').text('<%= @event.start_time.to_formatted_s(:long) %>')

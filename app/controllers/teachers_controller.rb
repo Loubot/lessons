@@ -2,7 +2,7 @@ class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
-	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects]
+	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price]
 	
 	include TeachersHelper
 
@@ -152,14 +152,21 @@ class TeachersController < ApplicationController
 		#location_choice =2 == teachers location
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id].to_i)
 		if params[:location_choice].to_i == 1 #home lesson
-			@prices = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
-			p @prices
+			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
+			p @price
 			render 'modals/payment_selections/_return_home_price.js.coffee'
 		else
-			@event = Event.new
-			@subject_id = params[:subject_id]
-			render 'modals/payment_selections/_return_locations_price.js.coffee'
+			# @event = Event.new
+			# @subject_id = params[:subject_id]
+			@locations = @teacher.locations
+			render 'modals/payment_selections/_return_locations.js.coffee'
 		end
+
+	def get_locations_price
+		@event = Event.new
+		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id].to_i)
+		render 'modals/payment_selections/_return_locations_price.js.coffee'
+	end
 		
 		# render status: 200, nothing: true
 	end
