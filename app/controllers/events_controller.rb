@@ -56,7 +56,7 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book		
 		
-		@rate = params[:rate].to_f #set instance variable of rate
+		@rate = params[:event][:rate].to_f #set instance variable of rate
 
 		if params['Multiple'] == 'true'
 			event = Event.student_do_multiple_bookings(params)

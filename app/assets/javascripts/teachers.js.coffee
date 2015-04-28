@@ -25,7 +25,9 @@ teachersInfoReady = ->
     #   $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
 
   $('#qual_left').css('height', $('#qual_form').height())
+
   if $('#dropzone').length 
+
     # Dropzone.autoDiscover = false
     try
       dropzone = new Dropzone('#dropzone', {
@@ -231,8 +233,8 @@ teachersInfoReady = ->
       
       # $('.profile_pic_container').css 'background-image', "url(#{img.src})"
     
-    
-    $('.fotorama').fotorama  #initiate fotorama picture displayer
+    #initiate fotorama picture displayer
+    $('.fotorama').fotorama  
       width: 333
       transition: "crossfade"
       loop: true
@@ -356,8 +358,14 @@ teachersInfoReady = ->
 
 #///////////jquery for popover previous_lessons_teacher
   if ('.previous_lessons_header').length
+<<<<<<< HEAD
     $("html").click (e) ->
         $(".review_hover").popover "hide"
+=======
+    if $('.review_hover').length
+      $("html").click (e) ->
+          $(".review_hover").popover "hide"
+>>>>>>> Only return home booking if no location available
         
 
       $(".review_hover").popover(

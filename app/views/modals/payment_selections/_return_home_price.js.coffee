@@ -1,10 +1,20 @@
 $('.payment_form_container').empty()
 $('.payment_form_container').empty()
 $('.display_teachers_location').empty()
+<% if defined? @deleteReturnedLocations %>
+$('.returned_locations_container').empty()
+$('.payment_form_container').append """ 
+    <h1>Price: <%= number_to_currency(@price.price, unit: '€') %><small> only home lesson available</small></h1><br>
+  """
+<% else %>
+$('.payment_form_container').append """ 
+    <h1>Price: <%= number_to_currency(@price.price, unit: '€') %></h1><br>
+  """
+<% end %>
 
 
 $('.payment_form_container').append """
-  <h1>Price: <%= @price.price %><br>
+  
   <div class="col-xs-6">
     <% if @teacher.paypal_email != "" %>
       <%= form_tag home_booking_paypal_path, class: 'home_booking_form', method: 'post' do %>

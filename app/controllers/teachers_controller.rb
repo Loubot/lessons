@@ -141,10 +141,15 @@ class TeachersController < ApplicationController
 	def get_locations
 		@teacher = Teacher.includes(:prices).find(params[:id].to_i)
 		
-		if @teacher.prices.any? { |p| p.no_map == true && subject_id = params[:subject_id] } && @teacher.prices.any? { |p| p.subject_id = params[:subject_id] && p.location_id != nil }
+		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject_id].to_i && p.location_id != nil })
 			render 'modals/payment_selections/_home_or_location.js.coffee'
+		else
+			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
+			p @price
+			@deleteReturnedLocations = 1
+			render 'modals/payment_selections/_return_home_price.js.coffee'
 		end
-		# render status: 200, nothing: true
+		
 	end
 
 	def get_subjects
@@ -164,6 +169,7 @@ class TeachersController < ApplicationController
 
 	def get_locations_price
 		@event = Event.new
+		@rate = Price.where(teacher_id: params[:id], subject_id: params[:subject_id], location_id: params[:location_id])
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id].to_i)
 		render 'modals/payment_selections/_return_locations_price.js.coffee'
 	end
