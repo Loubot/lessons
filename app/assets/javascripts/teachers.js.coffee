@@ -273,6 +273,7 @@ teachersInfoReady = ->
         $('.payment_form_container').empty()
         $('.display_teachers_location').empty()
         $('.returned_locations_container').empty()
+        
       $('#the_one_modal').on 'shown.bs.modal', ->
         
         document.getElementById("subject_id").selectedIndex = 0
