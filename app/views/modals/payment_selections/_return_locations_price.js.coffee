@@ -48,15 +48,18 @@ $('.payment_form_container').append """
       </div> <!-- end of form-group -->
       
         
-      <div class="form-group">
-        <div class="col-sm-10">
-          <div class="checkbox">                    
-            <label><%= check_box_tag 'Multiple', 'true' %>Block booking</label>
-            <span id="no_of_weeks" class="pull-right">Number of weeks: <%= select_tag "booking_length", options_for_select((2..52)) %></span>
+      <div class="row">
+        <div class="checkbox pull-left col-xs-6">                    
+          <label>
+            <%= check_box_tag 'Multiple', 'true' %>Block booking
+          </label>
+          
 
-          </div> <!-- end of checkbox -->
-        </div> <!-- end of col-sm-10 -->
-      </div> <!-- end of form-group -->
+        </div> <!-- end of checkbox -->
+        <div class="col-xs-6">
+          <%= select_tag "booking_length", options_for_select((2..52)),include_blank: 'no of weeks?', id: 'no_of_weeks',class: 'form-control' %>
+        </div>
+      </div>
         <br>
 
       <div class="form-group">
