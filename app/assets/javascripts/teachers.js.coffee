@@ -359,14 +359,9 @@ teachersInfoReady = ->
 
 #///////////jquery for popover previous_lessons_teacher
   if ('.previous_lessons_header').length
-<<<<<<< HEAD
+
     $("html").click (e) ->
         $(".review_hover").popover "hide"
-=======
-    if $('.review_hover').length
-      $("html").click (e) ->
-          $(".review_hover").popover "hide"
->>>>>>> Only return home booking if no location available
         
 
       $(".review_hover").popover(
