@@ -269,10 +269,12 @@ teachersInfoReady = ->
 
     #the_one_modal
     if $('#the_one_modal').length
-      $('#the_one_modal').on 'shown.bs.modal', ->
+      $('#the_one_modal').on 'hidden.bs.modal', ->
         $('.payment_form_container').empty()
         $('.display_teachers_location').empty()
         $('.returned_locations_container').empty()
+      $('#the_one_modal').on 'shown.bs.modal', ->
+        
         document.getElementById("subject_id").selectedIndex = 0
       # document.getElementById("select_subject").selectedIndex = 0     
       $(document).on 'change', '.select_subject', ->
