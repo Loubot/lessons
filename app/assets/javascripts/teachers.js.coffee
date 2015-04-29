@@ -25,7 +25,6 @@ teachersInfoReady = ->
     #   $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
 
   $('#qual_left').css('height', $('#qual_form').height())
-<<<<<<< HEAD
 
   if $('#dropzone').length 
 
@@ -360,15 +359,10 @@ teachersInfoReady = ->
 
 #///////////jquery for popover previous_lessons_teacher
   if ('.previous_lessons_header').length
-<<<<<<< HEAD
 
     $("html").click (e) ->
         $(".review_hover").popover "hide"
-=======
-    if $('.review_hover').length
-      $("html").click (e) ->
-          $(".review_hover").popover "hide"
->>>>>>> 7b7d237b4f484b01f9354ea5094a2c863b09250a
+
         
 
       $(".review_hover").popover(
