@@ -5,9 +5,10 @@ $('.payment_form_container').append """
     <h2>Check availability</h2>
     <%= form_for(@event, url: events_create_event_and_book_path, html: { class: 'form-horizontal', id: 'create_event_form'}, method: 'post') do |f| %>
                     
-      <div class="form-group">
-        <label for="date" class="col-sm-2 control-label">Date:</label>
-        <div class="col-sm-10">
+      <div class="col-xs-12 form-group">
+        
+        <div>
+          <label for="date" class="control-label">Date:</label>
           <input name="event[date]" type="text" id='location_only_datepicker' placeholder='Click to select date' class="1payment_choice_date_picker" >
         </div>
       </div> <!-- end of form-group -->
@@ -78,12 +79,18 @@ $('.payment_form_container').append """
           <%= submit_tag 'Check availability', id: 'event_submit', class: 'btn btn-success' %>
         </div> <!-- end of col-sm-10 -->
       </div> <!-- end of form-group  -->
-      <%= hidden_field_tag 'event[subject_id]', @subject_id %>
-      <%= hidden_field_tag 'event[teacher_id]', @teacher.id %>
-      <%= hidden_field_tag 'event[student_id]', current_teacher.id if teacher_signed_in? %>
-      <%= hidden_field_tag 'event[rate]', @rate.first.price %>
+      <%= j(hidden_field_tag 'event[subject_id]', @subject_id)%>
+      <%= j(hidden_field_tag 'event[teacher_id]', @teacher.id) %>
+      <%= j(hidden_field_tag 'event[student_id]', current_teacher.id) if teacher_signed_in? %>
+      <%= j(hidden_field_tag 'event[rate]', @rate.first.price) %>
     <% end %> <!-- end of form_tag  -->
 
 
 
     """
+AnyTime.noPicker 'location_only_datepicker' #activate anytime datepicker
+$("#location_only_datepicker").AnyTime_picker
+  format: "%Y-%m-%d"
+  placement: 'inline'
+  hideInput: true
+        

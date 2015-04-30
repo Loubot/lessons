@@ -299,13 +299,13 @@ teachersInfoReady = ->
            subject_id: $('.select_subject').val()
            location_choice: $('.select_home_or_location').val()
       
-      $(document).on 'click', '#location_only_datepicker', ->
-        console.log 'a'
-        AnyTime.noPicker 'location_only_datepicker'
-        $("#location_only_datepicker").AnyTime_picker
-          format: "%Y-%m-%d"
-          placement: 'inline'
-          hideInput: true
+      # $(document).on 'click', '#location_only_datepicker', ->
+      #   console.log 'a'
+      #   AnyTime.noPicker 'location_only_datepicker'
+      #   $("#location_only_datepicker").AnyTime_picker
+      #     format: "%Y-%m-%d"
+      #     placement: 'inline'
+      #     hideInput: true
 
       $(document).on 'change', '.teachers_location_selection', ->
         $.ajax

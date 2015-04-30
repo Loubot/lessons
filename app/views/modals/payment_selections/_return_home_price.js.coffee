@@ -4,11 +4,11 @@ $('.display_teachers_location').empty()
 <% if defined? @deleteReturnedLocations %>
 $('.returned_locations_container').empty()
 $('.payment_form_container').append """ 
-    <h1>Price: <%= number_to_currency(@price.price, unit: '€') %><small> only home lesson available</small></h1><br>
+    <h1>Price: <%= j(number_to_currency(@price.price, unit: '€')) %><small> only home lesson available</small></h1><br>
   """
 <% else %>
 $('.payment_form_container').append """ 
-    <h1>Price: <%= number_to_currency(@price.price, unit: '€') %></h1><br>
+    <h1>Price: <%= j(number_to_currency(@price.price, unit: '€')) %></h1><br>
   """
 <% end %>
 
@@ -18,17 +18,17 @@ $('.payment_form_container').append """
     <div class="col-xs-6">
       <% if @teacher.paypal_email != "" %>
         <%= form_tag home_booking_paypal_path, class: 'home_booking_form', method: 'post' do %>
-          <%= hidden_field_tag :teacher_id, @teacher.id %>
-          <%= hidden_field_tag :student_id, current_teacher.id %>
-          <%= hidden_field_tag :student_name, current_teacher.full_name %>
-          <%= hidden_field_tag :student_email, current_teacher.email %>
-          <%= hidden_field_tag :teacher_email, @teacher.email %>
+          <%= j(hidden_field_tag :teacher_id, @teacher.id) %>
+          <%= j(hidden_field_tag :student_id, current_teacher.id) %>
+          <%= j(hidden_field_tag :student_name, current_teacher.full_name) %>
+          <%= j(hidden_field_tag :student_email, current_teacher.email) %>
+          <%= j(hidden_field_tag :teacher_email, @teacher.email) %>
           
           
-          <%= hidden_field_tag :receiver_amount, @price.price %>
+          <%= j(hidden_field_tag :receiver_amount, @price.price) %>
           
-          <%= hidden_field_tag :start_time, Time.now %>
-          <%= hidden_field_tag :end_time, Time.now + 5.minutes %>
+          <%= j(hidden_field_tag :start_time, Time.now) %>
+          <%= j(hidden_field_tag :end_time, Time.now + 5.minutes) %>
           <%= hidden_field_tag :paypal, '1' %>
           <%= hidden_field_tag :home_address, '', class: 'home_address' %>
           <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
@@ -53,16 +53,16 @@ $('.payment_form_container').append """
           data-description="This is the description"
           data-imgage="<%= asset_url 'stripe.png' %>"
           ></script>
-          <%= hidden_field_tag :teacher_id, @teacher.id %>
-          <%= hidden_field_tag :student_id, current_teacher.id %>
-          <%= hidden_field_tag :student_name, current_teacher.full_name %>
-          <%= hidden_field_tag :student_email, current_teacher.email %>
-          <%= hidden_field_tag :teacher_email, @teacher.email %>
+          <%= j(hidden_field_tag :teacher_id, @teacher.id) %>
+          <%= j(hidden_field_tag :student_id, current_teacher.id) %>
+          <%= j(hidden_field_tag :student_name, current_teacher.full_name) %>
+          <%= j(hidden_field_tag :student_email, current_teacher.email) %>
+          <%= j(hidden_field_tag :teacher_email, @teacher.email) %>
           
-          <%= hidden_field_tag :amount, @price.price %>
+          <%= j(hidden_field_tag :amount, @price.price) %>
                       
                  
-          <%= hidden_field_tag :current_teacher, current_teacher.id %> 
+          <%= j(hidden_field_tag :current_teacher, current_teacher.id) %> 
           <%= hidden_field_tag :start_time, Time.now %>           
           <%= hidden_field_tag :end_time, Time.now + 5.minutes %>   
           <%= hidden_field_tag :home_address, '', class: 'home_address' %>        
@@ -81,7 +81,7 @@ $('.payment_form_container').append """
       <div class="form-group">
         <label for="address" class="col-sm-2 control-label">Address</label>
         <div class="col-sm-10">
-          <%= text_field_tag 'address', current_teacher.address, placeholder: 'Address',size: 40, id: 'home_booking_address' %>
+          <%= j(text_field_tag 'address', current_teacher.address, placeholder: 'Address',size: 40, id: 'home_booking_address') %>
           
         </div>
       </div>
