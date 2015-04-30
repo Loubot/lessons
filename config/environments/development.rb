@@ -33,6 +33,9 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = false
 
+  #change default url
+  config.application.routes.default_url_options[:host] = 'www.learnyourlesson.ie'
+
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.

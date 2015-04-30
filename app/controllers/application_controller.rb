@@ -10,14 +10,6 @@ class ApplicationController < ActionController::Base
     session[:mobile]
   end
 
-  def default_url_options
-    if Rails.env.production?
-      {:host => "www.learnyourlesson.ie"}
-    else  
-      {}
-    end
-  end
-
   def update_student_address(params) #update teacher address if 
     if params[:save_address] == 'true'
       if current_teacher.address != params[:home_address]
