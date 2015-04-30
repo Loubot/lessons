@@ -25,7 +25,9 @@ teachersInfoReady = ->
     #   $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
 
   $('#qual_left').css('height', $('#qual_form').height())
+
   if $('#dropzone').length 
+
     # Dropzone.autoDiscover = false
     try
       dropzone = new Dropzone('#dropzone', {
@@ -206,15 +208,21 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
 
   if $('.btn_book_now').length
-    currency = $('.teachers_rate').text()
-    
-    result = currency.replace(/[^\d.]/g,"")
-    # result = parseFloat(currency)
-    
-    $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value=#{result}> """ 
-    # $(document).on 'change', '#rates', ->
-    #   $('#create_event_form').find('#event_rate').remove()
-    # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
+    #////////////////Teachers area block book checkbox
+    $(document).on 'change', '#Multiple', ->
+
+      $('#no_of_weeks').animate height: 'toggle', 100
+
+    #///////////////End of Teachers area block book checkbox
+    $(document).on 'submit', '#create_event_form', (e) -> #stop event form to check week no is valid
+      
+      e.preventDefault()
+      if ($('#no_of_weeks').val() == '' && $('#Multiple').prop 'checked')
+        $('#no_of_weeks').addClass 'select_error'
+      else
+
+        $.post($(@).attr('action'), $(@).serialize()) #submit form remotely
+    #end of submit create_event_form
 
     do () ->
       img = new Image()
@@ -231,8 +239,8 @@ teachersInfoReady = ->
       
       # $('.profile_pic_container').css 'background-image', "url(#{img.src})"
     
-    
-    $('.fotorama').fotorama  #initiate fotorama picture displayer
+    #initiate fotorama picture displayer
+    $('.fotorama').fotorama  
       width: 333
       transition: "crossfade"
       loop: true
@@ -243,8 +251,7 @@ teachersInfoReady = ->
       arrows: true     
       fit: 'cover'
       thumbfit: 'cover'
-    # $(".fotorama").on "fotorama:load", (e, fotorama) ->
-    #   $('.show_teacher_profile_section').css 'height', $('.fotorama').css 'height'
+    
 
     $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
       # e.target # newly activated tab
@@ -265,22 +272,55 @@ teachersInfoReady = ->
         
 
     #// end of display appropraite booking option
-  
 
-  if $('.show_teacher_profile_container').length
-    AnyTime.noPicker 'payment_choice_datepicker'
-    AnyTime.noPicker 'location_only_datepicker'
-    $("#payment_choice_datepicker").AnyTime_picker
-      format: "%Y-%m-%d"
-      placement: 'inline'
-      hideInput: true
-    $("#location_only_datepicker").AnyTime_picker
-      format: "%Y-%m-%d"
-      placement: 'inline'
-      hideInput: true  
+    #the_one_modal
+    if $('#the_one_modal').length
+      $('#the_one_modal').on 'hidden.bs.modal', ->
+        $('.payment_form_container').empty()
+        $('.display_teachers_location').empty()
+        $('.returned_locations_container').empty()
+        
+      $('#the_one_modal').on 'shown.bs.modal', ->
+        
+        document.getElementById("subject_id").selectedIndex = 0
+      # document.getElementById("select_subject").selectedIndex = 0     
+      $(document).on 'change', '.select_subject', ->
+        $.ajax
+          url: 'get-locations'
+          data:            
+            subject_id: $('.select_subject').val()
+            id: $('#select_subjects_teacher_id').val()
+
+      $(document).on 'change', '.select_home_or_location', ->
+        $.ajax
+          url: 'get-subjects'
+          data:
+           id: $('#select_subjects_teacher_id').val()
+           subject_id: $('.select_subject').val()
+           location_choice: $('.select_home_or_location').val()
+      
+      # $(document).on 'click', '#location_only_datepicker', ->
+      #   console.log 'a'
+      #   AnyTime.noPicker 'location_only_datepicker'
+      #   $("#location_only_datepicker").AnyTime_picker
+      #     format: "%Y-%m-%d"
+      #     placement: 'inline'
+      #     hideInput: true
+
+      $(document).on 'change', '.teachers_location_selection', ->
+        $.ajax
+          url: 'get-locations-price'
+          data:
+            id: $('#select_subjects_teacher_id').val()
+            subject_id: $('.select_subject').val()
+            location_id: $('.teachers_location_selection').val()
+
+    # end of the_one_modal
+
     
 
-    $('.home_booking_form').submit (e) -> #prevent paypal for submitting
+    $(document).on 'submit', '.home_booking_form', (e) -> #prevent paypal for submitting
+      
       e.preventDefault()      
       
       address = null
@@ -328,8 +368,10 @@ teachersInfoReady = ->
 
 #///////////jquery for popover previous_lessons_teacher
   if ('.previous_lessons_header').length
+
     $("html").click (e) ->
         $(".review_hover").popover "hide"
+
         
 
       $(".review_hover").popover(
@@ -354,12 +396,7 @@ teachersInfoReady = ->
 
 #end of  teachers business page, add subject name to for before submitting
 
-#////////////////Teachers area block book checkbox
-$(document).on 'change', '#Multiple', ->
 
-  $('#no_of_weeks').animate height: 'toggle', 100
-
-#///////////////End of Teachers area block book checkbox
 
 
 $(document).on('ready', teachersInfoReady)

@@ -2,7 +2,7 @@ class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, only: [:update]
-	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals]
+	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price]
 	
 	include TeachersHelper
 
@@ -19,8 +19,9 @@ class TeachersController < ApplicationController
 		@params = params
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
-		@subject = Subject.find(params[:subject_id])
+		# @subject = Subject.find(params[:subject_id])
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
+		@subject = @teacher.subjects.select { |s| s.id == params[:subject_id].to_i }.first
 		@reviews = @teacher.reviews.take(3)
 		@locations = @teacher.locations
 		@prices = @teacher.prices
@@ -29,7 +30,7 @@ class TeachersController < ApplicationController
 		gon.locations = @locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		
-		@home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
+		# @home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
@@ -129,12 +130,51 @@ class TeachersController < ApplicationController
 		@location = Location.new
 		p request.to_s
 
-	end
+	end	
 
 	def modals #render modal content 
 		@teacher = Teacher.find(params[:id])
 		@current_teacher = current_teacher
 		render 'modals/show_teacher/_payment_packages_modal', layout: false
+	end
+
+	def get_locations
+		@teacher = Teacher.includes(:prices).find(params[:id].to_i)
+		
+		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject_id].to_i && p.location_id != nil })
+			render 'modals/payment_selections/_home_or_location.js.coffee'
+		else
+			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
+			p @price
+			@deleteReturnedLocations = 1
+			render 'modals/payment_selections/_return_home_price.js.coffee'
+		end
+		
+	end
+
+	def get_subjects
+		#location_choice =1 == home lesson
+		#location_choice =2 == teachers location
+		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id].to_i)
+		if params[:location_choice].to_i == 1 #home lesson
+			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
+			p @price
+			render 'modals/payment_selections/_return_home_price.js.coffee'
+		else
+			# @event = Event.new
+			# @subject_id = params[:subject_id]
+			@locations = @teacher.locations
+			render 'modals/payment_selections/_return_locations.js.coffee'
+		end
+
+	def get_locations_price
+		@event = Event.new
+		@rate = Price.where(teacher_id: params[:id], subject_id: params[:subject_id], location_id: params[:location_id])
+		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id].to_i)
+		render 'modals/payment_selections/_return_locations_price.js.coffee'
+	end
+		
+		# render status: 200, nothing: true
 	end
 
 	private

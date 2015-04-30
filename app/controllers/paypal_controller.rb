@@ -64,7 +64,7 @@ class PaypalController < ApplicationController
 
     
     cart = UserCart.home_booking_cart(params)
-    p cart.home_booking
+    # p cart.home_booking
     # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
     # render status: 200, nothing: true
     
