@@ -208,15 +208,21 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
 
   if $('.btn_book_now').length
-    # currency = $('.teachers_rate').text()
-    
-    # result = currency.replace(/[^\d.]/g,"")
-    # # result = parseFloat(currency)
-    
-    # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value=#{result}> """ 
-    # $(document).on 'change', '#rates', ->
-    #   $('#create_event_form').find('#event_rate').remove()
-    # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
+    #////////////////Teachers area block book checkbox
+    $(document).on 'change', '#Multiple', ->
+
+      $('#no_of_weeks').animate height: 'toggle', 100
+
+    #///////////////End of Teachers area block book checkbox
+    $(document).on 'submit', '#create_event_form', (e) -> #stop event form to check week no is valid
+      
+      e.preventDefault()
+      if ($('#no_of_weeks').val() == '' && $('#Multiple').prop 'checked')
+        $('#no_of_weeks').addClass 'select_error'
+      else
+
+        $.post($(@).attr('action'), $(@).serialize()) #submit form remotely
+    #end of submit create_event_form
 
     do () ->
       img = new Image()
@@ -390,12 +396,7 @@ teachersInfoReady = ->
 
 #end of  teachers business page, add subject name to for before submitting
 
-#////////////////Teachers area block book checkbox
-$(document).on 'change', '#Multiple', ->
 
-  $('#no_of_weeks').animate height: 'toggle', 100
-
-#///////////////End of Teachers area block book checkbox
 
 
 $(document).on('ready', teachersInfoReady)

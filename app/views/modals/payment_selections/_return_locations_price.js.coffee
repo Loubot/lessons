@@ -3,7 +3,7 @@ $('.payment_form_container').empty()
 $('.payment_form_container').append """
 
     <h2>Check availability</h2>
-    <%= form_for(@event, url: events_create_event_and_book_path, remote: true, html: { class: 'form-horizontal', id: 'create_event_form'}, method: 'post') do |f| %>
+    <%= form_for(@event, url: events_create_event_and_book_path, html: { class: 'form-horizontal', id: 'create_event_form'}, method: 'post') do |f| %>
                     
       <div class="form-group">
         <label for="date" class="col-sm-2 control-label">Date:</label>
@@ -68,7 +68,7 @@ $('.payment_form_container').append """
 
         </div> <!-- end of checkbox -->
         <div class="col-xs-6">
-          <%= select_tag "booking_length", options_for_select((2..52)),include_blank: 'no of weeks?', id: 'no_of_weeks',class: 'form-control' %>
+          <%= select_tag "booking_length", options_for_select((2..52)),include_blank: 'no of weeks?', id: 'no_of_weeks',class: 'form-control select-error' %>
         </div>
       </div>
         <br>
