@@ -95,7 +95,7 @@ Rails.application.configure do
   # config.autoflush_log = false
 
   #change default url
-  config.application.routes.default_url_options[:host] = 'www.learnyourlesson.ie'
+  config.action_controller.default_url_options = { host: 'www.learnyourlesson.ie' }
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
