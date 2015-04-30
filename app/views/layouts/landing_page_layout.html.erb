@@ -17,9 +17,6 @@
     
   </head>
   <body id="standard_layout">
-    <% if Rails.env.production? %>
-      <%= render 'partials/google_analytics' %>
-    <% end %>
     
     <%= render 'partials/navs/landing_page_nav' %>
     
@@ -40,5 +37,8 @@
       <% end %>
       
   </body>
+  <% if Rails.env.production? %>
+    <%= render 'partials/google_analytics' %>
+  <% end %>
 </html>
 

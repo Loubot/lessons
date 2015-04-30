@@ -16,10 +16,7 @@
 
     <%= render 'partials/shiv' %>
   </head>
-  <body id="standard_layout">
-    <% if Rails.env.production? %>
-      <%= render 'partials/google_analytics' %>
-    <% end %>
+  <body id="standard_layout">    
   	
   	<%= render 'partials/navs/home_page_nav' %>
   	
@@ -40,5 +37,8 @@
       <% end %>
 
   </body>
+  <% if Rails.env.production? %>
+    <%= render 'partials/google_analytics' %>
+  <% end %>
 </html>
 

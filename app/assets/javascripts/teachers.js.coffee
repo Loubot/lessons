@@ -2,8 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 teachersInfoReady = ->
-
-  $.cookieBar()
   
   #////////// remove fb/twitter share buttons
   $(document).on 'click', '.share_buttons_close', ->
