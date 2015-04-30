@@ -14,12 +14,12 @@
     <%= yield :head %>
 
     <%= render 'partials/shiv' %>    
-    <% if Rails.env.production? %>
-      <%= render 'partials/google_analytics' %>
-    <% end %>
 
   </head>
   <body id="standard_layout">
+    <% if Rails.env.production? %>
+      <%= render 'partials/google_analytics' %>
+    <% end %>
      	
     <%= render 'partials/navs/teacher_nav' %>  	
     

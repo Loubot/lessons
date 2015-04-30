@@ -15,14 +15,11 @@
 
 
     <%= render 'partials/shiv' %>
-    
-    
+  </head>
+  <body id="standard_layout">
     <% if Rails.env.production? %>
       <%= render 'partials/google_analytics' %>
     <% end %>
-
-  </head>
-  <body id="standard_layout">
   	
   	<%= render 'partials/navs/home_page_nav' %>
   	
