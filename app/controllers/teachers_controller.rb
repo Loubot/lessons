@@ -168,6 +168,7 @@ class TeachersController < ApplicationController
 			@locations = @teacher.locations.find(ids)
 			render 'modals/payment_selections/_return_locations.js.coffee'
 		end
+	end
 
 	def get_locations_price
 		@event = Event.new
