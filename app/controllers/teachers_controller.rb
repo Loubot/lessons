@@ -171,8 +171,11 @@ class TeachersController < ApplicationController
 
 	def get_locations_price
 		@event = Event.new
+		p "Event #{@event}"
 		@rate = Price.where(teacher_id: params[:id], subject_id: params[:subject_id], location_id: params[:location_id])
+		p "rate #{@rate}"
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id].to_i)
+		p "teacher #{@teacher}"
 		render 'modals/payment_selections/_return_locations_price.js.coffee'
 	end
 		
