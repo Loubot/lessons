@@ -180,8 +180,8 @@ class TeachersController < ApplicationController
 		render 'modals/payment_selections/_return_locations_price.js.coffee'
 	end
 		
-		# render status: 200, nothing: true
-	end
+		
+	
 
 	private
 		def teacher_params
