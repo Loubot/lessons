@@ -690,12 +690,13 @@ form .glyphicon {
 
 .teach_page_pros_container{
   font-size: 20px;
+  padding: 0 !important;
 }
 
 
 
 .teach_exp_table_container{
- margin-left: 50px;
+ // margin-left: 50px;
 }
 .teach_exp_table{
 
@@ -804,14 +805,14 @@ form .glyphicon {
 // login_modal page*/
 
 .login_modal_content{
-  color: #FFF;
+  // color: #FFF;
   background-image: asset_url('tryit.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 
 .forget_password{
-  color: #FFF;
+  // color: #FFF;
 }
 
 .ds-btn li{ list-style:none;padding:10px; }
@@ -1447,7 +1448,7 @@ form .glyphicon {
   .teachers_reg_photo{
     margin-bottom: 20px;
     margin-top: -22px;
-    height: 450px;  
+    height: 500px;  
     background-image: image_url('tree.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;

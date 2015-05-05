@@ -145,8 +145,7 @@ class TeachersController < ApplicationController
 			render 'modals/payment_selections/_home_or_location.js.coffee'
 		else
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
-			p @price
-			@deleteReturnedLocations = 1
+			
 			render 'modals/payment_selections/_return_home_price.js.coffee'
 		end
 		

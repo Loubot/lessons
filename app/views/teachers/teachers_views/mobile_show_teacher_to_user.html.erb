@@ -74,9 +74,15 @@
         
         <div class="text-center">
           <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %><br>
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
-            Book your package
-          </button>
+           <% if teacher_signed_in? %>
+             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" data-remote="<%= modal_teacher_path(@teacher) %>"> <!-- load modal content dynamically -->
+               Book your package
+             </button>              
+           <% else %>
+             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#login_modal" %> <!-- load modal content dynamically -->
+               Book your package
+             </button>                       
+           <% end %>
         </div> <!-- end of text-center -->
       </div> <!-- end of package_form_well -->
     <% end %> <%# end of packages loop %>

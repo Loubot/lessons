@@ -58,7 +58,10 @@ class StripeController < ApplicationController
   	@amount = params[:amount].to_i * 100    
     @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
-      :metadata           => { :tracking_id => cart.tracking_id, home_booking: true },
+      :metadata           => { 
+                              :tracking_id => cart.tracking_id, 
+                              home_booking: true
+                              },
       :amount             => @amount,
       :description        => cart.tracking_id,
       :currency           => 'eur',

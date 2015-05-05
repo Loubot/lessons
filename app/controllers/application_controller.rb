@@ -8,8 +8,10 @@ class ApplicationController < ActionController::Base
 
   def is_mobile?
     session[:mobile]
-    p "#{session[:mobile]} %%%%%%%%%%"
+    
   end
+
+  helper_method :is_mobile?
 
   def update_student_address(params) #update teacher address if 
     if params[:save_address] == 'true'
@@ -23,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :is_mobile?
+  
   private
 
 
