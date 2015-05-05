@@ -4,7 +4,7 @@ class StaticController < ApplicationController
 	include StaticHelper
 
 
-	caches_page :teach, :learn, gzip: true
+	# caches_page :teach, :learn, gzip: true
 
 	# caches_action :welcome, layout: false, gzip: true
 
@@ -33,7 +33,7 @@ class StaticController < ApplicationController
 
 	def welcome
 		
-		fresh_when([current_teacher, flash])
+		# fresh_when([current_teacher, flash])
 	end	
 
 	def learn
@@ -43,7 +43,7 @@ class StaticController < ApplicationController
 
 	def teach
 		render 'static/mobile_views/mobile_teach' if is_mobile?
-		fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
+		# fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
 	end
 
 	def add_to_list
