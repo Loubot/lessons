@@ -31,10 +31,14 @@
       <%= yield %>  
 
     
-      <%= render 'partials/share_buttons' if !is_mobile? %>
+      <% if !is_mobile? %>
+        <%= render 'partials/share_buttons' %>
+      <% end %>
+
       <% if teacher_signed_in? %>
         <%= render partial: 'modals/add_authentications_modal' %>
       <% end %>
+      
       <% if Rails.env.production? %>
         <%= render 'partials/google_analytics' %>
       <% end %>
