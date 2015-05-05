@@ -388,7 +388,7 @@ hr{
   // margin-bottom: 20px;
   // margin-top: -22px;
   height: 350px;  
-  // background-image: asset_url('background1.jpg');
+  
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;
   background-size: 100% 100%;
@@ -802,6 +802,18 @@ form .glyphicon {
 //end of teachers/teachers_area*/
 
 // login_modal page*/
+
+.login_modal_content{
+  color: #FFF;
+  background-image: asset_url('tryit.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.forget_password{
+  color: #FFF;
+}
+
 .ds-btn li{ list-style:none;padding:10px; }
 .ds-btn li a span{padding-right:5px;width:100%;display:inline-block; }
 .ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
