@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   		get     '/teachers-area'		      =>  'teachers#teachers_area'
       get     '/edit-appointments'      =>  'teachers#edit_appointments'
       get     '/qualification-form'     =>  'teachers#qualification_form'
-      get     '/your-location'          =>  'teachers#your_location'
-      get     'previous-lessons'        =>  'teachers#previous_lessons'  
-      post    '/change-profile-pic'     =>  'teachers#change_profile_pic'        
+      get     '/your-business'          =>  'teachers#your_business'
+      get     'previous-lessons'        =>  'teachers#previous_lessons'
+      get     'modal'                   =>  'teachers#modals'      
+      post    '/change-profile-pic'     =>  'teachers#change_profile_pic'       
   	end
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
@@ -20,10 +21,16 @@ Rails.application.routes.draw do
 
 
   end
+  get         '/show-teacher'           =>  'teachers#show_teacher'  
+  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
+  get         '/add-map'                =>  'teachers#add_map'
+  get         'get-locations'           =>  'teachers#get_locations'
+  get         'get-subjects'            =>  'teachers#get_subjects'
+  get         'get-locations-price'     =>  'teachers#get_locations_price'
 
   resources :locations
   resources :prices, only: [:create, :update, :destroy]
-  
+  resources :packages, only: [:create, :destroy]
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
@@ -55,23 +62,21 @@ Rails.application.routes.draw do
   get         'paypal-return'           =>  'paypal#paypal_return' 
   post        'home-booking-paypal'     =>  'paypal#home_booking_paypal'
   post        'store-paypal'            =>  'paypal#store_paypal'
+  post        'package-paypal'          =>  'paypal#create_package_booking_paypal'
+  post        'store-package-paypal'    =>  'paypal#store_package_paypal'
 
   #Stripe
   get         'stripe-auth-user'        =>  'stripe#stripe_auth_user'  
   post        'stripe-create'           =>  'stripe#stripe_create'
   post        'home-booking-stripe'     =>  'stripe#home_booking_stripe'
   post        'store-stripe'            =>  'stripe#store_stripe'
+  post        'package-stripe'          =>  'stripe#create_package_booking_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
 
 
-  get         '/show-teacher'           =>  'teachers#show_teacher'  
-  get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
-  get         '/add-map'                =>  'teachers#add_map'
-
-
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
-
+  
   root to: 'static#landing_page'
 end

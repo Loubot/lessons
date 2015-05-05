@@ -68,4 +68,7 @@
   </nav>
 <% end %> <%# end of cache %>
 
-<%= render 'modals/login_modal' %>
+
+<% if !teacher_signed_in? %>
+  <%= render 'modals/login_modal' %>
+<% end %>

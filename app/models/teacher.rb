@@ -25,8 +25,8 @@
 #  stripe_access_token    :string(255)      default("")
 #  is_active              :boolean          default("false"), not null
 #  will_travel            :boolean          default("false"), not null
-#  stripe_user_id         :string
 #  address                :string           default("")
+#  stripe_user_id         :string
 #
 
 class Teacher < ActiveRecord::Base
@@ -47,6 +47,8 @@ class Teacher < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
 
   has_many :identities, dependent: :destroy
+
+  has_many :packages, dependent: :destroy
 
   has_and_belongs_to_many :subjects, touch: true
 

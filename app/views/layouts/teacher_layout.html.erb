@@ -11,16 +11,16 @@
     <%= javascript_include_tag 'application', async: true %>
     <%= favicon_link_tag 'favicon.ico' %>
     <%= csrf_meta_tags %>
-    <%= yield :head %>    
+    <%= yield :head %>
 
     <%= render 'partials/shiv' %>    
+
+  </head>
+  <body id="standard_layout">
     <% if Rails.env.production? %>
       <%= render 'partials/google_analytics' %>
     <% end %>
-  </head>
-  <body id="standard_layout">
-    
-  	
+     	
     <%= render 'partials/navs/teacher_nav' %>  	
     
 
@@ -32,9 +32,13 @@
 
       <%= yield %>    
       <%= render 'partials/share_buttons' if !is_mobile? %>
+      <% if teacher_signed_in? %>
+        <%= render partial: 'modals/add_authentications_modal' %>
+      <% end %>
+      <% if Rails.env.production? %>
+        <%= render 'partials/google_analytics' %>
+      <% end %>
   </body>
-</html>
 
-<% if teacher_signed_in? %>
-  <%= render partial: 'modals/add_authentications_modal' %>
-<% end %>
+  
+</html>

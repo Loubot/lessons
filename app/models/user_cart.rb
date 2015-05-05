@@ -13,10 +13,11 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  subject_id    :integer
-#  multiple      :boolean          default("false")
-#  weeks         :integer          default("0")
 #  address       :string           default("")
-#  home_booking  :boolean
+#  weeks         :integer          default("0")
+#  multiple      :boolean          default("false")
+#  booking_type  :string           default("")
+#  package_id    :integer          default("0")
 #
 
 class UserCart < ActiveRecord::Base
@@ -31,8 +32,8 @@ class UserCart < ActiveRecord::Base
   before_validation :save_tracking_id
 
   def save_tracking_id
-    puts "blvvalvavl"
-    self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand].join)
+    
+    self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand, self.id].join)
   end
 
   def self.home_booking_cart(params)
@@ -45,7 +46,9 @@ class UserCart < ActiveRecord::Base
                             student_email: params[:student_email],
                             teacher_email: params[:teacher_email],
                             address: params[:home_address],
-                            home_booking: true
+                            booking_type: 'home',
+                            multiple: false,
+                            package_id: 0
                           )
 
     cart
@@ -59,7 +62,10 @@ class UserCart < ActiveRecord::Base
                             teacher_email: teacher_email,
                             student_email: current_teacher.email,
                             student_name: "#{current_teacher.full_name}",
-                            subject_id: params[:event][:subject_id]
+                            subject_id: params[:event][:subject_id],
+                            multiple: false,
+                            booking_type: 'single',
+                            package_id: 0
                           )
     cart
   end
@@ -75,7 +81,26 @@ class UserCart < ActiveRecord::Base
                             student_name: "#{current_teacher.full_name}",
                             subject_id: params[:event][:subject_id],
                             multiple: true,
-                            weeks: params[:booking_length]
+                            weeks: params[:booking_length],
+                            booking_type: 'multiple',
+                            package_id: 0
+                          )
+    cart
+  end
+
+  def self.create_package_cart(params, current_teacher, package)
+    cart = where(student_id: params[:student_id]).first_or_create
+    cart.update_attributes(
+                            teacher_id: params[:teacher_id],
+                            teacher_email: params[:teacher_email],
+                            params: params,
+                            student_email: current_teacher.email,
+                            student_name: current_teacher.full_name,
+                            subject_id: package.subject_id,
+                            address: '',
+                            multiple: false,
+                            booking_type: 'package',
+                            package_id: package.id
                           )
     cart
   end

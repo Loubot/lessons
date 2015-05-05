@@ -11,16 +11,21 @@
         <h4 class="teachers_blurb">Connect with local students and teach what you love</h4>
         <h4 class="teachers_blurb">Sign up to get notified when we launch</h4>
           <%= form_tag add_to_list_path, class: 'teacher_registration_form' do %>
-          <div class="input-group landing_page_container">
-            <span class="input-group-addon glyphicon glyphicon-envelope"></span>
-            
-            <%= email_field_tag 'email',nil, size: 50,class: 'form-control', placeholder: 'Email' %>
-            
-          </div><br>
-               
-          
-          
-        <br>        
+          <div class="landing_page_container">
+            <div class="input-group">
+              <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+              
+              <%= email_field_tag 'email',nil, size: 50,class: 'form-control', placeholder: 'Email' %>
+              
+            </div>
+            <div class="input-group ">
+              <span class="input-group-addon glyphicon glyphicon-user"></span>
+              
+              <%= text_field_tag 'name',nil, placeholder:'First name', size: 50, class: 'form-control' %>
+              
+            </div>
+          </div>
+                     
           
           <div >
             <%= submit_tag "Sign up", class: 'btn btn-success' %>

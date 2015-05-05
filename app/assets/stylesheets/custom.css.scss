@@ -226,7 +226,7 @@ hr{
 
 //end of qualifications
 
-//locations page
+//your_business page
 
 .price_alert{
   background: #ebffeb;
@@ -247,7 +247,40 @@ hr{
   margin-bottom: 50px;
 }
 
-//end of locations page
+.package_form_row{
+  margin-top: 20px;
+}
+
+.package_form_well{
+  background-color: #326EA7 !important;
+  padding-bottom: 10px;
+} 
+
+.package_form_header{
+  color: #FFF;
+  text-align: center;
+}
+
+.package_form_label{
+  color: #FFF;
+}
+
+.saved_packages{
+  background-color: #5491CD;
+  color: #FFF;
+}
+
+
+.display_saved_packages{
+  height: 150px;
+  padding: 30px;
+  border-style: solid;
+  border-width: 1px;
+  //margin-top: 9px;*/
+  border-color: #E6E6E6;
+}
+
+//end of your_business page
 
 .gray_section{
   background-color: #ff7e64 !important;
@@ -562,6 +595,14 @@ hr{
     width: 100%;
   }
 
+  .package_selection_container{
+    text-align: center;
+  }
+
+  .select_error{
+    border-color: red;
+  }
+
 // end of teachers/show_teacher_to_user*/
 
 // teach page*/
@@ -761,10 +802,9 @@ form .glyphicon {
 //end of teachers/teachers_area*/
 
 // login_modal page*/
-.ds-btn li{ list-style:none; float:left; padding:10px; }
-.ds-btn li a span{padding-left:15px;padding-right:5px;width:100%;display:inline-block; text-align:left;}
+.ds-btn li{ list-style:none;padding:10px; }
+.ds-btn li a span{padding-right:5px;width:100%;display:inline-block; }
 .ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
-
 .sign_in_submit{
   display: block;
   margin-left: 23%;
@@ -1228,7 +1268,7 @@ form .glyphicon {
   .lead{
     font-size: 30px !important;
   }
-  #rates{
+  .rates{
     font-size: 30px;
   }
   

@@ -19,6 +19,7 @@
         <% end %>
       </div> <!-- end of col-xs-6 -->
     <% end %>
+    <%= "Go to personal info and choose your subjects first" if @subjects.size == 0 %>
   </div> <!-- end of home_schooling -->
   <div class="price_alert">
     
@@ -53,5 +54,45 @@
 
     </div> <!-- end of tabpanel -->
   	
-  </div> <!-- end of map_container -->  
+  </div> <!-- end of map_container -->
+  <div class="row package_form_row">
+      
+    <div class="well package_form_well">
+      <h2 class="package_form_header">Lesson bundles </h2>
+     <span class='package_form_label'>Create bundles of lessons for specific rates.</span>
+    
+      <%# see teachers.js, subject name appended using jquery %>
+      <%= form_for @package, html: { class: 'form-inline create_package_form' } do |f| %>
+        <div class="form-group">
+          <%= f.label :subject_id, 'Subject?', class: 'package_form_label' %>
+          <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'package_subject_name form-control' } %>
+        </div>
+        <div class="form-group">
+          <%= f.label :no_of_lessons, 'No. of lessons?', class: 'package_form_label' %>
+          <%= f.select :no_of_lessons, options_for_select(0..52),{}, { class: 'form-control' } %>
+        </div>
+        <div class="form-group">
+          <%= f.label :price, 'Total price?', class: 'package_form_label' %>
+          <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
+        </div>
+        <%= f.hidden_field :teacher_id, value: current_teacher.id %>
+        <%= f.submit 'Submit', class: 'btn btn-warning' %>
+      <% end %>
+    </div> <!-- end of well -->
+    <div class="saved_packages_container">
+     <div class="saved_packages">
+       <% @teacher.packages.each do |p| %>
+       <div class="display_saved_packages">
+        <h2><%= p.subject_name %></h2>
+        <%= %Q(You are offering a package of #{p.no_of_lessons}x#{p.subject_name} lessons for
+          #{number_to_currency(p.price, unit:'€')})
+        %>
+        <%= link_to 'Delete?', package_path(p.id), method: 'DELETE', 'data-role' => 'button', class: 'btn btn-danger pull-right' %>
+       </div>
+        
+
+      <% end %>
+     </div> <!-- end of saved_packages -->
+    </div> <!-- end of saved_packages_container -->
+  </div> <!-- end of row -->
 </div> <!-- end of outer-container -->
