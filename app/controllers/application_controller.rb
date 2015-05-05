@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   def is_mobile?
     session[:mobile]
+    p "#{session[:mobile]} %%%%%%%%%%"
   end
 
   def update_student_address(params) #update teacher address if 

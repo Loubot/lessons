@@ -75,16 +75,17 @@ module TeachersHelper
 	end
 
 	def pick_show_teacher_view(id)
+		render layout: 'application', action: 'teachers_views/mobile_show_teacher_to_user' and return if is_mobile?
 		if teacher_signed_in?
 			if current_teacher.id.to_i == id.to_i && !current_teacher.is_teacher
 				redirect_to '/'
 			elsif current_teacher.id.to_i != id.to_i
-				render layout: 'application', action: 'show_teacher_to_user'
+				render layout: 'application', action: 'teachers_views/show_teacher_to_user'
 			else 
-				render layout: 'teacher_layout', action: 'show_teacher'			
+				render layout: 'teacher_layout', action: 'teachers_views/show_teacher'			
 			end
 		else
-			render layout: 'application', action: 'show_teacher_to_user'
+			render layout: 'application', action: 'teachers_views/show_teacher_to_user'
 		end
 	end
 

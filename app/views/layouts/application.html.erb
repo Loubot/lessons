@@ -18,26 +18,27 @@
   </head>
   <body id="standard_layout">    
   	
-  	<%= render 'partials/navs/home_page_nav' %>
-  	
-  	
-  	
+  	<%= render 'partials/navs/home_page_nav' %>  	
     
-      <div class="outer-container">
-        <%= render 'partials/notices' %>        
-      </div>
-      
-
-      <%= yield %>  
-
+    <div class="outer-container">
+      <%= render 'partials/notices' %>        
+    </div>
     
-      <%= render 'partials/share_buttons' if !is_mobile? %>
-      <% if teacher_signed_in? %>
-        <%= render partial: 'modals/add_authentications_modal' %>
-      <% end %>
-      <% if Rails.env.production? %>
-        <%= render 'partials/google_analytics' %>
-      <% end %>
+
+    <%= yield %>  
+
+  
+    <% if !is_mobile? %>
+      <%= render 'partials/share_buttons' %>
+    <% end %>
+
+    <% if teacher_signed_in? %>
+      <%= render partial: 'modals/add_authentications_modal' %>
+    <% end %>
+
+    <% if Rails.env.production? %>
+      <%= render 'partials/google_analytics' %>
+    <% end %>
 
   </body>
 

@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150420152010) do
     t.integer  "teacher_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -106,9 +106,6 @@ ActiveRecord::Schema.define(version: 20150420152010) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
-
-  add_index "packages", ["subject_id"], name: "index_packages_on_subject_id"
-  add_index "packages", ["teacher_id"], name: "index_packages_on_teacher_id"
 
   create_table "photos", force: :cascade do |t|
     t.string   "name",           limit: 255
@@ -193,10 +190,7 @@ ActiveRecord::Schema.define(version: 20150420152010) do
     t.boolean  "is_active",                          default: false, null: false
     t.boolean  "will_travel",                        default: false, null: false
     t.string   "stripe_user_id"
-<<<<<<< HEAD
-=======
     t.string   "address",                            default: ""
->>>>>>> 39c82140bc0f55e0de2ac5b0498dfb88ce25bca1
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
@@ -230,9 +224,9 @@ ActiveRecord::Schema.define(version: 20150420152010) do
     t.integer  "subject_id"
     t.boolean  "multiple",                  default: false
     t.integer  "weeks",                     default: 0
-
-    t.boolean  "home_booking"
-
+    t.string   "address",                   default: ""
+    t.string   "booking_type",              default: ""
+    t.integer  "package_id",                default: 0
   end
 
   add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true
