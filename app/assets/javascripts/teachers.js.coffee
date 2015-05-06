@@ -6,7 +6,7 @@ teachersInfoReady = ->
     declineButton: true
     
   )
-
+  SocialShareKit.init()
   if !(jQuery.cookieBar('cookies'))
     $('#share_buttons').empty()
     $('#share_buttons').hide()
