@@ -1185,6 +1185,27 @@ form .glyphicon {
 }
 //end of share_buttons
 
+// mobile_share_buttons
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+}
+
+.mobile_share_buttons{
+  bottom:0;
+  position:fixed;
+  z-index:150;
+  _position:absolute;
+  _top:expression(eval(document.documentElement.scrollTop+
+      (document.documentElement.clientHeight-this.offsetHeight)));
+  height:35px;
+}
+// end of mobile_share_buttons
+
 @media (min-width: 250px){
   // set gutter width  
   .outer-container{
