@@ -10,6 +10,8 @@ teachersInfoReady = ->
   if !(jQuery.cookieBar('cookies'))
     $('#share_buttons').empty()
     $('#share_buttons').hide()
+    $('#mobile_share_buttons').empty()
+    $('#mobile_share_buttons').hide()
   
   #////////// remove fb/twitter share buttons
   $(document).on 'click', '.share_buttons_close', ->

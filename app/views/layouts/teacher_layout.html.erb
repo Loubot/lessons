@@ -33,7 +33,9 @@
     <%= yield %> 
       
     <% if !is_mobile? %>
-      <%= render 'partials/share_buttons' %>
+      <%= render 'partials/socials/share_buttons' %>
+    <% else %>
+      <%= render 'partials/socials/mobile_share_buttons' %>
     <% end %>
 
     <% if teacher_signed_in? %>
