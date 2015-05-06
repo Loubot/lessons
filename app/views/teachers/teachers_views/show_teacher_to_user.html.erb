@@ -1,7 +1,7 @@
 <%= include_gon %>  
 <%= content_for :title,  @teacher.full_name %>
 
-<% cache [@teacher, @profilePic, @photos] do %>
+<% cache [@teacher, @profilePic, @photos, current_teacher] do %>
 <div class="outer-container">
 
 
