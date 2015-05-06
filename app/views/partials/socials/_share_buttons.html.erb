@@ -11,7 +11,9 @@
     
     <script type="text/javascript" src="https://platform.linkedin.com/in.js?async=true"></script>
     <script type="text/javascript">
-        IN.init({api_key:'77iyb2qd8pdh8f'});            
+      if !(jQuery.cookieBar('cookies')){
+        IN.init({api_key:'77iyb2qd8pdh8f'}); 
+        }           
     </script>
   </div>
 
