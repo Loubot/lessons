@@ -63,7 +63,7 @@
 			}
 		}
 		//Sets up default cookie preference if not already set
-		if(cookieValue=='' && options.autoEnable){
+		if(cookieValue=='' && doReturn!='cookies' && options.autoEnable){
 			cookieValue = 'enabled';
 			document.cookie = cookieEntry.replace('{value}','enabled');
 		}
@@ -138,7 +138,7 @@
 			$('#cookie-bar .cb-enable').click(function(){
 				document.cookie = cookieEntry.replace('{value}','accepted');
 				if(cookieValue!='enabled' && cookieValue!='accepted'){
-					window.location = options.currentLocation;
+					window.location = options.redirect;
 				}else{
 					if(options.effect=='slide'){
 						$('#cookie-bar').slideUp(300,function(){$('#cookie-bar').remove();});
@@ -166,7 +166,7 @@
 				}
 				document.cookie = cookieEntry.replace('{value}','declined');
 				if(cookieValue=='enabled' && cookieValue!='accepted'){
-					window.location = options.currentLocation;
+					window.location = options.redirect;
 				}else{
 					if(options.effect=='slide'){
 						$('#cookie-bar').slideUp(300,function(){$('#cookie-bar').remove();});

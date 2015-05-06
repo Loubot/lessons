@@ -22,4 +22,3 @@
 
 
 Dropzone.autoDiscover = false // Disable dropzone autoDiscover option
-$.cookieBar()
