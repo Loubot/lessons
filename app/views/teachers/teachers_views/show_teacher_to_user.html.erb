@@ -7,7 +7,7 @@
   content="<%= request.original_url %>" />
   <meta property="og:description" content="Learn Your Lesson, a place for teachers to advertise their expertise and grow their client base. Book a lesson here." />
   <meta property="fb:app_id" content="<%= ENV['FACEBOOK_APP_ID'] %>" />
-  <meta property="og:type" content="<%= @teacher.full_name %> profile page" />
+  <meta property="og:type" content="article" />
   <meta property="og:image" content= "<%= asset_url('facebook_logo.jpg') %>" />
 <% end %>
 <%= content_for :title,  @teacher.full_name %>
