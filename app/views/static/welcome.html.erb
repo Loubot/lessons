@@ -2,12 +2,11 @@
   <% content_for :head do %>
     <meta property="og:title" content="Search page" />
     <meta property="og:site_name" content="Learn your lesson" />
-    <meta property="og:url"
-    content="<%= request.original_url %>" />
+    <meta property="og:url" content="<%= request.original_url %>" />
     <meta property="og:description" content="Learn Your Lesson, a place for teachers to advertise their expertise and grow their client base. Book a lesson here." />
     <meta property="fb:app_id" content="<%= ENV['FACEBOOK_APP_ID'] %>" />
     <meta property="og:type" content="Search to connect with local teachers" />
-    <meta property="og:image" content= "<%= asset_url('facebook_logo.jpg') %>" />
+    <meta property="og:image" content= "https://<%= asset_url('facebook_logo.jpg') %>" />
   <% end %>
   <% content_for :title, "The place to connect with local teachers and learn" %>
   <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
