@@ -18,7 +18,8 @@ class Price < ActiveRecord::Base
   belongs_to :subject, touch: true
   belongs_to :teacher, touch: true
 
-  validates :subject_id, :teacher_id, :price, :no_map, presence: true
+  validates :subject_id, :teacher_id, :price, presence: true
+  validates :no_map, :inclusion => [true, false]
 
   scope :is_valid?, -> { where("home_price IS NOT NULL") }
 
