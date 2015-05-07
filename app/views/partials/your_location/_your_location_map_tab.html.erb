@@ -49,6 +49,7 @@
           <%= p.hidden_field :subject_id, value: s.id %>
           <%= p.hidden_field :location_id, value: location.id %>
           <%= p.hidden_field :teacher_id, value: @teacher.id %>
+          <%= p.hidden_field :no_map, value: false %>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <%= p.submit "Update #{s.name} price", class: 'btn btn-info' %>

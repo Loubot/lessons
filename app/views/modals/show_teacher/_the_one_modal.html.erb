@@ -1,4 +1,4 @@
-<% cache [current_teacher, 'the_one_modal'] do %>
+<% cache [current_teacher, @teacher, 'the_one_modal'] do %>
   <% if teacher_signed_in? %>  
     <div class="modal fade" id="the_one_modal" tabindex="-1" role="dialog" aria-labelledby="the_one_modal" aria-hidden="true">
       <div class="modal-dialog">
