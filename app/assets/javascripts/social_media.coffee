@@ -82,6 +82,7 @@ loadSocials = ->
 
     loadFacebookSDK()
     bindFacebookEvents() unless fb_events_bound
+    IN.init({api_key:'77iyb2qd8pdh8f'})
 
 $(document).ready loadSocials
 $(document).on 'page:load', loadSocials
