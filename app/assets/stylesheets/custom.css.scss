@@ -1192,11 +1192,12 @@ ul.share-buttons{
 }
 
 ul.share-buttons li{
-  display: inline;
+  display: block;
 }
 
 .mobile_share_buttons{
-  bottom:0;
+  bottom:90px;
+  right:0;
   position:fixed;
   z-index:150;
   _position:absolute;
