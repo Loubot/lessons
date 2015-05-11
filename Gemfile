@@ -82,7 +82,7 @@ gem 'geocoder', '~> 1.2'
 
 gem 'pp-adaptive', '~> 1.0.0'
 
-gem 'paypal-sdk-adaptiveaccounts'
+gem 'paypal-sdk-adaptiveaccounts' #check if paypal account exists with given email
 
 gem 'stripe', '~> 1'
 
