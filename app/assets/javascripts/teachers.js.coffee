@@ -437,5 +437,7 @@ window.initAnalytics = () ->
   ga 'send', 'pageview'
 
   if (gon.teacher_id?)
+    console.log "yep"
     ga('create', 'UA-57834504-1', 'auto', { 'name', "user#{gon.teacher_id}" })
     ga("user#{gon.teacher_id}.send", 'pageview')
+    console.log ga("user#{gon.teacher_id}")
