@@ -33,6 +33,7 @@ class TeachersController < ApplicationController
 		# @home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
+		gon.teacher_id = @teacher.id
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
 		# fresh_when([current_teacher,flash])		
 	end
