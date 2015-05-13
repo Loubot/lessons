@@ -214,6 +214,10 @@ teachersInfoReady = ->
 #////////// end of teachers/form photo partial enable dismissable popover
 
 #//// show_teacher_to_user add price to form modal
+  if (gon.teacher_id?)
+    if (window.ga?)
+      alert 'z'
+      ga('create', 'UA-57834504-3', 'auto')
 
   if $('.btn_book_now').length
     #////////////////Teachers area block book checkbox
@@ -415,5 +419,4 @@ getCounties = () ->
   return ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
-          'Waterford','Westmeath','Wexford','Wicklow']
-    
+          'Waterford','Westmeath','Wexford','Wicklow']    
