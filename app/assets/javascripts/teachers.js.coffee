@@ -216,7 +216,6 @@ teachersInfoReady = ->
 #//// show_teacher_to_user add price to form modal
   if (gon.teacher_id?)
     if (window.ga?)
-      alert 'z'
       ga('create', 'UA-57834504-3', 'auto')
 
   if $('.btn_book_now').length
