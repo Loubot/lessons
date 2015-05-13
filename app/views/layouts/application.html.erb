@@ -34,9 +34,9 @@
       <%= render partial: 'modals/add_authentications_modal' %>
     <% end %>
 
-    <% if Rails.env.production? %>
+    
       <%= render 'partials/google_analytics' %>
-    <% end %>
+    
 
     <% if !is_mobile? %>
       <%= render 'partials/socials/share_buttons' %>
