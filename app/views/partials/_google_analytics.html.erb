@@ -8,19 +8,9 @@
 	    ga('create', 'UA-57834504-1', 'auto');
 	    ga('send', 'pageview');
 
-	    var obj, ref;
-
-	    if ((gon.teacher_id != null)) {
-	      if ((window.ga != null)) {
-	        ga('create', 'UA-57834504-1', 'auto', (
-	          obj = {
-	            'name': 'name'
-	          },
-	          obj[ref = "user" + gon.teacher_id] = ref,
-	          obj
-	        ));
-	        ga("user" + gon.teacher_id + ".send", 'pageview');
-	      }
-	    }
+	    ga('set', {
+	    	page: 'profile',
+	    	title: 'A teachers profile' 
+	    })
 	    
   </script>
