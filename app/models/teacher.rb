@@ -118,6 +118,8 @@ class Teacher < ActiveRecord::Base
     error_message_array.push " you must select a subject" if self.subjects.size < 1
     error_message_array.push " you must enter some experience" if self.experiences.size < 1
     error_message_array.push " you must enter at least one location" if self.locations.size < 1
+    error_message_array.push " you must pay your subscription for this month " if self.paid_up == false
+
     if error_message_array.empty?
       self.update_attributes(is_active: true) #update is_active attribute
       false
