@@ -1,8 +1,14 @@
 class PaypalController < ApplicationController
 
   include PaymentsHelper
-  before_action :authenticate_teacher!, only: [:paypal_create, :single_booking_paypal, :create_package_booking]
-  protect_from_forgery except: [:store_paypal, :store_package_paypal]
+  before_action :authenticate_teacher!, only: [
+                                                :paypal_create,
+                                                :home_booking_paypal, 
+                                                :single_booking_paypal,
+                                                :create_package_booking, 
+                                                :pay_membership_paypal
+                                              ]
+  protect_from_forgery except: [:store_paypal, :store_package_paypal, :membership_return_paypal]
   before_action :get_event_id, only: [:store_paypal, :store_stripe]
 
   # before_action :fix_json_params, only: [:store_stripe]
@@ -15,6 +21,65 @@ class PaypalController < ApplicationController
   def paypal_create    
     create_paypal(params) if params[:paypal].present?
   end
+
+  #handle membership payments
+
+  def pay_membership_paypal
+    client = AdaptivePayments::Client.new(
+      :user_id       => "lllouis_api1.yahoo.com",
+      :password      => "MRXUGXEXHYX7JGHH",
+      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
+      :app_id        => "APP-80W284485P519543T",
+      :sandbox       => true
+    )
+
+    client.execute(:Pay,
+      :action_type     => "PAY",
+      :receiver_email  => "lllouis@yahoo.com",
+      :receiver_amount => 3,
+      :memo            => current_teacher.email,
+      :pin             => current_teacher.id,
+      :currency_code   => "EUR",
+      :cancel_url      => "http://76b9acc5.ngrok.com",
+      :return_url      => "http://76b9acc5.ngrok.com/welcome",
+      :ipn_notification_url => "http://76b9acc5.ngrok.com/membership-return-paypal"
+    ) do |response|
+
+      if response.success?
+        puts "Pay key: #{response.pay_key}"
+
+        # send the user to PayPal to make the payment
+        # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
+        redirect_to client.payment_url(response)
+      else
+        puts "#{response.ack_code}: #{response.error_message}"
+      end
+    end
+
+  end
+
+  def membership_return_paypal
+    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    http = Net::HTTP.new(uri.host,uri.port)
+    http.open_timeout = 60
+    http.read_timeout = 60
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl = true
+    response = http.post(
+                          uri.request_uri, 
+                          request.raw_post, 
+                          'Content-Length' => "#{request.raw_post.size}",
+                          'User-Agent' => 'My custom user agent'
+                        ).body
+
+    p "paypal post params: #{params['tracking_id']}"
+   
+    puts "Paypal verification response: #{response}"
+    logger.info "Paypal verification response: #{response}"
+    render status: 200, nothing: true
+  end
+
+  #end of membership payments
 
   def create_package_booking_paypal
     p "params #{params}"

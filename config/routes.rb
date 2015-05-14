@@ -65,6 +65,9 @@ Rails.application.routes.draw do
   post        'package-paypal'          =>  'paypal#create_package_booking_paypal'
   post        'store-package-paypal'    =>  'paypal#store_package_paypal'
 
+  post        'pay-membership-paypal'     =>  'paypal#pay_membership_paypal'
+  post        'membership-return-paypal'  =>  'paypal#membership_return_paypal'
+
   #Stripe
   get         'stripe-auth-user'        =>  'stripe#stripe_auth_user'  
   post        'stripe-create'           =>  'stripe#stripe_create'
