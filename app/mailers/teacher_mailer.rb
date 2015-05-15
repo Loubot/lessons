@@ -1,5 +1,6 @@
 class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
+
   def mail_teacher(student, student_name, teacher, start_time, end_time)
     p 'test mail start'
 

@@ -9,7 +9,7 @@ class PaypalController < ApplicationController
                                                 :pay_membership_paypal
                                               ]
   protect_from_forgery except: [:store_paypal, :store_package_paypal, :membership_return_paypal]
-  before_action :get_event_id, only: [:store_paypal, :store_stripe]
+  before_action :get_event_id, only: [:store_paypal]
 
   # before_action :fix_json_params, only: [:store_stripe]
 
@@ -25,6 +25,7 @@ class PaypalController < ApplicationController
   #handle membership payments
 
   def pay_membership_paypal
+    cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
     client = AdaptivePayments::Client.new(
       :user_id       => "lllouis_api1.yahoo.com",
       :password      => "MRXUGXEXHYX7JGHH",
@@ -37,8 +38,7 @@ class PaypalController < ApplicationController
       :action_type     => "PAY",
       :receiver_email  => "lllouis@yahoo.com",
       :receiver_amount => 3,
-      :memo            => current_teacher.email,
-      :pin             => current_teacher.id,
+      :tracking_id     => cart.tracking_id,
       :currency_code   => "EUR",
       :cancel_url      => "http://76b9acc5.ngrok.com",
       :return_url      => "http://76b9acc5.ngrok.com/welcome",
@@ -47,6 +47,7 @@ class PaypalController < ApplicationController
 
       if response.success?
         puts "Pay key: #{response.pay_key}"
+
 
         # send the user to PayPal to make the payment
         # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
@@ -72,11 +73,44 @@ class PaypalController < ApplicationController
                           'User-Agent' => 'My custom user agent'
                         ).body
 
-    p "paypal post params: #{params['tracking_id']}"
+    p "paypal post params: #{params['status']}"
    
     puts "Paypal verification response: #{response}"
     logger.info "Paypal verification response: #{response}"
-    render status: 200, nothing: true
+
+    if !(Transaction.find_by(tracking_id: params['tracking_id']))
+      if response == "VERIFIED"
+        cart = UserCart.find_by(tracking_id: params['tracking_id'])
+        
+        render status: 200, nothing: true and return if !cart
+        
+
+        # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
+        logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
+
+        # Event.create_confirmed_events(cart)
+
+        transaction = Transaction.create( #payments_helper
+                                          create_membership_params(params, cart.teacher_id)
+                                        )
+        t = Teacher.find_by_email(cart.teacher_email).update_attributes(paid_up: true, paid_up_date: Date.today - 7.days)
+        
+        MembershipMailer.membership_paid(cart.teacher_email).deliver_now
+        
+        render status: 200, nothing: true
+      else
+        p "Paypal membership payment didn't work out"
+        render status: 200, nothing: true
+      end
+    elsif transaction
+      p "Couldn't find transaction"
+      render status: 200, nothing: true
+    else
+      logger.info "MAJOR ALERT: Transaction already exists"
+      render status: 200, nothing: true
+    end
+
+    # render status: 200, nothing: true
   end
 
   #end of membership payments

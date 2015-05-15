@@ -1,17 +1,23 @@
 class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
-	before_action :check_id, only: [:update]
+	before_action :check_id, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price]
 	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price]
 	
 	include TeachersHelper
 
 	def check_is_teacher
-		redirect_to root_path unless current_teacher.is_teacher == true	
+		if current_teacher.is_teacher != true
+			flash[:danger] = "You are not authorised to view this page"
+			redirect_to root_path 
+		end
 	end
 
 	def check_id
-		redirect_to root_path unless current_teacher.id == params[:id].to_i
+		if current_teacher.id != params[:id].to_i
+			flash[:danger] = "You are not authorised to view this page"
+			redirect_to root_path
+		end 
 	end
 
 	def show_teacher

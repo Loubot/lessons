@@ -13,20 +13,22 @@
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  admin                  :boolean
 #  profile                :integer
-#  is_teacher             :boolean          default("false"), not null
+#  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
-#  is_active              :boolean          default("false"), not null
-#  will_travel            :boolean          default("false"), not null
-#  address                :string           default("")
+#  is_active              :boolean          default(FALSE), not null
+#  will_travel            :boolean          default(FALSE), not null
 #  stripe_user_id         :string
+#  address                :string           default("")
+#  paid_up                :boolean          default(FALSE)
+#  paid_up_date           :date
 #
 
 class Teacher < ActiveRecord::Base
@@ -39,6 +41,8 @@ class Teacher < ActiveRecord::Base
   validates :email, :first_name, :last_name, presence: true
   validates :is_teacher, inclusion: { in: [true, false], message: "%{value} must be set true or false" }
   # after_validation :reverse_geocode
+
+  after_initialize :set_paid_up_date
 
   has_many :photos, as: :imageable, dependent: :destroy
 
@@ -71,6 +75,10 @@ class Teacher < ActiveRecord::Base
   #scope
   def self.check_if_valid
     teachers = where(is_active: true)
+  end
+
+  def set_paid_up_date
+    self.paid_up_date = 6.month.ago
   end
 
   def full_street_address
