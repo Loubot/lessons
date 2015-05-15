@@ -142,7 +142,7 @@ class StripeController < ApplicationController
       # event = Event.create!(cart.params)
       # puts "Stripe successful event created id: #{event.id}"
     end
-    flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+    flash[:success] = 'Payment was successful. You will receive an email soon. Payments can take a few minutes to register.'
     redirect_to root_url
 
     rescue Stripe::CardError => e
@@ -179,7 +179,8 @@ class StripeController < ApplicationController
         package_transaction_and_mail(json_response, cart, package) #stripe helper
         render status: 200, nothing: true
       elsif cart.booking_type == 'membership'
-        cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
+        
+        p "stripe membership payment"
         transaction = Transaction.create( #payments_helper
                                           create_membership_params(params, cart.teacher_id)
                                         )
