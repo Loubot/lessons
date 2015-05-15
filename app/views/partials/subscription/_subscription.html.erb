@@ -18,18 +18,14 @@
     <% if @teacher.stripe_access_token != "" %>
       
       <div class="col-xs-3">
-        <%= form_tag stripe_create_path do %>
+        <%= form_tag pay_membership_stripe_path do %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
-          data-description="Book your lesson"
+          data-description="Pay subscription fee"
           data-currency="eur"
-          data-description="This is the description"
           data-imgage="<%= asset_url 'stripe.png' %>"
           ></script>
-          <%= hidden_field_tag :amount, '', class: 'rate' %>                
-          <%= hidden_field_tag :tracking_id, '', class: 'tracking_id' %>        
-          <%= hidden_field_tag :current_teacher, '', class: 'stripe_teacher' %> 
-          <%= hidden_field_tag :teacher_id, params['id'] %> 
+          <%= hidden_field_tag :student_id, current_teacher.id %>
     
     
         <% end %>

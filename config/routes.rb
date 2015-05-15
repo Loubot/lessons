@@ -74,6 +74,8 @@ Rails.application.routes.draw do
   post        'home-booking-stripe'     =>  'stripe#home_booking_stripe'
   post        'store-stripe'            =>  'stripe#store_stripe'
   post        'package-stripe'          =>  'stripe#create_package_booking_stripe'
+  post        'pay-membership-stripe'   =>  'stripe#pay_membership_stripe'
+  post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
 

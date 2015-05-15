@@ -9,14 +9,14 @@ class TeachersController < ApplicationController
 	def check_is_teacher
 		if current_teacher.is_teacher != true
 			flash[:danger] = "You are not authorised to view this page"
-			redirect_to root_path 
+			redirect_to :back 
 		end
 	end
 
 	def check_id
 		if current_teacher.id != params[:id].to_i
 			flash[:danger] = "You are not authorised to view this page"
-			redirect_to root_path
+			redirect_to :back
 		end 
 	end
 

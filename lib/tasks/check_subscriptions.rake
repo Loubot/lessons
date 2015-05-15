@@ -1,7 +1,8 @@
-task :print_teachers => :environment do
+task :check_subscriptions => :environment do
   Teacher.where(is_teacher: true).each do |t|
     if 5.day.ago > t.paid_up_date
-      p "hello"
+      MembershipMailer.pay_up_time(t.email).now
     end
   end
+
 end

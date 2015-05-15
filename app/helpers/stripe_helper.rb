@@ -2,10 +2,17 @@ module StripeHelper
 
 
 	def create_transaction_params_stripe(params, student_id, teacher_id) #format params for transaction, stripe
-    returnParams = { tracking_id: params['data']['object']['metadata']['tracking_id'], trans_id: params['id'],
-                    sender: params['data']['object']['card']['name'], payStripe: 'stripe', user_id: student_id,
-                    teacher_id: teacher_id, pay_date: Time.at(params['created'].to_i),
-                    tracking_id: params['data']['object']['metadata']['tracking_id'], whole_message: params }
+    returnParams = { 
+                      tracking_id: params['data']['object']['metadata']['tracking_id'], 
+                      trans_id: params['id'],
+                      sender: params['data']['object']['card']['name'], 
+                      payStripe: 'stripe', 
+                      user_id: student_id,
+                      teacher_id: teacher_id, 
+                      pay_date: Time.at(params['created'].to_i),
+                      tracking_id: params['data']['object']['metadata']['tracking_id'], 
+                      whole_message: params 
+                    }
     logger.info "stripe post params sender_email: #{params['data']['object']['card']['name']}"
     logger.info "stripe post params trans_id: #{params['id']}"
     logger.info "stripe post params paypal/stripe: #{'stripe'}"
@@ -16,6 +23,21 @@ module StripeHelper
     logger.info "stripe post params whole message: #{params.to_s}"
     returnParams
   end # end of create_transaction_params_stripe
+
+  def create_membership_params(params, teacher)
+    returnParams = { 
+                      tracking_id: params['data']['object']['metadata']['tracking_id'], 
+                      trans_id: params['id'],
+                      sender: params['data']['object']['card']['name'], 
+                      payStripe: 'stripe', 
+                      user_id: 0,
+                      teacher_id: teacher, 
+                      pay_date: Time.at(params['created'].to_i),
+                      tracking_id: params['data']['object']['metadata']['tracking_id'], 
+                      whole_message: params 
+                    }
+    
+  end
 
   def home_booking_transaction_and_mail(json_response, cart)
   	Transaction.create(

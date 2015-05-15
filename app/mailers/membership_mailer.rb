@@ -37,7 +37,7 @@ class MembershipMailer < ActionMailer::Base
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
       message = {  
-       :subject=> "Membership paid",  
+       :subject=> "Membership expiring",  
        :from_name=> "Learn Your Lesson",  
        :text=> "Your membership is about to expire. Please make sure to subscribe or your profile will not be visible to students.",  
        :to=>[  

@@ -3,7 +3,7 @@ class StripeController < ApplicationController
   
   protect_from_forgery except: [:store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_stripe]
-  before_action :authenticate_teacher!, only: [:stripe_create, :home_booking_stripe, :stripe_auth_user]
+  before_action :authenticate_teacher!, only: [:stripe_create, :home_booking_stripe, :stripe_auth_user, :pay_membership_stripe]
   before_action :fix_json_params, only: [:store_stripe]
 
   def get_event_id
@@ -41,6 +41,40 @@ class StripeController < ApplicationController
       redirect_to charges_path
     
   end #end of stripe_create
+
+  #start of membership payments
+  def pay_membership_stripe
+    cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
+    @amount = 300
+    charge = Stripe::Charge.create({
+      :metadata           => { 
+                              :tracking_id => cart.tracking_id, 
+                              home_booking: true
+                              },
+      :amount             => @amount,
+      :description        => cart.tracking_id,
+      :currency           => 'eur',
+      :application_fee    => 300,
+      :source             => params[:stripeToken]
+      
+      },
+      current_teacher.stripe_access_token
+    )
+    puts charge.inspect
+    if charge['paid'] == true
+      # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
+      # event = Event.create!(cart.params)
+      # puts "Stripe successful event created id: #{event.id}"
+    end
+    flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+    redirect_to :back
+
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to charges_path
+  end
+
+  #end of membership payments
 
   def home_booking_stripe
 
@@ -144,6 +178,17 @@ class StripeController < ApplicationController
 
         package_transaction_and_mail(json_response, cart, package) #stripe helper
         render status: 200, nothing: true
+      elsif cart.booking_type == 'membership'
+        cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
+        transaction = Transaction.create( #payments_helper
+                                          create_membership_params(params, cart.teacher_id)
+                                        )
+
+        Teacher.find_by_email(cart.teacher_email).update_attributes(paid_up: true, paid_up_date: Date.today - 7.days)
+        
+        MembershipMailer.membership_paid(cart.teacher_email).deliver_now
+        render status: 200, nothing: true
+        
       else #it's not a home booking or a package
       	Event.create_confirmed_events(cart)
       	

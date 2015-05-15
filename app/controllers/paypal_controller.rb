@@ -93,7 +93,7 @@ class PaypalController < ApplicationController
         transaction = Transaction.create( #payments_helper
                                           create_membership_params(params, cart.teacher_id)
                                         )
-        t = Teacher.find_by_email(cart.teacher_email).update_attributes(paid_up: true, paid_up_date: Date.today - 7.days)
+        Teacher.find_by_email(cart.teacher_email).update_attributes(paid_up: true, paid_up_date: Date.today - 7.days)
         
         MembershipMailer.membership_paid(cart.teacher_email).deliver_now
         
