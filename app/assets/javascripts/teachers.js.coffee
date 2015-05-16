@@ -213,12 +213,12 @@ teachersInfoReady = ->
     
 #////////// end of teachers/form photo partial enable dismissable popover
 
-#//// show_teacher_to_user add price to form modal
-  if (gon.teacher_id?)
-    if (window.ga?)
-      ga('create', 'UA-57834504-3', 'auto')
+#//// show_teacher_to_user add price to form modal  
 
   if $('.btn_book_now').length
+    if (gon.teacher_id?)
+      if (window.ga?)
+        ga('create', 'UA-57834504-3', 'auto')
     #////////////////Teachers area block book checkbox
     $(document).on 'change', '#Multiple', ->
 

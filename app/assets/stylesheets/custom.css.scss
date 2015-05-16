@@ -1224,6 +1224,11 @@ ul.share-buttons li{
 .mobile_share_buttons{
   margin-bottom: 5px;
 }
+
+.image_test{
+  min-width: 70px !important;
+  min-height: 30px;
+}
 // end of mobile_share_buttons
 
 @media (min-width: 250px){

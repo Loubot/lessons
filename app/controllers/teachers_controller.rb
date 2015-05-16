@@ -45,8 +45,8 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@context = Teacher.includes(:experiences,:subjects, :photos, :identities).find(params[:id])
-		@photos = @context.photos
+		@teacher = Teacher.includes(:experiences,:subjects, :photos, :identities).find(params[:id])
+		@photos = @teacher.photos
 		# @photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
@@ -54,9 +54,9 @@ class TeachersController < ApplicationController
 		@auths = ['facebook', 'google_oauth2', 'twitter', 'linkedin']
 		
 		@experience = Experience.new
-		@subjects = @context.subjects
+		@subjects = @teacher.subjects
 
-		# fresh_when([@context, @context.profile, @subjects.maximum(:updated_at),flash])
+		# fresh_when([@teacher, @teacher.profile, @subjects.maximum(:updated_at),flash])
 	end
 	
 	def update

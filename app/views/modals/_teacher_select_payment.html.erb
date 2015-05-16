@@ -35,7 +35,7 @@
               <p class="paypal_reg_explanation">Please enter your paypal login email address. We will never ask you for your paypal
                password.</p>
                
-               <%= form_for @context, class: 'paypal_email_form form-horizontal' do |f| %>
+               <%= form_for @teacher, class: 'paypal_email_form form-horizontal' do |f| %>
                  <div class="form-group">
                    <div class="col-sm-10">
                      <%= f.email_field :paypal_email, placeholder: 'Paypal Email', class: 'form-control' %>
