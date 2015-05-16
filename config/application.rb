@@ -24,5 +24,7 @@ module Lessons
     config.assets.initialize_on_precompile = false
     #load file from lib for devise redirects
     config.autoload_paths += %W(#{config.root}/lib)
+    #delayed_job for queing jobs
+    config.active_job.queue_adapter = :delayed_job
   end
 end

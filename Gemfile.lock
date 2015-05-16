@@ -83,6 +83,11 @@ GEM
     date_validator (0.7.1)
       activemodel
     debug_inspector (0.0.2)
+    delayed_job (4.0.6)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.0.3)
+      activerecord (>= 3.0, < 5.0)
+      delayed_job (>= 3.0, < 4.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (3.4.1)
@@ -358,6 +363,7 @@ DEPENDENCIES
   combined_time_select (~> 1.0.1)
   dalli
   date_validator (~> 0.7.0)
+  delayed_job_active_record
   devise
   fog (~> 1.23.0)
   fotoramajs

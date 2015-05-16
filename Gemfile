@@ -114,6 +114,8 @@ gem 'rack-zippy'
 
 gem 'browser'
 
+gem 'delayed_job_active_record'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
