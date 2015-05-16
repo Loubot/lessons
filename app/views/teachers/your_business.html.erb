@@ -3,9 +3,11 @@
 
 
 <div class="outer-container">
-  <% if !@teacher.paid_up %>
-    <%= render 'partials/subscription/subscription.html.erb' %>
-  <% end %>
+  <div class="container-fluid membership_container">
+    <% if !@teacher.paid_up %>
+      <%= render 'partials/subscription/subscription.html.erb' %>
+    <% end %>
+  </div>
   <div class="container-fluid home_schooling">
     <div class="well">
       You can enter a price that you charge if you are willing to travel to a students house to give a lesson

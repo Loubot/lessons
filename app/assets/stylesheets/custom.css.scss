@@ -285,6 +285,16 @@ hr{
   padding-bottom: 10px;
 }
 
+.membership_container{
+  text-align: center;
+  color: #FFF;
+  margin-bottom: 10px;
+}
+
+small.white{
+  color: #FFF;
+}
+
 //end of your_business page
 
 .gray_section{
@@ -1200,8 +1210,8 @@ ul.share-buttons li{
   display: block;
 }
 
-.mobile_share_buttons{
-  bottom:90px;
+.mobile_share_buttons_container{
+  bottom:110px;
   right:0;
   position:fixed;
   z-index:150;
@@ -1209,6 +1219,10 @@ ul.share-buttons li{
   _top:expression(eval(document.documentElement.scrollTop+
       (document.documentElement.clientHeight-this.offsetHeight)));
   height:35px;
+}
+
+.mobile_share_buttons{
+  margin-bottom: 5px;
 }
 // end of mobile_share_buttons
 

@@ -37,34 +37,33 @@ class UserCart < ActiveRecord::Base
   end
 
   def self.membership_cart(teacher, email)
-    cart = self.new
-    cart.update_attributes(
-                            teacher_id: teacher,
-                            teacher_email: email,
-                            student_id: 0,
-                            params: 'membership payment',
-                            booking_type: 'membership',
-                            multiple: 'false',
-                            package_id: 0
-                          )
-    cart.save
+    cart = self.create(
+                    teacher_id: teacher,
+                    teacher_email: email,
+                    student_id: 0,
+                    params: 'membership payment',
+                    booking_type: 'membership',
+                    multiple: 'false',
+                    package_id: 0
+                  )
+    p "membership cart #{cart.inspect}"
     cart
   end
 
   def self.home_booking_cart(params)
-    cart = where(student_id: params[:student_id]).first_or_create
-    cart.update_attributes(
-                            teacher_id: params[:teacher_id],
-                            student_id: params[:student_id],
-                            params: params,
-                            student_name: params[:student_name],
-                            student_email: params[:student_email],
-                            teacher_email: params[:teacher_email],
-                            address: params[:home_address],
-                            booking_type: 'home',
-                            multiple: false,
-                            package_id: 0
-                          )
+    cart = self.new(
+                    teacher_id: params[:teacher_id],
+                    student_id: params[:student_id],
+                    params: params,
+                    student_name: params[:student_name],
+                    student_email: params[:student_email],
+                    teacher_email: params[:teacher_email],
+                    address: params[:home_address],
+                    booking_type: 'home',
+                    multiple: false,
+                    package_id: 0
+                  )
+    cart.save
 
     cart
   end
