@@ -35,7 +35,7 @@ $('.payment_form_container').append """
                   %>
             </div> <!-- end of col-sm-8 -->
           </div> <!-- end of form-group -->
-        </div>
+        </div> <!-- end of col-xs-6 -->
 
         <div class="col-xs-6">
           <div class="form-group">
@@ -56,8 +56,8 @@ $('.payment_form_container').append """
                           %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
-        </div>
-      </div>
+        </div> <!-- end of col-xs-6 -->
+      </div> <!-- end of row -->
       
         
       <div class="row">

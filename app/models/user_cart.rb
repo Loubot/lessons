@@ -18,13 +18,15 @@
 #  address       :string           default("")
 #  booking_type  :string           default("")
 #  package_id    :integer          default(0)
+#  amount        :decimal(8, 2)    default(0.0), not null
+#  teacher_name  :string           default("")
 #
 
 class UserCart < ActiveRecord::Base
   belongs_to :teacher, touch: true
   serialize :params
 
-  validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, presence: true
+  validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, :amount, presence: true
   validates :tracking_id, uniqueness: true
 
   # before_update :save_tracking_id
@@ -56,12 +58,14 @@ class UserCart < ActiveRecord::Base
                     student_id: params[:student_id],
                     params: params,
                     student_name: params[:student_name],
+                    teacher_name: params[:teacher_name],
                     student_email: params[:student_email],
                     teacher_email: params[:teacher_email],
                     address: params[:home_address],
                     booking_type: 'home',
                     multiple: false,
-                    package_id: 0
+                    package_id: 0,
+                    amount: params[:receiver_amount]
                   )
     cart.save
 

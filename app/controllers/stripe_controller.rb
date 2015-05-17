@@ -185,9 +185,10 @@ class StripeController < ApplicationController
                                           create_membership_params(params, cart.teacher_id)
                                         )
 
-        Teacher.find_by_email(cart.teacher_email).update_attributes(paid_up: true, paid_up_date: Date.today - 7.days)
+        t = Teacher.find_by_email(cart.teacher_email)
+        t.update_attributes(paid_up: true, paid_up_date: Date.today - 7.days) #set teacher as paid
         
-        MembershipMailer.membership_paid(cart.teacher_email).deliver_now
+        MembershipMailer.delay.membership_paid(cart.teacher_email, t.full_name) #send email async with delayed_job
         render status: 200, nothing: true
         
       else #it's not a home booking or a package

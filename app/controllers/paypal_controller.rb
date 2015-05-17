@@ -41,8 +41,8 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :currency_code   => "EUR",
       :cancel_url      => "http://76b9acc5.ngrok.com",
-      :return_url      => "http://76b9acc5.ngrok.com/welcome",
-      :ipn_notification_url => "http://76b9acc5.ngrok.com/membership-return-paypal"
+      :return_url      => "http://46fd0a23.ngrok.com/welcome",
+      :ipn_notification_url => "http://46fd0a23.ngrok.com/membership-return-paypal"
     ) do |response|
 
       if response.success?
@@ -93,9 +93,10 @@ class PaypalController < ApplicationController
         transaction = Transaction.create( #payments_helper
                                           create_membership_params(params, cart.teacher_id)
                                         )
-        t = Teacher.find_by_email(cart.teacher_email).update_attributes(paid_up: true, paid_up_date: Date.today - 7.days)
+        t = Teacher.find_by_email(cart.teacher_email)
+        t.update_attributes(paid_up: true, paid_up_date: Date.today - 7.days) #set teacher as payed
         
-        MembershipMailer.membership_paid(cart.teacher_email, t.full_name).deliver_now
+        MembershipMailer.delay.membership_paid(cart.teacher_email, t.full_name) #send email async with delayed_job
         
         render status: 200, nothing: true
       else
@@ -181,8 +182,8 @@ class PaypalController < ApplicationController
       :currency_code   => "GBP",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-      :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
+      :return_url      => "http://46fd0a23.ngrok.com/welcome",
+      :ipn_notification_url => 'http://46fd0a23.ngrok.com/store-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
         { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -230,30 +231,42 @@ class PaypalController < ApplicationController
     if !(Transaction.find_by(tracking_id: params['tracking_id']))
       if response == "VERIFIED"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
+        p "cart #{cart.booking_type}"
 
         render status: 200, nothing: true and return if !cart
 
+        if cart.booking_type == "home"
+          transaction = Transaction.create( #payments_helper
+                                            create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
+                                          )
 
-        # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
-        logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
+          TeacherMailer.delay.home_booking_mail_student(cart)
+          
+        else #not home booking
+          # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
+          logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
 
-        Event.create_confirmed_events(cart)
+          Event.create_confirmed_events(cart)
 
-        transaction = Transaction.create( #payments_helper
-                                          create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
-                                        )
+          transaction = Transaction.create( #payments_helper
+                                            create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
+                                          )
 
-        # p "Event errors #{event.errors.full_messages}" if !event.valid?
-        # p "Event created id: #{event.id}"
-        TeacherMailer.mail_teacher(
-                                    cart.student_email,
-                                    cart.student_name,
-                                    cart.teacher_email,
-                                    cart.params[:start_time],
-                                    cart.params[:end_time]
-                                  ).deliver_now
+          # p "Event errors #{event.errors.full_messages}" if !event.valid?
+          # p "Event created id: #{event.id}"
+          TeacherMailer.mail_teacher(
+                                      cart.student_email,
+                                      cart.student_name,
+                                      cart.teacher_email,
+                                      cart.params[:start_time],
+                                      cart.params[:end_time]
+                                    ).deliver_now
 
-        render status: 200, nothing: true
+          render status: 200, nothing: true
+        end
+
+
+        
       else
         p "Paypal payment didn't work out"
         render status: 200, nothing: true

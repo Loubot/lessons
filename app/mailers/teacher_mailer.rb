@@ -1,4 +1,5 @@
 class TeacherMailer < ActionMailer::Base
+  include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
   def mail_teacher(student, student_name, teacher, start_time, end_time)
@@ -38,29 +39,40 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{teacher.to_s}"
   end
 
-  def home_booking_stripe_mail(json_response, cart)    
+  def home_booking_mail_student(cart)
+
     begin
       require 'mandrill'
-      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      message = {  
-       :subject=> "You have a booking request",  
-       :from_name=> "Learn Your Lesson",  
-       :text=> %Q(<html>#{cart.student_name} has requested a lesson.
-                #{cart.student_name} would like to book a lesson at their own house.
-                Their address is #{cart.address}. Please contact them via email to arrange a time.),  
-       :to=>[  
-         {  
-           :email=> cart.teacher_email,
-           :name=> "#{cart.student_email}"  
-         }  
-       ],  
-       :html=> %Q(<html>#{cart.student_name} has requested a lesson.
-                #{cart.student_name} would like to book a lesson at their own house.
-                Their address is #{cart.address}. Please contact them via email to arrange a time.),  
-       :from_email=> cart.student_email 
-      }  
-      sending = m.messages.send message  
-      puts sending
+      
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name = "students-home-booking-to-student"
+      template_content = []
+      message = { 
+                  subject: "Confirmation of booking request",     
+                  :to=>[  
+                   {  
+                     :email=> cart.student_email.to_s
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  cart.student_email,
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>cart.student_name  },
+                                          { "name"=>"TNAME",          "content"=>cart.teacher_name  },
+                                          { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
+                                          { "name"=>"LESSONLOCATION", "content"=>cart.address }
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+      
     rescue Mandrill::Error => e
         # Mandrill errors are thrown as exceptions
         logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
@@ -68,7 +80,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{cart.teacher_email}"
+    # logger.info "Mail sent to #{cart.teacher_email}"
 
   end
 

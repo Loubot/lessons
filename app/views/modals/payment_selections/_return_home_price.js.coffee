@@ -23,6 +23,7 @@ $('.payment_form_container').append """
           <%= j(hidden_field_tag :student_name, current_teacher.full_name) %>
           <%= j(hidden_field_tag :student_email, current_teacher.email) %>
           <%= j(hidden_field_tag :teacher_email, @teacher.email) %>
+          <%= j(hidden_field_tag :teacher_name, @teacher.full_name) %>
           
           
           <%= j(hidden_field_tag :receiver_amount, @price.price) %>
@@ -58,6 +59,7 @@ $('.payment_form_container').append """
           <%= j(hidden_field_tag :student_name, current_teacher.full_name) %>
           <%= j(hidden_field_tag :student_email, current_teacher.email) %>
           <%= j(hidden_field_tag :teacher_email, @teacher.email) %>
+          <%= j(hidden_field_tag :teacher_name, @teacher.full_name) %>
           
           <%= j(hidden_field_tag :amount, @price.price) %>
                       
