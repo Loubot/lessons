@@ -82,7 +82,53 @@ class TeacherMailer < ActionMailer::Base
 
     # logger.info "Mail sent to #{cart.teacher_email}"
 
-  end
+  end #end of home_booking_mail_student
+
+
+  def home_booking_mail_teacher(cart)
+
+    begin
+      require 'mandrill'
+      
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name = "students-home-booking-to-teacher"
+      template_content = []
+      message = { 
+                  subject: "Confirmation of booking request",     
+                  :to=>[  
+                   {  
+                     :email=> cart.teacher_email
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  cart.teacher_email,
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>cart.teacher_name  },
+                                          { "name"=>"SNAME",          "content"=>cart.student_name   },
+                                          { "name"=>"STEMAILADDRESS", "content"=>cart.student_email  },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
+                                          { "name"=>"LESSONLOCATION", "content"=>cart.address }
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+      
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    # logger.info "Mail sent to #{cart.teacher_email}"
+
+  end #end of home_booking_mail_student
 
   def paypal_package_email(student_email, student_name, teacher_email, package)
     begin
