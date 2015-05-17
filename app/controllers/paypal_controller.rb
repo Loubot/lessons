@@ -182,8 +182,8 @@ class PaypalController < ApplicationController
       :currency_code   => "GBP",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-      :return_url      => "http://46fd0a23.ngrok.com/welcome",
-      :ipn_notification_url => 'http://46fd0a23.ngrok.com/store-paypal',
+      :return_url      => "http://386bdcc6.ngrok.com/welcome",
+      :ipn_notification_url => 'http://386bdcc6.ngrok.com/store-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
         { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -241,6 +241,7 @@ class PaypalController < ApplicationController
                                           )
 
           TeacherMailer.delay.home_booking_mail_student(cart)
+          render status: 200, nothing: true
           
         else #not home booking
           # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
