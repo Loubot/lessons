@@ -21,13 +21,13 @@ class TeachersController < ApplicationController
 	end
 
 	def show_teacher
-		
-		@params = params
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
+		@subject = get_subject(params, @teacher.subjects)
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
 		# @subject = Subject.find(params[:subject_id])
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
-		@subject = @teacher.subjects.select { |s| s.id == params[:subject_id].to_i }.first
+		
+		
 		@reviews = @teacher.reviews.take(3)
 		@locations = @teacher.locations
 		@prices = @teacher.prices
@@ -187,6 +187,16 @@ class TeachersController < ApplicationController
 	
 
 	private
+
+		def get_subject(params, subjects)
+			if params.has_key?(:subject_id)
+				@teacher.subjects.select { |s| s.id == params[:subject_id].to_i }.first
+				
+			else
+				return subjects[0]
+			end
+		end #return subect to show_teacher
+
 		def teacher_params
 			params.require(:teacher).permit!
 		end
