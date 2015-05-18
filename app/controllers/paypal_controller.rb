@@ -242,6 +242,7 @@ class PaypalController < ApplicationController
                                           )
 
           TeacherMailer.delay.home_booking_mail_student(cart)
+          TeacherMailer.delay.home_booking_mail_teacher(cart)
           render status: 200, nothing: true
           
         else #not home booking
@@ -256,13 +257,13 @@ class PaypalController < ApplicationController
 
           # p "Event errors #{event.errors.full_messages}" if !event.valid?
           # p "Event created id: #{event.id}"
-          TeacherMailer.mail_teacher(
+          TeacherMailer.delay.mail_teacher(
                                       cart.student_email,
                                       cart.student_name,
                                       cart.teacher_email,
                                       cart.params[:start_time],
                                       cart.params[:end_time]
-                                    ).deliver_now
+                                    )
 
           render status: 200, nothing: true
         end

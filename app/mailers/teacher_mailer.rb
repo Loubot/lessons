@@ -80,7 +80,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    # logger.info "Mail sent to #{cart.teacher_email}"
+    logger.info "home_booking_mail_student #{cart.student_email}"
 
   end #end of home_booking_mail_student
 
@@ -126,7 +126,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    # logger.info "Mail sent to #{cart.teacher_email}"
+    logger.info "home_booking_mail_teacher #{cart.teacher_email}"
 
   end #end of home_booking_mail_student
 
