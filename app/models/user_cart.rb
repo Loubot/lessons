@@ -53,7 +53,7 @@ class UserCart < ActiveRecord::Base
   end
 
   def self.home_booking_cart(params)
-    cart = self.new(
+    cart = self.create(
                     teacher_id: params[:teacher_id],
                     student_id: params[:student_id],
                     params: params,

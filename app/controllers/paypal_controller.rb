@@ -196,6 +196,7 @@ class PaypalController < ApplicationController
 
         # send the user to PayPal to make the payment
         # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
+        flash[:success] = "Your booking is being processed. You should receive an email soon."
         redirect_to client.payment_url(response)
       else
         flash[:danger] = "#{response.error_message}"

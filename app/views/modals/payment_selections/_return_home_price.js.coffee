@@ -1,3 +1,4 @@
+<% cache([@teacher, current_teacher,'return_home_price']) do %>
 $('.payment_form_container').empty()
 $('.payment_form_container').empty()
 $('.display_teachers_location').empty()
@@ -103,3 +104,4 @@ $('.payment_form_container').append """
   </div> <%# end of row %>
 
                             """
+<% end %>
