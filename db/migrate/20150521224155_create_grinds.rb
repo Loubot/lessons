@@ -3,7 +3,9 @@ class CreateGrinds < ActiveRecord::Migration
     create_table :grinds do |t|
       t.integer :subject_id
       t.integer :teacher_id
-      t.integer :capacity      
+      t.string  :subject_name
+      t.integer :capacity
+      t.integer :number_booked
       t.decimal :price, :precision => 8, :scale => 2, default: 0.0, null: false
       t.datetime :start_time
 

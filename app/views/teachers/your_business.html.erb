@@ -162,8 +162,11 @@
       <div class="display_grind_container">
         <div class="saved_grinds">
           <% @teacher.grinds.each do |g| %>
-            <%= number_to_currency(g.price, unit: '€') %><br>
-            <%= link_to 'Delete', teacher_grind_path(current_teacher, g), class: 'btn btn-warning', method: :delete %><br>
+            <div class="display_saved_grinds">
+              <H2><%= g.subject_name %></H2>
+              <%= %Q(Classroom size: #{g.capacity}) %>
+              <%= link_to 'Delete?', teacher_grind_path(current_teacher, g), method: 'DELETE', 'data-role' => 'button', class: 'btn btn-danger pull-right' %>
+            </div> <!-- end of display_saved_grinds -->
           <% end %>
         </div> <!-- end of saved_grinds -->
       </div> <!-- end of display_grind_container -->

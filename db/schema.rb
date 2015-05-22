@@ -65,11 +65,13 @@ ActiveRecord::Schema.define(version: 20150521224155) do
   create_table "grinds", force: :cascade do |t|
     t.integer  "subject_id"
     t.integer  "teacher_id"
+    t.string   "subject_name"
     t.integer  "capacity"
-    t.decimal  "price",      precision: 8, scale: 2, default: 0.0, null: false
+    t.integer  "number_booked"
+    t.decimal  "price",         precision: 8, scale: 2, default: 0.0, null: false
     t.datetime "start_time"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
   add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id"

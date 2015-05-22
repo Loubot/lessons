@@ -411,6 +411,7 @@ teachersInfoReady = ->
       $(".grind_form").append """
                     <input value="#{ subject_name }" type="hidden" name="grind[subject_name]">
                                  """
+      @.submit()
 
 #end of  teachers business page, add subject name to for before submitting
 
