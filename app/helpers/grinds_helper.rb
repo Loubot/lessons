@@ -1,0 +1,2 @@
+module GrindsHelper
+end

@@ -402,8 +402,15 @@ teachersInfoReady = ->
       subject_name = $('.package_subject_name :selected').text()
       $('.create_package_form').append """ 
                   <input value="#{ subject_name }" type="hidden" name="package[subject_name]">
-                                        """
+                                        """      
       @.submit()
+  if $(".grind_form")
+    $(".grind_form").submit (e) ->
+      e.preventDefault()
+      subject_name = $(".grind_subject_name :selected").text()
+      $(".grind_form").append """
+                    <input value="#{ subject_name }" type="hidden" name="grind[subject_name]">
+                                 """
 
 #end of  teachers business page, add subject name to for before submitting
 

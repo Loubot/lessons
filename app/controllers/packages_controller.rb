@@ -3,7 +3,7 @@ class PackagesController < ApplicationController
 
 
   def create
-    p "params #{params}"
+    # p "params #{params}"
     p = Package.new(package_params)
     if p.save
       flash[:success] = "Package created successfully"
@@ -16,6 +16,7 @@ class PackagesController < ApplicationController
   def destroy
     p = Package.find(params[:id])
     p.destroy
+    flash[:success] = "Successfully deleted package"
     redirect_to :back
   end
 

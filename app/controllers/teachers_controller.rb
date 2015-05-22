@@ -102,9 +102,10 @@ class TeachersController < ApplicationController
 	end
 
 	def your_business
-		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id])
+		@teacher = Teacher.includes(:locations, :prices, :subjects, :grinds).find(params[:id])
 		# @location = @teacher.locations.first
 		@package = Package.new
+		@grind = Grind.new
 		@locations = @teacher.locations.reorder("created_at ASC")
 		@subjects = @teacher.subjects
 		gon.locations = @locations

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
                                           :registrations => "registrations", 
                                             passwords: 'passwords' }
   resources   :teachers, only: [:update, :edit, :destroy] do
-
+    
   	member do 
   		get     '/teachers-area'		      =>  'teachers#teachers_area'
       get     '/edit-appointments'      =>  'teachers#edit_appointments'
@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     resources :openings, only: [:create, :update]
     resources :events
     resources :identities, only: [:destroy]
-
+    resources :grinds, only: [:create, :destroy]
+    
+    resources :packages, only: [:create, :destroy]
 
   end
   get         '/show-teacher'           =>  'teachers#show_teacher'  
@@ -28,9 +30,9 @@ Rails.application.routes.draw do
   get         'get-subjects'            =>  'teachers#get_subjects'
   get         'get-locations-price'     =>  'teachers#get_locations_price'
 
-  resources :locations
+  resources :locations  
   resources :prices, only: [:create, :update, :destroy]
-  resources :packages, only: [:create, :destroy]
+  
   resources :experiences,   only: [:create, :update, :destroy]
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do

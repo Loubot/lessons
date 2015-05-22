@@ -65,43 +65,108 @@
   	
   </div> <!-- end of map_container -->
   <div class="row package_form_row">
-      
+    <div class="col-md-6 col-xs-12">
     <div class="well package_form_well">
-      <h2 class="package_form_header">Lesson bundles </h2>
-     <span class='package_form_label'>Create bundles of lessons for specific rates.</span>
-    
-      <%# see teachers.js, subject name appended using jquery %>
-      <%= form_for @package, html: { class: 'form-inline create_package_form' } do |f| %>
-        <div class="form-group">
-          <%= f.label :subject_id, 'Subject?', class: 'package_form_label' %>
-          <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'package_subject_name form-control' } %>
-        </div>
-        <div class="form-group">
-          <%= f.label :no_of_lessons, 'No. of lessons?', class: 'package_form_label' %>
-          <%= f.select :no_of_lessons, options_for_select(0..52),{}, { class: 'form-control' } %>
-        </div>
-        <div class="form-group">
-          <%= f.label :price, 'Total price?', class: 'package_form_label' %>
-          <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
-        </div>
-        <%= f.hidden_field :teacher_id, value: current_teacher.id %>
-        <%= f.submit 'Submit', class: 'btn btn-warning' %>
-      <% end %>
-    </div> <!-- end of well -->
-    <div class="saved_packages_container">
-     <div class="saved_packages">
-       <% @teacher.packages.each do |p| %>
-       <div class="display_saved_packages">
-        <h2><%= p.subject_name %></h2>
-        <%= %Q(You are offering a package of #{p.no_of_lessons}x#{p.subject_name} lessons for
-          #{number_to_currency(p.price, unit:'€')})
-        %>
-        <%= link_to 'Delete?', package_path(p.id), method: 'DELETE', 'data-role' => 'button', class: 'btn btn-danger pull-right' %>
-       </div>
-        
+        <h2 class="well_form_header">Lesson bundles </h2>
+       <span class='well_form_label'>Create bundles of lessons for specific rates.</span>
+      
+        <%# see teachers.js, subject name appended using jquery %>
+        <%= form_for [@teacher, @package], html: { class: 'form-horizontal create_package_form' } do |f| %> <%# teachers.js %>
+          <div class="form-group">
+            <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'package_subject_name form-control' } %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+          <div class="form-group">
+            <%= f.label :no_of_lessons, 'No. of lessons?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.select :no_of_lessons, options_for_select(0..52),{}, { class: 'form-control' } %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+          <div class="form-group">
+            <%= f.label :price, 'Total price?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+          <%= f.hidden_field :teacher_id, value: current_teacher.id %>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <%= f.submit 'Create', class: 'btn btn-warning' %>
+            </div> <!-- col-sm-offset-2 col-sm-10 -->
+          </div> <!-- end of form-group -->
+          
+        <% end %>
+      </div> <!-- end of well -->
+      <div class="saved_packages_container">
+       <div class="saved_packages">
+         <% @teacher.packages.each do |p| %>
+         <div class="display_saved_packages">
+          <h2><%= p.subject_name %></h2>
+          <%= %Q(You are offering a package of #{p.no_of_lessons}x#{p.subject_name} lessons for
+            #{number_to_currency(p.price, unit:'€')})
+          %>
+          <%= link_to 'Delete?', teacher_package_path(@teacher.id, p), method: 'DELETE', 'data-role' => 'button', class: 'btn btn-danger pull-right' %>
+         </div>
+          
 
-      <% end %>
-     </div> <!-- end of saved_packages -->
-    </div> <!-- end of saved_packages_container -->
+        <% end %>
+       </div> <!-- end of saved_packages -->
+      </div> <!-- end of saved_packages_container -->
+    </div> <!-- end of col-xs-12 -->
+  
+    <div class="col-md-6 col-xs-12">
+      <div class="well grind_well">
+        <h2 class="well_form_header">Create a classrom</h2>
+        <span class="package_form_label">Define your class room size and price for lesson</span>
+
+        <%= form_for [@teacher, @grind], html: { class: 'form-horizontal grind_form'} do |f| %>
+          <div class="form-group">
+            <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'grind_subject_name form-control' } %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :capacity, 'Capacity?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.select :capacity, options_for_select(0..40),{}, { class: 'form-control' } %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :price, "Price per student?", class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.number_field :price, placeholder: 'Price per student?', class: 'form-control' %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :price, "Start time", class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= datetime_select(:grind, :start_time, {}, {class: 'grind_start_time'}) %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <%= f.hidden_field :teacher_id, value: current_teacher.id %>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <%= f.submit 'Create', class: 'btn btn-success' %>
+            </div> <!-- col-sm-offset-2 col-sm-10 -->
+          </div> <!-- end of form-group -->
+        <% end %> <!-- end of grin_form -->
+      </div> <!-- end of well grind-->
+      <div class="display_grind_container">
+        <div class="saved_grinds">
+          <% @teacher.grinds.each do |g| %>
+            <%= number_to_currency(g.price, unit: '€') %><br>
+            <%= link_to 'Delete', teacher_grind_path(current_teacher, g), class: 'btn btn-warning', method: :delete %><br>
+          <% end %>
+        </div> <!-- end of saved_grinds -->
+      </div> <!-- end of display_grind_container -->
+    </div><!-- end of col-xs-12 -->
   </div> <!-- end of row -->
 </div> <!-- end of outer-container -->

@@ -54,6 +54,8 @@ class Teacher < ActiveRecord::Base
 
   has_many :packages, dependent: :destroy
 
+  has_many :grinds, dependent: :destroy
+
   has_and_belongs_to_many :subjects, touch: true
 
   has_many :experiences, dependent: :destroy

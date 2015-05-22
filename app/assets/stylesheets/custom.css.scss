@@ -256,12 +256,12 @@ hr{
   padding-bottom: 10px;
 } 
 
-.package_form_header{
+.well_form_header{
   color: #FFF;
-  text-align: center;
+  // text-align: center;
 }
 
-.package_form_label{
+.well_form_label{
   color: #FFF;
 }
 
@@ -278,6 +278,21 @@ hr{
   border-width: 1px;
   //margin-top: 9px;*/
   border-color: #E6E6E6;
+}
+
+.grind_well{
+  margin-bottom: 10px;
+  background-color: #FFBF00;
+  color: #FFF;
+}
+
+.grind_start_time{
+  color: #111;
+}
+
+.saved_grinds{
+  background-color: #FFBF3F;
+  color: #FFF;
 }
 
 .subscription_container{
