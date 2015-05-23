@@ -70,32 +70,33 @@ class MembershipMailer < ActionMailer::Base
     logger.info "Mail sent to #{teacher_email.to_s}"
   end
 
-  def send_invite(email, inviter, url)
-    begin
-      require 'mandrill'
-      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      message = {  
-       :subject=> "You are invited to join Learn Your lesson",  
-       :from_name=> "]#{inviter}",  
-       :text=> "#{inviter} has invited you to join our team. Click the link below to register and get started.",  
-       :to=>[  
-         {  
-           :email=> email
-           # :name=> "#{student_name}"  
-         }  
-       ],  
-       :html=> "#{inviter} has invited you to join our team. Click the link below to register and get started.",  
-       :from_email=> "loubot@learnyourlesson.ie" 
-      }  
-      sending = m.messages.send message  
-      puts sending
-    rescue Mandrill::Error => e
-        # Mandrill errors are thrown as exceptions
-        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
-        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
-    raise
-    end
+  def send_invite(invitaion, url)
+    p "url #{url}"
+    # begin
+    #   require 'mandrill'
+    #   m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+    #   message = {  
+    #    :subject=> "You are invited to join Learn Your lesson",  
+    #    :from_name=> "]#{inviter}",  
+    #    :text=> "#{inviter} has invited you to join our team. Click the link below to register and get started.",  
+    #    :to=>[  
+    #      {  
+    #        :email=> email
+    #        # :name=> "#{student_name}"  
+    #      }  
+    #    ],  
+    #    :html=> "#{inviter} has invited you to join our team. Click the link below to register and get started.",  
+    #    :from_email=> "loubot@learnyourlesson.ie" 
+    #   }  
+    #   sending = m.messages.send message  
+    #   puts sending
+    # rescue Mandrill::Error => e
+    #     # Mandrill errors are thrown as exceptions
+    #     logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+    #     # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    # raise
+    # end
 
-    logger.info "Mail sent to #{email}"
+    # logger.info "Mail sent to #{email}"
   end
 end

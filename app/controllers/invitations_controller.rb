@@ -3,9 +3,12 @@ class InvitationsController < ApplicationController
 
   def create
     @invitation = Invitation.new(invitations_params)
+
     if @invitation.save
+      p "url1 #{URI.escape("localhost:3000#{teach_path}?inviter_id=#{@invitation.token}")}"
+      MembershipMailer.send_invite(@invitation, ("#{teach_path}#{@invitation.token}"))
       flash[:success] = "Invitation successfully sent"
-      redirect_to :back
+      redirect_to URI.escape("localhost:3000#{teach_path}?inviter_id:#{@invitation.token}")
     else
       flash[:danger] = "Couldn't send invitation #{@invitation.errors.full_messages}"
       redirect_to :back
