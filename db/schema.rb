@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150516143113) do
+ActiveRecord::Schema.define(version: 20150523034739) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -71,6 +71,19 @@ ActiveRecord::Schema.define(version: 20150516143113) do
   end
 
   add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id"
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "inviter_id"
+    t.string   "inviter_name"
+    t.string   "recipient_email"
+    t.string   "token"
+    t.boolean  "accepted"
+    t.date     "accepted_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id"
 
   create_table "locations", force: :cascade do |t|
     t.integer  "teacher_id"
