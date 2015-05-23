@@ -116,6 +116,5 @@ gem 'browser'
 
 gem 'delayed_job_active_record'
 
-gem 'devise_invitable'
 
 gem 'tzinfo-data', '~> 1.2', platforms: [:mingw, :mswin]
