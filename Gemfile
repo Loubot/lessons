@@ -48,6 +48,8 @@ gem 'thin', 					platforms: [:mingw, :mswin]
 
 gem 'unicorn', '~> 4.8', platforms: [:ruby]
 
+gem 'email_validator'
+
 gem 'will_paginate'
 
 gem 'better_errors'

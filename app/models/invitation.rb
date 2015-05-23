@@ -14,7 +14,8 @@
 #
 
 class Invitation < ActiveRecord::Base
-  validates :inviter_id, :recipient_email, :token, :inviter_name, presence: true
+  validates :inviter_id, :token, :inviter_name, presence: true
+  validates :recipient_email, presence: true, email: true
   belongs_to :teacher, foreign_key: 'inviter_id'
 
   before_validation :add_token

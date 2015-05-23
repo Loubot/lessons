@@ -7,7 +7,7 @@
       <div class="col-md-6 col-xs-12 col-sm-12 teacher_registration_container left">
         <h2 class="teacher_registration_container_header"><strong>Teach</strong></h2><span class="label label-primary teach_label">Register below to become a teacher</span><br><br>
         <div class="teachers_form_container">
-          <%= form_for(:teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
+          <%= form_for(@teacher, :url => registration_path(:teacher), class: 'teacher_registration_form') do |f| %>
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-envelope"></span>
             <% if !is_mobile? %>
@@ -37,6 +37,7 @@
             <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Confirm password', class: 'form-control' %>
           </div><br>        
           <%= f.hidden_field(:is_teacher, value: true) %>
+          <%= f.hidden_field :invitation_token, value: params[:inviter_token] if params.has_key?(:inviter_token) %>
           <div class="teachers_reg_buttons">
             <%= f.submit "Sign up", class: 'btn btn-success' %> or 
             <%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' }, class: 'teach_page_login_link' %>

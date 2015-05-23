@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20150523034739) do
   end
 
   add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id"
+  add_index "invitations", ["token"], name: "index_invitations_on_token"
 
   create_table "locations", force: :cascade do |t|
     t.integer  "teacher_id"

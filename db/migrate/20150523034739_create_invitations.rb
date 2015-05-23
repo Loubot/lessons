@@ -11,5 +11,6 @@ class CreateInvitations < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :invitations, :inviter_id
+    add_index :invitations, :token
   end
 end

@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get         'get-subjects'            =>  'teachers#get_subjects'
   get         'get-locations-price'     =>  'teachers#get_locations_price'
 
-  resources :locations
+  resources :locations, only: [:create, :update, :destroy]
   resources :prices, only: [:create, :update, :destroy]
   resources :packages, only: [:create, :destroy]
   resources :experiences,   only: [:create, :update, :destroy]

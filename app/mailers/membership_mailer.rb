@@ -1,5 +1,6 @@
 class MembershipMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
+  include ActionView::Helpers::UrlHelper
 
   def membership_paid(teacher_email, teacher_name)
     p 'membership_paid mail start'    
@@ -70,23 +71,24 @@ class MembershipMailer < ActionMailer::Base
     logger.info "Mail sent to #{teacher_email.to_s}"
   end
 
-  def send_invite(email, invitaion, url)
-
+  def send_invite(email, invitation, url)
+    p "url #{link_to('Accept', url)}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
       message = {  
        :subject=> "You are invited to join Learn Your lesson",  
-       :from_name=> "]#{invitaion}",  
-       :text=> "#{invitaion} has invited you to join our team. Click the link below to register and get started. #{url}",  
+       :from_name=> "#{invitation.inviter_name}",  
+       :text=> "#{invitation.inviter_name} has invited you to join our team. Click the link below to register and get started. #{link_to('Accept', url)}",  
        :to=>[  
          {  
-           :email=> email
+           :email=> invitation.recipient_email
            # :name=> "#{student_name}"  
          }  
        ],  
-       :html=> "#{invitaion} has invited you to join our team. Click the link below to register and get started. #{url}",  
-       :from_email=> "loubot@learnyourlesson.ie" 
+       :html=> "#{invitation.inviter_name} has invited you to join our team. Click the link below to register and get started. #{link_to('Accept', url)}",  
+       :from_email=> "loubot@learnyourlesson.ie",
+       async: false 
       }  
       sending = m.messages.send message  
       puts sending
