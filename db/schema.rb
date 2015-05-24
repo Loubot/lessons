@@ -11,13 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420152010) do
+ActiveRecord::Schema.define(version: 20150521224155) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "events", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -45,6 +61,21 @@ ActiveRecord::Schema.define(version: 20150420152010) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "grinds", force: :cascade do |t|
+    t.integer  "subject_id"
+    t.integer  "teacher_id"
+    t.string   "subject_name"
+    t.integer  "capacity"
+    t.integer  "number_booked"
+    t.decimal  "price",         precision: 8, scale: 2, default: 0.0, null: false
+    t.datetime "start_time"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+  end
+
+  add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id"
+  add_index "grinds", ["teacher_id"], name: "index_grinds_on_teacher_id"
 
   create_table "identities", force: :cascade do |t|
     t.string   "uid",        limit: 255
