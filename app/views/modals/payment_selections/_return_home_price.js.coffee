@@ -37,10 +37,6 @@ $('.payment_form_container').append """
           <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
           <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
 
-
-
-
-
         <% end %>
       <% end %>
     </div> <%# end of col-xs-6 %>
