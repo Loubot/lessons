@@ -152,7 +152,7 @@ class TeachersController < ApplicationController
 			render 'modals/payment_selections/_home_or_location.js.coffee'
 		else
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
-			
+			@event = Event.new
 			render 'modals/payment_selections/_return_home_price.js.coffee'
 		end
 		
@@ -165,10 +165,7 @@ class TeachersController < ApplicationController
 		if params[:location_choice].to_i == 1 #home lesson
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
 			p @price
-
-			#render back booking form with no payment for the time being
-			# render 'modals/payment_selections/_return_home_price.js.coffee'
-			render 'modals/payment_selections/_return_home_price_temp.js.coffee'
+			render 'modals/payment_selections/_return_home_price.js.coffee'
 		else
 			#only return locations that teacher teaches this subject at
 			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == params[:subject_id].to_i && p.location_id != nil) }.compact

@@ -2,6 +2,7 @@
 $('.payment_form_container').empty()
 $('.payment_form_container').empty()
 $('.display_teachers_location').empty()
+$('.returned_locations_container').empty()
 <% if defined? @deleteReturnedLocations %>
 $('.returned_locations_container').empty()
 $('.payment_form_container').append """ 
@@ -9,95 +10,82 @@ $('.payment_form_container').append """
   """
 <% else %>
 $('.payment_form_container').append """ 
-    <h1>Price: <%= j(number_to_currency(@price.price, unit: '€')) %></h1><br>
+    <h4>Price: <%= j(number_to_currency(@price.price, unit: '€')) %></h4>
   """
 <% end %>
 
 
 $('.payment_form_container').append """
-  <div class="row">
-    <div class="col-xs-6">
-      <% if @teacher.paypal_email != "" %>
-        <%= form_tag home_booking_paypal_path, class: 'home_booking_form', method: 'post' do %>
-          <%= j(hidden_field_tag :teacher_id, @teacher.id) %>
-          <%= j(hidden_field_tag :student_id, current_teacher.id) %>
-          <%= j(hidden_field_tag :student_name, current_teacher.full_name) %>
-          <%= j(hidden_field_tag :student_email, current_teacher.email) %>
-          <%= j(hidden_field_tag :teacher_email, @teacher.email) %>
-          <%= j(hidden_field_tag :teacher_name, @teacher.full_name) %>
-          
-          
-          <%= j(hidden_field_tag :receiver_amount, @price.price) %>
-          
-          <%= j(hidden_field_tag :start_time, Time.now) %>
-          <%= j(hidden_field_tag :end_time, Time.now + 5.minutes) %>
-          <%= hidden_field_tag :paypal, '1' %>
-          <%= hidden_field_tag :home_address, '', class: 'home_address' %>
-          <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
-          <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
-          <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
+            <h2>Check availability</h2>
+            <div class="col-xs-12">
+              <%= form_for(@event, url: events_check_home_event_path, html: { class: 'form-horizontal' }, method: 'post') do |f| %>
+                <div class="row">
+                  <div class="col-xs-6 form-group">
+                    
+                    <div>
+                      <label for="date" class="control-label">Date:</label>
+                      <input name="event[date]" type="text" id='home_lesson_datepicker' placeholder='Click to select date' class="1payment_choice_date_picker" >
+                    </div>
+                  </div> <!-- end of form-group -->
+                  <div class="col-xs-6">
+                    <div class='form-group'>
+                      <%= label_tag 'start_time', 'Start-time:', class: 'col-sm-2 control-label' %>
+                      <div class="col-sm-10">
+                        <%= f.time_select :start_time,
+                              {
+                                :combined => true,
+                                :default => Time.now.change(:hour => 11, :min => 30),
+                                :minute_interval => 30,
+                                :time_separator => "",
+                                :start_hour => 10,
+                                :start_minute => 30,
+                                :end_hour => 14,
+                                :end_minute => 30
+                              },
+                              
+                              { class: 'form-control' }
+                            %>
+                      </div> <!-- end of col-sm-8 -->
+                    </div> <!-- end of form-group -->
+                  </div> <!-- end of col-xs-6 -->
 
-        <% end %>
-      <% end %>
-    </div> <%# end of col-xs-6 %>
+                  <div class="col-xs-6">
+                    <div class="form-group">
+                      <%= label_tag 'end_time', 'End-time:', class: 'col-sm-2 control-label' %>
+                      <div class="col-sm-10">
+                        <%= f.time_select :end_time,
+                                      {
+                                        :combined => true,
+                                        :default => Time.now.change(:hour => 12, :min => 30),
+                                        :minute_interval => 30,
+                                        :time_separator => "",
+                                        :start_hour => 10,
+                                        :start_minute => 30,
+                                        :end_hour => 14,
+                                        :end_minute => 30
+                                      },
+                                      { class: 'form-control'}
+                                    %>
+                      </div> <!-- end of col-sm-10 -->
+                    </div> <!-- end of form-group -->
+                  </div> <!-- end of col-xs-6 -->
 
-    <div class="col-xs-6">
-      <% if @teacher.stripe_access_token != "" %>
-        <%= form_tag home_booking_stripe_path, class: 'home_booking_form', method: 'post' do %>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
-          data-description="Book your lesson"
-          data-currency="eur"
-          data-description="This is the description"
-          data-imgage="<%= asset_url 'stripe.png' %>"
-          ></script>
-          <%= j(hidden_field_tag :teacher_id, @teacher.id) %>
-          <%= j(hidden_field_tag :student_id, current_teacher.id) %>
-          <%= j(hidden_field_tag :student_name, current_teacher.full_name) %>
-          <%= j(hidden_field_tag :student_email, current_teacher.email) %>
-          <%= j(hidden_field_tag :teacher_email, @teacher.email) %>
-          <%= j(hidden_field_tag :teacher_name, @teacher.full_name) %>
-          
-          <%= j(hidden_field_tag :amount, @price.price) %>
-                      
-                 
-          <%= j(hidden_field_tag :current_teacher, current_teacher.id) %> 
-          <%= hidden_field_tag :start_time, Time.now %>           
-          <%= hidden_field_tag :end_time, Time.now + 5.minutes %>   
-          <%= hidden_field_tag :home_address, '', class: 'home_address' %>        
-          <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
-        <% end %>
+                </div> <%# end of row %>
+                <%= j(hidden_field :event, :teacher_id, value: @teacher.id) %>
 
-      <% end %>
-    </div> <%# end of col-xs-6 %>
-  </div> <%# end of row %>
+                <%= f.submit 'hello' %>
+              <% end %> <%# end of form %>
+            </div> <%# end of col-xs-12 %>
+  """
 
-  <div class="row">
-    <div class="well">
-        Enter your address. We can remember this for you if you want. 
-      </div>
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label for="address" class="col-sm-2 control-label">Address</label>
-        <div class="col-sm-10">
-          <%= j(text_field_tag 'address', current_teacher.address, placeholder: 'Address',size: 40, id: 'home_booking_address') %>
-          
-        </div>
-      </div>
 
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <div class="checkbox">
-            <label>
-              <%= check_box_tag 'Remember', 'Remember address', current_teacher.address != '', id:'remember' %>Remember Address
-            </label>
-          </div>
-        </div>
-      </div>
-      
-    </form>
 
-  </div> <%# end of row %>
 
-                            """
 <% end %>
+
+
+AnyTime.noPicker 'location_only_datepicker' #activate anytime datepicker
+$("#home_lesson_datepicker").AnyTime_picker
+  format: "%Y-%m-%d"
+  placement: 'inline'
+  hideInput: true

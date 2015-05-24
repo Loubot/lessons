@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
+  post        'events/check-home-event'      => 'events#check_home_event'
 
 
   get         'admin-panel'             =>  'admins#admin_panel'
