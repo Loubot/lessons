@@ -79,17 +79,19 @@ class StripeController < ApplicationController
   def home_booking_stripe
 
     update_student_address(params) #application controller
+
+    price = Price.find(params[:price_id])
     
     if params[:home_address] == ''
       flash[:danger] = "Address can't be blank"
       redirect_to :back and return
     end
     
-  	cart = UserCart.home_booking_cart(params)
+  	cart = UserCart.home_booking_cart(params,price.price)
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
   	# 
 
-  	@amount = params[:amount].to_i * 100    
+  	@amount = (price.price * 100 ).to_i
     @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
       :metadata           => { 
@@ -171,7 +173,7 @@ class StripeController < ApplicationController
 
       if cart.booking_type == 'home' #if it's a home booking
       	home_booking_transaction_and_mail(json_response, cart) #stripe helper
-        p "***************** single booking"
+        p "***************** home booking"
         render status: 200, nothing: true
       elsif cart.booking_type == 'package' 
         package = Package.find(cart.package_id)

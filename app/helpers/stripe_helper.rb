@@ -44,7 +44,7 @@ module StripeHelper
 		                  	create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id)
 		                  )
 
-    TeacherMailer.home_booking_mail(json_response, cart).deliver_now
+    TeacherMailer.delay.home_booking_mail_teacher(cart)
   end #end of home_booking_transaction_and_mail
 
 	def transaction_and_mail(json_response, cart)

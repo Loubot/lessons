@@ -186,17 +186,17 @@ class TeachersController < ApplicationController
 	end
 		
 	def check_home_event
-		@event = Event.student_do_single_booking(params)
+		event = Event.student_do_single_booking(params)
 		@price = Price.find(params[:price_id])
-		if @event.valid?
+		if event.valid?
 			@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
+			@event = event
 			
 			
-			render 'modals/payment_selections/_return_home_price.js.coffee'
 		else
-			p "no good !!!!!!!!!!"
-			flash[:danger] = "#{@event.errors.full_messages}"
+			@event = event.errors.full_messages
 		end
+		render 'modals/payment_selections/_return_home_price.js.coffee'
 		# redirect_to :back
 	end
 	

@@ -3,16 +3,10 @@ $('.payment_form_container').empty()
 $('.payment_form_container').empty()
 $('.display_teachers_location').empty()
 $('.returned_locations_container').empty()
-<% if defined? @deleteReturnedLocations %>
-$('.returned_locations_container').empty()
-$('.payment_form_container').append """ 
-    <h1>Price: <%= j(number_to_currency(@price.price, unit: '€')) %><small> only home lesson available</small></h1><br>
-  """
-<% else %>
+
 $('.payment_form_container').append """ 
     <h4>Price: <%= j(number_to_currency(@price.price, unit: '€')) %></h4>
   """
-<% end %>
 
 
 $('.payment_form_container').append """
