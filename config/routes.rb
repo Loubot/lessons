@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for  :teachers, :controllers => { omniauth_callbacks: "authentications",
-                                          :registrations => "registrations", 
-                                            passwords: 'passwords' }
+  devise_for  :teachers, :controllers => {  omniauth_callbacks: "authentications",
+                                            :registrations => "registrations", 
+                                            passwords: 'passwords'
+                                          }
   resources   :teachers, only: [:update, :edit, :destroy] do
     
   	member do 
@@ -18,9 +19,11 @@ Rails.application.routes.draw do
     resources :openings, only: [:create, :update]
     resources :events
     resources :identities, only: [:destroy]
+
     resources :grinds, only: [:create, :destroy]
     
     resources :packages, only: [:create, :destroy]
+
 
   end
   get         '/show-teacher'           =>  'teachers#show_teacher'  
@@ -30,7 +33,11 @@ Rails.application.routes.draw do
   get         'get-subjects'            =>  'teachers#get_subjects'
   get         'get-locations-price'     =>  'teachers#get_locations_price'
 
+<<<<<<< HEAD
   resources :locations  
+=======
+  resources :locations, only: [:create, :update, :destroy]
+>>>>>>> master
   resources :prices, only: [:create, :update, :destroy]
   
   resources :experiences,   only: [:create, :update, :destroy]
@@ -80,10 +87,11 @@ Rails.application.routes.draw do
   post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
+  post        'events/check-home-event'      => 'events#check_home_event'
 
 
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
   
-  root to: 'static#landing_page'
+  root to: 'static#welcome'
 end

@@ -64,6 +64,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.student_do_single_booking(params)
+    p "params1 #{params}"
     event_params = get_event_params(params)
 
     event = Event.new( 
@@ -72,6 +73,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_event_params(params)
+    p "params2 #{params}"
+    p "adfadfadf #{params[:event]}"
     date = params[:event][:date]
     dates = { start_time: Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}"),
       end_time: Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}"),

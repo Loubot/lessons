@@ -42,6 +42,7 @@ class StaticController < ApplicationController
 	end
 
 	def teach
+		@teacher = Teacher.new email: params[:invited_email]
 		render 'static/mobile_views/mobile_teach' if is_mobile?
 		# fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
 	end

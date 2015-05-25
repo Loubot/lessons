@@ -138,8 +138,8 @@ class PaypalController < ApplicationController
       :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
       :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-package-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: package.price.to_f, primary: true },
-        { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+        { :email => params[:teacher_email], amount: package.price.to_f, primary: true }
+        # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
 
@@ -185,8 +185,8 @@ class PaypalController < ApplicationController
       :return_url      => "https://www.learnyourlesson.ie/welcome",
       :ipn_notification_url => 'https://www.learnyourlesson.ie/store-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
-        { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true }
+        # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
 
@@ -376,8 +376,8 @@ class PaypalController < ApplicationController
           :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
           :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
-            { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
-            { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+            { :email => params[:teacher], amount: params[:receiver_amount], primary: true }
+            # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
           ]
         ) do |response|
 

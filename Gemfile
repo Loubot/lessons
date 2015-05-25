@@ -48,6 +48,8 @@ gem 'thin', 					platforms: [:mingw, :mswin]
 
 gem 'unicorn', '~> 4.8', platforms: [:ruby]
 
+gem 'email_validator'
+
 gem 'will_paginate'
 
 gem 'better_errors'
@@ -116,17 +118,5 @@ gem 'browser'
 
 gem 'delayed_job_active_record'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', '~> 1.2', platforms: [:mingw, :mswin]
