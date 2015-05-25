@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150521224155) do
-
+ActiveRecord::Schema.define(version: 20150525002209) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -259,6 +257,7 @@ ActiveRecord::Schema.define(version: 20150521224155) do
     t.text     "whole_message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "decimal",                   precision: 8, scale: 2, default: 0.0, null: false
     t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0, null: false
   end
 
@@ -278,6 +277,7 @@ ActiveRecord::Schema.define(version: 20150521224155) do
     t.boolean  "multiple",                                          default: false
     t.integer  "weeks",                                             default: 0
     t.string   "address",                                           default: ""
+    t.string   "string",                                            default: ""
     t.string   "booking_type",                                      default: ""
     t.integer  "package_id",                                        default: 0
     t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0,   null: false
