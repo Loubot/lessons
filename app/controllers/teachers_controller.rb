@@ -166,6 +166,7 @@ class TeachersController < ApplicationController
 		if params[:location_choice].to_i == 1 #home lesson
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
 			p @price
+			@event = Event.new
 			render 'modals/payment_selections/_return_home_price.js.coffee'
 		else
 			#only return locations that teacher teaches this subject at

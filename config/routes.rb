@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :openings, only: [:create, :update]
     resources :events
     resources :identities, only: [:destroy]
-
+    resources :invitations, only: [:create]
     resources :grinds, only: [:create, :destroy]
     
     resources :packages, only: [:create, :destroy]

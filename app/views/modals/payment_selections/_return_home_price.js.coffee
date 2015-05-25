@@ -18,7 +18,7 @@ $('.payment_form_container').append """
 $('.payment_form_container').append """
             <h2>Check availability</h2>
             <div class="col-xs-12">
-              <%= form_for(@event, url: events_check_home_event_path, html: { class: 'form-horizontal' }, method: 'post') do |f| %>
+              <%= form_for(@event, url: events_check_home_event_path, html: { class: 'form-horizontal' }, method: 'post', remote: true) do |f| %>
                 <div class="row">
                   <div class="col-xs-6 form-group">
                     
@@ -84,7 +84,7 @@ $('.payment_form_container').append """
 <% end %>
 
 
-AnyTime.noPicker 'location_only_datepicker' #activate anytime datepicker
+AnyTime.noPicker 'home_lesson_datepicker' #activate anytime datepicker
 $("#home_lesson_datepicker").AnyTime_picker
   format: "%Y-%m-%d"
   placement: 'inline'
