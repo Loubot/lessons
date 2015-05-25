@@ -40,6 +40,7 @@ class Teacher < ActiveRecord::Base
   validates :email,  uniqueness: { case_sensitive: false }
   validates :email, :first_name, :last_name, presence: true
   validates :is_teacher, inclusion: { in: [true, false], message: "%{value} must be set true or false" }
+  validates_confirmation_of :password, message: "should match verification"
   # after_validation :reverse_geocode
 
   after_initialize :set_paid_up_date

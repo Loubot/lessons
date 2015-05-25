@@ -120,7 +120,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
@@ -152,7 +152,7 @@ class TeachersController < ApplicationController
 			render 'modals/payment_selections/_home_or_location.js.coffee'
 		else
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
-			
+			@event = Event.new
 			render 'modals/payment_selections/_return_home_price.js.coffee'
 		end
 		

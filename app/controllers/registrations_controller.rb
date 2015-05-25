@@ -3,11 +3,13 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def create
+    p "invitation #{params[:teacher][:invitation_token]}"
     build_resource(sign_up_params)
-
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
+      
+      Invitation.find_by_token(params[:teacher][:invitation_token]).update_attributes(accepted_at: Time.now, accepted: true) if params[:teacher].has_key?(:invitation_token)
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
@@ -29,5 +31,10 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   
+  private 
+
+  def sign_up_params
+    params.require(:teacher).permit(:email, :first_name, :last_name, :password, :password_confirmation, :is_teacher)
+  end
   
 end
