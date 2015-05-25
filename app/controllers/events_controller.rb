@@ -92,17 +92,6 @@ class EventsController < ApplicationController
 		end		
 	end
 
-	def check_home_event
-		@event = Event.student_do_single_booking(params)
-		if @event.valid?
-			p "yada yada #{@event.inspect}"
-		else
-			p "no good !!!!!!!!!!"
-			flash[:danger] = "#{@event.errors.full_messages}"
-		end
-		redirect_to :back
-	end
-
 	private
 
 		def event_params

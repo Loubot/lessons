@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get         'get-locations'           =>  'teachers#get_locations'
   get         'get-subjects'            =>  'teachers#get_subjects'
   get         'get-locations-price'     =>  'teachers#get_locations_price'
+  post        'teachers/check-home-event'      => 'teachers#check_home_event'
 
   resources :locations, only: [:create, :update, :destroy]
 
@@ -84,7 +85,7 @@ Rails.application.routes.draw do
   post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
-  post        'events/check-home-event'      => 'events#check_home_event'
+  
 
 
   get         'admin-panel'             =>  'admins#admin_panel'

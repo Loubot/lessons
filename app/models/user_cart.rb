@@ -52,7 +52,7 @@ class UserCart < ActiveRecord::Base
     cart
   end
 
-  def self.home_booking_cart(params)
+  def self.home_booking_cart(params, price)
     cart = self.create(
                     teacher_id: params[:teacher_id],
                     student_id: params[:student_id],
@@ -65,7 +65,7 @@ class UserCart < ActiveRecord::Base
                     booking_type: 'home',
                     multiple: false,
                     package_id: 0,
-                    amount: params[:receiver_amount]
+                    amount: price.to_f
                   )
     cart.save
 

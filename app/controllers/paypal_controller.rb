@@ -161,9 +161,9 @@ class PaypalController < ApplicationController
 
   def home_booking_paypal
     update_student_address(params) #application controller
-
+    price = Price.find(params[:price_id])
     
-    cart = UserCart.home_booking_cart(params)
+    cart = UserCart.home_booking_cart(params, price.price)
     # p cart.home_booking
     # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
     # render status: 200, nothing: true
@@ -185,7 +185,7 @@ class PaypalController < ApplicationController
       :return_url      => "https://www.learnyourlesson.ie/welcome",
       :ipn_notification_url => 'https://www.learnyourlesson.ie/store-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true }
+        { :email => params[:teacher_email], amount: price.price.to_f }
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|

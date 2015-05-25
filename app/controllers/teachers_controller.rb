@@ -1,8 +1,8 @@
 class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
-	before_action :check_id, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price]
-	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price]
+	before_action :check_id, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
+	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	
 	include TeachersHelper
 
@@ -154,7 +154,7 @@ class TeachersController < ApplicationController
 		else
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
 			@event = Event.new
-			render 'modals/payment_selections/_return_home_price.js.coffee'
+			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		end
 		
 	end
@@ -167,7 +167,7 @@ class TeachersController < ApplicationController
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
 			p @price
 			@event = Event.new
-			render 'modals/payment_selections/_return_home_price.js.coffee'
+			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		else
 			#only return locations that teacher teaches this subject at
 			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == params[:subject_id].to_i && p.location_id != nil) }.compact
@@ -185,7 +185,20 @@ class TeachersController < ApplicationController
 		render 'modals/payment_selections/_return_locations_price.js.coffee'
 	end
 		
-		
+	def check_home_event
+		@event = Event.student_do_single_booking(params)
+		@price = Price.find(params[:price_id])
+		if @event.valid?
+			@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
+			
+			
+			render 'modals/payment_selections/_return_home_price.js.coffee'
+		else
+			p "no good !!!!!!!!!!"
+			flash[:danger] = "#{@event.errors.full_messages}"
+		end
+		# redirect_to :back
+	end
 	
 
 	private
