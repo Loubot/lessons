@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150516143113) do
+ActiveRecord::Schema.define(version: 20150413221045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,22 +21,6 @@ ActiveRecord::Schema.define(version: 20150516143113) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -213,8 +197,6 @@ ActiveRecord::Schema.define(version: 20150516143113) do
     t.boolean  "will_travel",                        default: false, null: false
     t.string   "address",                            default: ""
     t.string   "stripe_user_id"
-    t.boolean  "paid_up",                            default: false
-    t.date     "paid_up_date"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
@@ -231,7 +213,7 @@ ActiveRecord::Schema.define(version: 20150516143113) do
     t.text     "whole_message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "decimal",                   precision: 8, scale: 2, default: 0.0, null: false
   end
 
   add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true, using: :btree
@@ -241,19 +223,17 @@ ActiveRecord::Schema.define(version: 20150516143113) do
     t.integer  "student_id"
     t.text     "params"
     t.text     "tracking_id"
-    t.string   "student_name",  limit: 255,                         default: ""
+    t.string   "student_name",  limit: 255, default: ""
     t.string   "student_email", limit: 255
     t.string   "teacher_email", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "subject_id"
-    t.string   "address",                                           default: ""
-    t.integer  "weeks",                                             default: 0
-    t.boolean  "multiple",                                          default: false
-    t.string   "booking_type",                                      default: ""
-    t.integer  "package_id",                                        default: 0
-    t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0,   null: false
-    t.string   "teacher_name",                                      default: ""
+    t.string   "address",                   default: ""
+    t.integer  "weeks",                     default: 0
+    t.boolean  "multiple",                  default: false
+    t.string   "string",                    default: ""
+    t.boolean  "home_booking",              default: false
   end
 
   add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree
