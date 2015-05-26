@@ -296,11 +296,12 @@ teachersInfoReady = ->
         document.getElementById("subject_id").selectedIndex = 0
       # document.getElementById("select_subject").selectedIndex = 0     
       $(document).on 'change', '.select_subject', ->
-        $.ajax
-          url: 'get-locations'
-          data:            
-            subject_id: $('.select_subject').val()
-            id: $('#select_subjects_teacher_id').val()
+        $('.select_subject').submit()
+        # $.ajax
+        #   url: 'get-locations'
+        #   data:            
+        #     subject_id: $('.select_subject').val()
+        #     id: $('#select_subjects_teacher_id').val()
 
       $(document).on 'change', '.select_home_or_location', ->
         $.ajax

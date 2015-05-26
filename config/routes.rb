@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
   get         '/add-map'                =>  'teachers#add_map'
-  get         'get-locations'           =>  'teachers#get_locations'
+  post        'get-locations'           =>  'teachers#get_locations'
   get         'get-subjects'            =>  'teachers#get_subjects'
   get         'get-locations-price'     =>  'teachers#get_locations_price'
   post        'teachers/check-home-event'      => 'teachers#check_home_event'

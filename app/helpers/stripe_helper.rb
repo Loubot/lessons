@@ -13,14 +13,14 @@ module StripeHelper
                       tracking_id: params['data']['object']['metadata']['tracking_id'], 
                       whole_message: params 
                     }
-    logger.info "stripe post params sender_email: #{params['data']['object']['card']['name']}"
-    logger.info "stripe post params trans_id: #{params['id']}"
-    logger.info "stripe post params paypal/stripe: #{'stripe'}"
-    logger.info "stripe post params teacher_id #{teacher_id}"
-    logger.info "stripe post params student_id #{student_id}"
-    logger.info "stripe post params date: #{params['created']}"
-    logger.info "stripe post params tracking_id: #{params['data']['object']['metadata']['tracking_id']}"
-    logger.info "stripe post params whole message: #{params.to_s}"
+    # logger.info "stripe post params sender_email: #{params['data']['object']['card']['name']}"
+    # logger.info "stripe post params trans_id: #{params['id']}"
+    # logger.info "stripe post params paypal/stripe: #{'stripe'}"
+    # logger.info "stripe post params teacher_id #{teacher_id}"
+    # logger.info "stripe post params student_id #{student_id}"
+    # logger.info "stripe post params date: #{params['created']}"
+    # logger.info "stripe post params tracking_id: #{params['data']['object']['metadata']['tracking_id']}"
+    # logger.info "stripe post params whole message: #{params.to_s}"
     returnParams
   end # end of create_transaction_params_stripe
 
@@ -52,13 +52,13 @@ module StripeHelper
 		                  	create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id)
 		                  )
 
-		TeacherMailer.mail_teacher(
+		TeacherMailer.delay.mail_teacher(
 		                            cart.student_email,
 		                            cart.student_name,
 		                            cart.teacher_email,
 		                            cart.params[:start_time],
 		                            cart.params[:end_time]
-		                          ).deliver_now
+		                          )
 	end # end of transaction_and_mail
 
   def package_transaction_and_mail(json_response, cart, package)
@@ -66,12 +66,12 @@ module StripeHelper
                         create_transaction_params_stripe(json_response, cart.student_id, cart.teacher_id)
                       )
 
-    TeacherMailer.paypal_package_email(
+    TeacherMailer.delay.paypal_package_email(
                                         cart.student_email,
                                         cart.student_name,
                                         cart.teacher_email,
                                         package
-                                      ).deliver_now
+                                      )
 
   end # end of package_transaction_and_mail
 end

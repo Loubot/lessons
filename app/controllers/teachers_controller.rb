@@ -147,12 +147,13 @@ class TeachersController < ApplicationController
 	end
 
 	def get_locations
-		@teacher = Teacher.includes(:prices).find(params[:id].to_i)
+		p "params #{params}"
+		@teacher = Teacher.includes(:prices).find((params[:subject][:teacher_id]))
 		
-		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject_id].to_i && p.location_id != nil })
+		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject_id].to_i && p.location_id != nil })
 			render 'modals/payment_selections/_home_or_location.js.coffee'
 		else
-			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
+			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i }[0]
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		end
