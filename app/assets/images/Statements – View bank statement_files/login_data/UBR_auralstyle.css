@@ -1,0 +1,29 @@
+body, table, td, div, span
+{
+	voice-family: female;
+	speak-punctuation: none;
+}
+abbr, acronym
+{
+	speak: spell-out;
+}
+.ItemTable, .ItemDetail
+{
+	speak-header: always;
+}
+COL.Numeric
+{
+	speak-numeral: digits;
+}
+COL.currency, COL.currencyblankifzero
+{
+	speak-numeral: continuous;
+}
+COL.date 
+{
+	speak-numeral: continuous;
+}
+#ValidationSummary
+{
+	stress: 60;	
+}

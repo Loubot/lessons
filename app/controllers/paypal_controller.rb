@@ -161,9 +161,9 @@ class PaypalController < ApplicationController
 
   def home_booking_paypal
     update_student_address(params) #application controller
-
+    price = Price.find(params[:price_id])
     
-    cart = UserCart.home_booking_cart(params, price)
+    cart = UserCart.home_booking_cart(params, price.price)
     # p cart.home_booking
     # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
     # render status: 200, nothing: true
@@ -171,21 +171,21 @@ class PaypalController < ApplicationController
     
     client = AdaptivePayments::Client.new(
       :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
-      :sandbox       => true
+      :password      => "DL2W4ZN9235UUZ32",
+      :signature     => "A0Keg6L7p81ZydPVAx2BG09isegaA9iprfcsvXBNYfCBQh1myT-RxF-y",
+      :app_id        => "APP-51B03621D1124052E",
+      :sandbox       => false
     )
 
     client.execute(:Pay,
       :action_type     => "PAY",
-      :currency_code   => "GBP",
+      :currency_code   => "EUR",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
-      :return_url      => "https://www.learnyourlesson.ie/welcome",
-      :ipn_notification_url => 'https://www.learnyourlesson.ie/store-paypal',
+      :return_url      => "http://61309c53.ngrok.com//welcome",
+      :ipn_notification_url => 'http://61309c53.ngrok.com/store-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true }
+        { :email => params[:teacher_email], amount: 0.01 } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|

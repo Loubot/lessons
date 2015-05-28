@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
-	before_action :check_id, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
+	before_action :check_id, except: [:add_map, :show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	
 	include TeachersHelper
@@ -69,10 +69,12 @@ class TeachersController < ApplicationController
 			@teacher.set_will_travel(params)
 			@subjects = @teacher.subjects.includes(:prices)
 			@params = params
-		elsif params[:teacher][:paypal_email]		  
-	  	if @teacher.paypal_verify(params).success?
+		elsif params[:teacher][:paypal_email]
+			bla = @teacher.paypal_verify(params)	  
+	  	if bla.success?
 	  		flash[:success] = "Paypal email updated ok"
 	  	else
+	  		p bla.inspect
 	  		flash[:danger] = "That is not a valid Paypal merchant email"
 	  	end
 	  	redirect_to :back and return
@@ -166,7 +168,7 @@ class TeachersController < ApplicationController
 		@teacher = Teacher.includes(:locations, :prices).find(params[:location][:teacher_id].to_i)
 		if params[:location][:id].to_i == 1 #home lesson
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:location][:subject_id].to_i }[0]
-			p @price
+			p "prices yoyo #{@price}"
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		else

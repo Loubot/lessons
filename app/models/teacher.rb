@@ -184,13 +184,12 @@ class Teacher < ActiveRecord::Base
 
   def paypal_verify(params)
     api = PayPal::SDK::AdaptiveAccounts::API.new(
-      :mode      => "sandbox",  # Set "live" for production
-      :app_id    => "APP-80W284485P519543T",
+      :mode      => "live",  # Set "live" for production
+      :app_id    => "APP-51B03621D1124052E",
       :username  => "lllouis_api1.yahoo.com",
-      :password  => "MRXUGXEXHYX7JGHH",
-      :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :device_ipaddress => "127.0.0.1",
-      :sandbox_email_address => "lllouis@yahoo.com" )
+      :password  => "DL2W4ZN9235UUZ32",
+      :signature => "A0Keg6L7p81ZydPVAx2BG09isegaA9iprfcsvXBNYfCBQh1myT-RxF-y"
+       )
     get_verified_status_request = api.build_get_verified_status( :emailAddress => params[:teacher][:paypal_email], :matchCriteria => "NONE" )
     response = api.get_verified_status(get_verified_status_request)
     self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?

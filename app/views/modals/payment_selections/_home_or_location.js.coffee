@@ -1,4 +1,4 @@
-<% cache('select_home_or_location') do %>
+<% cache [@teacher, 'select_home_or_location'] do %>
 $('.returned_locations_container').empty()
 $('.display_teachers_location').empty()
 $('.payment_form_container').empty()

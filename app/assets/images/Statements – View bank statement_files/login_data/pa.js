@@ -1,0 +1,1 @@
+(function(w,d){var h=d.getElementsByTagName('head')[0],e=d.createElement('script'),a=[['src',(w.location.protocol=='https:'?'https://':'http://')+'chat.ulsterbankanytimebanking.ie/ubrimages/tilt.js'],['async',true],['type','text/javascript']];for(var i=0,l=a.length;i<l;i++){e.setAttribute(a[i][0],a[i][1])}h.appendChild(e)})(window,document);

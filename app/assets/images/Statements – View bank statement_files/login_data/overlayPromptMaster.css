@@ -1,0 +1,29 @@
+.TOPT  { width: 302px; padding: 10px; margin: 0em; position: relative; background: #ffffff; }
+.TOPT
+{
+	border: 1px solid black;
+	-moz-box-shadow: 3px 3px 10px #000; /* Firefox */
+	-webkit-box-shadow: 3px 3px 10px #000; /* Safari and Chrome */
+	box-shadow: 3px 3px 10px #000; /* Opera 10.5+, future browsers and IE6+ using IE-CSS3 */
+	-moz-border-radius: 5px; /* Firefox */
+	webkit-border-radius: 5px; /* Safari and Chrome */
+	border-radius: 5px; /* Opera 10.5+, future browsers, and now also Internet Explorer 6+ using IE-CSS3 */
+
+
+	behavior: url(Brands/jq_scripts/ie-css3.htc); /* This lets IE know to call the script on all elements which get the 'box' class */
+}
+
+.TOPT .content { padding: 0em; position: relative;}
+.TOPT .content img.overlayCloseButton { position: absolute; right: 0px; cursor: pointer; }
+.TOPT h2.h2Flash { font-size:1.8em; line-height: 1em; font-weight: normal; margin-top: 0em; width: 95%; }
+.TOPT .btnsection { padding-right: 0em !important; margin-right: 0em !important; }
+.IOPT { position: relative; border: none;
+	-moz-box-shadow: 3px 3px 10px #000; /* Firefox */
+	-webkit-box-shadow: 3px 3px 10px #000; /* Safari and Chrome */
+	box-shadow: 3px 3px 10px #000; /* Opera 10.5+, future browsers and IE6+ using IE-CSS3 */
+
+	behavior: url(Brands/jq_scripts/ie-css3.htc); /* This lets IE know to call the script on all elements which get the 'box' class */
+  }
+.IOPT img.overlayCloseButton { position: absolute; right: 5px; top: 5px; }
+
+.overlayFrame {  position:absolute; z-index:2000; }
