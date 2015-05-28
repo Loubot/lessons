@@ -8,7 +8,7 @@
             <h4 class="modal-title" id="the_one_modal_title">Lets get you learning</h4>
           </div>
           <div class="modal-body">
-            <div class="container-fluid">
+            <div class="container-fluid">   <%# teacher.js for form submisson on change %>
                 <%= form_tag get_locations_path, remote: true, method: 'post' do %>
                   <%= select 'subject', 'id', content_tag(:option,'select subject...',:value=>"")+options_from_collection_for_select(@teacher.subjects, 'id', 'name'), { }, { class: 'form-control select_subject' } %>
                   <input type="hidden" name="subject[teacher_id]" value="<%= @teacher.id %>">

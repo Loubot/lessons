@@ -150,7 +150,7 @@ class TeachersController < ApplicationController
 		p "params #{params}"
 		@teacher = Teacher.includes(:prices).find((params[:subject][:teacher_id]))
 		
-		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject_id].to_i && p.location_id != nil })
+		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject][:id].to_i && p.location_id != nil })
 			render 'modals/payment_selections/_home_or_location.js.coffee'
 		else
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i }[0]
@@ -163,15 +163,15 @@ class TeachersController < ApplicationController
 	def get_subjects
 		#location_choice =1 == home lesson
 		#location_choice =2 == teachers location
-		@teacher = Teacher.includes(:locations, :prices).find(params[:id].to_i)
-		if params[:location_choice].to_i == 1 #home lesson
-			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject_id].to_i }[0]
+		@teacher = Teacher.includes(:locations, :prices).find(params[:location][:teacher_id].to_i)
+		if params[:location][:id].to_i == 1 #home lesson
+			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:location][:subject_id].to_i }[0]
 			p @price
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		else
 			#only return locations that teacher teaches this subject at
-			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == params[:subject_id].to_i && p.location_id != nil) }.compact
+			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == params[:location][:subject_id].to_i && p.location_id != nil) }.compact
 			p "ids #{ids}"
 			# @locations = @teacher.locations.map { |l| l if ids.include?  l.id }
 			@locations = @teacher.locations.find(ids)

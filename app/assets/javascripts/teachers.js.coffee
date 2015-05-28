@@ -304,12 +304,15 @@ teachersInfoReady = ->
         #     id: $('#select_subjects_teacher_id').val()
 
       $(document).on 'change', '.select_home_or_location', ->
-        $.ajax
-          url: 'get-subjects'
-          data:
-           id: $('#select_subjects_teacher_id').val()
-           subject_id: $('.select_subject').val()
-           location_choice: $('.select_home_or_location').val()
+        $('.location_choice').val $('.select_home_or_location').val()
+        $('.subject_id').val $('.select_subject').val()
+        $('.get_subjects_form').submit()
+        # $.ajax
+        #   url: 'get-subjects'
+        #   data:
+        #    id: $('#select_subjects_teacher_id').val()
+        #    subject_id: $('.select_subject').val()
+        #    location_choice: $('.select_home_or_location').val()
       
       # $(document).on 'click', '#location_only_datepicker', ->
       #   console.log 'a'

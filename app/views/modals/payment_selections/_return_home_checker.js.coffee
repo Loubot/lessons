@@ -1,8 +1,8 @@
-<% cache([@teacher, current_teacher,'return_home_price_checker']) do %>
+<% cache([@teacher, current_teacher,@price,'return_home_price_checker']) do %>
 $('.payment_form_container').empty()
 $('.payment_form_container').empty()
 $('.display_teachers_location').empty()
-$('.returned_locations_container').empty()
+# $('.returned_locations_container').empty()
 
 $('.payment_form_container').append """ 
     <h4>Price: <%= j(number_to_currency(@price.price, unit: '€')) %></h4>
