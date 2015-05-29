@@ -190,7 +190,12 @@ class Teacher < ActiveRecord::Base
       :password  => "DL2W4ZN9235UUZ32",
       :signature => "A0Keg6L7p81ZydPVAx2BG09isegaA9iprfcsvXBNYfCBQh1myT-RxF-y"
        )
-    get_verified_status_request = api.build_get_verified_status( :emailAddress => params[:teacher][:paypal_email], :matchCriteria => "NONE" )
+    get_verified_status_request = api.build_get_verified_status( 
+                      :emailAddress => params[:teacher][:paypal_email], 
+                      :matchCriteria => "NAME",
+                      :firstName => self.first_name,
+                      :lastName => self.last_name
+                      )
     response = api.get_verified_status(get_verified_status_request)
     self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?
     response
