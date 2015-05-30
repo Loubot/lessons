@@ -16,7 +16,7 @@
     </div>
     <% @subjects.each do |s| %>
       <div class="col-xs-6">
-        <%= form_for Price.find_or_initialize_by(subject_id: s.id, no_map: true), html: { class: 'form-inline' }, remote: true do |f| %>
+        <%= form_for Price.find_or_initialize_by(teacher_id: current_teacher, subject_id: s.id, no_map: true), html: { class: 'form-inline' }, remote: true do |f| %>
           <div class="form-group">
             <%= f.label "#{s.name} price" %>
             <%= f.number_field :price, class: 'form-control' %>
