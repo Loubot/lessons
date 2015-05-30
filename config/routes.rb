@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get         '/add-map'                =>  'teachers#add_map'
   post        'get-locations'           =>  'teachers#get_locations'
   post        'get-subjects'            =>  'teachers#get_subjects'
-  get         'get-locations-price'     =>  'teachers#get_locations_price'
+  post        'get-locations-price'     =>  'teachers#get_locations_price'
   post        'teachers/check-home-event'      => 'teachers#check_home_event'
 
   resources :locations, only: [:create, :update, :destroy]

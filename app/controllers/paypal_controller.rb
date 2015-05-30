@@ -170,10 +170,10 @@ class PaypalController < ApplicationController
     
     
     client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "DL2W4ZN9235UUZ32",
-      :signature     => "A0Keg6L7p81ZydPVAx2BG09isegaA9iprfcsvXBNYfCBQh1myT-RxF-y",
-      :app_id        => "APP-51B03621D1124052E",
+      :user_id       => ENV['PAYPAL_USER_ID'],
+      :password      => ENV['PAYPAL_PASSWORD'],
+      :signature     => ENV['PAYPAL_SIGNATURE'],
+      :app_id        => ENV['PAYPAL_APP_ID'],
       :sandbox       => false
     )
 

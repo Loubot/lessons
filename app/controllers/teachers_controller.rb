@@ -182,9 +182,13 @@ class TeachersController < ApplicationController
 	end
 
 	def get_locations_price
+		p "yayd"
 		@event = Event.new
-		@rate = Price.where(teacher_id: params[:id], subject_id: params[:subject_id], location_id: params[:location_id])
-		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id].to_i)
+		@rate = Price.where(
+												teacher_id: params[:teachers_locations][:teacher_id], 
+												subject_id: params[:teachers_locations][:subject_id], 
+												location_id: params[:teachers_locations][:location_id])
+		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:teachers_locations][:teacher_id].to_i)
 		render 'modals/payment_selections/_return_locations_price.js.coffee'
 	end
 		

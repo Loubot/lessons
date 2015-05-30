@@ -323,12 +323,14 @@ teachersInfoReady = ->
       #     hideInput: true
 
       $(document).on 'change', '.teachers_location_selection', ->
-        $.ajax
-          url: 'get-locations-price'
-          data:
-            id: $('#select_subjects_teacher_id').val()
-            subject_id: $('.select_subject').val()
-            location_id: $('.teachers_location_selection').val()
+        $('.teachers_locations_subject').val $('.select_subject').val()
+        $('.get_locations_price_form').submit()
+        # $.ajax
+        #   url: 'get-locations-price'
+        #   data:
+        #     id: $('#select_subjects_teacher_id').val()
+        #     subject_id: $('.select_subject').val()
+        #     location_id: $('.teachers_location_selection').val()
 
     # end of the_one_modal
 
