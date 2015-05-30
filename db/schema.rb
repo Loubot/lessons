@@ -16,6 +16,9 @@ ActiveRecord::Schema.define(version: 20150525002209) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
@@ -65,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150525002209) do
     t.datetime "updated_at"
   end
 
+
   create_table "grinds", force: :cascade do |t|
     t.integer  "subject_id"
     t.integer  "teacher_id"
@@ -79,6 +83,7 @@ ActiveRecord::Schema.define(version: 20150525002209) do
 
   add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id", using: :btree
   add_index "grinds", ["teacher_id"], name: "index_grinds_on_teacher_id", using: :btree
+
 
   create_table "identities", force: :cascade do |t|
     t.string   "uid",        limit: 255
