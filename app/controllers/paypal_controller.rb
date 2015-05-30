@@ -40,9 +40,9 @@ class PaypalController < ApplicationController
       :receiver_amount => 3,
       :tracking_id     => cart.tracking_id,
       :currency_code   => "EUR",
-      :cancel_url      => "http://76b9acc5.ngrok.com",
-      :return_url      => "http://46fd0a23.ngrok.com/welcome",
-      :ipn_notification_url => "http://46fd0a23.ngrok.com/membership-return-paypal"
+      :cancel_url      => "https://www.learnyourlesson.ie",
+      :return_url      => "https://www.learnyourlesson.ie/welcome",
+      :ipn_notification_url => "https://www.learnyourlesson.ie/membership-return-paypal"
     ) do |response|
 
       if response.success?
@@ -182,8 +182,8 @@ class PaypalController < ApplicationController
       :currency_code   => "EUR",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
-      :return_url      => "http://61309c53.ngrok.com//welcome",
-      :ipn_notification_url => 'http://61309c53.ngrok.com/store-paypal',
+      :return_url      => "https://www.learnyourlesson.ie/welcome",
+      :ipn_notification_url => 'https://www.learnyourlesson.ie/store-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: 0.01 } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
