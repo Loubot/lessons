@@ -2,11 +2,11 @@ source 'http://rubygems.org'
 
 ruby '2.1.2', platforms: [:ruby]
 
-ruby '2.0.0', platforms: [:mingw, :mswin]
+# ruby '2.0.0', platforms: [:mingw, :mswin]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
-ruby '2.0.0'
+# ruby '2.0.0'
 gem 'rails', '~> 4.2'
 
 gem 'bundler', '>= 1.3.0'

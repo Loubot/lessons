@@ -10,6 +10,7 @@
         <div  class="container-fluid">
           <%= form_tag teacher_subject_search_path, method: 'get', remote: 'true', id: 'subject_search' do %>
             <%= text_field_tag :search, params[:search], id: 'teachers_search_input', autocomplete: :off %>
+            <%= hidden_field_tag :id, current_teacher.id %>
             <%= submit_tag 'Search', name: 'nil', id: 'search_submit' %>
           <% end %>
         </div> <!-- end of container-fluid -->
