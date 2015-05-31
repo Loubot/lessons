@@ -3,7 +3,7 @@ class StripeController < ApplicationController
   
   protect_from_forgery except: [:store_stripe, :stripe_create, :stripe_auth_user]
   before_action :get_event_id, only: [:store_stripe]
-  before_action :authenticate_teacher!, only: [:stripe_create, :home_booking_stripe, :stripe_auth_user, :pay_membership_stripe]
+  before_action :authenticate_teacher!, only: [:stripe_create, :home_booking_stripe, :pay_membership_stripe]
   before_action :fix_json_params, only: [:store_stripe]
 
   def get_event_id
@@ -217,9 +217,11 @@ class StripeController < ApplicationController
 
 
   def stripe_auth_user
+    p "HELL EHL"
+    p "YEA YEA #{ENV['STRIPE_SECRET_KEY']}"
     uri = URI.parse('https://connect.stripe.com/oauth/token')
     uri.query = URI.encode_www_form({
-        'client_secret' => 'sk_test_1ZTmwrLuejFto5JhzCS9UAWu', 'code' => params[:code],
+        'client_secret' => ENV['STRIPE_SECRET_KEY'], 'code' => params[:code],
           'grant_type' => 'authorization_code'
       })
     http = Net::HTTP.new(uri.host, uri.port)

@@ -50,7 +50,7 @@
         <% if @teacher.stripe_access_token != "" %>
           <%= form_tag home_booking_stripe_path, class: 'home_booking_form', method: 'post' do %>
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
+            data-key="pk_live_UpVcCDAFOmF3oaIyddVvFbAL"
             data-description="Book your lesson"
             data-currency="eur"
             data-description="This is the description"

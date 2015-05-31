@@ -3,7 +3,6 @@ class PricesController < ApplicationController
 	before_action :check_correct_teacher
 
 	def check_correct_teacher
-		p "blb #{params[:price][:teacher_id]}"
 		if params[:price][:teacher_id].to_i != current_teacher.id
 			flash[:danger] = "An error has occrred. Please email louisangelini@gmail.com"
 			redirect_to :back
