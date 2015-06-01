@@ -235,10 +235,7 @@ Devise.setup do |config|
   config.omniauth :twitter, ENV["TWITTER_API_KEY"], ENV["TWITTER_API_SECRET"]
   config.omniauth :linkedin, ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"]
   # OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-<<<<<<< HEAD
-=======
-  Excon.defaults[:ssl_verify_peer] = false
->>>>>>> 293e0d95d8733b99365c38201be61ba355440736
+
 
   Devise::TRUE_VALUES << ["on"]
 
