@@ -12,7 +12,7 @@
         <%= link_to(root_url, class: 'pull-left') do %>
           <%= image_tag 'lylLogo.png' %>
         <% end %>
-        <%= link_to 'Learn Your Lesson', root_url, class: 'navbar-brand' %>
+        <%= link_to 'Learn Your Lesson', welcome_path, class: 'navbar-brand' %>
          
       </div>
 
@@ -21,7 +21,7 @@
         <ul class="nav navbar-nav">
           <li><%= link_to 'Personal info', edit_teacher_path(current_teacher) %></li>
           <li><%= link_to 'Qualifications', qualification_form_teacher_path(current_teacher) %></li>
-          <li><%= link_to 'Your Business', your_location_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
+          <li><%= link_to 'Your Business', your_business_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
           <li><%= link_to 'Work area', teachers_area_teacher_path(current_teacher), 'data-no-turbolink' => true %></li>
       
         </ul>

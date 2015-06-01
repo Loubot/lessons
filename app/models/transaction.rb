@@ -13,6 +13,8 @@
 #  whole_message :text
 #  created_at    :datetime
 #  updated_at    :datetime
+#  decimal       :decimal(8, 2)    default(0.0), not null
+#  amount        :decimal(8, 2)    default(0.0), not null
 #
 
 class Transaction < ActiveRecord::Base

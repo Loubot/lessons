@@ -74,17 +74,21 @@ module TeachersHelper
 		end		
 	end
 
-	def pick_show_teacher_view(id)
+	def pick_show_teacher_view(id)		
 		if teacher_signed_in?
-			if current_teacher.id.to_i == id.to_i && !current_teacher.is_teacher
+			if is_mobile?
+				render layout: 'application', action: 'teachers_views/mobile_show_teacher_to_user'
+			elsif current_teacher.id.to_i == id.to_i && !current_teacher.is_teacher
 				redirect_to '/'
 			elsif current_teacher.id.to_i != id.to_i
-				render layout: 'application', action: 'show_teacher_to_user'
+				render layout: 'application', action: 'teachers_views/show_teacher_to_user'
 			else 
-				render layout: 'teacher_layout', action: 'show_teacher'			
+				render layout: 'teacher_layout', action: 'teachers_views/show_teacher'			
 			end
+		elsif is_mobile?
+			render layout: 'application', action: 'teachers_views/mobile_show_teacher_to_user'
 		else
-			render layout: 'application', action: 'show_teacher_to_user'
+			render layout: 'application', action: 'teachers_views/show_teacher_to_user'
 		end
 	end
 
@@ -125,32 +129,22 @@ module TeachersHelper
   	link_to("Delete authentictation",teacher_identity_path(current_teacher, ident.id), method: :delete, data: { confirm: 'Are you sure?' }).html_safe
   end
 
-  def check_if_price(prices, location, subject, teacher)
-    # p = prices.select { |p| p.subject_id == subject && p.teacher_id == teacher }
-    if prices.any? { |p| p.subject_id == subject && p.location_id == location } && prices.any? { |p| p.subject_id == subject && p.no_map == true }
-      "#payment_choice_modal".html_safe
-    elsif prices.any? { |p| p.subject_id == subject && p.no_map == true }
-      "#payment_no_location_modal".html_safe
-    else
-      "#payment_location_only_modal".html_safe
-    end
+  def get_lowest_price(subject)
+    # number_to_currency(prices.min.price, unit: '€')
+    number_to_currency(subject.prices.min.price, unit: '€')
   end
 
-  def get_price_or_message(prices, location, subject, teacher)
-    p "location %%%%%%%%% #{location}"
-    p =  prices.select { |p| p.location_id == location && p.subject_id == subject && p.teacher_id == teacher }.first
-    home_price = prices.select { |p| p.subject_id == subject && p.no_map == true }.first
-    p ? number_to_currency(p.price, unit: '€') : "Only home lesson available".html_safe
-  end
-
-  def check_home_price(prices, subject) #check if home price defined for this subject
-    prices.any? { |p| p.subject_id == subject && p.no_map == true }
-  
+  def get_subjects_list(subject) #the_one_modal get subject list
+    ["#{subject.name}", subject.id]
   end
 
   def get_home_price(prices, subject)
     p = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
-    number_to_currency(p.price, unit: '€')
+    number_to_currency(p.price, unit: '€') if p
+  end
+
+  def get_select_text(p)
+  	["#{p.no_of_lessons}x#{p.subject_name} lessons for #{ number_to_currency(p.price, unit: '€') }", p.id]
   end
 
 end

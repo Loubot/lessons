@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module Lessons
   class Application < Rails::Application
     config.middleware.use Rack::Deflater
+    config.action_mailer.default_url_options = { host: 'www.learnyourlesson.ie' }
     #config.assets.paths << "#{Rails}/vendor/assets/fonts"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -24,5 +25,7 @@ module Lessons
     config.assets.initialize_on_precompile = false
     #load file from lib for devise redirects
     config.autoload_paths += %W(#{config.root}/lib)
+    #delayed_job for queing jobs
+    config.active_job.queue_adapter = :delayed_job #rake jobs:work
   end
 end

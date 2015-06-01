@@ -89,14 +89,12 @@ class EventsController < ApplicationController
 			else
 				@teacher = @event.errors.full_messages
 			end
-		end
-		
-		
+		end		
 	end
 
 	private
 
-		def event_params(params)
+		def event_params
 			params.require(:event).permit!
 		end
 

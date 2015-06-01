@@ -1,4 +1,4 @@
-<% popoverContent = "#{link_to 'Delete', [@context, photo], data: { :confirm => 'Are you sure?' }, method: :delete} <br>
+<% popoverContent = "#{link_to 'Delete', [@teacher, photo], data: { :confirm => 'Are you sure?' }, method: :delete} <br>
 			#{link_to 'Make profile', change_profile_pic_teacher_path(photo.id), method: 'post'}" %>
 
 <% cache(photo.avatar.url) do %>

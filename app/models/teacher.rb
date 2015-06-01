@@ -13,20 +13,22 @@
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  admin                  :boolean
 #  profile                :integer
-#  is_teacher             :boolean          default("false"), not null
+#  is_teacher             :boolean          default(FALSE), not null
 #  paypal_email           :string(255)      default("")
 #  stripe_access_token    :string(255)      default("")
-#  is_active              :boolean          default("false"), not null
-#  will_travel            :boolean          default("false"), not null
+#  is_active              :boolean          default(FALSE), not null
+#  will_travel            :boolean          default(FALSE), not null
 #  stripe_user_id         :string
 #  address                :string           default("")
+#  paid_up                :boolean          default(FALSE)
+#  paid_up_date           :date
 #
 
 class Teacher < ActiveRecord::Base
@@ -38,7 +40,10 @@ class Teacher < ActiveRecord::Base
   validates :email,  uniqueness: { case_sensitive: false }
   validates :email, :first_name, :last_name, presence: true
   validates :is_teacher, inclusion: { in: [true, false], message: "%{value} must be set true or false" }
+  validates_confirmation_of :password, message: "should match verification"
   # after_validation :reverse_geocode
+
+  after_initialize :set_paid_up_date
 
   has_many :photos, as: :imageable, dependent: :destroy
 
@@ -47,6 +52,10 @@ class Teacher < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
 
   has_many :identities, dependent: :destroy
+
+  has_many :packages, dependent: :destroy
+
+  has_many :grinds, dependent: :destroy
 
   has_and_belongs_to_many :subjects, touch: true
 
@@ -69,6 +78,10 @@ class Teacher < ActiveRecord::Base
   #scope
   def self.check_if_valid
     teachers = where(is_active: true)
+  end
+
+  def set_paid_up_date
+    self.paid_up_date = 6.month.ago
   end
 
   def full_street_address
@@ -116,6 +129,8 @@ class Teacher < ActiveRecord::Base
     error_message_array.push " you must select a subject" if self.subjects.size < 1
     error_message_array.push " you must enter some experience" if self.experiences.size < 1
     error_message_array.push " you must enter at least one location" if self.locations.size < 1
+    # error_message_array.push " you must pay your subscription for this month " if self.paid_up == false
+
     if error_message_array.empty?
       self.update_attributes(is_active: true) #update is_active attribute
       false
@@ -169,14 +184,18 @@ class Teacher < ActiveRecord::Base
 
   def paypal_verify(params)
     api = PayPal::SDK::AdaptiveAccounts::API.new(
-      :mode      => "sandbox",  # Set "live" for production
-      :app_id    => "APP-80W284485P519543T",
-      :username  => "lllouis_api1.yahoo.com",
-      :password  => "MRXUGXEXHYX7JGHH",
-      :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :device_ipaddress => "127.0.0.1",
-      :sandbox_email_address => "lllouis@yahoo.com" )
-    get_verified_status_request = api.build_get_verified_status( :emailAddress => params[:teacher][:paypal_email], :matchCriteria => "NONE" )
+      :mode      => "live",  # Set "live" for production
+      :app_id    => ENV['PAYPAL_APP_ID'],
+      :username  => ENV['PAYPAL_USER_ID'],
+      :password  => ENV['PAYPAL_PASSWORD'],
+      :signature => ENV['PAYPAL_SIGNATURE']
+       )
+    get_verified_status_request = api.build_get_verified_status( 
+                      :emailAddress => params[:teacher][:paypal_email], 
+                      :matchCriteria => "NAME",
+                      :firstName => self.first_name,
+                      :lastName => self.last_name
+                      )
     response = api.get_verified_status(get_verified_status_request)
     self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?
     response

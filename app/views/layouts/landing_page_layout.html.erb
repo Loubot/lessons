@@ -6,22 +6,18 @@
     <title><%= yield :title %> | Learn Your Lesson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
     <meta name="description" content="<%= yield :description %>">
+    <meta name="google-site-verification" content="6j9_P-85u82HFrJRz37myb-MgCdIKJmearbQSz4aW18" />
+    <meta name="google-site-verification" content="w-AjB4ZfZJeA_zvgq94G8gjGKTHjbIlZme7cA_1a5cM" />
     <%= stylesheet_link_tag    'application' %>
     <%= javascript_include_tag 'application', async: true %>
-    <%= favicon_link_tag 'favicon.ico' %>
+    <%= favicon_link_tag 'favicon3.ico' %>
     <%= csrf_meta_tags %>
     <%= yield :head %>
-    
 
-    <%= render 'partials/shiv' %>
+    <%= render 'partials/shiv' %>   
     
-    
-    <% if Rails.env.production? %>
-      <%= render 'partials/google_analytics' %>
-    <% end %>
   </head>
   <body id="standard_layout">
-    
     
     <%= render 'partials/navs/landing_page_nav' %>
     
@@ -36,10 +32,23 @@
       <%= yield %>  
 
     
-      <%= render 'partials/share_buttons' if !is_mobile? %>
+      
+
+      <% if teacher_signed_in? %>
+        <%= render partial: 'modals/add_authentications_modal' %>
+      <% end %>
+      
+      <% if Rails.env.production? %>
+        <%= render 'partials/google_analytics' %>
+      <% end %>
+
+      <% if !is_mobile? %>
+        <%= render 'partials/socials/share_buttons' %>
+      <% else %>
+        <%= render 'partials/socials/mobile_share_buttons' %>
+      <% end %>
+      
   </body>
+
 </html>
 
-<% if teacher_signed_in? %>
-  <%= render partial: 'modals/add_authentications_modal' %>
-<% end %>

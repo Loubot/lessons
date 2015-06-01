@@ -75,12 +75,55 @@ loadTwitterSDK = ->
   
 
 loadSocials = ->
+  if(jQuery.cookieBar('cookies'))  #jquery cookie bar for eu law
 
-  loadTwitterSDK()
-  bindTwitterEventHandlers() unless twttr_events_bound
+    loadTwitterSDK()
+    bindTwitterEventHandlers() unless twttr_events_bound
 
-  loadFacebookSDK()
-  bindFacebookEvents() unless fb_events_bound
+    loadFacebookSDK()
+    bindFacebookEvents() unless fb_events_bound
+    
+
+  Loader = ->
+
+  Loader.prototype =
+    require: (scripts, callback) ->
+      @loadCount = 0
+      @totalRequired = scripts.length
+      @callback = callback
+      i = 0
+      while i < scripts.length
+        @writeScript scripts[i]
+        i++
+      return
+    loaded: (evt) ->
+      @loadCount++
+      if @loadCount == @totalRequired and typeof @callback == 'function'
+        @callback.call()
+      return
+    writeScript: (src) ->
+      self = this
+      s = document.createElement('script')
+      s.type = 'text/javascript'
+      s.async = true
+      s.src = src
+      s.addEventListener 'load', ((e) ->
+        self.loaded e
+        return
+      ), false
+      head = document.getElementsByTagName('head')[0]
+      head.appendChild s
+      return
+
+  l = new Loader
+  l.require [
+    'https://platform.linkedin.com/in.js?async=true'
+  ], ->
+    IN.init({api_key:'77iyb2qd8pdh8f'})
+    console.log 'All Scripts Loaded'
+    return
+
+ 
 
 $(document).ready loadSocials
 $(document).on 'page:load', loadSocials

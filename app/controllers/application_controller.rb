@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
 
   def is_mobile?
     session[:mobile]
+    
   end
+
+  helper_method :is_mobile?
 
   def update_student_address(params) #update teacher address if 
     if params[:save_address] == 'true'
@@ -22,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :is_mobile?
+  
   private
 
 
@@ -34,7 +37,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :first_name, :last_name, :is_teacher) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :first_name, :last_name, :is_teacher, :password_confirmation, :invitation_token) }
   end
 
 

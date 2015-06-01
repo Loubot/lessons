@@ -5,4 +5,4 @@
 # Disallow: /
 
 
-sitemap: http://lessons-photos.s3.amazonaws.com/sitemaps/sitemap.xml.gz
+Sitemap: http://lessons-photos.s3.amazonaws.com/sitemaps/sitemap.xml.gz

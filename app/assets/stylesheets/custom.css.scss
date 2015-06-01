@@ -226,7 +226,7 @@ hr{
 
 //end of qualifications
 
-//locations page
+//your_business page
 
 .price_alert{
   background: #ebffeb;
@@ -247,7 +247,83 @@ hr{
   margin-bottom: 50px;
 }
 
-//end of locations page
+.package_form_row{
+  margin-top: 20px;
+}
+
+.package_form_well{
+  background-color: #326EA7 !important;
+  padding-bottom: 10px;
+} 
+
+.package_form_header{
+  color: #FFF;
+}
+
+.well_form_header{
+  color: #FFF;
+  // text-align: center;
+}
+
+.well_form_label{
+  color: #FFF;
+}
+
+.saved_packages{
+  background-color: #5491CD;
+  color: #FFF;
+}
+
+
+.display_saved_packages{
+  height: 150px;
+  padding: 30px;
+  border-style: solid;
+  border-width: 1px;
+  //margin-top: 9px;*/
+  border-color: #E6E6E6;
+}
+
+.grind_well{
+  margin-bottom: 10px;
+  background-color: #FFBF00;
+  color: #FFF;
+}
+
+.grind_start_time{
+  color: #111;
+}
+
+.saved_grinds{
+  background-color: #FFBF3F;
+  color: #FFF;
+}
+
+.display_saved_grinds{
+  height: 150px;
+  padding: 30px;
+  border-style: solid;
+  border-width: 1px;
+  //margin-top: 9px;*/
+  border-color: #FFBF3F;
+}
+
+.subscription_container{
+  background-color: #ff3a00;
+  padding-bottom: 10px;
+}
+
+.membership_container{
+  text-align: center;
+  color: #FFF;
+  margin-bottom: 10px;
+}
+
+small.white{
+  color: #FFF;
+}
+
+//end of your_business page
 
 .gray_section{
   background-color: #ff7e64 !important;
@@ -355,7 +431,7 @@ hr{
   // margin-bottom: 20px;
   // margin-top: -22px;
   height: 350px;  
-  // background-image: asset_url('background1.jpg');
+  
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;
   background-size: 100% 100%;
@@ -394,6 +470,12 @@ hr{
   border-top: 1px solid #CCCCC0;
 }
 //end of subject search page*/
+
+// invitaion partial
+.invitation{
+  text-align: center;
+}
+// end of invitation partial
 
 //teachers-area page opening times modal*/
 .second_day{
@@ -562,6 +644,14 @@ hr{
     width: 100%;
   }
 
+  .package_selection_container{
+    text-align: center;
+  }
+
+  .select_error{
+    border-color: red;
+  }
+
 // end of teachers/show_teacher_to_user*/
 
 // teach page*/
@@ -649,12 +739,13 @@ form .glyphicon {
 
 .teach_page_pros_container{
   font-size: 20px;
+  padding: 0 !important;
 }
 
 
 
 .teach_exp_table_container{
- margin-left: 50px;
+ // margin-left: 50px;
 }
 .teach_exp_table{
 
@@ -761,10 +852,21 @@ form .glyphicon {
 //end of teachers/teachers_area*/
 
 // login_modal page*/
-.ds-btn li{ list-style:none; float:left; padding:10px; }
-.ds-btn li a span{padding-left:15px;padding-right:5px;width:100%;display:inline-block; text-align:left;}
-.ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
 
+.login_modal_content{
+  // color: #FFF;
+  background-image: asset_url('tryit.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.forget_password{
+  color: #46b8da;
+}
+
+.ds-btn li{ list-style:none;padding:10px; }
+.ds-btn li a span{padding-right:5px;width:100%;display:inline-block; }
+.ds-btn li a span small{width:100%; display:inline-block; text-align:left;}
 .sign_in_submit{
   display: block;
   margin-left: 23%;
@@ -1132,6 +1234,37 @@ form .glyphicon {
 }
 //end of share_buttons
 
+// mobile_share_buttons
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: block;
+}
+
+.mobile_share_buttons_container{
+  bottom:110px;
+  right:0;
+  position:fixed;
+  z-index:150;
+  _position:absolute;
+  _top:expression(eval(document.documentElement.scrollTop+
+      (document.documentElement.clientHeight-this.offsetHeight)));
+  height:35px;
+}
+
+.mobile_share_buttons{
+  margin-bottom: 5px;
+}
+
+.paypal_image{
+  min-width: 70px !important;
+  min-height: 30px;
+}
+// end of mobile_share_buttons
+
 @media (min-width: 250px){
   // set gutter width  
   .outer-container{
@@ -1228,7 +1361,7 @@ form .glyphicon {
   .lead{
     font-size: 30px !important;
   }
-  #rates{
+  .rates{
     font-size: 30px;
   }
   
@@ -1395,7 +1528,7 @@ form .glyphicon {
   .teachers_reg_photo{
     margin-bottom: 20px;
     margin-top: -22px;
-    height: 450px;  
+    height: 500px;  
     background-image: image_url('tree.jpg');
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;

@@ -1,7 +1,18 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-teachersInfoReady = ->  
+teachersInfoReady = ->
+  $.cookieBar(
+    declineButton: true
+    
+  )
+  
+  if !(jQuery.cookieBar('cookies'))
+    $('#share_buttons').empty()
+    $('#share_buttons').hide()
+    $('#mobile_share_buttons').empty()
+    $('#mobile_share_buttons').hide()
+  
   #////////// remove fb/twitter share buttons
   $(document).on 'click', '.share_buttons_close', ->
     $('#share_buttons').hide()
@@ -16,13 +27,15 @@ teachersInfoReady = ->
 
 # end of qualification form checkbox
 
-  # if $('#website-title').length > 0 
+  # if $('#website-title').length 
     # $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
     # $(window).resize ->
     #   $('#website-title').css 'margin-left', ($('.collapse.navbar-collapse').width() / 4)
 
   $('#qual_left').css('height', $('#qual_form').height())
-  if $('#dropzone').length > 0
+
+  if $('#dropzone').length 
+
     # Dropzone.autoDiscover = false
     try
       dropzone = new Dropzone('#dropzone', {
@@ -61,7 +74,7 @@ teachersInfoReady = ->
 #/////////////End of qualifications visibility checkbox
   
 #////////////Root page subject search with typeahead
-  if $('.typeahead.subject').length > 0
+  if $('.typeahead.subject').length
     $('#main_subject_search').on 'keypress', (e) ->
       e.preventDefault() if e.which == 13
 
@@ -85,7 +98,7 @@ teachersInfoReady = ->
       source: bestPictures.ttAdapter()
 
 
-  if $('.typeahead.county').length > 0
+  if $('.typeahead.county').length
     countyList = getCounties()
     counties = new Bloodhound(
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value")
@@ -104,7 +117,7 @@ teachersInfoReady = ->
     
       source: counties.ttAdapter()
 
-  if $('.review_lesson').length > 0
+  if $('.review_lesson').length
     $('.review_lesson_input').rating
       filled: "glyphicon glyphicon-thumbs-up"
       empty: "glyphicon glyphicon-thumbs-down"
@@ -129,20 +142,20 @@ teachersInfoReady = ->
 #///////////////End of teachers subject_search
 
 #///////////////Autofocus on login modal
-  if $('#login_modal_email').length > 0
+  if $('#login_modal_email').length
     $('#login_modal').on 'shown.bs.modal', ->
       document.getElementById('login_modal_email').focus()
 
 #//////////////End of autofocus on login modal
 
 #///////////////Autofocus teachers subject search input field
-  if $('#teachers_subjects_modal').length > 0
+  if $('#teachers_subjects_modal').length
     $('#teachers_subjects_modal').on 'shown.bs.modal', ->
       document.getElementById('teachers_search_input').focus()
 #///////////////End of autofocus function
 
 #/////////////search results page
-  if $('.search_results_row').length > 0
+  if $('.search_results_row').length
 
     $('.search_results_row').mouseover ->
       $('.image_container').css 'color', 'black'
@@ -157,7 +170,7 @@ teachersInfoReady = ->
 #////////////end of search results page
 
 # ///////////welcome page
-  if $(".stock_photos_container").length > 0
+  if $(".stock_photos_container").length
     h = $('#main_page').height()
     $('#main_page').height(h)
     
@@ -184,7 +197,7 @@ teachersInfoReady = ->
 # //////////end of welcome page
 
 #////////// teachers/form photo partial enable dismissable popover
-  if $('.profile_pic_popover').length > 0
+  if $('.profile_pic_popover').length
     $("html").click (e) ->
       $(".profile_pic_popover").popover "hide"
       
@@ -200,18 +213,27 @@ teachersInfoReady = ->
     
 #////////// end of teachers/form photo partial enable dismissable popover
 
-#//// show_teacher_to_user add price to form modal
+#//// show_teacher_to_user add price to form modal  
 
   if $('.btn_book_now').length
-    currency = $('#teachers_rate').text()
-    
-    result = currency.replace(/[^\d.]/g,"")
-    # result = parseFloat(currency)
-    
-    $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value=#{result}> """ 
-    # $(document).on 'change', '#rates', ->
-    #   $('#create_event_form').find('#event_rate').remove()
-    # $('#create_event_form').append """ <input id="event_rate" name="event[rate]" type="hidden" value="#{$('#rates').val()}"> """ 
+    if (gon.teacher_id?)
+      if (window.ga?)
+        ga('create', 'UA-57834504-3', 'auto')
+    #////////////////Teachers area block book checkbox
+    $(document).on 'change', '#Multiple', ->
+
+      $('#no_of_weeks').animate height: 'toggle', 100
+
+    #///////////////End of Teachers area block book checkbox
+    $(document).on 'submit', '#create_event_form', (e) -> #stop event form to check week no is valid
+      
+      e.preventDefault()
+      if ($('#no_of_weeks').val() == '' && $('#Multiple').prop 'checked')
+        $('#no_of_weeks').addClass 'select_error'
+      else
+
+        $.post($(@).attr('action'), $(@).serialize()) #submit form remotely
+    #end of submit create_event_form
 
     do () ->
       img = new Image()
@@ -228,8 +250,8 @@ teachersInfoReady = ->
       
       # $('.profile_pic_container').css 'background-image', "url(#{img.src})"
     
-    
-    $('.fotorama').fotorama  #initiate fotorama picture displayer
+    #initiate fotorama picture displayer
+    $('.fotorama').fotorama  
       width: 333
       transition: "crossfade"
       loop: true
@@ -240,8 +262,7 @@ teachersInfoReady = ->
       arrows: true     
       fit: 'cover'
       thumbfit: 'cover'
-    # $(".fotorama").on "fotorama:load", (e, fotorama) ->
-    #   $('.show_teacher_profile_section').css 'height', $('.fotorama').css 'height'
+    
 
     $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
       # e.target # newly activated tab
@@ -263,20 +284,60 @@ teachersInfoReady = ->
 
     #// end of display appropraite booking option
 
-  if $('.show_teacher_profile_container').length
-    AnyTime.noPicker 'payment_choice_datepicker'
-    AnyTime.noPicker 'location_only_datepicker'
-    $("#payment_choice_datepicker").AnyTime_picker
-      format: "%Y-%m-%d"
-      placement: 'inline'
-      hideInput: true
-    $("#location_only_datepicker").AnyTime_picker
-      format: "%Y-%m-%d"
-      placement: 'inline'
-      hideInput: true  
+    #the_one_modal
+    if $('#the_one_modal').length
+      $('#the_one_modal').on 'hidden.bs.modal', ->
+        $('.payment_form_container').empty()
+        $('.display_teachers_location').empty()
+        $('.returned_locations_container').empty()
+        
+      $('#the_one_modal').on 'shown.bs.modal', ->
+        
+        document.getElementById("subject_id").selectedIndex = 0
+      # document.getElementById("select_subject").selectedIndex = 0     
+      $(document).on 'change', '.select_subject', ->
+        $('.select_subject').submit()
+        # $.ajax
+        #   url: 'get-locations'
+        #   data:            
+        #     subject_id: $('.select_subject').val()
+        #     id: $('#select_subjects_teacher_id').val()
+
+      $(document).on 'change', '.select_home_or_location', ->
+        $('.location_choice').val $('.select_home_or_location').val()
+        $('.subject_id').val $('.select_subject').val()
+        $('.get_subjects_form').submit()
+        # $.ajax
+        #   url: 'get-subjects'
+        #   data:
+        #    id: $('#select_subjects_teacher_id').val()
+        #    subject_id: $('.select_subject').val()
+        #    location_choice: $('.select_home_or_location').val()
+      
+      # $(document).on 'click', '#location_only_datepicker', ->
+      #   console.log 'a'
+      #   AnyTime.noPicker 'location_only_datepicker'
+      #   $("#location_only_datepicker").AnyTime_picker
+      #     format: "%Y-%m-%d"
+      #     placement: 'inline'
+      #     hideInput: true
+
+      $(document).on 'change', '.teachers_location_selection', ->
+        $('.teachers_locations_subject').val $('.select_subject').val()
+        $('.get_locations_price_form').submit()
+        # $.ajax
+        #   url: 'get-locations-price'
+        #   data:
+        #     id: $('#select_subjects_teacher_id').val()
+        #     subject_id: $('.select_subject').val()
+        #     location_id: $('.teachers_location_selection').val()
+
+    # end of the_one_modal
+
     
 
-    $('.home_booking_form').submit (e) -> #prevent paypal for submitting
+    $(document).on 'submit', '.home_booking_form', (e) -> #prevent paypal for submitting
+      
       e.preventDefault()      
       
       address = null
@@ -305,6 +366,17 @@ teachersInfoReady = ->
         
         $('.save_address').val 'false'
 
+        # append package id to packages modal when packages modal is opened
+    $('#payment_packages_modal').on 'shown.bs.modal', ->
+      
+      $('.package_booking_form').append """ 
+                        <input type="hidden" name="package_id" class="package_id" value="#{ $('.package_select_box').val() }"> 
+                                    """
+
+    $(document).on 'change', '.package_select_box', ->
+      
+        #change package_id passed to controller when dropdown menu is changed
+      $('.package_id').val $(@).val()
 
 
 
@@ -312,9 +384,11 @@ teachersInfoReady = ->
 #//// end of show_teacher_to_user add price to form modal
 
 #///////////jquery for popover previous_lessons_teacher
-  if ('.previous_lessons_header').length > 0
+  if ('.previous_lessons_header').length
+
     $("html").click (e) ->
         $(".review_hover").popover "hide"
+
         
 
       $(".review_hover").popover(
@@ -325,23 +399,32 @@ teachersInfoReady = ->
         $('.review_hover').not(this).popover('hide')
         $(this).popover "toggle"
         e.stopPropagation()
-  
-
-
-  # $('.review_hover').mouseleave ->
-  #   $(@).popover 'hide'
 #////////// end review script previous_lessons_teacher
 
+  # teachers business page, add subject name to for before submitting
+  if $('.create_package_form')
+    $('.create_package_form').submit (e)->
+      e.preventDefault()
+      subject_name = $('.package_subject_name :selected').text()
+      $('.create_package_form').append """ 
+                  <input value="#{ subject_name }" type="hidden" name="package[subject_name]">
+                                        """      
+      @.submit()
+  if $(".grind_form")
+    $(".grind_form").submit (e) ->
+      e.preventDefault()
+      subject_name = $(".grind_subject_name :selected").text()
+      $(".grind_form").append """
+                    <input value="#{ subject_name }" type="hidden" name="grind[subject_name]">
+                                 """
+      @.submit()
 
-#////////////////Teachers area block book checkbox
-$(document).on 'change', '#Multiple', ->
-
-  $('#no_of_weeks').animate height: 'toggle', 100
-
-#///////////////End of Teachers area block book checkbox
+#end of  teachers business page, add subject name to for before submitting
 
 
-$(document).ready(teachersInfoReady)
+
+
+$(document).on('ready', teachersInfoReady)
 $(document).on('page:load', teachersInfoReady)
 $(window).unload(teachersInfoReady)
 
@@ -349,4 +432,4 @@ getCounties = () ->
   return ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
-          'Waterford','Westmeath','Wexford','Wicklow']
+          'Waterford','Westmeath','Wexford','Wicklow']    

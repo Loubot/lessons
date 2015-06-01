@@ -20,13 +20,13 @@
 #  teacher_id   :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  all_day_mon  :boolean          default("false")
-#  all_day_tues :boolean          default("false")
-#  all_day_wed  :boolean          default("false")
-#  all_day_thur :boolean          default("false")
-#  all_day_fri  :boolean          default("false")
-#  all_day_sat  :boolean          default("false")
-#  all_day_sun  :boolean          default("false")
+#  all_day_mon  :boolean          default(FALSE)
+#  all_day_tues :boolean          default(FALSE)
+#  all_day_wed  :boolean          default(FALSE)
+#  all_day_thur :boolean          default(FALSE)
+#  all_day_fri  :boolean          default(FALSE)
+#  all_day_sat  :boolean          default(FALSE)
+#  all_day_sun  :boolean          default(FALSE)
 #
 
 class Opening < ActiveRecord::Base

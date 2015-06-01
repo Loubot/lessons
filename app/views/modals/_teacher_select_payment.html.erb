@@ -20,7 +20,7 @@
                 We do not store your Stripe password.
                 <%= form_tag 'https://connect.stripe.com/oauth/authorize', method: 'get', class: 'stripe_reg_button' do %>
                   <%= hidden_field_tag :response_type, 'code' %>
-                  <%= hidden_field_tag :client_id, 'ca_4qQTgrfr1l9xHgK7qnrNZbpXz2tpBecX' %>
+                  <%= hidden_field_tag :client_id, ENV['STRIPE_CLIENT_ID'] %>
                   <%= hidden_field_tag :scope, 'read_write' %>
 
                   <%= hidden_field_tag :redirect_uri, 'https://learn-your-lesson.herokuapp.com/stripe-auth-user' %>
@@ -35,7 +35,7 @@
               <p class="paypal_reg_explanation">Please enter your paypal login email address. We will never ask you for your paypal
                password.</p>
                
-               <%= form_for @context, class: 'paypal_email_form form-horizontal' do |f| %>
+               <%= form_for @teacher, class: 'paypal_email_form form-horizontal' do |f| %>
                  <div class="form-group">
                    <div class="col-sm-10">
                      <%= f.email_field :paypal_email, placeholder: 'Paypal Email', class: 'form-control' %>

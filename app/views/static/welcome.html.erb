@@ -1,14 +1,12 @@
 
   <% content_for :head do %>
-    <meta property="og:title"
-    content="Learn Your Lesson" />
+    <meta property="og:title" content="Search page" />
     <meta property="og:site_name" content="Learn your lesson" />
-    <meta property="og:url"
-    content="<%= request.original_url %>" />
-    <meta property="og:description" content="What do you want to learn today?" />
-    <meta property="og:type" content="article" />
-    <meta property="og:image"
-    content= "https://learn-your-lesson.herokuapp.com/assets/silhouette-ebed8878a5f8318d49bb55efa8cfc014.jpg" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:description" content="Learn Your Lesson, a place for teachers to advertise their expertise and grow their client base. Book a lesson here." />
+    <meta property="fb:app_id" content="<%= ENV['FACEBOOK_APP_ID'] %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content= "https://www.learnyourlesson.ie/assets/facebook_logo.jpg" />
   <% end %>
   <% content_for :title, "The place to connect with local teachers and learn" %>
   <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
@@ -19,7 +17,7 @@
       
     </div> <!-- end of welcome_page_form__header -->
 
-
+    
     <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
       <div class="form-group">
         <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
