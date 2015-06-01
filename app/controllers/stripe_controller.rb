@@ -238,12 +238,16 @@ class StripeController < ApplicationController
     # conn = Net::HTTP.new("https://connect.stripe.com/oauth/token")
     # r = conn.post('/oauth/token', params)
     # p "(((((((((((((((((((( #{r}"
+    @teacher = Teacher.find(params['state'].to_i)
     if json_resp['access_token'].present?
-      @teacher = Teacher.find(params['state'].to_i)
-      flash[:success] = "Successfully registered with Stripe"
+      
       @teacher.update_attributes(stripe_access_token: json_resp['access_token'], stripe_user_id: json_resp['stripe_user_id'])
+      flash[:success] = 'Successfully registered with Stripe. Stripe code updated'
+    else
+      flash[:danger] = "Couldn't update stripe code. #{json_resp['error']}"
+      @teacher.update_attributes(stripe_access_token: '')
     end
-    flash[:success] = 'Stripe code updated'
+    
     redirect_to edit_teacher_path(id: params[:state])
   end
 
