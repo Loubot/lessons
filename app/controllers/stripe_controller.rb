@@ -101,7 +101,6 @@ class StripeController < ApplicationController
       :amount             => 50,
       :description        => cart.tracking_id,
       :currency           => 'eur',
-      :application_fee    => 300,
       :source             => params[:stripeToken]
       
       },
