@@ -106,14 +106,18 @@ class StripeController < ApplicationController
       },
       @teacher.stripe_access_token
     )
-    puts charge.inspect
+    puts "charge inspect #{charge.inspect}"
     if charge['paid'] == true
+      flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+      redirect_to root_url
       # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
       # event = Event.create!(cart.params)
       # puts "Stripe successful event created id: #{event.id}"
+    else
+      flash[:danger] = "Payment failed"
+      redirect_to :back
     end
-    flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
-    redirect_to root_url
+    
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
