@@ -21,11 +21,12 @@ Rails.application.routes.draw do
     resources :identities, only: [:destroy]
     resources :invitations, only: [:create]
     resources :grinds, only: [:create, :destroy]
-    
+    resources :experiences,   only: [:create, :update, :destroy]
     resources :packages, only: [:create, :destroy]
-
-
+    resources :locations, only: [:create, :update, :destroy]
+    resources :prices, only: [:create, :update, :destroy]
   end
+
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
   get         '/add-map'                =>  'teachers#add_map'
@@ -34,11 +35,8 @@ Rails.application.routes.draw do
   post        'get-locations-price'     =>  'teachers#get_locations_price'
   post        'teachers/check-home-event'      => 'teachers#check_home_event'
 
-  resources :locations, only: [:create, :update, :destroy]
-
-  resources :prices, only: [:create, :update, :destroy]
   
-  resources :experiences,   only: [:create, :update, :destroy]
+  
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
     member do      
