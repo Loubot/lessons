@@ -25,6 +25,7 @@
 
                   <%= hidden_field_tag :redirect_uri, 'http://c35985a.ngrok.com/stripe-auth-user' %>
 
+
                   <%= hidden_field_tag :stripe_landing, 'login' %>
                   <%= hidden_field_tag :state, current_teacher.id %>
                   <%= submit_tag 'Stripe Registration', class: 'btn btn-info' %>
