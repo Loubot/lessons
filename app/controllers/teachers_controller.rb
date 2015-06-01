@@ -2,7 +2,8 @@ class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
 	before_action :check_id, except: [:add_map, :show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
-	before_action :check_is_teacher, except: [:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
+	before_action :check_is_teacher, only: [:edit, :teachers_area, :qualification_form, :your_business, :change_profile_pic, :add_map ]
+																					#[:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	
 	include TeachersHelper
 
@@ -45,7 +46,7 @@ class TeachersController < ApplicationController
 	end
 
 	def edit
-		@teacher = Teacher.includes(:experiences,:subjects, :photos, :identities).find(params[:id])
+		@teacher = Teacher.includes(:experiences,:subjects, :photos,:locations, :prices, :identities).find(params[:id])
 		@photos = @teacher.photos
 		# @photo = @context.photos.new
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
@@ -143,7 +144,7 @@ class TeachersController < ApplicationController
 	end	
 
 	def modals #render modal content 
-		@teacher = Teacher.find(params[:id])
+		@teacher = current_teacher
 		@current_teacher = current_teacher
 		render 'modals/show_teacher/_payment_packages_modal', layout: false
 	end
