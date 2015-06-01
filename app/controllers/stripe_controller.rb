@@ -98,7 +98,7 @@ class StripeController < ApplicationController
                               :tracking_id => cart.tracking_id, 
                               home_booking: true
                               },
-      :amount             => @amount,
+      :amount             => 50,
       :description        => cart.tracking_id,
       :currency           => 'eur',
       :application_fee    => 300,

@@ -1,4 +1,4 @@
-<% cache([@teacher, current_teacher,'return_home_price']) do %>
+<% cache([@teacher, current_teacher,'returns_home_price']) do %>
 <% if @event.instance_of? Array %>
   $('#new_event').prepend """ <div class='payment_choice_error'>"""
   $('.payment_choice_error').append("<%= escape_javascript(@event[0].to_s) %>")
@@ -50,7 +50,7 @@
         <% if @teacher.stripe_access_token != "" %>
           <%= form_tag home_booking_stripe_path, class: 'home_booking_form', method: 'post' do %>
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_live_UpVcCDAFOmF3oaIyddVvFbAL"
+            data-key="<%= ENV['STRIPE_PUBLIC_KEY'] %>"
             data-description="Book your lesson"
             data-currency="eur"
             data-description="This is the description"
