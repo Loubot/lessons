@@ -45,7 +45,8 @@ module StripeHelper
 		                  )
 
     TeacherMailer.delay.home_booking_mail_teacher(cart)
-    
+    TeacherMailer.delay.home_booking_mail_student(cart)
+
   end #end of home_booking_transaction_and_mail
 
 	def transaction_and_mail(json_response, cart)
