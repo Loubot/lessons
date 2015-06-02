@@ -111,9 +111,7 @@ class StripeController < ApplicationController
     if charge['paid'] == true
       flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
       redirect_to :back
-      # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
-      # event = Event.create!(cart.params)
-      # puts "Stripe successful event created id: #{event.id}"
+      home_booking_transaction_and_mail(json_response, cart)
     else
       flash[:danger] = "Payment failed"
       redirect_to :back
