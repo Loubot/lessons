@@ -99,7 +99,7 @@ class StripeController < ApplicationController
                               :tracking_id => cart.tracking_id, 
                               home_booking: true
                               },
-      :amount             => 50,
+      :amount             => @amount,
       :description        => cart.tracking_id,
       :currency           => 'eur',
       :source             => params[:stripeToken]
@@ -107,11 +107,18 @@ class StripeController < ApplicationController
       },
       @teacher.stripe_access_token
     )
-    puts "charge inspect #{charge.inspect}"
+    
+    p "charge inspection #{charge.inspect}"
     if charge['paid'] == true
-      flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
-      redirect_to :back
-      home_booking_transaction_and_mail(json_response, cart)
+      flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'      
+
+      f = home_booking_transaction(charge, params[:student_id], params[:teacher_id])
+
+      TeacherMailer.home_booking_mail_teacher(params, params[:home_address], Date.parse(params[:start_time]).strftime("%H:%M")).deliver_now
+      TeacherMailer.home_booking_mail_student(params, params[:home_address], Date.parse(params[:start_time]).strftime("%H:%M")).deliver_now
+
+      p "hsdfasdf #{f}"
+      redirect_to :back and return
     else
       flash[:danger] = "Payment failed"
       redirect_to :back
@@ -175,7 +182,7 @@ class StripeController < ApplicationController
       p "%%%%%%%% #{json_response['data']['object']['metadata']['home_booking']}"
 
       if cart.booking_type == 'home' #if it's a home booking
-      	home_booking_transaction_and_mail(json_response, cart) #stripe helper
+      	# home_booking_transaction_and_mail(json_response, cart) #stripe helper
         p "***************** home booking"
         render status: 200, nothing: true
       elsif cart.booking_type == 'package' 
