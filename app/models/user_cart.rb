@@ -31,7 +31,7 @@ class UserCart < ActiveRecord::Base
   validates :tracking_id, uniqueness: true
 
   # before_update :save_tracking_id
-  # before_save :save_tracking_id
+  # before_create :save_tracking_id
   before_validation :save_tracking_id
 
   def save_tracking_id
@@ -54,7 +54,10 @@ class UserCart < ActiveRecord::Base
   end
 
   def self.home_booking_cart(params, price)
-    cart = self.create(
+    puts "cart params #{params}"
+    cart = self.find_or_initialize_by(student_id: params[:student_id])
+
+    cart.update_attributes(
                     teacher_id: params[:teacher_id],
                     student_id: params[:student_id],
                     params: params,
@@ -68,13 +71,13 @@ class UserCart < ActiveRecord::Base
                     package_id: 0,
                     amount: price.to_f
                   )
-    cart.save
+    # cart.save!
 
     cart
   end
 
   def self.create_single_cart(params, teacher_email, current_teacher)
-    cart = where(student_id: params[:event][:student_id]).first_or_create
+    cart = self.new
     cart.update_attributes(
                             teacher_id: params[:event][:teacher_id],
                             params: Event.get_event_params(params),

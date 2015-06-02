@@ -34,13 +34,9 @@
             <%= hidden_field_tag :paypal, '1' %>
             <%= hidden_field_tag :home_address, '', class: 'home_address' %>
             <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
-            <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
+            <%= hidden_field_tag :tracking_id, @cart.tracking_id %>
             <%= j(hidden_field_tag :price_id,  @price.id) %>
             <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
-
-
-
-
 
           <% end %>
         <% end %>
@@ -72,6 +68,7 @@
             <%= hidden_field_tag :home_address, '', class: 'home_address' %>        
             <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
             <%= j(hidden_field_tag :price_id,  @price.id) %>
+            <%= hidden_field_tag :tracking_id, @cart.tracking_id %>
           <% end %>
 
         <% end %>

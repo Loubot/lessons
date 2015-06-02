@@ -81,16 +81,17 @@ class StripeController < ApplicationController
     update_student_address(params) #application controller
 
     price = Price.find(params[:price_id])
-    
+    cart = UserCart.find_by(student_id: current_teacher.id)
+    cart.update_attributes(address:params[:home_address])
     if params[:home_address] == ''
       flash[:danger] = "Address can't be blank"
       redirect_to :back and return
     end
     
-  	cart = UserCart.home_booking_cart(params,price.price)
+  	# cart = UserCart.home_booking_cart(params,price.price)
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
   	# 
-
+    
   	@amount = (price.price * 100 ).to_i
     @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
@@ -109,7 +110,7 @@ class StripeController < ApplicationController
     puts "charge inspect #{charge.inspect}"
     if charge['paid'] == true
       flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
-      redirect_to root_url
+      redirect_to :back
       # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
       # event = Event.create!(cart.params)
       # puts "Stripe successful event created id: #{event.id}"
@@ -170,6 +171,7 @@ class StripeController < ApplicationController
       cart = UserCart.find_by(tracking_id: json_response['data']['object']['metadata']['tracking_id'])
       # puts "Cart %%%  #{cart.inspect}"
       # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
+      p "No cart" if !cart
       render status: 200, nothing: true and return if !cart
 
       p "%%%%%%%% #{json_response['data']['object']['metadata']['home_booking']}"
@@ -214,6 +216,7 @@ class StripeController < ApplicationController
 
       
     else #no transaction found, render nothing
+      p "Couldn't find transaction"
       render status: 200, nothing: true
     end   #end of !if Transaction
   end #end of store_stripe

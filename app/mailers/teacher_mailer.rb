@@ -63,7 +63,10 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"TNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
                                           { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
-                                          { "name"=>"LESSONLOCATION", "content"=>cart.address }
+                                          { "name"=>"NUMBERLESSONS",  "content"=>1 },
+                                          { "name"=>"LESSONLOCATION", "content"=>cart.address },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.params['start_time(5i)'] },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:date] }
                                         ]
                           }],
                   
@@ -109,6 +112,8 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"SNAME",          "content"=>cart.student_name   },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email  },
                                           { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.params['start_time(5i)'] },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:date] },
                                           { "name"=>"LESSONLOCATION", "content"=>cart.address }
                                         ]
                           }],

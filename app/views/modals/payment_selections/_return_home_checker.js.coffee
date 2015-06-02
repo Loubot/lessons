@@ -5,7 +5,7 @@ $('.display_teachers_location').empty()
 # $('.returned_locations_container').empty()
 
 $('.payment_form_container').append """ 
-    <h4>Price: <%= j(number_to_currency(@price.price, unit: '€')) %></h4>
+    <h4>Price: <%= j(number_to_currency(@price.price, unit: '€')) %><small> At your house</small></h4>
   """
 
 
@@ -67,6 +67,11 @@ $('.payment_form_container').append """
                 </div> <%# end of row %>
                 <input type="hidden" name="id" id="id" value="<%= @teacher.id %>">
                 <%= j(hidden_field :event, :teacher_id, value: @teacher.id) %>
+                <%= j(hidden_field :event, :teacher_email, value: @teacher.email) %>
+                <%= j(hidden_field :event, :student_email, value: current_teacher.email) %>
+                <%= j(hidden_field :event, :student_id, value: current_teacher.id) %>
+                <%= j(hidden_field :event, :teacher_name, value: @teacher.full_name) %>
+                <%= j(hidden_field :event, :student_name, value: current_teacher.full_name) %>
                 <%# j(hidden_field :event, :rate, value: @price.price) %>
                 <%= j(hidden_field_tag :price_id,  @price.id) %>
 

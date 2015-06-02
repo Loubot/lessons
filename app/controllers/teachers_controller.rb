@@ -199,9 +199,11 @@ class TeachersController < ApplicationController
 		if event.valid?
 			@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
 			@event = event
-			
-			
+			p "start time #{params[:start_time]}"
+    	@cart = UserCart.home_booking_cart(params[:event], @price.price)
+			p "event is valid!!!!!!!!!!"
 		else
+			p "event is not valid&&&&&&&&&&&&&&&&&&S"
 			@event = event.errors.full_messages
 		end
 		render 'modals/payment_selections/_return_home_price.js.coffee'

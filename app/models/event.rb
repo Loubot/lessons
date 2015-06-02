@@ -85,7 +85,7 @@ class Event < ActiveRecord::Base
   end
 
 
-  def self.create_confirmed_events(cart) ##start here!!!!!
+  def self.create_confirmed_events(cart)
     #cart[:booking_type]
     if cart[:booking_type] == 'multiple'
       p "heeeeeeelllll1"

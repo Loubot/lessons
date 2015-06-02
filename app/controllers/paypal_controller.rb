@@ -162,8 +162,10 @@ class PaypalController < ApplicationController
   def home_booking_paypal
     update_student_address(params) #application controller
     price = Price.find(params[:price_id])
-    
-    cart = UserCart.home_booking_cart(params, price.price)
+    cart = UserCart.find_by(student_id: current_teacher.id)
+    cart.update_attributes(address:params[:home_address])
+    p "start time #{params[:start_time]}"
+    # cart = UserCart.home_booking_cart(params, price.price)
     # p cart.home_booking
     # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
     # render status: 200, nothing: true
@@ -174,7 +176,7 @@ class PaypalController < ApplicationController
       :password      => ENV['PAYPAL_PASSWORD'],
       :signature     => ENV['PAYPAL_SIGNATURE'],
       :app_id        => ENV['PAYPAL_APP_ID'],
-      :sandbox       => false
+      :sandbox       => true
     )
 
     client.execute(:Pay,
@@ -182,8 +184,8 @@ class PaypalController < ApplicationController
       :currency_code   => "EUR",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
-      :return_url      => "https://www.learnyourlesson.ie/welcome",
-      :ipn_notification_url => 'https://www.learnyourlesson.ie/store-paypal',
+      :return_url      => request.referrer,
+      :ipn_notification_url => 'http://72581b0c.ngrok.com/store-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: 0.01 } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -210,7 +212,7 @@ class PaypalController < ApplicationController
   
   def store_paypal
     
-    uri = URI.parse('https://www.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
     http.read_timeout = 60
