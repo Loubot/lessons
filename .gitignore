@@ -22,6 +22,7 @@ config/database.yml
 public/sitemaps/
 public/deploy/
 .env
+Gemfile.lock
 
 
 # git rm -r --cached .

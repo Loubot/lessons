@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-
+ruby '2.1.2', platforms: [:ruby]
 
 ruby '2.0.0', platforms: [:mingw, :mswin]
 
-ruby '2.1.2', platforms: [:ruby]
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 

@@ -12,10 +12,10 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
   puts "postion #{params[:search_position]}"
   
   # new_params = params
-  params.merge!({ :search_position => '' }) if params[:search_position].blank? #add search positiong if it's missing
+  # params.merge!({ :search_position => '' }) if params[:search_position].blank? #add search positiong if it's missing
   
   
-    if !params[:search_position].empty? && !params[:search_subjects].empty? #subject and location
+    if !params.has_key?(:search_position) && !params.has_key?(:search_subjects) #subject and location
       ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
       @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
       
@@ -27,7 +27,7 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
         @teachers
       end
 
-    elsif !params[:search_position].empty? && params[:search_subjects].empty? #location but not subject
+    elsif !params.has_key?(:search_position) && params.has_key?(:search_subjects)? #location but not subject
       ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
       @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
 
@@ -39,7 +39,7 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
         @teachers
       end          
 
-    elsif params[:search_position].empty? && !params[:search_subjects].empty? #no location and subject
+    elsif params.has_key?(:search_position) && !params.has_key?(:search_subjects) #no location and subject
       # ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
       @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).paginate(page: params[:page])
 
@@ -57,7 +57,7 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
         @teachers 
       end
 
-    elsif params[:search_position].empty? && params[:search_subjects].empty? #no location or subject
+    elsif params.has_key?(:search_position) && params.has_key?(:search_subjects) #no location or subject
       []
     else
       []
