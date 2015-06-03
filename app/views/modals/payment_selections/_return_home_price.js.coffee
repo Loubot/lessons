@@ -1,4 +1,4 @@
-<% cache([@teacher, current_teacher,'returns_home_price']) do %>
+
 <% if @event.instance_of? Array %>
   $('#new_event').prepend """ <div class='payment_choice_error'>"""
   $('.payment_choice_error').append("<%= escape_javascript(@event[0].to_s) %>")
@@ -63,7 +63,7 @@
                         
                    
             <%= j(hidden_field_tag :current_teacher, current_teacher.id) %> 
-            <%= hidden_field_tag :start_time, Time.now %>           
+            <%= hidden_field_tag :start_time, DateTime.now %>           
             <%= hidden_field_tag :end_time, Time.now + 5.minutes %>   
             <%= hidden_field_tag :home_address, '', class: 'home_address' %>        
             <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
@@ -104,4 +104,3 @@
 
                               """
 <% end %> <%# end of if statement %>
-<% end %>

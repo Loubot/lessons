@@ -77,6 +77,7 @@ class StripeController < ApplicationController
   #end of membership payments
 
   def home_booking_stripe
+    p "stripe submit"
 
     update_student_address(params) #application controller
 
@@ -110,14 +111,13 @@ class StripeController < ApplicationController
     
     p "charge inspection #{charge.inspect}"
     if charge['paid'] == true
-      flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'      
+      flash[:success] = 'Payment was successful. You will receive an email soon. Time and date to be confirmed'      
 
-      f = home_booking_transaction(charge, params[:student_id], params[:teacher_id])
+      home_booking_transaction(charge, params[:student_id], params[:teacher_id])
 
-      TeacherMailer.home_booking_mail_teacher(params, params[:home_address], Date.parse(params[:start_time]).strftime("%H:%M")).deliver_now
-      TeacherMailer.home_booking_mail_student(params, params[:home_address], Date.parse(params[:start_time]).strftime("%H:%M")).deliver_now
+      TeacherMailer.home_booking_mail_teacher(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M")).deliver_now
+      TeacherMailer.home_booking_mail_student(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M")).deliver_now
 
-      p "hsdfasdf #{f}"
       redirect_to :back and return
     else
       flash[:danger] = "Payment failed"
@@ -129,7 +129,7 @@ class StripeController < ApplicationController
       flash[:error] = e.message
       redirect_to charges_path
 
-  end #end of single_booking_stripe
+  end #end of home_booking_stripe
 
   def create_package_booking_stripe
     p "params #{params}"
