@@ -60,8 +60,12 @@
                 <%= hidden_field_tag :amount, '', class: 'rate' %>                
                 <%= hidden_field_tag :tracking_id, '', class: 'tracking_id' %>        
                 <%= hidden_field_tag :current_teacher, '', class: 'stripe_teacher' %> 
-                <%= hidden_field_tag :teacher_id, params['id'] %> 
-                <%= hidden_field_tag :cart_id, '', class: 'payments_modal_users_cart' %> 
+                <%= hidden_field_tag :teacher_id, '', class: 'payments_modal_teacher_id' %> 
+                <%= hidden_field_tag :student_id, '', class: 'payments_modal_student_id' %> 
+                <%= hidden_field_tag :subject_id, '', class: 'payments_modal_subject_id' %> 
+                <%= hidden_field_tag :start_time, '', class: 'payments_modal_start_time' %> 
+                <%= hidden_field_tag :end_time, '', class: 'payments_modal_end_time' %> 
+                <%# hidden_field_tag :cart_id, '', class: 'payments_modal_users_cart' %> 
           
           
               <% end %>

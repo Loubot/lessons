@@ -13,32 +13,36 @@ class StripeController < ApplicationController
 
   def stripe_create
    # Amount in cents
-  	puts "tracking_id%%%%%%%%% #{params[:tracking_id]}"
-    @amount = params[:amount].to_i * 100    
-    @teacher = Teacher.find(params[:teacher_id])
-    charge = Stripe::Charge.create({
-      :metadata           => { :tracking_id => params[:tracking_id] },
-      :amount             => @amount,
-      :description        => "#{params[:tracking_id]}",
-      :currency           => 'eur',
-      :application_fee    => 300,
-      :source             => params[:stripeToken]
+    begin
+    	puts "tracking_id%%%%%%%%% #{params[:tracking_id]}"
+      @amount = params[:amount].to_i * 100    
+      @teacher = Teacher.find(params[:teacher_id])
+      charge = Stripe::Charge.create({
+        :metadata           => { :tracking_id => params[:tracking_id] },
+        :amount             => @amount,
+        :description        => "#{params[:tracking_id]}",
+        :currency           => 'eur',
+        :application_fee    => 300,
+        :source             => params[:stripeToken]
+        
+        },
+        @teacher.stripe_access_token
+      )
+      puts charge.inspect
+      if charge['paid'] == true
+        Event.create_confirmed_events(params) #Event model    
+
+        single_transaction(charge, params) #stripe_helper
+        flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+           
+        redirect_to :back  
       
-      },
-      @teacher.stripe_access_token
-    )
-    puts charge.inspect
-    if charge['paid'] == true
-      # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
-      # event = Event.create!(cart.params)
-      # puts "Stripe successful event created id: #{event.id}"
-    end
-    flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
-    redirect_to root_url
+      end
+    
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
-      redirect_to charges_path
+      redirect_to :back
     
   end #end of stripe_create
 
@@ -188,7 +192,7 @@ class StripeController < ApplicationController
       p "%%%%%%%% #{json_response['data']['object']['metadata']['home_booking']}"
 
       if cart.booking_type == 'home' #if it's a home booking
-      	# home_booking_transaction_and_mail(json_response, cart) #stripe helper
+      	
         p "***************** home booking"
         render status: 200, nothing: true
       elsif cart.booking_type == 'package' 
@@ -207,7 +211,7 @@ class StripeController < ApplicationController
       	puts "cart params #{cart_params}"
       	puts "start time #{cart_params[:start_time]}"
 
-      	transaction_and_mail(json_response, cart) #stripe_helper      
+      	   
       	
 
       	# Transaction.create!(json_response)

@@ -293,7 +293,9 @@ teachersInfoReady = ->
         
       $('#the_one_modal').on 'shown.bs.modal', ->
         
-        document.getElementById("subject_id").selectedIndex = 0
+        $("select").each ->
+          $(this).val($(this).find('option[selected]').val())
+        
       # document.getElementById("select_subject").selectedIndex = 0     
       $(document).on 'change', '.select_subject', ->
         $('.select_subject').submit()

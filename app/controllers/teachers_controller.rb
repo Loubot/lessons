@@ -185,6 +185,7 @@ class TeachersController < ApplicationController
 	def get_locations_price
 		p "yayd"
 		@event = Event.new
+		@subject_id = params[:teachers_locations][:subject_id]
 		@rate = Price.where(
 												teacher_id: params[:teachers_locations][:teacher_id], 
 												subject_id: params[:teachers_locations][:subject_id], 

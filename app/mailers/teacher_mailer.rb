@@ -2,16 +2,13 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def mail_teacher(student, student_name, teacher, start_time, end_time)
-    p 'test mail start'
-
-    p "start time #{start_time} end time #{end_time}"
-
-    startTime = start_time
-    endTime = end_time
+  def single_booking_mail_teacher(student, student_name, teacher, start_time, end_time)
+    
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name ="teachers-home-booking-to-student"
+      template_content = []
       message = {  
        :subject=> "You have a booking",  
        :from_name=> "Learn Your Lesson",  
