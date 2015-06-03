@@ -15,14 +15,15 @@ class StripeController < ApplicationController
    # Amount in cents
     begin
     	puts "tracking_id%%%%%%%%% #{params[:tracking_id]}"
-      @amount = params[:amount].to_i * 100    
+      @amount = (Price.find(session[:price_id]).price * 100 ).to_i
       @teacher = Teacher.find(params[:teacher_id])
+      lesson_location = Location.find(session[:location_id]).name
       charge = Stripe::Charge.create({
         :metadata           => { :tracking_id => params[:tracking_id] },
         :amount             => @amount,
         :description        => "#{params[:tracking_id]}",
         :currency           => 'eur',
-        :application_fee    => 300,
+        # :application_fee    => 300,
         :source             => params[:stripeToken]
         
         },
@@ -32,7 +33,7 @@ class StripeController < ApplicationController
       if charge['paid'] == true
         Event.create_confirmed_events(params) #Event model    
 
-        single_transaction_and_mails(charge, params) #stripe_helper
+        single_transaction_and_mails(charge, params, lesson_location) #stripe_helper
         flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
            
         redirect_to :back  
@@ -126,8 +127,8 @@ class StripeController < ApplicationController
 
       home_booking_transaction(charge, params[:student_id], params[:teacher_id])
 
-      TeacherMailer.home_booking_mail_teacher(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M")).deliver_now
-      TeacherMailer.home_booking_mail_student(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M")).deliver_now
+      TeacherMailer.delay.home_booking_mail_teacher(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M"))
+      TeacherMailer.delay.home_booking_mail_student(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M"))
 
       redirect_to :back and return
     else

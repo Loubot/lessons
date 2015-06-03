@@ -124,7 +124,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
@@ -191,6 +191,9 @@ class TeachersController < ApplicationController
 												subject_id: params[:teachers_locations][:subject_id], 
 												location_id: params[:teachers_locations][:location_id])
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:teachers_locations][:teacher_id].to_i)
+		session[:price_id] = @rate.first.id #store price id for later
+		session[:location_id] = params[:teachers_locations][:location_id] #store location id for later
+		
 		render 'modals/payment_selections/_return_locations_price.js.coffee'
 	end
 		

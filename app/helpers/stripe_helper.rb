@@ -49,7 +49,7 @@ module StripeHelper
   end
 
   
-	def single_transaction_and_mails(charge, params)
+	def single_transaction_and_mails(charge, params, lesson_location)
     puts "stipe helper params #{params.inspect}"
 		Transaction.create(
 		                  	create_transaction_params_stripe(
@@ -59,13 +59,15 @@ module StripeHelper
                                                         )
 		                  )
 
-		TeacherMailer.single_booking_mail_teacher(
+		TeacherMailer.delay.single_booking_mail_teacher(
                 		                            charge,
                                                 params,
                                                 (sprintf "%.2f", (charge['amount'].to_f / 100)),
                                                 DateTime.parse(params[:start_time]).strftime("%H:%M"),
-                		                            DateTime.parse(params[:end_time]).strftime("%H:%M")                      		                            
-                		                          ).deliver_now
+                		                            DateTime.parse(params[:end_time]).strftime("%H:%M"),
+                                                lesson_location ,
+                                                current_teacher.full_name                  		                            
+                		                          )
 	end # end of single_transaction_and_mail
 
   def package_transaction_and_mail(json_response, cart, package)

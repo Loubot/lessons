@@ -2,12 +2,12 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def single_booking_mail_teacher(charge, params, amount, start_time, end_time)
-    p "teacher email email #{params['teacher_name']}"
+  def single_booking_mail_teacher(charge, params, amount, start_time, end_time, lesson_location, student_name)
+    p "teacher email email #{student_name} #{params} #{student_name}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      template_name ="teachers-home-booking-to-student"
+      template_name ="teachers-home-booking-to-teacher"
       template_content = []
       message = { 
                   subject: "You have a booking",     
@@ -21,12 +21,13 @@ class TeacherMailer < ActionMailer::Base
                 "merge_vars"=>[
                               { "rcpt"   =>  params['teacher_email'],
                                 "vars" =>  [
-                                          { "name"=>"TNAME",          "content"=>params['teacher_name']  },
-                                          { "name"=>"TEMAILADDRESS",  "content"=>params['teacher_email'] },
+                                          { "name"=>"FNAME",          "content"=>params['teacher_name']  },
+                                          { "name"=>"SNAME",          "content"=>student_name  },
+                                          { "name"=>"STEMAILADDRESS", "content"=>params['student_email'] },
                                           { "name"=>"LESSONPRICE",    "content"=>amount },
-                                          { "name"=>"NUMBERLESSONS",  "content"=>1 },
                                           { "name"=>"LESSONTIME",     "content"=>start_time },
-                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date }
+                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
+                                          { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],
                   
