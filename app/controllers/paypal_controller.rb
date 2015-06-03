@@ -42,7 +42,7 @@ class PaypalController < ApplicationController
       :currency_code   => "EUR",
       :cancel_url      => "https://www.learnyourlesson.ie",
       :return_url      => "https://www.learnyourlesson.ie/welcome",
-      :ipn_notification_url => "https://www.learnyourlesson.ie/membership-return-paypal"
+      :ipn_notification_url => "http://72581b0c.ngrok.com/membership-return-paypal"
     ) do |response|
 
       if response.success?
@@ -73,15 +73,13 @@ class PaypalController < ApplicationController
                           'User-Agent' => 'My custom user agent'
                         ).body
 
-    p "paypal post params: #{params['status']}"
-   
-    puts "Paypal verification response: #{response}"
-    logger.info "Paypal verification response: #{response}"
+   p "status #{params['status']}"
 
-    if !(Transaction.find_by(tracking_id: params['tracking_id']))
+    if !(transaction = Transaction.find_by(tracking_id: params['tracking_id'])) && (params['status'] == 'COMPLETED')
       if response == "VERIFIED"
+        p "Saving paypal membership transaction"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
-        
+        p "no cart" if !cart
         render status: 200, nothing: true and return if !cart
         
 
@@ -104,7 +102,7 @@ class PaypalController < ApplicationController
         render status: 200, nothing: true
       end
     elsif transaction
-      p "Couldn't find transaction"
+      p "Couldn't find transaction or not payment status not completed"
       render status: 200, nothing: true
     else
       logger.info "MAJOR ALERT: Transaction already exists"

@@ -12,6 +12,7 @@
 	$('#event_table_end_time').text('<%= j(@event.end_time.to_formatted_s(:long)) %>');
 	$('#event_table_length').text("<%= j(total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600)) %> hour(s)");
 	$('#event_table_price').text("<%= j(number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€')) %>");
+  $('.payments_modal_users_cart').val("<%= @cart.id %>");
 
 	//Update all hidden fields in payments_modal_for_users
 

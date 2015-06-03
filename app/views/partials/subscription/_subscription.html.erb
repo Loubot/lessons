@@ -10,8 +10,10 @@
           <%= form_tag pay_membership_paypal_path, class: 'membership_bookin_form', method: 'post' do %>
             
             
-            <%= hidden_field_tag :student_id, current_teacher.id %>
-            
+            <%= hidden_field_tag :teacher_id, current_teacher.id %>
+            <%# hidden_field_tag :sender_email, current_teacher.email %>
+            <%# hidden_field_tag :user_id, current_teacher.id %>
+
             
             <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'paypal_image img-responsive' %>
           <% end %>
@@ -28,8 +30,8 @@
           data-currency="eur"
           data-imgage="<%= asset_url 'stripe.png' %>"
           ></script>
-          <%= hidden_field_tag :student_id, current_teacher.id %>
-    
+          <%= hidden_field_tag :teacher_id, current_teacher.id %>
+          <%= hidden_field_tag :teacher_email, current_teacher.email %> 
     
         <% end %>
       </div> <!-- end of col-xs-6-->

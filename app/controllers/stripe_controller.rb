@@ -44,15 +44,15 @@ class StripeController < ApplicationController
 
   #start of membership payments
   def pay_membership_stripe
-    cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
+    # cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
     @amount = 300
     charge = Stripe::Charge.create({
       :metadata           => { 
-                              :tracking_id => cart.tracking_id, 
+                              # :tracking_id => cart.tracking_id, 
                               home_booking: true
                               },
       :amount             => @amount,
-      :description        => cart.tracking_id,
+      :description        => "#{current_teacher.full_name} membership payment",
       :currency           => 'eur',
       :application_fee    => 300,
       :source             => params[:stripeToken]
@@ -62,9 +62,15 @@ class StripeController < ApplicationController
     )
     puts charge.inspect
     if charge['paid'] == true
-      # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
-      # event = Event.create!(cart.params)
-      # puts "Stripe successful event created id: #{event.id}"
+      p "stripe membership payment"
+      transaction = Transaction.create( #payments_helper
+                                        create_membership_params(charge, params['teacher_id'])
+                                      )
+
+      
+      # current_teacher.update_attributes(paid_up: true, paid_up_date: Date.today - 7.days) #set teacher as paid
+      
+      MembershipMailer.delay.membership_paid(params[:teacher_email], current_teacher.full_name) #send email async with delayed_job
     end
     flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
     redirect_to :back
@@ -190,17 +196,8 @@ class StripeController < ApplicationController
 
         package_transaction_and_mail(json_response, cart, package) #stripe helper
         render status: 200, nothing: true
-      elsif cart.booking_type == 'membership'
+      elsif cart.booking_type == 'membership'        
         
-        p "stripe membership payment"
-        transaction = Transaction.create( #payments_helper
-                                          create_membership_params(params, cart.teacher_id)
-                                        )
-
-        t = Teacher.find_by_email(cart.teacher_email)
-        t.update_attributes(paid_up: true, paid_up_date: Date.today - 7.days) #set teacher as paid
-        
-        MembershipMailer.delay.membership_paid(cart.teacher_email, t.full_name) #send email async with delayed_job
         render status: 200, nothing: true
         
       else #it's not a home booking or a package

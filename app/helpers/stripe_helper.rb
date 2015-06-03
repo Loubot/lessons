@@ -33,16 +33,16 @@ module StripeHelper
 
   end #end of home_booking_transaction_and_mail
 
-  def create_membership_params(params, teacher)
+  def create_membership_params(params, teacher_id)
     returnParams = { 
-                      tracking_id: params['data']['object']['metadata']['tracking_id'], 
+                      # tracking_id: params['data']['object']['metadata']['tracking_id'], 
                       trans_id: params['id'],
-                      sender: params['data']['object']['card']['name'], 
+                      sender: params['source']['name'], 
                       payStripe: 'stripe', 
                       user_id: 0,
-                      teacher_id: teacher, 
+                      teacher_id: teacher_id, 
                       pay_date: Time.at(params['created'].to_i),
-                      tracking_id: params['data']['object']['metadata']['tracking_id'], 
+                      # tracking_id: params['data']['object']['metadata']['tracking_id'], 
                       whole_message: params 
                     }
     

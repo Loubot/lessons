@@ -82,6 +82,7 @@ class UserCart < ActiveRecord::Base
                             teacher_id: params[:event][:teacher_id],
                             params: Event.get_event_params(params),
                             teacher_email: teacher_email,
+                            student_id: current_teacher.id,
                             student_email: current_teacher.email,
                             student_name: "#{current_teacher.full_name}",
                             subject_id: params[:event][:subject_id],
@@ -89,6 +90,7 @@ class UserCart < ActiveRecord::Base
                             booking_type: 'single',
                             package_id: 0
                           )
+    cart.save!
     cart
   end
 
