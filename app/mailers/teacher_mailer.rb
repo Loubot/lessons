@@ -2,30 +2,39 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def single_booking_mail_teacher(student, student_name, teacher, start_time, end_time)
-    
+  def single_booking_mail_teacher(charge, params, amount, start_time, end_time)
+    p "teacher email email #{params}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
       template_name ="teachers-home-booking-to-student"
       template_content = []
-      message = {  
-       :subject=> "You have a booking",  
-       :from_name=> "Learn Your Lesson",  
-       :text=> %Q(<html>#{student_name} has booked a lesson.
-                #{startTime} to #{endTime}</html>),  
-       :to=>[  
-         {  
-           :email=> teacher.to_s,
-           :name=> "#{student_name}"  
-         }  
-       ],  
-       :html=> %Q(<html>#{student_name} has booked a lesson.
-                #{startTime} to #{endTime}</html>),  
-       :from_email=> student.to_s  
-      }  
-      sending = m.messages.send message  
-      puts sending
+      message = { 
+                  subject: "You have a booking",     
+                  :to=>[  
+                   {  
+                     :email=> params['teacher_email']
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  params['teacher_email'],
+                                "vars" =>  [
+                                          { "name"=>"TNAME",          "content"=>params['teacher_name']  },
+                                          { "name"=>"TEMAILADDRESS",  "content"=>params['teacher_email'] },
+                                          { "name"=>"LESSONPRICE",    "content"=>amount },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>1 },
+                                          { "name"=>"LESSONTIME",     "content"=>start_time },
+                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date }
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
     rescue Mandrill::Error => e
         # Mandrill errors are thrown as exceptions
         logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
@@ -33,7 +42,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{teacher.to_s}"
+    logger.info "Mail sent to #{params['teacher_email']}"
   end
 
   def home_booking_mail_student(params, address, time)

@@ -32,7 +32,7 @@ class StripeController < ApplicationController
       if charge['paid'] == true
         Event.create_confirmed_events(params) #Event model    
 
-        single_transaction(charge, params) #stripe_helper
+        single_transaction_and_mails(charge, params) #stripe_helper
         flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
            
         redirect_to :back  
@@ -82,6 +82,7 @@ class StripeController < ApplicationController
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to charges_path
+    end
   end
 
   #end of membership payments

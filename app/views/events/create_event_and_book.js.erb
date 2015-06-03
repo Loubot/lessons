@@ -14,6 +14,8 @@
 	$('#event_table_price').text("<%= j(number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€')) %>");
   $('.payments_modal_start_time').val("<%= @event.start_time %>");
   $('.payments_modal_end_time').val("<%= @event.end_time %>");
+  $('.payments_modal_student_email').val("<%= current_teacher.email %>");
+  $('.payments_modal_teacher_email').val("<%= @teacher.email %>");
   $('.payments_modal_student_id').val("<%= @event.student_id %>");
   $('.payments_modal_teacher_id').val("<%= @event.teacher_id %>");
   $('.payments_modal_subject_id').val("<%= @event.subject_id %>");
