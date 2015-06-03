@@ -3,7 +3,7 @@ class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
 
   def single_booking_mail_teacher(charge, params, amount, start_time, end_time)
-    p "teacher email email #{params}"
+    p "teacher email email #{params['teacher_name']}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']

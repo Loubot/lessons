@@ -50,6 +50,7 @@ module StripeHelper
 
   
 	def single_transaction_and_mails(charge, params)
+    puts "stipe helper params #{params.inspect}"
 		Transaction.create(
 		                  	create_transaction_params_stripe(
                                                           charge, 
