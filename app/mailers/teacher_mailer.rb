@@ -24,7 +24,7 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>params['teacher_name']  },
                                           { "name"=>"SNAME",          "content"=>student_name  },
                                           { "name"=>"STEMAILADDRESS", "content"=>params['student_email'] },
-                                          { "name"=>"NUMBERLESSONS",  "content"=>no_of_lessons }
+                                          { "name"=>"NUMBERLESSONS",  "content"=>no_of_lessons },
                                           { "name"=>"LESSONPRICE",    "content"=>amount },
                                           { "name"=>"LESSONTIME",     "content"=>start_time },
                                           { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
