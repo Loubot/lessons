@@ -14,5 +14,5 @@
   $('#event_table_price_multiple').text "<%= j(number_to_currency(@total_rate, unit: '€')) %>"
   $('.paypal_teacher_email').val '<%= j(@teacher.email) %>'
   $('.rate').val('<%= @rate %>')
-  $('.tracking_id').val('<%= j(@cart.tracking_id) %>')
+  
 <% end %> 

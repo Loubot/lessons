@@ -2,7 +2,7 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def single_booking_mail_teacher(charge, params, amount, start_time, end_time, lesson_location, student_name)
+  def single_booking_mail_teacher(charge, params, amount, start_time, end_time, lesson_location, student_name, no_of_lessons)
     p "teacher email email #{student_name} #{params} #{student_name}"
     begin
       require 'mandrill'
@@ -24,6 +24,7 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>params['teacher_name']  },
                                           { "name"=>"SNAME",          "content"=>student_name  },
                                           { "name"=>"STEMAILADDRESS", "content"=>params['student_email'] },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>no_of_lessons }
                                           { "name"=>"LESSONPRICE",    "content"=>amount },
                                           { "name"=>"LESSONTIME",     "content"=>start_time },
                                           { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },

@@ -8,7 +8,7 @@ $('.returned_locations_container').append """
     <%= select 'location', 'id', options_for_select([['teachers house or yours?....'],['My House', 1], ['Teachers house', '2']]), {  }, { class: 'form-control select_home_or_location'} %>
     <input type="hidden" name="location[teacher_id]" value="<%= @teacher.id %>">
     
-    <input type="hidden" name="location[subject_id]" value="" class="subject_id">
+    
   <% end %> <%# end of form %>                                
   																				"""
 

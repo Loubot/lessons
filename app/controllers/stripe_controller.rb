@@ -16,7 +16,8 @@ class StripeController < ApplicationController
     begin
     	puts "tracking_id%%%%%%%%% #{params[:tracking_id]}"
       @amount = (Price.find(session[:price_id]).price * 100 ).to_i
-      @teacher = Teacher.find(params[:teacher_id])
+      @teacher = Teacher.find(session[:teacher_id])
+      cart = UserCart.find(session[:cart_id])
       lesson_location = Location.find(session[:location_id]).name
       charge = Stripe::Charge.create({
         :metadata           => { :tracking_id => params[:tracking_id] },
@@ -31,9 +32,9 @@ class StripeController < ApplicationController
       )
       puts charge.inspect
       if charge['paid'] == true
-        Event.create_confirmed_events(params) #Event model    
-
-        single_transaction_and_mails(charge, params, lesson_location) #stripe_helper
+        Event.create_confirmed_events(params, cart) #Event model, checks if multiple or not   
+        single_transaction_and_mails(charge, params, lesson_location, cart) #stripe_helper
+        
         flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
            
         redirect_to :back  
@@ -93,7 +94,7 @@ class StripeController < ApplicationController
 
     update_student_address(params) #application controller
 
-    price = Price.find(params[:price_id])
+    
     cart = UserCart.find_by(student_id: current_teacher.id)
     cart.update_attributes(address:params[:home_address])
     if params[:home_address] == ''
@@ -105,7 +106,7 @@ class StripeController < ApplicationController
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
   	# 
     
-  	@amount = (price.price * 100 ).to_i
+  	@amount = (Price.find(session[:price_id])).to_i
     @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
       :metadata           => { 
@@ -148,29 +149,31 @@ class StripeController < ApplicationController
     package = Package.find(params[:package_id])
     @teacher = Teacher.find(params[:teacher_id])
     cart = UserCart.create_package_cart(params, current_teacher, package)
-    charge = Stripe::Charge.create({
-      :metadata           => { :tracking_id => cart.tracking_id},
-      :amount             => package.price.to_i * 100,
-      :description        => cart.tracking_id,
-      :currency           => 'eur',
-      :application_fee    => 300,
-      :source             => params[:stripeToken]
-      
-      },
-      @teacher.stripe_access_token
-    )
-    puts charge.inspect
-    if charge['paid'] == true
-      # cart = UserCart.find_by(tracking_id: charge['metadata']['tracking_id'])
-      # event = Event.create!(cart.params)
-      # puts "Stripe successful event created id: #{event.id}"
-    end
-    flash[:success] = 'Payment was successful. You will receive an email soon. Payments can take a few minutes to register.'
-    redirect_to root_url
+    begin
+      charge = Stripe::Charge.create({
+        :metadata           => { :tracking_id => cart.tracking_id },
+        :amount             => package.price.to_i * 100,
+        :description        => cart.tracking_id,
+        :currency           => 'eur',
+        :application_fee    => 300,
+        :source             => params[:stripeToken]
+        
+        },
+        @teacher.stripe_access_token
+      )
+      puts charge.inspect
+      if charge['paid'] == true
+        package = Package.find(cart.package_id)
 
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to charges_path
+        package_transaction_and_mail(json_response, cart, package) #stripe helper
+      end
+      flash[:success] = 'Payment was successful. You will receive an email soon. Payments can take a few minutes to register.'
+      redirect_to root_url
+
+      rescue Stripe::CardError => e
+        flash[:error] = e.message
+        redirect_to charges_path
+    end
     
   end #end of create_package_booking_stripe
 
@@ -198,20 +201,18 @@ class StripeController < ApplicationController
         p "***************** home booking"
         render status: 200, nothing: true
       elsif cart.booking_type == 'package' 
-        package = Package.find(cart.package_id)
-
-        package_transaction_and_mail(json_response, cart, package) #stripe helper
+        
         render status: 200, nothing: true
       elsif cart.booking_type == 'membership'        
         
         render status: 200, nothing: true
         
       else #it's not a home booking or a package
-      	Event.create_confirmed_events(cart)
+      	# Event.create_confirmed_events(cart)
       	
-      	cart_params = cart.params
-      	puts "cart params #{cart_params}"
-      	puts "start time #{cart_params[:start_time]}"
+      	# cart_params = cart.params
+      	# puts "cart params #{cart_params}"
+      	# puts "start time #{cart_params[:start_time]}"
 
       	   
       	

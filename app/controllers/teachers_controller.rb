@@ -7,20 +7,7 @@ class TeachersController < ApplicationController
 	
 	include TeachersHelper
 
-	def check_is_teacher
-		if current_teacher.is_teacher != true
-			flash[:danger] = "You are not authorised to view this page"
-			redirect_to :back 
-		end
-	end
-
-	def check_id
-		if current_teacher.id != params[:id].to_i
-			flash[:danger] = "You are not authorised to view this page"
-			redirect_to :back
-		end 
-	end
-
+	
 	def show_teacher
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
 		@subject = get_subject(params, @teacher.subjects)
@@ -150,13 +137,16 @@ class TeachersController < ApplicationController
 	end
 
 	def get_locations
-		p "params #{params}"
+		session[:teacher_id] = params[:subject][:teacher_id]
+		session[:subject_id] = params[:subject][:id]
+		p "session #{session[:subject_id]}"
 		@teacher = Teacher.includes(:prices).find((params[:subject][:teacher_id]))
 		
 		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject][:id].to_i && p.location_id != nil })
 			render 'modals/payment_selections/_home_or_location.js.coffee'
 		else
 			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i }[0]
+			session[:price_id] = @price.id #price id for home booking
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		end
@@ -166,15 +156,17 @@ class TeachersController < ApplicationController
 	def get_subjects
 		#location_choice =1 == home lesson
 		#location_choice =2 == teachers location
-		@teacher = Teacher.includes(:locations, :prices).find(params[:location][:teacher_id].to_i)
+		p "session #{session[:subject_id]}"
+		@teacher = Teacher.includes(:locations, :prices).find(session[:teacher_id])
 		if params[:location][:id].to_i == 1 #home lesson
-			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:location][:subject_id].to_i }[0]
+			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == session[:subject_id].to_i }[0]
 			p "prices yoyo #{@price}"
+			session[:price_id] = @price.id
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		else
 			#only return locations that teacher teaches this subject at
-			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == params[:location][:subject_id].to_i && p.location_id != nil) }.compact
+			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == session[:subject_id].to_i && p.location_id != nil) }.compact
 			p "ids #{ids}"
 			# @locations = @teacher.locations.map { |l| l if ids.include?  l.id }
 			@locations = @teacher.locations.find(ids)
@@ -185,12 +177,12 @@ class TeachersController < ApplicationController
 	def get_locations_price
 		p "yayd"
 		@event = Event.new
-		@subject_id = params[:teachers_locations][:subject_id]
+		@subject_id = session[:subject_id]
 		@rate = Price.where(
-												teacher_id: params[:teachers_locations][:teacher_id], 
-												subject_id: params[:teachers_locations][:subject_id], 
+												teacher_id: session[:teacher_id], 
+												subject_id: session[:subject_id], 
 												location_id: params[:teachers_locations][:location_id])
-		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:teachers_locations][:teacher_id].to_i)
+		@teacher = Teacher.includes(:locations, :prices, :subjects).find(session[:teacher_id].to_i)
 		session[:price_id] = @rate.first.id #store price id for later
 		session[:location_id] = params[:teachers_locations][:location_id] #store location id for later
 		
@@ -199,9 +191,9 @@ class TeachersController < ApplicationController
 		
 	def check_home_event
 		event = Event.student_do_single_booking(params)
-		@price = Price.find(params[:price_id])
+		@price = Price.find(session[:price_id])
 		if event.valid?
-			@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
+			@teacher = Teacher.find(session[:teacher_id])	# teacher not student		
 			@event = event
 			p "start time #{params[:start_time]}"
     	@cart = UserCart.home_booking_cart(params[:event], @price.price)
@@ -216,6 +208,19 @@ class TeachersController < ApplicationController
 	
 
 	private
+		def check_is_teacher
+			if current_teacher.is_teacher != true
+				flash[:danger] = "You are not authorised to view this page"
+				redirect_to :back 
+			end
+		end
+
+		def check_id
+			if current_teacher.id != params[:id].to_i
+				flash[:danger] = "You are not authorised to view this page"
+				redirect_to :back
+			end 
+		end
 
 		def get_subject(params, subjects)
 			if params.has_key?(:subject_id)

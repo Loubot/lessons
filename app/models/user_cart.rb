@@ -95,7 +95,7 @@ class UserCart < ActiveRecord::Base
   end
 
   def self.create_multiple_cart(params, teacher_email, current_teacher)
-    # puts "cart event #{event.inspect}"
+    puts "cart event multiple #{params[:booking_length]}"
     cart = where(student_id: params[:event][:student_id]).first_or_create        
     cart.update_attributes(
                             teacher_id: params[:event][:teacher_id],

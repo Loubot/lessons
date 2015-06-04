@@ -292,7 +292,7 @@ teachersInfoReady = ->
         $('.returned_locations_container').empty()
         
       $('#the_one_modal').on 'shown.bs.modal', ->
-        
+        $('.payment_form_container').empty()
         $("select").each ->
           $(this).val($(this).find('option[selected]').val())
         

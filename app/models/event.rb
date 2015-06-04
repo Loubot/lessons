@@ -86,11 +86,11 @@ class Event < ActiveRecord::Base
   end
 
 
-  def self.create_confirmed_events(params)
+  def self.create_confirmed_events(params, cart)
     #cart[:booking_type]
     if params[:booking_type] == 'multiple'
       p "heeeeeeelllll1"
-      create_multiple_events_and_save(params)
+      create_multiple_events_and_save(params, cart)
     else
       create_single_event_and_save(params)
       p "heeeeeeellllll2"
@@ -118,7 +118,7 @@ private
               )
   end
 
-  def self.create_multiple_events_and_save(cart) #teachers area block booking
+  def self.create_multiple_events_and_save(params, cart) #teachers area block booking
     ids = []
     continue = true  
     
