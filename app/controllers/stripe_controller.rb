@@ -17,7 +17,8 @@ class StripeController < ApplicationController
     	puts "tracking_id%%%%%%%%% #{params[:tracking_id]}"
       @amount = (Price.find(session[:price_id]).price * 100 ).to_i
       @teacher = Teacher.find(session[:teacher_id])
-      cart = UserCart.find(session[:cart_id])
+      p "session #{session[:cart_id]}"
+      cart = UserCart.find(session[:cart_id].to_i)
       lesson_location = Location.find(session[:location_id]).name
       charge = Stripe::Charge.create({
         :metadata           => { :tracking_id => params[:tracking_id] },
@@ -30,7 +31,8 @@ class StripeController < ApplicationController
         },
         @teacher.stripe_access_token
       )
-      puts charge.inspect
+      p "cart #{cart.inspect}"
+      # puts charge.inspect
       if charge['paid'] == true
         Event.create_confirmed_events(params, cart) #Event model, checks if multiple or not   
         single_transaction_and_mails(charge, params, lesson_location, cart) #stripe_helper
@@ -106,7 +108,7 @@ class StripeController < ApplicationController
     p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
   	# 
     
-  	@amount = (Price.find(session[:price_id])).to_i
+  	@amount = (Price.find(session[:price_id]).price * 100 ).to_i
     @teacher = Teacher.find(params[:teacher_id])
     charge = Stripe::Charge.create({
       :metadata           => { 

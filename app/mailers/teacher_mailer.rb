@@ -3,7 +3,7 @@ class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
 
   def single_booking_mail_teacher(charge, params, amount, start_time, end_time, lesson_location, student_name, no_of_lessons)
-    p "teacher email email #{student_name} #{params} #{student_name}"
+    logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -45,7 +45,52 @@ class TeacherMailer < ActionMailer::Base
     end
 
     logger.info "Mail sent to #{params['teacher_email']}"
-  end
+  end #end of single_booking_mail_teacher
+
+  def single_booking_mail_student(charge, params, amount, start_time, end_time, lesson_location, student_name, cart)
+    logger.info "teacher email email #{student_name} #{params} #{student_name}"
+    begin
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name ="teachers-home-booking-to-student"
+      template_content = []
+      message = { 
+                  subject: "You have made a booking",
+                  :to=>[  
+                   {  
+                     :email=> cart.student_email
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  cart.student_email,
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>cart.student_name  },
+                                          { "name"=>"TNAME",          "content"=>cart.teacher_name  },
+                                          { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks },
+                                          { "name"=>"LESSONPRICE",    "content"=>amount },
+                                          { "name"=>"LESSONTIME",     "content"=>start_time },
+                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
+                                          { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Mail sent to #{params['teacher_email']}"
+  end # end of single_booking_mail_student
 
   def home_booking_mail_student(params, address, time)
 

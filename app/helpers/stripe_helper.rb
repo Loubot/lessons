@@ -65,10 +65,22 @@ module StripeHelper
                                                 (sprintf "%.2f", (charge['amount'].to_f / 100)),
                                                 DateTime.parse(params[:start_time]).strftime("%H:%M"),
                 		                            DateTime.parse(params[:end_time]).strftime("%H:%M"),
-                                                lesson_location ,
+                                                lesson_location,
                                                 current_teacher.full_name,
                                                 cart.weeks                 		                            
                 		                          )
+
+    TeacherMailer.delay.single_booking_mail_student(
+                                                  charge,
+                                                  params,
+                                                  (sprintf "%.2f", (charge['amount'].to_f / 100)),
+                                                  DateTime.parse(params[:start_time]).strftime("%H:%M"),
+                                                  DateTime.parse(params[:end_time]).strftime("%H:%M"),
+                                                  lesson_location,
+                                                  current_teacher.full_name,                                                  
+                                                  cart 
+
+                                                  )
 	end # end of single_transaction_and_mail
 
   def package_transaction_and_mail(json_response, cart, package)

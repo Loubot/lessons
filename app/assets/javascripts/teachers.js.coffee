@@ -290,6 +290,7 @@ teachersInfoReady = ->
         $('.payment_form_container').empty()
         $('.display_teachers_location').empty()
         $('.returned_locations_container').empty()
+        $('.payment_choice_error').empty()
         
       $('#the_one_modal').on 'shown.bs.modal', ->
         $('.payment_form_container').empty()

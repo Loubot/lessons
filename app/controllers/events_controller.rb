@@ -83,8 +83,8 @@ class EventsController < ApplicationController
 			
 			if @event.valid?
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				# @cart = UserCart.create_single_cart(params, @teacher.email, current_teacher)
-				
+				@cart = UserCart.create_single_cart(params, @teacher.email, current_teacher)
+				session[:cart_id] = @cart.id
 				p "cart  #{@cart.inspect}"
 			else
 				@teacher = @event.errors.full_messages

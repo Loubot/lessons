@@ -109,6 +109,7 @@ class UserCart < ActiveRecord::Base
                             booking_type: 'multiple',
                             package_id: 0
                           )
+    cart.save!
     cart
   end
 
