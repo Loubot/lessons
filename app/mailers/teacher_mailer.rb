@@ -48,7 +48,7 @@ class TeacherMailer < ActionMailer::Base
   end #end of single_booking_mail_teacher
 
   def single_booking_mail_student(charge, params, amount, start_time, end_time, lesson_location, student_name, cart)
-    logger.info "teacher email email #{student_name} #{params} #{student_name}"
+    logger.info "teacher email email #{cart.inspect}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -58,7 +58,7 @@ class TeacherMailer < ActionMailer::Base
                   subject: "You have made a booking",
                   :to=>[  
                    {  
-                     :email=> cart.student_email
+                     :email=> cart.student_email  
                      # :name=> "#{student_name}"  
                    }  
                  ],  
