@@ -62,7 +62,7 @@ class TeacherMailer < ActionMailer::Base
                      # :name=> "#{student_name}"  
                    }  
                  ],  
-                 :from_email=> "lllouis@yahoo.com",
+                 :from_email=> "loubot@learnyourlesson.ie",
                 "merge_vars"=>[
                               { "rcpt"   =>  cart.student_email,
                                 "vars" =>  [
@@ -71,8 +71,8 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
                                           { "name"=>"LESSONPRICE",    "content"=>amount },
-                                          { "name"=>"LESSONTIME",     "content"=>params['start_time'].to_date },
-                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].to_date },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],

@@ -51,6 +51,11 @@ module StripeHelper
   
 	def single_transaction_and_mails(charge, params, lesson_location, cart)
     puts "stipe helper params #{params.inspect}"
+    if cart.weeks.to_i == 0
+      amount = (charge['amount'].to_f)
+    else
+      amount = cart.weeks * ((charge['amount'].to_f ))
+    end
 		Transaction.create(
 		                  	create_transaction_params_stripe(
                                                           charge, 
@@ -61,7 +66,7 @@ module StripeHelper
 
     TeacherMailer.delay.single_booking_mail_teacher(                		                            
                                                 params,
-                                                (sprintf "%.2f", (charge['amount'].to_f / 100)),
+                                                (sprintf "%.2f", amount / 100),
                                                 lesson_location,
                                                 current_teacher.full_name,
                                                 cart                		                            
@@ -69,7 +74,7 @@ module StripeHelper
 
     TeacherMailer.delay.single_booking_mail_student(
                                                   params,
-                                                  (sprintf "%.2f", (charge['amount'].to_f / 100)),
+                                                  (sprintf "%.2f", amount / 100),
                                                   (cart.params[:start_time]).strftime("%H:%M"),
                                                   (cart.params[:end_time]).strftime("%H:%M"),
                                                   lesson_location,
