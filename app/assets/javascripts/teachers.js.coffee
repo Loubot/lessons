@@ -136,8 +136,12 @@ teachersInfoReady = ->
 
 
 #///////////////Teachers subject search
+  $('#teachers_subjects_modal').on 'shown.bs.modal', ->
+    $('#search_results').empty()
+    $("#teachers_search_input").empty()
   $('#subject_search').keyup ->
-    $.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
+    if $('#teachers_search_input').val().length > 1
+      $.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
 
 #///////////////End of teachers subject_search
 
