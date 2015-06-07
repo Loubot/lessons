@@ -14,8 +14,7 @@ class StripeController < ApplicationController
   def stripe_create
    # Amount in cents
     begin
-    	puts "tracking_id%%%%%%%%% #{params[:tracking_id]}"
-      @amount = (Price.find(session[:price_id]).price * 100 ).to_i
+    	@amount = (Price.find(session[:price_id]).price * 100 ).to_i
       @teacher = Teacher.find(session[:teacher_id])
       p "session #{session[:cart_id]}"
       cart = UserCart.find(session[:cart_id].to_i)
@@ -31,13 +30,13 @@ class StripeController < ApplicationController
         },
         @teacher.stripe_access_token
       )
-      p "cart #{cart.inspect}"
+      # p "cart #{cart.inspect}"
       # puts charge.inspect
       if charge['paid'] == true
         Event.create_confirmed_events(params, cart) #Event model, checks if multiple or not   
         single_transaction_and_mails(charge, params, lesson_location, cart) #stripe_helper
         
-        flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+        flash[:success] = 'Payment was successful. You should receive an email soon.'
            
         redirect_to :back  
       

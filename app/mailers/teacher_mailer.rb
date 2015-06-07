@@ -2,7 +2,7 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def single_booking_mail_teacher(charge, params, amount, start_time, end_time, lesson_location, student_name, no_of_lessons)
+  def single_booking_mail_teacher(params, amount, lesson_location, student_name, cart)
     logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
       require 'mandrill'
@@ -13,21 +13,21 @@ class TeacherMailer < ActionMailer::Base
                   subject: "You have a booking",     
                   :to=>[  
                    {  
-                     :email=> params['teacher_email']
+                     :email=> cart.teacher_email
                      # :name=> "#{student_name}"  
                    }  
                  ],  
                  :from_email=> "loubot@learnyourlesson.ie",
                 "merge_vars"=>[
-                              { "rcpt"   =>  params['teacher_email'],
+                              { "rcpt"   =>  cart.teacher_email,
                                 "vars" =>  [
-                                          { "name"=>"FNAME",          "content"=>params['teacher_name']  },
+                                          { "name"=>"FNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"SNAME",          "content"=>student_name  },
-                                          { "name"=>"STEMAILADDRESS", "content"=>params['student_email'] },
-                                          { "name"=>"NUMBERLESSONS",  "content"=>no_of_lessons },
+                                          { "name"=>"STEMAILADDRESS", "content"=>cart.student_email },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
                                           { "name"=>"LESSONPRICE",    "content"=>amount },
-                                          { "name"=>"LESSONTIME",     "content"=>start_time },
-                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].to_date },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],
@@ -47,7 +47,7 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{params['teacher_email']}"
   end #end of single_booking_mail_teacher
 
-  def single_booking_mail_student(charge, params, amount, start_time, end_time, lesson_location, student_name, cart)
+  def single_booking_mail_student(params, amount, start_time, end_time, lesson_location, student_name, cart)
     logger.info "teacher email email #{cart.inspect}"
     begin
       require 'mandrill'
@@ -62,16 +62,16 @@ class TeacherMailer < ActionMailer::Base
                      # :name=> "#{student_name}"  
                    }  
                  ],  
-                 :from_email=> "loubot@learnyourlesson.ie",
+                 :from_email=> "lllouis@yahoo.com",
                 "merge_vars"=>[
                               { "rcpt"   =>  cart.student_email,
                                 "vars" =>  [
                                           { "name"=>"FNAME",          "content"=>cart.student_name  },
                                           { "name"=>"TNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
-                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
                                           { "name"=>"LESSONPRICE",    "content"=>amount },
-                                          { "name"=>"LESSONTIME",     "content"=>start_time },
+                                          { "name"=>"LESSONTIME",     "content"=>params['start_time'].to_date },
                                           { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]

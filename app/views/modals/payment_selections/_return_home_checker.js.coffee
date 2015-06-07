@@ -2,7 +2,7 @@
 $('.payment_form_container').empty()
 $('.payment_form_container').empty()
 $('.display_teachers_location').empty()
-$('.returned_locations_container').empty()
+# $('.returned_locations_container').empty()
 
 $('.payment_form_container').append """ 
     <h4>Price: <%= j(number_to_currency(@price.price, unit: '€')) %><small> At your house</small></h4>

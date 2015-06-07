@@ -108,7 +108,7 @@ private
 	end
 
   def self.create_single_event_and_save(params)
-    Event.create!(
+    e = Event.create!(
                 start_time: params[:start_time],
                 end_time: params[:end_time],
                 teacher_id: params[:teacher_id],
@@ -116,6 +116,9 @@ private
                 subject_id: params[:subject_id],
                 status: 'active'
               )
+
+    p "EVENT CREATED #{e.inspect}"
+    e
   end
 
   def self.create_multiple_events_and_save(params, cart) #teachers area block booking

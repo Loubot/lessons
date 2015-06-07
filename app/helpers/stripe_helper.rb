@@ -59,23 +59,19 @@ module StripeHelper
                                                         )
 		                  )
 
-    TeacherMailer.delay.single_booking_mail_teacher(
-                		                            charge,
+    TeacherMailer.delay.single_booking_mail_teacher(                		                            
                                                 params,
                                                 (sprintf "%.2f", (charge['amount'].to_f / 100)),
-                                                DateTime.parse(params[:start_time]).strftime("%H:%M"),
-                		                            DateTime.parse(params[:end_time]).strftime("%H:%M"),
                                                 lesson_location,
                                                 current_teacher.full_name,
-                                                cart.weeks                 		                            
+                                                cart                		                            
                 		                          )
 
     TeacherMailer.delay.single_booking_mail_student(
-                                                  charge,
                                                   params,
                                                   (sprintf "%.2f", (charge['amount'].to_f / 100)),
-                                                  DateTime.parse(params[:start_time]).strftime("%H:%M"),
-                                                  DateTime.parse(params[:end_time]).strftime("%H:%M"),
+                                                  (cart.params[:start_time]).strftime("%H:%M"),
+                                                  (cart.params[:end_time]).strftime("%H:%M"),
                                                   lesson_location,
                                                   current_teacher.full_name,                                                  
                                                   cart 
