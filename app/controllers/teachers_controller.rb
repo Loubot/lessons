@@ -39,6 +39,8 @@ class TeachersController < ApplicationController
 		#@context.profile == nil ? @profilePic = nil : @profilePic = Photo.find(@context.profile)
 		@params = params
 
+		gon.teacher_id = current_teacher.id
+
 		@auths = ['facebook', 'google_oauth2', 'twitter', 'linkedin']
 		
 		@experience = Experience.new
@@ -130,10 +132,10 @@ class TeachersController < ApplicationController
 
 	end	
 
-	def modals #render modal content 
-		@teacher = current_teacher
-		@current_teacher = current_teacher
-		render 'modals/show_teacher/_payment_packages_modal', layout: false
+	def create_new_subject #render modal content 
+		@subject = Subject.new
+		@categories = Category.all
+		render 'modals/_create_new_subject', layout: false
 	end
 
 	def get_locations

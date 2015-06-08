@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get     '/qualification-form'     =>  'teachers#qualification_form'
       get     '/your-business'          =>  'teachers#your_business'
       get     'previous-lessons'        =>  'teachers#previous_lessons'
+
       post    '/change-profile-pic'     =>  'teachers#change_profile_pic'       
   	end
   	resources :photos, only: [:create, :destroy]
@@ -83,7 +84,7 @@ Rails.application.routes.draw do
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
   
-
+  get     'create-new-subject'      =>  'teachers#create_new_subject'
 
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'

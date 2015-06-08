@@ -138,8 +138,10 @@ teachersInfoReady = ->
 #///////////////Teachers subject search
   $(document).on 'click', '.no_subject_found', ->
     $('#teachers_subjects_modal').modal 'hide'
-    $('#teacher_create_subject_modal').modal 'show'
-    console.log x
+    $('#teacher_create_subject_modal').modal
+      show: true
+      remote: "/create-new-subject?id=#{gon.teacher_id}"
+    
   $('#teachers_subjects_modal').on 'shown.bs.modal', ->
     $('#search_results').empty()
     $("#teachers_search_input").val ''
