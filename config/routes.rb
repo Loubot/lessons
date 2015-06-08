@@ -11,7 +11,6 @@ Rails.application.routes.draw do
       get     '/qualification-form'     =>  'teachers#qualification_form'
       get     '/your-business'          =>  'teachers#your_business'
       get     'previous-lessons'        =>  'teachers#previous_lessons'
-      get     'modal'                   =>  'teachers#modals'      
       post    '/change-profile-pic'     =>  'teachers#change_profile_pic'       
   	end
   	resources :photos, only: [:create, :destroy]
