@@ -1,0 +1,22 @@
+<div class="modal fade" id="teacher_create_subject_modal" tabindex="-1" role="dialog" aria-labelledby="create_subject_label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="create_subject_label">Create subject</h4>
+      </div> <!-- end of modal-header -->
+      <div class="modal-body">
+        <%= form_tag subjects_path, class: 'form-inline', method: 'post' do %>
+          <div class="form-group">
+            <label for="subjectName">Name</label>
+            <%= 'subject[name]'
+          </div> <!-- end of form-group -->
+        <% end %>
+      </div> <!-- end of modal-body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Send message</button> -->
+      </div> <!-- end of modal-footer -->
+    </div> <!-- end of modal-content -->
+  </div> <!-- end of modal-dialog -->
+</div> <!-- end of modal fade -->

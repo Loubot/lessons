@@ -144,6 +144,7 @@ module TeachersHelper
   end
 
   def get_select_text(p)
+    p "select text #{p.inspect}"
   	["#{p.no_of_lessons}x#{p.subject_name} lessons for #{ number_to_currency(p.price, unit: '€') }", p.id]
   end
 
