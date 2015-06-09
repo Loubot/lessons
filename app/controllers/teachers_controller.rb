@@ -132,10 +132,11 @@ class TeachersController < ApplicationController
 
 	end	
 
-	def create_new_subject #render modal content 
+	def create_new_subject #render modal content		
 		@subject = Subject.new
 		@categories = Category.all
-		render 'modals/_create_new_subject', layout: false
+		
+		
 	end
 
 	def get_locations
