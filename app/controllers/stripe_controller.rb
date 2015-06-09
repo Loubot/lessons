@@ -13,12 +13,14 @@ class StripeController < ApplicationController
 
   def stripe_create
    # Amount in cents
+    
+  	@amount = (Price.find(session[:price_id]).price * 100 ).to_i
+    @teacher = Teacher.find(session[:teacher_id])
+    p "session #{session[:cart_id]}"
+    cart = UserCart.find(session[:cart_id].to_i)
+    lesson_location = Location.find(session[:location_id]).name
+    
     begin
-    	@amount = (Price.find(session[:price_id]).price * 100 ).to_i
-      @teacher = Teacher.find(session[:teacher_id])
-      p "session #{session[:cart_id]}"
-      cart = UserCart.find(session[:cart_id].to_i)
-      lesson_location = Location.find(session[:location_id]).name
       charge = Stripe::Charge.create({
         :metadata           => { :tracking_id => params[:tracking_id] },
         :amount             => @amount,
@@ -40,12 +42,14 @@ class StripeController < ApplicationController
            
         redirect_to :back  
       
-      end
+      end #end of if
     
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to :back
+    end #end of begin/rescue
+    
     
   end #end of stripe_create
 
@@ -53,39 +57,41 @@ class StripeController < ApplicationController
   def pay_membership_stripe
     # cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
     @amount = 300
-    charge = Stripe::Charge.create({
-      :metadata           => { 
-                              # :tracking_id => cart.tracking_id, 
-                              home_booking: true
-                              },
-      :amount             => @amount,
-      :description        => "#{current_teacher.full_name} membership payment",
-      :currency           => 'eur',
-      :application_fee    => 300,
-      :source             => params[:stripeToken]
-      
-      },
-      current_teacher.stripe_access_token
-    )
-    puts charge.inspect
-    if charge['paid'] == true
-      p "stripe membership payment"
-      transaction = Transaction.create( #payments_helper
-                                        create_membership_params(charge, params['teacher_id'])
-                                      )
+    begin
+      charge = Stripe::Charge.create({
+        :metadata           => { 
+                                # :tracking_id => cart.tracking_id, 
+                                home_booking: true
+                                },
+        :amount             => @amount,
+        :description        => "#{current_teacher.full_name} membership payment",
+        :currency           => 'eur',
+        :application_fee    => 300,
+        :source             => params[:stripeToken]
+        
+        },
+        current_teacher.stripe_access_token
+      )
+      puts charge.inspect
+      if charge['paid'] == true
+        p "stripe membership payment"
+        transaction = Transaction.create( #payments_helper
+                                          create_membership_params(charge, params['teacher_id'])
+                                        )
 
-      
-      # current_teacher.update_attributes(paid_up: true, paid_up_date: Date.today - 7.days) #set teacher as paid
-      
-      MembershipMailer.delay.membership_paid(params[:teacher_email], current_teacher.full_name) #send email async with delayed_job
-    end
-    flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
-    redirect_to :back
+        
+        # current_teacher.update_attributes(paid_up: true, paid_up_date: Date.today - 7.days) #set teacher as paid
+        
+        MembershipMailer.delay.membership_paid(params[:teacher_email], current_teacher.full_name) #send email async with delayed_job
+      end
+      flash[:success] = 'Payment was successful. You will receive an email soon. Eventually. When I code it!'
+      redirect_to :back
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to charges_path
-    end
+    end #end of begin/rescue
+    
   end
 
   #end of membership payments

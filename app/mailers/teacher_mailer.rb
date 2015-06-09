@@ -2,8 +2,8 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def single_booking_mail_teacher(params, amount, lesson_location, student_name, cart)
-    logger.info "teacher email email #{student_name} #{params} #{student_name}"
+  def single_booking_mail_teacher(amount, lesson_location, cart)
+    # logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
@@ -22,7 +22,7 @@ class TeacherMailer < ActionMailer::Base
                               { "rcpt"   =>  cart.teacher_email,
                                 "vars" =>  [
                                           { "name"=>"FNAME",          "content"=>cart.teacher_name  },
-                                          { "name"=>"SNAME",          "content"=>student_name  },
+                                          { "name"=>"SNAME",          "content"=>cart.student_name  },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
                                           { "name"=>"LESSONPRICE",    "content"=>amount },
@@ -44,10 +44,10 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{params['teacher_email']}"
+    logger.info "Mail sent to #{cart.teacher_email}"
   end #end of single_booking_mail_teacher
 
-  def single_booking_mail_student(params, amount, start_time, end_time, lesson_location, student_name, cart)
+  def single_booking_mail_student(amount, lesson_location, cart)
     logger.info "teacher email email #{cart.inspect}"
     begin
       require 'mandrill'
@@ -89,7 +89,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{params['teacher_email']}"
+    logger.info "Mail sent to #{cart.teacher_email}"
   end # end of single_booking_mail_student
 
   def home_booking_mail_student(params, address, time)

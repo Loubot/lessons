@@ -59,28 +59,23 @@ module StripeHelper
 		Transaction.create(
 		                  	create_transaction_params_stripe(
                                                           charge, 
-                                                          params['student_id'], 
-                                                          params['teacher_id']
+                                                          cart.student_id, 
+                                                          cart.teacher_id
                                                         )
 		                  )
 
-    TeacherMailer.delay.single_booking_mail_teacher(                		                            
-                                                params,
-                                                (sprintf "%.2f", amount / 100),
-                                                lesson_location,
-                                                current_teacher.full_name,
-                                                cart                		                            
-                		                          )
+    TeacherMailer.delay.single_booking_mail_teacher(                                                
+                                                (
+                                                  sprintf "%.2f", amount / 100),
+                                                  lesson_location,
+                                                  cart                		                            
+                		                            )
 
     TeacherMailer.delay.single_booking_mail_student(
-                                                  params,
-                                                  (sprintf "%.2f", amount / 100),
-                                                  (cart.params[:start_time]).strftime("%H:%M"),
-                                                  (cart.params[:end_time]).strftime("%H:%M"),
-                                                  lesson_location,
-                                                  current_teacher.full_name,                                                  
-                                                  cart 
-
+                                                  (
+                                                    sprintf "%.2f", amount / 100),
+                                                    lesson_location,
+                                                    cart
                                                   )
 	end # end of single_transaction_and_mail
 
