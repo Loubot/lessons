@@ -17,37 +17,41 @@
 
           </div>
           <!-- package id appended to form using js on shown.bs.modal -->
-          <div class="col-xs-6">
-            <% if @teacher.paypal_email != "" %>
-              <%= form_tag package_paypal_path,  class: 'package_booking_form', method: 'post' do |f| %>
-                <%= hidden_field_tag :teacher_id, @teacher.id %>
-                <%= hidden_field_tag :student_id, @current_teacher.id %>
-                <%= hidden_field_tag :student_name, @current_teacher.full_name %>
-                <%= hidden_field_tag :student_email, @current_teacher.email %>
-                <%= hidden_field_tag :teacher_email, @teacher.email %>
-                <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
-              <% end %> <%# end of form %>
-            <% end %>
-          </div> <!-- end of col-xs-6 -->
-          <div class="col-xs-6">
-            <% if @teacher.stripe_access_token != "" %>
-              <%= form_tag package_stripe_path,  class: 'package_booking_form', method: 'post' do |f| %>
-                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
-                      data-description="Book your lesson"
-                      data-currency="eur"
-                      data-description="This is the description"
-                      data-imgage="<%= asset_url 'stripe.png' %>"
-                      ></script>
-                <%= hidden_field_tag :teacher_id, @teacher.id %>
-                <%= hidden_field_tag :student_id, @current_teacher.id %>
-                <%= hidden_field_tag :student_name, @current_teacher.full_name %>
-                <%= hidden_field_tag :student_email, @current_teacher.email %>
-                <%= hidden_field_tag :teacher_email, @teacher.email %>
-              
-              <% end %> <%# end of form %>
-            <% end %>
-          </div> <!-- end of col-xs-6 -->
+          <% if teacher_signed_in? %>
+
+            <div class="col-xs-6">
+              <% if @teacher.paypal_email != "" %>
+                <%= form_tag package_paypal_path,  class: 'package_booking_form', method: 'post' do |f| %>
+                  <%= hidden_field_tag :teacher_id, @teacher.id %>
+                  <%= hidden_field_tag :student_id, @current_teacher.id %>
+                  <%= hidden_field_tag :student_name, @current_teacher.full_name %>
+                  <%= hidden_field_tag :student_email, @current_teacher.email %>
+                  <%= hidden_field_tag :teacher_email, @teacher.email %>
+                  <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
+                <% end %> <%# end of form %>
+              <% end %>
+            </div> <!-- end of col-xs-6 -->
+            <div class="col-xs-6">
+              <% if @teacher.stripe_access_token != "" %>
+                <%= form_tag package_stripe_path,  class: 'package_booking_form', method: 'post' do |f| %>
+                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
+                        data-description="Book your lesson"
+                        data-currency="eur"
+                        data-description="This is the description"
+                        data-imgage="<%= asset_url 'stripe.png' %>"
+                        ></script>
+                  <%= hidden_field_tag :teacher_id, @teacher.id %>
+                  <%= hidden_field_tag :student_id, @current_teacher.id %>
+                  <%= hidden_field_tag :student_name, @current_teacher.full_name %>
+                  <%= hidden_field_tag :student_email, @current_teacher.email %>
+                  <%= hidden_field_tag :teacher_email, @teacher.email %>
+                
+                <% end %> <%# end of form %>
+              <% end %>
+            </div> <!-- end of col-xs-6 -->
+
+          <% end %>
           
         </div>
         
