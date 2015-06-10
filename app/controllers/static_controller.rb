@@ -150,6 +150,19 @@ class StaticController < ApplicationController
 		end
 	end
 
+	def feedback
+		if teacher_signed_in?
+			render layout: 'teacher_layout'
+		else
+			render layout: 'application'
+		end
+		fresh_when [current_teacher, flash]
+	end
+
+	def send_feedback
+		redirect_to :back
+	end
+
 	private
 
 		def valid_email?(email)

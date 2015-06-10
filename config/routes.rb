@@ -56,8 +56,10 @@ Rails.application.routes.draw do
   get         '/refresh-welcome'        =>  'static#refresh_welcome'
   get         '/new-registration'       =>  'static#new_registration'
   get         '/register-with-us'       =>  'static#landing_page'
+  get         'feedback'                =>  'static#feedback'
   post        '/add-to-list'            =>  'static#add_to_list'
   post        '/confirm-registration'   =>  'static#confirm_registration'
+  post        'send_feedback'           =>  'static#send_feedback'
 
   post        '/share-linkedin'         =>  'application#share_linkedin'
   

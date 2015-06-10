@@ -207,8 +207,7 @@ class TeachersController < ApplicationController
 		end
 		render 'modals/payment_selections/_return_home_price.js.coffee'
 		# redirect_to :back
-	end
-	
+	end	
 
 	private
 		def check_is_teacher
