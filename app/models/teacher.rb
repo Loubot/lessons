@@ -184,7 +184,6 @@ class Teacher < ActiveRecord::Base
 
   def paypal_verify(params)
     api = PayPal::SDK::AdaptiveAccounts::API.new(
-      :mode      => "live",  # Set "live" for production
       :app_id    => ENV['PAYPAL_APP_ID'],
       :username  => ENV['PAYPAL_USER_ID'],
       :password  => ENV['PAYPAL_PASSWORD'],
@@ -198,6 +197,7 @@ class Teacher < ActiveRecord::Base
                       )
     response = api.get_verified_status(get_verified_status_request)
     self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?
+    p "paypal registration failed #{response}" if !response.success?
     response
     
   end

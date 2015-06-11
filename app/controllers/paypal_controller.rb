@@ -27,10 +27,10 @@ class PaypalController < ApplicationController
   def pay_membership_paypal
     cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
     client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
+      :user_id       => ENV['PAYPAL_USER_ID'],
+      :password      => ENV['PAYPAL_PASSWORD'],
+      :signature     => ENV['PAYPAL_SIGNATURE'],
+      :app_id        => ENV['PAYPAL_APP_ID'],
       :sandbox       => true
     )
 
@@ -41,8 +41,8 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :currency_code   => "EUR",
       :cancel_url      => "https://www.learnyourlesson.ie",
-      :return_url      => "https://www.learnyourlesson.ie/welcome",
-      :ipn_notification_url => "http://72581b0c.ngrok.com/membership-return-paypal"
+      :return_url      => "http://38b2777c.ngrok.com/welcome",
+      :ipn_notification_url => "http://38b2777c.ngrok.com/membership-return-paypal"
     ) do |response|
 
       if response.success?

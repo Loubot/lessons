@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
 	layout 'teacher_layout', except: [:show_teacher]
 	before_action :authenticate_teacher!, except: [:show_teacher]
-	before_action :check_id, except: [:add_map, :show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
+	before_action :check_id, except: [:add_map, :show_teacher, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	before_action :check_is_teacher, only: [:edit, :teachers_area, :qualification_form, :your_business, :change_profile_pic, :add_map ]
 																					#[:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	
@@ -117,6 +117,7 @@ class TeachersController < ApplicationController
 	end
 
 	def previous_lessons
+		@categories = Category.all
 		if !current_teacher.is_teacher
 			render layout: 'application'
 		else 
@@ -220,7 +221,7 @@ class TeachersController < ApplicationController
 		def check_id
 			if current_teacher.id != params[:id].to_i
 				flash[:danger] = "You are not authorised to view this page"
-				redirect_to :back
+				redirect_to root_path
 			end 
 		end
 

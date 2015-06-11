@@ -35,11 +35,12 @@
     
     <div class="row add_col_padding">
       <% @teacher.subjects.each do |s| %>
-        <%= form_for [@teacher, Price.find_or_initialize_by(
+        <% price = [@teacher, Price.find_or_initialize_by(
                                 teacher_id: current_teacher, 
                                 location_id: location.id, 
                                 subject_id: s.id
-                                )],
+                                )] %>
+        <%= form_for price,
                         data: { remote: true, type: 'script' }, html: { class: 'form-horizontal prices_form' } do |p| %>
           <div class="form-group">
             <%= p.label "#{s.name} price:", class: 'col-sm-4 control-label' %>
@@ -58,6 +59,8 @@
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <%= p.submit "Update #{s.name} price", class: 'btn btn-info' %>
+              <%= (link_to 'Delete', price, class: 'btn btn-danger', method: 'delete') if !price[1].new_record?  %>
+              
             </div>
           </div>
           

@@ -42,7 +42,9 @@ class PricesController < ApplicationController
 
 	def destroy
 		@price = Price.find(params[:id])
+		# p @price.inspect
 		@price.destroy
+		redirect_to :back
 	end
 
 	private
