@@ -10,7 +10,9 @@ class TeachersController < ApplicationController
 	
 	def show_teacher
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
-		@subject = get_subject(params, @teacher.subjects)
+		@subject = get_subject(@teacher.subjects)
+		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices
+		p "subject #{@subjects}"
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
 		# @subject = Subject.find(params[:subject_id])
@@ -225,13 +227,10 @@ class TeachersController < ApplicationController
 			end 
 		end
 
-		def get_subject(params, subjects)
-			if params.has_key?(:subject_id)
-				@teacher.subjects.select { |s| s.id == params[:subject_id].to_i }.first
-				
-			else
-				return subjects[0]
-			end
+		def get_subject(subjects)
+			
+			subjects.min				
+			
 		end #return subect to show_teacher
 
 		def teacher_params

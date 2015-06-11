@@ -129,6 +129,10 @@ module TeachersHelper
   	link_to("Delete authentictation",teacher_identity_path(current_teacher, ident.id), method: :delete, data: { confirm: 'Are you sure?' }).html_safe
   end
 
+  def get_subjects_with_prices(subjects) #return only subjects with prices
+    subjects.map { |s| s if !s.prices.empty? } 
+  end
+
   def get_lowest_price(subject)
     # number_to_currency(prices.min.price, unit: '€')
     number_to_currency(subject.prices.min.price, unit: '€')
