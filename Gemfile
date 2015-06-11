@@ -1,8 +1,10 @@
 source 'http://rubygems.org'
 
-ruby '2.0.0'
-
-
+if RUBY_PLATFORM =~ /mingw|mswin/
+  ruby '2.0.0'
+else
+  ruby '2.1.2'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
@@ -58,9 +60,11 @@ gem 'binding_of_caller'
 
 gem 'devise'
 
-gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave', '~> 0.10'
 
-gem 'gibbon', '~> 1.1.3'
+gem 'gibbon', '~> 1.1'
+
+gem 'mandrill-api', '~> 1'
 
 gem 'gon', '~> 5.1.1'
 
@@ -87,8 +91,6 @@ gem 'pp-adaptive', '~> 1.0.0'
 gem 'paypal-sdk-adaptiveaccounts' #check if paypal account exists with given email
 
 gem 'stripe', '~> 1'
-
-gem 'mandrill-api', '~> 1'
 
 gem 'omniauth-facebook'
 

@@ -38,6 +38,8 @@
                 <li><%= link_to 'Logout', destroy_teacher_session_path, method: :delete %></li>
                 <li class="divider"></li>
                 <li><a href="#" data-target="#add_authentication_modal" data-toggle="modal">Add authentications</a></li>
+                <li class="divider"></li>
+                <li><%= link_to 'Feedback/Issues', feedback_path %></li>
           <% else %>
                   <li><%= link_to 'Login', new_teacher_session_path %></li>
           <% end %>
