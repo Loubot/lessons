@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
 	def show_teacher
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
 		@subject = get_subject(@teacher.subjects)
-		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices
+		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices teachers_helper
 		p "subject #{@subjects}"
 		@event = Event.new
 		@categories = Category.includes(:subjects).all
@@ -115,7 +115,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons

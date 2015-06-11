@@ -130,7 +130,7 @@ module TeachersHelper
   end
 
   def get_subjects_with_prices(subjects) #return only subjects with prices
-    subjects.map { |s| s if !s.prices.empty? } 
+    subjects.map { |s| s if !s.prices.empty? }.compact
   end
 
   def get_lowest_price(subject)
@@ -140,6 +140,14 @@ module TeachersHelper
 
   def get_subjects_list(subject) #the_one_modal get subject list
     ["#{subject.name}", subject.id]
+  end
+
+  def return_id_for_select
+    :id
+  end
+
+  def return_text_for_select
+    :name
   end
 
   def get_home_price(prices, subject)

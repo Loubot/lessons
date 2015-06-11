@@ -10,7 +10,7 @@
           <div class="modal-body">
             <div class="container-fluid">   <%# teacher.js for form submisson on change %>
                 <%= form_tag get_locations_path, remote: true, method: 'post' do %>
-                  <%= select 'subject', 'id', content_tag(:option,'select subject...',:value=>"")+options_from_collection_for_select(@teacher.subjects, 'id', 'name'), { }, { class: 'form-control select_subject' } %>
+                  <%= select 'subject', 'id', content_tag(:option,'select subject...',:value=>"")+options_from_collection_for_select(@subjects, return_id_for_select, return_text_for_select), { }, { class: 'form-control select_subject' } %>
                   <input type="hidden" name="subject[teacher_id]" value="<%= @teacher.id %>">
                 <% end %>
                 <%# select 'location', 'id', options_for_select([['Home lesson', 1], ['Teachers house', '2']]), { include_blank: true }, { class: 'form-control select_location'} %>
