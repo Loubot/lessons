@@ -12,9 +12,13 @@ class RegistrationsController < Devise::RegistrationsController
       Invitation.find_by_token(params[:teacher][:invitation_token]).update_attributes(accepted_at: Time.now, accepted: true) if params[:teacher].has_key?(:invitation_token)
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
+
+        send_welcome_mails(resource) #see below
+        resource.delay.add_to_mailing_lists #steachers model
+
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
-        send_welcome_mails(resource)
+        
 
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
@@ -41,7 +45,12 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
     def send_welcome_mails(teacher)
-      p teacher.inspect
+
+      if teacher.is_teacher == true
+        TeacherMailer.delay.welcome_mail_teacher(teacher.first_name, teacher.email)
+      else
+        TeacherMailer.delay.welcome_mail_student(teacher.first_name, teacher.email)
+      end
     end
   
 end

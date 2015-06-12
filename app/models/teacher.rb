@@ -70,14 +70,38 @@ class Teacher < ActiveRecord::Base
   has_one :user_cart
   has_one :opening
 
-  # geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
-  # reverse_geocoded_by :lat, :lon
+  geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
+  reverse_geocoded_by :lat, :lon
   
   self.per_page = 5
 
   #scope
   def self.check_if_valid
     teachers = where(is_active: true)
+  end
+
+  def add_to_mailing_lists
+    gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
+    list_id = self.is_teacher ? ENV['MAILCHIMP_TEACHER_LIST'] : ENV['MAILCHIMP_STUDENT_LIST']
+    
+    begin
+      gb.lists.subscribe({
+                          :id => list_id,
+                           :email => {
+                                      :email => self.email                                       
+                                      },
+                                      :merge_vars => { :FNAME => self.first_name },
+                            :double_optin => false
+                          })
+
+      logger.info "subscribed to mailchimp"
+      # flash[:success] = "Thank you, your sign-up request was successful! Please check your e-mail inbox."
+    rescue Gibbon::MailChimpError, StandardError => e
+      puts "list subscription failed !!!!!!!!!!"
+      logger.info e.to_s
+      # flash[:danger] = e.to_s
+    end
+    
   end
 
   def set_paid_up_date

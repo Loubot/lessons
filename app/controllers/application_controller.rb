@@ -24,33 +24,6 @@ class ApplicationController < ActionController::Base
       current_teacher.update_attributes(address: '') if current_teacher.address != ''
     end
   end
-
-  def add_to_mailing_lists(fname, email, type, list_id)
-    setx MAILCHIMP_STUDENT_LIST b04771680c
-    gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
-    
-    if valid_email?(params[:email])
-      begin
-        gb.lists.subscribe({
-                            :id => list_id,
-                             :email => {
-                                        :email => params[:email]                                        
-                                        },
-                                        :merge_vars => { :FNAME => params[:name] },
-                              :double_optin => false
-                            })
-
-        
-        flash[:success] = "Thank you, your sign-up request was successful! Please check your e-mail inbox."
-      rescue Gibbon::MailChimpError, StandardError => e
-        
-        flash[:danger] = e.to_s
-      end
-    else
-      flash[:danger] = "Email not valid"
-    end
-  end
-
   
   private
 

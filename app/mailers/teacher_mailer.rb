@@ -297,4 +297,44 @@ class TeacherMailer < ActionMailer::Base
     logger.info "welcome email #{email}"
   end
 
+  def welcome_mail_student(fname, email)
+    begin
+      require 'mandrill'
+      
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name = "become-a-student-email"
+      template_content = []
+      message = { 
+                  subject: "Welcome to Learn Your Lesson",     
+                  :to=>[  
+                   {  
+                     :email=> email
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  email,
+                                "vars" =>  [
+                                          { "name"=>"FNAME", "content"=>fname  },
+                                          
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+      
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "welcome email #{email}"
+  end
+
 end
