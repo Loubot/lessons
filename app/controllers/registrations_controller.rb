@@ -14,6 +14,8 @@ class RegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
+        send_welcome_mails(resource)
+
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
@@ -36,5 +38,10 @@ class RegistrationsController < Devise::RegistrationsController
   def sign_up_params
     params.require(:teacher).permit(:email, :first_name, :last_name, :password, :password_confirmation, :is_teacher)
   end
+
+  private
+    def send_welcome_mails(teacher)
+      p teacher.inspect
+    end
   
 end
