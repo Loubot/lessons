@@ -15,8 +15,8 @@ class Change < ActiveRecord::Migration
   	add_column :user_carts,      :home_booking, :boolean, default: false
   	remove_column :user_carts,   :package_id
     remove_column :user_carts,   :amount,       :decimal
-    rename_column :user_carts,   :teacher_name
-    rename_column :transactions,  :amount,      :decimal
+    remove_column :user_carts,   :teacher_name
+    remove_column :transactions,  :amount,      :decimal
     remove_column :teachers,     :paid_up
     remove_column :teachers,     :paid_up_date 
   end
