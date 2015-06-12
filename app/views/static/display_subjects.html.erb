@@ -2,20 +2,16 @@
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
 <div class="outer-container">
   <div  class="container-fluid search_page_results">
-    <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', class: 'form-inline' do %>
+    <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
       <div class="form-group">
-        <%= text_field_tag :search_subjects, params[:search], :utf8_enforcer_tag => false,value: params[:search_subjects], placeholder: 'What do you want to learn today?', class: 'typeahead subject', autocomplete: :off %>
-      </div>
+        <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', value: params[:search_subjects], class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
+      </div> <!-- end of form-group -->
       <div class="form-group">
-        <%= text_field_tag :search_position, params[:search], :utf8_enforce_tag => false,value: params[:search_position],placeholder: 'County', class: 'typeahead county', autocomplete: :off %>
-      </div>
-       <div class="container-fluid search_submit_container">
-        <%= submit_tag "I'm ready to learn", id: 'search_submit', class: 'btn btn-info' %>
-      </div>
-      <div class="pull-right col-md-4">
-        <label>Sort by:</label>
-        <%= select_tag 'sort_by', options_for_select(['Distance', 'Rate: lowest first', 'Rate: highest first'], selected: params[:sort_by]), class: 'form-control distance_rate' %>
-      </div>
+        <%= text_field_tag :search_position, params[:search], placeholder: 'County', class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
+      </div> <!-- end of form-group -->
+      <div class="container-fluid search_submit_container">
+        <%= submit_tag "I'm ready to learn",type: 'submit', name: 'submit', id: 'search_submit', class: 'btn' %>
+      </div> <!-- end of container-fluid search_submit_container -->
     <% end %>
     <div id="display_search_results">
       <form class="form-horizontal col-md-4 pull-right" role="form">
