@@ -64,31 +64,35 @@ class Event < ActiveRecord::Base
   end
 
   def self.student_do_single_booking(params)
-    event_params = get_event_params(params)
+    p "params1 #{params}"
+    
 
     event = Event.new( 
-                        event_params
+                        get_event_params(params)
                       )
   end
 
   def self.get_event_params(params)
+    p "params2 #{params}"
+    p "adfadfadf #{params[:event]}"
     date = params[:event][:date]
     dates = { start_time: Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}"),
       end_time: Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}"),
       teacher_id: params[:event][:teacher_id],
       student_id: params[:event][:student_id],
+      subject_id: params[:event][:subject_id],
       status: 'active'
      }
   end
 
 
-  def self.create_confirmed_events(cart) ##start here!!!!!
+  def self.create_confirmed_events(params, cart)
     #cart[:booking_type]
-    if cart[:booking_type] == 'multiple'
+    if params[:booking_type] == 'multiple'
       p "heeeeeeelllll1"
-      create_multiple_events_and_save(cart)
+      create_multiple_events_and_save(params, cart)
     else
-      create_single_event_and_save(cart)
+      create_single_event_and_save(params)
       p "heeeeeeellllll2"
     end
   end
@@ -103,7 +107,21 @@ private
 		self.title = user.full_name		
 	end
 
-  def self.create_multiple_events_and_save(cart) #teachers area block booking
+  def self.create_single_event_and_save(params)
+    e = Event.create!(
+                start_time: params[:start_time],
+                end_time: params[:end_time],
+                teacher_id: params[:teacher_id],
+                student_id: params[:student_id],
+                subject_id: params[:subject_id],
+                status: 'active'
+              )
+
+    p "EVENT CREATED #{e.inspect}"
+    e
+  end
+
+  def self.create_multiple_events_and_save(params, cart) #teachers area block booking
     ids = []
     continue = true  
     
@@ -134,17 +152,5 @@ private
     end
 
   end
-
-  def self.create_single_event_and_save(cart)
-    Event.create!(
-                start_time: cart.params[:start_time],
-                end_time: cart.params[:end_time],
-                teacher_id: cart.params[:teacher_id],
-                student_id: cart.params[:student_id],
-                subject_id: cart.params[:subject_id],
-                status: 'active'
-              )
-  end
-
 
 end

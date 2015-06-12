@@ -226,6 +226,14 @@ hr{
 
 //end of qualifications
 
+
+//create-new-subject page
+.create_new_subject_well{
+  background-color: #ff3a00;
+  color: #FFF;
+}
+
+// end of create-new-subject-page
 //your_business page
 
 .price_alert{
@@ -258,10 +266,14 @@ hr{
 
 .package_form_header{
   color: #FFF;
-  text-align: center;
 }
 
-.package_form_label{
+.well_form_header{
+  color: #FFF;
+  // text-align: center;
+}
+
+.well_form_label{
   color: #FFF;
 }
 
@@ -278,6 +290,30 @@ hr{
   border-width: 1px;
   //margin-top: 9px;*/
   border-color: #E6E6E6;
+}
+
+.grind_well{
+  margin-bottom: 10px;
+  background-color: #FFBF00;
+  color: #FFF;
+}
+
+.grind_start_time{
+  color: #111;
+}
+
+.saved_grinds{
+  background-color: #FFBF3F;
+  color: #FFF;
+}
+
+.display_saved_grinds{
+  height: 150px;
+  padding: 30px;
+  border-style: solid;
+  border-width: 1px;
+  //margin-top: 9px;*/
+  border-color: #FFBF3F;
 }
 
 .subscription_container{
@@ -442,6 +478,12 @@ small.white{
   border-top: 1px solid #CCCCC0;
 }
 //end of subject search page*/
+
+// invitaion partial
+.invitation{
+  text-align: center;
+}
+// end of invitation partial
 
 //teachers-area page opening times modal*/
 .second_day{
@@ -821,7 +863,7 @@ form .glyphicon {
 
 .login_modal_content{
   // color: #FFF;
-  background-image: asset_url('tryit.jpg');
+  background-image: asset_url('key_icon.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -858,13 +900,21 @@ form .glyphicon {
 }
 // end of login_modal page */
 
-// add authentications modal
+// feedback page
+.feedback_header_container{
+  background-color: #ff3a00;
+  color: #FFF;
+  padding: 10px 5px;
+  margin-bottom: 10px;
+}
 
-// .auth_pics{
-//   margin-left: 25px;
-// }
+.feedback_header{
+  
+  
+  
+}
 
-// end of add authentications modal
+// end of feedback page
 
 // static/browse_categories*/
 

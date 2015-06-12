@@ -68,7 +68,7 @@ class EventsController < ApplicationController
 
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
 				@cart = UserCart.create_multiple_cart(params, @teacher.email, current_teacher)
-				
+				session[:cart_id] = @cart.id
 				# p "cart multiple #{@cart.inspect}"
 				
 			else
@@ -84,19 +84,17 @@ class EventsController < ApplicationController
 			if @event.valid?
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
 				@cart = UserCart.create_single_cart(params, @teacher.email, current_teacher)
-				
+				session[:cart_id] = @cart.id
 				p "cart  #{@cart.inspect}"
 			else
 				@teacher = @event.errors.full_messages
 			end
-		end
-		
-		
+		end		
 	end
 
 	private
 
-		def event_params(params)
+		def event_params
 			params.require(:event).permit!
 		end
 

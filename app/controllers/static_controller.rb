@@ -42,6 +42,7 @@ class StaticController < ApplicationController
 	end
 
 	def teach
+		@teacher = Teacher.new email: params[:invited_email]
 		render 'static/mobile_views/mobile_teach' if is_mobile?
 		# fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
 	end
@@ -66,12 +67,14 @@ class StaticController < ApplicationController
 				
 				flash[:danger] = e.to_s
 			end
+		else
+			flash[:danger] = "Email not valid"
 		end
 		redirect_to :back
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
 	end
@@ -80,7 +83,7 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
+		@subjects = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%")
 		@subject = @subjects.first
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
@@ -89,7 +92,7 @@ class StaticController < ApplicationController
 			@teachers.paginate(page: params[:page])
 			
 		end
-		fresh_when [params[:search_subjects], params[:position], @teachers.maximum(:updated_at)]
+		fresh_when [params[:search_subjects], params[:position]]
 	end
 
 	def browse_categories
@@ -147,6 +150,25 @@ class StaticController < ApplicationController
 				redirect_to :back
 			end
 		end
+	end
+
+	def feedback
+		if current_teacher.is_teacher
+			render layout: 'teacher_layout'
+		else
+			render layout: 'application'
+		end
+		fresh_when [current_teacher, flash]
+	end
+
+	def send_feedback
+		if valid_email?(params[:email])
+			AdminMailer.send_feedback_email(params).deliver_now
+			flash[:success] = "Feedback submitted successfully"
+	  else
+	  	flash[:danger] = "Email not valid"
+	  end
+    redirect_to :back
 	end
 
 	private

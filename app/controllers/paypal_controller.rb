@@ -27,10 +27,10 @@ class PaypalController < ApplicationController
   def pay_membership_paypal
     cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
     client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
+      :user_id       => ENV['PAYPAL_USER_ID'],
+      :password      => ENV['PAYPAL_PASSWORD'],
+      :signature     => ENV['PAYPAL_SIGNATURE'],
+      :app_id        => ENV['PAYPAL_APP_ID'],
       :sandbox       => true
     )
 
@@ -40,9 +40,9 @@ class PaypalController < ApplicationController
       :receiver_amount => 3,
       :tracking_id     => cart.tracking_id,
       :currency_code   => "EUR",
-      :cancel_url      => "http://76b9acc5.ngrok.com",
-      :return_url      => "http://46fd0a23.ngrok.com/welcome",
-      :ipn_notification_url => "http://46fd0a23.ngrok.com/membership-return-paypal"
+      :cancel_url      => "https://www.learnyourlesson.ie",
+      :return_url      => "http://38b2777c.ngrok.com/welcome",
+      :ipn_notification_url => "http://38b2777c.ngrok.com/membership-return-paypal"
     ) do |response|
 
       if response.success?
@@ -73,15 +73,13 @@ class PaypalController < ApplicationController
                           'User-Agent' => 'My custom user agent'
                         ).body
 
-    p "paypal post params: #{params['status']}"
-   
-    puts "Paypal verification response: #{response}"
-    logger.info "Paypal verification response: #{response}"
+   p "status #{params['status']}"
 
-    if !(Transaction.find_by(tracking_id: params['tracking_id']))
+    if !(transaction = Transaction.find_by(tracking_id: params['tracking_id'])) && (params['status'] == 'COMPLETED')
       if response == "VERIFIED"
+        p "Saving paypal membership transaction"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
-        
+        p "no cart" if !cart
         render status: 200, nothing: true and return if !cart
         
 
@@ -104,7 +102,7 @@ class PaypalController < ApplicationController
         render status: 200, nothing: true
       end
     elsif transaction
-      p "Couldn't find transaction"
+      p "Couldn't find transaction or not payment status not completed"
       render status: 200, nothing: true
     else
       logger.info "MAJOR ALERT: Transaction already exists"
@@ -138,8 +136,8 @@ class PaypalController < ApplicationController
       :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
       :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-package-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: package.price.to_f, primary: true },
-        { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+        { :email => params[:teacher_email], amount: package.price.to_f, primary: true }
+        # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
 
@@ -161,32 +159,34 @@ class PaypalController < ApplicationController
 
   def home_booking_paypal
     update_student_address(params) #application controller
-
-    
-    cart = UserCart.home_booking_cart(params)
+    price = Price.find(params[:price_id])
+    cart = UserCart.find_by(student_id: current_teacher.id)
+    cart.update_attributes(address:params[:home_address])
+    p "start time #{params[:start_time]}"
+    # cart = UserCart.home_booking_cart(params, price.price)
     # p cart.home_booking
     # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
     # render status: 200, nothing: true
     
     
     client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
+      :user_id       => ENV['PAYPAL_USER_ID'],
+      :password      => ENV['PAYPAL_PASSWORD'],
+      :signature     => ENV['PAYPAL_SIGNATURE'],
+      :app_id        => ENV['PAYPAL_APP_ID'],
       :sandbox       => true
     )
 
     client.execute(:Pay,
       :action_type     => "PAY",
-      :currency_code   => "GBP",
+      :currency_code   => "EUR",
       :tracking_id     => cart.tracking_id,
-      :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-      :return_url      => "http://46fd0a23.ngrok.com/welcome",
-      :ipn_notification_url => 'http://46fd0a23.ngrok.com/store-paypal',
+      :cancel_url      => "https://www.learnyourlesson.ie",
+      :return_url      => request.referrer,
+      :ipn_notification_url => 'http://72581b0c.ngrok.com/store-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: params[:receiver_amount], primary: true },
-        { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+        { :email => params[:teacher_email], amount: 0.01 } #, primary: true
+        # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
 
@@ -196,6 +196,7 @@ class PaypalController < ApplicationController
 
         # send the user to PayPal to make the payment
         # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
+        flash[:success] = "Your booking is being processed. You should receive an email soon."
         redirect_to client.payment_url(response)
       else
         flash[:danger] = "#{response.error_message}"
@@ -241,6 +242,8 @@ class PaypalController < ApplicationController
                                           )
 
           TeacherMailer.delay.home_booking_mail_student(cart)
+          TeacherMailer.delay.home_booking_mail_teacher(cart)
+          render status: 200, nothing: true
           
         else #not home booking
           # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
@@ -254,13 +257,13 @@ class PaypalController < ApplicationController
 
           # p "Event errors #{event.errors.full_messages}" if !event.valid?
           # p "Event created id: #{event.id}"
-          TeacherMailer.mail_teacher(
+          TeacherMailer.delay.mail_teacher(
                                       cart.student_email,
                                       cart.student_name,
                                       cart.teacher_email,
                                       cart.params[:start_time],
                                       cart.params[:end_time]
-                                    ).deliver_now
+                                    )
 
           render status: 200, nothing: true
         end
@@ -373,8 +376,8 @@ class PaypalController < ApplicationController
           :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
           :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
           :receivers => [
-            { :email => params[:teacher], amount: params[:receiver_amount], primary: true },
-            { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+            { :email => params[:teacher], amount: params[:receiver_amount], primary: true }
+            # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
           ]
         ) do |response|
 

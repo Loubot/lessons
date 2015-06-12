@@ -40,6 +40,7 @@ class Teacher < ActiveRecord::Base
   validates :email,  uniqueness: { case_sensitive: false }
   validates :email, :first_name, :last_name, presence: true
   validates :is_teacher, inclusion: { in: [true, false], message: "%{value} must be set true or false" }
+  validates_confirmation_of :password, message: "should match verification"
   # after_validation :reverse_geocode
 
   after_initialize :set_paid_up_date
@@ -53,6 +54,8 @@ class Teacher < ActiveRecord::Base
   has_many :identities, dependent: :destroy
 
   has_many :packages, dependent: :destroy
+
+  has_many :grinds, dependent: :destroy
 
   has_and_belongs_to_many :subjects, touch: true
 
@@ -181,16 +184,20 @@ class Teacher < ActiveRecord::Base
 
   def paypal_verify(params)
     api = PayPal::SDK::AdaptiveAccounts::API.new(
-      :mode      => "sandbox",  # Set "live" for production
-      :app_id    => "APP-80W284485P519543T",
-      :username  => "lllouis_api1.yahoo.com",
-      :password  => "MRXUGXEXHYX7JGHH",
-      :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :device_ipaddress => "127.0.0.1",
-      :sandbox_email_address => "lllouis@yahoo.com" )
-    get_verified_status_request = api.build_get_verified_status( :emailAddress => params[:teacher][:paypal_email], :matchCriteria => "NONE" )
+      :app_id    => ENV['PAYPAL_APP_ID'],
+      :username  => ENV['PAYPAL_USER_ID'],
+      :password  => ENV['PAYPAL_PASSWORD'],
+      :signature => ENV['PAYPAL_SIGNATURE']
+       )
+    get_verified_status_request = api.build_get_verified_status( 
+                      :emailAddress => params[:teacher][:paypal_email], 
+                      :matchCriteria => "NAME",
+                      :firstName => self.first_name,
+                      :lastName => self.last_name
+                      )
     response = api.get_verified_status(get_verified_status_request)
     self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?
+    p "paypal registration failed #{response}" if !response.success?
     response
     
   end

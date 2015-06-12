@@ -2,99 +2,15 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def mail_teacher(student, student_name, teacher, start_time, end_time)
-    p 'test mail start'
-
-    p "start time #{start_time} end time #{end_time}"
-
-    startTime = start_time
-    endTime = end_time
+  def single_booking_mail_teacher(amount, lesson_location, cart)
+    # logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      message = {  
-       :subject=> "You have a booking",  
-       :from_name=> "Learn Your Lesson",  
-       :text=> %Q(<html>#{student_name} has booked a lesson.
-                #{startTime} to #{endTime}</html>),  
-       :to=>[  
-         {  
-           :email=> teacher.to_s,
-           :name=> "#{student_name}"  
-         }  
-       ],  
-       :html=> %Q(<html>#{student_name} has booked a lesson.
-                #{startTime} to #{endTime}</html>),  
-       :from_email=> student.to_s  
-      }  
-      sending = m.messages.send message  
-      puts sending
-    rescue Mandrill::Error => e
-        # Mandrill errors are thrown as exceptions
-        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
-        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
-    raise
-    end
-
-    logger.info "Mail sent to #{teacher.to_s}"
-  end
-
-  def home_booking_mail_student(cart)
-
-    begin
-      require 'mandrill'
-      
-      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      template_name = "students-home-booking-to-student"
+      template_name ="teachers-home-booking-to-teacher"
       template_content = []
       message = { 
-                  subject: "Confirmation of booking request",     
-                  :to=>[  
-                   {  
-                     :email=> cart.student_email.to_s
-                     # :name=> "#{student_name}"  
-                   }  
-                 ],  
-                 :from_email=> "loubot@learnyourlesson.ie",
-                "merge_vars"=>[
-                              { "rcpt"   =>  cart.student_email,
-                                "vars" =>  [
-                                          { "name"=>"FNAME",          "content"=>cart.student_name  },
-                                          { "name"=>"TNAME",          "content"=>cart.teacher_name  },
-                                          { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
-                                          { "name"=>"LESSONLOCATION", "content"=>cart.address }
-                                        ]
-                          }],
-                  
-                }
-      async = false
-      result = mandrill.messages.send_template template_name, template_content, message, async
-      # sending = m.messages.send message  
-      puts result
-      
-    rescue Mandrill::Error => e
-        # Mandrill errors are thrown as exceptions
-        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
-        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
-    raise
-    end
-
-    # logger.info "Mail sent to #{cart.teacher_email}"
-
-  end #end of home_booking_mail_student
-
-
-  def home_booking_mail_teacher(cart)
-
-    begin
-      require 'mandrill'
-      
-      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      template_name = "students-home-booking-to-teacher"
-      template_content = []
-      message = { 
-                  subject: "Confirmation of booking request",     
+                  subject: "You have a booking",     
                   :to=>[  
                    {  
                      :email=> cart.teacher_email
@@ -106,10 +22,104 @@ class TeacherMailer < ActionMailer::Base
                               { "rcpt"   =>  cart.teacher_email,
                                 "vars" =>  [
                                           { "name"=>"FNAME",          "content"=>cart.teacher_name  },
-                                          { "name"=>"SNAME",          "content"=>cart.student_name   },
-                                          { "name"=>"STEMAILADDRESS", "content"=>cart.student_email  },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
-                                          { "name"=>"LESSONLOCATION", "content"=>cart.address }
+                                          { "name"=>"SNAME",          "content"=>cart.student_name  },
+                                          { "name"=>"STEMAILADDRESS", "content"=>cart.student_email },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
+                                          { "name"=>"LESSONPRICE",    "content"=>amount },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].to_date },
+                                          { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Mail sent to #{cart.teacher_email}"
+  end #end of single_booking_mail_teacher
+
+  def single_booking_mail_student(amount, lesson_location, cart)
+    logger.info "teacher email email #{cart.inspect}"
+    begin
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name ="teachers-home-booking-to-student"
+      template_content = []
+      message = { 
+                  subject: "You have made a booking",
+                  :to=>[  
+                   {  
+                     :email=> cart.student_email  
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  cart.student_email,
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>cart.student_name  },
+                                          { "name"=>"TNAME",          "content"=>cart.teacher_name  },
+                                          { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
+                                          { "name"=>"LESSONPRICE",    "content"=>amount },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].to_date },
+                                          { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Mail sent to #{cart.teacher_email}"
+  end # end of single_booking_mail_student
+
+  def home_booking_mail_student(params, address, time)
+
+    begin
+      require 'mandrill'
+      
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name = "students-home-booking-to-student"
+      template_content = []
+      message = { 
+                  subject: "Confirmation of booking request",     
+                  :to=>[  
+                   {  
+                     :email=> params['student_email']
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  params['student_email'],
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>params['student_name']  },
+                                          { "name"=>"TNAME",          "content"=>params['teacher_name']  },
+                                          { "name"=>"TEMAILADDRESS",  "content"=>params['teacher_email'] },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(params['amount'], unit:'€') },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>1 },
+                                          { "name"=>"LESSONLOCATION", "content"=>address },
+                                          { "name"=>"LESSONTIME",     "content"=>time },
+                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date }
                                         ]
                           }],
                   
@@ -126,7 +136,55 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    # logger.info "Mail sent to #{cart.teacher_email}"
+    logger.info "home_booking_mail_student #{params['student_email']}"
+
+  end #end of home_booking_mail_student
+
+
+  def home_booking_mail_teacher(params, address, time)
+    
+    begin
+      require 'mandrill'
+      
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name = "students-home-booking-to-teacher"
+      template_content = []
+      message = { 
+                  subject: "Confirmation of booking request",     
+                  :to=>[  
+                   {  
+                     :email=> params['teacher_email']
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  params['teacher_email'],
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>params['teacher_name']  },
+                                          { "name"=>"SNAME",          "content"=>params['student_name']   },
+                                          { "name"=>"STEMAILADDRESS", "content"=>params['student_email']  },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(params['amount'], unit:'€') },
+                                          { "name"=>"LESSONTIME",     "content"=>time },
+                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
+                                          { "name"=>"LESSONLOCATION", "content"=>address }
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+      
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "home_booking_mail_teacher #{params['teacher_email']}"
 
   end #end of home_booking_mail_student
 

@@ -136,8 +136,18 @@ teachersInfoReady = ->
 
 
 #///////////////Teachers subject search
+  # $(document).on 'click', '.no_subject_found', ->
+  #   $('#teachers_subjects_modal').modal 'hide'
+  #   $('#teacher_create_subject_modal').modal
+  #     show: true
+  #     remote: "/create-new-subject?id=#{gon.teacher_id}"
+    
+  $('#teachers_subjects_modal').on 'shown.bs.modal', ->
+    $('#search_results').empty()
+    $("#teachers_search_input").val ''
   $('#subject_search').keyup ->
-    $.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
+    if $('#teachers_search_input').val().length > 1
+      $.get($('#subject_search').attr('action'), $('#subject_search').serialize(), null, 'script')
 
 #///////////////End of teachers subject_search
 
@@ -290,25 +300,32 @@ teachersInfoReady = ->
         $('.payment_form_container').empty()
         $('.display_teachers_location').empty()
         $('.returned_locations_container').empty()
+        $('.payment_choice_error').empty()
         
       $('#the_one_modal').on 'shown.bs.modal', ->
+        $('.payment_form_container').empty()
+        $("select").each ->
+          $(this).val($(this).find('option[selected]').val())
         
-        document.getElementById("subject_id").selectedIndex = 0
       # document.getElementById("select_subject").selectedIndex = 0     
       $(document).on 'change', '.select_subject', ->
-        $.ajax
-          url: 'get-locations'
-          data:            
-            subject_id: $('.select_subject').val()
-            id: $('#select_subjects_teacher_id').val()
+        $('.select_subject').submit()
+        # $.ajax
+        #   url: 'get-locations'
+        #   data:            
+        #     subject_id: $('.select_subject').val()
+        #     id: $('#select_subjects_teacher_id').val()
 
       $(document).on 'change', '.select_home_or_location', ->
-        $.ajax
-          url: 'get-subjects'
-          data:
-           id: $('#select_subjects_teacher_id').val()
-           subject_id: $('.select_subject').val()
-           location_choice: $('.select_home_or_location').val()
+        $('.location_choice').val $('.select_home_or_location').val()
+        $('.subject_id').val $('.select_subject').val()
+        $('.get_subjects_form').submit()
+        # $.ajax
+        #   url: 'get-subjects'
+        #   data:
+        #    id: $('#select_subjects_teacher_id').val()
+        #    subject_id: $('.select_subject').val()
+        #    location_choice: $('.select_home_or_location').val()
       
       # $(document).on 'click', '#location_only_datepicker', ->
       #   console.log 'a'
@@ -319,12 +336,14 @@ teachersInfoReady = ->
       #     hideInput: true
 
       $(document).on 'change', '.teachers_location_selection', ->
-        $.ajax
-          url: 'get-locations-price'
-          data:
-            id: $('#select_subjects_teacher_id').val()
-            subject_id: $('.select_subject').val()
-            location_id: $('.teachers_location_selection').val()
+        $('.teachers_locations_subject').val $('.select_subject').val()
+        $('.get_locations_price_form').submit()
+        # $.ajax
+        #   url: 'get-locations-price'
+        #   data:
+        #     id: $('#select_subjects_teacher_id').val()
+        #     subject_id: $('.select_subject').val()
+        #     location_id: $('.teachers_location_selection').val()
 
     # end of the_one_modal
 
@@ -402,7 +421,15 @@ teachersInfoReady = ->
       subject_name = $('.package_subject_name :selected').text()
       $('.create_package_form').append """ 
                   <input value="#{ subject_name }" type="hidden" name="package[subject_name]">
-                                        """
+                                        """      
+      @.submit()
+  if $(".grind_form")
+    $(".grind_form").submit (e) ->
+      e.preventDefault()
+      subject_name = $(".grind_subject_name :selected").text()
+      $(".grind_form").append """
+                    <input value="#{ subject_name }" type="hidden" name="grind[subject_name]">
+                                 """
       @.submit()
 
 #end of  teachers business page, add subject name to for before submitting

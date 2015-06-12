@@ -20,10 +20,11 @@
                 We do not store your Stripe password.
                 <%= form_tag 'https://connect.stripe.com/oauth/authorize', method: 'get', class: 'stripe_reg_button' do %>
                   <%= hidden_field_tag :response_type, 'code' %>
-                  <%= hidden_field_tag :client_id, 'ca_4qQTgrfr1l9xHgK7qnrNZbpXz2tpBecX' %>
+                  <%= hidden_field_tag :client_id, ENV['STRIPE_CLIENT_ID'] %>
                   <%= hidden_field_tag :scope, 'read_write' %>
 
-                  <%= hidden_field_tag :redirect_uri, 'https://learn-your-lesson.herokuapp.com/stripe-auth-user' %>
+                  <%= hidden_field_tag :redirect_uri, 'http://61309c53.ngrok.com/stripe-auth-user' %>
+
 
                   <%= hidden_field_tag :stripe_landing, 'login' %>
                   <%= hidden_field_tag :state, current_teacher.id %>

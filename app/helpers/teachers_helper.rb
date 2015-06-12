@@ -110,7 +110,7 @@ module TeachersHelper
 
   def experience_delete_link(experience)
   	if !current_page?(show_teacher_path)
-  		(link_to 'Delete', experience_path(experience.id), class: 'btn btn-danger btn-sm', method: 'DELETE', data: { confirm: 'Are you sure' }).html_safe
+  		(link_to 'Delete', [@teacher, experience], class: 'btn btn-danger btn-sm', method: 'DESTROY', data: { confirm: 'Are you sure' }).html_safe
   	end
   end
 
@@ -129,36 +129,25 @@ module TeachersHelper
   	link_to("Delete authentictation",teacher_identity_path(current_teacher, ident.id), method: :delete, data: { confirm: 'Are you sure?' }).html_safe
   end
 
-  # def check_if_price(prices, location, subject, teacher)
-  #   # p = prices.select { |p| p.subject_id == subject && p.teacher_id == teacher }
-  #   if prices.any? { |p| p.subject_id == subject && p.location_id == location } && prices.any? { |p| p.subject_id == subject && p.no_map == true }
-  #     "#payment_choice_modal".html_safe
-  #   elsif prices.any? { |p| p.subject_id == subject && p.no_map == true }
-  #     "#payment_no_location_modal".html_safe
-  #   else
-  #     "#payment_location_only_modal".html_safe
-  #   end
-  # end
-
-  # def get_price_or_message(prices, location, subject, teacher)
-  #   p "location %%%%%%%%% #{location}"
-  #   p =  prices.select { |p| p.location_id == location && p.subject_id == subject && p.teacher_id == teacher }.first
-  #   home_price = prices.select { |p| p.subject_id == subject && p.no_map == true }.first
-  #   p ? number_to_currency(p.price, unit: '€').html_safe : "Only home lesson available".html_safe
-  # end
-
-  def get_lowest_price(prices)
-    number_to_currency(prices.min.price, unit: '€')
-    #p.select { |p| p.subject_id == 1 }
+  def get_subjects_with_prices(subjects) #return only subjects with prices
+    subjects.map { |s| s if !s.prices.empty? }.compact
   end
 
-  # def check_home_price(prices, subject) #check if home price defined for this subject
-  #   prices.any? { |p| p.subject_id == subject && p.no_map == true }
-  
-  # end
+  def get_lowest_price(subject)
+    # number_to_currency(prices.min.price, unit: '€')
+    number_to_currency(subject.prices.min.price, unit: '€')
+  end
 
   def get_subjects_list(subject) #the_one_modal get subject list
     ["#{subject.name}", subject.id]
+  end
+
+  def return_id_for_select
+    :id
+  end
+
+  def return_text_for_select
+    :name
   end
 
   def get_home_price(prices, subject)
@@ -167,6 +156,7 @@ module TeachersHelper
   end
 
   def get_select_text(p)
+    p "select text #{p.inspect}"
   	["#{p.no_of_lessons}x#{p.subject_name} lessons for #{ number_to_currency(p.price, unit: '€') }", p.id]
   end
 

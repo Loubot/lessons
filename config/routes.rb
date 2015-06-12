@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
-  devise_for  :teachers, :controllers => { omniauth_callbacks: "authentications",
-                                          :registrations => "registrations", 
-                                            passwords: 'passwords' }
+  devise_for  :teachers, :controllers => {  omniauth_callbacks: "authentications",
+                                            :registrations => "registrations", 
+                                            passwords: 'passwords'
+                                          }
   resources   :teachers, only: [:update, :edit, :destroy] do
-
+    
   	member do 
   		get     '/teachers-area'		      =>  'teachers#teachers_area'
       get     '/edit-appointments'      =>  'teachers#edit_appointments'
       get     '/qualification-form'     =>  'teachers#qualification_form'
       get     '/your-business'          =>  'teachers#your_business'
       get     'previous-lessons'        =>  'teachers#previous_lessons'
-      get     'modal'                   =>  'teachers#modals'      
+      get     'create-new-subject'      =>  'teachers#create_new_subject'
       post    '/change-profile-pic'     =>  'teachers#change_profile_pic'       
   	end
   	resources :photos, only: [:create, :destroy]
@@ -18,20 +19,24 @@ Rails.application.routes.draw do
     resources :openings, only: [:create, :update]
     resources :events
     resources :identities, only: [:destroy]
-
-
+    resources :invitations, only: [:create]
+    resources :grinds, only: [:create, :destroy]
+    resources :experiences,   only: [:create, :update, :destroy]
+    resources :packages, only: [:create, :destroy]
+    resources :locations, only: [:create, :update, :destroy]
+    resources :prices, only: [:create, :update, :destroy]
   end
+
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
   get         '/add-map'                =>  'teachers#add_map'
-  get         'get-locations'           =>  'teachers#get_locations'
-  get         'get-subjects'            =>  'teachers#get_subjects'
-  get         'get-locations-price'     =>  'teachers#get_locations_price'
+  post        'get-locations'           =>  'teachers#get_locations'
+  post        'get-subjects'            =>  'teachers#get_subjects'
+  post        'get-locations-price'     =>  'teachers#get_locations_price'
+  post        'teachers/check-home-event'      => 'teachers#check_home_event'
 
-  resources :locations
-  resources :prices, only: [:create, :update, :destroy]
-  resources :packages, only: [:create, :destroy]
-  resources :experiences,   only: [:create, :update, :destroy]
+  
+  
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
     member do      
@@ -51,8 +56,10 @@ Rails.application.routes.draw do
   get         '/refresh-welcome'        =>  'static#refresh_welcome'
   get         '/new-registration'       =>  'static#new_registration'
   get         '/register-with-us'       =>  'static#landing_page'
+  get         'feedback'                =>  'static#feedback'
   post        '/add-to-list'            =>  'static#add_to_list'
   post        '/confirm-registration'   =>  'static#confirm_registration'
+  post        'send_feedback'           =>  'static#send_feedback'
 
   post        '/share-linkedin'         =>  'application#share_linkedin'
   
@@ -78,10 +85,10 @@ Rails.application.routes.draw do
   post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
 
   post        'events/create-event-and-book' => 'events#create_event_and_book'
-
+  
 
   get         'admin-panel'             =>  'admins#admin_panel'
   put         'make_admin'              =>  'admins#make_admin'
   
-  root to: 'static#landing_page'
+  root to: 'static#welcome'
 end

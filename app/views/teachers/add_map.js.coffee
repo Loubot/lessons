@@ -7,7 +7,7 @@ $('.tab-content').append """ <div role="tabpanel" class="tab-pane" id="meballs">
       <h2 class="h3">Where are you located?</h2><br>
       <input id="address<%= @id %>" type="text"><button id="start_address_search" onclick="start_address_search(<%= @id %>)">Find address</button><br>
       <h4>Or click on the map</h4><br>
-      <%= form_for @location, html: { class: 'form-horizontal'} do |f| %>
+      <%= form_for [@teacher, @location], html: { class: 'form-horizontal'} do |f| %>
         <div class="form-group">
           <%= f.label :name, class: 'col-sm-2 control-label' %>
           <div class="col-sm-10">

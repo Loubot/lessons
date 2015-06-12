@@ -38,7 +38,8 @@
                 <%= hidden_field_tag :teacher, '', class: 'paypal_teacher_email' %>
                 <%= hidden_field_tag :receiver_amount, '', class: 'rate' %>
                 <%= hidden_field_tag :paypal, '1' %>
-                <%= hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
+                <%= hidden_field_tag :booking_type, 'multiple' %>  
+                <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>
                 <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif' %>
               <% end %>
             </div> <!-- end of col-md-6-->
@@ -50,17 +51,24 @@
             <div class="col-md-6">
               <%= form_tag stripe_create_path do %>
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
+                data-key="<%= ENV['STRIPE_PUBLIC_KEY'] %>"
                 data-description="Book your lesson"
                 data-currency="eur"
                 data-description="This is the description"
                 data-imgage="<%= asset_url 'stripe.png' %>"
                 ></script>
+                <%= hidden_field_tag :booking_type, 'multiple' %>
                 <%= hidden_field_tag :amount, '', class: 'rate' %>                
-                <%= hidden_field_tag :tracking_id, '', class: 'tracking_id' %>        
-                <%= hidden_field_tag :current_teacher, '', class: 'stripe_teacher' %> 
-                <%= hidden_field_tag :teacher_id, params['id'] %> 
-          
+                <%# hidden_field_tag :tracking_id, '', class: 'tracking_id' %>        
+                <%= hidden_field_tag :student_email, '', class: 'payments_modal_student_email' %> 
+                <%= hidden_field_tag :teacher_id, '', class: 'payments_modal_teacher_id' %>
+                <%= hidden_field_tag :teacher_email, '', class: 'payments_modal_teacher_email' %>
+                <%= hidden_field_tag :teacher_name, @teacher.full_name %> 
+                <%= hidden_field_tag :student_id, '', class: 'payments_modal_student_id' %> 
+                <%= hidden_field_tag :subject_id, '', class: 'payments_modal_subject_id' %> 
+                <%= hidden_field_tag :start_time, '', class: 'payments_modal_start_time' %> 
+                <%= hidden_field_tag :end_time, '', class: 'payments_modal_end_time' %> 
+                       
           
               <% end %>
             </div> <!-- end of col-md-6-->

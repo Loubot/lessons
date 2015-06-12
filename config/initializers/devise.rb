@@ -62,7 +62,7 @@ Devise.setup do |config|
   # config.http_authenticatable = false
 
   # If http headers should be returned for AJAX requests. True by default.
-  # config.http_authenticatable_on_xhr = true
+  config.http_authenticatable_on_xhr = false
 
   # The realm used in Http Basic Authentication. 'Application' by default.
   # config.http_authentication_realm = 'Application'
@@ -235,7 +235,7 @@ Devise.setup do |config|
   config.omniauth :twitter, ENV["TWITTER_API_KEY"], ENV["TWITTER_API_SECRET"]
   config.omniauth :linkedin, ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"]
   # OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-  Excon.defaults[:ssl_verify_peer] = false
+
 
   Devise::TRUE_VALUES << ["on"]
 

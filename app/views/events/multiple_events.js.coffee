@@ -1,6 +1,6 @@
 <% if @event.instance_of? Array %>
   $('.payment_choice_error').remove().show 'slow'
-  $('.modal-body').prepend("<div class='payment_choice_error'>").show('slow')
+  $('.modal-body').append("<div class='payment_choice_error'>").show('slow')
   $('.payment_choice_error').append '<%= escape_javascript(@event[0].to_s) %>'
   $('.payment_choice_error').append '</div>'
 <% else %>
@@ -14,5 +14,5 @@
   $('#event_table_price_multiple').text "<%= j(number_to_currency(@total_rate, unit: '€')) %>"
   $('.paypal_teacher_email').val '<%= j(@teacher.email) %>'
   $('.rate').val('<%= @rate %>')
-  $('.tracking_id').val('<%= j(@cart.tracking_id) %>')
+  
 <% end %> 

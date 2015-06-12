@@ -1,5 +1,13 @@
 class PricesController < ApplicationController
 	before_action :authenticate_teacher!
+	before_action :check_correct_teacher, except: [:destroy]
+
+	def check_correct_teacher
+		if params[:price][:teacher_id].to_i != current_teacher.id
+			flash[:danger] = "An error has occrred. Please email louisangelini@gmail.com"
+			redirect_to :back
+		end
+	end
 
 	def create
 		@price = Price.find_or_initialize_by(price_params)
@@ -16,7 +24,11 @@ class PricesController < ApplicationController
 
 	def update
 		@price = Price.find(params[:id])
-		
+		if params[:price][:price].to_f == 0
+			@price.destroy
+			puts "deleted"
+			render status: 200 and return
+		end
 		@name = @price.subject.name
 		if @price.update(price_params)
 			
@@ -30,7 +42,9 @@ class PricesController < ApplicationController
 
 	def destroy
 		@price = Price.find(params[:id])
+		# p @price.inspect
 		@price.destroy
+		redirect_to :back
 	end
 
 	private

@@ -4,7 +4,7 @@
 	<% if !@teacher.paid_up %>
 	<div class="container-fluid membership_container">
 	  
-	    <%= render 'partials/subscription/subscription.html.erb' %>
+	    <%# render 'partials/subscription/subscription.html.erb' %>
 	  
 	</div> <!-- end of membership_container -->
 	<% end %> <%# end of teacher.paid_up %>
@@ -235,6 +235,7 @@
 			</div> <!-- end of col-md-12 -->
 		</div> <!-- end of row -->
 	</div> <!-- end of container-fluid -->
+	<%= render 'partials/teachers_stuff/invitation' %>
 </div>
 <% end %> <%# end of cache %>
 
@@ -244,3 +245,4 @@
 <%= render 'modals/teacher_about_you_form' %>
 <%= render 'modals/teachers_subjects_form' %>
 <%= render 'modals/teacher_select_payment' %>
+<%= render 'modals/teacher_create_subject' %>
