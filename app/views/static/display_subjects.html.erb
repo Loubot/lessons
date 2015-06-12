@@ -24,18 +24,20 @@
     </div>
   </div> <!-- end of container-fluid main_page_search -->
 
-  <% if @teachers == [] %>
-  	No results found
-  <% else %>
+  
   	<div id="display_search_results">
+      <% if @teachers == [] %>
+        <%= render partial: 'partials/socials/no_results_share_buttons' %>
+      <% else %>
       <div class="apple_pagination">
         <div class="page_info">
           <%= page_entries_info @teachers %>
-        </div>
+        </div><!--  end of page_info -->
         <%= will_paginate @teachers, :container => false %>
-      </div>
+      </div> <!-- end of apple_pagination -->
       
   		<%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
-  	</div>
-  <% end %>
+      <% end %>
+  	</div> <!-- end of display_search_results -->
+  
 </div>  
