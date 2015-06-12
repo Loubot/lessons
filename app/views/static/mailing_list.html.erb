@@ -1,3 +1,4 @@
+<%= content_for :title, 'Mailing list' %>
 <div class="container-fluid">
 	<div class="row">
     <div class="span12">
@@ -9,10 +10,11 @@
         
         <%= form_tag({ controller: 'static', action: 'add_to_list'}, method: 'post') %>
         <div class="input-prepend"><span class="glyphicon glyphicon-envelope"></span>
-                <input type="text" id="email" name="email" placeholder="your@email.com">
+            <%= text_field_tag 'email', nil,id: 'email', placeholder: 'your@email.com', size: 40 %>
+                
             </div>
             <br />
-            <input type="submit" id="doit" value="Subscribe Now!" class="btn btn-large" />
+            <input type="submit"  value="Subscribe Now!" class="btn btn-large" id='search_submit' />
       
         </div>    
     </div>
