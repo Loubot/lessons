@@ -161,6 +161,7 @@ class PaypalController < ApplicationController
     update_student_address(params) #application controller
     price = Price.find(params[:price_id])
     cart = UserCart.find_by(student_id: current_teacher.id)
+    p "cart price #{cart.amount}"
     cart.update_attributes(address:params[:home_address])
     p "start time #{params[:start_time]}"
     # cart = UserCart.home_booking_cart(params, price.price)
@@ -183,9 +184,9 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
       :return_url      => request.referrer,
-      :ipn_notification_url => 'http://72581b0c.ngrok.com/store-paypal',
+      :ipn_notification_url => 'http://38b2777c.ngrok.com/store-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: 0.01 } #, primary: true
+        { :email => params[:teacher_email], amount: cart.amount } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
@@ -232,17 +233,18 @@ class PaypalController < ApplicationController
     if !(Transaction.find_by(tracking_id: params['tracking_id']))
       if response == "VERIFIED"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
-        p "cart #{cart.booking_type}"
+        #p "cart #{cart.booking_type}"
 
         render status: 200, nothing: true and return if !cart
 
         if cart.booking_type == "home"
+          p "date %%%%%%%%%%%%% #{Date.parse(cart.params[:date]).strftime('%d/%m%Y')}"
+          
+          TeacherMailer.delay.home_booking_mail_student(cart, DateTime.parse(cart.params['start_time(5i)']).strftime("%H:%M"))
+          TeacherMailer.delay.home_booking_mail_teacher(cart, DateTime.parse(cart.params['start_time(5i)']).strftime("%H:%M"))
           transaction = Transaction.create( #payments_helper
                                             create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
                                           )
-
-          TeacherMailer.delay.home_booking_mail_student(cart)
-          TeacherMailer.delay.home_booking_mail_teacher(cart)
           render status: 200, nothing: true
           
         else #not home booking

@@ -40,7 +40,7 @@ class UserCart < ActiveRecord::Base
   end
 
   def self.membership_cart(teacher, email)
-    cart = self.create(
+    cart = self.create!(
                     teacher_id: teacher,
                     teacher_email: email,
                     student_id: 0,

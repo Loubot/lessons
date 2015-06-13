@@ -92,7 +92,7 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{cart.teacher_email}"
   end # end of single_booking_mail_student
 
-  def home_booking_mail_student(params, address, time)
+  def home_booking_mail_student(cart, time)
 
     begin
       require 'mandrill'
@@ -104,22 +104,22 @@ class TeacherMailer < ActionMailer::Base
                   subject: "Confirmation of booking request",     
                   :to=>[  
                    {  
-                     :email=> params['student_email']
+                     :email=> cart.student_email
                      # :name=> "#{student_name}"  
                    }  
                  ],  
                  :from_email=> "loubot@learnyourlesson.ie",
                 "merge_vars"=>[
-                              { "rcpt"   =>  params['student_email'],
+                              { "rcpt"   =>  cart.student_email,
                                 "vars" =>  [
-                                          { "name"=>"FNAME",          "content"=>params['student_name']  },
-                                          { "name"=>"TNAME",          "content"=>params['teacher_name']  },
-                                          { "name"=>"TEMAILADDRESS",  "content"=>params['teacher_email'] },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(params['amount'], unit:'€') },
+                                          { "name"=>"FNAME",          "content"=>cart.student_name  },
+                                          { "name"=>"TNAME",          "content"=>cart.teacher_name  },
+                                          { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
                                           { "name"=>"NUMBERLESSONS",  "content"=>1 },
-                                          { "name"=>"LESSONLOCATION", "content"=>address },
+                                          { "name"=>"LESSONLOCATION", "content"=>cart.address },
                                           { "name"=>"LESSONTIME",     "content"=>time },
-                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date }
+                                          { "name"=>"LESSONDATE",     "content"=>Date.parse(cart.params[:date]).strftime('%d/%m/%Y') }
                                         ]
                           }],
                   
@@ -136,13 +136,15 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "home_booking_mail_student #{params['student_email']}"
+    logger.info "home_booking_mail_student #{cart.student_email}"
+
 
   end #end of home_booking_mail_student
 
 
-  def home_booking_mail_teacher(params, address, time)
-    
+  def home_booking_mail_teacher(cart, time)
+    p "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
+    logger.info "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
     begin
       require 'mandrill'
       
@@ -153,21 +155,21 @@ class TeacherMailer < ActionMailer::Base
                   subject: "Confirmation of booking request",     
                   :to=>[  
                    {  
-                     :email=> params['teacher_email']
+                     :email=> cart.teacher_email
                      # :name=> "#{student_name}"  
                    }  
                  ],  
                  :from_email=> "loubot@learnyourlesson.ie",
                 "merge_vars"=>[
-                              { "rcpt"   =>  params['teacher_email'],
+                              { "rcpt"   =>  cart.teacher_email,
                                 "vars" =>  [
-                                          { "name"=>"FNAME",          "content"=>params['teacher_name']  },
-                                          { "name"=>"SNAME",          "content"=>params['student_name']   },
-                                          { "name"=>"STEMAILADDRESS", "content"=>params['student_email']  },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(params['amount'], unit:'€') },
+                                          { "name"=>"FNAME",          "content"=>cart.teacher_name  },
+                                          { "name"=>"SNAME",          "content"=>cart.student_name   },
+                                          { "name"=>"STEMAILADDRESS", "content"=>cart.student_email  },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
                                           { "name"=>"LESSONTIME",     "content"=>time },
-                                          { "name"=>"LESSONDATE",     "content"=>params['start_time'].to_date },
-                                          { "name"=>"LESSONLOCATION", "content"=>address }
+                                          { "name"=>"LESSONDATE",     "content"=>Date.parse(cart.params[:date]).strftime('%d/%m/%Y') },
+                                          { "name"=>"LESSONLOCATION", "content"=>cart.address }
                                         ]
                           }],
                   
@@ -184,7 +186,7 @@ class TeacherMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "home_booking_mail_teacher #{params['teacher_email']}"
+    logger.info "home_booking_mail_teacher #{cart.teacher_email}"
 
   end #end of home_booking_mail_student
 
