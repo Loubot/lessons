@@ -1,3 +1,4 @@
+<%= content_for :title, 'Admin-panel' %>
 <div class="container-fluid">
 	<div class="col-md-7 col-md-offset-1">
 
@@ -18,6 +19,7 @@
 								<% @teachers.each do |teacher| %>
 									<li class="list-group-item"><%= %Q(#{teacher.first_name}  (#{teacher.email}))%><%= ' active' if teacher.is_active %>
 										<%= check_box_tag 'teacher[admin][]', teacher.id, teacher.admin, class: 'pull-right' %>
+										<%= link_to 'Delete', teacher, method: 'delete', data: { confirm: "Are you sure?" }, class: 'pull-right btn btn-link' %>
 									</li>
 								<% end %>
 								
