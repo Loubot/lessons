@@ -143,8 +143,8 @@ class TeacherMailer < ActionMailer::Base
 
 
   def home_booking_mail_teacher(cart, time)
-    p "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
-    logger.info "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
+    # p "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
+    # logger.info "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
     begin
       require 'mandrill'
       

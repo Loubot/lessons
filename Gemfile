@@ -45,6 +45,7 @@ end
 gem 'thin', 					platforms: [:mingw, :mswin]
 
 gem 'unicorn', '~> 4.8', platforms: [:ruby]
+gem 'foreman', platforms: [:ruby]
 
 gem 'email_validator'
 

@@ -133,6 +133,8 @@ GEM
     fog-softlayer (0.4.6)
       fog-core
       fog-json
+    foreman (0.78.0)
+      thor (~> 0.19.1)
     formatador (0.2.5)
     fotoramajs (4.6.4)
       sprockets (>= 2)
@@ -369,6 +371,7 @@ DEPENDENCIES
   devise
   email_validator
   fog (~> 1.23.0)
+  foreman
   fotoramajs
   geocoder (~> 1.2)
   gibbon (~> 1.1)
@@ -404,3 +407,6 @@ DEPENDENCIES
   unicorn (~> 4.8)
   validates_overlap (~> 0)
   will_paginate
+
+BUNDLED WITH
+   1.10.3

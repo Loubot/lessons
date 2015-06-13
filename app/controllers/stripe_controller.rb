@@ -135,8 +135,14 @@ class StripeController < ApplicationController
 
       home_booking_transaction(charge, params[:student_id], params[:teacher_id])
 
-      TeacherMailer.delay.home_booking_mail_teacher(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M"))
-      TeacherMailer.delay.home_booking_mail_student(params, params[:home_address], DateTime.parse(params[:start_time]).strftime("%H:%M"))
+      TeacherMailer.delay.home_booking_mail_teacher(
+                                                      cart, 
+                                                      DateTime.parse(params[:start_time]).strftime("%H:%M")
+                                                    )
+      TeacherMailer.delay.home_booking_mail_student(
+                                                      cart, 
+                                                      DateTime.parse(params[:start_time]).strftime("%H:%M")
+                                                    )
 
       redirect_to :back and return
     else
