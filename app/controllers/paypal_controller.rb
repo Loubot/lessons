@@ -220,14 +220,14 @@ class PaypalController < ApplicationController
                           'User-Agent' => 'My custom user agent'
                         ).body
 
-    p "paypal post params: #{params['tracking_id']}"
+    p "paypal post params: #{params['status']}"
    
     puts "Paypal verification response: #{response}"
     logger.info "Paypal verification response: #{response}"
     
     
     if !(Transaction.find_by(tracking_id: params['tracking_id']))
-      if response == "VERIFIED"
+      if response == "VERIFIED" && params['status'] == 'COMPLETED'
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
         #p "cart #{cart.booking_type}"
         
