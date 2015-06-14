@@ -35,7 +35,7 @@ class StripeController < ApplicationController
       # p "cart #{cart.inspect}"
       # puts charge.inspect
       if charge['paid'] == true
-        Event.create_confirmed_events(params, cart) #Event model, checks if multiple or not   
+        Event.create_confirmed_events(cart) #Event model, checks if multiple or not   
         single_transaction_and_mails(charge, params, lesson_location, cart) #stripe_helper
         
         flash[:success] = 'Payment was successful. You should receive an email soon.'
