@@ -164,18 +164,14 @@ class PaypalController < ApplicationController
     p "cart price #{cart.amount}"
     cart.update_attributes(address:params[:home_address])
     p "start time #{params[:start_time]}"
-    # cart = UserCart.home_booking_cart(params, price.price)
-    # p cart.home_booking
-    # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.inspect}"
-    # render status: 200, nothing: true
-    
+
     
     client = AdaptivePayments::Client.new(
       :user_id       => ENV['PAYPAL_USER_ID'],
       :password      => ENV['PAYPAL_PASSWORD'],
       :signature     => ENV['PAYPAL_SIGNATURE'],
       :app_id        => ENV['PAYPAL_APP_ID'],
-      :sandbox       => true
+      sandbox:       true
     )
 
     client.execute(:Pay,
@@ -184,7 +180,7 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
       :return_url      => request.referrer,
-      :ipn_notification_url => 'http://72581b0c.ngrok.com/store-paypal',
+      :ipn_notification_url => "http://786bb086.ngrok.com/store-paypal",
       :receivers => [
         { :email => params[:teacher_email], amount: cart.amount } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -237,7 +233,7 @@ class PaypalController < ApplicationController
         
         
         render status: 200, nothing: true and return if !cart
-        location = Location.find(cart.location_id.to_i)
+        
         if cart.booking_type == "home"
           # p "date %%%%%%%%%%%%% #{Date.parse(cart.params[:date]).strftime('%d/%m%Y')}"
           
@@ -251,6 +247,7 @@ class PaypalController < ApplicationController
           
         else #not home booking
           # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
+          location = Location.find(cart.location_id.to_i)
           p "not a home booking paypal!!!!!!!!!!!!!!!!"
           logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
 
