@@ -82,7 +82,7 @@ $('.payment_form_container').append """
       <%= j(hidden_field_tag 'event[subject_id]', @subject_id)%>
       <%= j(hidden_field_tag 'event[teacher_id]', @teacher.id) %>
       <%= j(hidden_field_tag 'event[student_id]', current_teacher.id) if teacher_signed_in? %>
-      <%= j(hidden_field_tag 'event[rate]', @rate.first.price) %>
+      <%= j(hidden_field_tag 'event[price_id]', @rate.first.id) %>
       
     <% end %> <!-- end of form_tag  -->
 

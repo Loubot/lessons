@@ -235,9 +235,9 @@ class PaypalController < ApplicationController
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
         #p "cart #{cart.booking_type}"
         
-
+        
         render status: 200, nothing: true and return if !cart
-
+        location = Location.find(cart.location_id.to_i)
         if cart.booking_type == "home"
           # p "date %%%%%%%%%%%%% #{Date.parse(cart.params[:date]).strftime('%d/%m%Y')}"
           
@@ -263,13 +263,11 @@ class PaypalController < ApplicationController
           # p "Event errors #{event.errors.full_messages}" if !event.valid?
           # p "Event created id: #{event.id}"
           TeacherMailer.delay.single_booking_mail_teacher(
-                                      cart.amount,
                                       location.name,
                                       cart
                                       
                                     )
           TeacherMailer.delay.single_booking_mail_student(
-                                      cart.amount,
                                       location.name,
                                       cart
                                       

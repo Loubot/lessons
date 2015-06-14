@@ -30,6 +30,7 @@ class UserCart < ActiveRecord::Base
 
   validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, :amount, presence: true
   validates :tracking_id, uniqueness: true
+  # validates :amount, :numericality => { :greater_than => 0 }
 
   # before_update :save_tracking_id
   # before_create :save_tracking_id
@@ -77,7 +78,7 @@ class UserCart < ActiveRecord::Base
     cart
   end
 
-  def self.create_single_cart(params, teacher_email, current_teacher, location_id)
+  def self.create_single_cart(params, teacher_email, current_teacher, location_id, amount)
     cart = self.new
     cart.update_attributes(
                             teacher_id: params[:event][:teacher_id],
@@ -90,13 +91,14 @@ class UserCart < ActiveRecord::Base
                             multiple: false,
                             booking_type: 'single',
                             location_id: location_id,
+                            amount: amount,
                             package_id: 0
                           )
     cart.save!
     cart
   end
 
-  def self.create_multiple_cart(params, teacher_email, current_teacher, location_id)
+  def self.create_multiple_cart(params, teacher_email, current_teacher, location_id, amount)
     puts "cart event multiple #{params[:booking_length]}"
     cart = self.new      
     cart.update_attributes(

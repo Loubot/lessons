@@ -2,7 +2,7 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def single_booking_mail_teacher(amount, lesson_location, cart)
+  def single_booking_mail_teacher(lesson_location, cart)
     # logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
       require 'mandrill'
@@ -25,7 +25,7 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"SNAME",          "content"=>cart.student_name  },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(amount, unit: '€') },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit: '€') },
                                           { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
                                           { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
@@ -47,7 +47,10 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{cart.teacher_email}"
   end #end of single_booking_mail_teacher
 
-  def single_booking_mail_student(amount, lesson_location, cart)
+  def single_booking_mail_student(lesson_location, cart)
+    p "cart amount #{number_to_currency(cart.amount, unit: '€')}"
+    p "cart amount #{cart.amount}"
+
     logger.info "teacher email email #{cart.inspect}"
     begin
       require 'mandrill'
@@ -70,7 +73,7 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"TNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(amount, unit: '€') },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit: '€') },
                                           { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
                                           { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         

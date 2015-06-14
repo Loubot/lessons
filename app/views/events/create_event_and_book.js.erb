@@ -11,7 +11,7 @@
 	$('#event_table_start_time').text('<%= j(@event.start_time.to_formatted_s(:long)) %>');
 	$('#event_table_end_time').text('<%= j(@event.end_time.to_formatted_s(:long)) %>');
 	$('#event_table_length').text("<%= j(total_time = '%.2f' % ((@event.end_time - @event.start_time) / 3600)) %> hour(s)");
-	$('#event_table_price').text("<%= j(number_to_currency('%.2f' % (@rate * total_time.to_f), unit:'€')) %>");
+	$('#event_table_price').text("<%= j(number_to_currency('%.2f' % (@price.price * total_time.to_f), unit:'€')) %>");
   $('.payments_modal_start_time').val("<%= @event.start_time %>");
   $('.payments_modal_end_time').val("<%= @event.end_time %>");
   $('.payments_modal_student_email').val("<%= current_teacher.email %>");
@@ -22,7 +22,7 @@
   
 	//Update all hidden fields in payments_modal_for_users
 
-	$('.rate').val('<%= @rate %>');
+	// $('.rate').val('<%= number_to_currency(@price.price, unit: '€') %>');
 
 	$('.paypal_teacher_email').val('<%= j(@teacher.email) %>');
 
