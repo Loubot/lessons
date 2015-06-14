@@ -102,7 +102,7 @@ class StripeController < ApplicationController
     update_student_address(params) #application controller
 
     
-    cart = UserCart.find_by(student_id: current_teacher.id)
+    cart = UserCart.find(session[:cart_id].to_i)
     cart.update_attributes(address:params[:home_address])
     if params[:home_address] == ''
       flash[:danger] = "Address can't be blank"
@@ -135,13 +135,13 @@ class StripeController < ApplicationController
 
       home_booking_transaction(charge, params[:student_id], params[:teacher_id])
 
+      Event.delay.create_confirmed_events(cart)
+
       TeacherMailer.delay.home_booking_mail_teacher(
-                                                      cart, 
-                                                      DateTime.parse(params[:start_time]).strftime("%H:%M")
+                                                      cart
                                                     )
       TeacherMailer.delay.home_booking_mail_student(
-                                                      cart, 
-                                                      DateTime.parse(params[:start_time]).strftime("%H:%M")
+                                                      cart
                                                     )
 
       redirect_to :back and return

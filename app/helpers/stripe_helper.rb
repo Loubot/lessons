@@ -50,7 +50,7 @@ module StripeHelper
 
   
 	def single_transaction_and_mails(charge, params, lesson_location, cart)
-    puts "stipe helper params #{params.inspect}"
+    puts "stripe helper params1 #{Date.parse(cart.params[:date]).strftime("%Y")}"
     if cart.weeks.to_i == 0
       amount = (charge['amount'].to_f)
     else

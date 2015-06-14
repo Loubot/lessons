@@ -66,8 +66,8 @@ class EventsController < ApplicationController
 				puts "weeks #{@weeks.to_i} rate #{@rate.to_f}"
 				@total_rate = @weeks.to_i * @rate.to_f
 
-				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.create_multiple_cart(params, @teacher.email, current_teacher)
+				@teacher = Teacher.find(params[:teacher_id])	# teacher not student		
+				@cart = UserCart.create_multiple_cart(params, @teacher.email, current_teacher, session[:location_id])
 				session[:cart_id] = @cart.id
 				# p "cart multiple #{@cart.inspect}"
 				
@@ -83,7 +83,7 @@ class EventsController < ApplicationController
 			
 			if @event.valid?
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.create_single_cart(params, @teacher.email, current_teacher)
+				@cart = UserCart.create_single_cart(params, @teacher.email, current_teacher, session[:location_id])
 				session[:cart_id] = @cart.id
 				p "cart  #{@cart.inspect}"
 			else

@@ -407,6 +407,3 @@ DEPENDENCIES
   unicorn (~> 4.8)
   validates_overlap (~> 0)
   will_paginate
-
-BUNDLED WITH
-   1.10.3

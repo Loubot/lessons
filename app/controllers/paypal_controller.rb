@@ -160,7 +160,7 @@ class PaypalController < ApplicationController
   def home_booking_paypal
     update_student_address(params) #application controller
     price = Price.find(params[:price_id])
-    cart = UserCart.find_by(student_id: current_teacher.id)
+    cart = UserCart.find(session[:cart_id].to_i)
     p "cart price #{cart.amount}"
     cart.update_attributes(address:params[:home_address])
     p "start time #{params[:start_time]}"
@@ -184,7 +184,7 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
       :return_url      => request.referrer,
-      :ipn_notification_url => 'http://38b2777c.ngrok.com/store-paypal',
+      :ipn_notification_url => 'http://72581b0c.ngrok.com/store-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: cart.amount } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -210,7 +210,7 @@ class PaypalController < ApplicationController
   
   
   def store_paypal
-    
+    # render status: 200, nothing: true
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
@@ -234,14 +234,15 @@ class PaypalController < ApplicationController
       if response == "VERIFIED"
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
         #p "cart #{cart.booking_type}"
+        
 
         render status: 200, nothing: true and return if !cart
 
         if cart.booking_type == "home"
-          p "date %%%%%%%%%%%%% #{Date.parse(cart.params[:date]).strftime('%d/%m%Y')}"
+          # p "date %%%%%%%%%%%%% #{Date.parse(cart.params[:date]).strftime('%d/%m%Y')}"
           
-          TeacherMailer.delay.home_booking_mail_student(cart, DateTime.parse(cart.params['start_time(5i)']).strftime("%H:%M"))
-          TeacherMailer.delay.home_booking_mail_teacher(cart, DateTime.parse(cart.params['start_time(5i)']).strftime("%H:%M"))
+          TeacherMailer.delay.home_booking_mail_student(cart)
+          TeacherMailer.delay.home_booking_mail_teacher(cart)
           transaction = Transaction.create( #payments_helper
                                             create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
                                           )
@@ -249,6 +250,7 @@ class PaypalController < ApplicationController
           
         else #not home booking
           # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
+          p "not a home booking paypal!!!!!!!!!!!!!!!!"
           logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
 
           Event.create_confirmed_events(cart)
@@ -259,12 +261,17 @@ class PaypalController < ApplicationController
 
           # p "Event errors #{event.errors.full_messages}" if !event.valid?
           # p "Event created id: #{event.id}"
-          TeacherMailer.delay.mail_teacher(
-                                      cart.student_email,
-                                      cart.student_name,
-                                      cart.teacher_email,
-                                      cart.params[:start_time],
-                                      cart.params[:end_time]
+          TeacherMailer.delay.single_booking_mail_teacher(
+                                      cart.amount,
+                                      location.name,
+                                      cart
+                                      
+                                    )
+          TeacherMailer.delay.single_booking_mail_student(
+                                      cart.amount,
+                                      location.name,
+                                      cart
+                                      
                                     )
 
           render status: 200, nothing: true
@@ -279,6 +286,7 @@ class PaypalController < ApplicationController
     elsif transaction
       render status: 200, nothing: true
     else
+      p  "MAJOR ALERT: Transaction not found"
       logger.info "MAJOR ALERT: Transaction not found"
       render status: 200, nothing: true
     end
@@ -361,6 +369,8 @@ class PaypalController < ApplicationController
   end
 
       def create_paypal(params)
+        @amount = Price.find(session[:price_id]).price.to_f
+        cart = UserCart.find(session[:cart_id].to_i)
         require "pp-adaptive"
         client = AdaptivePayments::Client.new(
           :user_id       => "lllouis_api1.yahoo.com",
@@ -373,12 +383,12 @@ class PaypalController < ApplicationController
         client.execute(:Pay,
           :action_type     => "PAY",
           :currency_code   => "GBP",
-          :tracking_id     => params[:tracking_id],
+          :tracking_id     => cart.tracking_id,
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-          :return_url      => "https://learn-your-lesson.herokuapp.com/paypal-return?payKey=${payKey}",
-          :ipn_notification_url => 'https://learn-your-lesson.herokuapp.com/store-paypal',
+          :return_url      => request.referrer,
+          :ipn_notification_url => 'http://72581b0c.ngrok.com/store-paypal',
           :receivers => [
-            { :email => params[:teacher], amount: params[:receiver_amount], primary: true }
+            { :email => params[:teacher], amount: @amount }
             # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
           ]
         ) do |response|

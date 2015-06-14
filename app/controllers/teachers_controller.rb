@@ -115,7 +115,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
@@ -202,7 +202,8 @@ class TeachersController < ApplicationController
 			@teacher = Teacher.find(session[:teacher_id])	# teacher not student		
 			@event = event
 			p "start time #{params[:start_time]}"
-    	@cart = UserCart.home_booking_cart(params[:event], @price.price)
+    	@cart = UserCart.home_booking_cart(params, @price.price)
+    	session[:cart_id] = @cart.id
 			p "event is valid!!!!!!!!!!"
 		else
 			p "event is not valid&&&&&&&&&&&&&&&&&&S"
