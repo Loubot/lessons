@@ -243,6 +243,7 @@ class PaypalController < ApplicationController
           
           TeacherMailer.delay.home_booking_mail_student(cart)
           TeacherMailer.delay.home_booking_mail_teacher(cart)
+          Event.delay.create_confirmed_events(cart)
           transaction = Transaction.create( #payments_helper
                                             create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
                                           )

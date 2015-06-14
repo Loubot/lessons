@@ -1,6 +1,7 @@
 
 <% if @event.instance_of? Array %>
-  $('#new_event').prepend """ <div class='payment_choice_error'>"""
+  $('.payment_choice_error').remove()
+  $('#new_event').append """ <div class='payment_choice_error'>"""
   $('.payment_choice_error').append("<%= escape_javascript(@event[0].to_s) %>")
   $('.payment_choice_error').append("</div>")
 <% else %>
