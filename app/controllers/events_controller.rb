@@ -56,19 +56,21 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book		
 		
-		
 		@price = Price.find(params[:event][:price_id].to_i)
 		p "event price #{@price.price}"
 		if params['Multiple'] == 'true'
 			event = Event.student_do_multiple_bookings(params)
 			if event.valid?
 				@event = event
-				@weeks = params[:booking_length]
+				
 				puts "weeks #{@weeks.to_i} rate #{@rate.to_f}"
-				@total_rate = @weeks.to_i * @rate.to_f
+				
 
 				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
 				@cart = UserCart.create_multiple_cart(params, @teacher.email, current_teacher, session[:location_id], @price.price)
+				@weeks = @cart.weeks
+				@total_rate = @cart.weeks.to_i * @cart.amount.to_f
+				p "rate amount ******** #{@cart.weeks.to_i * @cart.amount.to_f}"
 				session[:cart_id] = @cart.id
 				# p "cart multiple #{@cart.inspect}"
 				

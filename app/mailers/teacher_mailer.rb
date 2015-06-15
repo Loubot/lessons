@@ -5,6 +5,7 @@ class TeacherMailer < ActionMailer::Base
   def single_booking_mail_teacher(lesson_location, cart)
     # logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
+      weeks = cart.weeks.to_i
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
       template_name ="teachers-home-booking-to-teacher"
@@ -24,10 +25,10 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"SNAME",          "content"=>cart.student_name  },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email },
-                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit: '€') },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>weeks },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount * weeks, unit: '€') },
                                           { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %y") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %Y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],
@@ -48,11 +49,9 @@ class TeacherMailer < ActionMailer::Base
   end #end of single_booking_mail_teacher
 
   def single_booking_mail_student(lesson_location, cart)
-    p "cart amount #{number_to_currency(cart.amount, unit: '€')}"
-    p "cart amount #{cart.amount}"
-
-    logger.info "teacher email email #{cart.inspect}"
+    
     begin
+      weeks = cart.weeks.to_i
       require 'mandrill'
       m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
       template_name ="teachers-home-booking-to-student"
@@ -72,10 +71,10 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>cart.student_name  },
                                           { "name"=>"TNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
-                                          { "name"=>"NUMBERLESSONS",  "content"=>cart.weeks.to_i },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit: '€') },
+                                          { "name"=>"NUMBERLESSONS",  "content"=>weeks },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount * weeks, unit: '€') },
                                           { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %y") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %Y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],

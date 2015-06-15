@@ -286,6 +286,8 @@ ActiveRecord::Schema.define(version: 20150614134846) do
     t.integer  "location_id"
   end
 
+  add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email", using: :btree
+  add_index "user_carts", ["student_id"], name: "index_user_carts_on_student_id", using: :btree
   add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree
 
 end

@@ -90,6 +90,7 @@ class UserCart < ActiveRecord::Base
                             subject_id: params[:event][:subject_id],
                             multiple: false,
                             booking_type: 'single',
+                            weeks: 1,
                             location_id: location_id,
                             amount: amount,
                             package_id: 0
@@ -113,6 +114,7 @@ class UserCart < ActiveRecord::Base
                             weeks: params[:booking_length],
                             booking_type: 'multiple',
                             location_id: location_id,
+                            amount: amount,
                             package_id: 0
                           )
     cart.save!

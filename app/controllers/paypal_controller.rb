@@ -365,8 +365,9 @@ class PaypalController < ApplicationController
   end
 
       def create_paypal(params)
-        @amount = Price.find(session[:price_id]).price.to_f
-        cart = UserCart.find(session[:cart_id].to_i)
+        price = Price.find(session[:price_id]).price.to_f
+        cart = UserCart.where(student_id: current_teacher.id).last
+        @amount = price* cart.weeks
         require "pp-adaptive"
         client = AdaptivePayments::Client.new(
           :user_id       => "lllouis_api1.yahoo.com",
@@ -378,11 +379,11 @@ class PaypalController < ApplicationController
 
         client.execute(:Pay,
           :action_type     => "PAY",
-          :currency_code   => "GBP",
+          :currency_code   => "EUR",
           :tracking_id     => cart.tracking_id,
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => request.referrer,
-          :ipn_notification_url => 'http://72581b0c.ngrok.com/store-paypal',
+          :ipn_notification_url => 'http://786bb086.ngrok.com/store-paypal',
           :receivers => [
             { :email => params[:teacher], amount: @amount }
             # { :email => 'loubotsjobs@gmail.com',  amount: 10 }

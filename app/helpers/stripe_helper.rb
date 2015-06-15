@@ -65,18 +65,16 @@ module StripeHelper
 		                  )
 
     TeacherMailer.delay.single_booking_mail_teacher(                                                
-                                                (
-                                                  sprintf "%.2f", amount / 100),
-                                                  lesson_location,
-                                                  cart                		                            
-                		                            )
+                                                
+                                                      lesson_location,
+                                                      cart                		                            
+                    		                            )
 
     TeacherMailer.delay.single_booking_mail_student(
-                                                  (
-                                                    sprintf "%.2f", amount / 100),
-                                                    lesson_location,
-                                                    cart
-                                                  )
+                                                  
+                                                      lesson_location,
+                                                      cart
+                                                    )
 	end # end of single_transaction_and_mail
 
   def package_transaction_and_mail(json_response, cart, package)
