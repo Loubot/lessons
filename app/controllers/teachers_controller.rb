@@ -85,7 +85,7 @@ class TeachersController < ApplicationController
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		@event = @teacher.events.new
 		@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)
-		fresh_when [@teacher, flash, @teacher.events.maximum(:updated_at)]
+		# fresh_when [@teacher, flash, @teacher.events.maximum(:updated_at)]
 	end
 
 	def qualification_form

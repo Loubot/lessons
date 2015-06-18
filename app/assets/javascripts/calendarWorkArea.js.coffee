@@ -1,9 +1,9 @@
 calendarReady = ->
   if $('.row_teachers_area').length > 0
     $(window).on 'resize', -> #set height of teachers area scheduler
-      $('.teachers_area_scheduler').css 'height', ($('body').height() * .75)
+      $('.teachers_area_scheduler').css 'height', ($('body').height() * .7)
       
-    $('.teachers_area_scheduler').css 'height', ($('body').height() * .75)
+    $('.teachers_area_scheduler').css 'height', ($('body').height() * .7)
 
     #scheduler config options
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"
@@ -187,8 +187,9 @@ window.markTimespanWeek = ->
   
 window.unmarkTimespan = ->
   for time in markedTimes
-    scheduler.unmarkTimespan time
+    scheduler.deleteMarkedTimespan time
   $('#calendar_unmark_time').prop disabled: true
+  scheduler.updateView()
 #// end of mark timespan in week view //   
 
 $(document).ready(calendarReady)
