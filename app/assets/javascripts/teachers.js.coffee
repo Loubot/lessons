@@ -75,6 +75,11 @@ teachersInfoReady = ->
   
 #////////////Root page subject search with typeahead
   if $('.typeahead.subject').length
+    $('#search_submit').on 'keypress', (f) ->
+      if f.which == 13
+        console.log "bb"
+        $('#main_subject_search').submit()
+        
     $('#main_subject_search').on 'keypress', (e) ->
       e.preventDefault() if e.which == 13
 

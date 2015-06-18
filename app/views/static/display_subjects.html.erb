@@ -4,13 +4,13 @@
   <div  class="container-fluid search_page_results">
     <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
       <div class="form-group">
-        <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', value: params[:search_subjects], class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off %>
+        <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', value: params[:search_subjects], class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off, tabindex: 1 %>
       </div> <!-- end of form-group -->
       <div class="form-group">
-        <%= text_field_tag :search_position, params[:search], placeholder: 'County',value: params[:search_position], class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off %>
+        <%= text_field_tag :search_position, params[:search], placeholder: 'County',value: params[:search_position], class: 'typeahead form-control county col-xs-12 col-md-12', autocomplete: :off, tabindex: 2 %>
       </div> <!-- end of form-group -->
       <div class="container-fluid search_submit_container">
-        <%= submit_tag "I'm ready to learn",type: 'submit', name: 'submit', id: 'search_submit', class: 'btn' %>
+        <%= submit_tag "I'm ready to learn", name: 'search_submit', id: 'search_submit', class: 'btn', tabindex: 3 %>
       </div> <!-- end of container-fluid search_submit_container -->
     <% end %>
     <div id="display_search_results">

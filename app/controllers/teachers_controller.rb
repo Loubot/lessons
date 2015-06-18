@@ -216,7 +216,7 @@ class TeachersController < ApplicationController
 	def invite_students
 		 
 		if valid_email?(params[:teacher][:recipient_email])
-			MembershipMailer.send_invite_to_student(current_teacher, params[:teacher][:recipient_email]).deliver_now
+			MembershipMailer.delay.send_invite_to_student(current_teacher, params[:teacher][:recipient_email])
 			flash[:success] = "Invite sent ok to #{params[:teacher][:recipient_email]}"
 		else
 			flash[:danger] = "Not a valid email address"
