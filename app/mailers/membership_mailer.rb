@@ -2,6 +2,7 @@ class MembershipMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
   include ActionView::Helpers::UrlHelper
 
+
   def membership_paid(teacher_email, teacher_name)
     p 'membership_paid mail start'    
     begin
@@ -123,7 +124,7 @@ class MembershipMailer < ActionMailer::Base
                          [{"rcpt"   =>  student_email,
                              "vars" =>  [
                                       { "name"=>"INVITERNAME", "content"=>teacher.first_name.pluralize },
-                                      { "name"=>"TEACHERSURL", "content"=>"https://www.google.ie" }
+                                      { "name"=>"TEACHERSURL", "content"=> "http://localhost:3000/show-teacher?id=#{teacher.id}" }
                                       ]
                           }],
                   
