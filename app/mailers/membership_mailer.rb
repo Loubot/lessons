@@ -71,7 +71,7 @@ class MembershipMailer < ActionMailer::Base
     logger.info "Mail sent to #{teacher_email.to_s}"
   end
 
-  def send_invite(email, invitation, url)
+  def send_invite_to_teacher(email, invitation, url)
     p "url #{link_to('Accept', url)}"
     begin
       require 'mandrill'
@@ -100,5 +100,46 @@ class MembershipMailer < ActionMailer::Base
     end
 
     logger.info "Mail sent to #{email}"
+  end
+
+  def send_invite_to_student(teacher, student_email)
+    p 'Sending invitation to student'    
+    begin
+      require 'mandrill'
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name = "invite-teacher-to-student"
+      template_content = []
+      message = { 
+                  :subject => "You've been invited to Learn Your Lesson by #{teacher.first_name}",
+                  :to=>[  
+                   {  
+                     :email=> student_email
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "alan@learnyourlesson.ie",
+                 :from_name=> "LYL",
+                 "merge_vars"=>
+                         [{"rcpt"   =>  student_email,
+                             "vars" =>  [
+                                      { "name"=>"INVITERNAME", "content"=>teacher.first_name.pluralize },
+                                      { "name"=>"TEACHERSURL", "content"=>"https://www.google.ie" }
+                                      ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+      
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Mail sent to #{student_email}"
   end
 end

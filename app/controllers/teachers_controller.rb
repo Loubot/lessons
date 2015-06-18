@@ -85,7 +85,7 @@ class TeachersController < ApplicationController
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		@event = @teacher.events.new
 		@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)
-		fresh_when [@teacher, @teacher.events.maximum(:updated_at)]
+		fresh_when [@teacher, flash, @teacher.events.maximum(:updated_at)]
 	end
 
 	def qualification_form
@@ -211,7 +211,18 @@ class TeachersController < ApplicationController
 		end
 		render 'modals/payment_selections/_return_home_price.js.coffee'
 		# redirect_to :back
-	end	
+	end
+
+	def invite_students
+		 
+		if valid_email?(params[:teacher][:recipient_email])
+			MembershipMailer.send_invite_to_student(current_teacher, params[:teacher][:recipient_email]).deliver_now
+			flash[:success] = "Invite sent ok to #{params[:teacher][:recipient_email]}"
+		else
+			flash[:danger] = "Not a valid email address"
+		end
+		redirect_to :back
+	end
 
 	private
 		def check_is_teacher

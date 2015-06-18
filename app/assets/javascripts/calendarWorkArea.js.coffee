@@ -1,9 +1,9 @@
 calendarReady = ->
   if $('.row_teachers_area').length > 0
-    $(window).on 'resize', ->
-      $('.teachers_area_scheduler').css 'height', ($('body').height() * .8)
+    $(window).on 'resize', -> #set height of teachers area scheduler
+      $('.teachers_area_scheduler').css 'height', ($('body').height() * .75)
       
-    $('.teachers_area_scheduler').css 'height', ($('body').height() * .8)
+    $('.teachers_area_scheduler').css 'height', ($('body').height() * .75)
 
     #scheduler config options
     scheduler.config.xml_date= "%Y-%m-%d %H:%i"

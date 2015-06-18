@@ -1,6 +1,6 @@
-<% cache [current_teacher, 'invitation'] do %>
-  <div class="container-fluid">
-    <div class="col-xs-12 invitation well">
+<% cache [current_teacher,'invitations'] do %>
+  <div class="container-fluid invitation_container">
+    <div class="col-md-6 col-xs-12 invitation well">
       <h3>Invite a friend to join the team</h3>
       <% if teacher_signed_in? %>
         <%= form_for [current_teacher, Invitation.new] do |f| %>
@@ -10,7 +10,17 @@
           <%= f.submit 'Invite', class: 'btn btn-success' %>
         <% end %>
       <% end %>
-    </div>
+    </div> <!-- end of invitation well -->
+    <div class="col-md-6 col-xs-12 invitation well">
+      <h3>Show off your profile to your existing students</h3>
+      <% if teacher_signed_in? %>
+        <%= form_tag invite_student_teacher_path do %>
+          <%= text_field_tag 'teacher[recipient_email]', nil, placeholder: 'email' %>
+          <%= hidden_field_tag 'id', current_teacher.id %>
+          <%= submit_tag 'Invite', class: 'btn btn-success' %>
+        <% end %>
+      <% end %>
+    </div> <!-- end of invitation well -->
   </div> <!-- end of container-fluid -->
 <% end %> <%# end of cache %>
 

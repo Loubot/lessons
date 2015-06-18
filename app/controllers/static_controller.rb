@@ -50,7 +50,7 @@ class StaticController < ApplicationController
 	def add_to_list
 		gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
 		
-		if valid_email?(params[:email])
+		if valid_email?(params[:email]) #applications_controller
 			begin
 				gb.lists.subscribe({
 														:id => ENV['_mail_chimp_list'],
@@ -173,8 +173,5 @@ class StaticController < ApplicationController
 
 	private
 
-		def valid_email?(email)
-			valid_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-			email =~ valid_regex
-		end		
+		
 end

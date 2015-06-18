@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       get     '/your-business'          =>  'teachers#your_business'
       get     'previous-lessons'        =>  'teachers#previous_lessons'
       get     'create-new-subject'      =>  'teachers#create_new_subject'
-      post    '/change-profile-pic'     =>  'teachers#change_profile_pic'       
+      post    '/change-profile-pic'     =>  'teachers#change_profile_pic'
+      post    'invite-student'          =>  'teachers#invite_students'     
   	end
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]

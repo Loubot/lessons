@@ -480,8 +480,17 @@ small.white{
 //end of subject search page*/
 
 // invitaion partial
+.invitation_container{
+  margin-top: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
 .invitation{
   text-align: center;
+  float: left;
+  padding-bottom: 1000px;
+  margin-bottom: -1000px;
 }
 // end of invitation partial
 
@@ -496,7 +505,7 @@ small.white{
 //end of teachers-area page opening times modal*/
 
 //teachers work area*/
-.row_teachers_area{
+.row_teachers_area{ //height is set in scheduler
   padding-left: 10px;
 }
 

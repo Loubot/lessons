@@ -24,6 +24,11 @@ class ApplicationController < ActionController::Base
       current_teacher.update_attributes(address: '') if current_teacher.address != ''
     end
   end
+
+  def valid_email?(email)
+    valid_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    email =~ valid_regex
+  end   
   
   private
 
