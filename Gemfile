@@ -39,7 +39,7 @@ group :production do
 	gem 'rails_12factor', '~> 0.0'
 	gem 'rack-pratchett'
   gem 'heroku_rails_deflate'
-  gem 'workless'
+  gem 'workless', platforms: [:ruby]
 	# gem 'rack-zippy'
 end
 
@@ -47,6 +47,7 @@ gem 'thin', 					platforms: [:mingw, :mswin]
 
 gem 'unicorn', '~> 4.8', platforms: [:ruby]
 gem 'foreman', platforms: [:ruby]
+
 
 gem 'email_validator'
 
