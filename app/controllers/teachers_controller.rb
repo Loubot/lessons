@@ -214,7 +214,7 @@ class TeachersController < ApplicationController
 	end
 
 	def invite_students
-		 
+		# p "root_url #{root_url}"
 		if valid_email?(params[:teacher][:recipient_email])
 			MembershipMailer.delay.send_invite_to_student(current_teacher, params[:teacher][:recipient_email])
 			flash[:success] = "Invite sent ok to #{params[:teacher][:recipient_email]}"

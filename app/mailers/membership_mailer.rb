@@ -72,27 +72,38 @@ class MembershipMailer < ActionMailer::Base
     logger.info "Mail sent to #{teacher_email.to_s}"
   end
 
-  def send_invite_to_teacher(email, invitation, url)
-    p "url #{link_to('Accept', url)}"
+  def send_invite_to_teacher(teacher, invitation, url)
+    p "root url #{root_url}"
+    p 'Sending invitation to student'    
     begin
       require 'mandrill'
-      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
-      message = {  
-       :subject=> "You are invited to join Learn Your lesson",  
-       :from_name=> "#{invitation.inviter_name}",  
-       :text=> "#{invitation.inviter_name} has invited you to join our team. Click the link below to register and get started. #{link_to('Accept', url)}",  
-       :to=>[  
-         {  
-           :email=> invitation.recipient_email
-           # :name=> "#{student_name}"  
-         }  
-       ],  
-       :html=> "#{invitation.inviter_name} has invited you to join our team. Click the link below to register and get started. #{link_to('Accept', url)}",  
-       :from_email=> "loubot@learnyourlesson.ie",
-       async: false 
-      }  
-      sending = m.messages.send message  
-      puts sending
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name = "invite-teacher-to-teacher"
+      template_content = []
+      message = { 
+                  :subject => "You've been invited to Learn Your Lesson by #{teacher.first_name}",
+                  :to=>[  
+                   {  
+                     :email=> invitation.recipient_email
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "alan@learnyourlesson.ie",
+                 :from_name=> "LYL",
+                 "merge_vars"=>
+                         [{"rcpt"   =>  invitation.recipient_email,
+                             "vars" =>  [
+                                      { "name"=>"INVITERNAME", "content"=>teacher.first_name.pluralize },
+                                      { "name"=>"TEACHERSURL", "content"=> "#{url}" }
+                                      ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+      
     rescue Mandrill::Error => e
         # Mandrill errors are thrown as exceptions
         logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
@@ -100,10 +111,11 @@ class MembershipMailer < ActionMailer::Base
     raise
     end
 
-    logger.info "Mail sent to #{email}"
+    logger.info "Mail sent to #{invitation.recipient_email}"
   end
 
   def send_invite_to_student(teacher, student_email)
+    p "root url #{root_url}"
     p 'Sending invitation to student'    
     begin
       require 'mandrill'
@@ -124,7 +136,7 @@ class MembershipMailer < ActionMailer::Base
                          [{"rcpt"   =>  student_email,
                              "vars" =>  [
                                       { "name"=>"INVITERNAME", "content"=>teacher.first_name.pluralize },
-                                      { "name"=>"TEACHERSURL", "content"=> "http://localhost:3000/show-teacher?id=#{teacher.id}" }
+                                      { "name"=>"TEACHERSURL", "content"=> "#{root_url}/show-teacher?id=#{teacher.id}" }
                                       ]
                           }],
                   

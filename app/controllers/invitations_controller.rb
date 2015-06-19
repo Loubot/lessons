@@ -6,7 +6,7 @@ class InvitationsController < ApplicationController
 
     if @invitation.save
       p "url1 #{URI.escape("localhost:3000#{teach_path}?inviter_id=#{@invitation.token}")}"
-      MembershipMailer.delay.send_invite_to_teacher(current_teacher.email, @invitation, (URI.escape("#{teach_url}?inviter_token=#{@invitation.token}&invited_email=#{@invitation.recipient_email}")))
+      MembershipMailer.delay.send_invite_to_teacher(current_teacher, @invitation, (URI.escape("#{teach_url}?inviter_token=#{@invitation.token}&invited_email=#{@invitation.recipient_email}")))
       flash[:success] = "Invitation successfully sent"
       redirect_to :back
     else

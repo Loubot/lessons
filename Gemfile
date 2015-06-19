@@ -39,6 +39,7 @@ group :production do
 	gem 'rails_12factor', '~> 0.0'
 	gem 'rack-pratchett'
   gem 'heroku_rails_deflate'
+  gem 'workless'
 	# gem 'rack-zippy'
 end
 
