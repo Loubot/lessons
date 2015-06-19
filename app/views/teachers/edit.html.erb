@@ -170,7 +170,7 @@
 				      </div> <!-- end of btn-group pull-right -->
 						</div> <!-- end of panel heading -->
 						<div class="panel-body">
-							<div class="well well-lg">We offer 2 choices for payment. <%= link_to 'Paypal', 'https://www.paypal.com/' %> and <%= link_to 'Stripe', 'https://stripe.com/ie' %>. We will not keep any of your money or credit card details. To avail of these payment options you must sign up to these services as a merchant. You can chose either or both. <br>For paypal all we need is the email address you log into paypal with. For stripe you must click on the stripe registration button and allow us to add you as a client. Click the edit button above or <%= link_to 'here', '#', data: { toggle: 'modal', target: '#teacher_select_payment'} %> to get started!</div> <!-- end of well well-lg -->
+							<div class="well well-lg">We offer 2 choices for payment. <%= link_to 'Paypal', 'https://www.paypal.com/' %> and <%= link_to 'Stripe', 'https://stripe.com/ie' %>. We will not keep any of your money or credit card details. To avail of these payment options <strong><u> you must sign up to these services as a merchant</u></strong>. You can chose either or both. <br>For paypal all we need is the email address you log into paypal with. For stripe you must click on the stripe registration button and allow us to add you as a client. Click the edit button above or <%= link_to 'here', '#', data: { toggle: 'modal', target: '#teacher_select_payment'} %> to get started!</div> <!-- end of well well-lg -->
 						</div>  <!-- end  of panel-body -->
 						<ul class="list-group">
 							<% if !current_teacher.paypal_email.blank? %>
