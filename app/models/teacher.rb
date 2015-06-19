@@ -228,7 +228,8 @@ class Teacher < ActiveRecord::Base
                       )
     response = api.get_verified_status(get_verified_status_request)
     self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?
-    p "paypal registration failed #{response}" if !response.success?
+    p "Paypal email updated #{response.inspect}" if response.success?
+    p "paypal registration failed #{response.inspect}" if !response.success?
     response
     
   end
