@@ -119,5 +119,6 @@ gem 'browser'
 
 gem 'delayed_job_active_record'
 
+gem 'mailboxer'
 
 gem 'tzinfo-data', '~> 1.2', platforms: [:mingw, :mswin]

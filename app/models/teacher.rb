@@ -34,6 +34,9 @@
 class Teacher < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  acts_as_messageable
+  
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -110,6 +113,10 @@ class Teacher < ActiveRecord::Base
 
   def full_street_address
     self.address
+  end
+
+  def mailboxer_email(object)
+    return self.email
   end
 
   def full_name
