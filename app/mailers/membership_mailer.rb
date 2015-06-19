@@ -136,7 +136,7 @@ class MembershipMailer < ActionMailer::Base
                          [{"rcpt"   =>  student_email,
                              "vars" =>  [
                                       { "name"=>"INVITERNAME", "content"=>teacher.first_name.pluralize },
-                                      { "name"=>"TEACHERSURL", "content"=> "#{root_url}/show-teacher?id=#{teacher.id}" }
+                                      { "name"=>"TEACHERSURL", "content"=> "#{root_url}show-teacher?id=#{teacher.id}" }
                                       ]
                           }],
                   
