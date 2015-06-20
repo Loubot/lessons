@@ -88,9 +88,28 @@
 			
 			<button class="btn btn-warning" data-toggle="tooltip" title="Should someone make a booking during your closed time and you need to edit it click this button to unlock the calendar" data-placement="right" id="calendar_unmark_time" onclick="unmarkTimespan()">Unlock calendar</button>
 		</div> <!-- end of col-md-4 -->
-
 	</div> <!-- end of row -->
 	<%= render 'partials/teachers_stuff/invitation' %>
+
+	<br>
+
+		<% for friendship in @teacher.friendships %>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#<%= friendship.id %>" data-parent="#accordian" data-toggle="collapse"><%= friendship.student.full_name %></a>
+					</h4>
+				</div> <!-- end of panel-heading -->
+				<div id="<%= friendship.id %>" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="list-group">
+							
+						</ul> <!-- end of list-group -->
+					</div> <!-- end of panel-body -->
+				</div> <!-- end of panel-collapse collapse -->
+			</div> <!-- end of panel panel-default -->
+
+		<% end %>
 </div> <!-- end of outer-container -->
 
 <%= render 'modals/teacher_open_close_times' %>

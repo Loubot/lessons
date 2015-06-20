@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :packages, only: [:create, :destroy]
     resources :locations, only: [:create, :update, :destroy]
     resources :prices, only: [:create, :update, :destroy]
+    resources :friendships, only: [:create, :destroy]
   end
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  

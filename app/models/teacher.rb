@@ -72,6 +72,12 @@ class Teacher < ActiveRecord::Base
   has_one :user_cart
   has_one :opening
 
+  has_many :friendships
+  has_many :students, through: :friendships
+
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'student_id'
+  has_many :teachers, through: :inverse_friendships, source: :teacher
+
   geocoded_by :full_street_address, :latitude  => :lat, :longitude => :lon
   reverse_geocoded_by :lat, :lon
   

@@ -18,7 +18,7 @@
 
 class Event < ActiveRecord::Base
   validates :teacher_id, presence: true
-  validates :start_time, :end_time,  presence: :true
+  validates :start_time, :end_time, :teacher_id,  presence: :true
   validates :start_time, :end_time, :overlap => {:exclude_edges => ["start_time", "end_time"]}
   validates :start_time, date: { before: :end_time, message: 'must be after end time' }
   has_one :review
@@ -26,6 +26,8 @@ class Event < ActiveRecord::Base
   #belongs_to :teacher, foreign_key: :student_id
 
   before_save :add_name, except: [:student_do_single_booking,:studentDoMultipleBookings]
+
+  after_save :create_students_association
 
   scope :student_events, ->(student_id) { where(student_id: student_id).order("end_time DESC")}
 
@@ -152,6 +154,10 @@ private
       return unless continue
     end
 
+  end
+
+  def create_students_association
+    Friendship.create(teacher_id: self.teacher_id, student_id: self.student_id)
   end
 
 end

@@ -9,7 +9,7 @@ class TeachersController < ApplicationController
 
 	
 	def show_teacher
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages).find(params[:id])
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages, :friendships).find(params[:id])
 		@subject = get_subject(@teacher.subjects)
 		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices teachers_helper
 		p "subject #{@subjects}"

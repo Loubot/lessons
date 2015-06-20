@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614134846) do
+ActiveRecord::Schema.define(version: 20150620030246) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -60,6 +60,13 @@ ActiveRecord::Schema.define(version: 20150614134846) do
     t.binary   "present"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "grinds", force: :cascade do |t|
