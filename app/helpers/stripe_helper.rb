@@ -86,10 +86,8 @@ module StripeHelper
                                                         )
                       )
 
-    TeacherMailer.delay.paypal_package_email(
-                                              cart.student_email,
-                                              cart.student_name,
-                                              cart.teacher_email,
+    TeacherMailer.delay.package_email_teacher(
+                                              cart,
                                               package
                                             )
 
