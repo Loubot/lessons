@@ -30,7 +30,7 @@ class Event < ActiveRecord::Base
   scope :student_events, ->(student_id) { where(student_id: student_id).order("end_time DESC")}
 
   def student_name
-    if self.student_id == 0
+    if self.student_id == 0 || self.student_id == nil
       'No name specified'
     else
       Teacher.find(self.student_id).full_name
@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
   end
 
   def teacher_name
-    if self.teacher_id == 0
+    if self.teacher_id == 0 || self.teacher_id == nil
       'No name specified'
     else
       Teacher.find(self.teacher_id).full_name
