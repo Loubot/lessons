@@ -2,7 +2,7 @@
   <h4 class="panel-title">
     <a href="#<%= event.id.to_s.parameterize.underscore %>" data-parent="#accordian" data-toggle="collapse">Student name: <%= event.student_name %></a>
   </h4>
-</div>
+</div> <!-- end of panel-heading -->
 <div id="<%= event.id.to_s.parameterize.underscore %>" class="panel-collapse collapse">
   <div class="panel-body">
     Date: <%= event.start_time.strftime("%d/%m/%Y %H:%M") %>
@@ -10,4 +10,4 @@
       <button class="review_hover btn btn-info btn-sm pull-right" data-html="true" data-content="<%= event.review.comment %>" data-title="<%= event.student_name %>  <%= star_helper(event.review.rating).html_safe %>" data-container="body">Review received</button>
     <% end %>
   </div> <!-- end of panel-body -->
-</div>
+</div> <!-- end of panel-collapse collapse -->

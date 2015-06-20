@@ -18,7 +18,7 @@
 
 class Event < ActiveRecord::Base
   validates :teacher_id, presence: true
-  validates :start_time, :end_time,  presence: :true
+  validates :start_time, :end_time, presence: :true
   validates :start_time, :end_time, :overlap => {:exclude_edges => ["start_time", "end_time"]}
   validates :start_time, date: { before: :end_time, message: 'must be after end time' }
   has_one :review
@@ -30,11 +30,19 @@ class Event < ActiveRecord::Base
   scope :student_events, ->(student_id) { where(student_id: student_id).order("end_time DESC")}
 
   def student_name
-    Teacher.find(self.student_id).full_name
+    if self.student_id == 0
+      'No name specified'
+    else
+      Teacher.find(self.student_id).full_name
+    end    
   end
 
   def teacher_name
-    Teacher.find(self.teacher_id).full_name
+    if self.teacher_id == 0
+      'No name specified'
+    else
+      Teacher.find(self.teacher_id).full_name
+    end    
   end
 
   def self.student_do_multiple_bookings(params)

@@ -2,7 +2,7 @@
   <h4 class="panel-title">
     <a href="#<%= event.id.to_s.parameterize.underscore %>" data-parent="#accordian" data-toggle="collapse">Teacher: <%= event.teacher_name %></a>
   </h4>
-</div>
+</div> <!-- end of panel-heading -->
 <div id="<%= event.id.to_s.parameterize.underscore %>" class="panel-collapse collapse">
   <div class="panel-body">
     Date: <%= event.start_time.strftime("%d/%m/%Y") %>
@@ -12,5 +12,5 @@
       <span class="pull-right review_hover" data-html="true" data-content="<%= event.review.comment %> <a class='btn btn-danger btn-xs' href='<%= review_path(event.review.id) %>' data-method='DELETE' confirm('Delete review?')>Delete</a>" data-title="<%= event.student_name %>  <%= star_helper(event.review.rating).html_safe %>" data-container="body">Review already created</span>
     <% end %>
   </div> <!-- end of panel-body -->
-</div>
+</div> <!-- end of panel-collapse collapse -->
 
