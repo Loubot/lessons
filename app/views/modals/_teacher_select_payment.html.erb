@@ -9,7 +9,7 @@
         <div class="container-fluid teacher_payment_registration_details">
           <ul class="nav nav-tabs" role="tablist" id="payment_tabs">
             <li role="presentation" class="active"><a href="#stripe" aria-controls="stripe" role="tab" data-toggle="tab">Stripe</a></li>
-            <li role="presentation"><a href="#paypal" aria-controls="paypal" role="tab" data-toggle="tab">Paypal</a></li>
+            <li role="presentation"><a href="#Paypal" aria-controls="Paypal" role="tab" data-toggle="tab">Paypal</a></li>
           </ul> <!-- end of payment_tabs -->
 
           <div class="tab-content">
@@ -32,22 +32,22 @@
                 <% end %>
             </div> <!-- end of stripe -->
 
-            <div role="tabpanel" class="tab-pane" id="paypal">
-              <p class="paypal_reg_explanation">Please enter your paypal login email address. We will never ask you for your paypal
-               password. <strong><u> First name and surname must match the name on your paypal account exactly. You must be registered for a papal business account.</u></strong> <br><%= link_to 'Click here for instructions', 'https://www.paypal.com/us/cgi-bin/webscr?cmd=_run-signup-upgrade-link', target: '_blank' %></p>
+            <div role="tabpanel" class="tab-pane" id="Paypal">
+              <p class="Paypal_reg_explanation">Please enter your Paypal login email address. We will never ask you for your Paypal
+               password. <strong><u> First name and surname must match the name on your Paypal account exactly. You must be registered for a Paypal business account.</u></strong> <br><%= link_to 'Click here for instructions', 'https://www.Paypal.com/us/cgi-bin/webscr?cmd=_run-signup-upgrade-link', target: '_blank' %></p>
                
-               <%= form_for @teacher, class: 'paypal_email_form form-horizontal' do |f| %>
+               <%= form_for @teacher, class: 'Paypal_email_form form-horizontal' do |f| %>
                  <div class="form-group">
                    <div class="col-sm-10">
-                     <%= text_field_tag 'teacher[paypal_first_name]', nil,  placeholder: 'First name', class: 'form-control' %>
+                     <%= text_field_tag 'teacher[Paypal_first_name]', nil,  placeholder: 'First name', class: 'form-control' %>
                    </div><div class="form-group">
                    <div class="col-sm-10">
-                     <%= text_field_tag 'teacher[paypal_last_name]', nil,   placeholder: 'Last name', class: 'form-control' %>
+                     <%= text_field_tag 'teacher[Paypal_last_name]', nil,   placeholder: 'Last name', class: 'form-control' %>
                    </div>
                  </div> <!-- enf of form-group -->
                  <div class="form-group">
                    <div class="col-sm-10">
-                     <%= f.email_field :paypal_email, placeholder: 'Paypal Email', class: 'form-control' %>
+                     <%= f.email_field :Paypal_email, placeholder: 'Paypal Email', class: 'form-control' %>
                    </div>
                  </div> <!-- enf of form-group -->
                  <div class="form-group">
@@ -57,7 +57,7 @@
                  </div>
                  
                <% end %>
-            </div> <!-- end of paypal -->
+            </div> <!-- end of Paypal -->
           </div>
         </div> <!-- end of container-fluid -->
       </div> <!-- end of modal-body -->
