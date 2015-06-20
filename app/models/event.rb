@@ -27,8 +27,8 @@ class Event < ActiveRecord::Base
 
   before_save :add_name, except: [:student_do_single_booking,:studentDoMultipleBookings]
 
-  after_save :create_students_association
-
+  after_save :create_students_association #private method
+ 
   scope :student_events, ->(student_id) { where(student_id: student_id).order("end_time DESC")}
 
   def student_name
