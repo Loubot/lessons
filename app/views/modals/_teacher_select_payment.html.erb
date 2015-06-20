@@ -36,7 +36,7 @@
               <p class="Paypal_reg_explanation">Please enter your Paypal login email address. We will never ask you for your Paypal
                password. <strong><u> First name and surname must match the name on your Paypal account exactly. You must be registered for a Paypal business account.</u></strong> <br><%= link_to 'Click here for instructions', 'https://www.Paypal.com/us/cgi-bin/webscr?cmd=_run-signup-upgrade-link', target: '_blank' %></p>
                
-               <%= form_for @teacher, class: 'Paypal_email_form form-horizontal' do |f| %>
+               <%= form_for @teacher, class: 'paypal_email_form form-horizontal' do |f| %>
                  <div class="form-group">
                    <div class="col-sm-10">
                      <%= text_field_tag 'teacher[Paypal_first_name]', nil,  placeholder: 'First name', class: 'form-control' %>
