@@ -68,7 +68,7 @@ class TeachersController < ApplicationController
 	  	if bla.success?
 	  		flash[:success] = "Paypal email updated ok"
 	  	else
-	  		p bla.inspect
+	  		p "error respnese #{bla.inspect}"
 	  		flash[:danger] = "Email or names provided incorrect or not a paypal mercant account."
 	  	end
 	  	redirect_to :back and return

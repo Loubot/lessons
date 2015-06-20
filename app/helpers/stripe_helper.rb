@@ -77,10 +77,10 @@ module StripeHelper
                                                     )
 	end # end of single_transaction_and_mail
 
-  def package_transaction_and_mail(json_response, cart, package)
+  def package_transaction_and_mail(charge, cart, package)
     Transaction.create(
                         create_transaction_params_stripe(
-                                                          json_response, 
+                                                          charge, 
                                                           cart.student_id, 
                                                           cart.teacher_id
                                                         )
