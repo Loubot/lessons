@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(version: 20150620030246) do
     t.string   "status",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "teacher_id"
+    t.integer  "teacher_id",             default: 0
     t.binary   "time_off"
-    t.integer  "student_id"
+    t.integer  "student_id",             default: 0
     t.integer  "review_id"
     t.integer  "subject_id"
   end
