@@ -29,6 +29,7 @@
 #  address                :string           default("")
 #  paid_up                :boolean          default(FALSE)
 #  paid_up_date           :date
+#  profile_views          :integer          default(0)
 #
 
 class Teacher < ActiveRecord::Base

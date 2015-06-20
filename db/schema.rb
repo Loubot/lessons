@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525002209) do
+ActiveRecord::Schema.define(version: 20150614134846) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -241,6 +241,7 @@ ActiveRecord::Schema.define(version: 20150525002209) do
     t.string   "address",                            default: ""
     t.boolean  "paid_up",                            default: false
     t.date     "paid_up_date"
+    t.integer  "profile_views",                      default: 0
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
@@ -282,6 +283,7 @@ ActiveRecord::Schema.define(version: 20150525002209) do
     t.integer  "package_id",                                        default: 0
     t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0,   null: false
     t.string   "teacher_name",                                      default: ""
+    t.integer  "location_id"
   end
 
   add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email"

@@ -17,7 +17,8 @@ class TeachersController < ApplicationController
 		@categories = Category.includes(:subjects).all
 		# @subject = Subject.find(params[:subject_id])
 		
-		
+		@teacher.increment!(:profile_views, by = 1)
+
 		@reviews = @teacher.reviews.take(3)
 		@locations = @teacher.locations
 		@prices = @teacher.prices
@@ -31,6 +32,7 @@ class TeachersController < ApplicationController
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		gon.teacher_id = @teacher.id
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
+
 		# fresh_when([current_teacher,flash])		
 	end
 
@@ -115,7 +117,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
