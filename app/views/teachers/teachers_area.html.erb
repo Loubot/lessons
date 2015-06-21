@@ -143,7 +143,7 @@
           <div class="form-group">
             <%= label_tag :email, 'Student email', class: 'col-sm-2 control-label' %>
             <div class="col-sm-10">
-              <%= text_field_tag :email,  nil, class: 'form-control', id: 'message_email', disabled: true %>
+              <%= text_field_tag :email,  nil, class: 'form-control', disabled: true %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
           <div class="form-group">
@@ -159,6 +159,7 @@
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
           <%= hidden_field_tag 'teacher_email', current_teacher.email %>
+          <%= hidden_field_tag 'email', '', id: 'message_email' %>
           <div class="friendship_message_footer">
             <%= submit_tag 'Send message', class: 'btn btn-success' %>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 

@@ -21,6 +21,7 @@ class FriendshipsController < ApplicationController
   end
 
   def send_message
+    p "params #{params}"
     TeacherMailer.delay.teacher_to_student_mail(params[:email], params[:teacher_email], params[:subject], params[:message])
     redirect_to :back
   end
@@ -28,7 +29,7 @@ class FriendshipsController < ApplicationController
   def get_modal
     p "modal params #{params}"
     @student = Teacher.find(params[:student_id])
-    render 'friendships/_friendships_modal_editer.js.coffee' and return
+    render 'friendships/_friendships_modal_editor.js.coffee' and return
 
   end
 
