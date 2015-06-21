@@ -30,8 +30,8 @@ class PaypalController < ApplicationController
       :user_id       => ENV['PAYPAL_USER_ID'],
       :password      => ENV['PAYPAL_PASSWORD'],
       :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID'],
-      :sandbox       => true
+      :app_id        => ENV['PAYPAL_APP_ID']
+      
     )
 
     client.execute(:Pay,
@@ -121,22 +121,21 @@ class PaypalController < ApplicationController
     cart = UserCart.create_package_cart(params, current_teacher, package)
     # redirect_to :back
     client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
-      :sandbox       => true
+      :user_id       => ENV['PAYPAL_USER_ID'],
+      :password      => ENV['PAYPAL_PASSWORD'],
+      :signature     => ENV['PAYPAL_SIGNATURE'],
+      :app_id        => ENV['PAYPAL_APP_ID']
     )
 
     client.execute(:Pay,
       :action_type     => "PAY",
-      :currency_code   => "GBP",
+      :currency_code   => "EUR",
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://learn-your-lesson.herokuapp.com",
       :return_url      => "https://wwww.learnyourlesson.ie/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'https://wwww.learnyourlesson.ie/store-package-paypal',
+      :ipn_notification_url => 'http://72581b0c.ngrok.com/store-package-paypal',
       :receivers => [
-        { :email => params[:teacher_email], amount: package.price.to_f, primary: true }
+        { :email => params[:teacher_email], amount: package.price.to_f } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
@@ -155,6 +154,51 @@ class PaypalController < ApplicationController
       end
 
     end
+  end
+
+  def store_package_paypal #ipn destination for package bookings
+    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    http = Net::HTTP.new(uri.host,uri.port)
+    http.open_timeout = 60
+    http.read_timeout = 60
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl = true
+    response = http.post(
+                          uri.request_uri, 
+                          request.raw_post, 
+                          'Content-Length' => "#{request.raw_post.size}",
+                          'User-Agent' => 'My custom user agent'
+                        ).body
+
+    if !Transaction.find_by(tracking_id: params['tracking_id'])
+      if response == 'VERIFIED'
+        cart = UserCart.find_by(tracking_id: params['tracking_id'])
+        render status: 200, nothing: true and return if !cart
+
+        p "MAJOR ERROR. ROUTED TO WRONG PAYPAL METHOD" if cart.booking_type != 'package'
+        package = Package.find(cart.package_id)
+        Transaction.create(
+                            create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
+                          )
+
+        TeacherMailer.package_email_student(
+                                              cart,
+                                              package
+                                            ).deliver_now
+        TeacherMailer.package_email_teacher(
+                                              cart,
+                                              package
+                                            ).deliver_now
+        render status: 200, nothing: true
+      else #end of response == 'verified'
+        p "nope 2"
+        render status: 200, nothing: true
+      end
+    else #end of find transaction
+      p "nope 1"
+      render status: 200, nothing: true
+    end
+
   end
 
   def home_booking_paypal
@@ -287,50 +331,7 @@ class PaypalController < ApplicationController
       render status: 200, nothing: true
     end
 
-  end
-
-  def store_package_paypal #ipn destination for package bookings
-    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
-    http = Net::HTTP.new(uri.host,uri.port)
-    http.open_timeout = 60
-    http.read_timeout = 60
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    http.use_ssl = true
-    response = http.post(
-                          uri.request_uri, 
-                          request.raw_post, 
-                          'Content-Length' => "#{request.raw_post.size}",
-                          'User-Agent' => 'My custom user agent'
-                        ).body
-
-    if !Transaction.find_by(tracking_id: params['tracking_id'])
-      if response == 'VERIFIED'
-        cart = UserCart.find_by(tracking_id: params['tracking_id'])
-        render status: 200, nothing: true and return if !cart
-
-        p "MAJOR ERROR. ROUTED TO WRONG PAYPAL METHOD" if cart.booking_type != 'package'
-        package = Package.find(cart.package_id)
-        Transaction.create(
-                            create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
-                          )
-
-        TeacherMailer.paypal_package_email(
-                                            cart.student_email,
-                                            cart.student_name,
-                                            cart.teacher_email,
-                                            package
-                                          ).deliver_now
-        render status: 200, nothing: true
-      else #end of response == 'verified'
-        p "nope 2"
-        render status: 200, nothing: true
-      end
-    else #end of find transaction
-      p "nope 1"
-      render status: 200, nothing: true
-    end
-
-  end
+  end  
 
   def paypal_return
     puts "paypal return params paykey: #{params[:payKey]}"
