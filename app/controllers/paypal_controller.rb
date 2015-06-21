@@ -115,7 +115,10 @@ class PaypalController < ApplicationController
   #end of membership payments
 
   def create_package_booking_paypal
-    p "params #{params}"
+    p ENV['PAYPAL_USER_ID']
+    p ENV['PAYPAL_PASSWORD']
+    p ENV['PAYPAL_SIGNATURE']
+    p ENV['PAYPAL_APP_ID']
     
     package = Package.find(params[:package_id])
     cart = UserCart.create_package_cart(params, current_teacher, package)
@@ -124,16 +127,17 @@ class PaypalController < ApplicationController
       :user_id       => ENV['PAYPAL_USER_ID'],
       :password      => ENV['PAYPAL_PASSWORD'],
       :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID']
+      :app_id        => ENV['PAYPAL_APP_ID'],
+      :sandbox       => true
     )
 
     client.execute(:Pay,
       :action_type     => "PAY",
       :currency_code   => "EUR",
       :tracking_id     => cart.tracking_id,
-      :cancel_url      => "https://learn-your-lesson.herokuapp.com",
-      :return_url      => "https://wwww.learnyourlesson.ie/paypal-return?payKey=${payKey}",
-      :ipn_notification_url => 'http://72581b0c.ngrok.com/store-package-paypal',
+      :cancel_url      => "https://www.learnyourlesson.ie",
+      :return_url      => "https://www.learnyourlesson.ie/paypal-return?payKey=${payKey}",
+      :ipn_notification_url => 'https://www.learnyourlesson.ie/store-package-paypal',
       :receivers => [
         { :email => params[:teacher_email], amount: package.price.to_f } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
@@ -224,7 +228,7 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
       :return_url      => request.referrer,
-      :ipn_notification_url => "http://786bb086.ngrok.com/store-paypal",
+      :ipn_notification_url => "https://www.learnyourlesson.ie/store-paypal",
       :receivers => [
         { :email => params[:teacher_email], amount: cart.amount } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
