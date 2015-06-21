@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+</div>
+<div class="modal-body">
+  <%= form_tag send_message_teacher_friendship_path(id: current_teacher.id, teacher_id: current_teacher.id), class: 'form-horizontal' do  %>
+    <div class="form-group">
+      <%= label_tag :email, 'Student email', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= text_field_tag :email,  @student.email, class: 'form-control', disabled: true %>
+      </div> <!-- end of col-sm-10 -->
+    </div> <!-- end of form-group -->
+    <div class="form-group">
+      <%= label_tag :subject, 'Subject', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= text_field_tag :subject, nil, placeholder: 'Subject', class: 'form-control' %>
+      </div> <!-- end of col-sm-10 -->
+    </div> <!-- end of form-group -->
+    <div class="form-group">
+      <%= label_tag :message, 'Message', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= text_area_tag :message, nil, placeholder: 'Enter your message here', class: 'form-control', rows: 10 %>
+      </div> <!-- end of col-sm-10 -->
+    </div> <!-- end of form-group -->
+    <%= hidden_field_tag 'teacher_email', current_teacher.email %>
+    <div class="friendship_message_footer">
+      <%= submit_tag 'Send message', class: 'btn btn-success' %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+    </div> <!-- end friendship_message_footer -->
+  </div>
+  
+<% end %>

@@ -392,4 +392,26 @@ class TeacherMailer < ActionMailer::Base
     logger.info "welcome email #{email}"
   end
 
+  def teacher_to_student_mail(student, teacher, subject, message)
+    begin
+      require 'mandrill'
+      mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      message = {
+        subject: subject,
+        to: [
+          {
+            email: student
+          }
+        ],
+        from_email: teacher,
+        text: message
+      }
+      async = false
+      result = mandrill.messages.send message, async
+    rescue Mandrill::Error => e
+      puts "A mandrill error occurred: #{e.class} - #{e.message}"
+    end
+
+  end
+
 end

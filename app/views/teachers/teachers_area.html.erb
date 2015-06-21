@@ -91,25 +91,48 @@
 	</div> <!-- end of row -->
 	<%= render 'partials/teachers_stuff/invitation' %>
 
-	<br>
+	
 
-		<% for friendship in @teacher.friendships %>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a href="#<%= friendship.id %>" data-parent="#accordian" data-toggle="collapse"><%= friendship.student.full_name %></a>
-					</h4>
-				</div> <!-- end of panel-heading -->
-				<div id="<%= friendship.id %>" class="panel-collapse collapse">
-					<div class="panel-body">
-						<ul class="list-group">
-							
-						</ul> <!-- end of list-group -->
-					</div> <!-- end of panel-body -->
-				</div> <!-- end of panel-collapse collapse -->
-			</div> <!-- end of panel panel-default -->
+	<div class="row">
+		<div class="col-xs-12">
+				<div class="well friendship_well">
+					<h2 class="friendship_well_header">
+						List of your students <small>Click on name for more options</small>
+					</h2>
+					<% for friendship in @teacher.friendships %>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a href="#<%= friendship.id %>" data-parent="#accordian" data-toggle="collapse"><%= friendship.student.full_name %></a>
+								</h4>
+							</div> <!-- end of panel-heading -->
+							<div id="<%= friendship.id %>" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul class="list-group">
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" 
+										href="<%= friendships_message_path(teacher_id: friendship.teacher_id, student_id: friendship.student_id) %>">
+										  Send message to student
+										</button>
+									</ul> <!-- end of list-group -->
+								</div> <!-- end of panel-body -->
+							</div> <!-- end of panel-collapse collapse -->
+						</div> <!-- end of panel panel-default -->
 
-		<% end %>
+					<% end %> <%# end of for friendship in @teacher.friendships %>
+				</div> <!-- end of well -->
+		</div> <!-- end of col-xs-12 -->
+	</div> <!-- end of row -->
 </div> <!-- end of outer-container -->
 
 <%= render 'modals/teacher_open_close_times' %>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+    </div> <!--  end of modal-content -->
+  </div>
+</div>

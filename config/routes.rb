@@ -26,7 +26,11 @@ Rails.application.routes.draw do
     resources :packages, only: [:create, :destroy]
     resources :locations, only: [:create, :update, :destroy]
     resources :prices, only: [:create, :update, :destroy]
-    resources :friendships, only: [:create, :destroy]
+    resources :friendships, only: [:create, :destroy] do
+      member do
+        post    'send_message'
+      end
+    end
   end
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
@@ -64,6 +68,8 @@ Rails.application.routes.draw do
   post        'send_feedback'           =>  'static#send_feedback'
 
   post        '/share-linkedin'         =>  'application#share_linkedin'
+
+  get        'friendships-message'      =>  'friendships#get_modal'
   
 
   #Paypal
