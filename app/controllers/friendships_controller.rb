@@ -28,7 +28,8 @@ class FriendshipsController < ApplicationController
   def get_modal
     p "modal params #{params}"
     @student = Teacher.find(params[:student_id])
-    render 'friendships/_friendships_modal', layout: false
+    render 'friendships/_friendships_modal_editer.js.coffee' and return
+
   end
 
   private

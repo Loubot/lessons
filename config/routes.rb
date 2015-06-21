@@ -69,7 +69,7 @@ Rails.application.routes.draw do
 
   post        '/share-linkedin'         =>  'application#share_linkedin'
 
-  get        'friendships-message'      =>  'friendships#get_modal'
+  post        'friendships-message'      =>  'friendships#get_modal'
   
 
   #Paypal
