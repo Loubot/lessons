@@ -1,9 +1,11 @@
-<h2 class="previous_lessons_header">List of your previous lessons <small>Click to expand</small></h2>
-<div class="panel panel-default">  
+<div class="outer-container">
+  <h2 class="previous_lessons_header">List of your previous lessons <small>Click to expand</small></h2>
+  <div class="panel panel-default">  
 
-  <% if current_teacher.is_teacher %>
-    <%= render partial: 'partials/previous_lessons_teacher', collection: current_teacher.events.order('end_time DESC'), as: :event %>
-  <% else %>
-    <%= render partial: 'partials/previous_lessons_student', collection: Event.student_events(current_teacher.id), as: :event %>
-  <% end %>
-</div>
+    <% if current_teacher.is_teacher %>
+      <%= render partial: 'partials/previous_lessons_teacher', collection: current_teacher.events.order('end_time DESC'), as: :event %>
+    <% else %>
+      <%= render partial: 'partials/previous_lessons_student', collection: Event.student_events(current_teacher.id), as: :event %>
+    <% end %>
+  </div>
+</div> <!-- end of container-fluid -->

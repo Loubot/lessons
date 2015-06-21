@@ -69,7 +69,8 @@ class TeachersController < ApplicationController
 	  		flash[:success] = "Paypal email updated ok"
 	  	else
 	  		p bla.inspect
-	  		flash[:danger] = "Email or names provided incorrect or not a paypal mercant account."
+	  		flash[:danger] = "Email or names provided incorrect or not a paypal merchant account."
+
 	  	end
 	  	redirect_to :back and return
 	  else @teacher.update_attributes(teacher_params)
@@ -98,7 +99,7 @@ class TeachersController < ApplicationController
 	end
 
 	def your_business
-		@teacher = Teacher.includes(:locations, :prices, :subjects, :grinds).find(params[:id])
+		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id])
 		# @location = @teacher.locations.first
 		@package = Package.new
 		@grind = Grind.new

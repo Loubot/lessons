@@ -77,19 +77,17 @@ module StripeHelper
                                                     )
 	end # end of single_transaction_and_mail
 
-  def package_transaction_and_mail(json_response, cart, package)
+  def package_transaction_and_mail(charge, cart, package)
     Transaction.create(
                         create_transaction_params_stripe(
-                                                          json_response, 
+                                                          charge, 
                                                           cart.student_id, 
                                                           cart.teacher_id
                                                         )
                       )
 
-    TeacherMailer.delay.paypal_package_email(
-                                              cart.student_email,
-                                              cart.student_name,
-                                              cart.teacher_email,
+    TeacherMailer.delay.package_email_teacher(
+                                              cart,
                                               package
                                             )
 

@@ -178,7 +178,7 @@ class StripeController < ApplicationController
       if charge['paid'] == true
         package = Package.find(cart.package_id)
 
-        package_transaction_and_mail(json_response, cart, package) #stripe helper
+        package_transaction_and_mail(charge, cart, package) #stripe helper
       end
       flash[:success] = 'Payment was successful. You will receive an email soon. Payments can take a few minutes to register.'
       redirect_to root_url
