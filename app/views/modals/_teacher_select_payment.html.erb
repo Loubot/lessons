@@ -23,7 +23,9 @@
                   <%= hidden_field_tag :client_id, ENV['STRIPE_CLIENT_ID'] %>
                   <%= hidden_field_tag :scope, 'read_write' %>
 
+
                   <%= hidden_field_tag :redirect_uri, 'https://www.learn-your-lesson.ie/stripe-auth-user' %>
+
 
 
                   <%= hidden_field_tag :stripe_landing, 'login' %>
@@ -37,11 +39,13 @@
                password. <strong><u> First name and surname must match the name on your Paypal account exactly. You must be registered for a Paypal business account.</u></strong> <br><%= link_to 'Click here for instructions', 'https://www.Paypal.com/us/cgi-bin/webscr?cmd=_run-signup-upgrade-link', target: '_blank' %></p>
                
                <%= form_for @teacher, class: 'paypal_email_form form-horizontal' do |f| %>
-                 <div class="form-group">
-                   <div class="col-sm-10">
+                  <div class="form-group">
+                    <div class="col-sm-10">
                      <%= text_field_tag 'teacher[paypal_first_name]', nil,  placeholder: 'First name', class: 'form-control' %>
+
                    </div>
                   </div> <!-- end of form-group -->
+
                    <div class="form-group">
                    <div class="col-sm-10">
                      <%= text_field_tag 'teacher[paypal_last_name]', nil,   placeholder: 'Last name', class: 'form-control' %>

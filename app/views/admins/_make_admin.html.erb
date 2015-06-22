@@ -17,9 +17,11 @@
 						<ul class="list-group">
 							<%= form_tag make_admin_path, method: 'put' do %>
 								<% @teachers.each do |teacher| %>
-									<li class="list-group-item"><%= %Q(#{teacher.first_name}  (#{teacher.email}))%><%= ' active' if teacher.is_active %>
-										<%= check_box_tag 'teacher[admin][]', teacher.id, teacher.admin, class: 'pull-right' %>
-										<%= link_to 'Delete', teacher, method: 'delete', data: { confirm: "Are you sure?" }, class: 'pull-right btn btn-link' %>
+									<li class="list-group-item"><%= %Q(#{teacher.first_name}  (#{teacher.email}))%><%= link_to 'Delete', teacher, method: 'delete', data: { confirm: "Are you sure?" }, class: 'pull-right btn btn-danger' %><br>
+										Admin? <%= check_box_tag 'teacher[admin][]', teacher.id, teacher.admin %><br>
+										<br>
+										Registered on: <%= teacher.created_at.strftime("%d:%m:%Y") %><br>
+										Teacher is <%= teacher.is_active ? 'active' : 'not active' %>
 									</li>
 								<% end %>
 								
