@@ -83,7 +83,7 @@ class TeachersController < ApplicationController
 
 	def teachers_area
 		@params = params
-		@teacher = Teacher.includes(:events, :subjects, :prices).find(params[:id])
+		@teacher = Teacher.includes(:events, :subjects, :prices, :reviews).find(params[:id])
 
 		if params[:zoom] == 'true'
 			events = @teacher.events.where(student_id: params[:student_id])

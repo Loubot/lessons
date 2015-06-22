@@ -118,10 +118,12 @@
 											<%= submit_tag 'Send message to student', class: 'btn btn-success pull-right' %>
 										<% end %>
 
-									</ul> <!-- end of list-group -->
+									</ul> <!-- end of list-group --><br>
+									
+									<%= link_to 'Zoom on this student', teachers_area_teacher_path(id: current_teacher.id, student_id: friendship.student_id, zoom:true), class: 'btn btn-warning pull-right' %><br>
 									No. of upcoming bookings <%= return_future_bookings(@existing_events, friendship.student_id) %><br>
 									No. of previous bookings <%= return_past_boookings(@existing_events, friendship.student_id) %><br>
-									<%= link_to 'Zoom on this student', teachers_area_teacher_path(id: current_teacher.id, student_id: friendship.student_id, zoom:true), class: 'btn btn-warning' %>
+									<%= @teacher.reviews.where(user_id: friendship.student_id) %>
 								</div> <!-- end of panel-body -->
 							</div> <!-- end of panel-collapse collapse -->
 						</div> <!-- end of panel panel-default -->
