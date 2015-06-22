@@ -38,25 +38,20 @@ ActiveRecord::Schema.define(version: 20150620030246) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "events", force: :cascade do |t|
+ create_table "events", force: :cascade do |t|
     t.string   "title"
     t.datetime "start_time"
     t.datetime "end_time"
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-    t.integer  "teacher_id",             default: 0
-    t.binary   "time_off"
-    t.integer  "student_id",             default: 0
-=======
     t.integer  "teacher_id", default: 0
     t.binary   "time_off"
     t.integer  "student_id", default: 0
->>>>>>> master
     t.integer  "review_id"
     t.integer  "subject_id"
   end
+
 
   add_index "events", ["review_id"], name: "index_events_on_review_id", using: :btree
 

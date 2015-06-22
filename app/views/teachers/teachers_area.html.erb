@@ -123,7 +123,13 @@
 									<%= link_to 'Zoom on this student', teachers_area_teacher_path(id: current_teacher.id, student_id: friendship.student_id, zoom:true), class: 'btn btn-warning pull-right' %><br>
 									No. of upcoming bookings <%= return_future_bookings(@existing_events, friendship.student_id) %><br>
 									No. of previous bookings <%= return_past_boookings(@existing_events, friendship.student_id) %><br>
-									<%= @teacher.reviews.where(user_id: friendship.student_id) %>
+									<ul class="list-group">
+										<% @teacher.reviews.each do |r| %>
+											<%= "<li class='list-group-item'>#{r.comment}</li>".html_safe if r.user_id == friendship.student_id %>
+										<% end %>
+										
+											
+									</ul>
 								</div> <!-- end of panel-body -->
 							</div> <!-- end of panel-collapse collapse -->
 						</div> <!-- end of panel panel-default -->
