@@ -84,7 +84,17 @@ class TeachersController < ApplicationController
 	def teachers_area
 		@params = params
 		@teacher = Teacher.includes(:events, :subjects, :prices).find(params[:id])
-		gon.events = format_times(@teacher.events) #teachers_helper
+
+		if params[:zoom] == 'true'
+			events = @teacher.events.where(student_id: params[:student_id])
+			@friendships = @teacher.friendships.where(student_id: params[:student_id])
+		else
+			events = @teacher.events
+			@friendships = @teacher.friendships
+		end
+
+		gon.events = format_times(events) #teachers_helper
+
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		@event = @teacher.events.new
 		@existing_events = @teacher.events.reject { |e| e.id == nil }

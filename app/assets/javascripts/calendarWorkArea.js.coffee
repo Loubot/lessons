@@ -37,6 +37,7 @@ calendarReady = ->
 
     # initialise scheduler
     scheduler.init('scheduler_here')
+    scheduler.clearAll()
     #// end of initialise scheduler //
 
     # onclick will disable edit buttons

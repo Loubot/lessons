@@ -1,4 +1,5 @@
 <%= content_for :title, "Teachers area" %>
+<%= include_gon %>
 <div class="outer-container">
 	<div class="row row_teachers_area">
 		<div id="scheduler_here" class="dhx_cal_container teachers_area_scheduler col-md-8">
@@ -98,8 +99,11 @@
 				<div class="well friendship_well">
 					<h2 class="friendship_well_header">
 						List of your students <small>Click on name for more options</small>
+						<% if params[:zoom] %>
+							<%= link_to "Show all students", teachers_area_teacher_path(id: current_teacher.id), class: 'btn btn-warning pull-right' %>
+						<% end %>
 					</h2>
-					<% for friendship in @teacher.friendships %>
+					<% for friendship in @friendships %>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
@@ -115,8 +119,9 @@
 										<% end %>
 
 									</ul> <!-- end of list-group -->
-									No. of upcoming bookings <%= return_future_bookings(@existing_events) %><br>
-									No. of previous bookings <%= return_past_boookings(@existing_events) %>
+									No. of upcoming bookings <%= return_future_bookings(@existing_events, friendship.student_id) %><br>
+									No. of previous bookings <%= return_past_boookings(@existing_events, friendship.student_id) %><br>
+									<%= link_to 'Zoom on this student', teachers_area_teacher_path(id: current_teacher.id, student_id: friendship.student_id, zoom:true), class: 'btn btn-warning' %>
 								</div> <!-- end of panel-body -->
 							</div> <!-- end of panel-collapse collapse -->
 						</div> <!-- end of panel panel-default -->
