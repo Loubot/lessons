@@ -16,6 +16,7 @@ class AdminsController < ApplicationController
 		@categories = Category.all
 		@subject = Subject.new
 		@teachers = Teacher.where(is_teacher: true)
+		render layout: 'teacher_layout'
 	end
 
 	def make_admin
