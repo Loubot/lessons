@@ -87,6 +87,7 @@ class TeachersController < ApplicationController
 		gon.events = format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		@event = @teacher.events.new
+		@existing_events = @teacher.events.reject { |e| e.id == nil }
 		@opening = Opening.find_or_create_by(teacher_id: current_teacher.id)
 		# fresh_when [@teacher, flash, @teacher.events.maximum(:updated_at)]
 	end
@@ -95,13 +96,13 @@ class TeachersController < ApplicationController
 		@context = current_teacher
 		@qualifications = Qualification.where(teacher_id: current_teacher.id)
 		@qualification = @context.qualifications.new
-		fresh_when @qualifications
+		# fresh_when @qualifications
 	end
 
 	def your_business
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id])
 		# @location = @teacher.locations.first
-		@package = Package.new
+		@package = Package.new		
 		@grind = Grind.new
 		@locations = @teacher.locations.reorder("created_at ASC")
 		@subjects = @teacher.subjects

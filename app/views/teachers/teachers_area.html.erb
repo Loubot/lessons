@@ -111,12 +111,12 @@
 									<ul class="list-group">
 										<!-- Button trigger modal -->
 										<%= form_tag friendships_message_path(teacher_id: friendship.teacher_id, student_id: friendship.student_id), remote: true do %>
-											<%= submit_tag 'Send message to student', class: 'btn btn-success' %>
-
+											<%= submit_tag 'Send message to student', class: 'btn btn-success pull-right' %>
 										<% end %>
-										
-										
+
 									</ul> <!-- end of list-group -->
+									No. of upcoming bookings <%= return_future_bookings(@existing_events) %><br>
+									No. of previous bookings <%= return_past_boookings(@existing_events) %>
 								</div> <!-- end of panel-body -->
 							</div> <!-- end of panel-collapse collapse -->
 						</div> <!-- end of panel panel-default -->
