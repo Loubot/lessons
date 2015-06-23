@@ -248,10 +248,12 @@ class TeachersController < ApplicationController
 		end
 
 		def check_id
-			if current_teacher.id != params[:id].to_i
-				flash[:danger] = "You are not authorised to view this page"
-				redirect_to root_path
-			end 
+			if !current_teacher.admin
+				if current_teacher.id != params[:id].to_i
+					flash[:danger] = "You are not authorised to view this page"
+					redirect_to root_path
+				end 
+			end
 		end
 
 		def get_subject(subjects)
