@@ -136,7 +136,20 @@ class EventsController < ApplicationController
 
 
 		when 'multiple'
+			lesson_location = Location.find(session[:location_id]).name
+			Event.create_confirmed_events(cart) #Event model, checks if multiple or not
 
+			TeacherMailer.delay.single_booking_mail_teacher(                                                
+                                                
+                                                      lesson_location,
+                                                      cart                		                            
+                    		                            )
+
+    	TeacherMailer.delay.single_booking_mail_student(
+                                                  
+                                                      lesson_location,
+                                                      cart
+                                                    )
 
 		when 'package'
 
