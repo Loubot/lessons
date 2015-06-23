@@ -56,7 +56,7 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book		
 		
-		@price = Price.find(params[:event][:price_id].to_i)
+		@price = Price.find(session[:price_id])
 		p "event price #{@price.price}"
 		if params['Multiple'] == 'true'
 			event = Event.student_do_multiple_bookings(params)
@@ -93,6 +93,55 @@ class EventsController < ApplicationController
 				@teacher = @event.errors.full_messages
 			end
 		end		
+	end
+
+	def payless_booking #take booking without payment
+		cart = UserCart.find(session[:cart_id])
+		if !cart
+			flash[:danger] = "Couldn't find your cart. Please try again"
+			p "Payless booking. Couldn't find cart"
+			redirect_to :back and return
+
+		end
+
+		p "payless booking found cart"
+		case cart.booking_type #single, multiple, home, package
+		when 'home'
+			update_student_address(params)
+			cart.update_attributes(address:params[:home_address])
+			Event.delay.create_confirmed_events(cart)
+
+			TeacherMailer.delay.home_booking_mail_teacher(
+			                                                cart
+			                                              )
+			TeacherMailer.delay.home_booking_mail_student(
+			                                                cart
+			                                              )
+
+		when 'single'
+			lesson_location = Location.find(session[:location_id]).name
+			Event.create_confirmed_events(cart) #Event model, checks if multiple or not
+
+			TeacherMailer.delay.single_booking_mail_teacher(                                                
+                                                
+                                                      lesson_location,
+                                                      cart                		                            
+                    		                            )
+
+    	TeacherMailer.delay.single_booking_mail_student(
+                                                  
+                                                      lesson_location,
+                                                      cart
+                                                    )
+
+
+		when 'multiple'
+
+
+		when 'package'
+
+		end
+		redirect_to :back
 	end
 
 	private

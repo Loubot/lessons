@@ -13,8 +13,10 @@ Rails.application.routes.draw do
       get     'previous-lessons'        =>  'teachers#previous_lessons'
       get     'create-new-subject'      =>  'teachers#create_new_subject'
       post    '/change-profile-pic'     =>  'teachers#change_profile_pic'
-      post    'invite-student'          =>  'teachers#invite_students'     
+      post    'invite-student'          =>  'teachers#invite_students'
+      post    'payless-booking'         =>  'teachers#payless_booking'    
   	end
+
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
     resources :openings, only: [:create, :update]
@@ -85,7 +87,8 @@ Rails.application.routes.draw do
   post        'pay-membership-stripe'   =>  'stripe#pay_membership_stripe'
   post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
 
-  post        'events/create-event-and-book' => 'events#create_event_and_book'
+  post        'events/create-event-and-book' =>   'events#create_event_and_book'
+  post        'payless-booking'              =>   'events#payless_booking'   
   
 
   get         'admin-panel'             =>  'admins#admin_panel'
