@@ -88,6 +88,10 @@ class Teacher < ActiveRecord::Base
     teachers = where(is_active: true)
   end
 
+  def has_payment_set?
+    (self.paypal_email != "" || self.stripe_access_token != "" )
+  end
+
   def add_to_mailing_lists
     gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
     list_id = self.is_teacher ? ENV['MAILCHIMP_TEACHER_LIST'] : ENV['MAILCHIMP_STUDENT_LIST']
@@ -137,7 +141,8 @@ class Teacher < ActiveRecord::Base
   end
 
   def is_teacher_valid
-    (self.paypal_email != "" || self.stripe_access_token != "" )  && self.profile != nil && self.overview != "" && (self.subjects.size > 0) && self.experiences.size > 0 && self.locations.size != 0 && check_rates #next method
+    #(self.paypal_email != "" || self.stripe_access_token != "" )  && 
+    self.profile != nil && self.overview != "" && (self.subjects.size > 0) && self.experiences.size > 0 && self.locations.size != 0 && check_rates #next method
   end
 
   def check_rates
@@ -159,7 +164,7 @@ class Teacher < ActiveRecord::Base
     
     # error_message_array.push " location not entered" if !self.lat || !self.lon
     error_message_array.push " profile picture not set" if !self.profile
-    error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
+    #error_message_array.push " payment option not specified" if (self.paypal_email == "" && self.stripe_access_token == "")
     error_message_array.push " please fill in your overview" if self.overview == ""
     error_message_array.push " you must set at least one price per subject" if !self.check_rates
     error_message_array.push " you must select a subject" if self.subjects.size < 1

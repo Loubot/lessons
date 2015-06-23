@@ -35,7 +35,7 @@ class StripeController < ApplicationController
       # p "cart #{cart.inspect}"
       # puts charge.inspect
       if charge['paid'] == true
-        Event.create_confirmed_events(cart) #Event model, checks if multiple or not   
+        Event.create_confirmed_events(cart, 'paid') #Event model, checks if multiple or not   
         single_transaction_and_mails(charge, params, lesson_location, cart) #stripe_helper
         
         flash[:success] = 'Payment was successful. You should receive an email soon.'
@@ -135,7 +135,7 @@ class StripeController < ApplicationController
 
       home_booking_transaction(charge, params[:student_id], params[:teacher_id])
 
-      Event.delay.create_confirmed_events(cart)
+      Event.delay.create_confirmed_events(cart, 'paid')
 
       TeacherMailer.delay.home_booking_mail_teacher(
                                                       cart

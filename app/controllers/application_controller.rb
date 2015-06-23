@@ -7,8 +7,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   def is_mobile?
-    session[:mobile]
-    
+    session[:mobile]    
   end
 
   helper_method :is_mobile?

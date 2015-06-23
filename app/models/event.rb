@@ -9,9 +9,9 @@
 #  status     :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  teacher_id :integer
+#  teacher_id :integer          default(0)
 #  time_off   :binary
-#  student_id :integer
+#  student_id :integer          default(0)
 #  review_id  :integer
 #  subject_id :integer
 #
@@ -94,18 +94,18 @@ class Event < ActiveRecord::Base
       teacher_id: params[:event][:teacher_id],
       student_id: params[:event][:student_id],
       subject_id: params[:event][:subject_id],
-      status: 'active'
+      status: 'payment'
      }
   end
 
 
-  def self.create_confirmed_events(cart)
+  def self.create_confirmed_events(cart, payment)
     #cart[:booking_type]
     if cart.booking_type == 'multiple'
       p "heeeeeeelllll1"
-      create_multiple_events_and_save(cart)
+      create_multiple_events_and_save(cart, payment)
     else
-      create_single_event_and_save(cart)
+      create_single_event_and_save(cart, payment)
       p "heeeeeeellllll2"
     end
   end
@@ -120,21 +120,21 @@ private
 		self.title = user.full_name		
 	end
 
-  def self.create_single_event_and_save(cart)
+  def self.create_single_event_and_save(cart, payment)
     e = Event.create!(
                 start_time: cart.params[:start_time],
                 end_time: cart.params[:end_time],
                 teacher_id: cart.teacher_id,
                 student_id: cart.student_id,
                 subject_id: cart.subject_id,
-                status: 'active'
+                status: payment
               )
 
     p "EVENT CREATED #{e.inspect}"
     e
   end
 
-  def self.create_multiple_events_and_save(cart) #teachers area block booking
+  def self.create_multiple_events_and_save(cart ,payment) #teachers area block booking
     ids = []
     continue = true  
     
@@ -149,7 +149,7 @@ private
                       teacher_id: cart.params[:teacher_id],
                       student_id: cart.params[:student_id],
                       subject_id: cart.params[:subject_id],
-                      status: 'active'
+                      status: payment
                     )
       if e.save
         ids << e.id

@@ -31,14 +31,14 @@ class EventsController < ApplicationController
 	end
 
 	def update
-		puts "vents controller/update params: #{params}"
+		puts "vents controller/update params: #{params[:event]['status']}"
 		@event = Event.find(params[:id])
 		start_time = (params[:event][:start_time].to_i) + 1.hours
 		end_time = (params[:event][:end_time].to_i) + 1.hours
 
 		respond_to do |format| 
 			 if @event.update_attributes(start_time: Time.at(start_time), end_time: Time.at(end_time),
-																title: params[:title])
+																title: params[:title], status: params[:event][:status])
 			 	format.json { render json: @event }
 			 	#format.js
 			 else
@@ -56,7 +56,7 @@ class EventsController < ApplicationController
 	# ajax event booking
 	def create_event_and_book		
 		
-		@price = Price.find(params[:event][:price_id].to_i)
+		@price = Price.find(session[:price_id])
 		p "event price #{@price.price}"
 		if params['Multiple'] == 'true'
 			event = Event.student_do_multiple_bookings(params)
@@ -93,6 +93,70 @@ class EventsController < ApplicationController
 				@teacher = @event.errors.full_messages
 			end
 		end		
+	end
+
+	def payless_booking #take booking without payment
+		cart = UserCart.find(session[:cart_id])
+		cart.update_attributes(status: 'owed')
+		if !cart
+			flash[:danger] = "Couldn't find your cart. Please try again"
+			p "Payless booking. Couldn't find cart"
+			redirect_to :back and return
+
+		end
+
+		p "payless booking found cart"
+		case cart.booking_type #single, multiple, home, package
+		when 'home'
+			update_student_address(params)
+			cart.update_attributes(address:params[:home_address])
+			Event.delay.create_confirmed_events(cart, cart.status)
+
+			TeacherMailer.delay.home_booking_mail_teacher(
+			                                                cart
+			                                              )
+			TeacherMailer.delay.home_booking_mail_student(
+			                                                cart
+			                                              )
+
+		when 'single'
+			lesson_location = Location.find(session[:location_id]).name
+			Event.create_confirmed_events(cart, cart.status) #Event model, checks if multiple or not
+
+			TeacherMailer.delay.single_booking_mail_teacher(                                                
+                                                
+                                                      lesson_location,
+                                                      cart                		                            
+                    		                            )
+
+    	TeacherMailer.delay.single_booking_mail_student(
+                                                  
+                                                      lesson_location,
+                                                      cart
+                                                    )
+
+
+		when 'multiple'
+			lesson_location = Location.find(session[:location_id]).name
+			Event.delay.create_confirmed_events(cart, cart.status) #Event model, checks if multiple or not
+
+			TeacherMailer.delay.single_booking_mail_teacher(                                                
+                                                
+                                                      lesson_location,
+                                                      cart                		                            
+                    		                            )
+
+    	TeacherMailer.delay.single_booking_mail_student(
+                                                  
+                                                      lesson_location,
+                                                      cart
+                                                    )
+
+		when 'package'
+
+		end
+		flash[:success] = "Your booking will be confirmed by email soon."
+		redirect_to :back
 	end
 
 	private

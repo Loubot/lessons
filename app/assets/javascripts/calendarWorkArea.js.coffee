@@ -22,7 +22,20 @@ calendarReady = ->
     scheduler.config.dblclick_create = false
     format = scheduler.date.date_to_str("%d-%m-%Y %H:%i")
 
-    scheduler.config.lightbox.sections = [{ name:"time", height:72, type:"time", map_to:"auto"}] 
+    payment_options = [
+      {
+        key: 'paid'
+        label: 'paid'
+      }
+      {
+        key: 'owed'
+        label: 'owed'
+      }
+    ]
+    scheduler.config.lightbox.sections = [
+      { name:"time", height:72, type:"time", map_to:"auto"},
+      { name:"payment", height:43, type:"select", map_to:"status", options: payment_options}
+      ] 
     
     scheduler.config.details_on_create = true
     scheduler.config.details_on_dblclick = true
@@ -61,7 +74,13 @@ calendarReady = ->
       #console.log Date.parse(ev.start_date)
       $.ajax
         url: "/teachers/#{gon.events[0].teacher_id}/events/#{id}"
-        data: { event: { title: ev.title, start_time: (Date.parse(ev.start_date))/1000, end_time: (Date.parse(ev.end_date)) /1000,id: ev.id }}
+        data: { event: {
+          title: ev.title, 
+          start_time: (Date.parse(ev.start_date))/1000, 
+          end_time: (Date.parse(ev.end_date)) /1000,
+          id: ev.id,
+          status: ev.status
+          }}
         type: 'put'
         success: (json) ->
           #scheduler.parse json, 'json'
