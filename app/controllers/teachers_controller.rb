@@ -81,6 +81,18 @@ class TeachersController < ApplicationController
 		
 	end
 
+	def destroy
+		redirect_to :back and return if !current_teacher.admin
+		@teacher = Teacher.find(params[:id])
+		if @teacher.destroy
+			flash[:success] = "Teacher deleted"
+		else
+			flash[:danager] = "Couldn't delete teacher: #{@teacher.errors.full_messages}"
+		end
+
+		redirect_to :back
+	end
+
 	def teachers_area
 		@params = params
 		@teacher = Teacher.includes(:events, :subjects, :prices).find(params[:id])
