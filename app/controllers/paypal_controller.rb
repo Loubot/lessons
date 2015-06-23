@@ -287,7 +287,7 @@ class PaypalController < ApplicationController
           
           TeacherMailer.delay.home_booking_mail_student(cart)
           TeacherMailer.delay.home_booking_mail_teacher(cart)
-          Event.delay.create_confirmed_events(cart)
+          Event.delay.create_confirmed_events(cart, 'paid')
           transaction = Transaction.create( #payments_helper
                                             create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
                                           )
@@ -299,7 +299,7 @@ class PaypalController < ApplicationController
           p "not a home booking paypal!!!!!!!!!!!!!!!!"
           logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
 
-          Event.create_confirmed_events(cart)
+          Event.create_confirmed_events(cart, 'paid')
 
           transaction = Transaction.create( #payments_helper
                                             create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)

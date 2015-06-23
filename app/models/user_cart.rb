@@ -16,7 +16,7 @@
 #  multiple      :boolean          default(FALSE)
 #  weeks         :integer          default(0)
 #  address       :string           default("")
-#  string        :string           default("")
+#  status        :string           default("")
 #  booking_type  :string           default("")
 #  package_id    :integer          default(0)
 #  amount        :decimal(8, 2)    default(0.0), not null

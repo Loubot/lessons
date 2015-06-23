@@ -76,9 +76,11 @@
 
             <% end %>
           <% else %>
-            <%= form_tag payless_booking_path(id: current_teacher.id) do %>
-              <%= submit_tag 'Book lesson', class: 'btn btn-lg btn-success center-block' %>
-              
+            <% if teacher_signed_in? %>
+              <%= form_tag payless_booking_path(id: current_teacher.id) do %>
+                <%= submit_tag 'Book lesson', class: 'btn btn-lg btn-success center-block' %>
+                
+              <% end %> <%# end of form_tag %>
             <% end %>
 
           <% end %>

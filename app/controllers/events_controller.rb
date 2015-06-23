@@ -31,14 +31,14 @@ class EventsController < ApplicationController
 	end
 
 	def update
-		puts "vents controller/update params: #{params}"
+		puts "vents controller/update params: #{params[:event]['status']}"
 		@event = Event.find(params[:id])
 		start_time = (params[:event][:start_time].to_i) + 1.hours
 		end_time = (params[:event][:end_time].to_i) + 1.hours
 
 		respond_to do |format| 
 			 if @event.update_attributes(start_time: Time.at(start_time), end_time: Time.at(end_time),
-																title: params[:title])
+																title: params[:title], status: params[:event][:status])
 			 	format.json { render json: @event }
 			 	#format.js
 			 else
@@ -97,6 +97,7 @@ class EventsController < ApplicationController
 
 	def payless_booking #take booking without payment
 		cart = UserCart.find(session[:cart_id])
+		cart.update_attributes(status: 'owed')
 		if !cart
 			flash[:danger] = "Couldn't find your cart. Please try again"
 			p "Payless booking. Couldn't find cart"
@@ -109,7 +110,7 @@ class EventsController < ApplicationController
 		when 'home'
 			update_student_address(params)
 			cart.update_attributes(address:params[:home_address])
-			Event.delay.create_confirmed_events(cart)
+			Event.delay.create_confirmed_events(cart, cart.status)
 
 			TeacherMailer.delay.home_booking_mail_teacher(
 			                                                cart
@@ -120,7 +121,7 @@ class EventsController < ApplicationController
 
 		when 'single'
 			lesson_location = Location.find(session[:location_id]).name
-			Event.create_confirmed_events(cart) #Event model, checks if multiple or not
+			Event.create_confirmed_events(cart, cart.status) #Event model, checks if multiple or not
 
 			TeacherMailer.delay.single_booking_mail_teacher(                                                
                                                 
@@ -137,7 +138,7 @@ class EventsController < ApplicationController
 
 		when 'multiple'
 			lesson_location = Location.find(session[:location_id]).name
-			Event.create_confirmed_events(cart) #Event model, checks if multiple or not
+			Event.delay.create_confirmed_events(cart, cart.status) #Event model, checks if multiple or not
 
 			TeacherMailer.delay.single_booking_mail_teacher(                                                
                                                 
@@ -154,6 +155,7 @@ class EventsController < ApplicationController
 		when 'package'
 
 		end
+		flash[:success] = "Your booking will be confirmed by email soon."
 		redirect_to :back
 	end
 
