@@ -21,10 +21,10 @@
                                 subject_id: s.id, 
                                 no_map: true
                                 )],
-                                 html: { class: 'form-inline' }, remote: true do |f| %>
+                                 html: { class: 'form-inline' }, remote: true, autocomplete: 'off' do |f| %>
           <div class="form-group">
             <%= f.label "#{s.name} price" %>
-            <%= f.number_field :price, class: 'form-control', autocoplete: 'off' %>
+            <%= f.number_field :price, class: 'form-control', autocomplete: :off %>
             <%= f.hidden_field :no_map, value: true %>
             <%= f.hidden_field :subject_id, value: s.id %>
             <%= f.hidden_field :teacher_id, value: @teacher.id %>

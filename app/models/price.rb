@@ -20,6 +20,7 @@ class Price < ActiveRecord::Base
 
   validates :subject_id, :teacher_id, :price, presence: true
   validates :no_map, :inclusion => [true, false]
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
 
   scope :is_valid?, -> { where("home_price IS NOT NULL") }
 
