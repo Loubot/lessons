@@ -166,7 +166,7 @@ class TeachersController < ApplicationController
 		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject][:id].to_i && p.location_id != nil })
 			render 'modals/payment_selections/_home_or_location.js.coffee'
 		else
-			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i }[0]
+			@price = @teacher.prices.select { |p| p.no_map == false && p.subject_id == params[:subject][:id].to_i }[0]
 			session[:price_id] = @price.id #price id for home booking
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
