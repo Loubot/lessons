@@ -12,7 +12,7 @@
 <% end %>
 <%= content_for :title,  @teacher.full_name %>
 
-<% cache [@teacher, @profilePic, @photos, current_teacher] do %>
+<% cache [@teacher, @profilePic, @photos, @prices.maximum(:updated_at), current_teacher] do %>
 <div class="outer-container">
 
 

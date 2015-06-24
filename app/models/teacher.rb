@@ -142,7 +142,8 @@ class Teacher < ActiveRecord::Base
 
   def is_teacher_valid
     #(self.paypal_email != "" || self.stripe_access_token != "" )  && 
-    self.profile != nil && self.overview != "" && (self.subjects.size > 0) && self.experiences.size > 0 && self.locations.size != 0 && check_rates #next method
+    (self.profile != nil && self.overview != "" && (self.subjects.size > 0) && self.experiences.size > 0 && self.locations.size != 0 && check_rates) #next method
+    
   end
 
   def check_rates
@@ -156,6 +157,7 @@ class Teacher < ActiveRecord::Base
 
       end    
     end
+    return true
 
   end
 

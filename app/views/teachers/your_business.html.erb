@@ -24,7 +24,7 @@
                                  html: { class: 'form-inline' }, remote: true do |f| %>
           <div class="form-group">
             <%= f.label "#{s.name} price" %>
-            <%= f.number_field :price, class: 'form-control' %>
+            <%= f.number_field :price, class: 'form-control', autocoplete: 'off' %>
             <%= f.hidden_field :no_map, value: true %>
             <%= f.hidden_field :subject_id, value: s.id %>
             <%= f.hidden_field :teacher_id, value: @teacher.id %>

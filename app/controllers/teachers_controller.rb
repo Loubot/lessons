@@ -81,6 +81,18 @@ class TeachersController < ApplicationController
 		
 	end
 
+	def destroy
+		redirect_to :back and return if !current_teacher.admin
+		@teacher = Teacher.find(params[:id])
+		if @teacher.destroy
+			flash[:success] = "Teacher deleted"
+		else
+			flash[:danager] = "Couldn't delete teacher: #{@teacher.errors.full_messages}"
+		end
+
+		redirect_to :back
+	end
+
 	def teachers_area
 		@params = params
 		@teacher = Teacher.includes(:events, :subjects, :prices, :reviews).find(params[:id])
@@ -129,7 +141,7 @@ class TeachersController < ApplicationController
 	end
 
 	def teacher_subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
 	end
 
 	def previous_lessons
@@ -161,11 +173,27 @@ class TeachersController < ApplicationController
 		session[:subject_id] = params[:subject][:id]
 		p "session #{session[:subject_id]}"
 		@teacher = Teacher.includes(:prices).find((params[:subject][:teacher_id]))
+		#Only teachers house to do !!!!
 		
-		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject][:id].to_i && p.location_id != nil })
+		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } ) \
+				&& ( @teacher.prices.any? { |p| p.subject_id == params[:subject][:id].to_i \
+																		&& p.location_id != nil } )
 			render 'modals/payment_selections/_home_or_location.js.coffee'
-		else
-			@price = @teacher.prices.select { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i }[0]
+			#with location but not home booking
+		elsif (!@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } ) \
+					&& ( @teacher.prices.any? { |p| p.location_id != nil \
+																			&& p.subject_id == params[:subject][:id].to_i} )
+
+					ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == session[:subject_id].to_i \
+																			&& p.location_id != nil) }.compact
+					p "ids #{ids}"
+					# @locations = @teacher.locations.map { |l| l if ids.include?  l.id }
+					@locations = @teacher.locations.find(ids)
+
+					render 'modals/payment_selections/_return_locations.js.coffee'
+		else #home booking only
+			@price = @teacher.prices.select { |p| p.no_map == true \
+																				&& p.subject_id == params[:subject][:id].to_i }[0]
 			session[:price_id] = @price.id #price id for home booking
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
@@ -186,7 +214,8 @@ class TeachersController < ApplicationController
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		else
 			#only return locations that teacher teaches this subject at
-			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == session[:subject_id].to_i && p.location_id != nil) }.compact
+			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == session[:subject_id].to_i \
+																	&& p.location_id != nil) }.compact
 			p "ids #{ids}"
 			# @locations = @teacher.locations.map { |l| l if ids.include?  l.id }
 			@locations = @teacher.locations.find(ids)
@@ -247,10 +276,12 @@ class TeachersController < ApplicationController
 		end
 
 		def check_id
-			if current_teacher.id != params[:id].to_i
-				flash[:danger] = "You are not authorised to view this page"
-				redirect_to root_path
-			end 
+			if !current_teacher.admin
+				if current_teacher.id != params[:id].to_i
+					flash[:danger] = "You are not authorised to view this page"
+					redirect_to root_path
+				end 
+			end
 		end
 
 		def get_subject(subjects)

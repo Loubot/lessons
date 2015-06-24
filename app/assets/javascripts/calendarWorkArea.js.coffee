@@ -86,7 +86,7 @@ calendarReady = ->
           #scheduler.parse json, 'json'
           console.log JSON.stringify json
           dhtmlx.message
-            text:"Event updated successfully"
+            text:"Event updated successfully <br>Refresh for payment changes"
             expire:1000
             type: 'myCss'
           switch scheduler.getState()
