@@ -162,11 +162,27 @@ class TeachersController < ApplicationController
 		session[:subject_id] = params[:subject][:id]
 		p "session #{session[:subject_id]}"
 		@teacher = Teacher.includes(:prices).find((params[:subject][:teacher_id]))
+		#Only teachers house to do !!!!
 		
-		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } && @teacher.prices.any? { |p| p.subject_id == params[:subject][:id].to_i && p.location_id != nil })
+		if (@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } ) \
+				&& ( @teacher.prices.any? { |p| p.subject_id == params[:subject][:id].to_i \
+																		&& p.location_id != nil } )
 			render 'modals/payment_selections/_home_or_location.js.coffee'
-		else
-			@price = @teacher.prices.select { |p| p.no_map == false && p.subject_id == params[:subject][:id].to_i }[0]
+			#with location but not home booking
+		elsif (!@teacher.prices.any? { |p| p.no_map == true && p.subject_id == params[:subject][:id].to_i } ) \
+					&& ( @teacher.prices.any? { |p| p.location_id != nil \
+																			&& p.subject_id == params[:subject][:id].to_i} )
+
+					ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == session[:subject_id].to_i \
+																			&& p.location_id != nil) }.compact
+					p "ids #{ids}"
+					# @locations = @teacher.locations.map { |l| l if ids.include?  l.id }
+					@locations = @teacher.locations.find(ids)
+
+					render 'modals/payment_selections/_return_locations.js.coffee'
+		else #home booking only
+			@price = @teacher.prices.select { |p| p.no_map == true \
+																				&& p.subject_id == params[:subject][:id].to_i }[0]
 			session[:price_id] = @price.id #price id for home booking
 			@event = Event.new
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
@@ -187,7 +203,8 @@ class TeachersController < ApplicationController
 			render 'modals/payment_selections/_return_home_checker.js.coffee'
 		else
 			#only return locations that teacher teaches this subject at
-			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == session[:subject_id].to_i && p.location_id != nil) }.compact
+			ids = @teacher.prices.map { |p| p.location_id if (p.subject_id == session[:subject_id].to_i \
+																	&& p.location_id != nil) }.compact
 			p "ids #{ids}"
 			# @locations = @teacher.locations.map { |l| l if ids.include?  l.id }
 			@locations = @teacher.locations.find(ids)
