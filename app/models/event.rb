@@ -3,10 +3,10 @@
 # Table name: events
 #
 #  id         :integer          not null, primary key
-#  title      :string(255)
+#  title      :string
 #  start_time :datetime
 #  end_time   :datetime
-#  status     :string(255)
+#  status     :string
 #  created_at :datetime
 #  updated_at :datetime
 #  teacher_id :integer          default(0)

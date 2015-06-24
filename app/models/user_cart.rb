@@ -7,21 +7,21 @@
 #  student_id    :integer
 #  params        :text
 #  tracking_id   :text
-#  student_name  :string(255)      default("")
-#  student_email :string(255)
-#  teacher_email :string(255)
+#  student_name  :string           default("")
+#  student_email :string
+#  teacher_email :string
 #  created_at    :datetime
 #  updated_at    :datetime
 #  subject_id    :integer
 #  multiple      :boolean          default(FALSE)
 #  weeks         :integer          default(0)
 #  address       :string           default("")
-#  status        :string           default("")
 #  booking_type  :string           default("")
 #  package_id    :integer          default(0)
 #  amount        :decimal(8, 2)    default(0.0), not null
 #  teacher_name  :string           default("")
 #  location_id   :integer
+#  status        :string           default("")
 #
 
 class UserCart < ActiveRecord::Base

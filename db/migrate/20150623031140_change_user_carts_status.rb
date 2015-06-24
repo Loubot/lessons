@@ -1,5 +1,5 @@
 class ChangeUserCartsStatus < ActiveRecord::Migration
   def change
-    rename_column :user_carts, :string, :status
+    add_column :user_carts, :status, :string, default: ''
   end
 end
