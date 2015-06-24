@@ -393,7 +393,7 @@ class TeacherMailer < ActionMailer::Base
   end
 
   def teacher_to_student_mail(student, teacher, subject, message)
-    p "Sending email to #{student}"
+    p "#{teacher} sending email to #{student}"
     begin
       require 'mandrill'
       mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']

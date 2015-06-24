@@ -167,7 +167,7 @@ private
   end
 
   def create_students_association
-    Friendship.create(teacher_id: self.teacher_id, student_id: self.student_id)
+    Friendship.create(teacher_id: self.teacher_id, student_id: self.student_id) if self.student_id != 0
   end
 
 end
