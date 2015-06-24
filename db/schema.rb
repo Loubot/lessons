@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(version: 20150623031140) do
     t.decimal  "amount",        precision: 8, scale: 2, default: 0.0,   null: false
     t.string   "teacher_name",                          default: ""
     t.integer  "location_id"
+    t.string   "status",                                default: ""
   end
 
   add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email", using: :btree
