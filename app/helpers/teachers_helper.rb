@@ -141,9 +141,9 @@ module TeachersHelper
     subjects.map { |s| s if !s.prices.empty? }.compact
   end
 
-  def get_lowest_price(subject)
-    # number_to_currency(prices.min.price, unit: '€')
-    number_to_currency(subject.prices.min.price, unit: '€')
+  def get_lowest_price(prices)
+    number_to_currency(prices.min.price, unit: '€')
+    # number_to_currency(subject.prices.min.price, unit: '€')
   end
 
   def get_subjects_list(subject) #the_one_modal get subject list

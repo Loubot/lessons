@@ -132,7 +132,7 @@
                 <%= @subject.name %>
               </p> 
               <div class="rates">
-                <span class="teachers_rate">From <%= get_lowest_price(@subject) %></span> <%# teachers helper %>
+                <span class="teachers_rate">From <%= get_lowest_price(@prices) %></span> <%# teachers helper %>
                 
                 <%# if check_home_price(@prices, @subject.id) %> <%# teachers_helper %>
                   <!-- Home lesson price <br> -->
