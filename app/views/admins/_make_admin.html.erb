@@ -21,7 +21,8 @@
 										Admin? <%= check_box_tag 'teacher[admin][]', teacher.id, teacher.admin %><br>
 										<br>
 										Registered on: <%= teacher.created_at.strftime("%d:%m:%Y") %><br>
-										Teacher is <%= teacher.is_active ? 'active' : 'not active' %>
+										Teacher is <%= teacher.is_active ? 'active' : 'not active' %><br>
+										<%= link_to 'View Teachers profile', show_teacher_path(id: teacher) %>
 									</li>
 								<% end %>
 								
