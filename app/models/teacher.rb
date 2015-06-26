@@ -236,7 +236,9 @@ class Teacher < ActiveRecord::Base
        )
     get_verified_status_request = api.build_get_verified_status( 
                       :emailAddress => params[:teacher][:paypal_email], 
-                      :matchCriteria => "NONE"
+                      :matchCriteria => "NAME",
+                      :firstName => params[:eacher][:paypal_first_name],
+                      :lastName => params[:teacher][:paypal_last_name]
                       
                       )
     response = api.get_verified_status(get_verified_status_request)
