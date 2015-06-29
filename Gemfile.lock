@@ -366,7 +366,7 @@ DEPENDENCIES
   fotoramajs
   geocoder (~> 1.2)
   gibbon (~> 1.1)
-  gon (~> 5.1.1)
+  gon (~> 5.1)
   heroku_rails_deflate
   jbuilder (~> 2.0)
   jquery-rails (~> 3.1)
