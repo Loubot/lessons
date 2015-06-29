@@ -3,36 +3,61 @@
 
 
 <div class="outer-container">
-  <% if !@teacher.paid_up %>
-  <div class="container-fluid membership_container">
+  <%# if !@teacher.paid_up %>
+  <!-- <div class="container-fluid membership_container"> -->
     
       <%# render 'partials/subscription/subscription.html.erb' %>
     
-  </div> <!-- end of membership_container -->
-  <% end %> <%# end of teacher.paid_up %>
+  <!-- </div> end of membership_container -->
+  <%#end %> <%# end of teacher.paid_up %>
   <div class="container-fluid home_schooling">
     <div class="well">      
       This page allows you to select what type of lessons you can offer your students. You can select locations of your own choice (a home or place of business), offer to travel to a students home and finally provide lesson bundles.
-    </div>
-    <% @subjects.each do |s| %>
-      <div class="col-xs-6">
-        <%= form_for [@teacher, Price.find_or_initialize_by(
-                                teacher_id: current_teacher, 
-                                subject_id: s.id, 
-                                no_map: true
-                                )],
-                                 html: { class: 'form-inline' }, remote: true, autocomplete: 'off' do |f| %>
-          <div class="form-group">
-            <%= f.label "#{s.name} price" %>
-            <%= f.number_field :price, class: 'form-control', autocomplete: :off %>
-            <%= f.hidden_field :no_map, value: true %>
-            <%= f.hidden_field :subject_id, value: s.id %>
-            <%= f.hidden_field :teacher_id, value: @teacher.id %>
-            <%= f.submit "Update #{s.name} price", class: 'btn btn-info' %>
-          </div> <!-- end of form-group -->
+    </div> <!-- end of well -->
+    <div class="table-responsive home_schooling_table col-md-6 col-xs-12">
+      <h4>List of subjects you teach in the students house</h4>
+      <table class="table table-condensed table-bordered">
+        <thead>
+          <tr>
+            <td>Subject name</td>
+            <td>Current price</td>
+          </tr>
+        </thead>
+        <% @teacher.subjects.each do |s| %>
+          <tr>
+            <td><%= s.name %></td>
+            <td><%= get_home_price(@teacher.prices, s) %></td>
+          </tr>
         <% end %>
-      </div> <!-- end of col-xs-6 -->
-    <% end %>
+      </table>
+    </div> <!-- end of table-responsive -->
+    <div class="well home_schooling_price col-md-6 col-xs-12">
+      <h4 class="home_schooling_heading">Update Prices</h4>
+
+      <%= form_for [@teacher, Price.new], class: 'form-horizontal' do |f| %>
+        <div class="form-group">
+          <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-2 control-label' %>
+          <div class="col-sm-10">
+            <%= f.select :subject_id, options_for_select(@subjects.map { |s| [s.name, s.id] }), {}, { class: 'package_subject_name form-control' } %>
+          </div> <!-- end of col-sm-10 -->
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <%= f.label :price, 'Total price?', class: 'well_form_label col-sm-2 control-label' %>
+          <div class="col-sm-10">
+            <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
+          </div> <!-- end of col-sm-10 -->
+        </div> <!-- end of form-group -->
+        <%= f.hidden_field :teacher_id, value:  current_teacher.id %>
+        <%= f.hidden_field :no_map, value: true %>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit 'Update price', class: 'btn btn-success' %>
+          </div> <!-- end of col-sm-offset-2 col-sm-10 -->
+        </div> <!-- end of form-group -->
+      <% end %> <%# end of form_for %>
+
+
+    </div> <!-- end of well home_schooling_price col-md-6 -->
     <%= "Go to personal info and choose your subjects first" if @subjects.size == 0 %>
   </div> <!-- end of home_schooling -->
   <div class="price_alert">

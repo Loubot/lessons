@@ -158,9 +158,11 @@ module TeachersHelper
     :name
   end
 
-  def get_home_price(prices, subject)
-    p = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
-    number_to_currency(p.price, unit: '€') if p
+  def get_home_price(prices, subject) #t.prices.find(subject_id: 1)
+    p "subject #{subject.id}"
+    p = prices.select { |p| p.subject_id == subject.id && p.no_map == true }.first
+    p ? number_to_currency(p.price, unit: '€')  : "<span>Price not set</span>".html_safe
+    
   end
 
   def get_select_text(p)
