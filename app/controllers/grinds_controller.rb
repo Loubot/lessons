@@ -19,6 +19,6 @@ class GrindsController < ApplicationController
 
   private
     def grind_params
-      params.require(:grind).permit!
+      params.require(:grind).permit(:subject_id, :teacher_id, :subject_name, :capacity, :number_booked, :price, :location_id)
     end
 end

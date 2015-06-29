@@ -12,6 +12,7 @@
 #  start_time    :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  location_id   :integer
 #
 
 class Grind < ActiveRecord::Base
@@ -19,6 +20,9 @@ class Grind < ActiveRecord::Base
   belongs_to :teacher, touch: true
   belongs_to :subject
 
-  validates :subject_id, :teacher_id, :capacity, :price, :subject_name, presence: true
+  validates :subject_id, :teacher_id, :location_id, :capacity, :price, :subject_name, presence: true
+  validates :price, :capacity, numericality: true
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  
   serialize :student_ids
 end
