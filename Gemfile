@@ -65,7 +65,7 @@ gem 'gibbon', '~> 1.1'
 
 gem 'mandrill-api', '~> 1'
 
-gem 'gon', '~> 5.1.1'
+gem 'gon', '~> 5.1'
 
 gem 'annotate'
 
