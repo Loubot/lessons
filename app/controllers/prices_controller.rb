@@ -12,14 +12,17 @@ class PricesController < ApplicationController
 	def create
 		@price = Price.find_or_initialize_by(price_params)
 		
-		@name = @price.subject.name
+		# @name = @price.subject.name
 		if @price.save
 
-			@message = "<p class='price_alert_message'> #{@name} price updated </p>".html_safe
+			# @message = "<p class='price_alert_message'> #{@name} price updated </p>".html_safe
+			flash[:success] = "Prices updated"
 		else
 			
-			@message = @price.errors.full_messages.split(',').join(", ")
+			# @message = @price.errors.full_messages.split(',').join(", ")
+			flash[:danger] = "Couldn't update prices #{@price.errors.full_messages}"
 		end		
+		redirect_to :back
 	end
 
 	def update
