@@ -18,7 +18,7 @@ class Price < ActiveRecord::Base
   belongs_to :subject, touch: true
   belongs_to :teacher, touch: true
 
-  validates :subject_id, :teacher_id, :price, presence: true
+  validates :subject_id, :teacher_id, :price, :no_map,  presence: true
   validates :no_map, :inclusion => [true, false]
   validates :price, numericality: { greater_than_or_equal_to: 0 }
 
