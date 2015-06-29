@@ -14,25 +14,34 @@
     <div class="well">      
       This page allows you to select what type of lessons you can offer your students. You can select locations of your own choice (a home or place of business), offer to travel to a students home and finally provide lesson bundles.
     </div>
-    <% @subjects.each do |s| %>
-      <div class="col-xs-6">
-        <%= form_for [@teacher, Price.find_or_initialize_by(
-                                teacher_id: current_teacher, 
-                                subject_id: s.id, 
-                                no_map: true
-                                )],
-                                 html: { class: 'form-inline' }, remote: true, autocomplete: 'off' do |f| %>
-          <div class="form-group">
-            <%= f.label "#{s.name} price" %>
-            <%= f.number_field :price, class: 'form-control', autocomplete: :off %>
-            <%= f.hidden_field :no_map, value: true %>
-            <%= f.hidden_field :subject_id, value: s.id %>
-            <%= f.hidden_field :teacher_id, value: @teacher.id %>
-            <%= f.submit "Update #{s.name} price", class: 'btn btn-info' %>
-          </div> <!-- end of form-group -->
-        <% end %>
-      </div> <!-- end of col-xs-6 -->
-    <% end %>
+    <div class="well home_schooling_well">
+      <h4>Willing to travel to a students house for a lesson?</h4>
+      <h4>Pick the subject and enter your price.</h4>
+      <%= form_tag teacher_prices_path(teacher_id: current_teacher.id), class: 'form-horizontal home_schooling_form', remote: true do %>
+        <div class="form-group">
+          <%= label_tag :subject, 'Subject', class: 'col-sm-1 control-label' %>
+          <div class="col-sm-11">
+            <%= select_tag 'price[subject_id]', options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), { class: 'form-control' } %>
+          </div> <!-- end of col-sm-11 -->
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <%= label_tag :price, 'Price', class: 'col-sm-1 control-label' %>
+          <div class="col-sm-11">
+            <%= number_field_tag 'price[price]', nil, placeholder: 'Price', class: 'form-control' %>
+          </div> <!-- end of col-sm-10 -->
+        </div> <!-- end of form-group -->
+        <%= hidden_field_tag 'price[id]', current_teacher.id %>
+        <%= hidden_field_tag 'price[teacher_id]', current_teacher.id %>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= submit_tag 'Submit', class: 'btn btn-success' %>
+          </div>  <!-- end of col-sm-offset-2 col-sm-10 -->
+        </div> <!-- end of form-group -->
+        
+      <% end %>
+    </div> <!-- end of well home_schooling_well -->
+    
+    
     <%= "Go to personal info and choose your subjects first" if @subjects.size == 0 %>
   </div> <!-- end of home_schooling -->
   <div class="price_alert">
@@ -125,3 +134,11 @@
   </div> <!-- end of row -->
   <%= render 'partials/teachers_stuff/invitation' %>
 </div> <!-- end of outer-container -->
+
+
+<script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid('l6cnt', { tw_sale_amount: 0, tw_order_quantity: 0 });</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l6cnt&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l6cnt&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+</noscript>

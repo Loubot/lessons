@@ -8,3 +8,4 @@ task :check_subscriptions => :environment do
   end
 end
 #MembershipMailer.pay_up_time("louisangelini@gmail.com").deliver_later(wait_until: 5.minutes.from_now)
+#rake check_subscriptions
