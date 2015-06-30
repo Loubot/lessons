@@ -20,9 +20,11 @@ class Grind < ActiveRecord::Base
   belongs_to :teacher, touch: true
   belongs_to :subject
 
-  validates :subject_id, :teacher_id, :location_id, :capacity, :price, :subject_name, presence: true
+  validates :subject_id, :teacher_id, :location_id, :capacity, :price, :start_time, :subject_name, presence: true
   validates :price, :capacity, numericality: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+  # validates :start_time, date: { after: Time.now }
+  validates :start_time, date: { after: Time.now, message: 'must be after end time' }
   
   serialize :student_ids
 end

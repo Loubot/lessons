@@ -182,7 +182,7 @@
           <div class="form-group">
             <%= f.label :price, "Start time", class: "col-sm-2 control-label" %>
             <div class="col-sm-10">
-              <%= datetime_select(:grind, :start_time, {prompt: true}, {class: 'grind_start_time'}) %>
+              <%= datetime_select(:grind, :start_time, {prompt: true,start_year: Time.now.year},  {class: 'grind_start_time'}) %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
 
