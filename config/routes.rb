@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :events
     resources :identities, only: [:destroy]
     resources :invitations, only: [:create]
-    resources :grinds, only: [:create, :destroy]
+    resources :grinds, only: [:create, :update, :destroy]
     resources :experiences,   only: [:create, :update, :destroy]
     resources :packages, only: [:create, :destroy]
     resources :locations, only: [:create, :update, :destroy]

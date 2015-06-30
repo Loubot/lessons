@@ -23,6 +23,7 @@ class Grind < ActiveRecord::Base
   validates :subject_id, :teacher_id, :location_id, :capacity, :price, :start_time, :subject_name, presence: true
   validates :price, :capacity, numericality: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :number_booked, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: :capacity }
   # validates :start_time, date: { after: Time.now }
   validates :start_time, date: { after: Time.now, message: 'must be after end time' }
   

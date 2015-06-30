@@ -15,9 +15,20 @@ class GrindsController < ApplicationController
     end
   end
 
+  def update
+    @grind = Grind.find(params[:id])
+    if @grind.update_attributes(grind_params)
+      flash[:success] = "Updated grind ok"
+    else
+      flash[:danger] = "Couldn't update grind #{@grind.erros.full_messages}"
+    end
+    redirect_to :back
+  end
+
   def destroy
     @grind = Grind.find(params[:id])
     @grind.destroy
+    redirect_to :back
   end
 
   private
