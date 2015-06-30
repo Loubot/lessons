@@ -2,9 +2,9 @@ class GrindsController < ApplicationController
   before_action :authenticate_teacher!
 
   def create
-    p "params before #{params[:grind]}"
-    params[:grind].parse_time_select! :start_time
-    p "params after #{params[:grind]}"
+    # p "params before #{params[:grind][:start_time]}"
+    # params[:grind].parse_time_select! :start_time
+    # p "params after #{params[:grind][:start_time]}"
     @grind = Grind.new(grind_params)
     if @grind.save
       flash[:success] = "Classroom created successfully"

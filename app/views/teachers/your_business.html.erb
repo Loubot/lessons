@@ -207,6 +207,12 @@
                 </div>  <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
               <div class="form-group">
+                <label  class="col-sm-3 control-label">Start time:</label>
+                <div class="col-sm-9">
+                  <span class="form-control"><%= g.start_time.strftime("%a %b %Y %H:%M%p") %></span>
+                </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+              <div class="form-group">
                 <label  class="col-sm-3 control-label">Capacity:</label>
                 <div class="col-sm-9">
                   <span class="form-control disabled"><%= g.capacity %></span>
@@ -223,7 +229,15 @@
                 <div class="col-sm-9 black">
                   <%= f.number_field :number_booked, class: 'form-control black' %><br>
                 </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group --><br>
+              <div class="form-group">
+                <label  class="col-sm-3 control-label ">Update time:</label>
+                <div class="col-sm-9 black">
+                  <%= f.datetime_select :start_time, class: 'form-control black' %>
+                </div>  <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
+
+             
               <div class="form-group">
                 <%= f.submit 'Update class size', class: 'btn btn-success' %><br>
                 <%= link_to 'Delete entire class?', teacher_grind_path(current_teacher, g), data: { confirm: 'Are you sure?', role: 'button' }, class: 'btn btn-danger pull-right', method: :delete %>
