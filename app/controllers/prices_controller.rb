@@ -10,8 +10,9 @@ class PricesController < ApplicationController
 	end
 
 	def create
-		@price = Price.find_or_initialize_by(price_params)
-		
+		p "params #{price_params[:price]}"
+		@price = Price.find_or_initialize_by(id: price_params[:subject_id], no_map: true)
+		@price.update_attributes(price_params)
 		# @name = @price.subject.name
 		if @price.save
 
