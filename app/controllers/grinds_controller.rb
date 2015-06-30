@@ -20,7 +20,7 @@ class GrindsController < ApplicationController
     if @grind.update_attributes(grind_params)
       flash[:success] = "Updated grind ok"
     else
-      flash[:danger] = "Couldn't update grind #{@grind.erros.full_messages}"
+      flash[:danger] = "Couldn't update grind #{@grind.errors.full_messages}"
     end
     redirect_to :back
   end
