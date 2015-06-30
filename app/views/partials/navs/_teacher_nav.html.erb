@@ -35,7 +35,7 @@
                 <% if current_teacher.events.size > 0 %>
                   <li><%= link_to 'History', previous_lessons_teacher_path(current_teacher.id) %></li> 
                 <% end %>
-                <li><%=link_to 'Edit info', edit_teacher_path(current_teacher) %></li>
+                <li><%=link_to 'My profile', edit_teacher_path(current_teacher) %></li>
                 <li class="divider"></li>              
                 <li><%= link_to 'Logout', destroy_teacher_session_path, method: :delete %></li>
                 <li class="divider"></li>
