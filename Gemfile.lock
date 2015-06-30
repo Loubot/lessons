@@ -419,3 +419,6 @@ DEPENDENCIES
   validates_overlap (~> 0)
   will_paginate
   workless
+
+BUNDLED WITH
+   1.10.3

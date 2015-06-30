@@ -428,6 +428,7 @@ teachersInfoReady = ->
                   <input value="#{ subject_name }" type="hidden" name="package[subject_name]">
                                         """      
       @.submit()
+      
   if $(".grind_form")
     $(".grind_form").submit (e) ->
       e.preventDefault()

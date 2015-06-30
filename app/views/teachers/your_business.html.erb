@@ -34,7 +34,7 @@
     <div class="well home_schooling_price col-md-6 col-xs-12">
       <h4 class="home_schooling_heading">Update Prices</h4>
 
-      <%= form_for [@teacher, Price.new], class: 'form-horizontal' do |f| %>
+      <%= form_for [@teacher, Price.new], class: 'home_schooling_form form-horizontal' do |f| %>
         <div class="form-group">
           <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-2 control-label' %>
           <div class="col-sm-10">
