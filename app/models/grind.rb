@@ -27,4 +27,5 @@ class Grind < ActiveRecord::Base
   validates :start_time, date: { after: Time.now, message: 'must be after end time' }
   
   serialize :student_ids
+
 end

@@ -419,7 +419,7 @@ teachersInfoReady = ->
         e.stopPropagation()
 #////////// end review script previous_lessons_teacher
 
-  # teachers business page, add subject name to for before submitting
+  # teachers business page, add subject name to form before submitting
   if $('.create_package_form')
     $('.create_package_form').submit (e)->
       e.preventDefault()
