@@ -55,7 +55,7 @@
         <div class="form-group">
           <%= f.label :duration, 'Duration?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
-            <%= f.number_field :duration, placeholder: 'Lesson length', class: 'form-control' %>
+            <%= f.number_field :duration, placeholder: 'Lesson length', step: 15, class: 'form-control' %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
         <%= f.hidden_field :teacher_id, value:  current_teacher.id %>
