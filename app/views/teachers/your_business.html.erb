@@ -138,7 +138,7 @@
       <div class="saved_packages_container">
        <div class="saved_packages clearfix">
          <% @teacher.packages.each do |p| %>
-         <div class="display_saved_packages">
+         <div class="display_saved_packages clearfix">
           <h2><%= p.subject_name %></h2>
           <h4><%= %Q(You are offering a package of #{p.no_of_lessons}x#{p.subject_name} lessons of #{p.duration} mins for
             #{number_to_currency(p.price, unit:'€')})
