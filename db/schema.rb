@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701081706) do
+ActiveRecord::Schema.define(version: 20150701212859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20150701081706) do
     t.integer  "location_id"
     t.decimal  "price",       precision: 8, scale: 2
     t.boolean  "no_map",                              default: false
+    t.integer  "duration",                            default: 0
   end
 
   add_index "prices", ["subject_id"], name: "index_prices_on_subject_id", using: :btree

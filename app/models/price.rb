@@ -10,6 +10,7 @@
 #  location_id :integer
 #  price       :decimal(8, 2)
 #  no_map      :boolean          default(FALSE)
+#  duration    :integer          default(0)
 #
 
 class Price < ActiveRecord::Base
@@ -18,7 +19,7 @@ class Price < ActiveRecord::Base
   belongs_to :subject, touch: true
   belongs_to :teacher, touch: true
 
-  validates :subject_id, :teacher_id, :price, presence: true
+  validates :subject_id, :teacher_id, :duration, :price, presence: true
   validates :no_map, :inclusion => [true, false]
   validates :price, numericality: { greater_than_or_equal_to: 0 }
 
