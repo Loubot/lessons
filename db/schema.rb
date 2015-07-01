@@ -77,11 +77,12 @@ ActiveRecord::Schema.define(version: 20150701081706) do
     t.integer  "teacher_id"
     t.string   "subject_name"
     t.integer  "capacity"
-    t.integer  "number_booked"
+    t.integer  "number_booked",                         default: 0
     t.decimal  "price",         precision: 8, scale: 2, default: 0.0, null: false
     t.datetime "start_time"
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
+    t.integer  "location_id"
   end
 
   add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id", using: :btree
