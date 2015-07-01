@@ -165,6 +165,11 @@ module TeachersHelper
     
   end
 
+  def get_location_name(price)
+    l = current_teacher.locations.select { |l| l.id == price.location_id }.first
+    l.name
+  end
+
   def get_subject_name(price)
     s = current_teacher.subjects.select { |s| s.id == price.subject_id }.first
     s.name

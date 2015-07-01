@@ -56,6 +56,6 @@ class PricesController < ApplicationController
 	private
 
 			def price_params
-				params.require(:price).permit!
+				params.require(:price).permit(:subject_id, :teacher_id, :location_id, :no_map, :duration, :price, :id)
 			end
 end
