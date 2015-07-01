@@ -21,12 +21,14 @@
           <tr>
             <td>Subject name:</td>
             <td>Current price:</td>
+            <td>Delete</td>
           </tr>
         </thead>
         <% @teacher.subjects.each do |s| %>
           <tr>
             <td><%= s.name %></td>
             <td><%= get_home_price(@teacher.prices, s) %></td>
+            <td><%= get_home_price_delete(@teacher.prices, s) %></td>
           </tr>
         <% end %>
       </table>

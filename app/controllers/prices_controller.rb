@@ -10,11 +10,12 @@ class PricesController < ApplicationController
 	end
 
 	def create
-		p "params #{price_params[:price]}"
-		@price = Price.find_or_initialize_by(id: price_params[:subject_id], no_map: true)
-		@price.update_attributes(price_params)
+		# p "params #{price_params[:price]}"
+		@price = Price.find_or_initialize_by(subject_id: price_params[:subject_id], no_map: price_params[:no_map])
+		p @price.inspect
+		
 		# @name = @price.subject.name
-		if @price.save
+		if @price.update_attributes(price_params)
 
 			# @message = "<p class='price_alert_message'> #{@name} price updated </p>".html_safe
 			flash[:success] = "Prices updated"

@@ -165,6 +165,13 @@ module TeachersHelper
     
   end
 
+  def get_home_price_delete(prices, subject)
+    p "subject object #{subject.id}"
+    p = prices.select { |p| p.subject_id == subject.id && p.no_map == true }.first
+    p ? link_to('Delete?', [current_teacher, p], 'data-confirm' => 'Are your sure?', method: 'DELETE', class: 'btn btn-danger').html_safe \
+              : ''
+  end
+
   def get_select_text(p)
     # p "select text #{p.inspect}"
   	["#{p.no_of_lessons}x#{p.subject_name} lessons/#{p.duration} mins for #{ number_to_currency(p.price, unit: '€') }", p.id]
