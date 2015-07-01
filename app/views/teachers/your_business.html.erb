@@ -115,6 +115,12 @@
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
           <div class="form-group">
+            <%= f.label :duration, 'Duration/mins?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.number_field :duration, class: 'form-control' %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+          <div class="form-group">
             <%= f.label :price, 'Total price?', class: 'well_form_label col-sm-2 control-label' %>
             <div class="col-sm-10">
               <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
@@ -130,13 +136,13 @@
         <% end %>
       </div> <!-- end of well -->
       <div class="saved_packages_container">
-       <div class="saved_packages">
+       <div class="saved_packages clearfix">
          <% @teacher.packages.each do |p| %>
          <div class="display_saved_packages">
           <h2><%= p.subject_name %></h2>
-          <%= %Q(You are offering a package of #{p.no_of_lessons}x#{p.subject_name} lessons for
+          <h4><%= %Q(You are offering a package of #{p.no_of_lessons}x#{p.subject_name} lessons of #{p.duration} mins for
             #{number_to_currency(p.price, unit:'€')})
-          %>
+          %></h4>
           <%= link_to 'Delete?', teacher_package_path(@teacher.id, p), method: 'DELETE', 'data-role' => 'button', class: 'btn btn-danger pull-right' %>
          </div>
           

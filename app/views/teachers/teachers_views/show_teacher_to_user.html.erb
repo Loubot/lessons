@@ -166,7 +166,7 @@
         <div class="col-xs-12 package_form_well">
           <h3 class="package_form_header">Teachers special offers</h3>
           
-          <div class="text-center">
+          <div class="text-center"> <%# teachers helper for get_select_text %>
             <%= select('packages', 'id', @teacher.packages.collect { |p| get_select_text(p) }) %><br>
             <% if teacher_signed_in? %>
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#payment_packages_modal" > <!-- load modal content dynamically -->
