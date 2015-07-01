@@ -22,6 +22,6 @@ class PackagesController < ApplicationController
 
   private
     def package_params
-      params.require(:package).permit(:subject_name, :teacher_id, :subject_id, :price, :no_of_lessons)
+      params.require(:package).permit(:subject_name, :teacher_id, :subject_id, :price, :duration, :no_of_lessons)
     end
 end

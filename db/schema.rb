@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623031140) do
+ActiveRecord::Schema.define(version: 20150701081706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 20150623031140) do
     t.integer  "no_of_lessons", default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "duration",      default: 0
   end
 
   add_index "packages", ["subject_id"], name: "index_packages_on_subject_id", using: :btree
