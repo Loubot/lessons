@@ -7,7 +7,7 @@
 #  teacher_id    :integer
 #  subject_name  :string
 #  capacity      :integer
-#  number_booked :integer
+#  number_booked :integer          default(0)
 #  price         :decimal(8, 2)    default(0.0), not null
 #  start_time    :datetime
 #  created_at    :datetime         not null

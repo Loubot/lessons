@@ -20,6 +20,7 @@ class Package < ActiveRecord::Base
 
   validates :price, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ },
                        :numericality => {:greater_than => 0}
+  validates :duration, :numericality => { greater_than: 0 }
 
   validates :no_of_lessons, :numericality => { greater_than: 0, less_than: 53 }
 
