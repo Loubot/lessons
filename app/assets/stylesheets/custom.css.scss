@@ -336,6 +336,10 @@ hr{
   color: #FFF;
 }
 
+.saved_packages_and_grinds{
+  display: none;
+}
+
 .display_saved_grinds{
  
   padding: 30px;
@@ -343,6 +347,7 @@ hr{
   border-width: 1px;
   //margin-top: 9px;*/
   border-color: #FFBF3F;
+  margin-bottom: 5px;
 }
 
 .subscription_container{

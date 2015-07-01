@@ -420,16 +420,15 @@ teachersInfoReady = ->
 #////////// end review script previous_lessons_teacher
 
   # teachers business page, add subject name to form before submitting
-  if $('.create_package_form')
+  if $('.home_schooling')
     $('.create_package_form').submit (e)->
       e.preventDefault()
       subject_name = $('.package_subject_name :selected').text()
       $('.create_package_form').append """ 
                   <input value="#{ subject_name }" type="hidden" name="package[subject_name]">
                                         """      
-      @.submit()
-      
-  if $(".grind_form")
+      @.submit()      
+  
     $(".grind_form").submit (e) ->
       e.preventDefault()
       subject_name = $(".grind_subject_name :selected").text()
@@ -437,6 +436,9 @@ teachersInfoReady = ->
                     <input value="#{ subject_name }" type="hidden" name="grind[subject_name]">
                                  """
       @.submit()
+
+    $('#toggle_packages_grinds').click ->
+      $('.saved_packages_and_grinds').slideToggle 'slow'
 
 #end of  teachers business page, add subject name to for before submitting
 
