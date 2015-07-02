@@ -21,6 +21,7 @@ class Price < ActiveRecord::Base
 
   validates :subject_id, :teacher_id, :duration, :price, presence: true
   validates :no_map, :inclusion => [true, false]
+  validates :duration, numericality: { greater_than: 0 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validate :duration_is_fifteen
 
