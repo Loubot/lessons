@@ -14,7 +14,7 @@
 	
 	
 		<div class="col-md-3 search_restuls_right search_results_shadow">			
-
+			<%= p "teacher #{teacher.full_name} #{teacher.id}" %>
 			Price: <%= number_to_currency(teacher.prices.where(subject_id: @subject.id).first.price,unit:'€') %><br>
 			<%= teacher.locations.first.address %>
 			<br>
