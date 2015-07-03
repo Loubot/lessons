@@ -1,15 +1,15 @@
-<% cache [current_teacher, 'payment_no_location_choice_modal'] do %>
+
   <% if teacher_signed_in? %>  
     <div class="modal fade" id="payment_no_location_modal" tabindex="-1" role="dialog" aria-labelledby="payment_no_location_modal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="payment_no_location_modal-title">Book a lesson at your home. <%= get_home_price(@prices, @subject.id) %></h4>
+            <h4 class="modal-title" id="payment_no_location_modal-title">Book a lesson at your home.</h4>
           </div>
           <div class="modal-body">
             <div class="container-fluid">
-                
+              <% if @teacher.has_payment_set? %>
                 <% if @teacher.paypal_email != "" %>
                   <div class="col-xs-6">
                     <%= form_tag home_booking_paypal_path, class: 'home_booking_form', method: 'post' do %>
@@ -63,6 +63,24 @@
                   </div> <!-- end of col-xs-6-->
 
                 <% end %> <%# end of  @teacher.stripe_access_token != "" %>
+              <% else %>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <h4>Book a lesson with <span class="teacher_name"></span> <small>pay teacher in person</small></h4>
+                    <!-- div class="table-responsive">
+                      <table class="table table-bordered">
+                        
+                      </table>
+                    </div> <%# end of table-responsive %> -->
+                  </div> <%# end of col-mod-12 %>
+                </div> <%# end of row %>
+                <%= form_tag payless_booking_path(id: current_teacher.id), class: 'home_booking_form' do %>
+                  <%= submit_tag 'Book lesson', class: 'btn btn-lg btn-success center-block' %>
+                  <%= hidden_field_tag :home_address, '', class: 'home_address' %>
+                  <%= hidden_field_tag :save_address, 'false', class: 'save_address' %>
+                <% end %>
+              <% end %> <%# end of has_payment_set> %>  
+              
             </div> <!-- end of container-fluid -->
             <div class="well">
                 Enter your address. We can remember this for you if you want. 
@@ -92,4 +110,3 @@
       </div> <!-- end of modal-dialog -->
     </div> <!-- end of modal fade -->
   <% end %> <!-- if teacher_signed_in? -->
-<% end %> <%# end of cache %>

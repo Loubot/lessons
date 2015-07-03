@@ -75,22 +75,22 @@ class Event < ActiveRecord::Base
     return event  
   end
 
-  def self.student_do_single_booking(params)
+  def self.student_do_single_booking(params, price)
     p "params1 #{params}"
     
 
     event = Event.new( 
-                        get_event_params(params)
+                        get_event_params(params, price)
                       )
   end
 
-  def self.get_event_params(params)
-    p "params2 #{params}"
-    p "adfadfadf #{params[:event]}"
-    logger.info "adfadfadf #{params[:event]}"
+  def self.get_event_params(params, price)
     date = params[:event][:date]
-    dates = { start_time: Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}"),
-      end_time: Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}"),
+    start_time = Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}")
+    
+    date = params[:event][:date]
+    dates = { start_time: start_time,
+      end_time: Time.zone.parse("#{start_time + price.duration.to_i.minutes}"),
       teacher_id: params[:event][:teacher_id],
       student_id: params[:event][:student_id],
       subject_id: params[:event][:subject_id],

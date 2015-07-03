@@ -62,7 +62,7 @@ class UserCart < ActiveRecord::Base
     cart.update_attributes(
                     teacher_id: params[:event][:teacher_id],
                     student_id: params[:event][:student_id],
-                    params: Event.get_event_params(params),
+                    params: Event.get_event_params(params, price),
                     student_name: params[:event][:student_name],
                     teacher_name: params[:event][:teacher_name],
                     student_email: params[:event][:student_email],
@@ -71,7 +71,8 @@ class UserCart < ActiveRecord::Base
                     booking_type: 'home',
                     multiple: false,
                     package_id: 0,
-                    amount: price.to_f
+                    amount: price.price.to_f,
+                    duration: price.duration
                   )
     cart.save!
 

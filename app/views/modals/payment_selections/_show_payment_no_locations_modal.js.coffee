@@ -1,0 +1,1 @@
+$('.check_availability_container').css 'display', 'inline'

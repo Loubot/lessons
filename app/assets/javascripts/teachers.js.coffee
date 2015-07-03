@@ -301,54 +301,31 @@ teachersInfoReady = ->
 
     #the_one_modal
     if $('#the_one_modal').length
+      AnyTime.noPicker 'home_lesson_datepicker' #activate anytime datepicker
+      $("#home_lesson_datepicker").AnyTime_picker
+        format: "%Y-%m-%d"
+        placement: 'inline'
+        hideInput: true
       $('#the_one_modal').on 'hidden.bs.modal', ->
         $('.payment_form_container').empty()
         $('.display_teachers_location').empty()
         $('.returned_locations_container').empty()
         $('.payment_choice_error').empty()
         
-      $('#the_one_modal').on 'shown.bs.modal', ->
+      $('#the_one_modal').on 'hidden.bs.modal', ->
         $('.payment_form_container').empty()
         $("select").each ->
           $(this).val($(this).find('option[selected]').val())
         
       # document.getElementById("select_subject").selectedIndex = 0     
-      $(document).on 'change', '.select_subject', ->
-        $('.select_subject').submit()
-        # $.ajax
-        #   url: 'get-locations'
-        #   data:            
-        #     subject_id: $('.select_subject').val()
-        #     id: $('#select_subjects_teacher_id').val()
+      $(document).on 'change', '.teachers_or_location_form', -> #submit form/decide teachers or students house
+        $('.teachers_or_location_form').submit()
 
-      $(document).on 'change', '.select_home_or_location', ->
-        $('.location_choice').val $('.select_home_or_location').val()
-        $('.subject_id').val $('.select_subject').val()
-        $('.get_subjects_form').submit()
-        # $.ajax
-        #   url: 'get-subjects'
-        #   data:
-        #    id: $('#select_subjects_teacher_id').val()
-        #    subject_id: $('.select_subject').val()
-        #    location_choice: $('.select_home_or_location').val()
+      $(document).on 'change', '.select_price_duration_form', -> #submit form/decide teachers or students house
+        $('.select_price_duration_form').submit()
+        
+
       
-      # $(document).on 'click', '#location_only_datepicker', ->
-      #   console.log 'a'
-      #   AnyTime.noPicker 'location_only_datepicker'
-      #   $("#location_only_datepicker").AnyTime_picker
-      #     format: "%Y-%m-%d"
-      #     placement: 'inline'
-      #     hideInput: true
-
-      $(document).on 'change', '.teachers_location_selection', ->
-        $('.teachers_locations_subject').val $('.select_subject').val()
-        $('.get_locations_price_form').submit()
-        # $.ajax
-        #   url: 'get-locations-price'
-        #   data:
-        #     id: $('#select_subjects_teacher_id').val()
-        #     subject_id: $('.select_subject').val()
-        #     location_id: $('.teachers_location_selection').val()
 
     # end of the_one_modal
 

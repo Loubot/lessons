@@ -37,14 +37,16 @@ Rails.application.routes.draw do
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
-  get         '/add-map'                =>  'teachers#add_map'
-  post        'get-locations'           =>  'teachers#get_locations'
-  post        'get-subjects'            =>  'teachers#get_subjects'
-  post        'get-locations-price'     =>  'teachers#get_locations_price'
-  post        'teachers/check-home-event'      => 'teachers#check_home_event'
+  get         '/add-map'                =>  'teachers#add_map' 
 
   
-  
+  resources :user_carts, only: [:create] do
+    member do 
+      post 'teachers-or-students'   =>  'user_carts#teachers_or_students'
+      post 'select-price-duration'  =>  'user_carts#select_price_duration'
+      post 'check-home-event'       =>  'user_carts#check_home_event'
+    end
+  end
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
     member do      
