@@ -28,7 +28,11 @@ class TeachersController < ApplicationController
 
 		@reviews = @teacher.reviews.take(3)
 		@locations = @teacher.locations
+
 		@prices = @teacher.prices.where(subject_id: params[:subject_id])
+		@home_prices = @prices.select { |p| p.no_map == true } #only home prices
+		@location_prices = @prices.select { |p| p.no_map == false } #only location prices
+		
 		gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		gon.locations = @locations
