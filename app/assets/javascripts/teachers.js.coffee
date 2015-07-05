@@ -326,6 +326,9 @@ teachersInfoReady = ->
       $(document).on 'change', '.no_pay_location_select', -> #submit form/decide teachers or students house
         $('.select_location_prices').css 'display', 'inline'
 
+      $(document).on 'change', '.select_price_duration_form', ->
+        $('.select_price_duration_form').submit() #submit form and store price id
+
       $(document).on 'change', '.select_location_prices', ->
         $('.select_locations_form').submit()
 

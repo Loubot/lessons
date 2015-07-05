@@ -1,0 +1,144 @@
+<%# if teacher has home booking and locations %>
+<% if @teacher.prices.any? { |p| p.no_map == true && p.subject_id == @subject.id } && \
+    @teacher.prices.any? { |p| p.location_id != nil && p.subject_id == @subject.id } %>
+
+  <%= form_tag teachers_or_students_user_cart_path(id: 1), class: 'teachers_or_location_form',remote: true do %>
+    <%= select_tag :location_choice, options_for_select([['Your house', 1],['Teachers house', 2]]), class: 'form-control', prompt: "Your house or teachers?" %>
+  <% end %> <%# end of form %>
+  <%= form_tag select_price_duration_user_cart_path(id: 1), class: 'select_price_duration_form', remote: true do %>
+    <%= select_tag :price_id, options_for_select(@location_prices.map { |p| \
+      ["#{p.duration} mins #{number_to_currency(p.price, unit:'€')}", p.id] }),  class: ' form-control', prompt: 'Select class duration'  %> 
+
+  <% end %>
+  <%# elsif teacher only has home prices %>
+<% elsif !@teacher.prices.any? { |p| p.location_id != nil && p.subject_id == @subject.id } %>
+  
+  <%= form_tag select_price_duration_user_cart_path(id: 1), class: 'select_price_duration_form', remote: true do %>
+    <%= select_tag :price_id, options_for_select(@home_prices.map { |p| \
+      ["#{p.duration} mins #{number_to_currency(p.price, unit:'€')}", p.id] }),  class: ' form-control', prompt: 'Select class duration'  %> 
+
+  <% end %> <%# end of select_price_duration_forn %>
+  <div class="check_availability_container">
+    <h2>Home booking <small>check availability</small></h2>
+     <div class="col-xs-12">
+      <%= form_for(@event, url: check_home_event_user_cart_path(id: 1), html: { class: 'form-horizontal' }, method: 'post', remote: true) do |f| %>
+        <div class="row">
+          <div class="col-xs-6 form-group">
+            
+            <div>
+              <label for="date" class="control-label">Date:</label>
+              <input name="event[date]" type="text" id='home_lesson_datepicker' placeholder='Click to select date' class="1payment_choice_date_picker" >
+            </div>
+          </div> <!-- end of form-group -->
+          <div class="col-xs-6">
+            <div class='form-group'>
+              <%= label_tag 'start_time', 'Start-time:', class: 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= f.time_select :start_time,
+                      {
+                        :combined => true,
+                        :default => Time.now.change(:hour => 11, :min => 30),
+                        :minute_interval => 30,
+                        :time_separator => "",
+                        :start_hour => 10,
+                        :start_minute => 30,
+                        :end_hour => 14,
+                        :end_minute => 30
+                      },
+                      
+                      { class: 'form-control' }
+                    %>
+              </div> <!-- end of col-sm-8 -->
+            </div> <!-- end of form-group -->
+          </div> <!-- end of col-xs-6 -->
+
+          
+
+        </div> <%# end of row %>
+        <input type="hidden" name="id" id="id" value="<%= @teacher.id %>">
+        <%= hidden_field :event, :teacher_id, value: @teacher.id %>
+        <%= hidden_field :event, :teacher_email, value: @teacher.email %>
+        <%= hidden_field :event, :student_email, value: current_teacher.email %>
+        <%= hidden_field :event, :student_id, value: current_teacher.id %>
+        <%= hidden_field :event, :teacher_name, value: @teacher.full_name %>
+        <%= hidden_field :event, :student_name, value: current_teacher.full_name %>
+      
+
+
+        <%= f.submit 'Check availability', class: 'btn btn-success' %>
+      <% end %> <%# end of form %>
+    </div> <%# end of col-xs-12 %>
+  </div> <!-- end of check_availablity_container -->
+  <div class="payment_choice_error"></div>
+  <div class="payment_form_container">
+    
+    <!-- ajax -->
+  </div> <!-- end of payment_form_container -->
+  
+  <%# teacher only has location entries for this subject %>
+<% else %>
+
+  <%= form_tag select_price_duration_user_cart_path(id: 1), class: 'select_locations_form', remote: true do %>
+
+    <%= select_tag :location_id, options_for_select(@locations.map { |l| \
+      [l.name, l.id] }), class: 'form-control no_pay_location_select', prompt: 'Select teachers location' %>
+
+    <%= select_tag :price_id, options_for_select(@location_prices.map { |p| \
+      ["#{p.duration} mins #{number_to_currency(p.price, unit:'€')}", p.id] }),  class: ' form-control select_location_prices', prompt: 'Select class duration'  %> 
+  <% end %>
+  
+
+  <div class="check_availability_container">
+    <h2>Home booking <small>check availability</small></h2>
+     <div class="col-xs-12">
+      <%= form_for(@event, url: check_home_event_user_cart_path(id: 1), html: { class: 'form-horizontal' }, method: 'post', remote: true) do |f| %>
+        <div class="row">
+          <div class="col-xs-6 form-group">
+            
+            <div>
+              <label for="date" class="control-label">Date:</label>
+              <input name="event[date]" type="text" id='home_lesson_datepicker' placeholder='Click to select date' class="1payment_choice_date_picker" >
+            </div>
+          </div> <!-- end of form-group -->
+          <div class="col-xs-6">
+            <div class='form-group'>
+              <%= label_tag 'start_time', 'Start-time:', class: 'col-sm-2 control-label' %>
+              <div class="col-sm-10">
+                <%= f.time_select :start_time,
+                      {
+                        :combined => true,
+                        :default => Time.now.change(:hour => 11, :min => 30),
+                        :minute_interval => 30,
+                        :time_separator => "",
+                        :start_hour => 10,
+                        :start_minute => 30,
+                        :end_hour => 14,
+                        :end_minute => 30
+                      },
+                      
+                      { class: 'form-control' }
+                    %>
+              </div> <!-- end of col-sm-8 -->
+            </div> <!-- end of form-group -->
+          </div> <!-- end of col-xs-6 -->
+
+          
+
+        </div> <%# end of row %>
+        <input type="hidden" name="id" id="id" value="<%= @teacher.id %>">
+        <%= hidden_field :event, :teacher_id, value: @teacher.id %>
+        <%= hidden_field :event, :teacher_email, value: @teacher.email %>
+        <%= hidden_field :event, :student_email, value: current_teacher.email %>
+        <%= hidden_field :event, :student_id, value: current_teacher.id %>
+        <%= hidden_field :event, :teacher_name, value: @teacher.full_name %>
+        <%= hidden_field :event, :student_name, value: current_teacher.full_name %>
+      
+
+
+        <%= f.submit 'Check availability', class: 'btn btn-success' %>
+      <% end %> <%# end of form %>
+    </div> <%# end of col-xs-12 %>
+  </div> <!-- end of check_availablity_container -->
+  <div class="payment_choice_error"></div>
+
+<% end %> 

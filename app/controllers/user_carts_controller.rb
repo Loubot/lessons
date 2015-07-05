@@ -5,8 +5,28 @@ class UserCartsController < ApplicationController
     render status: 200, nothing: true
   end
 
+  ####################################### payment methods
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ##################################### end of no payment methods
+
+  ####################################### no payment methods
+
   def select_price_duration #get price id and show check availability form
     session[:price_id] = params[:price_id]
+    session[:location_id] = params[:location_id]
     render 'modals/payment_selections/_show_payment_no_locations_modal.js.coffee'
   end
 
@@ -28,5 +48,6 @@ class UserCartsController < ApplicationController
     end
     render 'modals/payment_selections/_show_total.js.coffee' #display _payments_modal_for_users
   end
+  ####################################### end of no payment methods
 
 end
