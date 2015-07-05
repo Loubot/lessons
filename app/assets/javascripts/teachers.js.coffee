@@ -311,8 +311,10 @@ teachersInfoReady = ->
         $('.display_teachers_location').empty()
         $('.returned_locations_container').empty()
         $('.payment_choice_error').empty()
+        $('.select_location_prices').css 'display', 'none'
         
       $('#the_one_modal').on 'hidden.bs.modal', ->
+        $('.check_availability_container').css 'display', 'none'
         $('.payment_form_container').empty()
         $("select").each ->
           $(this).val($(this).find('option[selected]').val())
@@ -321,11 +323,12 @@ teachersInfoReady = ->
       $(document).on 'change', '.teachers_or_location_form', -> #submit form/decide teachers or students house
         $('.teachers_or_location_form').submit()
 
-      $(document).on 'change', '.select_price_duration_form', -> #submit form/decide teachers or students house
-        $('.select_price_duration_form').submit()
-        
+      $(document).on 'change', '.no_pay_location_select', -> #submit form/decide teachers or students house
+        $('.select_location_prices').css 'display', 'inline'
 
-      
+      $(document).on 'change', '.select_location_prices', ->
+        $('.select_locations_form').submit()
+
 
     # end of the_one_modal
 

@@ -1,4 +1,4 @@
-<% cache [current_teacher, @teacher, 'the_one_modal'] do %>
+
   <% if teacher_signed_in? %>  
     <div class="modal fade" id="the_one_modal" tabindex="-1" role="dialog" aria-labelledby="the_one_modal" aria-hidden="true">
       <div class="modal-dialog">
@@ -91,10 +91,15 @@
                 <%# teacher only has location entries for this subject %>
               <% else %>
 
-                <%= form_tag select_price_duration_user_cart_path(id: 1), class: 'select_price_duration_form', remote: true do %>
+                <%= form_tag select_price_duration_user_cart_path(id: 1), class: 'select_locations_form', remote: true do %>
+
+                  <%= select_tag :location_id, options_for_select(@locations.map { |l| \
+                    [l.name, l.id] }), class: 'form-control no_pay_location_select', prompt: 'Select teachers location' %>
+
                   <%= select_tag :price_id, options_for_select(@location_prices.map { |p| \
-                    ["#{p.duration} mins #{number_to_currency(p.price, unit:'€')}", p.id] }),  class: ' form-control', prompt: 'Select class duration'  %> 
+                    ["#{p.duration} mins #{number_to_currency(p.price, unit:'€')}", p.id] }),  class: ' form-control select_location_prices', prompt: 'Select class duration'  %> 
                 <% end %>
+                
 
                 <div class="check_availability_container">
                   <h2>Home booking <small>check availability</small></h2>
@@ -156,4 +161,3 @@
       </div> <!-- end of modal-dialog -->
     </div> <!-- end of modal fade -->
   <% end %> <!-- if teacher_signed_in? -->
-<% end %> <%# end of cache %>
