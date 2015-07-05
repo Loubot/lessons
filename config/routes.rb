@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get     'create-new-subject'      =>  'teachers#create_new_subject'
       post    '/change-profile-pic'     =>  'teachers#change_profile_pic'
       post    'invite-student'          =>  'teachers#invite_students'
-      post    'payless-booking'         =>  'teachers#payless_booking'    
+      # post    'payless-booking'         =>  'teachers#payless_booking'    
   	end
 
   	resources :photos, only: [:create, :destroy]
