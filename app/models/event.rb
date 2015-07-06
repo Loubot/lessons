@@ -75,7 +75,7 @@ class Event < ActiveRecord::Base
     return event  
   end
 
-  def self.student_do_single_booking(params, price)
+  def self.student_do_single_booking(params, price)  #check if event times are valid
     p "params1 #{params}"
     
 
@@ -85,15 +85,15 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_event_params(params, price)
-    date = params[:event][:date]
-    start_time = Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}")
+    date = params[:user_cart][:date]
+    start_time = Time.zone.parse("#{date} #{params[:user_cart]['start_time(5i)']}")
     
-    date = params[:event][:date]
+    date = params[:user_cart][:date]
     dates = { start_time: start_time,
       end_time: Time.zone.parse("#{start_time + price.duration.to_i.minutes}"),
-      teacher_id: params[:event][:teacher_id],
-      student_id: params[:event][:student_id],
-      subject_id: params[:event][:subject_id],
+      teacher_id: params[:user_cart][:teacher_id],
+      student_id: params[:user_cart][:student_id],
+      subject_id: params[:user_cart][:subject_id],
       status: 'payment'
      }
   end

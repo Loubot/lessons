@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703131721) do
+ActiveRecord::Schema.define(version: 20150706213042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -297,6 +297,9 @@ ActiveRecord::Schema.define(version: 20150703131721) do
     t.integer  "location_id"
     t.string   "status",                                default: ""
     t.integer  "duration",                              default: 0
+    t.datetime "start_time"
+    t.integer  "price_id"
+    t.date     "date"
   end
 
   add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email", using: :btree

@@ -54,47 +54,7 @@ class EventsController < ApplicationController
 		redirect_to :back
 	end
 
-	# ajax event booking
-	def create_event_and_book		
-		
-		@price = Price.find(session[:price_id])
-		p "event price #{@price.price}"
-		if params['Multiple'] == 'true'
-			event = Event.student_do_multiple_bookings(params)
-			if event.valid?
-				@event = event
-				
-				puts "weeks #{@weeks.to_i} rate #{@rate.to_f}"
-				
-
-				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.create_multiple_cart(params, @teacher.email, current_teacher, session[:location_id], @price.price)
-				@weeks = @cart.weeks
-				@total_rate = @cart.weeks.to_i * @cart.amount.to_f
-				p "rate amount ******** #{@cart.weeks.to_i * @cart.amount.to_f}"
-				session[:cart_id] = @cart.id
-				# p "cart multiple #{@cart.inspect}"
-				
-			else
-				puts event
-				@event = event.errors.full_messages
-			end
-			render 'events/multiple_events.js.coffee'
-		else #single booking		
-			
-			@event = Event.student_do_single_booking(params)
-			
-			
-			if @event.valid?
-				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.create_single_cart(params, @teacher.email, current_teacher, session[:location_id], @price.price)
-				session[:cart_id] = @cart.id
-				p "cart  #{@cart.inspect}"
-			else
-				@teacher = @event.errors.full_messages
-			end
-		end		
-	end
+	# ajax event booking	
 
 	def payless_booking #take booking without payment
 		cart = UserCart.find(session[:cart_id])

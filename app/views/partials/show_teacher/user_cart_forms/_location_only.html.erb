@@ -1,0 +1,65 @@
+<%= form_for(UserCart.new, url: check_availability_user_cart_path(id: current_teacher.id), html: { class: 'form-horizontal' }, method: 'post', remote: true) do |f| %>
+
+  <%= select_tag :subject_id, options_for_select([[@subject.name, @subject.id]]), prompt: @subject.name, class: 'form-control', disabled: true %>
+
+
+  <%= select_tag "user_cart[location_id]", options_for_select(@only_locs.map { |l| [l.name, l.id]\
+          }), class: 'form-control location_only_select', prompt: 'Select teachers location' %>
+
+  <select name="user_cart[price_id]" class="location_only_price_select form-control"></select>
+
+
+<div class="col-xs-12">
+  <div class="row home_only_avail_times">
+    <h2>Check availability</h2>
+    <div class="col-xs-6 form-group">
+      
+      <div>
+        <label for="date" class="control-label">Date:</label>
+        <input name="user_cart[date]" type="text" id='home_lesson_datepicker' placeholder='Click to select date' class="1payment_choice_date_picker" >
+      </div>
+    </div> <!-- end of form-group -->
+    <div class="col-xs-6">
+      <div class='form-group'>
+        <%= label_tag 'start_time', 'Start-time:', class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= f.time_select :start_time,
+                {
+                  :combined => true,
+                  :default => Time.now.change(:hour => 11, :min => 30),
+                  :minute_interval => 30,
+                  :time_separator => "",
+                  :start_hour => 10,
+                  :start_minute => 30,
+                  :end_hour => 14,
+                  :end_minute => 30
+                },
+                
+                { class: 'form-control' }
+              %>
+        </div> <!-- end of col-sm-8 -->
+      </div> <!-- end of form-group -->
+    </div> <!-- end of col-xs-6 -->
+    <input type="hidden" name="id" id="id" value="<%= @teacher.id %>">
+  <%= hidden_field :user_cart, :teacher_id, value: @teacher.id %>
+  <%= hidden_field :user_cart, :teacher_email, value: @teacher.email %>
+  <%= hidden_field :user_cart, :student_email, value: current_teacher.email %>
+  <%= hidden_field :user_cart, :student_id, value: current_teacher.id %>
+  <%= hidden_field :user_cart, :teacher_name, value: @teacher.full_name %>
+  <%= hidden_field :user_cart, :student_name, value: current_teacher.full_name %>  
+  <%= hidden_field :user_cart, :subject_id, value: @subject.id %>  
+    
+
+  </div> <%# end of row %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-9">
+      <%= f.submit 'Check availability', class: 'btn btn-success home_only_avail_times' %>
+    </div> <!-- end of class="col-sm-offset-2 col-sm-10" -->
+  </div> <!-- end of form-group -->
+  
+  
+<% end %> <%# end of form %>
+</div> <%# end of col-xs-12 %>
+</div> <!-- end of check_availablity_container -->
+<div class="payment_choice_error"></div>

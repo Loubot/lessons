@@ -1,0 +1,3 @@
+<%= form_tag teachers_or_students_user_cart_path(id: current_teacher.id), class: 'teachers_or_location_form',remote: true do %>
+  <%= select_tag :location_choice, options_for_select([['Your house', 1],['Teachers house', 2]]), class: 'form-control', prompt: "Your house or teachers?" %>
+<% end %> <%# end of form %>

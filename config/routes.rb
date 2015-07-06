@@ -42,11 +42,12 @@ Rails.application.routes.draw do
   
   resources :user_carts, only: [:create] do
     member do 
-      post 'teachers-or-students'   =>  'user_carts#teachers_or_students'
-      post 'select-price-duration'  =>  'user_carts#select_price_duration'
-      post 'check-home-event'       =>  'user_carts#check_home_event'
+      post 'check-availability'       => 'user_carts#check_availability'
+      post 'loc-only-prices'          => 'user_carts#loc_only_prices'
     end
   end
+
+
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
     member do      
@@ -55,6 +56,8 @@ Rails.application.routes.draw do
     end
   end
   resources :reviews, only: [:create, :destroy]
+
+
   get         '/learn'                  =>  'static#learn'
   get         '/teach'                  =>  'static#teach'
   get         '/welcome'                =>  'static#welcome'
@@ -96,7 +99,7 @@ Rails.application.routes.draw do
   post        'pay-membership-stripe'   =>  'stripe#pay_membership_stripe'
   post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
 
-  post        'events/create-event-and-book' =>   'events#create_event_and_book'
+  
   post        'payless-booking'              =>   'events#payless_booking'   
   
 

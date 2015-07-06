@@ -22,13 +22,17 @@
 #  teacher_name  :string           default("")
 #  location_id   :integer
 #  status        :string           default("")
+#  duration      :integer          default(0)
+#  start_time    :datetime
+#  price_id      :integer
+#  date          :date
 #
 
 class UserCart < ActiveRecord::Base
   belongs_to :teacher, touch: true
   serialize :params
 
-  validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, :amount, presence: true
+  # validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, :amount, presence: true
   validates :tracking_id, uniqueness: true
   # validates :amount, :numericality => { :greater_than => 0 }
 
@@ -39,6 +43,19 @@ class UserCart < ActiveRecord::Base
   def save_tracking_id
     
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand, self.id].join)
+  end
+
+  def self.initial(params)
+    if !params.has_key? :location_id
+      cart = self.create!(
+          booking_type: 'home'
+        )
+    else
+      self.create!(
+          booking_type: 'single'
+        )
+    end
+
   end
 
   def self.membership_cart(teacher, email)

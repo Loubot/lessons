@@ -306,31 +306,21 @@ teachersInfoReady = ->
         format: "%Y-%m-%d"
         placement: 'inline'
         hideInput: true
-      $('#the_one_modal').on 'hidden.bs.modal', ->
-        $('.payment_form_container').empty()
-        $('.display_teachers_location').empty()
-        $('.returned_locations_container').empty()
-        $('.payment_choice_error').empty()
-        $('.select_location_prices').css 'display', 'none'
-        
-      $('#the_one_modal').on 'hidden.bs.modal', ->
-        $('.check_availability_container').css 'display', 'none'
-        $('.payment_form_container').empty()
-        $("select").each ->
+      $('#the_one_modal').on 'hidden.bs.modal', ->        
+        $("select").each -> #set all selects to 0 position
           $(this).val($(this).find('option[selected]').val())
-        
-      # document.getElementById("select_subject").selectedIndex = 0     
-      $(document).on 'change', '.teachers_or_location_form', -> #submit form/decide teachers or students house
-        $('.teachers_or_location_form').submit()
 
-      $(document).on 'change', '.no_pay_location_select', -> #submit form/decide teachers or students house
-        $('.select_location_prices').css 'display', 'inline'
+    $(document).on 'change', '.home_only_price_select', ->
+      if $('.home_only_price_select')[0].selectedIndex != 0
+        $('.home_only_avail_times').css 'display', 'inline'
 
-      $(document).on 'change', '.select_price_duration_form', ->
-        $('.select_price_duration_form').submit() #submit form and store price id
 
-      $(document).on 'change', '.select_location_prices', ->
-        $('.select_locations_form').submit()
+    $(document).on 'change', '.location_only_select', ->
+      if $('.location_only_select')[0].selectedIndex != 0
+        $.post '/user_carts/1/loc-only-prices',
+          { 'user_cart[location_id]': $('.location_only_select').val(),
+          'user_cart[teacher_id]': $('#user_cart_teacher_id').val() },
+          'script'
 
 
     # end of the_one_modal

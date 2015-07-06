@@ -9,15 +9,25 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid">   <%# teacher.js for form submisson on change %>
-              <%= text_field_tag :id, @subject.name, class: 'form-control', disabled: true %>
+              <%# text_field_tag :id, @subject.name, class: 'form-control', disabled: true %>
 
-              <%# see partials/show_teacher/booking_forms %>
+              <%# if teacher has home booking and locations %>
+              <% if @teacher.prices.any? { |p| p.no_map == true && p.subject_id == @subject.id } && \
+                  @teacher.prices.any? { |p| p.location_id != nil && p.subject_id == @subject.id } %>
 
-              <% if @teacher.has_payment_set? %>
+                <%= render partial: 'partials/show_teacher/user_cart_forms/home_and_location' %>
+
+              <%# elsif teacher only has home prices %>
+              <% elsif !@teacher.prices.any? { |p| p.location_id != nil && p.subject_id == @subject.id } %>
                 
+                <%= render partial: 'partials/show_teacher/user_cart_forms/home_only' %>
+                
+              <%# teacher only has location entries for this subject %>
               <% else %>
-               <%= render 'partials/show_teacher/booking_forms/no_payment_form.html.erb' %>
-              <% end %>
+
+                <%= render partial: 'partials/show_teacher/user_cart_forms/location_only' %>
+
+              <% end %> 
             </div> <!-- end of container-fluid -->
           </div> <!-- end of modal-body -->
         </div> <!-- end of modal-content -->

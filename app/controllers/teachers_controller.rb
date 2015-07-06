@@ -9,7 +9,7 @@ class TeachersController < ApplicationController
 
 	
 	def show_teacher
-		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects, :qualifications,:locations, :photos, :packages, :friendships).find(params[:id])
+		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects,:qualifications,:locations, :photos, :packages, :friendships).find(params[:id])
 
 		if !@teacher.is_active #only show active teachers
 			flash[:danger] = "This teacher has not completed their profile"
@@ -17,25 +17,29 @@ class TeachersController < ApplicationController
 		end
 
 		@subject = @teacher.subjects.find { |s| s.id == params[:subject_id].to_i }
+		session[:subject_id] = @subject.id
 
 		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices teachers_helper
-		p "subject #{@subjects}"
-		@event = Event.new
+		
+		
 		@categories = Category.includes(:subjects).all
 		# @subject = Subject.find(params[:subject_id])
 		
 		@teacher.increment!(:profile_views, by = 1)
 
 		@reviews = @teacher.reviews.take(3)
-		@locations = @teacher.locations
+		
 
 		@prices = @teacher.prices.where(subject_id: params[:subject_id])
 		@home_prices = @prices.select { |p| p.no_map == true } #only home prices
 		@location_prices = @prices.select { |p| p.no_map == false } #only location prices
+
+		@locations = @teacher.locations
+		@only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
 		
 		gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
-		gon.locations = @locations
+		gon.locations = @teacher.locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		
 		# @home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first

@@ -1,53 +1,36 @@
 class UserCartsController < ApplicationController
   before_action :authenticate_teacher!
+  before_action :check_id, except: [ :loc_only_prices ]
 
   def teachers_or_students
     render status: 200, nothing: true
   end
 
-  ####################################### payment methods
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ##################################### end of no payment methods
-
-  ####################################### no payment methods
-
-  def select_price_duration #get price id and show check availability form
-    session[:price_id] = params[:price_id]
-    session[:location_id] = params[:location_id]
-    render 'modals/payment_selections/_show_payment_no_locations_modal.js.coffee'
+  def check_availability
+    price = Price.find(params[:user_cart][:price_id])
+    event = Event.student_do_single_booking(params, price)
+    params[:user_cart].parse_time_select! :start_time
+    UserCart.create!(user_cart_params)
+    p event.inspect
+    render status: 200, nothing: true
   end
 
-  def check_home_event
-    
-    @price = Price.find(session[:price_id])
-    event = Event.student_do_single_booking(params, @price)
-    if event.valid?
-      @teacher = Teacher.find(session[:teacher_id]) # teacher not student   
-      @event = event
-      p "start time #{params[:start_time]}"
-      @cart = UserCart.home_booking_cart(params, @price)
-      p "cart #{@cart.inspect}"
-      session[:cart_id] = @cart.id
-      p "event is valid!!!!!!!!!!"
-    else
-      p "event is not valid &&&&&&&&&&&&&&&&&&S"
-      @event = event.errors.full_messages
-    end
-    render 'modals/payment_selections/_show_total.js.coffee' #display _payments_modal_for_users
+  def loc_only_prices
+    p params
+    @teacher = Teacher.find(params['user_cart']['teacher_id'].to_i)
+    @prices = @teacher.prices.select { |p| p.location_id == params['user_cart']['location_id'].to_i }
+    p @prices.inspect
+    # render status: 200, nothing: true
   end
-  ####################################### end of no payment methods
+  
+  private
+
+  def user_cart_params
+    params.require(:user_cart).permit!
+  end
+
+  def check_id
+    redirect_to root_url if params[:id].to_i != current_teacher.id
+  end
 
 end
