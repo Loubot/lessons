@@ -17,7 +17,7 @@ class TeachersController < ApplicationController
 		end
 
 		@subject = @teacher.subjects.find { |s| s.id == params[:subject_id].to_i }
-		session[:subject_id] = @subject.id
+		
 
 		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices teachers_helper
 		
@@ -47,7 +47,8 @@ class TeachersController < ApplicationController
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		gon.teacher_id = @teacher.id
 
-		session[:subject_id ] = params[:subject_id] #set subject id to session for booking purposes
+		session[:subject_id] = @subject.id
+		session[:teacher_id] = @teacher.id
 
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
 

@@ -296,7 +296,6 @@ ActiveRecord::Schema.define(version: 20150706213042) do
     t.string   "teacher_name",                          default: ""
     t.integer  "location_id"
     t.string   "status",                                default: ""
-    t.integer  "duration",                              default: 0
     t.datetime "start_time"
     t.integer  "price_id"
     t.date     "date"

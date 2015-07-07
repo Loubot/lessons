@@ -22,7 +22,6 @@
 #  teacher_name  :string           default("")
 #  location_id   :integer
 #  status        :string           default("")
-#  duration      :integer          default(0)
 #  start_time    :datetime
 #  price_id      :integer
 #  date          :date
@@ -39,24 +38,24 @@ class UserCart < ActiveRecord::Base
   # before_update :save_tracking_id
   # before_create :save_tracking_id
   before_validation :save_tracking_id
+  before_validation :initial
 
   def save_tracking_id
     
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand, self.id].join)
   end
 
-  def self.initial(params)
-    if !params.has_key? :location_id
-      cart = self.create!(
-          booking_type: 'home'
-        )
-    else
-      self.create!(
-          booking_type: 'single'
-        )
+  def initial #check booking type before saving
+    p "location_id #{self.location_id}"
+    if self.location_id != ""
+      self.booking_type =  'home'
+        
+    else      
+      self.booking_type =  'single'        
     end
 
   end
+
 
   def self.membership_cart(teacher, email)
     cart = self.create!(

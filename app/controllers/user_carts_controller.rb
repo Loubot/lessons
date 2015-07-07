@@ -7,13 +7,14 @@ class UserCartsController < ApplicationController
   end
 
   def check_availability #run event checker in event model
+    @teacher= Teacher.find(session[:teacher_id].to_i)
     price = Price.find(params[:user_cart][:price_id])
     event = Event.student_do_single_booking(params, price)
     params[:user_cart].parse_time_select! :start_time
     u = UserCart.create!(user_cart_params)
-    session[:user_cart] = u.id
+    session[:cart_id] = u.id
     p event.inspect
-    render status: 200, nothing: true
+    # render status: 200, nothing: true
   end
 
   def loc_only_prices 

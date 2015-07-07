@@ -2,6 +2,9 @@ class EventsController < ApplicationController
 	include TeachersHelper
 	include	EventsHelper
 	before_action :authenticate_teacher!
+	before_action :check_id, only: [:payless_booking]
+
+
 	def create
 		if params[:date].blank? 
 			flash[:danger] = "Date can't be blank"
@@ -125,6 +128,13 @@ class EventsController < ApplicationController
 		def event_params
 			params.require(:event).permit!
 		end
+
+		def check_id
+
+			if params[:id].to_i != current_teacher.id
+				render status: 200, nothing: true
+			end
+		end #end of payless_booking
 
 		
 end
