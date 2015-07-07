@@ -292,18 +292,19 @@ class TeacherMailer < ActionMailer::Base
        :from_name=> "Learn Your Lesson",  
        :text=> %Q(<html>Reset your password #{record} #{token} #{opts} <br>
 
-                <a>https://learn-your-lesson.herokuapp.com/teachers/password/edit?reset_password_token=#{token}</a></html>),  
+                <a>https://www.learnyourlesson.ie/teachers/password/edit?reset_password_token=#{token}</a></html>),  
        :to=>[  
          {  
            :email=> record.email,
            :name=> "#{record.full_name}"  
          }  
        ],  
-       :html=> %Q(<html>http://localhost:3000/teachers/password/edit?reset_password_token=#{token}</html>),  
+       :html=> %Q(<a>https://www.learnyourlesson.ie/teachers/password/edit?reset_password_token=#{token}</a>),  
        :from_email=> "learn@b.com"  
       }  
-      sending = m.messages.send message  
-      puts sending
+      async = false
+      result = mandrill.messages.send message, async 
+      puts result
     rescue Mandrill::Error => e
         # Mandrill errors are thrown as exceptions
         logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
