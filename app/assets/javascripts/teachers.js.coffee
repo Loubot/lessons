@@ -310,17 +310,25 @@ teachersInfoReady = ->
         $("select").each -> #set all selects to 0 position
           $(this).val($(this).find('option[selected]').val())
 
+
+          #home only. display availability form after selecting price
     $(document).on 'change', '.home_only_price_select', ->
       if $('.home_only_price_select')[0].selectedIndex != 0
         $('.home_only_avail_times').css 'display', 'inline'
 
 
+        #location only select location id
     $(document).on 'change', '.location_only_select', ->
       if $('.location_only_select')[0].selectedIndex != 0
         $.post '/user_carts/1/loc-only-prices',
           { 'user_cart[location_id]': $('.location_only_select').val(),
-          'user_cart[teacher_id]': $('#user_cart_teacher_id').val() },
+          'user_cart[teacher_id]': $('#user_cart_teacher_id').val(),
+          'user_cart[subject_id': $('#user_cart_subject_id').val() },
           'script'
+
+    $(document).on 'change', '.select_home_or_location', -> #submit choice of home or location
+      if $('.home_or_location_select_tag')[0].selectedIndex != 0
+        $('.select_home_or_location').submit()
 
 
     # end of the_one_modal

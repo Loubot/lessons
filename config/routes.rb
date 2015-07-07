@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     member do 
       post 'check-availability'       => 'user_carts#check_availability'
       post 'loc-only-prices'          => 'user_carts#loc_only_prices'
+      post 'select-home-or-location'  => 'user_carts#select_home_or_location'
     end
   end
 
