@@ -49,6 +49,8 @@ class ApplicationController < ActionController::Base
     # puts "request #{request.env['omniauth.origin']}"
     # flash[:danger] = resource.is_teacher_valid_message if resource.is_teacher_valid_message && resource.is_teacher
     
+    return '/' if request.referer = "" || request.referer == nil
+    
     if request.env['omniauth.origin']
       if URI.parse(URI.encode(request.env['omniauth.origin'])).path == '/display-subjects' #create display_subjects url with params
 
