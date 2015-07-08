@@ -47,7 +47,7 @@ class UserCart < ActiveRecord::Base
 
   def initial #check booking type before saving
     p "location_id #{self.location_id}"
-    if self.location_id != ""
+    if self.location_id == "" || self.location_id == nil
       self.booking_type =  'home'
         
     else      
