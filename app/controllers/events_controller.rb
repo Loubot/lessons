@@ -95,13 +95,15 @@ class EventsController < ApplicationController
 			TeacherMailer.delay.single_booking_mail_teacher(                                                
                                                 
                                                       lesson_location,
-                                                      cart                		                            
+                                                      cart,
+                                                      price.price              		                            
                     		                            )
 
     	TeacherMailer.delay.single_booking_mail_student(
                                                   
                                                       lesson_location,
-                                                      cart
+                                                      cart,
+                                                      price.price
                                                     )
 
 
