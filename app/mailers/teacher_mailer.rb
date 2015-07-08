@@ -94,7 +94,7 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{cart.teacher_email}"
   end # end of single_booking_mail_student
 
-  def home_booking_mail_student(cart)
+  def home_booking_mail_student(cart, price)
 
     begin
       require 'mandrill'
@@ -117,7 +117,7 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>cart.student_name  },
                                           { "name"=>"TNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price, unit:'€') },
                                           { "name"=>"NUMBERLESSONS",  "content"=>1 },
                                           { "name"=>"LESSONLOCATION", "content"=>cart.address },
                                           { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
@@ -144,7 +144,7 @@ class TeacherMailer < ActionMailer::Base
   end #end of home_booking_mail_student
 
 
-  def home_booking_mail_teacher(cart)
+  def home_booking_mail_teacher(cart, price)
     # p "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
     # logger.info "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
     begin
@@ -168,7 +168,7 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"SNAME",          "content"=>cart.student_name   },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email  },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price, unit:'€') },
                                           { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
                                           { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime('%d/%m/%Y') },
                                           { "name"=>"LESSONLOCATION", "content"=>cart.address }

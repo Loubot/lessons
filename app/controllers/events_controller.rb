@@ -75,17 +75,21 @@ class EventsController < ApplicationController
 		when 'home'
 			update_student_address(params)
 			cart.update_attributes(address:params[:home_address])
+			price = Price.find(cart.price_id.to_i)
 			Event.delay.create_confirmed_events(cart, cart.status)
 
 			TeacherMailer.delay.home_booking_mail_teacher(
-			                                                cart
+			                                                cart,
+			                                                price.price
 			                                              )
 			TeacherMailer.delay.home_booking_mail_student(
-			                                                cart
+			                                                cart,
+			                                                price.price
 			                                              )
 
 		when 'single'
 			lesson_location = Location.find(session[:location_id]).name
+			price = Price.find(cart.price_id.to_i)
 			Event.create_confirmed_events(cart, cart.status) #Event model, checks if multiple or not
 
 			TeacherMailer.delay.single_booking_mail_teacher(                                                

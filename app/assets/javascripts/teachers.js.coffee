@@ -307,6 +307,8 @@ teachersInfoReady = ->
         placement: 'inline'
         hideInput: true
       $('#the_one_modal').on 'hidden.bs.modal', ->
+        $('.check_availabilty_form_container').html ""
+        $('.location_only_price_select').css 'display', 'none'
         $('.home_only_avail_times').css "display", 'none'
         $("select").each -> #set all selects to 0 position
           $(this).val($(this).find('option[selected]').val())
