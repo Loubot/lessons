@@ -306,7 +306,8 @@ teachersInfoReady = ->
         format: "%Y-%m-%d"
         placement: 'inline'
         hideInput: true
-      $('#the_one_modal').on 'hidden.bs.modal', ->        
+      $('#the_one_modal').on 'hidden.bs.modal', ->
+        $('.home_only_avail_times').css "display", 'none'
         $("select").each -> #set all selects to 0 position
           $(this).val($(this).find('option[selected]').val())
 

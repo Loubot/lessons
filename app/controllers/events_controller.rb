@@ -60,6 +60,7 @@ class EventsController < ApplicationController
 	# ajax event booking	
 
 	def payless_booking #take booking without payment
+		p "right here huh huh"
 		cart = UserCart.find(session[:cart_id])
 		cart.update_attributes(status: 'owed')
 		if !cart

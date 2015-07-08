@@ -121,9 +121,10 @@ private
 	end
 
   def self.create_single_event_and_save(cart, payment)
+    p = Price.find(cart.price_id.to_i)
     e = Event.create!(
-                start_time: cart.params[:start_time],
-                end_time: cart.params[:end_time],
+                start_time: cart.start_time,
+                end_time: cart.start_time + p.duration.minutes,
                 teacher_id: cart.teacher_id,
                 student_id: cart.student_id,
                 subject_id: cart.subject_id,

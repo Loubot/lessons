@@ -120,8 +120,8 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
                                           { "name"=>"NUMBERLESSONS",  "content"=>1 },
                                           { "name"=>"LESSONLOCATION", "content"=>cart.address },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime('%d/%m/%Y') }
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime('%d/%m/%Y') }
                                         ]
                           }],
                   
@@ -169,8 +169,8 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"SNAME",          "content"=>cart.student_name   },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email  },
                                           { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime('%d/%m/%Y') },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime('%d/%m/%Y') },
                                           { "name"=>"LESSONLOCATION", "content"=>cart.address }
                                         ]
                           }],

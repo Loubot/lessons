@@ -1,8 +1,58 @@
-<%= form_for Event.new, url: payless_booking_teacher_event_path(id: current_teacher.id, \
-                          teacher_id: @teacher.id), class: 'form-horizontal', remote: true do |f| %>
+<div class="table-responsive">
+    <table class="table table-bordered">
+      <tr>
+        <td>Teacher:</td>
+        <td><%= @teacher.full_name %></td>
+      </tr>
+      <tr>
+        <td>Price:</td>
+        <td><%= number_to_currency(@price.price, unit:'€') %></td>
+      </tr>
+      <tr>
+        <td>Duration:</td>
+        <td><%= "#{@price.duration} mins" %></td>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <% if @cart.booking_type == "home" %>
+          <td>Your house</td>
+        <% else %>
+          <%= Location.find(@cart.location_id).name %>
+        <% end %>
+        
+      </tr>
+    </table>
+  </div> <!-- end of table-responsive -->
+
+<div class="row">
+  <%= form_for Event.new, url: payless_booking_teacher_event_path(id: current_teacher.id, \
+                            teacher_id: @teacher.id), class: 'form-horizontal' do |f| %>
 
 
+    <div class="form-group">
+      <label for="address" class="col-sm-2 control-label">Address:</label>
+      <div class="col-sm-10">
+        <%= text_field_tag :home_address, current_teacher.address, placeholder: 'Address',size: 40 %>
+        
+      </div>
+    </div> <!-- end of form-group -->
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <%= check_box_tag :remember, 'Remember address', current_teacher.address != '' %>Remember Address
+          </label>
+        </div>
+      </div>
+    </div> <!-- end of form-group -->
 
 
-    <%= f.submit 'hello' %>
-<% end %>
+    <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-11">
+        <%= f.submit 'Submit', class: 'btn btn-success' %>
+      </div>
+    </div> <!-- end of form-group -->
+
+    
+  <% end %>
+</div> <!-- end of row -->

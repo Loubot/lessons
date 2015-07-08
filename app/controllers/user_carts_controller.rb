@@ -8,12 +8,15 @@ class UserCartsController < ApplicationController
 
   def check_availability #run event checker in event model
     @teacher= Teacher.find(session[:teacher_id].to_i)
-    price = Price.find(params[:user_cart][:price_id])
-    event = Event.student_do_single_booking(params, price)
+    @price = Price.find(params[:user_cart][:price_id])
+    @event = Event.student_do_single_booking(params, @price) #if for event validation in check_availabilit.js
+
+
     params[:user_cart].parse_time_select! :start_time
-    u = UserCart.create!(user_cart_params)
-    session[:cart_id] = u.id
-    p event.inspect
+    @cart = UserCart.create!(user_cart_params)
+    session[:cart_id] = @cart.id
+
+    p @event.inspect
     # render status: 200, nothing: true
   end
 
