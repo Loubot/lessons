@@ -103,6 +103,8 @@ class StripeController < ApplicationController
 
     
     cart = UserCart.find(session[:cart_id].to_i)
+    price = Price.find(cart.price_id.to_i)
+
     cart.update_attributes(address:params[:home_address])
     if params[:home_address] == ''
       flash[:danger] = "Address can't be blank"
@@ -110,11 +112,11 @@ class StripeController < ApplicationController
     end
     
   	# cart = UserCart.home_booking_cart(params,price.price)
-    p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
+    # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
   	# 
     
-  	@amount = (Price.find(session[:price_id]).price * 100 ).to_i
-    @teacher = Teacher.find(params[:teacher_id])
+  	@amount = (price.price * 100 ).to_i
+    @teacher = Teacher.find(cart.teacher_id)
     charge = Stripe::Charge.create({
       :metadata           => { 
                               :tracking_id => cart.tracking_id, 
@@ -129,20 +131,22 @@ class StripeController < ApplicationController
       @teacher.stripe_access_token
     )
     
-    p "charge inspection #{charge.inspect}"
+    # p "charge inspection #{charge.inspect}"
     if charge['paid'] == true
       flash[:success] = 'Payment was successful. You will receive an email soon. Time and date to be confirmed'      
 
-      home_booking_transaction(charge, params[:student_id], params[:teacher_id])
+      # home_booking_transaction(charge, cart.student_id, cart.teacher_id)
 
-      Event.delay.create_confirmed_events(cart, 'paid')
+      # Event.create_confirmed_events(cart, 'paid')
 
-      TeacherMailer.delay.home_booking_mail_teacher(
-                                                      cart
-                                                    )
-      TeacherMailer.delay.home_booking_mail_student(
-                                                      cart
-                                                    )
+      # TeacherMailer.delay.home_booking_mail_teacher(
+      #                                                 cart,
+      #                                                 price.price
+      #                                               )
+      # TeacherMailer.delay.home_booking_mail_student(
+      #                                                 cart,
+      #                                                 price.price
+      #                                               )
 
       redirect_to :back and return
     else

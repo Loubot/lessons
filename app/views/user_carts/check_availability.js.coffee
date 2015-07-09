@@ -2,16 +2,16 @@
 
 
 <% if @event.valid? %>
-$('.booking_form_container').html """
 
-    <%= j(render partial: 'partials/show_teacher/booking_forms/no_payment_form') %>
+<% if @teacher.has_payment_set? %>
+$('.booking_form_container').html """ <%= j(render partial: 'partials/show_teacher/booking_forms/payment_form') %> """
+<% else %>
+$('.booking_form_container').html """ <%= j(render partial: 'partials/show_teacher/booking_forms/no_payment_form') %> """
+<% end %>
 
 
-"""
 $('#the_one_modal').modal 'hide'
 $('#booking_modal').modal 'show'
-
-
 <% else %>
 
 $('.errors_container').html """ <p class="payment_choice_error"> 

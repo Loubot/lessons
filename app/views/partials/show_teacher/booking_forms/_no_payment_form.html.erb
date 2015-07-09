@@ -1,28 +1,28 @@
 <div class="table-responsive">
-    <table class="table table-bordered">
-      <tr>
-        <td>Teacher:</td>
-        <td><%= @teacher.full_name %></td>
-      </tr>
-      <tr>
-        <td>Price:</td>
-        <td><%= number_to_currency(@price.price, unit:'€') %></td>
-      </tr>
-      <tr>
-        <td>Duration:</td>
-        <td><%= "#{@price.duration} mins" %></td>
-      </tr>
-      <tr>
-        <td>Location</td>
-        <% if @cart.booking_type == "home" %>
-          <td>Your house</td>
-        <% else %>
-          <td><%= Location.find(@cart.location_id).name %> (teachers location)</td>
-        <% end %>
-        
-      </tr>
-    </table>
-  </div> <!-- end of table-responsive -->
+  <table class="table table-bordered">
+    <tr>
+      <td>Teacher:</td>
+      <td><%= @teacher.full_name %></td>
+    </tr>
+    <tr>
+      <td>Price:</td>
+      <td><%= number_to_currency(@price.price, unit:'€') %></td>
+    </tr>
+    <tr>
+      <td>Duration:</td>
+      <td><%= "#{@price.duration} mins" %></td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <% if @cart.booking_type == "home" %>
+        <td>Your house</td>
+      <% else %>
+        <td><%= Location.find(@cart.location_id).name %> (teachers location)</td>
+      <% end %>
+      
+    </tr>
+  </table>
+</div> <!-- end of table-responsive -->
 
 <div class="row">
   <%= form_for Event.new, url: payless_booking_teacher_event_path(id: current_teacher.id, \

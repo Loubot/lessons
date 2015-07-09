@@ -310,6 +310,7 @@ teachersInfoReady = ->
         $('.check_availabilty_form_container').html ""
         $('.location_only_price_select').css 'display', 'none'
         $('.home_only_avail_times').css "display", 'none'
+        $('.payment_choice_error').remove()
         $("select").each -> #set all selects to 0 position
           $(this).val($(this).find('option[selected]').val())
 
@@ -349,24 +350,24 @@ teachersInfoReady = ->
       $('.home_address').val $('#home_booking_address').val() #append address to booking form
 
       if $('#remember').is ':checked'
-        $('.save_address').val 'true' #set value of hidden field to tell server to save address
+        $('.save_address').val "Remember address" #set value of hidden field to tell server to save address
       else
         $('.save_address').val 'false'
-        
-      address = $('#home_booking_address').val() 
+      
+      
+      address = $('.home_address').val()
       if !address #alert user if no address entered
         alert "Address cannot be blank" 
       else 
         @.submit()
 
     $(document).on 'click', '.stripe-button-el', ->  #function on stripe button click. 
-      
-      $('.home_address').val $('#home_booking_address').val()
+     
+      $('.home_address').val $('#home_booking_address').val() #append address to booking form
+
       if $('#remember').is ':checked'
-        
-        $('.save_address').val 'true'
+        $('.save_address').val "Remember address" #set value of hidden field to tell server to save address
       else
-        
         $('.save_address').val 'false'
 
         # append package id to packages modal when packages modal is opened

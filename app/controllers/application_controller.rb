@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_mobile?
 
   def update_student_address(params) #update teacher address if 
+    p "params address #{params[:remember]}"
     if params[:remember] == "Remember address"
       if current_teacher.address != params[:home_address]
         

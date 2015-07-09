@@ -206,9 +206,10 @@ class PaypalController < ApplicationController
   end
 
   def home_booking_paypal
-    update_student_address(params) #application controller
-    price = Price.find(params[:price_id])
     cart = UserCart.find(session[:cart_id].to_i)
+    update_student_address(params) #application controller
+    price = Price.find(cart.price_id)
+    
     p "cart price #{cart.amount}"
     cart.update_attributes(address:params[:home_address])
     p "start time #{params[:start_time]}"
@@ -228,9 +229,9 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
       :return_url      => request.referrer,
-      :ipn_notification_url => "https://www.learnyourlesson.ie/store-paypal",
+      :ipn_notification_url => "#{root_url}store-paypal",
       :receivers => [
-        { :email => params[:teacher_email], amount: cart.amount } #, primary: true
+        { :email => cart.teacher_email, amount: price.price.to_f } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
