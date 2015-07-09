@@ -32,6 +32,7 @@ class UserCart < ActiveRecord::Base
   serialize :params
 
   # validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, :amount, presence: true
+  validates :start_time, presence: true
   validates :tracking_id, uniqueness: true
   # validates :amount, :numericality => { :greater_than => 0 }
 
@@ -54,6 +55,9 @@ class UserCart < ActiveRecord::Base
       self.booking_type =  'single'        
     end
 
+    if self.weeks == 0 
+      self.weeks = 1
+    end
   end
 
 

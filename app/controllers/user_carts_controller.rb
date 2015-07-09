@@ -10,9 +10,12 @@ class UserCartsController < ApplicationController
     @teacher= Teacher.find(session[:teacher_id].to_i)
     @price = Price.find(params[:user_cart][:price_id])
     @event = Event.student_do_single_booking(params, @price) #if for event validation in check_availabilit.js
+    
 
-
-    params[:user_cart].parse_time_select! :start_time
+    user_cart_params[:start_time] = Time.zone.parse("#{params[:user_cart][:date]} #{params[:user_cart]['start_time(5i)']}")
+    user_cart_params.delete :date
+    user_cart_params.delete 'start_time(5i)'
+    p "user_cart_params #{user_cart_params}"
     @cart = UserCart.create!(user_cart_params)
     session[:cart_id] = @cart.id
 

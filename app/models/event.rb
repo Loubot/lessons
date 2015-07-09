@@ -87,6 +87,8 @@ class Event < ActiveRecord::Base
   def self.get_event_params(params, price)
     date = params[:user_cart][:date]
     start_time = Time.zone.parse("#{date} #{params[:user_cart]['start_time(5i)']}")
+    p "start_time #{start_time}"
+    p "start_time + mins #{start_time + price.duration.to_i.minutes}"
     
     date = params[:user_cart][:date]
     dates = { start_time: start_time,
@@ -96,10 +98,12 @@ class Event < ActiveRecord::Base
       subject_id: params[:user_cart][:subject_id],
       status: 'payment'
      }
+     p "dates #{dates.inspect}"
+     dates
   end
 
 
-  def self.create_confirmed_events(cart, payment)
+  def self.create_confirmed_events(cart, payment) #create and save confirmed event after booking/payment complete
     #cart[:booking_type]
     if cart.booking_type == 'multiple'
       p "heeeeeeelllll1"
@@ -121,6 +125,7 @@ private
 	end
 
   def self.create_single_event_and_save(cart, payment)
+    p "create_single_event_and_save #{cart.start_time}"
     p = Price.find(cart.price_id.to_i)
     e = Event.create!(
                 start_time: cart.start_time,

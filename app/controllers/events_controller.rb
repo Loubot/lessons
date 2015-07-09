@@ -63,6 +63,8 @@ class EventsController < ApplicationController
 		p "right here huh huh"
 		cart = UserCart.find(session[:cart_id])
 		cart.update_attributes(status: 'owed')
+		price = Price.find(cart.price_id.to_i)
+		p "payless_booking #{price.price}"
 		if !cart
 			flash[:danger] = "Couldn't find your cart. Please try again"
 			p "Payless booking. Couldn't find cart"
@@ -73,9 +75,10 @@ class EventsController < ApplicationController
 		p "payless booking found cart"
 		case cart.booking_type #single, multiple, home, package
 		when 'home'
+			p "shouldn't be here £££££££££££££££££££££££££££££££££££££"
 			update_student_address(params)
 			cart.update_attributes(address:params[:home_address])
-			price = Price.find(cart.price_id.to_i)
+			
 			Event.delay.create_confirmed_events(cart, cart.status)
 
 			TeacherMailer.delay.home_booking_mail_teacher(
@@ -88,8 +91,9 @@ class EventsController < ApplicationController
 			                                              )
 
 		when 'single'
-			lesson_location = Location.find(session[:location_id]).name
-			price = Price.find(cart.price_id.to_i)
+			p "should be here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #{cart.inspect}"
+			lesson_location = Location.find(cart.location_id).name
+			
 			Event.create_confirmed_events(cart, cart.status) #Event model, checks if multiple or not
 
 			TeacherMailer.delay.single_booking_mail_teacher(                                                

@@ -3,6 +3,7 @@ class TeacherMailer < ActionMailer::Base
   include Devise::Mailers::Helpers
 
   def single_booking_mail_teacher(lesson_location, cart, price)
+    p "mail price #{price}"
     # logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
       weeks = cart.weeks.to_i
@@ -27,8 +28,8 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>weeks },
                                           { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price * weeks, unit: '€') },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %Y") },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime("%d %b %Y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],
@@ -49,7 +50,7 @@ class TeacherMailer < ActionMailer::Base
   end #end of single_booking_mail_teacher
 
   def single_booking_mail_student(lesson_location, cart, price)
-    
+    p "mail price #{price}"
     begin
       weeks = cart.weeks.to_i
       require 'mandrill'
@@ -73,8 +74,8 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>weeks },
                                           { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price * weeks, unit: '€') },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %Y") },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime("%d %b %Y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],
@@ -95,7 +96,7 @@ class TeacherMailer < ActionMailer::Base
   end # end of single_booking_mail_student
 
   def home_booking_mail_student(cart, price)
-
+    p "mail price #{price}"
     begin
       require 'mandrill'
       
@@ -145,8 +146,7 @@ class TeacherMailer < ActionMailer::Base
 
 
   def home_booking_mail_teacher(cart, price)
-    # p "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
-    # logger.info "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
+    p "mail price #{price}"
     begin
       require 'mandrill'
       

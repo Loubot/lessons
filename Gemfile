@@ -71,7 +71,7 @@ gem 'annotate'
 
 gem 'jquery-ui-rails', '~> 4.2.1'
 
-gem "combined_time_select", "~> 1.0.1"
+gem "combined_time_select"
 
 gem 'validates_overlap', '~> 0'
 
