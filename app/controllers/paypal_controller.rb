@@ -31,7 +31,8 @@ class PaypalController < ApplicationController
       :user_id       => ENV['PAYPAL_USER_ID'],
       :password      => ENV['PAYPAL_PASSWORD'],
       :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID']
+      :app_id        => ENV['PAYPAL_APP_ID'],
+      sandbox:       true
       
     )
 
@@ -210,7 +211,7 @@ class PaypalController < ApplicationController
     cart = UserCart.find(session[:cart_id].to_i)
     update_student_address(params) #application controller
     price = Price.find(cart.price_id)
-    
+   
     p "cart price #{cart.amount}"
     cart.update_attributes(address:params[:home_address])
     p "start time #{params[:start_time]}"
@@ -354,10 +355,10 @@ class PaypalController < ApplicationController
     require "pp-adaptive"
 
     client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
+      :user_id       => ENV['PAYPAL_USER_ID'],
+      :password      => ENV['PAYPAL_PASSWORD'],
+      :signature     => ENV['PAYPAL_SIGNATURE'],
+      :app_id        => ENV['PAYPAL_APP_ID'],
       :sandbox       => true
     )
 
