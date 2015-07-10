@@ -49,7 +49,7 @@ module StripeHelper
   end
 
   
-	def single_transaction_and_mails(charge, params, lesson_location, cart)
+	def single_transaction_and_mails(charge, params, lesson_location, cart, price)
     # puts "stripe helper params1 #{Date.parse(cart.params[:date]).strftime("%Y")}"
     if cart.weeks.to_i == 0
       amount = (charge['amount'].to_f)
@@ -67,13 +67,15 @@ module StripeHelper
     TeacherMailer.delay.single_booking_mail_teacher(                                                
                                                 
                                                       lesson_location,
-                                                      cart                		                            
+                                                      cart,
+                                                      price.price               		                            
                     		                            )
 
     TeacherMailer.delay.single_booking_mail_student(
                                                   
                                                       lesson_location,
-                                                      cart
+                                                      cart,
+                                                      price.price
                                                     )
 	end # end of single_transaction_and_mail
 

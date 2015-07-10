@@ -342,16 +342,18 @@ teachersInfoReady = ->
 
     $(document).on 'submit', '.home_booking_form', (e) -> #prevent paypal for submitting
       
-      e.preventDefault()      
+      e.preventDefault()
       
       address = null
       
       
       $('.home_address').val $('#home_booking_address').val() #append address to booking form
 
-      if $('#remember').is ':checked'
+      if $('#hello_check_box').is ':checked'
+        console.log 'yes'
         $('.save_address').val "Remember address" #set value of hidden field to tell server to save address
       else
+        console.log 'no'
         $('.save_address').val 'false'
       
       
@@ -361,13 +363,19 @@ teachersInfoReady = ->
       else 
         @.submit()
 
-    $(document).on 'click', '.stripe-button-el', ->  #function on stripe button click. 
+    $(document).on 'click', '.stripe-button-el', ->  #function on stripe button click.
+
+      
      
       $('.home_address').val $('#home_booking_address').val() #append address to booking form
 
-      if $('#remember').is ':checked'
-        $('.save_address').val "Remember address" #set value of hidden field to tell server to save address
+      console.log $('.home_address').val()
+
+      if $('#hello_check_box').is ':checked'
+        console.log 'yes'
+        $('.home_booking_form').prepend """ <input type="hidden" name="remember" id="remember" class="save_address" value="Remember address"> """
       else
+        console.log 'no'
         $('.save_address').val 'false'
 
         # append package id to packages modal when packages modal is opened

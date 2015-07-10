@@ -12,13 +12,15 @@ class StripeController < ApplicationController
 
 
   def stripe_create
-   # Amount in cents
-    
-  	@amount = (Price.find(session[:price_id]).price * 100 ).to_i
-    @teacher = Teacher.find(session[:teacher_id])
+       
     p "session #{session[:cart_id]}"
     cart = UserCart.find(session[:cart_id].to_i)
-    lesson_location = Location.find(session[:location_id]).name
+    @teacher = Teacher.find(cart.teacher_id)
+
+    # Amount in cents
+    price = Price.find(cart.price_id)
+    @amount = (price.price * 100 ).to_i
+    lesson_location = Location.find(cart.location_id).name
     
     begin
       charge = Stripe::Charge.create({
@@ -35,8 +37,8 @@ class StripeController < ApplicationController
       # p "cart #{cart.inspect}"
       # puts charge.inspect
       if charge['paid'] == true
-        Event.create_confirmed_events(cart, 'paid') #Event model, checks if multiple or not   
-        single_transaction_and_mails(charge, params, lesson_location, cart) #stripe_helper
+        Event.delay.create_confirmed_events(cart, 'paid') #Event model, checks if multiple or not   
+        single_transaction_and_mails(charge, params, lesson_location, cart, price) #stripe_helper
         
         flash[:success] = 'Payment was successful. You should receive an email soon.'
            
@@ -101,7 +103,7 @@ class StripeController < ApplicationController
 
     update_student_address(params) #application controller
 
-    
+    p "params #{params[:home_address]}"
     cart = UserCart.find(session[:cart_id].to_i)
     price = Price.find(cart.price_id.to_i)
 
@@ -111,9 +113,7 @@ class StripeController < ApplicationController
       redirect_to :back and return
     end
     
-  	# cart = UserCart.home_booking_cart(params,price.price)
-    # p "cart $$$$$$$$$$$$$$$$$$$$$ #{cart.tracking_id}"
-  	# 
+  	
     
   	@amount = (price.price * 100 ).to_i
     @teacher = Teacher.find(cart.teacher_id)
@@ -135,18 +135,18 @@ class StripeController < ApplicationController
     if charge['paid'] == true
       flash[:success] = 'Payment was successful. You will receive an email soon. Time and date to be confirmed'      
 
-      # home_booking_transaction(charge, cart.student_id, cart.teacher_id)
+      home_booking_transaction(charge, cart.student_id, cart.teacher_id)
 
-      # Event.create_confirmed_events(cart, 'paid')
+      Event.delay.create_confirmed_events(cart, 'paid')
 
-      # TeacherMailer.delay.home_booking_mail_teacher(
-      #                                                 cart,
-      #                                                 price.price
-      #                                               )
-      # TeacherMailer.delay.home_booking_mail_student(
-      #                                                 cart,
-      #                                                 price.price
-      #                                               )
+      TeacherMailer.delay.home_booking_mail_teacher(
+                                                      cart,
+                                                      price.price
+                                                    )
+      TeacherMailer.delay.home_booking_mail_student(
+                                                      cart,
+                                                      price.price
+                                                    )
 
       redirect_to :back and return
     else
