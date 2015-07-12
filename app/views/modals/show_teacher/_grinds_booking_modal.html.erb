@@ -1,0 +1,52 @@
+
+<div class="modal fade" id="grinds_booking_modal" tab-index="-3" role="dialog" aria-labelledby="grinds_booking_label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="grinds_booking_modal_title">Select package</h4>
+      </div> <!-- end of modal-header -->
+      <div class="modal-body">
+        <div class="row">
+
+          
+
+          <% if teacher_signed_in? %>
+
+            <div class="col-xs-6">
+              <% if @teacher.paypal_email != "" %>
+                <%= form_tag package_paypal_path,  class: 'package_booking_form', method: 'post' do |f| %>
+                  
+                  <%= image_submit_tag 'https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif', class: 'img-responsive' %>
+                <% end %> <%# end of form %>
+              <% end %>
+            </div> <!-- end of col-xs-6 -->
+            <div class="col-xs-6">
+              <% if @teacher.stripe_access_token != "" %>
+                <%= form_tag package_stripe_path,  class: 'package_booking_form', method: 'post' do |f| %>
+                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="pk_test_bedFzS7vnmzthkrQolmUjXNn"
+                        data-description="Book your lesson"
+                        data-currency="eur"
+                        data-description="This is the description"
+                        data-imgage="<%= asset_url 'stripe.png' %>"
+                        ></script>
+                 
+                <% end %> <%# end of form %>
+              <% end %>
+            </div> <!-- end of col-xs-6 -->
+
+          <% end %>
+          
+        </div> <!-- end of row -->
+        
+      </div> <!-- end of modal-body -->
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>        
+      </div>
+      
+      </div> <!-- end of modal-content -->
+  </div> <!-- end of modal-dialog -->
+</div> <!-- end of modal fade -->

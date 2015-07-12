@@ -5,6 +5,8 @@ class GrindsController < ApplicationController
     # p "params before #{params[:grind][:start_time]}"
     # params[:grind].parse_time_select! :start_time
     # p "params after #{params[:grind][:start_time]}"
+    # @grind = Grind.new(grind_params)
+    # p "grind params #{grind_params}"
     @grind = Grind.new(grind_params)
     if @grind.save
       flash[:success] = "Classroom created successfully"
@@ -13,6 +15,7 @@ class GrindsController < ApplicationController
       flash[:danger] = "Couldn't create classroom #{@grind.errors.full_messages}"
       redirect_to :back
     end
+    
   end
 
   def update
@@ -33,6 +36,8 @@ class GrindsController < ApplicationController
 
   private
     def grind_params
-      params.require(:grind).permit(:subject_id, :teacher_id, :subject_name, :capacity, :number_booked, :price, :location_id, :start_time)
+      params.require(:grind).permit(:subject_id, :teacher_id, :subject_name, :capacity, \
+                            :number_booked, :price, :location_id, :start_time).merge(location_name: \
+                            Location.find(params[:grind][:location_id]).name )
     end
 end

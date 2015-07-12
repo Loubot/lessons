@@ -181,6 +181,30 @@
           </div> <!-- end of text-center -->
         </div> <!-- end of package_form_well -->
       <% end %> <%# end of packages loop %>
+
+      <% if @teacher.grinds.size != 0 && @teacher.has_payment_set? %>
+        <div class="col-xs-12 grinds_container nopadding">
+          <% @teacher.grinds.each do |g| %>
+            <div class="well grinds_well">
+              <h4>Subject: <%= g.subject_name %></h4>
+              <h5>Location: <%= Location.find(g.location_id).name %></h5>
+              <h5>Time <%= g.start_time.strftime("%a %b %Y %H:%M%p") %></h5>
+              Places left: <%= g.capacity - g.number_booked %>  <br>
+              Price: <%= number_to_currency(g.price, unit: '€') %> <br>
+              <% if teacher_signed_in? %>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#grinds_booking_modal" > <!-- load modal content dynamically -->
+                  Book your place
+                </button>              
+              <% else %>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#login_modal" %> <!-- load modal content dynamically -->
+                  Book your place
+                </button>                       
+              <% end %>
+            </div> <!-- end of grinds_well -->
+            
+          <% end %> <!-- end of grinds loop -->
+        </div> <!-- end of grinds_container -->
+      <% end %>
     </div> <!-- end of mob_no_padding col-md-4 col-xs-12 nopadding -->    
   </div> <!-- end of row show_teacher_to_user -->     
   
@@ -205,5 +229,6 @@
 
 <%= render 'modals/show_teacher/booking_modal' %>
 <%= render 'modals/show_teacher/payment_packages_modal' %>
+<%= render 'modals/show_teacher/grinds_booking_modal' %>
 
 <%= render 'modals/show_teacher/the_one_modal' %>

@@ -78,7 +78,7 @@
   <div class="price_alert">
     
   </div> <!-- end of price_alert -->
-
+<hr>
   <div class="row" id="map_container">
     <div class="col-md-12">
       <div class="well">You can enter your address and click find address or use the map controls and click on 
@@ -178,7 +178,7 @@
 
     </div> <!-- end of well home_schooling_price col-md-6 -->
   </div> <!-- end of row -->
-
+<hr>
   <div class="row package_form_row">
     <div class="col-md-6 col-xs-12">
     <div class="well package_form_well">
@@ -259,7 +259,7 @@
           <div class="form-group">
             <%= f.label :price, "Start time", class: "col-sm-2 control-label" %>
             <div class="col-sm-10">
-              <%= datetime_select(:grind, :start_time, {prompt: true,start_year: Time.now.year},  {class: 'grind_start_time'}) %>
+              <%= datetime_select(:grind, :start_time, { prompt: true,start_year: Time.now.year, minute_step: 15 },  { class: 'grind_start_time' }) %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
 
@@ -343,7 +343,7 @@
 
              
               <div class="form-group">
-                <%= f.submit 'Update class size', class: 'btn btn-success pull-left' %><br>
+                <%= f.submit 'Update class', class: 'btn btn-success pull-left' %><br>
                 <%= link_to 'Delete entire class?', teacher_grind_path(current_teacher, g), data: { confirm: 'Are you sure?', role: 'button' }, class: 'btn btn-danger pull-right', method: :delete %>
               </div>
             <% end %>         

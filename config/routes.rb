@@ -90,6 +90,7 @@ Rails.application.routes.draw do
   post        'store-paypal'            =>  'paypal#store_paypal'
   post        'package-paypal'          =>  'paypal#create_package_booking_paypal'
   post        'store-package-paypal'    =>  'paypal#store_package_paypal'
+  post        'grind-paypal'            =>  'paypal#grind_paypal'
 
   post        'pay-membership-paypal'     =>  'paypal#pay_membership_paypal'
   post        'membership-return-paypal'  =>  'paypal#membership_return_paypal'
@@ -101,7 +102,8 @@ Rails.application.routes.draw do
   post        'store-stripe'            =>  'stripe#store_stripe'
   post        'package-stripe'          =>  'stripe#create_package_booking_stripe'
   post        'pay-membership-stripe'   =>  'stripe#pay_membership_stripe'
-  post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe' 
+  post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
+  post        'grind-stripe'            =>  'stripe#grind_stripe'
   
   
 

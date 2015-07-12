@@ -177,7 +177,11 @@ module TeachersHelper
 
   def get_select_text(p)
     # p "select text #{p.inspect}"
-  	["#{p.no_of_lessons}x#{p.subject_name} lessons/#{p.duration} mins for #{ number_to_currency(p.price, unit: '€') }", p.id]
+  	[ "#{p.no_of_lessons}x#{p.subject_name} lessons/#{p.duration} mins for #{ number_to_currency(p.price, unit: '€') }", p.id ]
+  end
+
+  def grind_select_text(g)
+  	[ "#{g.subject_name}, #{g.location_name}" ]
   end
 
 end

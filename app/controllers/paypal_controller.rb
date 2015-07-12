@@ -374,7 +374,11 @@ class PaypalController < ApplicationController
 
     
     redirect_to root_url
-  end    
+  end
+
+  def grind_paypal
+    
+  end #end of grind_paypal
 
 
   private

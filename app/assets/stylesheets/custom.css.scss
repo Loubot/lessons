@@ -337,7 +337,7 @@ hr{
 }
 
 .saved_packages_and_grinds{
-  display: none;
+  // display: none;
 }
 
 .display_saved_grinds{
@@ -348,6 +348,16 @@ hr{
   //margin-top: 9px;*/
   border-color: #FFBF3F;
   margin-bottom: 5px;
+}
+
+.grinds_container{
+  margin-top: 10px;
+  
+}
+
+.grinds_well{
+  color: #FFF;
+  background-color: #FFBF3F;
 }
 
 .subscription_container{

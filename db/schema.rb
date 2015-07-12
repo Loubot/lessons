@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706213042) do
+ActiveRecord::Schema.define(version: 20150712145420) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150706213042) do
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
     t.integer  "location_id"
+    t.string   "location_name"
   end
 
   add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id"
