@@ -14,13 +14,16 @@ Rails.application.routes.draw do
       get     'create-new-subject'      =>  'teachers#create_new_subject'
       post    '/change-profile-pic'     =>  'teachers#change_profile_pic'
       post    'invite-student'          =>  'teachers#invite_students'
-      post    'payless-booking'         =>  'teachers#payless_booking'    
   	end
 
   	resources :photos, only: [:create, :destroy]
     resources :qualifications, only: [:create, :destroy, :edit]
     resources :openings, only: [:create, :update]
-    resources :events
+    resources :events do 
+      member do 
+        post  'payless-booking'        =>   'events#payless_booking'   
+      end
+    end
     resources :identities, only: [:destroy]
     resources :invitations, only: [:create]
     resources :grinds, only: [:create, :update, :destroy]
@@ -37,14 +40,18 @@ Rails.application.routes.draw do
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'
-  get         '/add-map'                =>  'teachers#add_map'
-  post        'get-locations'           =>  'teachers#get_locations'
-  post        'get-subjects'            =>  'teachers#get_subjects'
-  post        'get-locations-price'     =>  'teachers#get_locations_price'
-  post        'teachers/check-home-event'      => 'teachers#check_home_event'
+  get         '/add-map'                =>  'teachers#add_map' 
 
   
-  
+  resources :user_carts, only: [:create] do
+    member do 
+      post 'check-availability'       => 'user_carts#check_availability'
+      post 'loc-only-prices'          => 'user_carts#loc_only_prices'
+      post 'select-home-or-location'  => 'user_carts#select_home_or_location'
+    end
+  end
+
+
   resources :categories,    only: [:update, :create, :destroy]
   resources :subjects,      only: [:update, :create, :destroy] do
     member do      
@@ -53,6 +60,8 @@ Rails.application.routes.draw do
     end
   end
   resources :reviews, only: [:create, :destroy]
+
+
   get         '/learn'                  =>  'static#learn'
   get         '/teach'                  =>  'static#teach'
   get         '/welcome'                =>  'static#welcome'
@@ -92,10 +101,8 @@ Rails.application.routes.draw do
   post        'store-stripe'            =>  'stripe#store_stripe'
   post        'package-stripe'          =>  'stripe#create_package_booking_stripe'
   post        'pay-membership-stripe'   =>  'stripe#pay_membership_stripe'
-  post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe'
-
-  post        'events/create-event-and-book' =>   'events#create_event_and_book'
-  post        'payless-booking'              =>   'events#payless_booking'   
+  post        'pay-membership-return-stripe'  =>  'stripe#membership_return_stripe' 
+  
   
 
   get         'admin-panel'             =>  'admins#admin_panel'

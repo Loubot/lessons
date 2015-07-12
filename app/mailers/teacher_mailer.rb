@@ -2,7 +2,8 @@ class TeacherMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
   include Devise::Mailers::Helpers
 
-  def single_booking_mail_teacher(lesson_location, cart)
+  def single_booking_mail_teacher(lesson_location, cart, price)
+    p "mail price #{price}"
     # logger.info "teacher email email #{student_name} #{params} #{student_name}"
     begin
       weeks = cart.weeks.to_i
@@ -26,9 +27,9 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"SNAME",          "content"=>cart.student_name  },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>weeks },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount * weeks, unit: '€') },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %Y") },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price * weeks, unit: '€') },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime("%d %b %Y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],
@@ -48,8 +49,8 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{cart.teacher_email}"
   end #end of single_booking_mail_teacher
 
-  def single_booking_mail_student(lesson_location, cart)
-    
+  def single_booking_mail_student(lesson_location, cart, price)
+    p "mail price #{price}"
     begin
       weeks = cart.weeks.to_i
       require 'mandrill'
@@ -72,9 +73,9 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"TNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
                                           { "name"=>"NUMBERLESSONS",  "content"=>weeks },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount * weeks, unit: '€') },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime("%d %b %Y") },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price * weeks, unit: '€') },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime("%d %b %Y") },
                                           { "name"=>"LESSONLOCATION", "content"=>lesson_location}                                         
                                         ]
                           }],
@@ -94,8 +95,8 @@ class TeacherMailer < ActionMailer::Base
     logger.info "Mail sent to #{cart.teacher_email}"
   end # end of single_booking_mail_student
 
-  def home_booking_mail_student(cart)
-
+  def home_booking_mail_student(cart, price)
+    p "mail price #{price}"
     begin
       require 'mandrill'
       
@@ -117,11 +118,11 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>cart.student_name  },
                                           { "name"=>"TNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"TEMAILADDRESS",  "content"=>cart.teacher_email },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price, unit:'€') },
                                           { "name"=>"NUMBERLESSONS",  "content"=>1 },
                                           { "name"=>"LESSONLOCATION", "content"=>cart.address },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime('%d/%m/%Y') }
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime('%d/%m/%Y') }
                                         ]
                           }],
                   
@@ -144,9 +145,8 @@ class TeacherMailer < ActionMailer::Base
   end #end of home_booking_mail_student
 
 
-  def home_booking_mail_teacher(cart)
-    # p "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
-    # logger.info "date $$$$$$$$$$$$$$ #{cart.params[:date].to_date}"
+  def home_booking_mail_teacher(cart, price)
+    p "mail price #{price}"
     begin
       require 'mandrill'
       
@@ -168,9 +168,9 @@ class TeacherMailer < ActionMailer::Base
                                           { "name"=>"FNAME",          "content"=>cart.teacher_name  },
                                           { "name"=>"SNAME",          "content"=>cart.student_name   },
                                           { "name"=>"STEMAILADDRESS", "content"=>cart.student_email  },
-                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(cart.amount, unit:'€') },
-                                          { "name"=>"LESSONTIME",     "content"=>cart.params[:start_time].strftime("%H:%M") },
-                                          { "name"=>"LESSONDATE",     "content"=>cart.params[:start_time].strftime('%d/%m/%Y') },
+                                          { "name"=>"LESSONPRICE",    "content"=>number_to_currency(price, unit:'€') },
+                                          { "name"=>"LESSONTIME",     "content"=>cart.start_time.strftime("%H:%M") },
+                                          { "name"=>"LESSONDATE",     "content"=>cart.start_time.strftime('%d/%m/%Y') },
                                           { "name"=>"LESSONLOCATION", "content"=>cart.address }
                                         ]
                           }],
@@ -290,19 +290,22 @@ class TeacherMailer < ActionMailer::Base
       message = {  
        :subject=> "Password reset",  
        :from_name=> "Learn Your Lesson",  
-       :text=> %Q(<html>Reset your password #{record} #{token} #{opts} <br>
+       :text=> %Q(<html>Reset your password  <br>
 
-                <a>https://learn-your-lesson.herokuapp.com/teachers/password/edit?reset_password_token=#{token}</a></html>),  
+                <a href='https://www.learnyourlesson.ie/teachers/password/edit?reset_password_token=#{token}'>Reset password</a></html>), 
        :to=>[  
          {  
            :email=> record.email,
            :name=> "#{record.full_name}"  
          }  
        ],  
-       :html=> %Q(<html>http://localhost:3000/teachers/password/edit?reset_password_token=#{token}</html>),  
-       :from_email=> "learn@b.com"  
-      }  
-      sending = m.messages.send message  
+       :html=> %Q(<html>Reset your password  <br>
+
+                <a href='https://www.learnyourlesson.ie/teachers/password/edit?reset_password_token=#{token}'>Reset password</a></html>), 
+       :from_email=> "alan@learnyourlesson.ie"  
+      }
+      async = false
+      sending = m.messages.send message, async
       puts sending
     rescue Mandrill::Error => e
         # Mandrill errors are thrown as exceptions

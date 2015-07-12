@@ -12,7 +12,7 @@
 <% end %>
 <%= content_for :title,  @teacher.full_name %>
 
-<% cache [@teacher, @profilePic, @photos, @prices.maximum(:updated_at), current_teacher] do %>
+
 <div class="outer-container">
 
 
@@ -28,7 +28,7 @@
         
         <tr>
           <td >Address: </td>
-          <td id="address"><%= @locations.first.address %></td>
+          <td id="address"><%= @teacher.locations.first.address %></td>
         </tr>
         <tr>
           <td >Profile views: </td>
@@ -162,7 +162,7 @@
           <%= display_subjects(@teacher.subjects, @teacher.id) %> <%# teachers_helper %>
         </div> <!-- end of panel-body -->
       </div> <!-- end of booking_button_panel -->
-      <% if @teacher.packages.size != 0 %>
+      <% if @teacher.packages.size != 0 && @teacher.has_payment_set? %>
         <div class="col-xs-12 package_form_well">
           <h3 class="package_form_header">Teachers special offers</h3>
           
@@ -202,12 +202,8 @@
       </div>
     </div> <!-- end of row -->
 </div>
-<% end %> <%# end of cache %>
 
-<%# render 'modals/show_teacher/payment_choice_modal' %>
-<%= render 'modals/show_teacher/payments_modal_for_users' %>
-<%= render 'modals/show_teacher/payments_modal_for_users_multiple' %>
-<%# render 'modals/show_teacher/payment_no_location_modal' %>
+<%= render 'modals/show_teacher/booking_modal' %>
 <%= render 'modals/show_teacher/payment_packages_modal' %>
 
 <%= render 'modals/show_teacher/the_one_modal' %>

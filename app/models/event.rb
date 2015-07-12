@@ -75,31 +75,35 @@ class Event < ActiveRecord::Base
     return event  
   end
 
-  def self.student_do_single_booking(params)
+  def self.student_do_single_booking(params, price)  #check if event times are valid
     p "params1 #{params}"
     
 
     event = Event.new( 
-                        get_event_params(params)
+                        get_event_params(params, price)
                       )
   end
 
-  def self.get_event_params(params)
-    p "params2 #{params}"
-    p "adfadfadf #{params[:event]}"
-    logger.info "adfadfadf #{params[:event]}"
-    date = params[:event][:date]
-    dates = { start_time: Time.zone.parse("#{date} #{params[:event]['start_time(5i)']}"),
-      end_time: Time.zone.parse("#{date} #{params[:event]['end_time(5i)']}"),
-      teacher_id: params[:event][:teacher_id],
-      student_id: params[:event][:student_id],
-      subject_id: params[:event][:subject_id],
+  def self.get_event_params(params, price)
+    date = params[:user_cart][:date]
+    start_time = Time.zone.parse("#{date} #{params[:user_cart]['start_time(5i)']}")
+    p "start_time #{start_time}"
+    p "start_time + mins #{start_time + price.duration.to_i.minutes}"
+    
+    date = params[:user_cart][:date]
+    dates = { start_time: start_time,
+      end_time: Time.zone.parse("#{start_time + price.duration.to_i.minutes}"),
+      teacher_id: params[:user_cart][:teacher_id],
+      student_id: params[:user_cart][:student_id],
+      subject_id: params[:user_cart][:subject_id],
       status: 'payment'
      }
+     p "dates #{dates.inspect}"
+     dates
   end
 
 
-  def self.create_confirmed_events(cart, payment)
+  def self.create_confirmed_events(cart, payment) #create and save confirmed event after booking/payment complete
     #cart[:booking_type]
     if cart.booking_type == 'multiple'
       p "heeeeeeelllll1"
@@ -121,9 +125,11 @@ private
 	end
 
   def self.create_single_event_and_save(cart, payment)
+    p "create_single_event_and_save #{cart.start_time}"
+    p = Price.find(cart.price_id.to_i)
     e = Event.create!(
-                start_time: cart.params[:start_time],
-                end_time: cart.params[:end_time],
+                start_time: cart.start_time,
+                end_time: cart.start_time + p.duration.minutes,
                 teacher_id: cart.teacher_id,
                 student_id: cart.student_id,
                 subject_id: cart.subject_id,

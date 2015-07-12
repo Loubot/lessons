@@ -24,7 +24,7 @@
                   <%= hidden_field_tag :scope, 'read_write' %>
 
 
-                  <%= hidden_field_tag :redirect_uri, 'https://www.learn-your-lesson.ie/stripe-auth-user' %>
+                  <%= hidden_field_tag :redirect_uri, "#{root_url}stripe-auth-user" %>
 
 
 
@@ -41,14 +41,14 @@
                <%= form_for @teacher, class: 'paypal_email_form form-horizontal' do |f| %>
                   <div class="form-group">
                     <div class="col-sm-10">
-                     <%= text_field_tag 'teacher[paypal_first_name]', nil,  placeholder: 'First name', class: 'form-control' %>
+                     <%= text_field_tag 'teacher[paypal_first_name]', @teacher.first_name,  placeholder: 'First name', class: 'form-control' %>
 
                    </div>
                   </div> <!-- end of form-group -->
 
                    <div class="form-group">
                    <div class="col-sm-10">
-                     <%= text_field_tag 'teacher[paypal_last_name]', nil,   placeholder: 'Last name', class: 'form-control' %>
+                     <%= text_field_tag 'teacher[paypal_last_name]', @teacher.last_name,   placeholder: 'Last name', class: 'form-control' %>
                    </div>
                  </div> <!-- enf of form-group -->
 

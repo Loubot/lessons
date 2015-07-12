@@ -10,9 +10,10 @@ class PricesController < ApplicationController
 	end
 
 	def create
-		p "params #{price_params[:price]}"
-		@price = Price.find_or_initialize_by(id: price_params[:subject_id], no_map: true)
-		@price.update_attributes(price_params)
+		# p "params #{price_params[:price]}"
+		@price = Price.new(price_params)
+		p @price.inspect
+		
 		# @name = @price.subject.name
 		if @price.save
 
@@ -54,6 +55,6 @@ class PricesController < ApplicationController
 	private
 
 			def price_params
-				params.require(:price).permit!
+				params.require(:price).permit(:subject_id, :teacher_id, :location_id, :no_map, :duration, :price, :id)
 			end
 end

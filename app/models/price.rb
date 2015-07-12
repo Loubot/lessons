@@ -10,6 +10,7 @@
 #  location_id :integer
 #  price       :decimal(8, 2)
 #  no_map      :boolean          default(FALSE)
+#  duration    :integer          default(0)
 #
 
 class Price < ActiveRecord::Base
@@ -18,15 +19,21 @@ class Price < ActiveRecord::Base
   belongs_to :subject, touch: true
   belongs_to :teacher, touch: true
 
-  validates :subject_id, :teacher_id, :price, :no_map,  presence: true
+  validates :subject_id, :teacher_id, :duration, :price, presence: true
   validates :no_map, :inclusion => [true, false]
+  validates :duration, numericality: { greater_than: 0 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validate :duration_is_fifteen
 
   scope :is_valid?, -> { where("home_price IS NOT NULL") }
 
   after_destroy :update_teacher
   after_update :update_teacher
   after_create :update_teacher  
+
+  def duration_is_fifteen
+    errors.add(:duration, 'must be multiple of 15 mins') if (duration % 15 != 0)
+  end
 
   def update_teacher
     Teacher.find(self.teacher_id).set_active

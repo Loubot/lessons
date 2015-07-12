@@ -10,6 +10,7 @@
 #  no_of_lessons :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  duration      :integer          default(0)
 #
 
 class Package < ActiveRecord::Base

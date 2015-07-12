@@ -18,8 +18,9 @@ class PaypalController < ApplicationController
     @event_id = session[:event_params] || []
   end
 
-  def paypal_create    
-    create_paypal(params) if params[:paypal].present?
+  def paypal_create
+    p "got here"
+    create_paypal(params)
   end
 
   #handle membership payments
@@ -30,7 +31,8 @@ class PaypalController < ApplicationController
       :user_id       => ENV['PAYPAL_USER_ID'],
       :password      => ENV['PAYPAL_PASSWORD'],
       :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID']
+      :app_id        => ENV['PAYPAL_APP_ID'],
+      sandbox:       true
       
     )
 
@@ -206,9 +208,10 @@ class PaypalController < ApplicationController
   end
 
   def home_booking_paypal
-    update_student_address(params) #application controller
-    price = Price.find(params[:price_id])
     cart = UserCart.find(session[:cart_id].to_i)
+    update_student_address(params) #application controller
+    price = Price.find(cart.price_id)
+   
     p "cart price #{cart.amount}"
     cart.update_attributes(address:params[:home_address])
     p "start time #{params[:start_time]}"
@@ -228,9 +231,9 @@ class PaypalController < ApplicationController
       :tracking_id     => cart.tracking_id,
       :cancel_url      => "https://www.learnyourlesson.ie",
       :return_url      => request.referrer,
-      :ipn_notification_url => "https://www.learnyourlesson.ie/store-paypal",
+      :ipn_notification_url => "#{root_url}store-paypal",
       :receivers => [
-        { :email => params[:teacher_email], amount: cart.amount } #, primary: true
+        { :email => cart.teacher_email, amount: price.price.to_f } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
@@ -278,16 +281,24 @@ class PaypalController < ApplicationController
       if response == "VERIFIED" && params['status'] == 'COMPLETED'
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
         #p "cart #{cart.booking_type}"
+        price = Price.find(cart.price_id)
         
         
         render status: 200, nothing: true and return if !cart
         
         if cart.booking_type == "home"
           # p "date %%%%%%%%%%%%% #{Date.parse(cart.params[:date]).strftime('%d/%m%Y')}"
-          
-          TeacherMailer.delay.home_booking_mail_student(cart)
-          TeacherMailer.delay.home_booking_mail_teacher(cart)
           Event.delay.create_confirmed_events(cart, 'paid')
+          
+          TeacherMailer.delay.home_booking_mail_teacher(
+                                                      cart,
+                                                      price.price
+                                                    )
+          TeacherMailer.delay.home_booking_mail_student(
+                                                      cart,
+                                                      price.price
+                                                    )
+          
           transaction = Transaction.create( #payments_helper
                                             create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
                                           )
@@ -309,12 +320,14 @@ class PaypalController < ApplicationController
           # p "Event created id: #{event.id}"
           TeacherMailer.delay.single_booking_mail_teacher(
                                       location.name,
-                                      cart
+                                      cart,
+                                      price.price
                                       
                                     )
           TeacherMailer.delay.single_booking_mail_student(
                                       location.name,
-                                      cart
+                                      cart,
+                                      price.price
                                       
                                     )
 
@@ -342,10 +355,10 @@ class PaypalController < ApplicationController
     require "pp-adaptive"
 
     client = AdaptivePayments::Client.new(
-      :user_id       => "lllouis_api1.yahoo.com",
-      :password      => "MRXUGXEXHYX7JGHH",
-      :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-      :app_id        => "APP-80W284485P519543T",
+      :user_id       => ENV['PAYPAL_USER_ID'],
+      :password      => ENV['PAYPAL_PASSWORD'],
+      :signature     => ENV['PAYPAL_SIGNATURE'],
+      :app_id        => ENV['PAYPAL_APP_ID'],
       :sandbox       => true
     )
 
@@ -370,9 +383,12 @@ class PaypalController < ApplicationController
   end
 
       def create_paypal(params)
-        price = Price.find(session[:price_id]).price.to_f
-        cart = UserCart.where(student_id: current_teacher.id).last
-        @amount = price* cart.weeks
+        p "paypal ipn address #{root_url}store-paypal"
+        cart = UserCart.find(session[:cart_id])
+        price = Price.find(cart.price_id).price.to_f
+        teacher = Teacher.find(cart.teacher_id)
+        
+        @amount = price * cart.weeks
         require "pp-adaptive"
         client = AdaptivePayments::Client.new(
           :user_id       => "lllouis_api1.yahoo.com",
@@ -388,15 +404,15 @@ class PaypalController < ApplicationController
           :tracking_id     => cart.tracking_id,
           :cancel_url      => "https://learn-your-lesson.herokuapp.com",
           :return_url      => request.referrer,
-          :ipn_notification_url => 'https://wwww.learnyourlesson.ie/store-paypal',
+          :ipn_notification_url => "#{root_url}store-paypal",
           :receivers => [
-            { :email => params[:teacher], amount: @amount }
+            { :email => teacher.email, amount: @amount }
             # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
           ]
         ) do |response|
 
           if response.success?
-            puts "Pay key: #{response.pay_key}"
+            puts "Pay key: #{response}"
             logger.info "create paypal response #{response.inspect}"
 
             # send the user to PayPal to make the payment

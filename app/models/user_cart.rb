@@ -22,24 +22,44 @@
 #  teacher_name  :string           default("")
 #  location_id   :integer
 #  status        :string           default("")
+#  start_time    :datetime
+#  price_id      :integer
+#  date          :date
 #
 
 class UserCart < ActiveRecord::Base
   belongs_to :teacher, touch: true
   serialize :params
 
-  validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, :amount, presence: true
+  # validates :teacher_id, :teacher_email, :student_id, :params, :tracking_id, :amount, presence: true
+  validates :start_time, presence: true
   validates :tracking_id, uniqueness: true
   # validates :amount, :numericality => { :greater_than => 0 }
 
   # before_update :save_tracking_id
   # before_create :save_tracking_id
   before_validation :save_tracking_id
+  before_validation :initial
 
   def save_tracking_id
     
     self.tracking_id = Digest::SHA1.hexdigest([Time.now, rand, self.id].join)
   end
+
+  def initial #check booking type before saving
+    p "location_id #{self.location_id}"
+    if self.location_id == "" || self.location_id == nil
+      self.booking_type =  'home'
+        
+    else      
+      self.booking_type =  'single'        
+    end
+
+    if self.weeks == 0 
+      self.weeks = 1
+    end
+  end
+
 
   def self.membership_cart(teacher, email)
     cart = self.create!(
@@ -62,7 +82,7 @@ class UserCart < ActiveRecord::Base
     cart.update_attributes(
                     teacher_id: params[:event][:teacher_id],
                     student_id: params[:event][:student_id],
-                    params: Event.get_event_params(params),
+                    params: Event.get_event_params(params, price),
                     student_name: params[:event][:student_name],
                     teacher_name: params[:event][:teacher_name],
                     student_email: params[:event][:student_email],
@@ -71,7 +91,8 @@ class UserCart < ActiveRecord::Base
                     booking_type: 'home',
                     multiple: false,
                     package_id: 0,
-                    amount: price.to_f
+                    amount: price.price.to_f,
+                    duration: price.duration
                   )
     cart.save!
 

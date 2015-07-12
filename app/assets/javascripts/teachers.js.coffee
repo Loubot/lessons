@@ -301,54 +301,40 @@ teachersInfoReady = ->
 
     #the_one_modal
     if $('#the_one_modal').length
+      AnyTime.noPicker 'home_lesson_datepicker' #activate anytime datepicker
+      $("#home_lesson_datepicker").AnyTime_picker
+        format: "%Y-%m-%d"
+        placement: 'inline'
+        hideInput: true
       $('#the_one_modal').on 'hidden.bs.modal', ->
-        $('.payment_form_container').empty()
-        $('.display_teachers_location').empty()
-        $('.returned_locations_container').empty()
-        $('.payment_choice_error').empty()
-        
-      $('#the_one_modal').on 'shown.bs.modal', ->
-        $('.payment_form_container').empty()
-        $("select").each ->
+        $('.check_availabilty_form_container').html ""
+        $('.location_only_price_select').css 'display', 'none'
+        $('.home_only_avail_times').css "display", 'none'
+        $('.payment_choice_error').remove()
+        $("select").each -> #set all selects to 0 position
           $(this).val($(this).find('option[selected]').val())
-        
-      # document.getElementById("select_subject").selectedIndex = 0     
-      $(document).on 'change', '.select_subject', ->
-        $('.select_subject').submit()
-        # $.ajax
-        #   url: 'get-locations'
-        #   data:            
-        #     subject_id: $('.select_subject').val()
-        #     id: $('#select_subjects_teacher_id').val()
 
-      $(document).on 'change', '.select_home_or_location', ->
-        $('.location_choice').val $('.select_home_or_location').val()
-        $('.subject_id').val $('.select_subject').val()
-        $('.get_subjects_form').submit()
-        # $.ajax
-        #   url: 'get-subjects'
-        #   data:
-        #    id: $('#select_subjects_teacher_id').val()
-        #    subject_id: $('.select_subject').val()
-        #    location_choice: $('.select_home_or_location').val()
-      
-      # $(document).on 'click', '#location_only_datepicker', ->
-      #   console.log 'a'
-      #   AnyTime.noPicker 'location_only_datepicker'
-      #   $("#location_only_datepicker").AnyTime_picker
-      #     format: "%Y-%m-%d"
-      #     placement: 'inline'
-      #     hideInput: true
 
-      $(document).on 'change', '.teachers_location_selection', ->
-        $('.teachers_locations_subject').val $('.select_subject').val()
-        $('.get_locations_price_form').submit()
-        # $.ajax
-        #   url: 'get-locations-price'
-        #   data:
-        #     id: $('#select_subjects_teacher_id').val()
-        #     subject_id: $('.select_subject').val()
-        #     location_id: $('.teachers_location_selection').val()
+          #home only. display availability form after selecting price
+    $(document).on 'change', '.home_only_price_select', ->
+      if $('.home_only_price_select')[0].selectedIndex != 0
+        $('.home_only_avail_times').css 'display', 'inline'
+
+
+        #location only select location id
+    $(document).on 'change', '.location_only_select', ->
+      if $('.location_only_select')[0].selectedIndex != 0
+        $.post '/user_carts/1/loc-only-prices',
+          { 'user_cart[location_id]': $('.location_only_select').val(),
+          'user_cart[teacher_id]': $('#user_cart_teacher_id').val(),
+          'user_cart[subject_id': $('#user_cart_subject_id').val() },
+          'script'
+
+    $(document).on 'change', '.select_home_or_location', -> #submit choice of home or location
+      if $('.home_or_location_select_tag')[0].selectedIndex != 0
+        $('.select_home_or_location').submit()
+
+
 
     # end of the_one_modal
 
@@ -356,32 +342,40 @@ teachersInfoReady = ->
 
     $(document).on 'submit', '.home_booking_form', (e) -> #prevent paypal for submitting
       
-      e.preventDefault()      
+      e.preventDefault()
       
       address = null
       
       
       $('.home_address').val $('#home_booking_address').val() #append address to booking form
 
-      if $('#remember').is ':checked'
-        $('.save_address').val 'true' #set value of hidden field to tell server to save address
+      if $('#hello_check_box').is ':checked'
+        console.log 'yes'
+        $('.save_address').val "Remember address" #set value of hidden field to tell server to save address
       else
+        console.log 'no'
         $('.save_address').val 'false'
-        
-      address = $('#home_booking_address').val() 
+      
+      
+      address = $('.home_address').val()
       if !address #alert user if no address entered
         alert "Address cannot be blank" 
       else 
         @.submit()
 
-    $(document).on 'click', '.stripe-button-el', ->  #function on stripe button click. 
+    $(document).on 'click', '.stripe-button-el', ->  #function on stripe button click.
+
       
-      $('.home_address').val $('#home_booking_address').val()
-      if $('#remember').is ':checked'
-        
-        $('.save_address').val 'true'
+     
+      $('.home_address').val $('#home_booking_address').val() #append address to booking form
+
+      console.log $('.home_address').val()
+
+      if $('#hello_check_box').is ':checked'
+        console.log 'yes'
+        $('.home_booking_form').prepend """ <input type="hidden" name="remember" id="remember" class="save_address" value="Remember address"> """
       else
-        
+        console.log 'no'
         $('.save_address').val 'false'
 
         # append package id to packages modal when packages modal is opened
@@ -453,4 +447,4 @@ getCounties = () ->
   return ['Antrim','Armagh','Carlow','Cavan','Clare','Cork','Derry','Donegal','Down','Dublin',
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
-          'Waterford','Westmeath','Wexford','Wicklow']    
+          'Waterford','Westmeath','Wexford','Wicklow']

@@ -2,6 +2,9 @@ class EventsController < ApplicationController
 	include TeachersHelper
 	include	EventsHelper
 	before_action :authenticate_teacher!
+	before_action :check_id, only: [:payless_booking]
+
+
 	def create
 		if params[:date].blank? 
 			flash[:danger] = "Date can't be blank"
@@ -51,53 +54,17 @@ class EventsController < ApplicationController
 
 	def destroy
 		Event.find(params[:id]).destroy
+		redirect_to :back
 	end
 
-	# ajax event booking
-	def create_event_and_book		
-		
-		@price = Price.find(session[:price_id])
-		p "event price #{@price.price}"
-		if params['Multiple'] == 'true'
-			event = Event.student_do_multiple_bookings(params)
-			if event.valid?
-				@event = event
-				
-				puts "weeks #{@weeks.to_i} rate #{@rate.to_f}"
-				
-
-				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.create_multiple_cart(params, @teacher.email, current_teacher, session[:location_id], @price.price)
-				@weeks = @cart.weeks
-				@total_rate = @cart.weeks.to_i * @cart.amount.to_f
-				p "rate amount ******** #{@cart.weeks.to_i * @cart.amount.to_f}"
-				session[:cart_id] = @cart.id
-				# p "cart multiple #{@cart.inspect}"
-				
-			else
-				puts event
-				@event = event.errors.full_messages
-			end
-			render 'events/multiple_events.js.coffee'
-		else #single booking		
-			
-			@event = Event.student_do_single_booking(params)
-			
-			
-			if @event.valid?
-				@teacher = Teacher.find(params[:event][:teacher_id])	# teacher not student		
-				@cart = UserCart.create_single_cart(params, @teacher.email, current_teacher, session[:location_id], @price.price)
-				session[:cart_id] = @cart.id
-				p "cart  #{@cart.inspect}"
-			else
-				@teacher = @event.errors.full_messages
-			end
-		end		
-	end
+	# ajax event booking	
 
 	def payless_booking #take booking without payment
+		p "right here huh huh"
 		cart = UserCart.find(session[:cart_id])
 		cart.update_attributes(status: 'owed')
+		price = Price.find(cart.price_id.to_i)
+		p "payless_booking #{price.price}"
 		if !cart
 			flash[:danger] = "Couldn't find your cart. Please try again"
 			p "Payless booking. Couldn't find cart"
@@ -108,31 +75,39 @@ class EventsController < ApplicationController
 		p "payless booking found cart"
 		case cart.booking_type #single, multiple, home, package
 		when 'home'
+			p "shouldn't be here £££££££££££££££££££££££££££££££££££££"
 			update_student_address(params)
 			cart.update_attributes(address:params[:home_address])
+			
 			Event.delay.create_confirmed_events(cart, cart.status)
 
 			TeacherMailer.delay.home_booking_mail_teacher(
-			                                                cart
+			                                                cart,
+			                                                price.price
 			                                              )
 			TeacherMailer.delay.home_booking_mail_student(
-			                                                cart
+			                                                cart,
+			                                                price.price
 			                                              )
 
 		when 'single'
-			lesson_location = Location.find(session[:location_id]).name
+			p "should be here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #{cart.inspect}"
+			lesson_location = Location.find(cart.location_id).name
+			
 			Event.create_confirmed_events(cart, cart.status) #Event model, checks if multiple or not
 
 			TeacherMailer.delay.single_booking_mail_teacher(                                                
                                                 
                                                       lesson_location,
-                                                      cart                		                            
+                                                      cart,
+                                                      price.price              		                            
                     		                            )
 
     	TeacherMailer.delay.single_booking_mail_student(
                                                   
                                                       lesson_location,
-                                                      cart
+                                                      cart,
+                                                      price.price
                                                     )
 
 
@@ -164,6 +139,13 @@ class EventsController < ApplicationController
 		def event_params
 			params.require(:event).permit!
 		end
+
+		def check_id
+
+			if params[:id].to_i != current_teacher.id
+				render status: 200, nothing: true
+			end
+		end #end of payless_booking
 
 		
 end

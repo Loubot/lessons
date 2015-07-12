@@ -1,0 +1,13 @@
+<%= form_tag select_home_or_location_user_cart_path(id: current_teacher.id), \
+        class: 'form-horizontal select_home_or_location', remote: true do %>
+
+  <%= select_tag :location_choice, options_for_select([['Your house', 1],['Teachers house', 2]]), class: 'form-control home_or_location_select_tag', prompt: "Your house or teachers?" %>
+  <%= hidden_field_tag :teacher_id, params[:id] %>
+  <%= hidden_field_tag :subject_id, @subject.id %>
+<% end %> <%# end of form %>
+
+
+<div class="check_availabilty_form_container">
+
+  <!-- populated by usercarts controler after selecting home or location lesson -->
+</div> <!-- end of check_availabilty_form_container -->

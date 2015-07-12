@@ -1,4 +1,4 @@
-<% cache [current_teacher, @teacher, 'the_one_modal'] do %>
+
   <% if teacher_signed_in? %>  
     <div class="modal fade" id="the_one_modal" tabindex="-1" role="dialog" aria-labelledby="the_one_modal" aria-hidden="true">
       <div class="modal-dialog">
@@ -9,28 +9,31 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid">   <%# teacher.js for form submisson on change %>
-                <%= form_tag get_locations_path, remote: true, method: 'post' do %>
-                  <%= select 'subject', 'id', content_tag(:option,'select subject...',:value=>"")+options_from_collection_for_select(@subjects, return_id_for_select, return_text_for_select), { }, { class: 'form-control select_subject' } %>
-                  <input type="hidden" name="subject[teacher_id]" value="<%= @teacher.id %>">
-                <% end %>
-                <%# select 'location', 'id', options_for_select([['Home lesson', 1], ['Teachers house', '2']]), { include_blank: true }, { class: 'form-control select_location'} %>
-                 <%# teachers helper %>
-                <input type="hidden" name="Select subject" value="<%= @teacher.id %>" id="select_subjects_teacher_id">
-                <div class="returned_locations_container">
-                  <!-- ajax -->
-                </div> <!-- end of returned_locations_container -->
-                <div class='display_teachers_location'>
-                  <!-- ajax -->
-                </div>
-                <div class="payment_form_container">
-                  
-                  <!-- ajax -->
-                </div> <!-- end of payment_form_container -->
+              <%# text_field_tag :id, @subject.name, class: 'form-control', disabled: true %>
 
+              <%# if teacher has home booking and locations %>
+              <% if @teacher.prices.any? { |p| p.no_map == true && p.subject_id == @subject.id } && \
+                  @teacher.prices.any? { |p| p.location_id != nil && p.subject_id == @subject.id } %>
+
+                <%= render partial: 'partials/show_teacher/user_cart_forms/home_and_location' %>
+
+              <%# elsif teacher only has home prices %>
+              <% elsif !@teacher.prices.any? { |p| p.location_id != nil && p.subject_id == @subject.id } %>
+                
+                <%= render partial: 'partials/show_teacher/user_cart_forms/home_only' %>
+                
+              <%# teacher only has location entries for this subject %>
+              <% else %>
+
+                <%= render partial: 'partials/show_teacher/user_cart_forms/location_only' %>
+
+              <% end %> 
+              <div class="errors_container">
+
+              </div> <!-- end of errors_container -->
             </div> <!-- end of container-fluid -->
           </div> <!-- end of modal-body -->
         </div> <!-- end of modal-content -->
       </div> <!-- end of modal-dialog -->
     </div> <!-- end of modal fade -->
   <% end %> <!-- if teacher_signed_in? -->
-<% end %> <%# end of cache %>
