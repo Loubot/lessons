@@ -27,7 +27,7 @@
         </thead>
         <% @home_prices.each do |p| %>
           <tr>
-            <td><%= get_subject_name(p) %></td>
+            <td><%= get_subject_name(@teacher, p) %></td>
             <td><%= number_to_currency(p.price, unit:'€') %></td>
             <td><%= "#{p.duration} mins" %></td>
             <td><%= link_to 'Delete?', [current_teacher, p], method: :delete, \
@@ -123,10 +123,10 @@
         </thead>
         <% @location_prices.each do |p| %>
           <tr>
-            <td><%= get_subject_name(p) %></td>
+            <td><%= get_subject_name(@teacher, p) %></td>
             <td><%= number_to_currency(p.price, unit:'€') %></td>
             <td><%= "#{p.duration} mins" %></td>
-            <td><%= get_location_name(p) %></td>
+            <td><%= get_location_name(@teacher, p) %></td>
             <td><%= link_to 'Delete?', [current_teacher, p], method: :delete, \
                     'data-confirm' => 'Are you sure', class: 'btn btn-danger btn-sm' %></td>    
           </tr>
