@@ -14,7 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/test
+
 /public/uploads
 config/initializers/carrierwave.rb
 app/uploaders/avatar_uploader.rb
