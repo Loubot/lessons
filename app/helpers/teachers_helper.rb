@@ -173,7 +173,9 @@ module TeachersHelper
   end
 
   def get_subject_name(price)
+    p "price inspect #{price.inspect}"
     s = current_teacher.subjects.select { |s| s.id == price.subject_id }.first
+    p "s inspect #{s.inspect}"
     s.name
   end
 
