@@ -169,14 +169,23 @@ module TeachersHelper
 
   def get_location_name(teacher, price)
     l = teacher.locations.select { |l| l.id == price.location_id }.first
-    l.name
+    if l 
+      l.name
+    else
+      "Name not defined"
+    end
+    
   end
 
   def get_subject_name(teacher, price)
     p "price inspect #{price.inspect}"
     s = teacher.subjects.select { |s| s.id == price.subject_id }.first
     p "s inspect #{s.inspect}"
-    s.name
+    if s 
+      s.name
+    else
+      "No name defined"
+    end
   end
 
   def get_select_text(p)
