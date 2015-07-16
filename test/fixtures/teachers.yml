@@ -1,5 +1,5 @@
 
-one:
+louis:
   first_name: 'Louis'
   second_name: 'Angelini'
   overview: 'I is a teaher'
@@ -13,5 +13,4 @@ one:
   stripe_access_token: '123'
   stripe_user_id: 'abcd'
   address: ''
-  paid_up: false
-  
+  paid_up: false  

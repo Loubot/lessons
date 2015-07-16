@@ -2,6 +2,8 @@ require 'test_helper'
 
 class StaticControllerTest < ActionController::TestCase
 
+  fixtures :teachers
+
   test "should display how it works" do 
 
     get :how_it_works
@@ -43,4 +45,6 @@ class StaticControllerTest < ActionController::TestCase
   end
 
   
+
+  teacher = teachers(:louis)
 end
