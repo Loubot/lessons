@@ -4,11 +4,11 @@ class TeachersControllerTest < ActionController::TestCase
 
   
 
-  test "should display edit" do 
+  # test "should display edit" do 
 
-    get :edit, id: 1
-    assert_response 302
+  #   get :edit, id: 1
+  #   assert_response 302
 
-  end
+  # end
 
 end

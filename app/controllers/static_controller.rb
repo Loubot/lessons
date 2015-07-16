@@ -104,10 +104,6 @@ class StaticController < ApplicationController
 		
 	end
 
-	def robots
-		render 'public/robots.txt'
-	end
-
 	def new_registration
 		@oauth = session['devise.facebook_data']
 		@provider = session['devise.facebook_data']['provider'] == 'facebook' ? "facebook" : "Google"
@@ -116,7 +112,7 @@ class StaticController < ApplicationController
 
 	def confirm_registration
 		puts "facebook_data #{session['devise.facebook_data']}"
-		@teacher = Teacher.from_omniauth(session['devise.facebook_data']) #action in the teacher model
+		@teacher = Teacher.from_omniauth(session['devise.facebook_data']) #method in the teacher model
 		
 		
 		if params[:teacher].to_i == 2

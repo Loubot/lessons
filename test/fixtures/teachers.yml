@@ -1,0 +1,17 @@
+
+one:
+  first_name: 'Louis'
+  second_name: 'Angelini'
+  overview: 'I is a teaher'
+  email: 'lllouis@yahoo.com'
+  encrypted_password: 'abcd'
+  reset_password_token: '123'
+  admin: true
+  profile: 2
+  is_teacher: true
+  paypal_email: 'lllouis@yahoo.com'
+  stripe_access_token: '123'
+  stripe_user_id: 'abcd'
+  address: ''
+  paid_up: false
+  
