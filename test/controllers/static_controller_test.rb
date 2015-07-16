@@ -44,7 +44,11 @@ class StaticControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  
+  test "should log in user" do
+    t = teachers(:louis)
+    sign_in :teacher, t
 
-  teacher = teachers(:louis)
+  end
+
+  
 end
