@@ -38,7 +38,7 @@ class StaticController < ApplicationController
 
 	def learn
 		render 'static/mobile_views/mobile_learn' if is_mobile?
-		fresh_when(:etag => ['learn-page', current_teacher, flash], :public => true)
+		# fresh_when(:etag => ['learn-page', current_teacher, flash], :public => true)
 	end
 
 	def teach
