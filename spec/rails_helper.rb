@@ -35,6 +35,8 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+  # Capybara.javascript_driver = :webkit
+  # Capybara.app_host = 'http://localhost:3000'
 
 
   config.include Warden::Test::Helpers

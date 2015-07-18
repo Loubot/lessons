@@ -16,12 +16,18 @@
 class Experience < ActiveRecord::Base
 	belongs_to :teacher, touch: true
 
+	validates :title, :description, :teacher_id, :start, presence: true
+
+	validates :start, :end, date: true
+
+	validates :end, date: { after: :start }
+
 	before_save :addTime
 
 
 	def addTime
 		if self.present == '1'
-			self.end = Time.now()
+			self.end = self.start + 5.years
 		end
 	end
 end

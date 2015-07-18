@@ -61,7 +61,7 @@
               </ul>
           <% else %>
             <li><%= link_to 'Become a teacher', teach_path %></li>
-            <li><%= link_to 'Login', '#', data: { toggle: 'modal', target: '#login_modal' } %></li>
+            <li><%= link_to 'Login', '#', id: 'login_button', class: 'login_button',data: { toggle: 'modal', target: '#login_modal' } %></li>
             <li><%= link_to 'Become a student', learn_path %></li>
           <% end %>
         </ul>

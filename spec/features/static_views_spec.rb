@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'database_cleaner'
 
 describe "visit static views" do
 	it 'displays how-it-works' do
@@ -34,6 +35,10 @@ end
 
 
 describe "the register process" do
+	DatabaseCleaner.strategy = :truncation
+
+	# then, whenever you need to clean the DB
+	DatabaseCleaner.clean
   it "registers teachers" do
   	visit '/teach'
   	
@@ -47,6 +52,10 @@ describe "the register process" do
   	expect(page).to have_content 'Welcome'
   end
 
+  DatabaseCleaner.strategy = :truncation
+
+# then, whenever you need to clean the DB
+	DatabaseCleaner.clean
   it "registers students" do
   	visit :learn
 
@@ -60,8 +69,26 @@ describe "the register process" do
   	expect(page).to have_content 'Welcome'
 
   end 
+end
 
+describe "login user" do	
 
- 
+	it 'should login through the login modal' do
+		t = build(:teacher)
 
+		visit 'welcome'
+		expect(page).to have_content('Your place to connect with local teachers')
+		expect(page).to have_content('Login')
+		# click_link_or_button('login_button')
+		
+		expect(page).to have_content('Remember me')
+		page.fill_in 'login_modal_email', with: t.email
+		page.fill_in 'login_modal_password', with: t.password
+		click_link_or_button('sign_in_submit')
+		
+
+		expect(page).to have_content('Signed in successfully')
+		expect(current_path).to eq(root_path)	
+		
+	end
 end

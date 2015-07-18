@@ -43,7 +43,7 @@
                 <li class="divider"></li>
                 <li><%= link_to 'Feedback/Issues', feedback_path %></li>
           <% else %>
-                  <li><%= link_to 'Login', new_teacher_session_path %></li>
+                  <li><%= link_to 'Login', new_teacher_session_path, id: 'login_button' %></li>
           <% end %>
               </ul> <!-- end of dropdown-menu -->
             </li> <!-- end of dropdown -->
