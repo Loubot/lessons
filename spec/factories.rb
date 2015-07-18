@@ -19,4 +19,12 @@ FactoryGirl.define do
 		category
 	end
 
+	factory :qualification do
+		title			'Piano Player'
+		school		'UCC'
+		start			Time.now - 5.years
+		'end'			Time.now
+		teacher
+	end
+
 end

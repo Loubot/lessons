@@ -15,8 +15,9 @@
 
 class Qualification < ActiveRecord::Base
 	belongs_to :teacher, touch: true
-	validates :start, :end, :overlap => {:scope => 'teacher_id' }
-	validates :start, :end, :teacher_id, presence: true
+	validates :start, :end, date: true
+	validates :end, date: { after: :start }
+	validates :title, :school, :start, :end, :teacher_id, presence: true
 
 	before_validation :addTime
 
