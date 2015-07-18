@@ -1,7 +1,7 @@
 
 louis:
   first_name: 'Louis'
-  second_name: 'Angelini'
+  last_name: 'Angelini'
   overview: 'I is a teaher'
   email: 'lllouis@yahoo.com'
   encrypted_password: 'abcd'
