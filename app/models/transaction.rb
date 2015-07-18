@@ -3,16 +3,17 @@
 # Table name: transactions
 #
 #  id            :integer          not null, primary key
-#  sender        :string
-#  trans_id      :string
-#  payStripe     :string
+#  sender        :string(255)
+#  trans_id      :string(255)
+#  payStripe     :string(255)
 #  user_id       :integer
 #  teacher_id    :integer
 #  pay_date      :datetime
-#  tracking_id   :string
+#  tracking_id   :string(255)
 #  whole_message :text
 #  created_at    :datetime
 #  updated_at    :datetime
+#  decimal       :decimal(8, 2)    default(0.0), not null
 #  amount        :decimal(8, 2)    default(0.0), not null
 #
 

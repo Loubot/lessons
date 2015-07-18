@@ -3,10 +3,10 @@
 # Table name: qualifications
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  school     :string
+#  title      :string(255)
+#  school     :string(255)
 #  start      :datetime
-#  end        :datetime
+#  end_time   :datetime
 #  teacher_id :integer
 #  created_at :datetime
 #  updated_at :datetime

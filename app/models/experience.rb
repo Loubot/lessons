@@ -3,11 +3,11 @@
 # Table name: experiences
 #
 #  id          :integer          not null, primary key
-#  title       :string
+#  title       :string(255)
 #  description :text
 #  teacher_id  :integer
 #  start       :datetime
-#  end         :datetime
+#  end_time    :datetime
 #  present     :binary
 #  created_at  :datetime
 #  updated_at  :datetime
