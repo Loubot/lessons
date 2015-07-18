@@ -16,7 +16,7 @@
 class Qualification < ActiveRecord::Base
 	belongs_to :teacher, touch: true
 	validates :start, :end, date: true
-	validates :end, date: { after: :start }
+	validates :end_time, date: { after: :start }
 	validates :title, :school, :start, :end, :teacher_id, presence: true
 
 	before_validation :addTime

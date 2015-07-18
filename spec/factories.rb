@@ -20,10 +20,10 @@ FactoryGirl.define do
 	end
 
 	factory :qualification do
-		title			'Piano Player'
-		school		'UCC'
-		start			Time.now - 5.years
-		'end'			Time.now
+		title				'Piano Player'
+		school			'UCC'
+		start				Time.now - 5.years
+		end_time		Time.now
 		teacher
 	end
 

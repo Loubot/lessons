@@ -20,7 +20,7 @@ class Experience < ActiveRecord::Base
 
 	validates :start, :end, date: true
 
-	validates :end, date: { after: :start }
+	validates :end_time, date: { after: :start }
 
 	before_save :addTime
 
