@@ -1,9 +1,13 @@
 FactoryGirl.define do
 
+	sequence :email do |n|
+    "email#{n}@factory.com"
+  end
+
 	factory :teacher do
 		first_name 					'Louis'
 		last_name 					'Angelini'
-		email 							'test@balls.com'
+		email 							
 		password						'password'
 		profile_views				1
 		is_teacher					true

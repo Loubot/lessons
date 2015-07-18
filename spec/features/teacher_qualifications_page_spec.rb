@@ -48,14 +48,14 @@ describe 'posts to qualifications' do
 		fill_in 'qualification_school', with: 'UCC'
 		select "2015", from: "qualification[start(1i)]"
 		select "July", from: "qualification[start(2i)]"
-		select "2007", from: "qualification[end(1i)]"
-		select "July", from: "qualification[end(2i)]"
+		select "2007", from: "qualification[end_time(1i)]"
+		select "July", from: "qualification[end_time(2i)]"
 		
 		click_link_or_button('qualification_submit')
-		expect(page).to have_content('Failed to save qualification ["End translation missing')
+		expect(page).to have_content('Failed to save qualification ["Start must be after end time"]')
 	end
 
-	it 'should create a qualification using 2 dates' do
+	it 'should create a qualification using correct dates' do
 		t = FactoryGirl.create(:teacher)
 		login_as(t, scope: :teacher)
 		visit '/teachers/1/qualification-form'
@@ -64,14 +64,46 @@ describe 'posts to qualifications' do
 		fill_in 'qualification_school', with: 'UCC'
 		select "2007", from: "qualification[start(1i)]"
 		select "July", from: "qualification[start(2i)]"
-		select "2015", from: "qualification[end(1i)]"
-		select "July", from: "qualification[end(2i)]"
+		select "2015", from: "qualification[end_time(1i)]"
+		select "July", from: "qualification[end_time(2i)]"
 
 		click_link_or_button('qualification_submit')
 		expect(page).to have_content('Qualification saved')
 	end
 
+	it 'should have a qualification' do		
+		t = FactoryGirl.create(:teacher)
+		login_as(t, scope: :teacher)
+
+		visit '/teachers/1/qualification-form'
+		fill_in 'qualification_name', with: 'Degree in Music'
+		fill_in 'qualification_school', with: 'UCC'
+		select "2007", from: "qualification[start(1i)]"
+		select "July", from: "qualification[start(2i)]"
+		select "2015", from: "qualification[end_time(1i)]"
+		select "July", from: "qualification[end_time(2i)]"
+
+		click_link_or_button('qualification_submit')
+		expect(page).to have_content('Delete qualification')
 	end
+
+	it 'should delete qualification' do		
+		t = FactoryGirl.create(:teacher)
+		login_as(t, scope: :teacher)
+
+		visit '/teachers/1/qualification-form'
+		fill_in 'qualification_name', with: 'Degree in Music'
+		fill_in 'qualification_school', with: 'UCC'
+		select "2007", from: "qualification[start(1i)]"
+		select "July", from: "qualification[start(2i)]"
+		select "2015", from: "qualification[end_time(1i)]"
+		select "July", from: "qualification[end_time(2i)]"
+
+		click_link_or_button('qualification_submit')
+		click_link_or_button('delete_qualification')
+		expect(page).to have_content('Qualification successfully deleted')
+	end
+
 
 
 

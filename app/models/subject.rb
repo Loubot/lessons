@@ -3,7 +3,7 @@
 # Table name: subjects
 #
 #  id          :integer          not null, primary key
-#  name        :string
+#  name        :string(255)
 #  category_id :integer
 #  created_at  :datetime
 #  updated_at  :datetime

@@ -3,11 +3,11 @@
 # Table name: experiences
 #
 #  id          :integer          not null, primary key
-#  title       :string
+#  title       :string(255)
 #  description :text
 #  teacher_id  :integer
 #  start       :datetime
-#  end         :datetime
+#  end_time    :datetime
 #  present     :binary
 #  created_at  :datetime
 #  updated_at  :datetime
@@ -18,16 +18,16 @@ class Experience < ActiveRecord::Base
 
 	validates :title, :description, :teacher_id, :start, presence: true
 
-	validates :start, :end, date: true
+	validates :start, :end_time, date: true
 
-	validates :end_time, date: { after: :start }
+	validates :start, date: { before: :end_time, message: 'must be after end time' }
 
 	before_save :addTime
 
 
 	def addTime
 		if self.present == '1'
-			self.end = self.start + 5.years
+			self.end_time = self.start + 5.years
 		end
 	end
 end

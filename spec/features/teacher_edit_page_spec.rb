@@ -73,8 +73,8 @@ describe 'posts for  experience' do
 		fill_in 'experience_description', with: 'Been playing piano for years'
 		select "2015", from: "experience[start(1i)]"
 		select "July", from: "experience[start(2i)]"
-		select "2007", from: "experience[end(1i)]"
-		select "July", from: "experience[end(2i)]"			
+		select "2007", from: "experience[end_time(1i)]"
+		select "July", from: "experience[end_time(2i)]"			
 		
 		click_link_or_button('experience_submit')
 		expect(page).to have_content("Couldn't save your work experience")
