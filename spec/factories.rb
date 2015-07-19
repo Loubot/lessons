@@ -21,6 +21,7 @@ FactoryGirl.define do
 	factory :subject do
 		name 'Drums'
 		category
+		
 	end
 
 	factory :qualification do

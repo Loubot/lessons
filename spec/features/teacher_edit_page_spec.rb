@@ -37,6 +37,27 @@ describe 'posts for teacher info' do
 	end
 end
 
+#webkit driver
+# describe 'test photo upload' do 
+# 	before (:each) do 
+# 		DatabaseCleaner.strategy = :truncation
+
+# 		# then, whenever you need to clean the DB
+# 		DatabaseCleaner.clean
+# 		teacher = FactoryGirl.create(:teacher)
+# 		login_as(teacher, scope: :teacher)
+# 	end
+
+# 	it "should upload a photo" do
+# 		visit '/teachers/1/edit'
+# 		page.execute_script(%|$('#dropzone').append('<input id="picture_upload_field" name="image" type="file">');|)
+# 		page.attach_file('picture_upload_field', 'C:\Users\angell\Downloads\me.jpg')
+# 		click_link_or_button('process_queue')
+# 		# sleep 5
+# 		expect(page).to have_content('Photo uploaded successfully!')
+# 	end
+# end
+
 describe 'posts for  experience' do
 
 	before (:each) do 
@@ -63,6 +84,8 @@ describe 'posts for  experience' do
 		click_link_or_button('experience_submit')
 		expect(current_path).to eq(edit_teacher_path(id: 1))
 		expect(page).to have_content('Work experience saved')
+		expect(page).to have_content('Been playing piano for years')
+		expect(page).to have_content('2007')
 
 	end
 
@@ -106,4 +129,115 @@ describe 'posts for overview' do
 		expect(page).to have_content('I is a teacher')
 	end
 
+end
+
+#webkit driver
+
+# describe "get stripe key" do 
+# 	it "should add get stripe added succesfully message " do
+# 		DatabaseCleaner.strategy = :truncation
+
+# 		# then, whenever you need to clean the DB
+# 		DatabaseCleaner.clean
+# 		teacher = FactoryGirl.create(:teacher)
+# 		login_as(teacher, scope: :teacher)
+
+# 		visit 'teachers/1/edit'
+# 		click_link_or_button('stripe_connect_button')
+# 		expect(page).to have_content('Successfully registered with Stripe. Stripe code updated')
+# 	end
+# end
+
+describe "set paypal email" do
+	before (:each) do 
+		DatabaseCleaner.strategy = :truncation
+
+		# then, whenever you need to clean the DB
+		DatabaseCleaner.clean
+		teacher = FactoryGirl.create(:teacher)
+		login_as(teacher, scope: :teacher)
+	end
+
+	it "should fail with incorrect email" do
+		visit 'teachers/1/edit'
+		page.fill_in 'teacher_paypal_first_name', with: 'Louis'
+		page.fill_in 'teacher_paypal_last_name', with: 'Angelini'
+		page.fill_in 'teacher_paypal_email', with: 'llslouis@yahoo.com'
+		click_link_or_button('teacher_paypal_confirm_button')
+		expect(page).to have_content('Email or names provided incorrect or not a paypal merchant account.')
+
+	end
+
+	it "should fail with incorrect first name" do
+		visit 'teachers/1/edit'
+		page.fill_in 'teacher_paypal_first_name', with: 'Louiss'
+		page.fill_in 'teacher_paypal_last_name', with: 'Angelini'
+		page.fill_in 'teacher_paypal_email', with: 'llslouis@yahoo.com'
+		click_link_or_button('teacher_paypal_confirm_button')
+		expect(page).to have_content('Email or names provided incorrect or not a paypal merchant account.')
+
+	end
+
+	it "should fail with incorrect last name" do
+		visit 'teachers/1/edit'
+		page.fill_in 'teacher_paypal_first_name', with: 'Louis'
+		page.fill_in 'teacher_paypal_last_name', with: 'Angelinis'
+		page.fill_in 'teacher_paypal_email', with: 'llslouis@yahoo.com'
+		click_link_or_button('teacher_paypal_confirm_button')
+		expect(page).to have_content('Email or names provided incorrect or not a paypal merchant account.')
+
+	end
+
+	it "should respond with success with correct credentials" do
+		visit 'teachers/1/edit'
+		page.fill_in 'teacher_paypal_first_name', with: 'Louis'
+		page.fill_in 'teacher_paypal_last_name', with: 'Angelini'
+		page.fill_in 'teacher_paypal_email', with: 'lllouis@yahoo.com'
+		click_link_or_button('teacher_paypal_confirm_button')
+		expect(page).to have_content('Paypal email updated ok')
+	end
+end #end of set paypal email
+
+
+describe "adding authentications" do
+	before (:each) do 
+		DatabaseCleaner.strategy = :truncation
+
+		# then, whenever you need to clean the DB
+		DatabaseCleaner.clean
+		teacher = FactoryGirl.create(:teacher)
+		login_as(teacher, scope: :teacher)
+	end
+
+	it "should add facebook" do
+		visit 'teachers/1/edit'
+		
+   	click_link_or_button('facebook_login_link')
+   	expect(page).to have_content('Facebook added to login methods.')
+   	expect(current_path).to eq('/teachers/1/edit')
+	end
+
+	it "should add google" do
+		visit 'teachers/1/edit'
+
+		click_link_or_button('google_oauth2_login_link')
+		expect(page).to have_content('Google added to login methods.')
+		expect(current_path).to eq('/teachers/1/edit')
+	end
+
+	it "should add twtitter" do
+		visit 'teachers/1/edit'
+
+		click_link_or_button('twitter_login_link')
+		expect(page).to have_content('Twitter added to login methods.')
+		expect(current_path).to eq('/teachers/1/edit')
+	end
+
+	it "should add linkedin" do
+		visit 'teachers/1/edit'
+
+		click_link_or_button('linkedin_login_link')
+		expect(page).to have_content("Linkedin added to login methods.")
+		expect(current_path).to eq('/teachers/1/edit')
+	end
 end

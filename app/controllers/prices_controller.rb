@@ -4,7 +4,7 @@ class PricesController < ApplicationController
 
 	def check_correct_teacher
 		if params[:price][:teacher_id].to_i != current_teacher.id
-			flash[:danger] = "An error has occrred. Please email louisangelini@gmail.com"
+			flash[:danger] = "You are not the correct teacher"
 			redirect_to :back
 		end
 	end

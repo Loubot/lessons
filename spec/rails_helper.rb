@@ -6,9 +6,36 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'support/controller_macros'
+# require 'support/omniauth'
 require 'capybara/rails'
 require 'capybara/rspec'
 include Capybara::DSL
+
+OmniAuth.config.test_mode = true
+
+Capybara.default_host = 'http://localhost:3000'
+
+OmniAuth.config.add_mock(:facebook, {
+  :uid => '12345',
+  :nickname => 'zapnap'
+})
+
+OmniAuth.config.add_mock(:twitter, {
+  :uid => '111',
+  :nickname => 'zapnap'
+})
+
+OmniAuth.config.add_mock(:google_oauth2, {
+  :uid => '222',
+  :nickname => 'zapnap'
+})
+
+OmniAuth.config.add_mock(:linkedin, {
+  :uid => '12333345',
+  :nickname => 'zapnap'
+})
+
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -31,6 +58,8 @@ include Capybara::DSL
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::TestHelpers, :type => :controller

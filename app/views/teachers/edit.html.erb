@@ -1,5 +1,5 @@
 <%= content_for :title,  'Edit profile' %>
-<% cache [@teacher, @teacher.profile, @subjects.size] do %>
+
 <div class="outer-container">
 	<% if !@teacher.paid_up %>
 	<div class="container-fluid membership_container">
@@ -203,7 +203,7 @@
 						
 						<div class="row">
 							<div class="col-xs-3">
-		      			<%= image_tag('facebook_login.jpg', class: 'img-responsive') %>
+		      			<%= image_tag('facebook_login.jpg', class: 'img-responsive', id: 'facebook_login_link') %>
 		      			
 		      		</div> <!-- end of col-xs-3 -->
 		      		<div class="col-xs-3">
@@ -237,7 +237,7 @@
 	</div> <!-- end of container-fluid -->
 	<%= render 'partials/teachers_stuff/invitation' %>
 </div>
-<% end %> <%# end of cache %>
+
 
 <%= render 'modals/teacher_photos_dropzone' %>
 <%= render 'modals/teacher_info_form' %>

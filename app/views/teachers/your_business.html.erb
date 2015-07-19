@@ -43,26 +43,26 @@
         <div class="form-group">
           <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
-            <%= f.select :subject_id, options_for_select(@subjects.map { |s| [s.name, s.id] }), {}, { class: ' form-control' } %>
+            <%= f.select :subject_id, options_for_select(@subjects.map { |s| [s.name, s.id] }), {}, { class: ' form-control', id: 'home_price_subject_id' } %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :price, 'Total price?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
-            <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
+            <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control', id: 'home_price_price' %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :duration, 'Duration?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
-            <%= f.number_field :duration, placeholder: 'Lesson length', step: 15, class: 'form-control' %>
+            <%= f.number_field :duration, placeholder: 'Lesson length', step: 15, class: 'form-control', id: 'home_price_duration' %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
-        <%= f.hidden_field :teacher_id, value: current_teacher.id %>
-        <%= f.hidden_field :no_map, value: true %>
+        <%= f.hidden_field :teacher_id, value: current_teacher.id, id: 'home_price_teacher_id' %>
+        <%= f.hidden_field :no_map, value: true, id: 'home_price_no_map' %>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <%= f.submit 'Update price', class: 'btn btn-success' %>
+            <%= f.submit 'Update price', class: 'btn btn-success', id: 'home_price_submit_button' %>
           </div> <!-- end of col-sm-offset-2 col-sm-10 -->
         </div> <!-- end of form-group -->
       <% end %> <%# end of form_for %>

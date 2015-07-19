@@ -132,7 +132,7 @@ module TeachersHelper
   end
 
   def get_auth_add_links(auth)
-  	link_to("Add authentication", "/teachers/auth/#{auth}").html_safe
+  	link_to "Add authentication", "/teachers/auth/#{auth}", id: "#{auth}_login_link"
   end
 
   def get_auth_delete_links(ident)
