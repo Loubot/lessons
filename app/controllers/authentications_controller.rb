@@ -3,8 +3,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
   before_action :authenticate_teacher!, only:[:destroy]
   
   def oauth
-    puts "provider #{request.env["omniauth.auth"]['provider']}"
-    puts "referrer #{request.env['omniauth.origin']}"
+    # puts "provider #{request.env["omniauth.auth"]['provider']}"
+    # puts "referrer #{request.env['omniauth.origin']}"
     if teacher_signed_in?
       @identity = current_teacher.identities.find_or_create_identity(request.env["omniauth.auth"]) 
       

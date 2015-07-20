@@ -141,33 +141,33 @@
           <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
             <%= f.select :subject_id, options_for_select(@subjects.map { |s| [s.name, s.id] }), \
-                                                            {}, { class: ' form-control' } %>
+                                          {}, { class: ' form-control', id: 'location_price_subject_id' } %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :location_id, 'Location?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
             <%= f.select :location_id, options_for_select(@teacher.locations.map { |l| [l.name, l.id] }), \
-                                                              {}, { class: ' form-control' } %>
+                                          {}, { class: ' form-control', id: 'location_price_location_id' } %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :price, 'Total price?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
-            <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
+            <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control', id: 'location_price_price' %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
         <div class="form-group">
           <%= f.label :duration, 'Duration?', class: 'well_form_label col-sm-3 control-label' %>
           <div class="col-sm-9">
-            <%= f.number_field :duration, placeholder: 'Lesson length', step: 15, class: 'form-control' %>
+            <%= f.number_field :duration, placeholder: 'Lesson length', step: 15, class: 'form-control', id: 'location_price_duration' %>
           </div> <!-- end of col-sm-10 -->
         </div> <!-- end of form-group -->
-        <%= f.hidden_field :teacher_id, value: current_teacher.id %>
-        <%= f.hidden_field :no_map, value: false %>
+        <%= f.hidden_field :teacher_id, value: current_teacher.id, id: 'location_price_teacher_id' %>
+        <%= f.hidden_field :no_map, value: false, id: 'location_price_no_map' %>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <%= f.submit 'Update price', class: 'btn btn-success' %>
+            <%= f.submit 'Update price', class: 'btn btn-success', id: 'location_price_button_submit' %>
           </div> <!-- end of col-sm-offset-2 col-sm-10 -->
         </div> <!-- end of form-group -->
       <% end %> <%# end of form_for %>

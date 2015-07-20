@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'support/controller_macros'
+require 'support/wait_for_ajax'
 # require 'support/omniauth'
 require 'capybara/rails'
 require 'capybara/rspec'
@@ -14,6 +15,8 @@ include Capybara::DSL
 OmniAuth.config.test_mode = true
 
 Capybara.default_host = 'http://localhost:3000'
+
+Capybara.ignore_hidden_elements = false
 
 OmniAuth.config.add_mock(:facebook, {
   :uid => '12345',
@@ -58,6 +61,7 @@ OmniAuth.config.add_mock(:linkedin, {
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include WaitForAjax, type: :feature
 
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

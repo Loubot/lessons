@@ -5,6 +5,7 @@ FactoryGirl.define do
   end
 
 	factory :teacher do
+		id 									1
 		first_name 					'Louis'
 		last_name 					'Angelini'
 		email 							
@@ -22,6 +23,14 @@ FactoryGirl.define do
 		name 'Drums'
 		category
 		
+	end
+
+	factory :location do
+		teacher_id 				1
+		latitude					4.2
+		longitude					4.2
+		name 							'Home'
+		address 					'49 Beech Park'
 	end
 
 	factory :qualification do

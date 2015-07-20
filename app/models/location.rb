@@ -17,7 +17,9 @@ class Location < ActiveRecord::Base
 
   has_many :prices, dependent: :destroy
 
-  validates :teacher_id, :latitude, :longitude, :name, presence: true
+  validates :teacher_id, :latitude, :longitude, :name, :address, presence: true
+
+  validates :longitude, :latitude, numericality: { only_float: true }
 
   geocoded_by :full_street_address
 
