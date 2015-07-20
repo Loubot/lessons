@@ -31,8 +31,8 @@ class TeachersController < ApplicationController
 		
 
 		@prices = @teacher.prices.where(subject_id: params[:subject_id])
-		@home_prices = @prices.select { |p| p.no_map == true } #only home prices
-		@location_prices = @prices.select { |p| p.no_map == false } #only location prices
+		@home_prices = @prices.select { |p| p.location_id == nil } #only home prices
+		@location_prices = @prices.select { |p| p.location_id == nil } #only location prices
 
 		@locations = @teacher.locations
 		@only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
@@ -149,8 +149,8 @@ class TeachersController < ApplicationController
 		@subjects = @teacher.subjects
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
-		@home_prices = @teacher.prices.select { |p| p.no_map == true } #only home prices
-		@location_prices = @teacher.prices.select { |p| p.no_map == false } #only location prices
+		@home_prices = @teacher.prices.select { |p| p.location_id == nil } #only home prices
+		@location_prices = @teacher.prices.select { |p| p.location_id != nil } #only location prices
 		# fresh_when [@locations.maximum(:updated_at), @teacher.subjects.maximum(:updated_at)]
 	end
 

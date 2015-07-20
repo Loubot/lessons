@@ -9,7 +9,6 @@
 #  updated_at  :datetime
 #  location_id :integer
 #  price       :decimal(8, 2)
-#  no_map      :boolean          default(FALSE)
 #  duration    :integer          default(0)
 #
 
@@ -20,8 +19,6 @@ class Price < ActiveRecord::Base
   belongs_to :teacher, touch: true
 
   validates :subject_id, :teacher_id, :duration, :price, presence: true
-  validate :no_map_is_boolean
-  validate :location_if_no_map
   validates :duration, numericality: { greater_than: 0 }
   validates :price, numericality: { greater_than: 0 }
   validate :duration_is_fifteen
@@ -46,20 +43,6 @@ class Price < ActiveRecord::Base
     end
   end
 
-  def no_map_is_boolean
-    # p "no_map #{self.no_map}"
-    boolean_array = [true, false, 'true', 'false']
-    if !boolean_array.include?(self.no_map)
-      errors.add(:no_map, 'must be a boolean')
-    end
-  end
-
-  def location_if_no_map
-    if self.no_map == false
-      if self.location_id == nil || self.location_id == ""
-        errors.add(:location_id, "can't be blank")
-      end
-    end
-  end
+ 
 
 end

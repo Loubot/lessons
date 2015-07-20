@@ -11,11 +11,6 @@ class PricesController < ApplicationController
 
 	def create
 		# p "params #{price_params[:price]}"
-		boolean_array = [true, false, 'true', 'false']
-		if !boolean_array.include?(params[:price][:no_map])
-			flash[:danger] = "No map must be a boolean"
-			redirect_to :back and return
-		end
 		
 		@price = Price.new(price_params)
 		# p @price.inspect
