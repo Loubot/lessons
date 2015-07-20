@@ -30,4 +30,9 @@ describe "adding authentications from authentications modal" do
 		click_link_or_button 'add_twitter_authentication'
 		expect(page).to have_content "Twitter added to login methods."
 	end
+
+	it "should add linkedin to authentications" do
+		click_link_or_button "add_linkedin_authentication"
+		expect(page).to have_content "Linkedin added to login methods."
+	end
 end
