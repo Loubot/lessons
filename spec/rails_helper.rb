@@ -60,7 +60,6 @@ OmniAuth.config.add_mock(:linkedin, {
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.include WaitForAjax, type: :feature
 
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
