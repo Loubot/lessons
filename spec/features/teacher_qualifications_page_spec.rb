@@ -3,10 +3,20 @@ require 'database_cleaner'
 
 
 describe 'posts to qualifications' do
+	before (:each) do 
+		DatabaseCleaner.strategy = :truncation
+
+		DatabaseCleaner.clean
+		teacher = FactoryGirl.create(:teacher)
+
+		login_as(teacher, scope: :teacher)
+
+		visit '/teachers/1/qualification-form'	
+	end
+
 	it "shouldn't be valid" do
-		t = FactoryGirl.create(:teacher)
-		login_as(t, scope: :teacher)
-		visit '/teachers/1/qualification-form'
+		
+		
 		expect(page).to have_content "Qualifications"
 		fill_in 'qualification_name', with: ''
 		fill_in 'qualification_school', with: 's'
@@ -16,9 +26,6 @@ describe 'posts to qualifications' do
 	end
 
 	it "should fail title validation" do
-		t = FactoryGirl.create(:teacher)
-		login_as(t, scope: :teacher)
-		visit '/teachers/1/qualification-form'
 
 		fill_in 'qualification_name', with: ''
 		fill_in 'qualification_school', with: 'UCC'
@@ -28,9 +35,6 @@ describe 'posts to qualifications' do
 	end
 
 	it "should fail school validation" do
-		t = FactoryGirl.create(:teacher)
-		login_as(t, scope: :teacher)
-		visit '/teachers/1/qualification-form'
 
 		fill_in 'qualification_name', with: 'Degree in Music'
 		fill_in 'qualification_school', with: ''
@@ -40,9 +44,6 @@ describe 'posts to qualifications' do
 	end
 
 	it "should fail date overlap validation" do
-		t = FactoryGirl.create(:teacher)
-		login_as(t, scope: :teacher)
-		visit '/teachers/1/qualification-form'
 
 		fill_in 'qualification_name', with: 'Degree in Music'
 		fill_in 'qualification_school', with: 'UCC'
@@ -56,9 +57,6 @@ describe 'posts to qualifications' do
 	end
 
 	it 'should create a qualification using correct dates' do
-		t = FactoryGirl.create(:teacher)
-		login_as(t, scope: :teacher)
-		visit '/teachers/1/qualification-form'
 
 		fill_in 'qualification_name', with: 'Degree in Music'
 		fill_in 'qualification_school', with: 'UCC'
@@ -72,10 +70,7 @@ describe 'posts to qualifications' do
 	end
 
 	it 'should have a qualification' do		
-		t = FactoryGirl.create(:teacher)
-		login_as(t, scope: :teacher)
-
-		visit '/teachers/1/qualification-form'
+		
 		fill_in 'qualification_name', with: 'Degree in Music'
 		fill_in 'qualification_school', with: 'UCC'
 		select "2007", from: "qualification[start(1i)]"
@@ -88,10 +83,7 @@ describe 'posts to qualifications' do
 	end
 
 	it 'should delete qualification' do		
-		t = FactoryGirl.create(:teacher)
-		login_as(t, scope: :teacher)
-
-		visit '/teachers/1/qualification-form'
+		
 		fill_in 'qualification_name', with: 'Degree in Music'
 		fill_in 'qualification_school', with: 'UCC'
 		select "2007", from: "qualification[start(1i)]"
@@ -103,8 +95,5 @@ describe 'posts to qualifications' do
 		click_link_or_button('delete_qualification')
 		expect(page).to have_content('Qualification successfully deleted')
 	end
-
-
-
 
 end

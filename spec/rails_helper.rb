@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'support/controller_macros'
 # require 'support/omniauth'
+
 require 'capybara/rails'
 require 'capybara/rspec'
 include Capybara::DSL
@@ -16,6 +17,8 @@ OmniAuth.config.test_mode = true
 Capybara.default_host = 'http://localhost:3000'
 
 Capybara.ignore_hidden_elements = false
+
+Capybara.javascript_driver = :webkit
 
 OmniAuth.config.add_mock(:facebook, {
   :uid => '12345',
