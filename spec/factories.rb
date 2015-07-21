@@ -5,14 +5,16 @@ FactoryGirl.define do
   end
 
 	factory :teacher do
-		id 									1
 		first_name 					'Louis'
 		last_name 					'Angelini'
 		email 							
 		password						'password'
 		profile_views				1
 		is_teacher					true
-		admin								true
+		trait :admin do
+	    admin true
+	    
+	  end
 	end
 
 	factory :category do 

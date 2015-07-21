@@ -73,6 +73,7 @@ class TeachersController < ApplicationController
 	end
 	
 	def update
+		p "controller #{params}"
 		@teacher = current_teacher
 		if params[:rate_select]
 			@teacher.add_prices(params)
@@ -96,8 +97,8 @@ class TeachersController < ApplicationController
 	  	flash[:success] = 'Details updated ok'
 	  	redirect_to :back
 	  end
-	  @teacher.set_active	
-		
+	  @teacher.set_active	 #teacher model
+		 
 	end
 
 	def destroy
@@ -216,7 +217,9 @@ class TeachersController < ApplicationController
 		end
 
 		def teacher_params
-			params.require(:teacher).permit!
+			params.require(:teacher).permit(:first_name, :last_name, :email, :admin, :profile, :is_teacher, :paypal_email, 
+																			:stripe_access_token, :overview, :paypal_email, :paypal_first_name, :paypal_last_name,
+																			:stripe_user_id, :address, :paid_up, :paid_up_date, )
 		end
 
 		def addTime(params)

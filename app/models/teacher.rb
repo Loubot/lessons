@@ -221,6 +221,7 @@ class Teacher < ActiveRecord::Base
   end
 
   def paypal_verify(params)
+    p "params email #{params}"
     # p "paypal verify first_name #{params[:teacher][:paypal_first_name]}"
     # p "paypal verify last_name #{params[:teacher][:paypal_last_name]}"
     api = PayPal::SDK::AdaptiveAccounts::API.new(

@@ -39,5 +39,16 @@ RSpec.describe Teacher, type: :model do
   	t = FactoryGirl.build(:teacher)
   	expect(t).to be_valid
   end
+
+  before(:each) do
+  	
+  end
+
+  it "updates paypal_email" do
+  	t = FactoryGirl.create(:teacher)
+  	expect(t).to be_valid
+  	t.paypal_verify({ teacher:{ paypal_email: 'lllouis@yahoo.com', paypal_first_name: 'Louis', paypal_last_name: 'Angelini' } })
+  	expect(t.paypal_email).to eq('lllouis@yahoo.com')
+  end
   	
 end
