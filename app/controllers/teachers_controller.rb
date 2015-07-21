@@ -158,7 +158,7 @@ class TeachersController < ApplicationController
 	def change_profile_pic
 		@params = params
 		current_teacher.update_attributes(profile: params[:picture_id])
-		flash[:notice] = 'Profile picture updated'
+		flash[:success] = 'Profile picture updated'
 		redirect_to :back
 	end
 

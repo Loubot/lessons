@@ -7,9 +7,9 @@ describe 'posts to qualifications' do
 		t = FactoryGirl.create(:teacher)
 		login_as(t, scope: :teacher)
 		visit '/teachers/1/qualification-form'
-
+		expect(page).to have_content "Qualifications"
 		fill_in 'qualification_name', with: ''
-		fill_in 'qualification_school', with: ''
+		fill_in 'qualification_school', with: 's'
 		
 		click_link_or_button('qualification_submit')
 		expect(page).to have_content('Failed to save qualification')

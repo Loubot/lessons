@@ -27,6 +27,13 @@ FactoryGirl.define do
 		
 	end
 
+	factory :event do
+		title 						'Louis'
+		start_time				3.days.ago - 1.hours
+		end_time					3.days.ago
+		teacher_id 				1
+	end
+
 	factory :location do
 		teacher_id 				1
 		latitude					4.2
