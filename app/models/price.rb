@@ -9,7 +9,6 @@
 #  updated_at  :datetime
 #  location_id :integer
 #  price       :decimal(8, 2)
-#  no_map      :boolean          default(FALSE)
 #  duration    :integer          default(0)
 #
 
@@ -20,9 +19,8 @@ class Price < ActiveRecord::Base
   belongs_to :teacher, touch: true
 
   validates :subject_id, :teacher_id, :duration, :price, presence: true
-  validates :no_map, :inclusion => [true, false]
   validates :duration, numericality: { greater_than: 0 }
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :price, numericality: { greater_than: 0 }
   validate :duration_is_fifteen
 
   scope :is_valid?, -> { where("home_price IS NOT NULL") }
@@ -44,5 +42,7 @@ class Price < ActiveRecord::Base
       p.destroy
     end
   end
+
+ 
 
 end

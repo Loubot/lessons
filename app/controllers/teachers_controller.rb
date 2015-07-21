@@ -31,8 +31,8 @@ class TeachersController < ApplicationController
 		
 
 		@prices = @teacher.prices.where(subject_id: params[:subject_id])
-		@home_prices = @prices.select { |p| p.no_map == true } #only home prices
-		@location_prices = @prices.select { |p| p.no_map == false } #only location prices
+		@home_prices = @prices.select { |p| p.location_id == nil } #only home prices
+		@location_prices = @prices.select { |p| p.location_id == nil } #only location prices
 
 		@locations = @teacher.locations
 		@only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
@@ -73,6 +73,7 @@ class TeachersController < ApplicationController
 	end
 	
 	def update
+		p "controller #{params}"
 		@teacher = current_teacher
 		if params[:rate_select]
 			@teacher.add_prices(params)
@@ -96,8 +97,8 @@ class TeachersController < ApplicationController
 	  	flash[:success] = 'Details updated ok'
 	  	redirect_to :back
 	  end
-	  @teacher.set_active	
-		
+	  @teacher.set_active	 #teacher model
+		 
 	end
 
 	def destroy
@@ -149,15 +150,15 @@ class TeachersController < ApplicationController
 		@subjects = @teacher.subjects
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
-		@home_prices = @teacher.prices.select { |p| p.no_map == true } #only home prices
-		@location_prices = @teacher.prices.select { |p| p.no_map == false } #only location prices
+		@home_prices = @teacher.prices.select { |p| p.location_id == nil } #only home prices
+		@location_prices = @teacher.prices.select { |p| p.location_id != nil } #only location prices
 		# fresh_when [@locations.maximum(:updated_at), @teacher.subjects.maximum(:updated_at)]
 	end
 
 	def change_profile_pic
 		@params = params
 		current_teacher.update_attributes(profile: params[:picture_id])
-		flash[:notice] = 'Profile picture updated'
+		flash[:success] = 'Profile picture updated'
 		redirect_to :back
 	end
 
@@ -216,7 +217,9 @@ class TeachersController < ApplicationController
 		end
 
 		def teacher_params
-			params.require(:teacher).permit!
+			params.require(:teacher).permit(:first_name, :last_name, :email, :admin, :profile, :is_teacher, :paypal_email, 
+																			:stripe_access_token, :overview, :paypal_email, :paypal_first_name, :paypal_last_name,
+																			:stripe_user_id, :address, :paid_up, :paid_up_date, )
 		end
 
 		def addTime(params)

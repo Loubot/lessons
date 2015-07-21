@@ -9,7 +9,7 @@ class LocationsController < ApplicationController
       flash[:success] = 'Location added'
       redirect_to :back
     else
-      flash[:danger] = "Couldn't save location #{@location.errors.full_messages}"
+      flash[:danger] = "Couldn't save location #{ @location.errors.full_messages }"
       redirect_to :back
     end
   end
@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
     if @location.update(location_params)
       flash[:success] = "Location data updated"
     else
-      flash[:danger] = "Couldn't update location data #{@location.errors.full_messages}"
+      flash[:danger] = "Couldn't update location data #{ @location.errors.full_messages }"
     end
     redirect_to :back
   end
@@ -29,7 +29,7 @@ class LocationsController < ApplicationController
     if @location.destroy
       flash[:success] = "Location deleted!"
     else
-      flash[:danger] = "Couldn't delete location: #{@location.errors.full_messages}"
+      flash[:danger] = "Couldn't delete location: #{ @location.errors.full_messages }"
     end
     redirect_to :back
   end
@@ -37,6 +37,6 @@ class LocationsController < ApplicationController
 
   private
     def location_params
-      params.require(:location).permit!
+      params.require(:location).permit(:teacher_id, :latitude, :longitude, :name, :address)
     end
 end

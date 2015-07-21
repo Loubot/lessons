@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718053109) do
+ActiveRecord::Schema.define(version: 20150720194257) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -178,7 +178,6 @@ ActiveRecord::Schema.define(version: 20150718053109) do
     t.datetime "updated_at"
     t.integer  "location_id"
     t.decimal  "price",       precision: 8, scale: 2
-    t.boolean  "no_map",                              default: false
     t.integer  "duration",                            default: 0
   end
 
