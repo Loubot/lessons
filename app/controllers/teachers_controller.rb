@@ -16,8 +16,11 @@ class TeachersController < ApplicationController
 			redirect_to root_url and return
 		end
 
-		@subject = @teacher.subjects.find { |s| s.id == params[:subject_id].to_i }
-		
+		if !params[:subject_id]
+			@subject = @teacher.subjects.first
+		else
+			@subject = @teacher.subjects.find { |s| s.id == params[:subject_id].to_i }
+		end
 
 		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices teachers_helper
 		
@@ -30,7 +33,7 @@ class TeachersController < ApplicationController
 		@reviews = @teacher.reviews.take(3)
 		
 
-		@prices = @teacher.prices.where(subject_id: params[:subject_id])
+		@prices = @teacher.prices.where(subject_id: @subject.id)
 		@home_prices = @prices.select { |p| p.location_id == nil } #only home prices
 		@location_prices = @prices.select { |p| p.location_id == nil } #only location prices
 

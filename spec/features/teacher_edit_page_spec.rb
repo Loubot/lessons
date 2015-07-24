@@ -48,28 +48,52 @@ require 'database_cleaner'
 # end
 
 # webkit driver
-describe 'test photo uploads' do 
+describe 'test photo uploads', js: true do 
 	before (:each) do 
 		DatabaseCleaner.strategy = :truncation
-
+		Capybara.current_driver = :selenium
 		# then, whenever you need to clean the DB
 		DatabaseCleaner.clean
-		Capybara.current_driver = :selenium
 		@teacher = FactoryGirl.create(:teacher)
-		login_as(@teacher, scope: :teacher, :run_callbacks => false)
+
+		login_as(@teacher, scope: :teacher)
+		
+	end
+
+	it "should visit edit page ok" do
+		visit edit_teacher_path(@teacher)
+		expect(page).to have_content('Your info')
 	end
 
 
-	it "should upload a photo" do
-		visit 'http://localhost:3000/teachers/1/edit'
-		# page.driver.allow_url(*
-		page.execute_script(%|$('#dropzone').append('<input id="picture_upload_field" name="image" type="file">');|)
-		page.attach_file('picture_upload_field', '/home/loubot/Pictures/Webcam/me.jpg')
-		click_link_or_button('process_queue')
-		# sleep 5
-		expect(page).to have_content('Photo uploaded successfully!')
-	end
+
+
+	# it "should upload a photo", js: true do
+	# 	# @teacher = FactoryGirl.create(:teacher)
+	# 	# login_as @teacher, scope: :teacher
+	# 	# # p "current_teacher #{subject.current_teaecher}"
+	# 	p "teacher 1 #{@teacher.inspect}"
+	# 	# visit "teachers/#{@teacher.id}/edit"
+	# 	# page.driver.allow_url(*
+	# 	# page.execute_script("document.getElementById('dropzone').appendChild('<input id=\"picture_upload_field\" name=\"image\" type=\"file\">')")
+	# 	page.attach_file('dropzone', '/home/loubot/Pictures/Webcam/me.jpg')
+	# 	click_link_or_button('process_queue')
+	# 	# sleep 5
+	# 	expect(page).to have_content('Your info')
+	# end
 end
+
+describe "when user drop files", :js => true do
+  before do
+     files = [ Rails.root + 'spec/support/me.jpg' ]
+     p "files #{files}"
+     drop_files files, 'dropzone'
+  end
+
+  it "should ..." do
+     should have_content '...'
+  end
+end   
 
 # describe 'posts for  experience' do
 

@@ -35,10 +35,12 @@ end
 
 
 describe "the register process" do
-	DatabaseCleaner.strategy = :truncation
-
-	# then, whenever you need to clean the DB
-	DatabaseCleaner.clean
+	
+  before(:each) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean
+  end
+  
   it "registers teachers" do
   	visit '/teach'
   	
@@ -52,10 +54,7 @@ describe "the register process" do
   	expect(page).to have_content 'Welcome'
   end
 
-  DatabaseCleaner.strategy = :truncation
-
-# then, whenever you need to clean the DB
-	DatabaseCleaner.clean
+  
   it "registers students" do
   	visit :learn
 
