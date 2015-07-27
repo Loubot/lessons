@@ -16,7 +16,23 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
+def drop_in_dropzone(file_path)
+  # Generate a fake input selector
+  page.execute_script <<-JS
+    fakeFileInput = window.$('<input/>').attr(
+      {id: 'fakeFileInput', type:'file'}
+    ).appendTo('#dropzone');
+  JS
+  # Attach the file to the fake input selector with Capybara
+  attach_file("fakeFileInput", file_path)
+  # Add the file to a fileList array
+  page.execute_script("var fileList = [fakeFileInput.get(0).files[0]]")
+  # Trigger the fake drop event
+  page.execute_script <<-JS
+    var e = jQuery.Event('drop', { dataTransfer : { files : fileList } });
+    $('.dropzone')[0].dropzone.listeners[0].events.drop(e);
+  JS
+end
 
 RSpec.configure do |config|
   require 'factory_girl_rails'

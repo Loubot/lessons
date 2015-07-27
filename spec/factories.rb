@@ -22,9 +22,8 @@ FactoryGirl.define do
 	end
 
 	factory :subject do
-		name 'Drums'
-		category
-		
+		name 'Bass'
+		category_id 1
 	end
 
 	factory :event do

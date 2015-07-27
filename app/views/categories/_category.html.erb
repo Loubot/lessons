@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h4 class="panel-title">
-			<a href="#<%= category.name.parameterize.underscore %>" data-parent="#accordian" data-toggle="collapse"><%= category.name %>: id = <%= category.id %></a>
+			<a href="#<%= category.name.parameterize.underscore %>" class="<%= category.name.downcase %>" data-parent="#accordian" data-toggle="collapse"><%= category.name %>: id = <%= category.id %></a>
 		</h4>
 	</div>
 	<div id="<%= category.name.parameterize.underscore %>" class="panel-collapse collapse">
@@ -17,14 +17,14 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<%= s.submit class: 'btn btn-info' %>
-							<%= link_to 'Delete Category', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'pull-right btn btn-danger' %>
+							<%= s.submit class: 'btn btn-info', id: 'subject_submit' %>
+							<%= link_to "Delete #{ category.name.downcase }" , category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'pull-right btn btn-danger' %>
 						</div>
 					</div>
 				<% end %>
 				<% category.subjects.each do |subject| %>
 					<li class="list-group-item"><%= subject.name %>: id = <%= subject.id %>
-						<span class="pull-right"><%= link_to 'Delete subject', subject, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+						<span class="pull-right"><%= link_to 'Delete subject', subject, id: "delete_#{ subject.name.downcase }", method: :delete, data: { confirm: 'Are you sure?' } %></span>
 					</li>
 				<% end %>
 			</ul>

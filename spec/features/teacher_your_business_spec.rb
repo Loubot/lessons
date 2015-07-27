@@ -41,7 +41,7 @@ describe "home price form validations" do
 		fill_in 'home_price_price', with: '50'
 		fill_in 'home_price_duration', with: '30'
 		
-		select 'Drums', from: 'home_price_subject_id'
+		select 'Bass', from: 'home_price_subject_id'
 		find('#home_price_teacher_id', visible: false).set(2)
 		click_link_or_button 'home_price_submit_button'
 		expect(page).to have_content('You are not the correct teacher')
@@ -71,7 +71,7 @@ describe "home price form validations" do
 
 		fill_in 'home_price_price', with: '50'
 		fill_in 'home_price_duration', with: '30'
-		select 'Drums', from: 'home_price_subject_id'
+		select 'Bass', from: 'home_price_subject_id'
 		find('#home_price_teacher_id').set("")
 		click_link_or_button 'home_price_submit_button'
 		expect(page).to have_content('You are not the correct teacher')
@@ -86,7 +86,7 @@ describe "home price form validations" do
 		visit 'teachers/1/your-business'
 
 		fill_in 'home_price_duration', with: '30'
-		select 'Drums', from: 'home_price_subject_id'
+		select 'Bass', from: 'home_price_subject_id'
 		click_link_or_button 'home_price_submit_button'
 		expect(page).to have_content %Q(Couldn't update prices ["Price can't be blank", "Price is not a number"])
 	end
@@ -100,7 +100,7 @@ describe "home price form validations" do
 		visit 'teachers/1/your-business'
 
 		fill_in 'home_price_price', with: '50'
-		select 'Drums', from: 'home_price_subject_id'
+		select 'Bass', from: 'home_price_subject_id'
 		click_link_or_button 'home_price_submit_button'
 		expect(page).to have_content %Q(Couldn't update prices ["Duration must be greater than 0"])
 	end	
@@ -121,7 +121,7 @@ describe "it should create a home_price" do
 	it "should save a home price" do
 		fill_in 'home_price_price', with: '50'
 		fill_in 'home_price_duration', with: '30'
-		select 'Drums', from: 'home_price_subject_id'
+		select 'Bass', from: 'home_price_subject_id'
 		click_link_or_button 'home_price_submit_button'
 		expect(page).to have_content('Prices updated')
 	
@@ -147,7 +147,7 @@ describe "location price validations" do
 		fill_in 'location_price_price', with: '50'
 		fill_in 'location_price_duration', with: '30'
 		
-		select 'Drums', from: 'location_price_subject_id'
+		select 'Bass', from: 'location_price_subject_id'
 		find('#location_price_teacher_id', visible: false).set(2)
 		click_link_or_button 'location_price_button_submit'
 		expect(page).to have_content('You are not the correct teacher')
@@ -157,7 +157,7 @@ describe "location price validations" do
 		
 		fill_in 'location_price_price', with: '50'
 		fill_in 'location_price_duration', with: '30'
-		select 'Drums', from: 'location_price_subject_id'
+		select 'Bass', from: 'location_price_subject_id'
 		find('#location_price_teacher_id').set("")
 		click_link_or_button 'location_price_button_submit'
 		expect(page).to have_content('You are not the correct teacher')
@@ -166,7 +166,7 @@ describe "location price validations" do
 	it "should fail when price is blank" do		
 
 		fill_in 'location_price_duration', with: '30'
-		select 'Drums', from: 'location_price_subject_id'
+		select 'Bass', from: 'location_price_subject_id'
 		click_link_or_button 'location_price_button_submit'
 		expect(page).to have_content %Q(Couldn't update prices ["Price can't be blank", "Price is not a number"])
 	end
@@ -174,7 +174,7 @@ describe "location price validations" do
 	it "should fail when duration is blank" do		
 
 		fill_in 'location_price_price', with: '50'
-		select 'Drums', from: 'location_price_subject_id'		
+		select 'Bass', from: 'location_price_subject_id'		
 		click_link_or_button 'location_price_button_submit'
 		expect(page).to have_content %Q(Couldn't update prices ["Duration must be greater than 0"])
 	end
@@ -198,7 +198,7 @@ describe "it should create a location price" do
 	it "should pass when setting a location price" do
 		
 
-		select 'Drums', from: 'location_price_subject_id'
+		select 'Bass', from: 'location_price_subject_id'
 		select 'Home', from: 'location_price_location_id'
 		fill_in 'location_price_price', with: '50'
 		fill_in 'location_price_duration', with: '30'
