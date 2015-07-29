@@ -76,7 +76,7 @@ describe "deleting subjects and categories" do
     # then, whenever you need to clean the DB
     DatabaseCleaner.clean
     teacher = FactoryGirl.create(:teacher, :admin)
-    @category =  FactoryGirl.create(:category)
+    # @category =  FactoryGirl.create(:category)
     @subject = FactoryGirl.create(:subject)
     login_as(teacher, scope: :teacher)
     visit 'http://localhost:3000/admin-panel'
@@ -94,5 +94,34 @@ describe "deleting subjects and categories" do
   it "should delete a category" do
     click_link_or_button "Delete music"
     expect(page).to have_content "Category deleted successfully"
+  end
+end
+
+describe "teachers controls" do
+  before(:each) do
+    DatabaseCleaner.strategy = :truncation
+
+    # then, whenever you need to clean the DB
+    DatabaseCleaner.clean
+    # @category =  FactoryGirl.create(:category)
+    
+    price = FactoryGirl.create(:price)
+    # @subject = FactoryGirl.create(:subject)
+
+    @teacher = FactoryGirl.create(:teacher, :admin, :complete, prices: [price])
+    p "@teacher #{Category.all}"
+    @teacher2 = FactoryGirl.create(:teacher)
+    
+    login_as(@teacher, scope: :teacher)
+    visit 'http://localhost:3000/admin-panel'
+    expect(page).to have_content "Music:"
+    click_link_or_button "Music: id = 1"
+    expect(page).to have_content "Bass: id = 1"
+  end
+
+  it "should show a teachers profile" do
+    click_link_or_button "teachers_list"
+    expect(page).to have_content "Louis (email8@factory.com)"
+    expect(page).to have_css '.list-group-item-success'
   end
 end

@@ -35,7 +35,7 @@ class TeachersController < ApplicationController
 
 		@prices = @teacher.prices.where(subject_id: @subject.id)
 		@home_prices = @prices.select { |p| p.location_id == nil } #only home prices
-		@location_prices = @prices.select { |p| p.location_id == nil } #only location prices
+		@location_prices = @prices.select { |p| p.location_id != nil } #only location prices
 
 		@locations = @teacher.locations
 		@only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
@@ -45,7 +45,6 @@ class TeachersController < ApplicationController
 		gon.locations = @teacher.locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		
-		# @home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		gon.teacher_id = @teacher.id

@@ -148,7 +148,7 @@ class Teacher < ActiveRecord::Base
 
   def check_rates
     self.subjects.each do |s|
-      if !(prices.any? { |p| p.subject_id == s.id })
+      if !(self.prices.any? { |p| p.subject_id == s.id })
         return false
       end
     end

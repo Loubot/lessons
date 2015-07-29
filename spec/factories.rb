@@ -15,23 +15,16 @@ FactoryGirl.define do
 	    admin true
 	    
 	  end
+	  trait :complete do
+	  	profile 					2
+	  	overview 					'I is a teacher'
+	  	
+	  end
 	end
 
 	factory :category do 
 		name 'Music'
-	end
-
-	factory :subject do
-		name 'Bass'
-		category_id 1
-	end
-
-	factory :event do
-		title 						'Louis'
-		start_time				3.days.ago - 1.hours
-		end_time					3.days.ago
-		teacher_id 				1
-	end
+	end	
 
 	factory :location do
 		teacher_id 				1
@@ -40,6 +33,34 @@ FactoryGirl.define do
 		name 							'Home'
 		address 					'49 Beech Park'
 	end
+
+	factory :price do
+		teacher
+		subject
+		location
+		price 						33.4
+		duration					45
+	end
+
+	factory :subject do
+		name 'Bass'
+		category
+	end
+
+	factory :experience do 
+		title 				"Drum player"
+		description		"I is a drum player"
+		teacher
+		start 				Time.now - 5.years
+		present 			1
+	end
+
+	factory :event do
+		title 						'Louis'
+		start_time				3.days.ago - 1.hours
+		end_time					3.days.ago
+		teacher_id 				1
+	end	
 
 	factory :qualification do
 		title				'Piano Player'
