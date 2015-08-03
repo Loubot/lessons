@@ -107,9 +107,15 @@ describe "teachers controls" do
     
     price = FactoryGirl.create(:price)
     # @subject = FactoryGirl.create(:subject)
+    subject = FactoryGirl.create(:subject)
+    experience = FactoryGirl.create(:experience)
+    location = FactoryGirl.create(:location)
 
     @teacher = FactoryGirl.create(:teacher, :admin, :complete, prices: [price])
-    p "@teacher #{Category.all}"
+    @teacher.subjects << subject
+    @teacher.experiences << experience
+    @teacher.locations << location
+    p "@teacher #{@teacher.set_active}"
     @teacher2 = FactoryGirl.create(:teacher)
     
     login_as(@teacher, scope: :teacher)
@@ -121,7 +127,14 @@ describe "teachers controls" do
 
   it "should show a teachers profile" do
     click_link_or_button "teachers_list"
-    expect(page).to have_content "Louis (email8@factory.com)"
+    expect(page).to have_content "Louis (email"
     expect(page).to have_css '.list-group-item-success'
   end
+
+  # it "should display teachers profile" do
+  #   click_link_or_button "teachers_list"
+  #   p ".view_profile_#{@teacher.id}"
+  #   find(".view_profile_#{@teacher.id}").click
+  #   expect(page).to have_content "@teacher.email"
+  # end
 end

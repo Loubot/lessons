@@ -22,7 +22,7 @@
 										<br>
 										Registered on: <%= teacher.created_at.strftime("%d:%m:%Y") %><br>
 										Teacher is <%= teacher.is_active ? 'active' : 'not active' %><br>
-										<%= link_to 'View Teachers profile', show_teacher_path(id: teacher) %>
+										<%= link_to 'View Teachers profile', show_teacher_path(id: teacher), class: "view_profile_#{teacher.id}" %>
 									</li>
 								<% end %>
 								

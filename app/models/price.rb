@@ -30,6 +30,7 @@ class Price < ActiveRecord::Base
   after_create :update_teacher  
 
   def duration_is_fifteen
+    return if duration == nil or duration == ""
     errors.add(:duration, 'must be multiple of 15 mins') if (duration % 15 != 0)
   end
 

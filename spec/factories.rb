@@ -35,8 +35,8 @@ FactoryGirl.define do
 	end
 
 	factory :price do
+		subject_id				1
 		teacher
-		subject
 		location
 		price 						33.4
 		duration					45
@@ -47,11 +47,13 @@ FactoryGirl.define do
 		category
 	end
 
-	factory :experience do 
+	factory :experience do
+		teacher_id 				1
 		title 				"Drum player"
 		description		"I is a drum player"
 		teacher
 		start 				Time.now - 5.years
+		end_time			Time.now
 		present 			1
 	end
 
