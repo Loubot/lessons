@@ -11,8 +11,7 @@ class StaticController < ApplicationController
 	before_filter :get_categories
 
 	def get_categories
-		# @categories = Category.includes(:subjects)
-		@categories = Category.where(name: 'Music')
+		@categories = Category.includes(:subjects)
 	end
 
 	def landing_page
@@ -97,7 +96,7 @@ class StaticController < ApplicationController
 	end
 
 	def browse_categories
-		@categories = Category.order(name: :asc)
+		@categories = Category.where(name: 'Music').order(name: :asc)
 	end
 
 	def refresh_welcome
