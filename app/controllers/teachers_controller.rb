@@ -15,7 +15,7 @@ class TeachersController < ApplicationController
 			flash[:danger] = "This teacher has not completed their profile"
 			redirect_to root_url and return
 		end
-		p "size #{@teacher.subjects.size}"
+		
 
 		if !params[:subject_id]
 			@subject = @teacher.subjects.first
