@@ -76,7 +76,7 @@ describe "deleting subjects and categories" do
     # then, whenever you need to clean the DB
     DatabaseCleaner.clean
     teacher = FactoryGirl.create(:teacher, :admin)
-    # @category =  FactoryGirl.create(:category)
+    @category =  FactoryGirl.create(:category)
     @subject = FactoryGirl.create(:subject)
     login_as(teacher, scope: :teacher)
     visit 'http://localhost:3000/admin-panel'
@@ -103,7 +103,7 @@ describe "teachers controls" do
 
     # then, whenever you need to clean the DB
     DatabaseCleaner.clean
-    # @category =  FactoryGirl.create(:category)
+    @category =  FactoryGirl.create(:category)
     
     price = FactoryGirl.create(:price)
     # @subject = FactoryGirl.create(:subject)
