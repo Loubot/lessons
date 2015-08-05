@@ -12,7 +12,7 @@ class StaticController < ApplicationController
 
 	def get_categories
 		# @categories = Category.includes(:subjects)
-		@categories = Category.includes(:subjects).where(name: 'Music')
+		@categories = Category.where(name: 'Music')
 	end
 
 	def landing_page
