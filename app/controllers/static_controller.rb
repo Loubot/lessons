@@ -96,6 +96,7 @@ class StaticController < ApplicationController
 	end
 
 	def browse_categories
+		# @categories = Category.order(name: :asc)
 		@categories = Category.where(name: 'Music').order(name: :asc)
 	end
 
