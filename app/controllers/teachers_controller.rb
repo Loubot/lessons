@@ -15,6 +15,7 @@ class TeachersController < ApplicationController
 			flash[:danger] = "This teacher has not completed their profile"
 			redirect_to root_url and return
 		end
+		p "size #{@teacher.subjects.size}"
 
 		if !params[:subject_id]
 			@subject = @teacher.subjects.first
@@ -22,10 +23,15 @@ class TeachersController < ApplicationController
 			@subject = @teacher.subjects.find { |s| s.id == params[:subject_id].to_i }
 		end
 
+		p "size #{Category.all.size}"
 		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices teachers_helper
 		
 		
-		@categories = Category.includes(:subjects).all
+		if Rails.env.test?
+			@categories = Category.all
+		else
+			@categories = Category.includes(:subjects).all
+		end
 		# @subject = Subject.find(params[:subject_id])
 		
 		@teacher.increment!(:profile_views, by = 1)

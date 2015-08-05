@@ -16,7 +16,7 @@ FactoryGirl.define do
 	    
 	  end
 	  trait :complete do
-	  	profile 					2
+	  	profile 					1
 	  	overview 					'I is a teacher'
 	  	
 	  end
@@ -34,17 +34,24 @@ FactoryGirl.define do
 		address 					'49 Beech Park'
 	end
 
+	factory :photo do
+		name 							nil
+		imageable_id 			1
+		imageable_type 		"Teacher"
+		avatar 						"fake_text.jpg"
+	end
+
 	factory :price do
 		subject_id				1
 		teacher
-		location
 		price 						33.4
 		duration					45
 	end
 
 	factory :subject do
-		name 'Bass'
-		category
+		name 							'Bass'
+		category_id				1
+		# category
 	end
 
 	factory :experience do
