@@ -44,8 +44,7 @@ class AdminMailer < ActionMailer::Base
        :text=> %Q(#{user.email} has registered @ #{Time.now}),  
        :to=>[  
           {
-            :email => 'louisangelini@gmail.com',
-            # :email => 'philip@learnyourlesson.ie',
+            :email => 'philip@learnyourlesson.ie',
             :name => 'Admin'
           } 
        ],  
