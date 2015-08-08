@@ -25,6 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
+      AdminMailer.user_registered(resource).deliver_now
     else
       clean_up_passwords resource
       @validatable = devise_mapping.validatable?
