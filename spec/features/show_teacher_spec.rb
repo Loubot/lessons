@@ -3,30 +3,8 @@ require 'database_cleaner'
 require 'spec_helper'
 
 describe "visit show_teacher page" do
-  before(:each) do
-    DatabaseCleaner.strategy = :truncation
-
-    # # then, whenever you need to clean the DB
-    DatabaseCleaner.clean
-    @category = FactoryGirl.create(:category)
-    
-    @price = FactoryGirl.create(:price)
-    @qualification = FactoryGirl.create(:qualification)
-    # @subject = FactoryGirl.create(:subject)
-
-    @subject = FactoryGirl.create(:subject)
-    @category.subjects << @subject
-    @experience = FactoryGirl.create(:experience)
-    @location = FactoryGirl.create(:location)
-    @photo = FactoryGirl.create(:photo)    
-
-    @teacher = FactoryGirl.create(:teacher, :admin, :complete)
-    @teacher.qualifications << @qualification
-    @teacher.photos << @photo
-    @teacher.prices << @price
-    @teacher.subjects << @subject
-    @teacher.experiences << @experience
-    @teacher.locations << @location
+  before do
+    @teacher = complete_teacher
     p "@teacher #{@teacher.set_active}"
     
     visit "http://localhost:3000/show-teacher?id=#{@teacher.id}"
@@ -36,4 +14,15 @@ describe "visit show_teacher page" do
   it "should display ok" do
     expect(page).to have_content @teacher.first_name
   end
+
+  it "should display teachers info" do
+    expect(page).to have_content @teacher.subjects.first.name
+    expect(page).to have_content @teacher.overview
+    expect(page).to have_content @teacher.address
+    expect(page).to have_content @teacher.experiences.first.title
+    expect(page).to have_content @teacher.qualifications.first.title
+  end
+
+ 
+
 end

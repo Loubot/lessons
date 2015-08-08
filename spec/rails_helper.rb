@@ -6,12 +6,12 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'support/controller_macros'
+require 'support/teacher_types'
 
 # require 'support/omniauth'
 
 require 'capybara/rails'
 require 'capybara/rspec'
-include Capybara::DSL
 
 require 'rack/utils'
 Capybara.app = Rack::ShowExceptions.new(Lessons::Application)
@@ -52,11 +52,12 @@ end
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
+  config.include Capybara::DSL
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::TestHelpers, :type => :controller
+  config.include TeacherTypes
   config.extend ControllerMacros, :type => :controller
   # Capybara.javascript_driver = :webkit
   # Capybara.app_host = 'http://localhost:3000'
