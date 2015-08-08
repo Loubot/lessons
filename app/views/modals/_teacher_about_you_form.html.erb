@@ -11,7 +11,7 @@
             <%= form_for @teacher do |f| %>
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                  <%= f.text_area :overview, size: '40x15', class: "form-control input-sm", placeholder: "Please describe yourself. Where you learned the subject you're teaching. Years of experience, services and equipment provided. Ages taught etc.." %>
+                  <%= f.text_area :overview, size: '40x15', id: 'teacher_overview', class: "form-control input-sm", placeholder: "Please describe yourself. Where you learned the subject you're teaching. Years of experience, services and equipment provided. Ages taught etc.." %>
                 </div>
               </div>
               
@@ -19,7 +19,7 @@
               <div class="container-fluid">
               	<div class="modal-footer">
   	              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  	              <%= f.submit 'Update info', class: 'btn btn-primary' %>
+  	              <%= f.submit 'Update info', class: 'btn btn-primary', id: 'teacher_overview_submit' %>
   	            </div>
               </div>
             <% end %>          

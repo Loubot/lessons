@@ -132,7 +132,7 @@ module TeachersHelper
   end
 
   def get_auth_add_links(auth)
-  	link_to("Add authentication", "/teachers/auth/#{auth}").html_safe
+  	link_to "Add authentication", "/teachers/auth/#{auth}", id: "#{auth}_login_link"
   end
 
   def get_auth_delete_links(ident)
@@ -162,7 +162,7 @@ module TeachersHelper
 
   def get_home_price(prices, subject) #t.prices.find(subject_id: 1)
     p "subject #{subject.id}"
-    p = prices.select { |p| p.subject_id == subject.id && p.no_map == true }.first
+    p = prices.select { |p| p.subject_id == subject.id && p.location_id == nil }.first
     p ? number_to_currency(p.price, unit: '€')  : "<span>Price not set</span>".html_safe
     
   end

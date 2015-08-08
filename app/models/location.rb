@@ -19,6 +19,8 @@ class Location < ActiveRecord::Base
 
   validates :teacher_id, :latitude, :longitude, :name, presence: true
 
+  validates :longitude, :latitude, numericality: { only_float: true }
+
   geocoded_by :full_street_address
 
 

@@ -43,11 +43,24 @@ group :production do
 	# gem 'rack-zippy'
 end
 
-gem 'thin', 					platforms: [:mingw, :mswin]
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'guard-rspec'
+  gem 'spring-commands-rspec'
+  gem 'vcr'
+  gem 'database_cleaner'
+end
+
+gem 'thin',           platforms: [:mingw, :mswin]
 
 gem 'unicorn', '~> 4.8', platforms: [:ruby]
 gem 'foreman', platforms: [:ruby]
 
+gem 'date_validator'
 
 gem 'email_validator'
 
@@ -74,8 +87,6 @@ gem 'jquery-ui-rails', '~> 4.2.1'
 gem "combined_time_select"
 
 gem 'validates_overlap', '~> 0'
-
-gem 'date_validator', '~> 0.7.0'
 
 gem 'rmagick', '~> 2.13.3', platforms: [:ruby]
 

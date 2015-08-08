@@ -1,1 +1,1 @@
-<li class="list-group-item clearfix"><%= subject.name %><%= link_to 'Add subject', add_teacher_subject_path(subject.id, teacher: current_teacher.id),  class: 'pull-right btn btn-xs btn-info', method: 'post' %></li>
+<li class="list-group-item clearfix"><%= subject.name %><%= link_to 'Add subject', add_teacher_subject_path(subject.id, teacher: current_teacher.id),  class: 'pull-right btn btn-xs btn-info', id: 'add_subject_to_teacher', method: 'post' %></li>

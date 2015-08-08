@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def create
-    p "invitation #{params[:teacher][:invitation_token]}"
+    # p "invitation #{params[:teacher][:invitation_token]}"
     build_resource(sign_up_params)
     resource_saved = resource.save
     yield resource if block_given?

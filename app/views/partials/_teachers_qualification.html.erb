@@ -1,4 +1,4 @@
-<% endTime = qualification.present == '1' ? 'Present' : qualification.end.strftime('%Y %b') %>
+<% endTime = qualification.present == '1' ? 'Present' : qualification.end_time.strftime('%Y %b') %>
 
 <% cache [qualification, 'show_teacher_qualification'] do %>
 	<li class="list-group-item">

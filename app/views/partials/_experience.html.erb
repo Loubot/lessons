@@ -7,7 +7,7 @@
 		<div class="panel-footer"><%= experience.description %></div>
 	<% else %>
 		<li class="list-group-item clearfix"><strong>Title: <%= experience.title %></strong>
-			<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - #{experience.end.strftime('%Y %b')}"%> 
+			<span class="pull-right"><%= "#{experience.start.strftime('%Y %b')} - #{experience.end_time.strftime('%Y %b')}"%> 
 			<%= experience_delete_link(@teacher, experience) %> </span>
 	      
 		</li>
