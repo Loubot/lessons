@@ -77,7 +77,7 @@ describe "home price form validations" do
 		expect(page).to have_content('You are not the correct teacher')
 	end
 
-	it "should fail when price is blank" do
+	it "should fail when price is not filled in" do
 		subject = FactoryGirl.create(:subject)
 		teacher = FactoryGirl.create(:teacher, :subjects => [subject])
 
@@ -86,6 +86,21 @@ describe "home price form validations" do
 		visit 'teachers/1/your-business'
 
 		fill_in 'home_price_duration', with: '30'
+		select 'Bass', from: 'home_price_subject_id'
+		click_link_or_button 'home_price_submit_button'
+		expect(page).to have_content %Q(Couldn't update prices ["Price can't be blank", "Price is not a number"])
+	end
+
+	it "should fail when price is not filled in" do
+		subject = FactoryGirl.create(:subject)
+		teacher = FactoryGirl.create(:teacher, :subjects => [subject])
+
+		login_as(teacher, scope: :teacher)
+
+		visit 'teachers/1/your-business'
+
+		fill_in 'home_price_duration', with: '30'
+		fill_in 'home_price_price', with: ''
 		select 'Bass', from: 'home_price_subject_id'
 		click_link_or_button 'home_price_submit_button'
 		expect(page).to have_content %Q(Couldn't update prices ["Price can't be blank", "Price is not a number"])
