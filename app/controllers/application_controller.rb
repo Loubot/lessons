@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
   end
     
   def after_sign_up_path_for(resource)
-    case resource.is_teacher == true
+    case resource.is_teacher
     when false
       root_path
     else

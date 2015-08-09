@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def create
-    p "invitation #{params[:teacher][:invitation_token]}"
+    # p "invitation #{params[:teacher][:invitation_token]}"
     build_resource(sign_up_params)
     resource_saved = resource.save
     yield resource if block_given?
@@ -25,6 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
+      AdminMailer.delay.user_registered(resource)
     else
       clean_up_passwords resource
       @validatable = devise_mapping.validatable?

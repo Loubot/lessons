@@ -6,7 +6,7 @@
 #  title      :string(255)
 #  school     :string(255)
 #  start      :datetime
-#  end        :datetime
+#  end_time   :datetime
 #  teacher_id :integer
 #  created_at :datetime
 #  updated_at :datetime
@@ -15,14 +15,15 @@
 
 class Qualification < ActiveRecord::Base
 	belongs_to :teacher, touch: true
-	validates :start, :end, :overlap => {:scope => 'teacher_id' }
-	validates :start, :end, :teacher_id, presence: true
+	validates :start, :end_time, date: true
+	validates :start, date: { before: :end_time, message: 'must be after end time' }
+	validates :title, :school, :start, :end_time, :teacher_id, presence: true
 
 	before_validation :addTime
 
 	def addTime
 		if self.present == '1'
-			self.end = Time.now()
+			self.end_time = Time.now()
 		end
 	end
 end
