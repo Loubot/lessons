@@ -47,69 +47,45 @@ describe 'posts for teacher info' do
 	end
 end
 
-# webkit driver
-# describe 'test photo uploads', js: true do 
-# 	before (:each) do 
-# 		DatabaseCleaner.strategy = :truncation
-# 		# Capybara.current_driver = :selenium
-# 		# then, whenever you need to clean the DB
-# 		DatabaseCleaner.clean
-# 		@teacher = FactoryGirl.create(:teacher)
-
-# 		login_as(@teacher, scope: :teacher)
-		
-# 	end
-
-# 	it "should visit edit page ok" do
-# 		visit edit_teacher_path(@teacher)
-# 		expect(page).to have_content('Your info')
-# 	end
 
 
 
+describe "when user drop files", js: true do
 
-# 	it "should upload a photo", js: true do
-# 		# @teacher = FactoryGirl.create(:teacher)
-# 		# login_as @teacher, scope: :teacher
-# 		# # p "current_teacher #{subject.current_teaecher}"
-# 		p "teacher 1 #{@teacher.inspect}"
-# 		# visit "teachers/#{@teacher.id}/edit"
-# 		# page.driver.allow_url(*
-# 		# page.execute_script("document.getElementById('dropzone').appendChild('<input id=\"picture_upload_field\" name=\"image\" type=\"file\">')")
-# 		page.attach_file('dropzone', Rails.root + 'spec/support/me.jpg')
-# 		click_link_or_button('process_queue')
-# 		# sleep 5
-# 		expect(page).to have_content('Your info')
-# 	end
-# end
+  before(:each) do
+  	DatabaseCleaner.strategy = :truncation
+  	# Capybara.current_driver = :selenium
+		DatabaseCleaner.clean
+		@teacher = FactoryGirl.create(:teacher)
 
-# describe "when user drop files", js: true do
+		login_as(@teacher, scope: :teacher, :run_callbacks => false)
+  end
 
-#   before(:each) do
-#   	DatabaseCleaner.strategy = :truncation
-#   	Capybara.current_driver = :selenium
-# 		DatabaseCleaner.clean
-# 		@teacher = FactoryGirl.create(:teacher)
+  it "should do something" do
+  	visit edit_teacher_path(id: @teacher.id)
+  	expect(page).to have_content 'Your info'
+  	# click_link_or_button 'add_photo_button'
+  	# sleep 5
+  	# page.execute_script("$('#dropzone').append('<input id=\"photo_image\" name=\"image\" type=\"file\">')")
+  	page.execute_script <<-JS
+	    fakeFileInput = window.$('<input/>').attr(
+	      {id: 'fakeFileInput', type:'file'}
+	    ).appendTo('body');
+	  JS
 
-# 		login_as(@teacher, scope: :teacher, :run_callbacks => false)
-#   end
-
-#   it "should do something" do
-#   	visit edit_teacher_path(id: @teacher.id)
-#   	expect(page).to have_content 'Your info'
-#   	click_link_or_button 'add_photo_button'
-#   	sleep 5
-#   	page.execute_script("$('#dropzone').append('<input id=\"photo_image\" name=\"image\" type=\"file\">')")
-#   	# # page.execute_script("seleniumUpload = window.$('<input/>').attr({id: 'seleniumUpload', type:'file'}).appendTo('body');")
-#   	# files = [ Rails.root + 'spec/support/me.jpg']
-#    # 	drop_files files, 'dropzone'
-#    	page.attach_file('photo_image', Rails.root + 'spec/support/me.jpg')
-#   	# sleep 5
-#   	click_link_or_button 'process_queue'
-#   	# sleep 5
-# 	  expect(page).to have_content "Photo uploaded successfully!"
-#   end
-# end   
+  	attach_file("fakeFileInput", Rails.root + 'spec/support/me.jpg')
+   	# page.attach_file('seleniumUpload', Rails.root + 'spec/support/me.jpg')
+  	# sleep 5
+  	page.execute_script("var fileList = [fakeFileInput.get(0).files[0]]")
+  # Trigger the fake drop event
+	  page.execute_script <<-JS
+	    var e = jQuery.Event('drop', { dataTransfer : { files : fileList } });
+	    $('.dropzone')[0].dropzone.listeners[0].events.drop(e);
+	  JS
+	  sleep 5
+	  expect(page).to have_content 'Photo uploaded successfully!'
+  end
+end   
 
 describe 'posts for  experience' do
 
