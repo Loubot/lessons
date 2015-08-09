@@ -307,7 +307,6 @@ hr{
   color: #FFF;
 }
 
-
 .display_saved_packages{
   // height: 175px;
   padding: 30px;
@@ -328,18 +327,37 @@ hr{
   color: #111;
 }
 
+.black{
+  color: #111;
+}
+
 .saved_grinds{
   background-color: #FFBF3F;
   color: #FFF;
 }
 
+.saved_packages_and_grinds{
+  // display: none;
+}
+
 .display_saved_grinds{
-  height: 150px;
+ 
   padding: 30px;
   border-style: solid;
   border-width: 1px;
   //margin-top: 9px;*/
   border-color: #FFBF3F;
+  margin-bottom: 5px;
+}
+
+.grinds_container{
+  margin-top: 10px;
+  
+}
+
+.grinds_well{
+  color: #FFF;
+  background-color: #FFBF3F;
 }
 
 .subscription_container{
@@ -867,7 +885,6 @@ form .glyphicon {
 }
 
 .learn_header{
-  text-decoration: underline;
   font-weight: bold;
 }
 

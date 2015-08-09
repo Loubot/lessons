@@ -11,7 +11,8 @@ class StaticController < ApplicationController
 	before_filter :get_categories
 
 	def get_categories
-		@categories = Category.includes(:subjects)
+		# @categories = Category.includes(:subjects)
+		@categories = Category.where(name: 'Music').order(name: :asc)
 	end
 
 	def landing_page
