@@ -151,17 +151,21 @@ class StaticController < ApplicationController
 	end
 
 	def feedback
-		if current_teacher.is_teacher
-			render layout: 'teacher_layout'
+		if teacher_signed_in?
+			if current_teacher.is_teacher
+				render layout: 'teacher_layout'
+			else
+				render layout: 'application'
+			end
+			fresh_when [current_teacher, flash]
 		else
 			render layout: 'application'
 		end
-		fresh_when [current_teacher, flash]
 	end
 
 	def send_feedback
 		if valid_email?(params[:email])
-			AdminMailer.send_feedback_email(params).deliver_now
+			AdminMailer.delay.send_feedback_email(params)
 			flash[:success] = "Feedback submitted successfully"
 	  else
 	  	flash[:danger] = "Email not valid"
