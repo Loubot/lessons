@@ -309,7 +309,8 @@
               <div class="form-group">
                 <label  class="col-sm-3 control-label">Location:</label>
                 <div class="col-sm-9">
-                  <span class="form-control disabled"><%= @teacher.locations.find { |l| l.id = g.location_id }.name %></span>
+                  <%= location = @teacher.locations.find { |l| l.id = g.location_id } %>
+                  <span class="form-control disabled"><%= location.name %></span>
                 </div>  <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
               <div class="form-group">
@@ -343,7 +344,7 @@
                 </div>  <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
 
-             
+             <%= f.hidden_field :location_id, value: location.id %>
               <div class="form-group">
                 <%= f.submit 'Update class', class: 'btn btn-success pull-left' %><br>
                 <%= link_to 'Delete entire class?', teacher_grind_path(current_teacher, g), data: { confirm: 'Are you sure?', role: 'button' }, class: 'btn btn-danger pull-right', method: :delete %>
@@ -355,11 +356,9 @@
       </div> <!-- end of display_grind_container -->
     </div> <!-- end of col-md-6 col-xs-12 -->
     
-<<<<<<< HEAD
-  </div>
-=======
+
   </div> <!-- end of row -->
   <hr>
->>>>>>> master
+
   <%= render 'partials/teachers_stuff/invitation' %>
 </div> <!-- end of outer-container -->
