@@ -1,33 +1,68 @@
 <%= content_for :title, 'Feedback/Issues' %>
 <div class="outer-container">
+  <% if teacher_signed_in? %>
+    <div class="col-md-7 col-md-12">
+      <div class="feedback_header_container">
+        <h4 class="feedback_header">How can we help you?</h4>
+        <p>We are always looking for feedback on how to improve the website based on your suggestions, get in contact and let us know how we can change things up!</p>
+      </div>
+      <%= form_tag send_feedback_path, method: 'post' do %>
+        <div class="form-group">
+          <label for="feedbackName">Name:</label>
+          <%= text_field_tag 'name', current_teacher.full_name, class: 'form-control', id: 'feedbackName', placeholder: 'Enter name' %>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label for="feedbackEmail">Email:</label>
+          <% if teacher_signed_in? %>
+            <%= text_field_tag 'email', current_teacher.email, class: 'form-control', id: 'feedbackEmail', placeholder: 'Enter email' %>
+          <% else %>
+            <%= text_field_tag 'email', nil, class: 'form-control', id: 'feedbackEmail', placeholder: 'Enter email' %>
+          <% end %>        
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label for="feedbackSubject">Subject:</label>
+          <%= text_field_tag 'subject', nil, class: 'form-control', id: 'feedbackSubject', placeholder: 'Enter subject' %>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <%= text_area_tag 'feedback-info', nil, class: 'form-control', rows: 10 %>
+        </div> <!-- end of form-group -->
+        
+        <%= submit_tag 'Submit', class: 'btn btn-success' %>
+      <% end %>
+    </div> <!-- end of col-md-7 col-md-12 -->
+  <% else %>
+    <div class="col-md-7 col-md-12">
+      <div class="feedback_header_container">
+        <h4 class="feedback_header">How can we help you?</h4>
+        <p>We are always looking for feedback on how to improve the website based on your suggestions, get in contact and let us know how we can change things up!</p>
+      </div>
+      <%= form_tag send_feedback_path, method: 'post' do %>
+        <div class="form-group">
+          <label for="feedbackName">Name:</label>
+          <%= text_field_tag 'name', nil, class: 'form-control', id: 'feedbackName', placeholder: 'Enter name' %>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label for="feedbackEmail">Email:</label>
+          <% if teacher_signed_in? %>
+            <%= text_field_tag 'email', nil, class: 'form-control', id: 'feedbackEmail', placeholder: 'Enter email' %>
+          <% else %>
+            <%= text_field_tag 'email', nil, class: 'form-control', id: 'feedbackEmail', placeholder: 'Enter email' %>
+          <% end %>        
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label for="feedbackSubject">Subject:</label>
+          <%= text_field_tag 'subject', nil, class: 'form-control', id: 'feedbackSubject', placeholder: 'Enter subject' %>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <%= text_area_tag 'feedback-info', nil, class: 'form-control', rows: 10 %>
+        </div> <!-- end of form-group -->
+        
+        <%= submit_tag 'Submit', class: 'btn btn-success' %>
+      <% end %>
+    </div> <!-- end of col-md-7 col-md-12 -->
+
+  <% end %>
+
+
   
-  <div class="col-md-7 col-md-12">
-    <div class="feedback_header_container">
-      <h4 class="feedback_header">How can we help you?</h4>
-      <p>We are always looking for feedback on how to improve the website based on your suggestions, get in contact and let us know how we can change things up!</p>
-    </div>
-    <%= form_tag send_feedback_path, method: 'post' do %>
-      <div class="form-group">
-        <label for="feedbackName">Name:</label>
-        <%= text_field_tag 'name', current_teacher.full_name, class: 'form-control', id: 'feedbackName', placeholder: 'Enter name' %>
-      </div> <!-- end of form-group -->
-      <div class="form-group">
-        <label for="feedbackEmail">Email:</label>
-        <% if teacher_signed_in? %>
-          <%= text_field_tag 'email', current_teacher.email, class: 'form-control', id: 'feedbackEmail', placeholder: 'Enter email' %>
-        <% else %>
-          <%= text_field_tag 'email', nil, class: 'form-control', id: 'feedbackEmail', placeholder: 'Enter email' %>
-        <% end %>        
-      </div> <!-- end of form-group -->
-      <div class="form-group">
-        <label for="feedbackSubject">Subject:</label>
-        <%= text_field_tag 'subject', nil, class: 'form-control', id: 'feedbackSubject', placeholder: 'Enter subject' %>
-      </div> <!-- end of form-group -->
-      <div class="form-group">
-        <%= text_area_tag 'feedback-info', nil, class: 'form-control', rows: 10 %>
-      </div> <!-- end of form-group -->
-      
-      <%= submit_tag 'Submit', class: 'btn btn-success' %>
-    <% end %>
-  </div> <!-- end of col-md-7 col-md-12 -->
 </div> <!-- end of outer-container -->
