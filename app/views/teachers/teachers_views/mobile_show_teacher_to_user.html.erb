@@ -11,7 +11,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:image" content= "<%= asset_url('facebook_logo.jpg') %>" />
 <% end %>
-
+<%= content_for :description, "Book a lesson in #{ @subject.name }, book online with confidence, Pay online or in person" %>
 <% cache [@teacher, @profilePic, @photos, @prices.maximum(:updated_at), current_teacher] do %>
 <div class="outer-container">
 
