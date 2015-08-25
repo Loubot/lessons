@@ -46,8 +46,9 @@ class TeachersController < ApplicationController
 		@locations = @teacher.locations
 		@only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
 		
-		gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
+		# gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
+		gon.profile_pic_url = @profilePic
 		gon.locations = @teacher.locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		

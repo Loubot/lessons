@@ -6,7 +6,7 @@ describe "visit show_teacher page" do
   before do
     @teacher = complete_teacher
     p "@teacher #{ @teacher.set_active }"
-    
+    p @pic = "#{ @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url }"
     
     visit "http://localhost:3000/show-teacher?id=#{@teacher.id}"
     
@@ -24,7 +24,7 @@ describe "visit show_teacher page" do
     expect(page).to have_content @teacher.qualifications.first.title
     expect(page).to have_css "#location0"
     expect(page).to have_selector "div.profile_pic_container"
-    expect(page.find("div.profile_pic_container")['style']).to == "background-image:url(#{ @profilePid }"
+    expect(page.find("div.profile_pic_container")['style']).to eq "background-image: url(#{ @pic })"
   end
 
  
