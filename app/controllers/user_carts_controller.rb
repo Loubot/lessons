@@ -38,9 +38,9 @@ class UserCartsController < ApplicationController
     @prices = @teacher.prices.where(subject_id: params[:subject_id])
 
     if params[:location_choice] == '1'
-      @home_prices = @prices.select { |p| p.no_map == true } #only home prices
+      @home_prices = @prices.select { |p| p.location_id != nil } #only home prices
     else
-      @location_prices = @prices.select { |p| p.no_map == false } #only location prices
+      @location_prices = @prices.select { |p| p.location_id == nil } #only location prices
       @locations = @teacher.locations
       @only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
     end

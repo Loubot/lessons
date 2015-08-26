@@ -509,6 +509,3 @@ DEPENDENCIES
   vcr
   will_paginate
   workless
-
-BUNDLED WITH
-   1.10.3
