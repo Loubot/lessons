@@ -48,6 +48,10 @@ class StaticController < ApplicationController
 		# fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
 	end
 
+	def prices
+
+	end
+
 	def add_to_list
 		gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
 		
