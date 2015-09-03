@@ -15,14 +15,23 @@ class TeachersController < ApplicationController
 			flash[:danger] = "This teacher has not completed their profile"
 			redirect_to root_url and return
 		end
-
-		@subject = @teacher.subjects.find { |s| s.id == params[:subject_id].to_i }
 		
 
+		if !params[:subject_id]
+			@subject = @teacher.subjects.first
+		else
+			@subject = @teacher.subjects.find { |s| s.id == params[:subject_id].to_i }
+		end
+
+		p "size #{Category.all.size}"
 		@subjects = get_subjects_with_prices(@teacher.subjects) #get only subjects with prices teachers_helper
 		
 		
-		@categories = Category.includes(:subjects).all
+		if Rails.env.test?
+			@categories = Category.all
+		else
+			@categories = Category.includes(:subjects).all
+		end
 		# @subject = Subject.find(params[:subject_id])
 		
 		@teacher.increment!(:profile_views, by = 1)
@@ -30,19 +39,19 @@ class TeachersController < ApplicationController
 		@reviews = @teacher.reviews.take(3)
 		
 
-		@prices = @teacher.prices.where(subject_id: params[:subject_id])
-		@home_prices = @prices.select { |p| p.no_map == true } #only home prices
-		@location_prices = @prices.select { |p| p.no_map == false } #only location prices
+		@prices = @teacher.prices.where(subject_id: @subject.id)
+		@home_prices = @prices.select { |p| p.location_id == nil } #only home prices
+		@location_prices = @prices.select { |p| p.location_id != nil } #only location prices
 
 		@locations = @teacher.locations
 		@only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
 		
-		gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
+		# gon.profile_pic_url = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
 		@profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
+		gon.profile_pic_url = @profilePic
 		gon.locations = @teacher.locations
 		@photos = @teacher.photos.where.not(id: @teacher.profile)
 		
-		# @home_price = @prices.select { |p| p.subject_id == @subject.id && p.no_map == true }.first
 		gon.events = public_format_times(@teacher.events) #teachers_helper
 		gon.openingTimes = open_close_times(@teacher.opening) #teachers_helper
 		gon.teacher_id = @teacher.id
@@ -73,6 +82,7 @@ class TeachersController < ApplicationController
 	end
 	
 	def update
+		p "controller #{params}"
 		@teacher = current_teacher
 		if params[:rate_select]
 			@teacher.add_prices(params)
@@ -96,8 +106,8 @@ class TeachersController < ApplicationController
 	  	flash[:success] = 'Details updated ok'
 	  	redirect_to :back
 	  end
-	  @teacher.set_active	
-		
+	  @teacher.set_active	 #teacher model
+		 
 	end
 
 	def destroy
@@ -149,15 +159,15 @@ class TeachersController < ApplicationController
 		@subjects = @teacher.subjects
 		gon.locations = @locations
 		session[:map_id] = @locations.empty? ? 0 : @locations.last.id #store id for tabs
-		@home_prices = @teacher.prices.select { |p| p.no_map == true } #only home prices
-		@location_prices = @teacher.prices.select { |p| p.no_map == false } #only location prices
+		@home_prices = @teacher.prices.select { |p| p.location_id == nil } #only home prices
+		@location_prices = @teacher.prices.select { |p| p.location_id != nil } #only location prices
 		# fresh_when [@locations.maximum(:updated_at), @teacher.subjects.maximum(:updated_at)]
 	end
 
 	def change_profile_pic
 		@params = params
 		current_teacher.update_attributes(profile: params[:picture_id])
-		flash[:notice] = 'Profile picture updated'
+		flash[:success] = 'Profile picture updated'
 		redirect_to :back
 	end
 
@@ -216,7 +226,9 @@ class TeachersController < ApplicationController
 		end
 
 		def teacher_params
-			params.require(:teacher).permit!
+			params.require(:teacher).permit(:first_name, :last_name, :email, :admin, :profile, :is_teacher, :paypal_email, 
+																			:stripe_access_token, :overview, :paypal_email, :paypal_first_name, :paypal_last_name,
+																			:stripe_user_id, :address, :paid_up, :paid_up_date, )
 		end
 
 		def addTime(params)

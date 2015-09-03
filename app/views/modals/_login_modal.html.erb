@@ -9,21 +9,21 @@
         <div class="modal-body">
           <div class="container-fluid">
             <div class="col-md-6 col-md-12 col-xs-12">
-              <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-horizontal') do |f| %>
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal login_form' }) do |f| %>
                 <!-- <div class="heading">
                   <h4 class="form-heading">Sign In</h4>
                 </div> --> <!-- end of heading -->
 
                 <div class="control-group">
-                  <%= f.label :email, class: 'control-label', id: 'login_modal_email' %>
+                  <%= f.label :email, class: 'control-label' %>
                   <div class="controls">
-                    <%= f.email_field :email %>
+                    <%= f.email_field :email, id: 'login_modal_email' %>
                   </div> <!-- end of controls -->
                 </div> <!-- end of control-group --> 
                 <div class="control-group">
                   <%= f.label :password, class: 'control-label' %>
                   <div class="controls">
-                    <%= f.password_field :password %>
+                    <%= f.password_field :password, id: 'login_modal_password' %>
                   </div> <!-- end of controls -->
                 </div> <!-- end of control-group -->
 
@@ -39,7 +39,7 @@
 
 
                 <div class="control-group">
-                  <div><%= f.submit "Sign in", class: 'btn btn-success sign_in_submit' %></div>
+                  <div><%= f.submit "Sign in", class: 'btn btn-success sign_in_submit', id: 'sign_in_submit' %></div>
                   <div class="controls">
                     <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
                       <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'forget_password' %><br />

@@ -33,4 +33,34 @@ class AdminMailer < ActionMailer::Base
     
   end
 
+  def user_registered(user)
+    begin
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      message = {  
+       :subject=> "New User",  
+       :from_name=> 'Admin',
+       :from_email => 'do-not-reply@learnyourlesson.ie',
+       :text=> %Q(#{user.email} has registered @ #{Time.now}),  
+       :to=>[  
+          {
+            :email => 'philip@learnyourlesson.ie',
+            :name => 'Admin'
+          } 
+       ],  
+       
+      }  
+      sending = m.messages.send message  
+      puts sending
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+
+    
+  end
+
 end

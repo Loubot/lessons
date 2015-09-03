@@ -30,7 +30,7 @@
 
                   <%= hidden_field_tag :stripe_landing, 'login' %>
                   <%= hidden_field_tag :state, current_teacher.id %>
-                  <%= submit_tag 'Stripe Registration', class: 'btn btn-info' %>
+                  <%= submit_tag 'Stripe Registration', class: 'btn btn-info', id: 'stripe_connect_button' %>
                 <% end %>
             </div> <!-- end of stripe -->
 
@@ -41,26 +41,26 @@
                <%= form_for @teacher, class: 'paypal_email_form form-horizontal' do |f| %>
                   <div class="form-group">
                     <div class="col-sm-10">
-                     <%= text_field_tag 'teacher[paypal_first_name]', @teacher.first_name,  placeholder: 'First name', class: 'form-control' %>
+                     <%= text_field_tag 'teacher[paypal_first_name]', @teacher.first_name,  placeholder: 'First name', class: 'form-control', id: 'teacher_paypal_first_name' %>
 
                    </div>
                   </div> <!-- end of form-group -->
 
                    <div class="form-group">
                    <div class="col-sm-10">
-                     <%= text_field_tag 'teacher[paypal_last_name]', @teacher.last_name,   placeholder: 'Last name', class: 'form-control' %>
+                     <%= text_field_tag 'teacher[paypal_last_name]', @teacher.last_name,   placeholder: 'Last name', class: 'form-control', id: 'teacher_paypal_last_name' %>
                    </div>
                  </div> <!-- enf of form-group -->
 
                  <div class="form-group">
                    <div class="col-sm-10">
-                     <%= f.email_field :paypal_email, placeholder: 'Paypal Email', class: 'form-control' %>
+                     <%= f.email_field :paypal_email, placeholder: 'Paypal Email', class: 'form-control', id: 'teacher_paypal_email' %>
                    </div>
                  </div> <!-- enf of form-group -->
 
                  <div class="form-group">
                    <div class="col-sm-10">
-                     <%= f.submit 'Save email', class: 'btn btn-info' %>
+                     <%= f.submit 'Save email', class: 'btn btn-info', id: 'teacher_paypal_confirm_button' %>
                    </div>
                  </div>
                  

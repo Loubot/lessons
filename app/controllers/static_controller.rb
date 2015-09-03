@@ -11,7 +11,8 @@ class StaticController < ApplicationController
 	before_filter :get_categories
 
 	def get_categories
-		@categories = Category.includes(:subjects)
+		# @categories = Category.includes(:subjects)
+		@categories = Category.where(name: 'Music').order(name: :asc)
 	end
 
 	def landing_page
@@ -38,7 +39,7 @@ class StaticController < ApplicationController
 
 	def learn
 		render 'static/mobile_views/mobile_learn' if is_mobile?
-		fresh_when(:etag => ['learn-page', current_teacher, flash], :public => true)
+		# fresh_when(:etag => ['learn-page', current_teacher, flash], :public => true)
 	end
 
 	def teach
@@ -96,16 +97,13 @@ class StaticController < ApplicationController
 	end
 
 	def browse_categories
-		@categories = Category.order(name: :asc)
+		# @categories = Category.order(name: :asc)
+		@categories = Category.where(name: 'Music').order(name: :asc)
 	end
 
 	def refresh_welcome
 		render "static/partials/#{params[:page]}", :layout => false
 		
-	end
-
-	def robots
-		render 'public/robots.txt'
 	end
 
 	def new_registration
@@ -116,7 +114,7 @@ class StaticController < ApplicationController
 
 	def confirm_registration
 		puts "facebook_data #{session['devise.facebook_data']}"
-		@teacher = Teacher.from_omniauth(session['devise.facebook_data']) #action in the teacher model
+		@teacher = Teacher.from_omniauth(session['devise.facebook_data']) #method in the teacher model
 		
 		
 		if params[:teacher].to_i == 2
@@ -153,17 +151,21 @@ class StaticController < ApplicationController
 	end
 
 	def feedback
-		if current_teacher.is_teacher
-			render layout: 'teacher_layout'
+		if teacher_signed_in?
+			if current_teacher.is_teacher
+				render layout: 'teacher_layout'
+			else
+				render layout: 'application'
+			end
+			fresh_when [current_teacher, flash]
 		else
 			render layout: 'application'
 		end
-		fresh_when [current_teacher, flash]
 	end
 
 	def send_feedback
 		if valid_email?(params[:email])
-			AdminMailer.send_feedback_email(params).deliver_now
+			AdminMailer.delay.send_feedback_email(params)
 			flash[:success] = "Feedback submitted successfully"
 	  else
 	  	flash[:danger] = "Email not valid"

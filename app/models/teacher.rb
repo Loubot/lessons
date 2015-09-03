@@ -3,26 +3,26 @@
 # Table name: teachers
 #
 #  id                     :integer          not null, primary key
-#  first_name             :string
-#  last_name              :string
+#  first_name             :string(255)
+#  last_name              :string(255)
 #  overview               :text             default("")
 #  created_at             :datetime
 #  updated_at             :datetime
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string
-#  last_sign_in_ip        :string
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
 #  admin                  :boolean
 #  profile                :integer
 #  is_teacher             :boolean          default(FALSE), not null
-#  paypal_email           :string           default("")
-#  stripe_access_token    :string           default("")
+#  paypal_email           :string(255)      default("")
+#  stripe_access_token    :string(255)      default("")
 #  is_active              :boolean          default(FALSE), not null
 #  will_travel            :boolean          default(FALSE), not null
 #  stripe_user_id         :string
@@ -148,7 +148,7 @@ class Teacher < ActiveRecord::Base
 
   def check_rates
     self.subjects.each do |s|
-      if !(prices.any? { |p| p.subject_id == s.id })
+      if !(self.prices.any? { |p| p.subject_id == s.id })
         return false
       end
     end
@@ -221,8 +221,9 @@ class Teacher < ActiveRecord::Base
   end
 
   def paypal_verify(params)
-    p "paypal verify first_name #{params[:teacher][:paypal_first_name]}"
-    p "paypal verify last_name #{params[:teacher][:paypal_last_name]}"
+    # p "params email #{params}"
+    # p "paypal verify first_name #{params[:teacher][:paypal_first_name]}"
+    # p "paypal verify last_name #{params[:teacher][:paypal_last_name]}"
     api = PayPal::SDK::AdaptiveAccounts::API.new(
       :app_id    => ENV['PAYPAL_APP_ID'],
       :username  => ENV['PAYPAL_USER_ID'],
@@ -238,8 +239,8 @@ class Teacher < ActiveRecord::Base
                       )
     response = api.get_verified_status(get_verified_status_request)
     self.update_attributes(paypal_email: params[:teacher][:paypal_email]) if response.success?
-    p "Paypal email updated #{response.inspect}" if response.success?
-    p "paypal registration failed #{response.inspect}" if !response.success?
+    # p "Paypal email updated #{response.inspect}" if response.success?
+    # p "paypal registration failed #{response.inspect}" if !response.success?
     response
     
   end

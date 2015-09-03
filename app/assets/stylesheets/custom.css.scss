@@ -307,7 +307,6 @@ hr{
   color: #FFF;
 }
 
-
 .display_saved_packages{
   // height: 175px;
   padding: 30px;
@@ -328,18 +327,37 @@ hr{
   color: #111;
 }
 
+.black{
+  color: #111;
+}
+
 .saved_grinds{
   background-color: #FFBF3F;
   color: #FFF;
 }
 
+.saved_packages_and_grinds{
+  // display: none;
+}
+
 .display_saved_grinds{
-  height: 150px;
+ 
   padding: 30px;
   border-style: solid;
   border-width: 1px;
   //margin-top: 9px;*/
   border-color: #FFBF3F;
+  margin-bottom: 5px;
+}
+
+.grinds_container{
+  margin-top: 10px;
+  
+}
+
+.grinds_well{
+  color: #FFF;
+  background-color: #FFBF3F;
 }
 
 .subscription_container{
@@ -793,10 +811,6 @@ form .glyphicon {
   text-align: center;
 }
 
-.teach_header{
-  text-decoration: underline;
-}
-
 .teach_page_pros_container{
   font-size: 20px;
   padding: 0 !important;
@@ -871,7 +885,6 @@ form .glyphicon {
 }
 
 .learn_header{
-  text-decoration: underline;
   font-weight: bold;
 }
 
@@ -896,9 +909,7 @@ form .glyphicon {
   padding: 20px 50px;
   border-bottom: 1px solid #CCCCC0;
 }
-.how_it_works_header{
-  text-decoration: underline;
-}
+
 .center_text{
   text-align: center;
 }
@@ -1095,7 +1106,7 @@ form .glyphicon {
   background-image: image-url("learn-to-play-piano.jpg");
   // height: 200px;
   // width: 300px;
-  // padding: 0 !important;
+  padding: 0 !important;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -1772,4 +1783,37 @@ ul.share-buttons li{
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
+}
+
+#feedback { 
+  height: 104px; 
+  width: 104px; 
+  position: fixed; 
+  top: 40%; 
+  z-index: 999;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#feedback a { 
+  display: block; 
+  background: #f00; 
+  height: 30px; 
+  width: 100px; 
+  padding: 8px 16px;
+  color: #fff; 
+  font-family: Arial, sans-serif; 
+  font-size: 17px; 
+  font-weight: bold; 
+  text-decoration: none; 
+  border-bottom: solid 1px #333;
+  border-left: solid 1px #333;
+  border-right: solid 1px #fff;
+}
+
+#feedback a:hover { 
+  background: #06c; 
 }

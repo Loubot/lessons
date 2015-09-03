@@ -4,15 +4,16 @@ class PricesController < ApplicationController
 
 	def check_correct_teacher
 		if params[:price][:teacher_id].to_i != current_teacher.id
-			flash[:danger] = "An error has occrred. Please email louisangelini@gmail.com"
+			flash[:danger] = "You are not the correct teacher"
 			redirect_to :back
 		end
 	end
 
 	def create
 		# p "params #{price_params[:price]}"
+		
 		@price = Price.new(price_params)
-		p @price.inspect
+		# p @price.inspect
 		
 		# @name = @price.subject.name
 		if @price.save

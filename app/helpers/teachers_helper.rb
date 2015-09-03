@@ -116,9 +116,11 @@ module TeachersHelper
   	return html.html_safe
   end
 
-  def experience_delete_link(experience)
+  def experience_delete_link(teacher, experience)
   	if !current_page?(show_teacher_path)
-  		(link_to 'Delete', [@teacher, experience], class: 'btn btn-danger btn-sm', method: 'DESTROY', data: { confirm: 'Are you sure' }).html_safe
+  		link_to 'Delete?', [teacher, experience], method: :delete, \
+                    'data-confirm' => 'Are you sure', class: 'btn btn-danger btn-sm'
+  		
   	end
   end
 
@@ -130,7 +132,7 @@ module TeachersHelper
   end
 
   def get_auth_add_links(auth)
-  	link_to("Add authentication", "/teachers/auth/#{auth}").html_safe
+  	link_to "Add authentication", "/teachers/auth/#{auth}", id: "#{auth}_login_link"
   end
 
   def get_auth_delete_links(ident)
@@ -160,19 +162,30 @@ module TeachersHelper
 
   def get_home_price(prices, subject) #t.prices.find(subject_id: 1)
     p "subject #{subject.id}"
-    p = prices.select { |p| p.subject_id == subject.id && p.no_map == true }.first
+    p = prices.select { |p| p.subject_id == subject.id && p.location_id == nil }.first
     p ? number_to_currency(p.price, unit: '€')  : "<span>Price not set</span>".html_safe
     
   end
 
-  def get_location_name(price)
-    l = current_teacher.locations.select { |l| l.id == price.location_id }.first
-    l.name
+  def get_location_name(teacher, price)
+    l = teacher.locations.select { |l| l.id == price.location_id }.first
+    if l 
+      l.name
+    else
+      "Name not defined"
+    end
+    
   end
 
-  def get_subject_name(price)
-    s = current_teacher.subjects.select { |s| s.id == price.subject_id }.first
-    s.name
+  def get_subject_name(teacher, price)
+    p "price inspect #{price.inspect}"
+    s = teacher.subjects.select { |s| s.id == price.subject_id }.first
+    p "s inspect #{s.inspect}"
+    if s 
+      s.name
+    else
+      "No name defined"
+    end
   end
 
   def get_select_text(p)
