@@ -257,7 +257,7 @@ class PaypalController < ApplicationController
   
   
   def store_paypal
-    # render status: 200, nothing: true
+    render status: 200, nothing: true and return
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
