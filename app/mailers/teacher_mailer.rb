@@ -330,7 +330,7 @@ class TeacherMailer < ActionMailer::Base
                      # :name=> "#{student_name}"  
                    }  
                  ],  
-                 :from_email=> "loubot@learnyourlesson.ie",
+                 :from_email=> "alan@learnyourlesson.ie",
                 "merge_vars"=>[
                               { "rcpt"   =>  email,
                                 "vars" =>  [
