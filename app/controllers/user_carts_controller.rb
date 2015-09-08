@@ -17,6 +17,7 @@ class UserCartsController < ApplicationController
     user_cart_params.delete 'start_time(5i)'
     p "user_cart_params #{user_cart_params}"
     @cart = UserCart.create!(user_cart_params)
+    @cart.update_attributes(price_id: @price.id)
     session[:cart_id] = @cart.id
 
     p @event.inspect
@@ -38,9 +39,9 @@ class UserCartsController < ApplicationController
     @prices = @teacher.prices.where(subject_id: params[:subject_id])
 
     if params[:location_choice] == '1'
-      @home_prices = @prices.select { |p| p.location_id != nil } #only home prices
+      @home_prices = @prices.select { |p| p.location_id == nil } #only home prices
     else
-      @location_prices = @prices.select { |p| p.location_id == nil } #only location prices
+      @location_prices = @prices.select { |p| p.location_id != nil } #only location prices
       @locations = @teacher.locations
       @only_locs = @teacher.locations.find( @location_prices.map { |p| p.location_id }.compact)
     end
