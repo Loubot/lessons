@@ -44,7 +44,7 @@ teachersInfoReady = ->
         parallelUploads: 10
         thumbnailWidth: 150
         thumbnailHeight:180
-        autoProcessQueue: false
+        autoProcessQueue: true
         })  
     
       dropzone.on 'error', (file) ->

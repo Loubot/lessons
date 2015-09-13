@@ -6,14 +6,14 @@
   <meta property="og:description" content="Learn Your Lesson, a place for teachers to advertise their expertise and grow their client base. Book a lesson here." />
   <meta property="fb:app_id" content="<%= ENV['FACEBOOK_APP_ID'] %>" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content= "https://www.learnyourlesson.ie/assets/facebook_logo.jpg" />
+  <meta property="og:image" content= "<%= asset_url('facebook_logo.jpg') %>" />
 <% end %>
 <% content_for :title, "The place to connect with local teachers and learn" %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
 
 <div  class="container-fluid main_page_search_container home_welcome">
   <div class="welcome_page_form__header">
-    <h1>Your place to connect with local teachers <br><small>on guitar, yoga, languages or anything else</small></h1>
+    <h1>Your place to connect with local teachers <br><small>on guitar, piano, drums or anything else musical</small></h1>
     
   </div> <!-- end of welcome_page_form__header -->
 
@@ -53,21 +53,21 @@
         <div class="add_padding col-md-4 col-sm-4" >
             <div  class="col-md-12 stock_photo_container" id="all_lessons">
               <%= link_to browse_categories_path, class: "stock_photo_container" do %>
-                <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+                <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search all subjects on www.learnyourlesson.ie' %>
               <% end %>
             </div> <!-- end of stock_photo_container -->      
           </div> <!-- end of add_padding -->
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="guitar">
             <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: "stock_photo_container" do %>
-              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for guitar teachers near you' %>
             <% end %>
           </div> <!-- end of stock_photo_container -->      
         </div> <!-- end of add_padding -->
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="drums">
             <%= link_to display_subjects_path(search_subjects: 'drums', search_position: ''), class: "stock_photo_container" do %>
-              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for drum teachers near you' %>
             <% end %>
           </div> <!-- end of stock_photo_container -->      
         </div> <!-- end of add_padding -->
@@ -81,21 +81,21 @@
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="violin">
             <%= link_to display_subjects_path(search_subjects: 'violin', search_position: ''), class: "stock_photo_container" do %>
-              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for violin teachers near you' %>
             <% end %>
           </div> <!-- end of stock_photo_container -->      
         </div> <!-- end of add_padding -->
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="electric-guitar">
             <%= link_to display_subjects_path(search_subjects: 'electric guitar', search_position: ''), class: "stock_photo_container" do %>
-              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for electric-guitar teachers near you' %>
             <% end %>
           </div> <!-- end of stock_photo_container -->      
         </div> <!-- end of add_padding -->
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="piano">
             <%= link_to display_subjects_path(search_subjects: 'piano', search_position: ''), class: "stock_photo_container" do %>
-              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive' %>
+              <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for piano teachers near you' %>
             <% end %>
           </div> <!-- end of stock_photo_container -->      
         </div> <!-- end of add_padding -->

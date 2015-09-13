@@ -7,7 +7,8 @@ FactoryGirl.define do
 	factory :teacher do
 		first_name 					'Louis'
 		last_name 					'Angelini'
-		email 							
+		email
+		profile 						1 							
 		password						'password'
 		profile_views				1
 		is_teacher					true
@@ -35,13 +36,15 @@ FactoryGirl.define do
 	end
 
 	factory :photo do
-		name 							nil
+		name 							'hello'
 		imageable_id 			1
 		imageable_type 		"Teacher"
-		avatar 						"fake_text.jpg"
+		
+		avatar 						{ Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'me.jpg')) }
 	end
 
-	factory :price do
+
+	factory :price do		
 		subject_id				1
 		teacher
 		price 						33.4

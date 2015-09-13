@@ -18,6 +18,8 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 def drop_in_dropzone(file_path)
   # Generate a fake input selector
+
+  file_path = Rails.root + "spec/support/me.jpg"
   page.execute_script <<-JS
     fakeFileInput = window.$('<input/>').attr(
       {id: 'fakeFileInput', type:'file'}

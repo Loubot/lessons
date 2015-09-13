@@ -11,7 +11,8 @@ class StaticController < ApplicationController
 	before_filter :get_categories
 
 	def get_categories
-		@categories = Category.includes(:subjects)
+		# @categories = Category.includes(:subjects)
+		@categories = Category.where(name: 'Music').order(name: :asc)
 	end
 
 	def landing_page
@@ -47,6 +48,10 @@ class StaticController < ApplicationController
 		# fresh_when(:etag => ['teach-page', current_teacher, flash], :public => true)
 	end
 
+	def prices
+
+	end
+
 	def add_to_list
 		gb = Gibbon::API.new(ENV['_mail_chimp_api'], { :timeout => 15 })
 		
@@ -74,7 +79,7 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
 	end
@@ -83,7 +88,7 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name ILIKE ?', "%#{params[:search_subjects]}%")
+		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
 		@subject = @subjects.first
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
@@ -150,17 +155,21 @@ class StaticController < ApplicationController
 	end
 
 	def feedback
-		if current_teacher.is_teacher
-			render layout: 'teacher_layout'
+		if teacher_signed_in?
+			if current_teacher.is_teacher
+				render layout: 'teacher_layout'
+			else
+				render layout: 'application'
+			end
+			fresh_when [current_teacher, flash]
 		else
 			render layout: 'application'
 		end
-		fresh_when [current_teacher, flash]
 	end
 
 	def send_feedback
 		if valid_email?(params[:email])
-			AdminMailer.send_feedback_email(params).deliver_now
+			AdminMailer.delay.send_feedback_email(params)
 			flash[:success] = "Feedback submitted successfully"
 	  else
 	  	flash[:danger] = "Email not valid"
