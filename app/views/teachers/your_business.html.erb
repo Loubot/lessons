@@ -309,7 +309,7 @@
               <div class="form-group">
                 <label  class="col-sm-3 control-label">Location:</label>
                 <div class="col-sm-9">
-                  <%= location = @teacher.locations.find { |l| l.id = g.location_id } %>
+                  <% location = @teacher.locations.find { |l| l.id = g.location_id } %>
                   <span class="form-control disabled"><%= location.name %></span>
                 </div>  <!-- end of col-sm-10 -->
               </div> <!-- end of form-group -->
