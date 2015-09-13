@@ -28,11 +28,7 @@ class PaypalController < ApplicationController
   def pay_membership_paypal
     cart = UserCart.membership_cart(current_teacher.id, current_teacher.email)
     client = AdaptivePayments::Client.new(
-      :user_id       => ENV['PAYPAL_USER_ID'],
-      :password      => ENV['PAYPAL_PASSWORD'],
-      :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID'],
-      sandbox:       true
+      get_paypal_credentials
       
     )
 
@@ -62,7 +58,7 @@ class PaypalController < ApplicationController
   end
 
   def membership_return_paypal
-    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    uri = choose_uri
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
     http.read_timeout = 60
@@ -126,11 +122,7 @@ class PaypalController < ApplicationController
     cart = UserCart.create_package_cart(params, current_teacher, package)
     # redirect_to :back
     client = AdaptivePayments::Client.new(
-      :user_id       => ENV['PAYPAL_USER_ID'],
-      :password      => ENV['PAYPAL_PASSWORD'],
-      :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID'],
-      :sandbox       => true
+      get_paypal_credentials
     )
 
     client.execute(:Pay,
@@ -163,7 +155,7 @@ class PaypalController < ApplicationController
   end
 
   def store_package_paypal #ipn destination for package bookings
-    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    uri = choose_uri
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
     http.read_timeout = 60
@@ -218,11 +210,7 @@ class PaypalController < ApplicationController
 
     
     client = AdaptivePayments::Client.new(
-      :user_id       => ENV['PAYPAL_USER_ID'],
-      :password      => ENV['PAYPAL_PASSWORD'],
-      :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID'],
-      sandbox:       true
+      get_paypal_credentials
     )
 
     client.execute(:Pay,
@@ -257,8 +245,10 @@ class PaypalController < ApplicationController
   
   
   def store_paypal
-    render status: 200, nothing: true and return
-    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    # render status: 200, nothing: true and return
+    uri = choose_uri
+
+    p "paypal url #{ uri }"
     http = Net::HTTP.new(uri.host,uri.port)
     http.open_timeout = 60
     http.read_timeout = 60
@@ -355,11 +345,7 @@ class PaypalController < ApplicationController
     require "pp-adaptive"
 
     client = AdaptivePayments::Client.new(
-      :user_id       => ENV['PAYPAL_USER_ID'],
-      :password      => ENV['PAYPAL_PASSWORD'],
-      :signature     => ENV['PAYPAL_SIGNATURE'],
-      :app_id        => ENV['PAYPAL_APP_ID'],
-      :sandbox       => true
+      get_paypal_credentials
     )
 
     client.execute(:PaymentDetails, :pay_key => params[:payKey]) do |response|
@@ -378,6 +364,34 @@ class PaypalController < ApplicationController
 
 
   private
+
+  def choose_uri
+    if Rails.env.development? or Rails.env.test?
+      URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    else
+      URI.parse('https://www.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    end
+  end
+
+  def get_paypal_credentials
+    if Rails.env.development? or Rails.env.test?
+      { 
+        :user_id       => ENV['PAYPAL_USER_ID'],
+        :password      => ENV['PAYPAL_PASSWORD'],
+        :signature     => ENV['PAYPAL_SIGNATURE'],
+        :app_id        => ENV['PAYPAL_APP_ID'],
+        sandbox:       true
+      }
+    else
+      {
+        :user_id       => ENV['PAYPAL_USER_ID'],
+        :password      => ENV['PAYPAL_PASSWORD'],
+        :signature     => ENV['PAYPAL_SIGNATURE'],
+        :app_id        => ENV['PAYPAL_APP_ID']
+      }
+    end
+  end
+
   def params
     @reparsed_params || super
   end
@@ -391,11 +405,7 @@ class PaypalController < ApplicationController
         @amount = price * cart.weeks
         require "pp-adaptive"
         client = AdaptivePayments::Client.new(
-          :user_id       => "lllouis_api1.yahoo.com",
-          :password      => "MRXUGXEXHYX7JGHH",
-          :signature     => "AFcWxV21C7fd0v3bYYYRCpSSRl31Akm0pm37C5ZCuhi7YDnTxAVFtuug",
-          :app_id        => "APP-80W284485P519543T",
-          :sandbox       => true
+          get_paypal_credentials
         )
 
         client.execute(:Pay,
