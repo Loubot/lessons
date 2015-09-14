@@ -103,12 +103,22 @@ class StaticController < ApplicationController
 	def grinds_search
 		require 'will_paginate/array'
 		@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
-		ids = @teachers.collect { |t| t.id }
-		@locations = Location.where(teacher_id: ids)
-		p "locations #{@locations.inspect}"
-		gon.locations = @locations
-		@subject = Subject.where('name LIKE ?', "%#{ params[:search_subejcts] }").first
-		@teachers = @teachers.paginate(page: params[:page])
+		respond_to do |format|
+			format.html{
+				
+				ids = @teachers.collect { |t| t.id }
+				@locations = Location.where(teacher_id: ids)
+
+				p "locations #{@locations.inspect}"
+				gon.locations = @locations
+				@subject = Subject.where('name LIKE ?', "%#{ params[:search_subejcts] }").first
+				@teachers = @teachers.paginate(page: params[:page])
+			}
+			format.js{}
+			format.json{
+				render json: { teachers: @teachers }
+			}
+		end
 	end
 
 	def browse_categories

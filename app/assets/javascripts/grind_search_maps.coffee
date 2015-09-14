@@ -9,7 +9,7 @@ window.init_grinds_map = ->
      center: {lat: gon.locations[0].latitude, lng: gon.locations[0].longitude},
      zoom: 8
    });
-
+  
   for loc in gon.locations
     latLng =  
       lat: loc.latitude
@@ -20,6 +20,23 @@ window.init_grinds_map = ->
         map: map
         title: 'Grinds maps'
       )
+
+    google.maps.event.addListener map, 'dragend', (e) ->
+
+      grindCentral =  map.getCenter()
+      console.log grindCentral.lat()
+
+      $.ajax(
+        method: 'get'
+        dataType: 'json'
+        url: 'grinds-search'
+        data: 
+          coords: 
+            lat: grindCentral.lat()
+            lon: grindCentral.lng() ).done (data) ->
+        console.log data
+        
+    
 
 load_google_maps_api_grinds = ->
   if !(google?) #if google maps already loaded   
