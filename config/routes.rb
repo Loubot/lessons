@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   get         '/welcome'                =>  'static#welcome'
   get         '/subject-search'         =>  'static#subject_search'
   get         '/display-subjects'       =>  'static#display_subjects'
+  get         'grinds-search'           =>  'static#grinds_search'
   get         '/how-it-works'           =>  'static#how_it_works'
   get         '/mailing-list'           =>  'static#mailing_list'
   get         '/browse-categories'      =>  'static#browse_categories'

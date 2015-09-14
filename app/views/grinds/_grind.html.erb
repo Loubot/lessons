@@ -1,0 +1,32 @@
+
+
+<div class="row search_results_row nopadding">
+	<%= link_to show_teacher_path(id: teacher.id, subject_id: subject.id), html_options = {class: 'image_container'} do %>
+		<div class="col-md-9 search_results_left search_results_shadow nopadding">
+			
+			<%= silhouette_helper(teacher) %>		
+			<%= image_tag 'view-more-small.png',  class: 'pull-left results_photos back' %>
+			
+			<div class="search_results_teachers_info">
+				<h4 class="search_results_teachers_name"><%= "#{teacher.first_name} #{teacher.last_name}" %></h4>
+				<p>Subjects taught: <%= display_subjects(teacher.subjects, teacher.id)  %></p>  <%# teachers_helper %>
+				<p><%# teacher.address %></p>
+			</div> <!-- end of search_results_teachers_info -->
+		</div> <!-- end of col-md-9 -->
+	
+	
+		<div class="col-md-3 search_restuls_right search_results_shadow">
+			
+			<%= teacher.locations.first.address %>
+			<br>
+			<% if !teacher.reviews.empty? %>
+				<div class="review_container">					
+					<% teacher.reviews.first.rating.times do %>
+						<span style="color:#ffaa00;font-size:140%;">★</span>
+					<% end %>
+					 <%= pluralize(teacher.reviews.count, 'review') %>
+				</div>
+			<% end %>
+		</div> <!-- end of search_restuls_right -->
+	<% end %>
+</div> <!-- end of row -->

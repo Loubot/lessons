@@ -9,7 +9,7 @@ end
 
 
 def get_search_results(params, subject) #return list of valid teachers ordered by params
-  puts "postion #{params[:search_position]}"
+  # puts "postion #{params[:search_position]}"
   
   # new_params = params
   params.merge!({ :search_position => '' }) if (params[:search_position].blank? || !params.has_key?(:search_position))#add search positiong if it's missing
@@ -63,5 +63,5 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
     else
       []
     end
-  end
+  end #end of get_search_results
 

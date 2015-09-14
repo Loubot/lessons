@@ -137,7 +137,7 @@ load_google_maps_api = (name) ->
   console.log 'loading'
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&" + callback
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0&" + callback
   document.body.appendChild script
 
 

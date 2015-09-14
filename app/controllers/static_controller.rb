@@ -88,7 +88,7 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
+		@subjects = Subject.where('name LIKE ?', "%#{ params[:search_subjects] }%")
 		@subject = @subjects.first
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
@@ -98,6 +98,17 @@ class StaticController < ApplicationController
 			
 		end
 		# fresh_when [params[:search_subjects], params[:position]]
+	end
+
+	def grinds_search
+		require 'will_paginate/array'
+		@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
+		ids = @teachers.collect { |t| t.id }
+		@locations = Location.where(teacher_id: ids)
+		p "locations #{@locations.inspect}"
+		gon.locations = @locations
+		@subject = Subject.where('name LIKE ?', "%#{ params[:search_subejcts] }").first
+		@teachers = @teachers.paginate(page: params[:page])
 	end
 
 	def browse_categories
