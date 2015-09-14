@@ -34,7 +34,8 @@ window.init_grinds_map = ->
           coords: 
             lat: grindCentral.lat()
             lon: grindCentral.lng() ).done (data) ->
-        console.log data
+        console.log data.latitude
+        # map.setCenter(lat: data.latitude, lng: data.longitude)
         
     
 

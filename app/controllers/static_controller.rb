@@ -103,11 +103,11 @@ class StaticController < ApplicationController
 	def grinds_search
 		require 'will_paginate/array'
 		@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
+		ids = @teachers.collect { |t| t.id }
+		@locations = Location.where(teacher_id: ids)
+
 		respond_to do |format|
-			format.html{
-				
-				ids = @teachers.collect { |t| t.id }
-				@locations = Location.where(teacher_id: ids)
+			format.html{				
 
 				p "locations #{@locations.inspect}"
 				gon.locations = @locations
@@ -116,7 +116,7 @@ class StaticController < ApplicationController
 			}
 			format.js{}
 			format.json{
-				render json: { teachers: @teachers }
+				render json: { locations: @locations }
 			}
 		end
 	end
