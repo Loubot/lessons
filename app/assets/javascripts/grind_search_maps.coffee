@@ -4,6 +4,7 @@ ready = ->
     $.when(load_google_maps_api_grinds()).done ->
 
 map_changed = ->
+
   console.log "map changed"
   grindCentral =  grinds_map.getCenter()
   bounds = grinds_map.getBounds()
@@ -29,7 +30,8 @@ map_changed = ->
       coords: 
         lat: grindCentral.lat()
         lon: grindCentral.lng()
-        distance: dis ).done (data) ->
+        distance: dis
+        search_subjects: getQueryParam("search_subjects") ).done (data) ->
     redraw_markers(data)
 
 redraw_markers = (data) ->
@@ -79,8 +81,9 @@ window.init_grinds_map = ->
 
   google.maps.event.addListener grinds_map, "zoom_changed", ->
     map_changed()
-        
-        
+
+  google.maps.event.addListener grinds_map, "idle", ->
+    map_changed()
         
     
 
@@ -99,3 +102,8 @@ load_google_maps_api_grinds = ->
 
 $(document).ready ready
 $(document).on 'page:load', ready
+
+
+getQueryParam = (param) ->
+  result = window.location.search.match(new RegExp('(\\?|&)' + param + '(\\[\\])?=([^&]*)'))
+  if result then result[3] else false

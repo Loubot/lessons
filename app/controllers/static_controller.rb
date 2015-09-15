@@ -101,25 +101,33 @@ class StaticController < ApplicationController
 	end
 
 	def grinds_search
+		redirect_to :back and return if params[:search_subjects] == ""
 		require 'Geocoder'
-		require 'will_paginate/array'
-		@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
-		ids = @teachers.collect { |t| t.id }
-		loc = Geocoder.search('cork')
-		p "location coords #{ pp loc[0].latitude }"
+		require 'will_paginate/array'		
+
+		
 
 		respond_to do |format|
-			format.html{				
+			format.html{
+				@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
+				ids = @teachers.collect { |t| t.id }		
+				loc = Geocoder.search(params[:search_position])
+				gon.initial_location = { lat: loc[0].latitude, lon: loc[0].longitude }				
 				@locations = Location.where(teacher_id: ids)
 				p "locations #{@locations.inspect}"
 				gon.locations = @locations
 				@subject = Subject.where('name LIKE ?', "%#{ params[:search_subejcts] }").first
 				@teachers = @teachers.paginate(page: params[:page])
 			}
-			format.js{}
+			
 			format.json{
-				p "lat #{ params['coords']['distance'] }"
-				@locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], params['coords']['distance'].to_f).where(teacher_id: ids)
+				subject = Subject.where("LOWER(name) LIKE ?", params['coords']["search_subjects"]).first
+
+				@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
+																												.where(grinds: { subject_id: subject.id })
+				ids = @teachers.collect { |t| t.id }
+				@locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], \
+					 params['coords']['distance'].to_f).where(teacher_id: ids)
 				render json: { locations: @locations }
 			}
 		end
