@@ -35,7 +35,9 @@
         </div><!--  end of page_info -->
       </div> <!-- end of apple_pagination -->
       
-  		<%= render partial: 'grinds/grind', collection: @teachers, as: :teacher, locals: { subject: @subject } %>
+  		<div id="display_grinds_teachers">
+        <%= render partial: 'grinds/grind', collection: @teachers, as: :teacher, locals: { subject: @subject } %>
+      </div>
       <% end %>
   	</div> <!-- end of display_search_results -->
   
