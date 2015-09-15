@@ -24,16 +24,15 @@ map_changed = ->
 
   $.ajax(
     method: 'get'
-    dataType: 'json'
+    dataType: 'script'
     url: 'grinds-search'
     data: 
       coords: 
         lat: grindCentral.lat()
         lon: grindCentral.lng()
         distance: dis
-        search_subjects: getQueryParam("search_subjects") ).done (data) ->
-    redraw_markers(data)
-
+        search_subjects: getQueryParam("search_subjects") )
+  
 redraw_markers = (data) ->
   # console.log "locations #{ JSON.stringify data }"
   for marker in window.markersArray

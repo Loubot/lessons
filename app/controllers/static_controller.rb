@@ -119,7 +119,16 @@ class StaticController < ApplicationController
 				@subject = Subject.where('name LIKE ?', "%#{ params[:search_subejcts] }").first
 				@teachers = @teachers.paginate(page: params[:page])
 			}
-			
+			format.js{
+				subject = Subject.where("LOWER(name) LIKE ?", params['coords']["search_subjects"]).first
+
+				@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
+																												.where(grinds: { subject_id: subject.id })
+				ids = @teachers.collect { |t| t.id }
+				@locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], \
+					 params['coords']['distance'].to_f).where(teacher_id: ids)
+				
+			}
 			format.json{
 				subject = Subject.where("LOWER(name) LIKE ?", params['coords']["search_subjects"]).first
 
