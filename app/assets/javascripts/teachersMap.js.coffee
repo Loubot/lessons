@@ -31,6 +31,7 @@ window.init_teachers_maps = ->
               
         )
     google.maps.event.addListenerOnce map, "idle", ->
+      console.log 'idle'
       google.maps.event.trigger map, "resize"
       map.setCenter new google.maps.LatLng(52.904281, -8.023571)
 

@@ -101,14 +101,16 @@ class StaticController < ApplicationController
 	end
 
 	def grinds_search
+		require 'Geocoder'
 		require 'will_paginate/array'
 		@teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
 		ids = @teachers.collect { |t| t.id }
-		@locations = Location.where(teacher_id: ids)
+		loc = Geocoder.search('cork')
+		p "location coords #{ pp loc[0].latitude }"
 
 		respond_to do |format|
 			format.html{				
-
+				@locations = Location.where(teacher_id: ids)
 				p "locations #{@locations.inspect}"
 				gon.locations = @locations
 				@subject = Subject.where('name LIKE ?', "%#{ params[:search_subejcts] }").first
@@ -116,6 +118,8 @@ class StaticController < ApplicationController
 			}
 			format.js{}
 			format.json{
+				p "lat #{ params['coords']['distance'] }"
+				@locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], params['coords']['distance'].to_f).where(teacher_id: ids)
 				render json: { locations: @locations }
 			}
 		end
