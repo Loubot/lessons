@@ -9,6 +9,7 @@ class TeachersController < ApplicationController
 
 	
 	def show_teacher
+		redirect_to root_url and return if params[:id] == ""
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects,:qualifications,:locations, :photos, :packages, :friendships).find(params[:id])
 
 		if !@teacher.is_active #only show active teachers
