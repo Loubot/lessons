@@ -1,5 +1,6 @@
 <% content_for :title, "Searching for #{ params[:search_subjects] } teachers near you" %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else. Search results for #{ params[:search_subjects] }" %>
+<%= include_gon %>
 <div class="outer-container">
   <div  class="container-fluid search_page_results">
     <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
@@ -23,6 +24,7 @@
   </div> <!-- end of container-fluid main_page_search -->
 
   
+    <div id="search_map"></div>
   	<div id="display_search_results">
       <% if @teachers == [] %>
         <%= render partial: 'partials/socials/no_results_share_buttons' %>
@@ -34,7 +36,10 @@
         <%= will_paginate @teachers, :container => false %>
       </div> <!-- end of apple_pagination -->
       
-  		<%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
+      <div id="search_results_teachers_info">
+        <%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
+      </div>
+  		
       <% end %>
   	</div> <!-- end of display_search_results -->
   

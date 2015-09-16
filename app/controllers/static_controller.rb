@@ -85,17 +85,36 @@ class StaticController < ApplicationController
 	end
 
 	def display_subjects
+		p "params 1 #{}"
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name LIKE ?', "%#{ params[:search_subjects] }%")
+		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
 		@subject = @subjects.first
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
 		else			
-			@teachers = get_search_results(params, @subjects)
-			@teachers.paginate(page: params[:page])
-			
+			respond_to do |format|
+				format.html{
+					@teachers = get_search_results(params, @subjects)
+					ids = @teachers.collect { |t| t.id }		
+					loc = Geocoder.search(params[:search_position])
+					gon.initial_location = { lat: loc[0].latitude, lon: loc[0].longitude }				
+					@locations = Location.where(teacher_id: ids)
+					p "locations #{@locations.inspect}"
+					gon.locations = @locations
+					@teachers.paginate(page: params[:page])
+				}
+				format.js{
+					@subject = Subject.where("LOWER(name) LIKE ?", params["search_subjects"]).first				
+					@teachers = get_search_results(params, @subjects)
+					p "teachers #{ pp @teachers }"
+					ids = @teachers.collect { |t| t.id }
+					@locations = Location.near([params['lat'].to_f, params['lon'].to_f], \
+					 params['distance'].to_f).where(teacher_id: ids)
+					
+				}
+			end
 		end
 		# fresh_when [params[:search_subjects], params[:position]]
 	end
