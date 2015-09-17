@@ -22,7 +22,11 @@ markersArray.push marker
 
 
 $("#search_results_teachers_info").html ("""
-
-  <%= j( render partial: 'static/subjects_search', collection: @teachers, as: :teacher, locals: { subject: @subject }) %>
+  <% pp @teachers %>
+  <% if @teachers.size > 0 %>
+    <%= j( render partial: 'static/subjects_search', collection: @teachers, as: :teacher, locals: { subject: @subject }) %>
+  <% else %>
+    <%= render partial: 'partials/socials/no_results_share_buttons' %>
+  <% end %>
 
 """)

@@ -91,17 +91,20 @@ class StaticController < ApplicationController
 		#Teacher.includes(:locations).where(id: ids)
 		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
 		@subject = @subjects.first
+		p "subject #{ pp @subject }"
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
 		else			
 			respond_to do |format|
 				format.html{
-					@teachers = get_search_results(params, @subjects)
-					ids = @teachers.collect { |t| t.id }		
 					loc = Geocoder.search(params[:search_position])
+					@teachers = get_search_results(params, @subjects)
+					p "teachers #{ pp @teachers.size }"
+					ids = @teachers.collect { |t| t.id }		
+					
 					gon.initial_location = { lat: loc[0].latitude, lon: loc[0].longitude }				
 					@locations = Location.where(teacher_id: ids)
-					p "locations #{@locations.inspect}"
+					p "locations #{pp @locations}"
 					gon.locations = @locations
 					@teachers.paginate(page: params[:page])
 				}

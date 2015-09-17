@@ -13,34 +13,37 @@
       <div class="container-fluid search_submit_container">
         <%= submit_tag "I'm ready to learn", name: 'search_submit', id: 'search_submit', class: 'btn', tabindex: 3 %>
       </div> <!-- end of container-fluid search_submit_container -->
-    <% end %>
+    
     <div id="display_search_results">
-      <form class="form-horizontal col-md-4 pull-right" role="form">
+      <span class="form-horizontal col-md-4 pull-right" role="form">
         <label>Sort by:</label>
         <%= select_tag 'sort_by', options_for_select(['Distance', 'Rate: lowest first', 'Rate: highest first'], selected: params[:sort_by]),  class: 'form-control distance_rate' %>
         
-      </form>
-    </div>
+      </span>
+      <% end %>
+    </div> <!-- end of display_search_results -->
   </div> <!-- end of container-fluid main_page_search -->
 
   
     <div id="search_map"></div>
   	<div id="display_search_results">
-      <% if @teachers == [] %>
-        <%= render partial: 'partials/socials/no_results_share_buttons' %>
-      <% else %>
-      <div class="apple_pagination">
-        <div class="page_info">
-          <%= page_entries_info @teachers %>
-        </div><!--  end of page_info -->
-        <%= will_paginate @teachers, :container => false %>
-      </div> <!-- end of apple_pagination -->
-      
       <div id="search_results_teachers_info">
-        <%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
-      </div>
+        <% if @teachers == [] %>
+          <%= render partial: 'partials/socials/no_results_share_buttons' %>
+        <% else %>
+        <div class="apple_pagination">
+          <div class="page_info">
+            <%# page_entries_info @teachers %>
+          </div><!--  end of page_info -->
+          <%# will_paginate @teachers, :container => false %>
+        </div> <!-- end of apple_pagination -->
+        
+        
+          <%= render partial: 'static/subjects_search', collection: @teachers, as: :teacher %>
+        
   		
-      <% end %>
+        <% end %>
+      </div>
   	</div> <!-- end of display_search_results -->
   
 </div> <!-- end of outer-container -->  

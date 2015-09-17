@@ -9,7 +9,7 @@ end
 
 
 def get_search_results(params, subject) #return list of valid teachers ordered by params
-  puts "params2 #{params['search_position']}"
+  puts "params2 #{params}"
   
   # new_params = params
   params.merge!({ :search_position => '' }) if (params[:search_position].blank? || !params.has_key?(:search_position))#add search positiong if it's missing
@@ -17,10 +17,15 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
   
   
     if !params[:search_position].empty? && !params[:search_subjects].empty? #subject and location
-      ids = Location.near([params['lat'].to_f, params['lon'].to_f], \
-           params['distance'].to_f).select('id').map(&:teacher_id)
-      @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
+      if params.has_key?(:lat)
+        ids = Location.near([params['lat'].to_f, params['lon'].to_f], \
+             params['distance'].to_f).select('id').map(&:teacher_id)
+        @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
+      else
+        ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
+        @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
       
+      end
       if params[:sort_by] == 'Rate: lowest first'   
         @teachers.reorder('prices.price ASC')
       elsif params[:sort_by] == "Rate: highest first"
