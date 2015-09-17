@@ -33,9 +33,9 @@
         <% else %>
         <div class="apple_pagination">
           <div class="page_info">
-            <%# page_entries_info @teachers %>
+            <%= page_entries_info @teachers %>
           </div><!--  end of page_info -->
-          <%# will_paginate @teachers, :container => false %>
+          <%= will_paginate @teachers, :container => false %>
         </div> <!-- end of apple_pagination -->
         
         

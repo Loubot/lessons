@@ -26,7 +26,12 @@ Rails.application.routes.draw do
     end
     resources :identities, only: [:destroy]
     resources :invitations, only: [:create]
-    resources :grinds, only: [:create, :update, :destroy]
+    resources :grinds do
+      member do
+        get 'grinds-search'         =>  "grinds#grind_search"
+      end
+    end
+
     resources :experiences,   only: [:create, :update, :destroy]
     resources :packages, only: [:create, :destroy]
     resources :locations, only: [:create, :update, :destroy]
@@ -67,7 +72,6 @@ Rails.application.routes.draw do
   get         '/welcome'                =>  'static#welcome'
   get         '/subject-search'         =>  'static#subject_search'
   get         '/display-subjects'       =>  'static#display_subjects'
-  get         'grinds-search'           =>  'static#grinds_search'
   get         '/how-it-works'           =>  'static#how_it_works'
   get         '/mailing-list'           =>  'static#mailing_list'
   get         '/browse-categories'      =>  'static#browse_categories'
