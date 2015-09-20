@@ -4,7 +4,7 @@ ready = ->
     $.when(load_google_maps_api_grinds()).done ->
 
 map_changed = ->
-  console.log "right here"
+  
   if window.first_load != true
     
     console.log "map changed"
@@ -39,51 +39,39 @@ map_changed = ->
         search_subjects: getQueryParam("search_subjects")
         search_position: getQueryParam("search_position") )
   window.first_load = false
-    
-# redraw_markers = (data) ->
-#   # console.log "locations #{ JSON.stringify data }"
-#   for marker in window.markersArray
-#     marker.setMap(null)
-
-#   console.log data['locations'].length
-#   for loc in data['locations']
-#     # console.log "latitude #{ loc.longitude }"
-#     latLng = new google.maps.LatLng loc.latitude, loc.longitude
-#     # console.log latLng
-#     marker = new google.maps.Marker(
-#       position: latLng
-#       map: grinds_map
-#       title: loc.name
-#       )
-#     # console.log marker
-#     marker.setMap(grinds_map)
-#     markersArray.push marker
+  
 
 
 window.init_search_map = ->
+
+  if (gon?) and (gon.initial_location?)
+    mapOptions = 
+      center: new google.maps.LatLng(gon.initial_location.lat, gon.initial_location.lon)
+      zoom: 8
+  else
+    mapOptions = 
+      center: new google.maps.LatLng(52.904281, -8.023571)
+      zoom: 7
   
-  window.grinds_map = new (google.maps.Map)(document.getElementById('search_map'),
-    center:
-      lat: gon.initial_location.lat
-      lng: gon.initial_location.lon
-    zoom: 8)
+  window.grinds_map = new (google.maps.Map)(document.getElementById('search_map'), mapOptions)
  
 
-  window.markersArray = new Array()
-  
-  for loc in gon.locations
-    # console.log loc.longitude
-    latLng =  
-      lat: loc.latitude
-      lng: loc.longitude
+  if (gon)? and (gon.locations)?
+    window.markersArray = new Array()
+    
+    for loc in gon.locations
+      # console.log loc.longitude
+      latLng =  
+        lat: loc.latitude
+        lng: loc.longitude
 
-    marker = new (google.maps.Marker)(
-        position: latLng
-        map: grinds_map
-        title: 'Grinds maps'
-      )
+      marker = new (google.maps.Marker)(
+          position: latLng
+          map: grinds_map
+          title: 'Grinds maps'
+        )
 
-    markersArray.push marker
+      markersArray.push marker
   # console.log "markersArray #{markersArray}"
 
   # google.maps.event.addListener grinds_map, "dragend", ->    

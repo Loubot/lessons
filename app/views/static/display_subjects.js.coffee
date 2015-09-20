@@ -1,9 +1,13 @@
-for marker in window.markersArray
-  marker.setMap null
 
-window.markersArray = null
-window.markersArray = new Array()
-# console.log "<%= pp @locations %>"
+if window.markersArray?
+  for marker in window.markersArray
+    marker.setMap null
+
+  window.markersArray = null
+  window.markersArray = new Array()
+
+  
+# console.log "locations <%= pp @locations %>"
 <% @locations.each do |loc| %>
 latLng = new google.maps.LatLng "#{<%= loc.latitude.to_f %>}", "#{<%= loc.longitude.to_f %>}"
 # console.log latLng
@@ -22,7 +26,7 @@ markersArray.push marker
 
 
 $("#search_results_teachers_info").html ("""
-  <% pp @teachers %>
+  
   <% if @teachers.size > 0 %>
     <%= j( render partial: 'static/subjects_search', collection: @teachers, as: :teacher, locals: { subject: @subject }) %>
   <% else %>
