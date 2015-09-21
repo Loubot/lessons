@@ -14,6 +14,7 @@
 #  student_id :integer          default(0)
 #  review_id  :integer
 #  subject_id :integer
+#  pay_key    :string
 #
 
 class Event < ActiveRecord::Base

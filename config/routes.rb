@@ -26,12 +26,7 @@ Rails.application.routes.draw do
     end
     resources :identities, only: [:destroy]
     resources :invitations, only: [:create]
-    resources :grinds do
-      member do
-        get 'grinds-search'         =>  "grinds#grind_search"
-      end
-    end
-
+    resources :grinds, except: [:index]
     resources :experiences,   only: [:create, :update, :destroy]
     resources :packages, only: [:create, :destroy]
     resources :locations, only: [:create, :update, :destroy]
@@ -42,6 +37,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :grinds, only: [:index]
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'

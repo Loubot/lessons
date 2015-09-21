@@ -1,4 +1,5 @@
 window.init_teachers_maps = ->
+  console.log 'heelllo'
   window.start_address_search = (id = "") ->
     geocoder = new google.maps.Geocoder()
     geocoder.geocode address: $("#address#{id}").val(), (results, status) ->
@@ -52,8 +53,31 @@ window.init_teachers_maps = ->
       setMapPosition e.latLng, map.getZoom()
 
 
-  window.multiple_maps = ->
+  window.doNothin = ->
+  console.log "Maps loaded"
+
+
+  window.getTab = ->  
+    $.ajax #fetch tab from server
+      url: '/add-map'
+      
+
     
+  $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
+    if $(@).data 'index'
+      # console.log $(@).data 'index'
+      i = $(@).data 'index'
+      map = mapArray[i]
+      google.maps.event.trigger map, "resize"
+      map.setCenter mapOptionsArray[i].center
+    
+  $(document).on 'click', 'a[href="#profile"]', ->
+    $.when(getTab()).done -> #call getTab
+      $("[href='#meballs']").tab 'show' #show tab after tab has been rendered
+      $("[href='#profile']").hide()
+
+window.multiple_maps = ->
+    console.log "size #{gon.locations.length}"
     for loc, i in gon.locations
       # console.log "map_canvas#{i}"
       map_options = 
@@ -79,45 +103,24 @@ window.init_teachers_maps = ->
       cityCircle = new (google.maps.Circle)(populationOptions)
     # console.log mapArray
 
-  window.doNothin = ->
-  console.log "Maps loaded"
-
-
-  window.getTab = ->  
-    $.ajax #fetch tab from server
-      url: '/add-map'
-      
-
-    
-  $("a[data-toggle=\"tab\"]").on "shown.bs.tab", (e) ->
-    if $(@).data 'index'
-      # console.log $(@).data 'index'
-      i = $(@).data 'index'
-      map = mapArray[i]
-      google.maps.event.trigger map, "resize"
-      map.setCenter mapOptionsArray[i].center
-    
-  $(document).on 'click', 'a[href="#profile"]', ->
-    $.when(getTab()).done -> #call getTab
-      $("[href='#meballs']").tab 'show' #show tab after tab has been rendered
-      $("[href='#profile']").hide()
-
-
-
 # Run initialize on dom ready if map_container is on screen
 
 
 ready = ->
   if $('#map_container').is(':visible')
+    
     window.mapArray = []
     window.mapOptionsArray = []
     if gon.locations.length == 0
       $.when(load_google_maps_api()).done ->
+        
         init_teachers_maps()
     else
       $.when(load_google_maps_api('multiple_maps')).done ->
+        
         init_teachers_maps()
   else if $('.show_teacher_profile_container').length > 0
+
     window.mapArray = []
     window.mapOptionsArray = []
     $.when(load_google_maps_api('multiple_maps')).done ->
@@ -129,6 +132,7 @@ ready = ->
 
 
 load_google_maps_api = (name) ->
+  
   if (google?) #if google maps already loaded
     console.log 'Google maps already loaded'
     window[name]() #turn string into function call

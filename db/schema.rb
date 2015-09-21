@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150720194257) do
-
-
-  # These are extensions that must be enabled in order to support this database
+ActiveRecord::Schema.define(version: 20150826100057) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -51,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer  "student_id",             default: 0
     t.integer  "review_id"
     t.integer  "subject_id"
+    t.string   "pay_key"
   end
 
   add_index "events", ["review_id"], name: "index_events_on_review_id"

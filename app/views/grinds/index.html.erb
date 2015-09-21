@@ -3,7 +3,7 @@
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for grinds on music, photography, languages or anything else. Search results for #{ params[:search_subjects] }" %>
 <div class="outer-container">
   <div  class="container-fluid search_page_results">
-    <%= form_tag grinds_search_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
+    <%= form_tag grinds_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
       <div class="form-group">
         <%= text_field_tag :search_subjects, params[:search], :utf8_enforce_tag => false,placeholder: 'What do you want to learn today?', value: params[:search_subjects], class: 'typeahead form-control subject col-xs-12 col-md-12', autocomplete: :off, tabindex: 1 %>
       </div> <!-- end of form-group -->
@@ -25,7 +25,7 @@
   </div> <!-- end of container-fluid main_page_search -->
 
   
-  	<div id="display_search_results">
+    <div id="display_search_results">
       <% if @teachers == [] %>
         <%= render partial: 'partials/socials/no_results_share_buttons' %>
       <% else %>
@@ -35,10 +35,10 @@
         </div><!--  end of page_info -->
       </div> <!-- end of apple_pagination -->
       
-  		<div id="display_grinds_teachers">
+      <div id="display_grinds_teachers">
         <%= render partial: 'grinds/grind', collection: @teachers, as: :teacher, locals: { subject: @subject } %>
       </div>
       <% end %>
-  	</div> <!-- end of display_search_results -->
+    </div> <!-- end of display_search_results -->
   
 </div>  <!-- end of outer-container -->

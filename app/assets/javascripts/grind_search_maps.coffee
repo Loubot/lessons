@@ -75,11 +75,11 @@ window.init_grinds_map = ->
 
     markersArray.push marker
 
-  google.maps.event.addListener grinds_map, "dragend", ->    
-    map_changed()
+  # google.maps.event.addListener grinds_map, "dragend", ->    
+  #   map_changed()
 
-  google.maps.event.addListener grinds_map, "zoom_changed", ->
-    map_changed()
+  # google.maps.event.addListener grinds_map, "zoom_changed", ->
+  #   map_changed()
 
   google.maps.event.addListener grinds_map, "idle", ->
     map_changed()

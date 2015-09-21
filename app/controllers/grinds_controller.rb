@@ -1,9 +1,59 @@
 class GrindsController < ApplicationController
-  before_action :authenticate_teacher!
+  before_action :authenticate_teacher!, except: [:index, :show]
+
+  before_action :get_categories
+
+  def  get_categories
+    @categories = Category.all
+  end 
 
 
   def index
-    @grinds = Grind.all
+    redirect_to :back and return if params[:search_subjects] == ""
+    # require 'Geocoder'
+    require 'will_paginate/array'      
+
+    respond_to do |format|
+      format.html{
+        @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
+        ids = @teachers.collect { |t| t.id }    
+        loc = Geocoder.search(params[:search_position])
+        gon.initial_location = { lat: loc[0].latitude, lon: loc[0].longitude }        
+        @locations = Location.where(teacher_id: ids)
+        p "locations #{@locations.inspect}"
+        gon.locations = @locations
+        @subject = Subject.where('name LIKE ?', "%#{ params[:search_subejcts] }").first
+        @teachers = @teachers.paginate(page: params[:page])
+      }
+      format.js{
+        @subject = Subject.where("LOWER(name) LIKE ?", params['coords']["search_subjects"]).first
+
+        @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
+                                                        .where(grinds: { subject_id: @subject.id })
+        ids = @teachers.collect { |t| t.id }
+        @locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], \
+           params['coords']['distance'].to_f).where(teacher_id: ids)
+        
+      }
+      format.json{
+        @subject = Subject.where("LOWER(name) LIKE ?", params['coords']["search_subjects"]).first
+
+        @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
+                                                        .where(grinds: { subject_id: @subject.id })
+        ids = @teachers.collect { |t| t.id }
+        @locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], \
+           params['coords']['distance'].to_f).where(teacher_id: ids)
+        render json: { locations: @locations }
+      }
+    end
+  end
+
+  def show
+    redirect_to :back and return if(!params.has_key?(:teacher_id) or params[:teacher_id].empty?)
+    @teacher = Teacher.includes(:locations).find(params[:teacher_id])
+    @locations = @teacher.locations
+    p "locations #{pp @locations}"
+    gon.locations = @locations
   end
 
   def create
@@ -36,45 +86,7 @@ class GrindsController < ApplicationController
   end
 
   def grinds_search
-    redirect_to :back and return if params[:search_subjects] == ""
-    # require 'Geocoder'
-    require 'will_paginate/array'   
-
     
-
-    respond_to do |format|
-      format.html{
-        @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil } )
-        ids = @teachers.collect { |t| t.id }    
-        loc = Geocoder.search(params[:search_position])
-        gon.initial_location = { lat: loc[0].latitude, lon: loc[0].longitude }        
-        @locations = Location.where(teacher_id: ids)
-        p "locations #{@locations.inspect}"
-        gon.locations = @locations
-        @subject = Subject.where('name ILIKE ?', "%#{ params[:search_subejcts] }").first
-        @teachers = @teachers.paginate(page: params[:page])
-      }
-      format.js{
-        @subject = Subject.where("LOWER(name) ILIKE ?", params['coords']["search_subjects"]).first
-
-        @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
-                                                        .where(grinds: { subject_id: @subject.id })
-        ids = @teachers.collect { |t| t.id }
-        @locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], \
-           params['coords']['distance'].to_f).where(teacher_id: ids)
-        
-      }
-      format.json{
-        @subject = Subject.where("LOWER(name) ILIKE ?", params['coords']["search_subjects"]).first
-
-        @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
-                                                        .where(grinds: { subject_id: @subject.id })
-        ids = @teachers.collect { |t| t.id }
-        @locations = Location.near([params['coords']['lat'].to_f, params['coords']['lon'].to_f], \
-           params['coords']['distance'].to_f).where(teacher_id: ids)
-        render json: { locations: @locations }
-      }
-    end
   end
 
   private

@@ -1,0 +1,12 @@
+<%= include_gon %>
+<div class="outer-container">
+  <div class="row">
+    <div class="col-md-4">
+      <%= image_tag Photo.find(@teacher.profile).avatar.url ,alt: "#{@teacher.full_name} grinds profile pic", class: 'grind_teacher_profile' %>
+    </div> <!-- end of col-md -->
+    
+  </div> <!-- end of row -->
+  <div class="row">
+    <div id="map_container"></div>
+  </div>
+</div> <!-- end of outer-container -->
