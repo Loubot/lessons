@@ -78,7 +78,7 @@ class StaticController < ApplicationController
 		redirect_to :back
 	end
 
-	def subject_searchdddddddddddddddddddddddddddddddddddddddddddddddddd
+	def subject_search
 		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
