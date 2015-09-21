@@ -78,20 +78,20 @@ class StaticController < ApplicationController
 		redirect_to :back
 	end
 
-	def subject_search
+	def subject_searchdddddddddddddddddddddddddddddddddddddddddddddddddd
 		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
 	end
 
 	def display_subjects
-		p "params 1 #{}"
+		
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name LIKE ?', "%#{params[:search_subjects]}%")
+		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 		@subject = @subjects.first
-		# p "subject #{ pp @subject }"
+		p "subject #{ pp @subject.inspect }"
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
 		else			
@@ -99,10 +99,7 @@ class StaticController < ApplicationController
 				format.html{
 					@teachers = get_search_results(params, @subjects)
 
-					if !params[:search_position].empty?
-						loc = Geocoder.search(params[:search_position])
-						
-						p "loc #{ pp loc }"
+					if !params[:search_position].empty?ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 						ids = @teachers.collect { |t| t.id }		
 						
 						gon.initial_location = { lat: loc[0].latitude, lon: loc[0].longitude }				
@@ -113,7 +110,7 @@ class StaticController < ApplicationController
 					@teachers.paginate(page: params[:page])
 				}
 				format.js{
-					@subject = Subject.where("LOWER(name) LIKE ?", params["search_subjects"]).first				
+					@subject = Subject.where("LOWER(name) ILIKE ?", params["search_subjects"]).first				
 					@teachers = get_search_results(params, @subjects)
 					# p "teachers #{ pp @teachers }"
 					ids = @teachers.collect { |t| t.id }
