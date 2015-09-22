@@ -38,16 +38,16 @@
       </table>
     </div> <!-- end of show_teacher_profile_section -->
     <div class="col-sm-8 mob_no_padding">    
-        <div class="col-xs-12 mob_no_padding nopadding">
-          <div role="tabpanel">
-            <ul class="nav nav-tabs" role="tablist">
-              <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
-            </ul> <!-- emd of nav nav-tabs -->
-            <div class="tab-content">
-              <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
-            </div> <!-- end of tab-content -->
-          </div> <!-- end of tabpanel -->
-        </div> <!-- end of col- -->    
+      <div class="col-xs-12 mob_no_padding nopadding">
+        <div role="tabpanel">
+          <ul class="nav nav-tabs" role="tablist">
+            <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
+          </ul> <!-- emd of nav nav-tabs -->
+          <div class="tab-content">
+            <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
+          </div> <!-- end of tab-content -->
+        </div> <!-- end of tabpanel -->
+      </div> <!-- end of col- -->    
     </div> <!-- end of col-sm-8 -->   
   </div> <!-- end of row show_teacher_profile_container -->
 

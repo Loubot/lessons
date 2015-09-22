@@ -59,10 +59,24 @@ class GrindsController < ApplicationController
 
   def show
     redirect_to :back and return if(!params.has_key?(:teacher_id) or params[:teacher_id].empty?)
-    @teacher = Teacher.includes(:locations).find(params[:teacher_id])
-    @locations = @teacher.locations
-    p "locations #{pp @locations}"
-    gon.locations = @locations
+    respond_to do |format|
+      format.html{
+
+        @teacher = Teacher.includes(:locations, :grinds).find(params[:teacher_id])
+        @profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
+        subject_ids = @teacher.grinds.pluck(:subject_id).uniq
+        @subjects = Subject.find(subject_ids)
+        @locations = @teacher.locations
+        p "locations #{pp @locations}"
+        gon.locations = @locations
+
+      }
+
+      format.js{
+        
+
+      }
+      
   end
 
   def create

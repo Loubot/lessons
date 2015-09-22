@@ -253,6 +253,7 @@ teachersInfoReady = ->
     do () ->
       img = new Image()
       img.src = gon.profile_pic_url
+      console.log img.src
       w = $('.show_teacher_profile_section').outerWidth()
       # console.log w
       $('.profile_pic_container').css 'height', w

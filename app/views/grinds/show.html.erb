@@ -1,21 +1,41 @@
 <%= include_gon %>
 <div class="outer-container">
+ <div class="row show_teacher_profile_container">
+    <div class="col-sm-4 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
+      <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
+        <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
+        <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
+      </div> <!-- end of col-xs-12 profile_pic_container -->   
+      <table class="table table-bordered table-striped table-hover teacher_profile_table col-xs-12">
+        
+        <tr>
+          <td >Address: </td>
+          <td id="address"><%= @teacher.locations.first.address %></td>
+        </tr>
+        <tr>
+          <td >Profile views: </td>
+          <td id="address"><%= @teacher.profile_views %></td>
+        </tr>
+      </table>
+    </div> <!-- end of show_teacher_profile_section -->
+    <div class="col-sm-8 mob_no_padding ">    
+      <div class="col-xs-12 mob_no_padding nopadding">
+        <div role="tabpanel">
+          <ul class="nav nav-tabs" role="tablist">
+            <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
+          </ul> <!-- emd of nav nav-tabs -->
+          <div class="tab-content">
+            <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
+          </div> <!-- end of tab-content -->
+        </div> <!-- end of tabpanel -->
+      </div> <!-- end of col- -->    
+    </div> <!-- end of col-sm-8 -->   
+  </div> <!-- end of row show_teacher_profile_container -->
   <div class="row">
-    <div class="col-md-4">
-      <%= image_tag Photo.find(@teacher.profile).avatar.url ,alt: "#{@teacher.full_name} grinds profile pic", class: 'grind_teacher_profile' %>
-    </div> <!-- end of col-md -->
-    
-  </div> <!-- end of row -->
-  <div class="col-sm-8 mob_no_padding show_teacher_profile_container">    
-    <div class="col-xs-12 mob_no_padding nopadding">
-      <div role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-          <%= render partial: 'partials/show_teacher/show_teacher_maps_li_tags', collection: @locations, as: :location %>
-        </ul> <!-- emd of nav nav-tabs -->
-        <div class="tab-content">
-          <%= render partial: 'partials/show_teacher/show_teacher_maps_tabs', collection: @locations, as: :location %>
-        </div> <!-- end of tab-content -->
-      </div> <!-- end of tabpanel -->
-    </div> <!-- end of col- -->    
-    </div> <!-- end of col-sm-8 -->  
+    <div class="col-md-4 col-xs-12"> 
+      <%= select_tag "teachers[grind_id]", options_for_select(@subjects.map { |s| [ s.name, s.id ] }), \
+                                          class: 'form-horizontal', prompt: 'Select your subject' %>
+    </div> <!-- end col-md-4 col-xs-12 -->
+  </div><!-- end of row -->
 </div> <!-- end of outer-container -->
+<button class="btn_book_now"></button>
