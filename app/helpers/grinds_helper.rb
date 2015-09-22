@@ -1,16 +1,7 @@
-module StaticHelper  
+module GrindsHelper
+  def get_grinds_search_results(params, subject) #return list of valid teachers ordered by params
   
-
-  def get_subject(subject) #return first subject LIKE name passed in
-    @subject = subject == '' ? [] : Subject.where('name LIKE ?', "%#{subject}%").first
-  end
-end
-
-
-
-def get_search_results(params, subject) #return list of valid teachers ordered by params
-  
-  # new_params = params
+  p "grind params #{params}"
   params.merge!({ :search_position => '' }) if (params[:search_position].blank? || !params.has_key?(:search_position))#add search positiong if it's missing
   params.merge!({ :search_subjects => '' }) if (params[:search_subjects].blank? || !params.has_key?(:search_subjects))#add search positiong if it's missing
   
@@ -19,10 +10,19 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
       if params.has_key?(:lat)
         ids = Location.near([params['lat'].to_f, params['lon'].to_f], \
              params['distance'].to_f).select('id').map(&:teacher_id)
+
+        
+
         @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
       else
         ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
-        @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
+
+        @teachers = Teacher.includes(:grinds, :prices, :reviews, :subjects, :locations).where.not(grinds: { teacher_id: nil }) \
+                                                        .where(grinds: { subject_id: @subject.id })
+
+
+        @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations)\
+                                                                .where(id: ids).paginate(page: params[:page])
       
       end
       if params[:sort_by] == 'Rate: lowest first'   
@@ -78,4 +78,4 @@ def get_search_results(params, subject) #return list of valid teachers ordered b
       []
     end
   end
-
+end

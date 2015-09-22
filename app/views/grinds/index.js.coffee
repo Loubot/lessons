@@ -6,6 +6,7 @@ markersArray = null
 markersArray = new Array()
 
 
+console.log "length <% @teachers.length %>"
 <% @locations.each do |loc| %>
 
 latLng = new google.maps.LatLng "#{<%= loc.latitude.to_f %>}", "#{<%= loc.longitude.to_f %>}"
@@ -20,12 +21,15 @@ marker.setMap(grinds_map)
 markersArray.push marker
 
 <% end %>
-
 # end of google map
 
 
 $("#display_grinds_teachers").html (""" 
     
-    <%= j( render partial: 'grinds/grind', collection: @teachers, as: :teacher, locals: { subject: @subject }) %>
+    <% if @teachers.size > 0 %>
+      <%= j( render partial: 'grinds/grind', collection: @teachers, as: :teacher, locals: { subject: @subject }) %>
+    <% else %>
+      <%= render partial: 'partials/socials/no_results_share_buttons' %>
+    <% end %>
 
     """)

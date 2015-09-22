@@ -1,37 +1,37 @@
 ready = ->
   if $('#grind_map_container').is(':visible')
-    
+    window.first_load = true
     $.when(load_google_maps_api_grinds()).done ->
 
 map_changed = ->
+  if window.first_load != true
+    console.log "map changed"
+    grindCentral =  grinds_map.getCenter()
+    bounds = grinds_map.getBounds()
+    center = bounds.getCenter()
+    ne = bounds.getNorthEast()
 
-  console.log "map changed"
-  grindCentral =  grinds_map.getCenter()
-  bounds = grinds_map.getBounds()
-  center = bounds.getCenter()
-  ne = bounds.getNorthEast()
+    r = 3960
 
-  r = 3960
+    lat1 = center.lat() / 57.2958
+    lon1 = center.lng() / 57.2958
+    lat2 = ne.lat() / 57.2958
+    lon2 = ne.lng() / 57.2958
+    dis = r * Math.acos(Math.sin(lat1) * Math.sin(lat2) + 
+     Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1))
+    dis = dis * .8
+    # console.log "distance #{ dis }"
 
-  lat1 = center.lat() / 57.2958
-  lon1 = center.lng() / 57.2958
-  lat2 = ne.lat() / 57.2958
-  lon2 = ne.lng() / 57.2958
-  dis = r * Math.acos(Math.sin(lat1) * Math.sin(lat2) + 
-   Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1))
-
-  # console.log "distance #{ dis }"
-
-  $.ajax(
-    method: 'get'
-    dataType: 'script'
-    url: 'grinds-search'
-    data: 
-      coords: 
+    $.ajax(
+      method: 'get'
+      dataType: 'script'
+      url: 'grinds'
+      data:        
         lat: grindCentral.lat()
         lon: grindCentral.lng()
         distance: dis
         search_subjects: getQueryParam("search_subjects") )
+  window.first_load = false
   
 redraw_markers = (data) ->
   # console.log "locations #{ JSON.stringify data }"
@@ -54,10 +54,19 @@ redraw_markers = (data) ->
 
 
 window.init_grinds_map = ->
-  window.grinds_map = new google.maps.Map(document.getElementById('grind_map_container'), {
-     center: {lat: gon.locations[0].latitude, lng: gon.locations[0].longitude},
-     zoom: 8
-   });
+  window.markersArray = null
+  window.markersArray = new Array()
+  if (gon?) and (gon.initial_location?)
+    mapOptions = 
+      center: new google.maps.LatLng(gon.initial_location.lat, gon.initial_location.lon)
+      zoom: 8
+  else
+    mapOptions = 
+      center: new google.maps.LatLng(52.904281, -8.023571)
+      zoom: 7
+
+  window.grinds_map = new (google.maps.Map)(document.getElementById('grind_map_container'),mapOptions)
+  
 
   window.markersArray = new Array()
   

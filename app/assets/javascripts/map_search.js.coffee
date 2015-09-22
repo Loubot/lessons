@@ -25,7 +25,7 @@ map_changed = ->
     dis = r * Math.acos(Math.sin(lat1) * Math.sin(lat2) + 
      Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1))
     console.log dis
-    dis = ((dis /10) * 8)
+    dis = dis * .8
     console.log dis
 
     $.ajax(
@@ -43,7 +43,8 @@ map_changed = ->
 
 
 window.init_search_map = ->
-
+  window.markersArray = null
+  window.markersArray = new Array()
   if (gon?) and (gon.initial_location?)
     mapOptions = 
       center: new google.maps.LatLng(gon.initial_location.lat, gon.initial_location.lon)
@@ -57,7 +58,8 @@ window.init_search_map = ->
  
 
   if (gon)? and (gon.locations)?
-    window.markersArray = new Array()
+
+   
     
     for loc in gon.locations
       # console.log loc.longitude
