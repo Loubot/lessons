@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150720194257) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -36,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -52,7 +49,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer  "subject_id"
   end
 
-  add_index "events", ["review_id"], name: "index_events_on_review_id", using: :btree
+  add_index "events", ["review_id"], name: "index_events_on_review_id"
 
   create_table "experiences", force: :cascade do |t|
     t.string   "title"
@@ -86,8 +83,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.string   "location_name"
   end
 
-  add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id", using: :btree
-  add_index "grinds", ["teacher_id"], name: "index_grinds_on_teacher_id", using: :btree
+  add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id"
+  add_index "grinds", ["teacher_id"], name: "index_grinds_on_teacher_id"
 
   create_table "identities", force: :cascade do |t|
     t.string   "uid"
@@ -97,7 +94,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.datetime "updated_at"
   end
 
-  add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id", using: :btree
+  add_index "identities", ["teacher_id"], name: "index_identities_on_teacher_id"
 
   create_table "invitations", force: :cascade do |t|
     t.integer  "inviter_id"
@@ -110,8 +107,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id", using: :btree
-  add_index "invitations", ["token"], name: "index_invitations_on_token", using: :btree
+  add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id"
+  add_index "invitations", ["token"], name: "index_invitations_on_token"
 
   create_table "locations", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -123,7 +120,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.datetime "updated_at"
   end
 
-  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id", using: :btree
+  add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id"
 
   create_table "openings", force: :cascade do |t|
     t.datetime "mon_open"
@@ -152,7 +149,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.boolean  "all_day_sun",  default: false
   end
 
-  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true, using: :btree
+  add_index "openings", ["teacher_id"], name: "index_openings_on_teacher_id", unique: true
 
   create_table "packages", force: :cascade do |t|
     t.string   "subject_name",  default: ""
@@ -165,8 +162,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer  "duration",      default: 0
   end
 
-  add_index "packages", ["subject_id"], name: "index_packages_on_subject_id", using: :btree
-  add_index "packages", ["teacher_id"], name: "index_packages_on_teacher_id", using: :btree
+  add_index "packages", ["subject_id"], name: "index_packages_on_subject_id"
+  add_index "packages", ["teacher_id"], name: "index_packages_on_teacher_id"
 
   create_table "photos", force: :cascade do |t|
     t.string   "name"
@@ -187,8 +184,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer  "duration",                            default: 0
   end
 
-  add_index "prices", ["subject_id"], name: "index_prices_on_subject_id", using: :btree
-  add_index "prices", ["teacher_id"], name: "index_prices_on_teacher_id", using: :btree
+  add_index "prices", ["subject_id"], name: "index_prices_on_subject_id"
+  add_index "prices", ["teacher_id"], name: "index_prices_on_teacher_id"
 
   create_table "qualifications", force: :cascade do |t|
     t.string   "title"
@@ -211,7 +208,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer  "event_id"
   end
 
-  add_index "reviews", ["event_id"], name: "index_reviews_on_event_id", using: :btree
+  add_index "reviews", ["event_id"], name: "index_reviews_on_event_id"
 
   create_table "subjects", force: :cascade do |t|
     t.string   "name"
@@ -225,7 +222,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer "teacher_id", null: false
   end
 
-  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id", using: :btree
+  add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id"
 
   create_table "teachers", force: :cascade do |t|
     t.string   "first_name"
@@ -257,8 +254,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer  "profile_views",          default: 0
   end
 
-  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
-  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
+  add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
+  add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
 
   create_table "transactions", force: :cascade do |t|
     t.string   "sender"
@@ -274,7 +271,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.decimal  "amount",        precision: 8, scale: 2, default: 0.0, null: false
   end
 
-  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true, using: :btree
+  add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true
 
   create_table "user_carts", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -301,8 +298,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.date     "date"
   end
 
-  add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email", using: :btree
-  add_index "user_carts", ["student_id"], name: "index_user_carts_on_student_id", using: :btree
-  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true, using: :btree
+  add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email"
+  add_index "user_carts", ["student_id"], name: "index_user_carts_on_student_id"
+  add_index "user_carts", ["tracking_id"], name: "index_user_carts_on_tracking_id", unique: true
 
 end
