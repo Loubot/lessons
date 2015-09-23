@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     end
     resources :identities, only: [:destroy]
     resources :invitations, only: [:create]
-    resources :grinds, except: [:index]
+    resources :grinds, except: [:index] 
     resources :experiences,   only: [:create, :update, :destroy]
     resources :packages, only: [:create, :destroy]
     resources :locations, only: [:create, :update, :destroy]
@@ -38,7 +38,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :grinds, only: [:index]
+  resources :grinds, only: [:index] do
+    member do
+      post 'check-grind-availability'   => 'grinds#check_grind_availability'
+    end
+  end
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'

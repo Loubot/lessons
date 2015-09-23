@@ -70,19 +70,20 @@ window.init_grinds_map = ->
 
   window.markersArray = new Array()
   
-  for loc in gon.locations
-    # console.log loc.longitude
-    latLng =  
-      lat: loc.latitude
-      lng: loc.longitude
+  if (gon?) and (gon.initial_location?)
+    for loc in gon.locations
+      # console.log loc.longitude
+      latLng =  
+        lat: loc.latitude
+        lng: loc.longitude
 
-    marker = new (google.maps.Marker)(
-        position: latLng
-        map: grinds_map
-        title: 'Grinds maps'
-      )
+      marker = new (google.maps.Marker)(
+          position: latLng
+          map: grinds_map
+          title: 'Grinds maps'
+        )
 
-    markersArray.push marker
+      markersArray.push marker
 
   # google.maps.event.addListener grinds_map, "dragend", ->    
   #   map_changed()
@@ -110,8 +111,3 @@ load_google_maps_api_grinds = ->
 
 $(document).ready ready
 $(document).on 'page:load', ready
-
-
-getQueryParam = (param) ->
-  result = window.location.search.match(new RegExp('(\\?|&)' + param + '(\\[\\])?=([^&]*)'))
-  if result then result[3] else false

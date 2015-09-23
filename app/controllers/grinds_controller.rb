@@ -29,7 +29,7 @@ class GrindsController < ApplicationController
                           params['distance'].to_f).select('id')
           # p "locations #{pp ids}"
           gon.locations = @locations
-        end
+        end #end of if
       }
 
       format.js{
@@ -54,8 +54,8 @@ class GrindsController < ApplicationController
         render json: { locations: @locations }
 
       }
-    end
-  end
+    end #end of respond_to
+  end #end of index
 
   def show
     redirect_to :back and return if(!params.has_key?(:teacher_id) or params[:teacher_id].empty?)
@@ -73,11 +73,17 @@ class GrindsController < ApplicationController
       }
 
       format.js{
+        @teacher = Teacher.includes(:grinds, :subjects).find(params[:teacher_id])
+        @subject = @teacher.subjects.find(params[:subject_id])
+        grind = @teacher.grinds.where(subject_id: params[:subject_id])
+        p "Grind inspect #{ grind.inspect }"
         
+        # render status: 200, nothing: true
 
       }
+    end #end of format
       
-  end
+  end #of show
 
   def create
     
@@ -108,8 +114,8 @@ class GrindsController < ApplicationController
     redirect_to :back
   end
 
-  def grinds_search
-    
+  def check_grind_availability
+    render status: 200, nothing: true
   end
 
   private

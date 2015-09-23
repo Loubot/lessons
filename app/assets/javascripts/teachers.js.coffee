@@ -437,7 +437,17 @@ teachersInfoReady = ->
       $('.saved_packages_and_grinds').slideToggle 'slow'
 
 #end of  teachers business page, add subject name to for before submitting
-
+  
+  # grind show page
+  if $('.show_grind_page').length
+    $(document).on 'change', '.grind_select_subject', ->
+      if $('.grind_select_subject')[0].selectedIndex != 0
+        $.ajax
+          url: window.location.pathname
+          method: 'get'
+          dataType: 'script'
+          data:
+            subject_id: $('.grind_select_subject :selected').val()
 
 
 
@@ -450,3 +460,5 @@ getCounties = () ->
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']
+
+

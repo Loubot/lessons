@@ -22,3 +22,17 @@
 
 
 window.Dropzone.autoDiscover = false // Disable dropzone autoDiscover option
+
+
+
+var getQueryParam;
+
+getQueryParam = function(param) {
+  var result;
+  result = window.location.search.match(new RegExp('(\\?|&)' + param + '(\\[\\])?=([^&]*)'));
+  if (result) {
+    return result[3];
+  } else {
+    return false;
+  }
+};
