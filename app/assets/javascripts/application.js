@@ -21,4 +21,4 @@
 //= require_tree .
 
 
-Dropzone.autoDiscover = false // Disable dropzone autoDiscover option
+window.Dropzone.autoDiscover = false // Disable dropzone autoDiscover option

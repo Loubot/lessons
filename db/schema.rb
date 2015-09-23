@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826100057) do
+ActiveRecord::Schema.define(version: 20150904152723) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150826100057) do
     t.integer  "review_id"
     t.integer  "subject_id"
     t.string   "pay_key"
+    t.integer  "cart_id"
   end
 
   add_index "events", ["review_id"], name: "index_events_on_review_id"
@@ -115,7 +116,7 @@ ActiveRecord::Schema.define(version: 20150826100057) do
     t.integer  "teacher_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -162,9 +163,6 @@ ActiveRecord::Schema.define(version: 20150826100057) do
     t.datetime "updated_at",                  null: false
     t.integer  "duration",      default: 0
   end
-
-  add_index "packages", ["subject_id"], name: "index_packages_on_subject_id"
-  add_index "packages", ["teacher_id"], name: "index_packages_on_teacher_id"
 
   create_table "photos", force: :cascade do |t|
     t.string   "name",           limit: 255
@@ -253,6 +251,7 @@ ActiveRecord::Schema.define(version: 20150826100057) do
     t.boolean  "paid_up",                            default: false
     t.date     "paid_up_date"
     t.integer  "profile_views",                      default: 0
+    t.string   "stripe_customer_id"
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true
@@ -289,15 +288,16 @@ ActiveRecord::Schema.define(version: 20150826100057) do
     t.boolean  "multiple",                                          default: false
     t.integer  "weeks",                                             default: 0
     t.string   "address",                                           default: ""
-    t.string   "status",                                            default: ""
     t.string   "booking_type",                                      default: ""
     t.integer  "package_id",                                        default: 0
     t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0,   null: false
     t.string   "teacher_name",                                      default: ""
     t.integer  "location_id"
+    t.string   "status",                                            default: ""
     t.datetime "start_time"
     t.integer  "price_id"
     t.date     "date"
+    t.string   "pay_key"
   end
 
   add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email"
