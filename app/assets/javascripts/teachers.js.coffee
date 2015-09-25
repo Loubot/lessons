@@ -1,6 +1,10 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+window.getQueryParam = (param) -> #return params from url
+  result = window.location.search.match(new RegExp('(\\?|&)' + param + '(\\[\\])?=([^&]*)'))
+  if result then result[3] else false
 teachersInfoReady = ->
   $.cookieBar(
     declineButton: true
@@ -251,21 +255,8 @@ teachersInfoReady = ->
         $.post($(@).attr('action'), $(@).serialize()) #submit form remotely
     #end of submit create_event_form
 
-    do () ->
-      img = new Image()
-      img.src = gon.profile_pic_url
-      console.log img.src
-      w = $('.show_teacher_profile_section').outerWidth()
-      # console.log w
-      $('.profile_pic_container').css 'height', w
-      $('.profile_pic_container').css 'width', w
-    $(window).resize ->      
-      w = $('.show_teacher_profile_section').outerWidth()
-      # console.log w
-      $('.profile_pic_container').css 'height', w
-      $('.profile_pic_container').css 'width', w
-      
-      # $('.profile_pic_container').css 'background-image', "url(#{img.src})"
+
+    makeProfileSizeCorrect() #adjust size of profile picture 
     
     #initiate fotorama picture displayer
     $('.fotorama').fotorama  
@@ -437,6 +428,22 @@ teachersInfoReady = ->
       $('.saved_packages_and_grinds').slideToggle 'slow'
 
 #end of  teachers business page, add subject name to for before submitting
+
+#grind_show page
+  if $('.show_grind_page').length
+    makeProfileSizeCorrect()
+
+    $('#grind_modal').modal()
+
+    $(document).on 'change', '.grind_payment_select_subject', ->
+      if $('.grind_payment_select_subject')[0].selectedIndex != 0
+
+        $.ajax
+          url: '/grinds/1/check-grind-availability'
+          method: 'post'
+          data:
+            teacher_id: gon.teacher_id
+            subject_id: $('.grind_payment_select_subject').val()
   
   # grind show page
   if $('.show_grind_page').length
@@ -461,4 +468,18 @@ getCounties = () ->
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']
 
-
+makeProfileSizeCorrect = () ->
+  img = new Image()
+  img.src = gon.profile_pic_url
+  console.log img.src
+  w = $('.show_teacher_profile_section').outerWidth()
+  # console.log w
+  $('.profile_pic_container').css 'height', w
+  $('.profile_pic_container').css 'width', w
+$(window).resize ->      
+  w = $('.show_teacher_profile_section').outerWidth()
+  # console.log w
+  $('.profile_pic_container').css 'height', w
+  $('.profile_pic_container').css 'width', w
+  
+  # $('.profile_pic_container').css 'background-image', "url(#{img.src})"

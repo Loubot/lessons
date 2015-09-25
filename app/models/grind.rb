@@ -27,7 +27,12 @@ class Grind < ActiveRecord::Base
   validates :number_booked, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: :capacity }
   # validates :start_time, date: { after: Time.now }
   validates :start_time, date: { after: Time.now, message: 'must be after end time' }
+
+  # validates :duration, numericality: { greater_than: 0 }
+  validates :price, numericality: { greater_than: 0 }
   
   serialize :student_ids
+
+  scope :available, -> { capacity - booked > 0 }
 
 end

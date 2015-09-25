@@ -42,7 +42,7 @@ $('.display_grind_user').html """
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <%= submit_tag 'Create', class: 'btn btn-success' %>
+              <%= submit_tag 'Book', class: 'btn btn-success' %>
             </div> <!-- col-sm-offset-2 col-sm-10 -->
           </div> <!-- end of form-group --> 
 

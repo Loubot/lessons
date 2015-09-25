@@ -102,8 +102,3 @@ load_google_maps_api_grinds = ->
 
 $(document).ready ready
 $(document).on 'page:load', ready
-
-
-getQueryParam = (param) ->
-  result = window.location.search.match(new RegExp('(\\?|&)' + param + '(\\[\\])?=([^&]*)'))
-  if result then result[3] else false

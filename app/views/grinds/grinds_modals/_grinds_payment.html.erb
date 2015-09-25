@@ -1,0 +1,19 @@
+<div class="modal fade" id="grind_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Pay for your grinds</h4>        
+      </div><!-- end of modal-header -->
+
+      <div class="modal-body grind_modal_body">
+        <%= select_tag "grinds[selection]", options_for_select(@grind_names), \
+                                            class: 'form-control grind_payment_select_subject',\
+                                             prompt: 'Select your subject' %>
+        <div class="returned_grinds_container">
+
+        </div> <!-- end of returned_grinds_container -->
+      </div> <!-- end of grind_modal_body -->
+    </div> <!-- end of modal-content -->
+  </div> <!-- end of modal =-dialog -->
+</div> <!-- end of modal fade -->

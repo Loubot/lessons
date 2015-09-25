@@ -34,11 +34,12 @@
   <div class="row">
     <div class="col-md-12 col-xs-12"> 
       <%= select_tag "teachers[grind_id]", options_for_select(@subjects.map { |s| [ s.name, s.id ] }), \
-                                          class: 'form-horizontal grind_select_subject', prompt: 'Select your subject' %>
+                                          class: 'grind_select_subject', prompt: 'Select your subject' %>
     </div> <!-- end col-md-4 col-xs-12 -->
     <div class="display_grind_user col-xs-12">
 
     </div> <!-- end of col-md-8 -->
   </div><!-- end of row -->
 </div> <!-- end of outer-container -->
-<button class="btn_book_now"></button>
+
+<%= render 'grinds/grinds_modals/grinds_payment' %>

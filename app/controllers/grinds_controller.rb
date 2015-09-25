@@ -1,6 +1,6 @@
 class GrindsController < ApplicationController
   include GrindsHelper
-  before_action :authenticate_teacher!, except: [:index, :show]
+  before_action :authenticate_teacher!, except: [:index, :show, :check_grind_availability]
 
   before_action :get_categories
 
@@ -66,8 +66,10 @@ class GrindsController < ApplicationController
         @profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
         subject_ids = @teacher.grinds.pluck(:subject_id).uniq
         @subjects = Subject.find(subject_ids)
+        @grind_names = @teacher.grinds.collect { |g| [g.subject_name, g.subject_id] }.uniq
         @locations = @teacher.locations
-        p "locations #{pp @locations}"
+        p "grinds #{pp @grind_names}"
+        gon.teacher_id = @teacher.id
         gon.locations = @locations
 
       }
@@ -115,7 +117,9 @@ class GrindsController < ApplicationController
   end
 
   def check_grind_availability
-    render status: 200, nothing: true
+    @grinds = Grind.available.where(teacher_id: params[:teacher_id], subject_id: params[:subject_id])
+    # pp @grind
+    render 'grinds/grinds_js/check_grind_availability.js.coffee'
   end
 
   private

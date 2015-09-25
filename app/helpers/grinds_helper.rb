@@ -77,5 +77,14 @@ module GrindsHelper
     else
       []
     end
+  end # end of get_grinds_search_results
+
+  def get_select_text_for_grinds(grinds)
+    grinds.collect { |g| \
+     [ "#{ g.subject_name } #{ g.start_time.strftime('%d/%m/%Y @ %H:%M') } \
+        #{ number_to_currency(g.price.to_f, unit: '€') }" \
+      , g.id]
+    }
   end
+
 end
