@@ -1,6 +1,6 @@
 class GrindsController < ApplicationController
   include GrindsHelper
-  before_action :authenticate_teacher!, except: [:index, :show, :check_grind_availability]
+  before_action :authenticate_teacher!, except: [:index, :show, :return_available_grinds, :select_grind]
 
   before_action :get_categories
 
@@ -116,10 +116,16 @@ class GrindsController < ApplicationController
     redirect_to :back
   end
 
-  def check_grind_availability
-    @grinds = Grind.available.where(teacher_id: params[:teacher_id], subject_id: params[:subject_id])
-    # pp @grind
+  def return_available_grinds
+    @grinds = Grind.where(teacher_id: params[:teacher_id], subject_id: params[:subject_id]).available
+    pp @grinds
     render 'grinds/grinds_js/check_grind_availability.js.coffee'
+  end
+
+  def select_grind
+    @grind = Grind.find(params[:grind_id])
+    pp @grind
+    render 'grinds/grinds_js/return_selected_grind.js.coffee'
   end
 
   private

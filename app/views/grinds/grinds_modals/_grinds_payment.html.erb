@@ -10,9 +10,14 @@
         <%= select_tag "grinds[selection]", options_for_select(@grind_names), \
                                             class: 'form-control grind_payment_select_subject',\
                                              prompt: 'Select your subject' %>
-        <div class="returned_grinds_container">
+        <div class="returned_grinds_container clear_me">
 
         </div> <!-- end of returned_grinds_container -->
+
+        <div class="selected_grind_container clear_me">
+
+        </div> <!-- selected_grind_container -->
+
       </div> <!-- end of grind_modal_body -->
     </div> <!-- end of modal-content -->
   </div> <!-- end of modal =-dialog -->

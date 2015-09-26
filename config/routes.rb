@@ -40,7 +40,8 @@ Rails.application.routes.draw do
 
   resources :grinds, only: [:index] do
     member do
-      post 'check-grind-availability'   => 'grinds#check_grind_availability'
+      get 'return-available-grinds'   => 'grinds#return_available_grinds'
+      get 'select-grind'              =>  'grinds#select_grind'
     end
   end
 

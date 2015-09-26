@@ -33,6 +33,11 @@ class Grind < ActiveRecord::Base
   
   serialize :student_ids
 
-  scope :available, -> { capacity - booked > 0 }
+  scope :available, -> { where('(capacity - number_booked) > 0') }
+
+
+  def number_left
+    capacity - number_booked
+  end
 
 end

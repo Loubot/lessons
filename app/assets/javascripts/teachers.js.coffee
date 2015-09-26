@@ -433,17 +433,31 @@ teachersInfoReady = ->
   if $('.show_grind_page').length
     makeProfileSizeCorrect()
 
+    $('#grind_modal').on 'hidden.bs.modal', ->
+      $('.clear_me').empty()
+
     $('#grind_modal').modal()
 
     $(document).on 'change', '.grind_payment_select_subject', ->
       if $('.grind_payment_select_subject')[0].selectedIndex != 0
 
         $.ajax
-          url: '/grinds/1/check-grind-availability'
-          method: 'post'
+          url: '/grinds/1/return-available-grinds'
+          method: 'get'
           data:
             teacher_id: gon.teacher_id
             subject_id: $('.grind_payment_select_subject').val()
+
+    $(document).on 'change', '.grind_payment_select_grind', ->
+      # alert 'b'
+      if $('.grind_payment_select_grind').selectedIndex != 0
+        $.ajax
+          url: '/grinds/1/select-grind'
+          method: 'get'
+          data: 
+            teacher_id: gon.teacher_id
+            grind_id: $('.grind_payment_select_grind').val()
+
   
   # grind show page
   if $('.show_grind_page').length
