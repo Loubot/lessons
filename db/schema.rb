@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20150928200103) do
     t.integer  "location_id"
     t.string   "location_name"
     t.integer  "weeks",                                 default: 1
+    t.string   "level"
   end
 
   add_index "grinds", ["subject_id"], name: "index_grinds_on_subject_id", using: :btree

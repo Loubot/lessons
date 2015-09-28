@@ -259,9 +259,16 @@
           </div> <!-- end of form-group -->
 
           <div class="form-group">
-            <%= f.label :price, "Start time", class: "col-sm-2 control-label" %>
+            <%= f.label :start_time, "First class?", class: "col-sm-2 control-label" %>
             <div class="col-sm-10">
               <%= datetime_select(:grind, :start_time, { prompt: true,start_year: Time.now.year, minute_step: 15 },  { class: 'grind_start_time' }) %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :weeks, "Weeks?", class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.number_field :weeks, placeholder: 'NUmber of weeks?', class: 'form-control' %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
 

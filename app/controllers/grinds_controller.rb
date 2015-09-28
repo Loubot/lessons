@@ -88,7 +88,12 @@ class GrindsController < ApplicationController
   end #of show
 
   def create
-    
+    if params[:weeks].to_i > 1
+      puts "needs doing"
+      flash[:success] = "yep yep"
+      redirect_to :back and return
+    end
+
     @grind = Grind.new(grind_params)
     if @grind.save
       flash[:success] = "Classroom created successfully"
@@ -140,7 +145,7 @@ class GrindsController < ApplicationController
   private
     def grind_params
       params.require(:grind).permit(:subject_id, :teacher_id, :subject_name, :capacity, \
-                            :number_booked, :price, :location_id, :start_time).merge(location_name: \
+                            :number_booked, :price, :location_id, :start_time, :weeks).merge(location_name: \
                             Location.find(params[:grind][:location_id]).name )
     end
 end

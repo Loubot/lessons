@@ -15,6 +15,7 @@
 #  location_id   :integer
 #  location_name :string
 #  weeks         :integer          default(1)
+#  level         :string
 #
 
 class Grind < ActiveRecord::Base
