@@ -14,6 +14,7 @@
 #  updated_at    :datetime         not null
 #  location_id   :integer
 #  location_name :string
+#  weeks         :integer          default(1)
 #
 
 class Grind < ActiveRecord::Base

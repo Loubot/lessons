@@ -6,7 +6,7 @@
 #  teacher_id :integer
 #  latitude   :float
 #  longitude  :float
-#  name       :string(255)
+#  name       :string
 #  address    :text
 #  created_at :datetime
 #  updated_at :datetime
