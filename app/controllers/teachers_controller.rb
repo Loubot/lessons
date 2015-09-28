@@ -6,6 +6,7 @@ class TeachersController < ApplicationController
 																					#[:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	
 	include TeachersHelper
+	include GrindsHelper
 
 	
 	def show_teacher
@@ -151,6 +152,7 @@ class TeachersController < ApplicationController
 	end
 
 	def your_business
+
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id])
 		@event = Event.new
 		@package = Package.new		

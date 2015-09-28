@@ -438,25 +438,25 @@ teachersInfoReady = ->
 
     $('#grind_modal').modal()
 
-    $(document).on 'change', '.grind_payment_select_subject', ->
-      if $('.grind_payment_select_subject')[0].selectedIndex != 0
+    $(document).on 'change', '.grind_choose_subject', ->
+      if $('.grind_choose_subject')[0].selectedIndex != 0
 
         $.ajax
-          url: '/grinds/1/return-available-grinds'
+          url: '/grinds/1/return-levels'
           method: 'get'
           data:
             teacher_id: gon.teacher_id
-            subject_id: $('.grind_payment_select_subject').val()
+            subject_id: $('.grind_choose_subject').val()
 
-    $(document).on 'change', '.grind_payment_select_grind', ->
+    $(document).on 'change', '.grind_select_level', ->
       # alert 'b'
-      if $('.grind_payment_select_grind').selectedIndex != 0
+      if $('.grind_select_level').selectedIndex != 0
         $.ajax
-          url: '/grinds/1/select-grind'
+          url: '/grinds/1/return-matching-grinds'
           method: 'get'
           data: 
             teacher_id: gon.teacher_id
-            grind_id: $('.grind_payment_select_grind').val()
+            level: $('.grind_select_level').val()
 
   
   # grind show page

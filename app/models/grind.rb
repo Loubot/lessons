@@ -23,7 +23,8 @@ class Grind < ActiveRecord::Base
   belongs_to :teacher, touch: true
   belongs_to :subject
 
-  validates :subject_id, :teacher_id, :location_id, :capacity, :price, :start_time, :subject_name, presence: true
+  validates :subject_id, :teacher_id, :location_id, :capacity, :price, :start_time,\
+            :level, :subject_name, presence: true
   validates :price, :capacity, numericality: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :number_booked, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: :capacity }

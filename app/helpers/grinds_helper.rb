@@ -83,8 +83,18 @@ module GrindsHelper
     grinds.collect { |g| \
      [ "#{ g.subject_name } #{ g.start_time.strftime('%d/%m/%Y @ %H:%M') } \
         #{ number_to_currency(g.price.to_f, unit: '€') }" \
-      , g.id]
+      , g.id ]
     }
+  end
+
+  def level_select
+    [ ['Junior cert', 'Junior cert'], ['Leaving cert', 'Leaving cert']]
+  end
+
+  def get_level_select(levels)
+    levels_array = levels.collect { |l| [ l, l ] }
+    p "levels array #{ levels_array }"
+    levels_array
   end
 
 end

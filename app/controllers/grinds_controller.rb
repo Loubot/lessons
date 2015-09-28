@@ -1,6 +1,6 @@
 class GrindsController < ApplicationController
   include GrindsHelper
-  before_action :authenticate_teacher!, except: [:index, :show, :return_available_grinds, :select_grind, :check_and_start_payment]
+  before_action :authenticate_teacher!, except: [:index, :show, :return_levels, :return_matching_grinds]
 
   before_action :get_categories
 
@@ -85,7 +85,7 @@ class GrindsController < ApplicationController
       }
     end #end of format
       
-  end #of show
+  end #end of show
 
   def create
     if params[:weeks].to_i > 1
@@ -121,31 +121,26 @@ class GrindsController < ApplicationController
     redirect_to :back
   end
 
-  def return_available_grinds
-    @grinds = Grind.where(teacher_id: params[:teacher_id], subject_id: params[:subject_id]).available
-    # pp @grinds
-    render 'grinds/grinds_js/check_grind_availability.js.coffee'
+  def return_levels
+    session[:grind_subject_id] = params[:subject_id]
+    session[:grind_teacher_id] = params[:teacher_id]
+    @teacher = Teacher.includes(:grinds).find(params[:teacher_id])
+    @levels = @teacher.grinds.where(subject_id: params[:subject_id]).collect { |g| g.level }.uniq
+    # p "levels #{ @levels }"
+    render '/grinds/grinds_js/return_levels.js.coffee'
   end
 
-  def select_grind
-    @grind = Grind.find(params[:grind_id])
-    # pp @grind
-    render 'grinds/grinds_js/return_selected_grind.js.coffee'
-  end
-
-  def check_and_start_payment
-    grind = Grind.find(params[:id])
-    pp grind
-    if grind.number_left - params[:quantity].to_i >= 0
-      pp "hoorray"
-    end
-    render 'grinds/grinds_js/grinds_paymant_form.js.coffee'
+  def return_matching_grinds
+    teacher = Teacher.includes(:grinds).find(session[:grind_teacher_id])
+    @grinds = teacher.grinds.where(level: params[:level], subject_id: session[:grind_subject_id])
+    p "grinds #{ pp @grinds }"
+    render status: 200, nothing: true
   end
 
   private
     def grind_params
       params.require(:grind).permit(:subject_id, :teacher_id, :subject_name, :capacity, \
-                            :number_booked, :price, :location_id, :start_time, :weeks).merge(location_name: \
+                            :number_booked, :price, :location_id, :start_time, :weeks, :level).merge(location_name: \
                             Location.find(params[:grind][:location_id]).name )
     end
 end
