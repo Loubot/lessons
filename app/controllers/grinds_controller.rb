@@ -133,8 +133,9 @@ class GrindsController < ApplicationController
   def return_matching_grinds
     teacher = Teacher.includes(:grinds).find(session[:grind_teacher_id])
     @grinds = teacher.grinds.where(level: params[:level], subject_id: session[:grind_subject_id])
-    p "grinds #{ pp @grinds }"
-    render status: 200, nothing: true
+    @json_grinds = @grinds.to_json
+    p "json #{ pp @json_grinds }"
+    render '/grinds/grinds_js/return_calendar.js.coffee'
   end
 
   private
