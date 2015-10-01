@@ -133,7 +133,7 @@ class GrindsController < ApplicationController
   def return_matching_grinds
     teacher = Teacher.includes(:grinds).find(session[:grind_teacher_id])
     @grinds = teacher.grinds.where(level: params[:level], subject_id: session[:grind_subject_id])
-    @json_grinds = get_json_grinds(@grinds)
+    @json_grinds = get_json_grinds(@grinds).to_json
     p "json #{ pp @json_grinds }"
     render '/grinds/grinds_js/return_calendar.js.coffee'
   end
@@ -150,15 +150,10 @@ class GrindsController < ApplicationController
       formatted_times = []
       grinds.each do |grind|
         formatted_times << {
-                            id: grind.id, 
-                            text: "#{ grind.subject_name }", 
+                            
                             textColor: 'white',
-                            start_date: grind.start_date.strftime('%Y-%m-%d %H:%M'), 
-                            end_date: (grind.start_date + grind.duration.minutes).strftime('%Y-%m-%d %H:%M'), 
-                            color:'#0E64A0',
-                            teacher_id: grind.teacher_id, 
-                            description: grind.teacher.first_name,
-                            status: 'Available'             
+                            start_date: grind.start_date.strftime('%Y-%m-%e %H:%M'), 
+                            end_date: (grind.start_date + grind.duration.minutes).strftime('%Y-%m-%e %H:%M')         
                           }
       end
       formatted_times
