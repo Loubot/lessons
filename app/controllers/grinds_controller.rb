@@ -153,6 +153,7 @@ class GrindsController < ApplicationController
       formatted_times = []
       grinds.each do |grind|
         formatted_times << {
+                            id: grind.id,
                             text: "Subject: #{ grind.subject_name }\n" \
                             "Places left: #{ grind.number_left }\n" \
                             "Price #{ number_to_currency(grind.price, unit: '€') }",

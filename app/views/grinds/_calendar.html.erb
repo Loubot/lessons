@@ -32,7 +32,7 @@
 
   scheduler.config.details_on_dblclick = true;
 
-  scheduler.config.readonly_form = true;
+  scheduler.config.lightbox.sections=[{name:"description", height:200, map_to:"text", type:"textarea" , focus:true}]
 
   scheduler.config.buttons_left=["select_grind"];
 
@@ -50,6 +50,8 @@
 
   scheduler.locale.labels.unit_tab = "Unit";
 
+  scheduler.config.wide_form = false;
+
   scheduler.locale.labels.section_custom = "Section";
 
   scheduler.config.wide_form = false;
@@ -60,11 +62,20 @@
 
   scheduler.init('returned_calendar_container');
 
+  console.log("gongrinds " + JSON.stringify(gon.grinds));
+
   scheduler.parse(gon.grinds, 'json');
+
+  scheduler.showLightbox = function(id){
+      // id - id of event
+      alert(id);
+  }
 
   scheduler.attachEvent("onLightboxButton", function(button_id, node, e){
     if(button_id == "select_grind"){
-        alert("Location!");
+        console.log("button_Id " + button_id);
+        console.debug("%o", node);
+        console.debug("%o", e);
     }
   });
 <% end -%>
