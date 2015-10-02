@@ -1,4 +1,4 @@
-$('#returned_calendar_container').html "<%= j(render '_calendar.html.erb') %>"
+$('#returned_calendar_container').html "<%= j(render 'grinds/calendar.html.erb') %>"
 # console.log "<%= @json_grinds %>"
 
 # console.log "gon #{gon.grinds}"
