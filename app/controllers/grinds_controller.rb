@@ -134,6 +134,7 @@ class GrindsController < ApplicationController
     teacher = Teacher.includes(:grinds).find(session[:grind_teacher_id])
     @grinds = teacher.grinds.where(level: params[:level], subject_id: session[:grind_subject_id])
     @json_grinds = get_json_grinds(@grinds).to_json
+    
     p "json #{ pp @json_grinds }"
     render '/grinds/grinds_js/return_calendar.js.coffee'
   end
