@@ -32,6 +32,14 @@
 
   scheduler.config.details_on_dblclick = true;
 
+  scheduler.config.readonly_form = true;
+
+  scheduler.config.buttons_left=["select_grind"];
+
+  scheduler.config.buttons_right=[];
+
+  scheduler.locale.labels["select_grind"] = "Select this grind";
+
   scheduler.config.time_step = 30;
 
   scheduler.config.drag_create = false;
@@ -53,4 +61,10 @@
   scheduler.init('returned_calendar_container');
 
   scheduler.parse(gon.grinds, 'json');
+
+  scheduler.attachEvent("onLightboxButton", function(button_id, node, e){
+    if(button_id == "select_grind"){
+        alert("Location!");
+    }
+  });
 <% end -%>

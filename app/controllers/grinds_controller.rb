@@ -1,5 +1,6 @@
 class GrindsController < ApplicationController
   include GrindsHelper
+  include ActionView::Helpers::NumberHelper
   before_action :authenticate_teacher!, except: [:index, :show, :return_levels, :return_matching_grinds]
 
   before_action :get_categories
@@ -148,10 +149,13 @@ class GrindsController < ApplicationController
     end
 
     def get_json_grinds(grinds)
+
       formatted_times = []
       grinds.each do |grind|
         formatted_times << {
-                            text: "Subject: #{ grind.subject_name  }",
+                            text: "Subject: #{ grind.subject_name }\n" \
+                            "Places left: #{ grind.number_left }\n" \
+                            "Price #{ number_to_currency(grind.price, unit: '€') }",
                             textColor: 'white',
                             start_date: grind.start_date.strftime('%Y-%m-%e %H:%M'), 
                             end_date: (grind.start_date + grind.duration.minutes).strftime('%Y-%m-%e %H:%M')         
