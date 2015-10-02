@@ -151,7 +151,7 @@ class GrindsController < ApplicationController
       formatted_times = []
       grinds.each do |grind|
         formatted_times << {
-                            
+                            text: "Subject: #{ grind.subject_name  }",
                             textColor: 'white',
                             start_date: grind.start_date.strftime('%Y-%m-%e %H:%M'), 
                             end_date: (grind.start_date + grind.duration.minutes).strftime('%Y-%m-%e %H:%M')         

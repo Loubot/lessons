@@ -20,13 +20,17 @@
 
   var format, grinds;
 
+  scheduler.clearAll();
+
   scheduler.config.xml_date = "%Y-%m-%d %H:%i";
 
   scheduler.config.first_hour = 6;
 
   scheduler.config.last_hour = 23;
 
-  scheduler.config.readonly = true;
+  scheduler.config.readonly = false;
+
+  scheduler.config.details_on_dblclick = true;
 
   scheduler.config.time_step = 30;
 
@@ -44,9 +48,7 @@
 
   format = scheduler.date.date_to_str("%d-%m-%Y %H:%i");
 
-  scheduler.config.details_on_create = false;
-
-  scheduler.config.details_on_dblclick = false;
+  scheduler.config.details_on_create = false;  
 
   scheduler.init('returned_calendar_container');
 
