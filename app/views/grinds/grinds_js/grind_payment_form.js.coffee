@@ -1,5 +1,5 @@
 $('.grind_payment_modal_container').html """
-  <div class="modal fade" id="grind_payment_modal" tabindex="99" role="dialog" aria-labelledby="grind_payment_label">
+  <div class="modal fade" id="grind_payment_modal" tabindex="-7" role="dialog" aria-labelledby="grind_payment_label">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
