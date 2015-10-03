@@ -146,6 +146,11 @@ class GrindsController < ApplicationController
     render '/grinds/grinds_js/grind_payment_form.js.coffee'
   end
 
+  def check_booking
+    p "hdddlll"
+    render status: 200, nothing: true
+  end
+
   private
     def grind_params
       params.require(:grind).permit(:subject_id, :teacher_id, :subject_name, :capacity, \
