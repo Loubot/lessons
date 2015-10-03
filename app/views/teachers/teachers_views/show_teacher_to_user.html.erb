@@ -189,7 +189,7 @@
             <div class="well grinds_well">
               <h4>Subject: <%= g.subject_name %></h4>
               <h5>Location: <%= Location.find(g.location_id).name %></h5>
-              <h5>Time <%= g.start_time.strftime("%a %b %Y %H:%M%p") %></h5>
+              <h5>Time <%= g.start_date.strftime("%a %b %Y %H:%M%p") %></h5>
               Places left: <%= g.capacity - g.number_booked %>  <br>
               Price: <%= number_to_currency(g.price, unit: '€') %> <br>
               <% if teacher_signed_in? %>

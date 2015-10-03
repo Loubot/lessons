@@ -1,7 +1,7 @@
 class GrindsController < ApplicationController
   include GrindsHelper
   include ActionView::Helpers::NumberHelper
-  before_action :authenticate_teacher!, except: [:index, :show, :return_levels, :return_matching_grinds]
+  before_action :authenticate_teacher!, except: [:index, :show, :return_levels, :return_matching_grinds, :get_payment_form]
 
   before_action :get_categories
 
@@ -138,6 +138,12 @@ class GrindsController < ApplicationController
     gon.grinds = get_json_grinds(@grinds)
     p "json #{ pp @json_grinds }"
     render '/grinds/grinds_js/return_calendar.js.coffee'
+  end
+
+  def get_payment_form
+    @grind = Grind.find(params[:grind_id])
+    pp @grind
+    render '/grinds/grinds_js/grind_payment_form.js.coffee'
   end
 
   private

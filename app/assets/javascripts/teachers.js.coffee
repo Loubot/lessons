@@ -449,18 +449,17 @@ teachersInfoReady = ->
             subject_id: $('.grind_choose_subject').val()
 
     $(document).on 'change', '.grind_select_level', ->
-      # alert 'b'
-      if $('.grind_select_level').selectedIndex != 0
-        $.ajax
-          url: '/grinds/1/return-matching-grinds'
-          method: 'get'
-          data: 
-            teacher_id: gon.teacher_id
-            level: $('.grind_select_level').val()
+      if $('.grind_select_level')[0].selectedIndex != 0
+        if $('.grind_select_level').selectedIndex != 0
+          $.ajax
+            url: '/grinds/1/return-matching-grinds'
+            method: 'get'
+            data: 
+              teacher_id: gon.teacher_id
+              level: $('.grind_select_level').val()
 
   
-  # grind show page
-  if $('.show_grind_page').length
+ 
     $(document).on 'change', '.grind_select_subject', ->
       if $('.grind_select_subject')[0].selectedIndex != 0
         $.ajax
@@ -470,7 +469,7 @@ teachersInfoReady = ->
           data:
             subject_id: $('.grind_select_subject :selected').val()
 
-
+# end of grind show page
 
 $(document).on('ready', teachersInfoReady)
 $(document).on('page:load', teachersInfoReady)

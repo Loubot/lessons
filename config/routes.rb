@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   resources :grinds, only: [:index] do
     member do
       get     'return-levels'                 =>  'grinds#return_levels'
-      get     'return-matching-grinds'        =>  'grinds#return_matching_grinds' 
+      get     'return-matching-grinds'        =>  'grinds#return_matching_grinds'
+      get     'get-payment-form'              =>  'grinds#get_payment_form'
     end
   end
 

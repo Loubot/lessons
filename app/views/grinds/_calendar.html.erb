@@ -4,8 +4,8 @@
     
     <div id="grinds_calendar" class="dhx_cal_container teachers_display_scheduler" >
       <div class="dhx_cal_navline" >
-          <div class="dhx_cal_prev_button">&nbsp;</div>
-          <div class="dhx_cal_next_button">&nbsp;</div>
+          <div class="dhx_cal_prev_button grind">&nbsp;</div>
+          <div class="dhx_cal_next_button grind">&nbsp;</div>
           <div class="dhx_cal_date display_teachers_cal_date pull-left" id="display_teachers_cal_date"></div>
           
       </div> <!-- end of dhx_cal_navline -->
@@ -36,9 +36,13 @@
 
   scheduler.config.buttons_left=["select_grind"];
 
-  scheduler.config.buttons_right=[];
+  scheduler.config.buttons_right=["dhx_cancel_btn"];
 
   scheduler.locale.labels["select_grind"] = "Select this grind";
+
+  scheduler.config.icons_select = [
+     "icon_details"
+  ];
 
   scheduler.config.time_step = 30;
 
@@ -47,6 +51,8 @@
   scheduler.config.drag_resize = false;
 
   scheduler.locale.labels.timeline_tab = "Timeline";
+
+  scheduler.enableTooltips = (false, false, false);
 
   scheduler.locale.labels.unit_tab = "Unit";
 
@@ -66,16 +72,24 @@
 
   scheduler.parse(gon.grinds, 'json');
 
-  scheduler.showLightbox = function(id){
-      // id - id of event
-      alert(id);
-  }
+  scheduler.attachEvent("onDblClick", function (id, e){
+    
+    window.localStorage.setItem('grind_id', id);  //set grind id in cookie
+    
+    scheduler.showLightbox(id);
+  })
 
   scheduler.attachEvent("onLightboxButton", function(button_id, node, e){
     if(button_id == "select_grind"){
-        console.log("button_Id " + button_id);
-        console.debug("%o", node);
-        console.debug("%o", e);
+      $.ajax({
+        url: '/grinds/1/get-payment-form',
+        method: 'get',
+        data: { grind_id: window.localStorage.getItem('grind_id') }
+      }).done(function() {
+        console.log('done');
+        scheduler.resetLightbox();
+        $('#grind_modal').modal('hide');
+      });
     }
   });
 <% end -%>
