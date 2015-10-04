@@ -82,7 +82,7 @@
   scheduler.attachEvent("onLightboxButton", function(button_id, node, e){
     if(button_id == "select_grind"){
       $.ajax({
-        url: '/grinds/1/get-payment-form',
+        url: '/grinds/1/get-quantity-form',
         method: 'get',
         data: { grind_id: window.localStorage.getItem('grind_id') }
       }).done(function() {

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     member do
       get     'return-levels'                 =>  'grinds#return_levels'
       get     'return-matching-grinds'        =>  'grinds#return_matching_grinds'
-      get     'get-payment-form'              =>  'grinds#get_payment_form'
+      get     'get-quantity-form'             =>  'grinds#get_quantity_form'
       post    'check-booking'                 =>  'grinds#check_booking'
     end
   end

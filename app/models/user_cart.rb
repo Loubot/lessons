@@ -75,6 +75,24 @@ class UserCart < ActiveRecord::Base
     cart
   end
 
+  def self.grind(teacher_id, student_id, student_name, teacher_name, student_email, teacher_email, subject_id, start_date, booking_type)
+    cart = self.new
+
+    cart.update_attributes(
+                            teacher_id: teacher_id,
+                            student_id: student_id,
+                            start_time: start_date,
+                            student_name: student_name, 
+                            teacher_name: teacher_name,
+                            student_email: student_email,
+                            teacher_email: teacher_email,
+                            subject_id: subject_id,
+                            booking_type: 'grind'
+                          )
+
+    cart
+  end
+
   def self.home_booking_cart(params, price)
     puts "cart params #{params}"
     cart = self.new

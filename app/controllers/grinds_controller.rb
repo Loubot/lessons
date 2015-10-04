@@ -140,18 +140,42 @@ class GrindsController < ApplicationController
     render '/grinds/grinds_js/return_calendar.js.coffee'
   end
 
-  def get_payment_form
+  def get_quantity_form
     @grind = Grind.find(params[:grind_id])
     pp @grind
-    render '/grinds/grinds_js/grind_payment_form.js.coffee'
+    render '/grinds/grinds_js/grind_quantity_form.js.coffee'
   end
 
-  def check_booking
-    p "hdddlll"
-    render status: 200, nothing: true
+  def check_booking    
+    @grind = Grind.find(params[:id])
+    cart = create_cart(params, @grind)
+    pp cart
+    if @grind.number_left - params[:quantity].to_i >= 0
+      p "yep yep"
+    else
+      p "nope nope"
+    end
+    render '/grinds/grinds_js/grind_payment_buttons.js.coffee'
   end
 
   private
+
+    def create_cart(params, grind)
+      teacher = Teacher.find(grind.teacher_id)
+      cart = UserCart.grind(
+                      teacher.id,
+                      current_teacher.id, 
+                      current_teacher.full_name, 
+                      teacher.full_name,
+                      current_teacher.email,
+                      teacher.email,
+                      grind.subject_id,
+                      grind.start_date,
+                      'grind'
+                    )
+      cart
+    end
+
     def grind_params
       params.require(:grind).permit(:subject_id, :teacher_id, :subject_name, :capacity, \
                             :number_booked, :price, :location_id, :start_date, :weeks,\

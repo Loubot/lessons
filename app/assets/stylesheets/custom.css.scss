@@ -543,6 +543,10 @@ small.white{
 // end of grinds search page
 
 //grind show page
+.tooltip{ // keep tootip behind lightbox but in front of everything else
+  z-index: 10000 !important;
+}
+
 #grind_show_map_container{
   height: 250px;
   width: 250px;
