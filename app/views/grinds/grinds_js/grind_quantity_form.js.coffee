@@ -43,7 +43,7 @@ $('.grind_payment_modal_container').html """
               <div class="form-group">
                 <div class="col-sm-2 control-label">Quantity?</div> <!-- end of col-sm-2 control-label -->
                 <div class="col-sm-10">
-                  <%= number_field_tag 'quantity', step: 1 %>
+                  <%= number_field_tag 'quantity', step: 1, in: 1...@grind.number_left %>
                 </div> <!-- end of col-sm-10 -->
               </div>
               
@@ -55,6 +55,11 @@ $('.grind_payment_modal_container').html """
               </div> <!-- end of form-group -->
             
             <% end %>
+
+            <div class="grind_payment_form_container row">
+
+            </div> <!-- end of grind_payment_form_container -->
+
           </div> <!-- end of modal-body -->
   
           <div class="modal-footer">

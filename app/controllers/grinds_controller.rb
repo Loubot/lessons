@@ -146,10 +146,11 @@ class GrindsController < ApplicationController
     render '/grinds/grinds_js/grind_quantity_form.js.coffee'
   end
 
-  def check_booking    
+  def check_booking   
     @grind = Grind.find(params[:id])
-    cart = create_cart(params, @grind)
-    pp cart
+    @teacher = Teacher.find(session[:grind_teacher_id])
+    @cart = create_cart(params, @grind)
+    pp @cart
     if @grind.number_left - params[:quantity].to_i >= 0
       p "yep yep"
     else
@@ -157,6 +158,7 @@ class GrindsController < ApplicationController
     end
     render '/grinds/grinds_js/grind_payment_buttons.js.coffee'
   end
+
 
   private
 

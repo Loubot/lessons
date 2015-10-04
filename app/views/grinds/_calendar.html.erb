@@ -72,12 +72,18 @@
 
   scheduler.parse(gon.grinds, 'json');
 
-  scheduler.attachEvent("onDblClick", function (id, e){
+  scheduler.attachEvent("onBeforeLightbox", function (id, e){
     
     window.localStorage.setItem('grind_id', id);  //set grind id in cookie
     
-    scheduler.showLightbox(id);
+    return true;
+
   })
+
+  scheduler.attachEvent("onBeforeTooltip", function (id){
+      
+      window.localStorage.setItem('grind_id', id);  //set grind id in cookie
+  });
 
   scheduler.attachEvent("onLightboxButton", function(button_id, node, e){
     if(button_id == "select_grind"){

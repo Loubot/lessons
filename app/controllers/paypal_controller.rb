@@ -294,6 +294,9 @@ class PaypalController < ApplicationController
                                           )
           render status: 200, nothing: true
           
+        elsif cart.booking_type == 'grind' #grind booking
+          
+
         else #not home booking
           # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
           location = Location.find(cart.location_id.to_i)
@@ -363,7 +366,40 @@ class PaypalController < ApplicationController
   end
 
   def grind_paypal
-    
+    cart = UserCart.find(params[:cart_Id])
+
+    client = AdaptivePayments::Client.new(
+      get_paypal_credentials
+    )
+
+    client.execute(:Pay,
+      :action_type     => "PAY",
+      :currency_code   => "EUR",
+      :tracking_id     => cart.tracking_id,
+      :cancel_url      => "https://www.learnyourlesson.ie",
+      :return_url      => request.referrer,
+      :ipn_notification_url => "#{root_url}store-paypal",
+      :receivers => [
+        { :email => cart.teacher_email, amount: price.price.to_f } #, primary: true
+        # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
+      ]
+    ) do |response|
+
+      if response.success?
+        puts "Pay key: #{response.pay_key}"
+        logger.info "create paypal response #{response.inspect}"
+
+        # send the user to PayPal to make the payment
+        # e.g. https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=abc
+        flash[:success] = "Your booking is being processed. You should receive an email soon."
+        redirect_to client.payment_url(response)
+      else
+        flash[:danger] = "#{response.error_message}"
+        puts "Paypal error message: #{response.ack_code}: #{response.error_message}"
+        redirect_to :back
+      end
+
+    end
   end #end of grind_paypal
 
 
