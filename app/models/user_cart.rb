@@ -47,13 +47,13 @@ class UserCart < ActiveRecord::Base
   end
 
   def initial #check booking type before saving
-    p "location_id #{self.location_id}"
-    if self.location_id == "" || self.location_id == nil
-      self.booking_type =  'home'
+    # p "location_id #{self.location_id}"
+    # if self.location_id == "" || self.location_id == nil
+    #   self.booking_type =  'home'
         
-    else      
-      self.booking_type =  'single'        
-    end
+    # else      
+    #   self.booking_type =  'single'        
+    # end
 
     if self.weeks == 0 
       self.weeks = 1
@@ -75,7 +75,7 @@ class UserCart < ActiveRecord::Base
     cart
   end
 
-  def self.grind(teacher_id, student_id, student_name, teacher_name, student_email, teacher_email, subject_id, start_date, booking_type)
+  def self.grind(teacher_id, student_id, student_name, teacher_name, student_email, teacher_email, subject_id, start_date, grind_id, location_id, booking_type)
     cart = self.new
 
     cart.update_attributes(
@@ -87,6 +87,7 @@ class UserCart < ActiveRecord::Base
                             student_email: student_email,
                             teacher_email: teacher_email,
                             subject_id: subject_id,
+                            grind_id: grind_id,
                             booking_type: 'grind'
                           )
 

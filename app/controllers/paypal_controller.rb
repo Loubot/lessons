@@ -271,12 +271,13 @@ class PaypalController < ApplicationController
       if response == "VERIFIED" && params['status'] == 'COMPLETED'
         cart = UserCart.find_by(tracking_id: params['tracking_id'])
         #p "cart #{cart.booking_type}"
-        price = Price.find(cart.price_id)
+        
         
         
         render status: 200, nothing: true and return if !cart
         
         if cart.booking_type == "home"
+          price = Price.find(cart.price_id) 
           # p "date %%%%%%%%%%%%% #{Date.parse(cart.params[:date]).strftime('%d/%m%Y')}"
           Event.delay.create_confirmed_events(cart, 'paid')
           
@@ -295,10 +296,13 @@ class PaypalController < ApplicationController
           render status: 200, nothing: true
           
         elsif cart.booking_type == 'grind' #grind booking
-          
+          p "got to grinds"
+
+          render status: 200, nothing: true
 
         else #not home booking
           # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"
+          price = Price.find(cart.price_id) 
           location = Location.find(cart.location_id.to_i)
           p "not a home booking paypal!!!!!!!!!!!!!!!!"
           logger.info "returned params #{create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)}"
@@ -366,12 +370,12 @@ class PaypalController < ApplicationController
   end
 
   def grind_paypal
-    cart = UserCart.find(params[:cart_Id])
-
+    cart = UserCart.find(params['cart_id'])
+    grind = Grind.find(cart.grind_id)
     client = AdaptivePayments::Client.new(
       get_paypal_credentials
     )
-
+    # redirect_to :back
     client.execute(:Pay,
       :action_type     => "PAY",
       :currency_code   => "EUR",
@@ -380,7 +384,7 @@ class PaypalController < ApplicationController
       :return_url      => request.referrer,
       :ipn_notification_url => "#{root_url}store-paypal",
       :receivers => [
-        { :email => cart.teacher_email, amount: price.price.to_f } #, primary: true
+        { :email => cart.teacher_email, amount: grind.price.to_f } #, primary: true
         # { :email => 'loubotsjobs@gmail.com',  amount: 10 }
       ]
     ) do |response|
@@ -414,7 +418,9 @@ class PaypalController < ApplicationController
   end
 
   def get_paypal_credentials
+    p "signature #{ ENV['PAYPAL_APP_ID'] }"
     if Rails.env.development? or Rails.env.test?
+      p "signature #{ ENV['PAYPAL_APP_ID'] }"
       { 
         :user_id       => ENV['PAYPAL_USER_ID'],
         :password      => ENV['PAYPAL_PASSWORD'],

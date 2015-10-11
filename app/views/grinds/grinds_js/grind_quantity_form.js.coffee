@@ -41,7 +41,7 @@ $('.grind_payment_modal_container').html """
   
             <%= form_tag check_booking_grind_path(id: @grind.id), remote: true, class: 'form-horizontal' do %>
               <div class="form-group">
-                <div class="col-sm-2 control-label">Quantity?</div> <!-- end of col-sm-2 control-label -->
+                <div class="col-sm-2 control-label">Places?</div> <!-- end of col-sm-2 control-label -->
                 <div class="col-sm-10">
                   <%= number_field_tag 'quantity', step: 1, in: 1...@grind.number_left %>
                 </div> <!-- end of col-sm-10 -->
@@ -53,7 +53,7 @@ $('.grind_payment_modal_container').html """
                   <%= submit_tag 'Check', class: 'btn btn-info' %>
                 </div> <!-- end of col-sm-offset-2 col-sm-10 -->
               </div> <!-- end of form-group -->
-            
+              <%= hidden_field_tag 'grind_id', @grind.id %>
             <% end %>
 
             <div class="grind_payment_form_container row">
