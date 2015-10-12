@@ -135,6 +135,9 @@ class StaticController < ApplicationController
 					# p gon.locations
 					@teachers.paginate(page: params[:page])
 				}
+				format.json{
+					p "helllloooo"
+				}
 			end
 			logger.info "55555555555555555555555555555"
 		end
