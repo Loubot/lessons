@@ -2,6 +2,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 # Include RMagick or MiniMagick support:
 include CarrierWave::RMagick
 include CarrierWave::MiniMagick
+require 'carrierwave/processing/mini_magick'
 # Choose what kind of storage to use for this uploader:
 # storage :file
 storage :fog
