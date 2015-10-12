@@ -22,8 +22,12 @@ class PhotosController < ApplicationController
 				format.json { flash[:success] = "Photo uploaded successfully!"
 					render json: @photo }
 			else
-				flash[:danger] = "Couldn't upload photo #{@photo.erros.full_messages}"
-				render edit_teacher_path(current_teacher)
+				flash[:danger] = "Couldn't upload photo #{@photo.errors.full_messages}"
+				format.html { 
+					flash[:success] = "Photo uploaded successfully!"
+					redirect_to edit_teacher_path(current_teacher) 
+				}
+				
 			end
 		end
 	end

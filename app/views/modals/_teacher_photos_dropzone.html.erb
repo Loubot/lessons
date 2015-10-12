@@ -10,14 +10,29 @@
       <div class="modal-body">
         <div  class="container-fluid">
           <div class="dropzone-container">
-            <%= form_for [@teacher, Photo.new], html: { id: 'dropzone', class: 'dropzone' } do |p| %>
-              <div class="form-group fallback">
-                  
+            <% if is_mobile? %>
+              <%= form_for [@teacher, Photo.new] do |p| %>
+                <div class="form-group fallback">
+                    
                    <%= p.file_field :avatar, id: 'picture_upload_field' %>
-                   <%= p.hidden_field :teacher_id, value: current_teacher.id %>
+                   <%# p.hidden_field :teacher_id, value: current_teacher.id %>
                    <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-              </div> <!-- end of fallback -->
+                   <%= p.submit 'Upload photos', class: 'btn btn-primary' %>
+                </div> <!-- end of fallback -->
+              <% end %>
+            <% else %>
+              <%= form_for [@teacher, Photo.new], html: { id: 'dropzone', class: 'dropzone' } do |p| %>
+                <div class="form-group fallback">
+                    
+                     <%= p.file_field :avatar, id: 'picture_upload_field' %>
+                     <%= p.hidden_field :teacher_id, value: current_teacher.id %>
+                     <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+                </div> <!-- end of fallback -->
+              <% end %>
             <% end %>
+
+
+            
           </div> <!-- end of dropzone-container -->
           
         </div> <!-- end of container-fluid -->
