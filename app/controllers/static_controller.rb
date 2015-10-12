@@ -90,7 +90,7 @@ class StaticController < ApplicationController
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
 		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
-		logger.info "first subjects #{@subjects}"
+		logger.info "first subjects #{@subjects.inspect}"
 		@subject = @subjects.first
 		# p "subject #{ pp @subject.inspect }"
 		if @subjects.empty?			
