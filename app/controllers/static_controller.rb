@@ -89,7 +89,7 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
-		@subjects = Subject.where('name LIKE ?', "%#{ params[:search_subjects] }%")
+		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 		logger.info "first subjects #{@subjects.inspect}"
 		@subject = @subjects.first
 		# p "subject #{ pp @subject.inspect }"
@@ -115,7 +115,7 @@ class StaticController < ApplicationController
 				}
 				format.js{
 					logger.info "doing js 22222222222"
-					@subject = Subject.where("LOWER(name) LIKE ?", params["search_subjects"]).first
+					@subject = Subject.where("LOWER(name) ILIKE ?", params["search_subjects"]).first
 					logger.info @subject.inspect		
 					@teachers = get_search_results(params, @subjects)
 					# p "teachers #{ pp @teachers }"
