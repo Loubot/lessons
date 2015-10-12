@@ -91,15 +91,15 @@ class StaticController < ApplicationController
 		#Teacher.includes(:locations).where(id: ids)
 		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 		logger.info "first subjects #{@subjects.inspect}"
-		@subject = @subjects.first
-		logger.info "subject #{ pp @subject.inspect }"
+		
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
 			render "display_subjects"
 		else			
 			respond_to do |format|
 				format.html{
-
+					@subject = @subjects.first
+					logger.info "subject #{ pp @subject.inspect }"
 					p "doing html !!!!!!!!"
 					@teachers = get_search_results(params, @subjects)
 
@@ -116,6 +116,7 @@ class StaticController < ApplicationController
 				format.js{
 					logger.info "doing js 22222222222"
 					@subject = Subject.where("LOWER(name) ILIKE ?", params["search_subjects"]).first
+					logger.info "subject ********** #{@subject}"
 					logger.info @subject.inspect		
 					@teachers = get_search_results(params, @subjects)
 					# p "teachers #{ pp @teachers }"
