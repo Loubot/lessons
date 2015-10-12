@@ -92,7 +92,7 @@ class StaticController < ApplicationController
 		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 		logger.info "first subjects #{@subjects.inspect}"
 		@subject = @subjects.first
-		# p "subject #{ pp @subject.inspect }"
+		p "subject #{ pp @subject.inspect }"
 		if @subjects.empty?			
 			@teachers = @subjects.paginate(page: params[:page])
 			render "display_subjects"
