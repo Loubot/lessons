@@ -79,7 +79,7 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
 	end
@@ -88,15 +88,10 @@ class StaticController < ApplicationController
 		p "got to here ***********"
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
-		#Teacher.includes(:locations).where(id: ids)
-		
-		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
-		
-		
-		
-			
+		#Teacher.includes(:locations).where(id: ids)	
+		logger.info "params #{ params[:search_subjects] }"
 		respond_to do |format|
-			
+			@subjects = Subject.where('name LIKE ?', "%#{ params[:search_subjects] }%")
 			format.html{
 				@subject = @subjects.first
 				
@@ -114,8 +109,8 @@ class StaticController < ApplicationController
 				@teachers.paginate(page: params[:page])
 			}
 			format.js{
-				
-				@subject = Subject.where("LOWER(name) ILIKE ?", params[:search_subjects]).first
+				@subjects = Subject.where('name LIKE ?', "%#{ params[:search_subjects] }%")
+				@subject = Subject.where("LOWER(name) LIKE ?", params[:search_subjects]).first
 				# logger.info "subject ********** #{@subject}"
 				# logger.info @subject.inspect		
 				@teachers = get_search_results(params, @subjects)
