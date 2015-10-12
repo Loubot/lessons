@@ -88,9 +88,9 @@ gem "combined_time_select"
 
 gem 'validates_overlap', '~> 0'
 
-gem 'rmagick', '~> 2.13.3'
+gem 'rmagick', '~> 2.13.3', platforms: [:ruby]
 
-gem 'mini_magick', '~> 3.8.0'
+gem 'mini_magick', '~> 3.8.0', platforms: [:ruby]
 
 gem "fog", '~> 1.23.0'
 

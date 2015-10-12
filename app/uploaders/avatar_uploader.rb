@@ -36,7 +36,7 @@ process auto_orient
 def auto_orient
   manipulate! { |img|
     image = MiniMagick::Image.open(img.path)
-    image.auto_orient
+    image.auto_orient!
     image
   }
 end
