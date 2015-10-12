@@ -25,6 +25,8 @@
 #  start_time    :datetime
 #  price_id      :integer
 #  date          :date
+#  grind_id      :integer
+#  places        :integer          default(0)
 #
 
 class UserCart < ActiveRecord::Base
@@ -75,7 +77,7 @@ class UserCart < ActiveRecord::Base
     cart
   end
 
-  def self.grind(teacher_id, student_id, student_name, teacher_name, student_email, teacher_email, subject_id, start_date, grind_id, location_id, booking_type)
+  def self.grind(teacher_id, student_id, student_name, teacher_name, student_email, teacher_email, subject_id, start_date, grind_id, location_id, quantity, amount, booking_type)
     cart = self.new
 
     cart.update_attributes(
@@ -88,6 +90,8 @@ class UserCart < ActiveRecord::Base
                             teacher_email: teacher_email,
                             subject_id: subject_id,
                             grind_id: grind_id,
+                            places: quantity,
+                            amount: amount,
                             booking_type: 'grind'
                           )
 

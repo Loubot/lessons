@@ -140,7 +140,7 @@ private
     e
   end
 
-  def self.create_multiple_events_and_save(cart ,payment) #teachers area block booking
+  def self.create_multiple_events_and_save(cart, payment) #teachers area block booking
     ids = []
     continue = true  
     
@@ -170,7 +170,7 @@ private
       return unless continue
     end
 
-  end
+  end # end of create_multiple_events_and_save
 
   def create_students_association
     Friendship.create(teacher_id: self.teacher_id, student_id: self.student_id) if self.student_id != 0

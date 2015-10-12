@@ -14,7 +14,7 @@ class GrindsController < ApplicationController
     redirect_to :back and return if params[:search_subjects] == ""
     # require 'Geocoder'
     require 'will_paginate/array'      
-    @subjects = Subject.where('name LIKE ?', "%#{ params[:search_subjects] }%")
+    @subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
     @subject = @subjects.first
 
     respond_to do |format|
@@ -45,7 +45,7 @@ class GrindsController < ApplicationController
 
       format.json{
 
-        @subject = Subject.where("LOWER(name) LIKE ?", params['coords']["search_subjects"]).first
+        @subject = Subject.where("LOWER(name) ILIKE ?", params['coords']["search_subjects"]).first
 
         @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
                                                         .where(grinds: { subject_id: @subject.id })
@@ -149,10 +149,10 @@ class GrindsController < ApplicationController
   def check_booking   
     @grind = Grind.find(params[:id])
     @teacher = Teacher.find(session[:grind_teacher_id])
-    @cart = create_cart(params, @grind)
+    @quantity = params[:quantity].to_i
     pp @cart
-    if @grind.number_left - params[:quantity].to_i >= 0
-      p "yep yep"
+    if @grind.number_left - @quantity >= 0
+     @cart = create_cart(params, @grind, @quantity)
     else
       p "nope nope"
     end
@@ -162,7 +162,7 @@ class GrindsController < ApplicationController
 
   private
 
-    def create_cart(params, grind)
+    def create_cart(params, grind, quantity)
       teacher = Teacher.find(grind.teacher_id)
       cart = UserCart.grind(
                       teacher.id,
@@ -175,6 +175,8 @@ class GrindsController < ApplicationController
                       grind.start_date,
                       grind.id,
                       grind.location_id,
+                      quantity,
+                      grind.price,
                       'grind'
                     )
       cart

@@ -1,4 +1,7 @@
 $('.grind_payment_form_container').html """
+    <div class="grind_payment_total text-center col-xs-12">
+      <strong> Toal due: <%= number_to_currency((@grind.price.to_f * @quantity), unit: '€') %> </strong>
+    </div> <!-- end of grind_payment_total -->
     <div class="col-xs-6">
       <% if @teacher.paypal_email != "" %>
         <%= form_tag grind_paypal_path, class: 'form-horizontal', method: 'post' do |f| %>

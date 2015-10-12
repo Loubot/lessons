@@ -416,6 +416,85 @@ class TeacherMailer < ActionMailer::Base
       puts "A mandrill error occurred: #{e.class} - #{e.message}"
     end
 
-  end
+  end # end of teacher_to_student_mail
+
+  def grind_teacher_mail(cart)
+    begin
+      weeks = cart.weeks.to_i
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name ="teachers-home-booking-to-teacher"
+      template_content = []
+      message = { 
+                  subject: "You have a booking",     
+                  :to=>[  
+                   {  
+                     :email=> cart.teacher_email
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  cart.teacher_email,
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>cart.teacher_name  }
+                                                                              
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Grind Mail sent to #{cart.teacher_email}"
+  end #end of grind_teacher_mail
+
+  def grind_student_mail(cart)
+    begin
+      weeks = cart.weeks.to_i
+      require 'mandrill'
+      m = mandrill = Mandrill::API.new ENV['MANDRILL_APIKEY']
+      template_name ="teachers-home-booking-to-teacher"
+      template_content = []
+      message = { 
+                  subject: "You have a booking",     
+                  :to=>[  
+                   {  
+                     :email=> cart.teacher_email
+                     # :name=> "#{student_name}"  
+                   }  
+                 ],  
+                 :from_email=> "loubot@learnyourlesson.ie",
+                "merge_vars"=>[
+                              { "rcpt"   =>  cart.teacher_email,
+                                "vars" =>  [
+                                          { "name"=>"FNAME",          "content"=>cart.teacher_name  }
+                                                                              
+                                        ]
+                          }],
+                  
+                }
+      async = false
+      result = mandrill.messages.send_template template_name, template_content, message, async
+      # sending = m.messages.send message  
+      puts result
+    rescue Mandrill::Error => e
+        # Mandrill errors are thrown as exceptions
+        logger.info "A mandrill error occurred: #{e.class} - #{e.message}"
+        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
+    raise
+    end
+
+    logger.info "Grind Mail sent to #{cart.teacher_email}"
+  end #end of grind_student_mail
+
 
 end

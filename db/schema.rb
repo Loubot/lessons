@@ -300,6 +300,7 @@ ActiveRecord::Schema.define(version: 20150928200103) do
     t.integer  "price_id"
     t.date     "date"
     t.integer  "grind_id"
+    t.integer  "places",                                default: 0
   end
 
   add_index "user_carts", ["student_email"], name: "index_user_carts_on_student_email"
