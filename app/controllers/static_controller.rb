@@ -89,7 +89,7 @@ class StaticController < ApplicationController
 		require 'will_paginate/array' 
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)	
-		logger.info "params #{ params[:search_subjects] }"
+		logger.info "params #{ params[:search_subjects].tr('+', ' ') }"
 		respond_to do |format|
 			@subjects = Subject.where('name LIKE ?', "%#{ params[:search_subjects] }%")
 			format.html{
