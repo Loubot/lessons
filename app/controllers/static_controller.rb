@@ -113,12 +113,16 @@ class StaticController < ApplicationController
 				}
 				format.js{
 					p "doing js 22222222222"
-					@subject = Subject.where("LOWER(name) ILIKE ?", params["search_subjects"]).first				
+					@subject = Subject.where("LOWER(name) ILIKE ?", params["search_subjects"]).first
+					p @subject.inspect		
 					@teachers = get_search_results(params, @subjects)
 					# p "teachers #{ pp @teachers }"
 					ids = @teachers.collect { |t| t.id }
+					p "ids #{ids}"
 					@locations = Location.near([params['lat'].to_f, params['lon'].to_f], \
 					 params['distance'].to_f).where(teacher_id: ids)
+
+					p "locations #{@locations.inpsect}"
 					
 					# p gon.locations
 					@teachers.paginate(page: params[:page])
