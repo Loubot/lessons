@@ -122,7 +122,7 @@ class StaticController < ApplicationController
 					logger.info "44444444444444444444444444444444"
 					logger.info "doing js 22222222222"
 					@subject = Subject.where("LOWER(name) ILIKE ?", params[:search_subjects]).first
-					# logger.info "subject ********** #{@subject}"
+					logger.info "subject ********** #{@subject}"
 					# logger.info @subject.inspect		
 					@teachers = get_search_results(params, @subjects)
 					# p "teachers #{ pp @teachers }"
