@@ -32,7 +32,14 @@ version :thumb do
   process :resize_to_fill => [50, 50]
 end
 
-process :auto_orient
+process auto_orient
+def auto_orient
+  manipulate! { |img|
+    image = MiniMagick::Image.open(img.path)
+    image.auto_orient
+    image
+  }
+end
 #Create different versions of your uploaded files:
 # version :thumb do
 # process :resize_to_fit => [50, 50]
