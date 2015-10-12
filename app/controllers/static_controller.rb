@@ -90,6 +90,7 @@ class StaticController < ApplicationController
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
 		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
+		logger.info "first subjects #{@subjects}"
 		@subject = @subjects.first
 		# p "subject #{ pp @subject.inspect }"
 		if @subjects.empty?			
@@ -112,17 +113,17 @@ class StaticController < ApplicationController
 					@teachers.paginate(page: params[:page])
 				}
 				format.js{
-					p "doing js 22222222222"
+					logger.info "doing js 22222222222"
 					@subject = Subject.where("LOWER(name) ILIKE ?", params["search_subjects"]).first
-					p @subject.inspect		
+					logger.info @subject.inspect		
 					@teachers = get_search_results(params, @subjects)
 					# p "teachers #{ pp @teachers }"
 					ids = @teachers.collect { |t| t.id }
-					p "ids #{ids}"
+					logger.info "ids #{ids}"
 					@locations = Location.near([params['lat'].to_f, params['lon'].to_f], \
 					 params['distance'].to_f).where(teacher_id: ids)
 
-					p "locations #{@locations.inpsect}"
+					logger.info "locations #{@locations.inpsect}"
 					
 					# p gon.locations
 					@teachers.paginate(page: params[:page])
