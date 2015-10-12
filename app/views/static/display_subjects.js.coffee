@@ -1,4 +1,4 @@
-
+<% p "got to here ))))))))))" %>
 if window.markersArray?
 
   for marker in window.markersArray
