@@ -90,7 +90,7 @@ class StaticController < ApplicationController
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
 		
-		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
+		
 		
 		
 				
@@ -98,6 +98,7 @@ class StaticController < ApplicationController
 		respond_to do |format|
 			logger.info "3333333333333333333333333333333"
 			format.html{
+				@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 				@subject = @subjects.first
 				logger.info "subject #{ pp @subject.inspect }"
 				p "doing html !!!!!!!!"
@@ -114,6 +115,7 @@ class StaticController < ApplicationController
 				@teachers.paginate(page: params[:page])
 			}
 			format.js{
+				@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 				logger.info "44444444444444444444444444444444"
 				logger.info "doing js 22222222222"
 				@subject = Subject.where("LOWER(name) ILIKE ?", params[:search_subjects]).first
