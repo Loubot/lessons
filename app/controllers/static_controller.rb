@@ -97,6 +97,8 @@ class StaticController < ApplicationController
 		else			
 			respond_to do |format|
 				format.html{
+
+					p "doing html !!!!!!!!"
 					@teachers = get_search_results(params, @subjects)
 
 					if !params[:search_position].empty?
@@ -110,6 +112,7 @@ class StaticController < ApplicationController
 					@teachers.paginate(page: params[:page])
 				}
 				format.js{
+					p "doing js 22222222222"
 					@subject = Subject.where("LOWER(name) ILIKE ?", params["search_subjects"]).first				
 					@teachers = get_search_results(params, @subjects)
 					# p "teachers #{ pp @teachers }"
