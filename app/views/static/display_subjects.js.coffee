@@ -1,4 +1,5 @@
 <% p "got to here ))))))))))" %>
+<% p "locations buddyyyyyyyyyy #{@locations.inspect}" %>
 if window.markersArray?
 
   for marker in window.markersArray
