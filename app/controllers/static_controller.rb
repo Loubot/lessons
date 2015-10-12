@@ -90,17 +90,16 @@ class StaticController < ApplicationController
 		#ids = Location.near('cork', 10).select('id').map(&:teacher_id)
 		#Teacher.includes(:locations).where(id: ids)
 		
+		@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 		
 		
 		
-				
-		logger.info "22222222222222222222222222222222"
+			
 		respond_to do |format|
-			logger.info "3333333333333333333333333333333"
+			
 			format.html{
-				@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
 				@subject = @subjects.first
-				logger.info "subject #{ pp @subject.inspect }"
+				
 				p "doing html !!!!!!!!"
 				@teachers = get_search_results(params, @subjects)
 
@@ -115,17 +114,15 @@ class StaticController < ApplicationController
 				@teachers.paginate(page: params[:page])
 			}
 			format.js{
-				@subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
-				logger.info "44444444444444444444444444444444"
-				logger.info "doing js 22222222222"
+				
 				@subject = Subject.where("LOWER(name) ILIKE ?", params[:search_subjects]).first
-				logger.info "subject ********** #{@subject}"
+				# logger.info "subject ********** #{@subject}"
 				# logger.info @subject.inspect		
 				@teachers = get_search_results(params, @subjects)
 				# p "teachers #{ pp @teachers }"
 				ids = @teachers.collect { |t| t.id }
 				# logger.info "ids #{ids}"
-				logger.info "coords #{ params[:lat] } #{ params[:lon] }"
+				
 				@locations = Location.near([params[:lat].to_f, params[:lon].to_f], \
 				 params['distance'].to_f).where(teacher_id: ids)
 
@@ -138,7 +135,6 @@ class StaticController < ApplicationController
 				p "helllloooo"
 			}
 			
-			logger.info "55555555555555555555555555555"
 		end
 		# fresh_when [params[:search_subjects], params[:position]]
 	end
