@@ -11,13 +11,13 @@
         <div  class="container-fluid">
           <div class="dropzone-container">
             <% if is_mobile? %>
-              <%= form_for [@teacher, Photo.new] do |p| %>
+              <%= form_for [@teacher, Photo.new], html: { id: 'mobile_pic_form' } do |p| %>
                 <div class="form-group fallback">
                     
                    <%= p.file_field :avatar, id: 'picture_upload_field' %>
                    <%# p.hidden_field :teacher_id, value: current_teacher.id %>
                    <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-                   <%= p.submit 'Upload photos', class: 'btn btn-primary' %>
+                   
                 </div> <!-- end of fallback -->
               <% end %>
             <% else %>
@@ -39,7 +39,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" name="Upload photos" id="process_queue">Upload photos</button>
+        <% if is_mobile? %>
+          <button type="button" class="btn btn-primary" name="Upload photos" id="mobile_pic_upload">Upload photos</button>
+        <% else %>
+          <button type="button" class="btn btn-primary" name="Upload photos" id="process_queue">Upload photos</button>
+        <% end %>
+        
       </div>
     </div>
   </div>
