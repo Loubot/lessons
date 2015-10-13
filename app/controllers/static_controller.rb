@@ -79,7 +79,7 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
 	end
@@ -92,7 +92,7 @@ class StaticController < ApplicationController
 		search_subjects = params[:search_subjects].tr('+', ' ')
 		p "subjecrs %%%%%% #{search_subjects}"
 		respond_to do |format|
-			@subjects = Subject.where('name ILIKE ?', "%#{ search_subjects }%")
+			@subjects = Subject.where('name LIKE ?', "%#{ search_subjects }%")
 			format.html{
 				@subject = @subjects.first
 				
@@ -110,9 +110,9 @@ class StaticController < ApplicationController
 				@teachers.paginate(page: params[:page])
 			}
 			format.js{
-				@subjects = Subject.where('name ILIKE ?', "%#{ search_subjects }%")
-				@subject = Subject.where("name ILIKE ?", search_subjects).first
-				logger.info "subject ********** #{@subject.name}"
+				@subjects = Subject.where('name LIKE ?', "%#{ search_subjects }%")
+				# @subject = @subjects.first
+				# logger.info "subject ********** #{@subject.name}"
 				# logger.info @subject.inspect		
 				@teachers = get_search_results(params, @subjects)
 				# p "teachers #{ pp @teachers }"
