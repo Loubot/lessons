@@ -1,8 +1,7 @@
 class AvatarUploader < CarrierWave::Uploader::Base
 # Include RMagick or MiniMagick support:
 include CarrierWave::RMagick
-# include CarrierWave::MiniMagick
-require 'carrierwave/processing/mini_magick'
+include CarrierWave::MiniMagick
 # Choose what kind of storage to use for this uploader:
 # storage :file
 storage :fog
@@ -33,10 +32,11 @@ version :thumb do
   process :resize_to_fill => [50, 50]
 end
 
-process auto_orient
+process :auto_orient
+
 def auto_orient
   manipulate! do |img|
-    img.tap(&:auto_orient)
+    img.auto_orient!
   end
 end
 #Create different versions of your uploaded files:
