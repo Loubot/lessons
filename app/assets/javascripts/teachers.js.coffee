@@ -65,6 +65,9 @@ teachersInfoReady = ->
     catch error
       # console.log "Error: #{error}"
 
+  $('#mobile_pic_upload').on 'click', () ->
+    $('#mobile_pic_form').submit()
+
 #/////////////Qualifications visibility checkbox
   $('#visible_check').on 'click', () ->
     if $('#endDate').css('opacity') is '1'
