@@ -111,8 +111,8 @@ class StaticController < ApplicationController
 			}
 			format.js{
 				@subjects = Subject.where('name ILIKE ?', "%#{ search_subjects }%")
-				@subject = Subject.where("LOWER(name) ILIKE ?", search_subjects).first
-				logger.info "subject ********** #{@subject}"
+				@subject = Subject.where("name ILIKE ?", search_subjects).first
+				logger.info "subject ********** #{@subject.name}"
 				# logger.info @subject.inspect		
 				@teachers = get_search_results(params, @subjects)
 				# p "teachers #{ pp @teachers }"
