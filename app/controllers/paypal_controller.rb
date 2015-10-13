@@ -359,9 +359,11 @@ class PaypalController < ApplicationController
           # render status:200, nothing: true
           pp cart
           grind = Grind.find(cart.grind_id)
-          grind.increment!(:number_booked, by = cart.places.to_i)
-
-          inform_myself(cart) if grind.number_left < 0  # log an error cause grind is overbooked
+          if !(grind.number_booked - cart.places.to_i < 0)
+            grind.increment!(:number_booked, by = cart.places.to_i)
+          else
+            inform_myself(cart)  # log an error cause grind is overbooked
+          end
 
           Transaction.create( #payments_helper
                               create_transaction_params_paypal(params, cart.student_id, cart.teacher_id)
@@ -369,7 +371,7 @@ class PaypalController < ApplicationController
 
           TeacherMailer.grind_teacher_mail(
                                             cart
-                                          )
+                                          ).deliver_now
           render status: 200, nothing: true
         else #not home booking
           # logger.info "teacher #{event.teacher_id}, student #{event.student_id}"

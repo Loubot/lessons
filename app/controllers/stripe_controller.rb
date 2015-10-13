@@ -194,6 +194,49 @@ class StripeController < ApplicationController
     
   end #end of create_package_booking_stripe
 
+  def grind_stripe
+    cart = UserCart.find(params[:cart_id])
+    @teacher = Teacher.find(cart.teacher_id)
+    begin
+      charge = Stripe::Charge.create({
+        :metadata           => { :tracking_id => cart.tracking_id },
+        :amount             => ( ( cart.amount.to_f * cart.places ).to_i * 100 ),
+        :description        => cart.tracking_id,
+        :currency           => 'eur',
+        :application_fee    => 300,
+        :source             => params[:stripeToken]
+        
+        },
+        @teacher.stripe_access_token
+      )
+      puts charge.inspect
+      if charge['paid'] == true
+       grind = Grind.find(cart.grind_id)
+       
+        Transaction.create( #payments_helper
+                              create_transaction_params_stripe(charge, cart.student_id, cart.teacher_id)
+                            )
+
+        TeacherMailer.grind_teacher_mail(
+                                          cart
+                                        ).deliver_now
+
+        if !(grind.number_booked - cart.places.to_i < 0)
+          grind.increment!(:number_booked, by = cart.places.to_i)
+        else
+          inform_myself(cart)  # log an error cause grind is overbooked
+        end
+        
+      end
+      flash[:success] = 'Payment was successful. You will receive an email soon. Payments can take a few minutes to register.'
+      redirect_to :back
+
+      rescue Stripe::CardError => e
+        flash[:error] = e.message
+        redirect_to charges_path
+    end
+  end # end of grind_stripe
+
   def store_stripe
     
     json_response = JSON.parse(request.body.read)
@@ -294,6 +337,8 @@ class StripeController < ApplicationController
       end
     end
 
-
-
+    def inform_myself(cart)
+      logger.info "Grind overbooked error"
+      logger.info("Cart #{ pp cart }")
+    end
 end

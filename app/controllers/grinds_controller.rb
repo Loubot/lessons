@@ -154,7 +154,7 @@ class GrindsController < ApplicationController
     if @grind.number_left - @quantity >= 0
      @cart = create_cart(params, @grind, @quantity)
     else
-      p "nope nope"
+      @cart = "Not enough places left"
     end
     render '/grinds/grinds_js/grind_payment_buttons.js.coffee'
   end

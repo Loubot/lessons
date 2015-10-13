@@ -2,7 +2,7 @@ module StripeHelper
 
 
 	def create_transaction_params_stripe(params, student_id, teacher_id) #format params for transaction, stripe
-    # p "stripe params #{params['source']['name']}"
+    p "stripe params #{pp params}"
     returnParams = { 
                       # tracking_id: params['data']['object']['metadata']['tracking_id'], 
                       trans_id: params['id'],
