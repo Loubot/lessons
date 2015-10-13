@@ -326,9 +326,6 @@ teachersInfoReady = ->
     $(document).on 'change', '.select_home_or_location', -> #submit choice of home or location
       if $('.home_or_location_select_tag')[0].selectedIndex != 0
         $('.select_home_or_location').submit()
-
-
-
     # end of the_one_modal
 
     
@@ -436,7 +433,7 @@ teachersInfoReady = ->
     $('#grind_modal').on 'hidden.bs.modal', ->
       $('.clear_me').empty()
 
-    $('#grind_modal').modal()
+    # $('#grind_modal').modal()
 
     $(document).on 'change', '.grind_choose_subject', ->
       if $('.grind_choose_subject')[0].selectedIndex != 0
@@ -461,13 +458,7 @@ teachersInfoReady = ->
   
  
     $(document).on 'change', '.grind_select_subject', ->
-      if $('.grind_select_subject')[0].selectedIndex != 0
-        $.ajax
-          url: window.location.pathname
-          method: 'get'
-          dataType: 'script'
-          data:
-            subject_id: $('.grind_select_subject :selected').val()
+      $('#grind_modal').modal()
 
 # end of grind show page
 

@@ -67,7 +67,7 @@ class GrindsController < ApplicationController
         @profilePic = @teacher.photos.find { |p| p.id == @teacher.profile }.avatar.url
         subject_ids = @teacher.grinds.pluck(:subject_id).uniq
         @subjects = Subject.find(subject_ids)
-        @grind_names = @teacher.grinds.collect { |g| [g.subject_name, g.subject_id] }.uniq
+        @grind_names = @teacher.grinds.collect { |g| [ g.subject_name, g.subject_id ] }.uniq
         @locations = @teacher.locations
         p "grinds #{pp @grind_names}"
         gon.teacher_id = @teacher.id
