@@ -457,7 +457,7 @@ teachersInfoReady = ->
 
   
  
-    $(document).on 'change', '.grind_select_subject', ->
+    $(document).on 'click', '.grind_select_subject', ->
       $('#grind_modal').modal()
 
 # end of grind show page

@@ -211,19 +211,19 @@ class StripeController < ApplicationController
       )
       puts charge.inspect
       if charge['paid'] == true
-       grind = Grind.find(cart.grind_id)
-       
-        Transaction.create( #payments_helper
-                              create_transaction_params_stripe(charge, cart.student_id, cart.teacher_id)
-                            )
-
-        TeacherMailer.grind_teacher_mail(
-                                          cart
-                                        ).deliver_now
+       grind = Grind.find(cart.grind_id)        
 
         if !(grind.number_booked - cart.places.to_i < 0)
           grind.increment!(:number_booked, by = cart.places.to_i)
+          Transaction.create( #payments_helper
+                              create_transaction_params_stripe(charge, cart.student_id, cart.teacher_id)
+                            )
+
+          TeacherMailer.grind_teacher_mail(
+                                          cart
+                                        ).deliver_now
         else
+          issue_refund(charge)
           inform_myself(cart)  # log an error cause grind is overbooked
         end
         
@@ -340,5 +340,13 @@ class StripeController < ApplicationController
     def inform_myself(cart)
       logger.info "Grind overbooked error"
       logger.info("Cart #{ pp cart }")
+    end
+
+    def issue_refund(charge)
+      re = Stripe::Refund.create(
+          charge: charge
+        )
+
+      pp "refund response #{ pp re }"
     end
 end

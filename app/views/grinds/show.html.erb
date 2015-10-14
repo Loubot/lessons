@@ -33,8 +33,7 @@
   </div> <!-- end of row show_teacher_profile_container -->
   <div class="row">
     <div class="col-md-12 col-xs-12"> 
-      <%= select_tag "teachers[grind_id]", options_for_select(@subjects.map { |s| [ s.name, s.id ] }), \
-                                          class: 'grind_select_subject', prompt: 'Select your subject' %>
+      <button class="btn btn-success grind_select_subject">Book a grind</button>
     </div> <!-- end col-md-4 col-xs-12 -->
     <div class="display_grind_user col-xs-12">
 
