@@ -25,20 +25,26 @@
   </div> <!-- end of container-fluid main_page_search -->
 
   
-  <div id="display_search_results">
-    <% if @teachers == [] %>
-      <%= render partial: 'partials/socials/no_results_share_buttons' %>
-    <% else %>
-    <div class="apple_pagination">
-      <div class="page_info">
-        <%= page_entries_info @teachers %>
-      </div><!--  end of page_info -->
-    </div> <!-- end of apple_pagination -->
+  <div id="grind_display_search_results">
+    <div id="search_results_teachers_info">
+      <% if @teachers == [] %>
+        <%= render partial: 'partials/socials/no_results_share_buttons' %>
+      <% else %>
+      <div class="apple_pagination">
+        <div class="page_info">
+          <%= page_entries_info @teachers %>
+        </div><!--  end of page_info -->
+        <%= will_paginate @teachers, :container => false %>
+      </div> <!-- end of apple_pagination -->
+      
+      
+        <%= render partial: 'grinds/grind', collection: @teachers, as: :teacher, locals: { subject: @subject } %>
+      
     
-    <div id="display_grinds_teachers">
-      <%= render partial: 'grinds/grind', collection: @teachers, as: :teacher, locals: { subject: @subject } %>
-    </div>
-    <% end %>
+      <% end %>
+    </div> <!-- end of search_results_teachers_info -->
   </div> <!-- end of display_search_results -->
   
+
+
 </div>  <!-- end of outer-container -->

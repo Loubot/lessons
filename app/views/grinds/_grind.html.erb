@@ -1,7 +1,7 @@
 
 
 <div class="row search_results_row nopadding">
-	<%= link_to teacher_grind_path(teacher_id: teacher.id, id: 1, subject_id: subject.id), html_options = {class: 'image_container'} do %>
+	<%= link_to teacher_grind_path(teacher_id: teacher.id, id: 1, subject_id: subject.id), html_options = { class: 'image_container' } do %>
 		<div class="col-md-9 search_results_left search_results_shadow nopadding">
 			
 			<%= silhouette_helper(teacher) %>		
@@ -17,7 +17,7 @@
 	
 		<div class="col-md-3 search_restuls_right search_results_shadow">
 			
-			<%= teacher.locations.first.address %>
+			<%= @locations.first.address %>
 			<br>
 			<% if !teacher.reviews.empty? %>
 				<div class="review_container">					

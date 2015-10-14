@@ -1,17 +1,20 @@
 ready = ->
-  if $('#search_map').is(':visible')
+  if $('#search_map').is(':visible') or $('#grind_map_container').is(':visible')
+    window.url = if $('#search_map').is(':visible') then 'display-subjects' else 'grinds'
+    window.map_id = if $('#search_map').is(':visible') then  'search_map' else 'grind_map_container'
+    console.log map_id
     window.first_load = true
-    $.when(load_google_maps_api_grinds()).done ->
+    $.when(load_google_maps_api()).done ->
 
 map_changed = ->
   
   if window.first_load != true
     
     console.log "map changed"
-    console.log "map #{grinds_map.getBounds()}"
-    grindCentral =  grinds_map.getCenter()
+    # console.log "map #{search_map.getBounds()}"
+    grindCentral =  search_map.getCenter()
 
-    bounds = grinds_map.getBounds()
+    bounds = search_map.getBounds()
     console.log bounds
     center = bounds.getCenter()
     ne = bounds.getNorthEast()
@@ -26,12 +29,12 @@ map_changed = ->
      Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1))
     console.log dis
     dis = dis * .8
-    console.log dis
+    # console.log dis
 
     $.ajax(
       method: 'get'
       dataType: 'script'
-      url: 'display-subjects'
+      url: url
       data:       
         lat: grindCentral.lat()
         lon: grindCentral.lng()
@@ -54,7 +57,7 @@ window.init_search_map = ->
       center: new google.maps.LatLng(52.904281, -8.023571)
       zoom: 7
   
-  window.grinds_map = new (google.maps.Map)(document.getElementById('search_map'), mapOptions)
+  window.search_map = new (google.maps.Map)(document.getElementById(map_id), mapOptions)
  
 
   if (gon)? and (gon.locations)?
@@ -69,25 +72,25 @@ window.init_search_map = ->
 
       marker = new (google.maps.Marker)(
           position: latLng
-          map: grinds_map
+          map: search_map
           title: 'Grinds maps'
         )
 
       markersArray.push marker
   # console.log "markersArray #{markersArray}"
 
-  # google.maps.event.addListener grinds_map, "dragend", ->    
+  # google.maps.event.addListener search_map, "dragend", ->    
   #   map_changed()
 
-  # google.maps.event.addListener grinds_map, "zoom_changed", ->
+  # google.maps.event.addListener search_map, "zoom_changed", ->
   #   map_changed()
 
-  google.maps.event.addListener grinds_map, "idle", ->
+  google.maps.event.addListener search_map, "idle", ->
     map_changed()
         
     
 
-load_google_maps_api_grinds = ->
+load_google_maps_api = ->
   if !(google?) #if google maps not loaded   
   
     console.log 'loading Google maps'

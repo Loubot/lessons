@@ -487,3 +487,8 @@ $(window).resize ->
   $('.profile_pic_container').css 'width', w
   
   # $('.profile_pic_container').css 'background-image', "url(#{img.src})"
+
+
+window.clearMarkers = () ->
+  for marker in window.markersArray
+    marker.setMap null
