@@ -1,4 +1,5 @@
-ready = ->
+grind_ready = ->
+  console.log 'hello'
   if $('#grind_map_container').is(':visible')
     window.first_load = true
     $.when(load_google_maps_api_grinds()).done ->
@@ -108,6 +109,7 @@ load_google_maps_api_grinds = ->
     console.log 'Google maps already loaded'
 
 
-
-$(document).ready ready
-$(document).on 'page:load', ready
+# history.navigationMode = 'compatible'
+$(document).ready grind_ready
+$(document).on 'page:load', grind_ready
+$(window).unload(grind_ready)

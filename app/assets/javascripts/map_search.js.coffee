@@ -102,3 +102,4 @@ load_google_maps_api_grinds = ->
 
 $(document).ready ready
 $(document).on 'page:load', ready
+$(window).unload(ready)
