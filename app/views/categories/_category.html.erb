@@ -22,7 +22,7 @@
 						</div>
 					</div>
 				<% end %>
-				<% category.subjects.each do |subject| %>
+				<% category.subjects.order('created_at DESC').each do |subject| %>
 					<li class="list-group-item"><%= subject.name %>: id = <%= subject.id %>
 						<span class="pull-right"><%= link_to 'Delete subject', subject, id: "delete_#{ subject.name.downcase }", method: :delete, data: { confirm: 'Are you sure?' } %></span>
 					</li>
