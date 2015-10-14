@@ -429,20 +429,22 @@ teachersInfoReady = ->
 #grind_show page
   if $('.show_grind_page').length
     makeProfileSizeCorrect()
+    teacher_id = gon.teacher_id
 
     $('#grind_modal').on 'hidden.bs.modal', ->
+      document.getElementById("grinds_selection").selectedIndex = 0
       $('.clear_me').empty()
 
     # $('#grind_modal').modal()
 
     $(document).on 'change', '.grind_choose_subject', ->
       if $('.grind_choose_subject')[0].selectedIndex != 0
-
+        console.log "teacher id #{ teacher_id }"
         $.ajax
           url: '/grinds/1/return-levels'
           method: 'get'
           data:
-            teacher_id: gon.teacher_id
+            teacher_id: teacher_id
             subject_id: $('.grind_choose_subject').val()
 
     $(document).on 'change', '.grind_select_level', ->

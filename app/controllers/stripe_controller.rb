@@ -211,9 +211,9 @@ class StripeController < ApplicationController
       )
       puts charge.inspect
       if charge['paid'] == true
-       grind = Grind.find(cart.grind_id)        
+       grind = Grind.find(cart.grind_id)       
 
-        if !(grind.number_booked - cart.places.to_i < 0)
+        if !(grind.number_booked - cart.places.to_i <= 0)
           grind.increment!(:number_booked, by = cart.places.to_i)
           Transaction.create( #payments_helper
                               create_transaction_params_stripe(charge, cart.student_id, cart.teacher_id)
@@ -348,5 +348,5 @@ class StripeController < ApplicationController
         )
 
       pp "refund response #{ pp re }"
-    end
+    
 end
