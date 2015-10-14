@@ -104,7 +104,6 @@ class StaticController < ApplicationController
 					loc = Geocoder.search(params[:search_position])
 					gon.initial_location = { lat: loc[0].latitude, lon: loc[0].longitude }				
 					@locations = Location.where(teacher_id: ids)
-					@address = @locations.first
 					# p "locations #{pp ids}"
 					gon.locations = @locations
 				end
