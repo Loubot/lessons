@@ -7,9 +7,9 @@
 #  student_id    :integer
 #  params        :text
 #  tracking_id   :text
-#  student_name  :string           default("")
-#  student_email :string
-#  teacher_email :string
+#  student_name  :string(255)      default("")
+#  student_email :string(255)
+#  teacher_email :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
 #  subject_id    :integer

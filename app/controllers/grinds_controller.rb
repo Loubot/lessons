@@ -13,8 +13,10 @@ class GrindsController < ApplicationController
   def index
     redirect_to :back and return if params[:search_subjects] == ""
     # require 'Geocoder'
-    require 'will_paginate/array'      
-    @subjects = Subject.where('name ILIKE ?', "%#{ params[:search_subjects] }%")
+    require 'will_paginate/array'
+    search_subjects = params[:search_subjects].tr('+', ' ')    
+    @subjects = Subject.where('name ILIKE ?', "%#{ search_subjects }%")
+    p "all subjects #{ pp @subjects.inspect }"
     @subject = @subjects.first
 
     respond_to do |format|
