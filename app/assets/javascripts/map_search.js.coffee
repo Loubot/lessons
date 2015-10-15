@@ -99,6 +99,7 @@ load_google_maps_api = ->
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBpOd04XM28WtAk1LcJyhlQzNW6P6OT2Q0&callback=init_search_map"
     document.body.appendChild script
   else
+    init_search_map()
     console.log 'Google maps already loaded'
 
 
