@@ -348,5 +348,5 @@ class StripeController < ApplicationController
         )
 
       pp "refund response #{ pp re }"
-    
+    end
 end
