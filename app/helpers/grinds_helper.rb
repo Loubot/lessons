@@ -18,11 +18,11 @@ module GrindsHelper
         ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
 
         @teachers = Teacher.includes(:grinds, :prices, :reviews, :subjects, :locations).where.not(grinds: { teacher_id: nil }) \
-                                                        .where(grinds: { subject_id: @subject.id })
+                                    .where(grinds: { subject_id: @subject.id }).paginate(page: params[:page])
 
 
-        @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations)\
-                                                                .where(id: ids).paginate(page: params[:page])
+        # @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations)\
+                                                                # .where(id: ids).paginate(page: params[:page])
       
       end
       if params[:sort_by] == 'Rate: lowest first'   
@@ -46,14 +46,15 @@ module GrindsHelper
         @teachers
       end          
 
-    elsif params[:search_position].empty? && !params[:search_subjects].empty? #no location and subject
+    elsif params[:search_position].empty? && !params[:search_subjects].empty? #subject but no location
        if params.has_key?(:lat)
         ids = Location.near([params['lat'].to_f, params['lon'].to_f], \
              params['distance'].to_f).select('id').map(&:teacher_id)
         @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).where(id: ids).paginate(page: params[:page])
       else
         ids = Location.near(params[:search_position], 10).select('id').map(&:teacher_id)
-        @teachers = subject.first.teachers.check_if_valid.includes(:prices, :reviews, :subjects, :locations).paginate(page: params[:page])
+        @teachers = Teacher.includes(:grinds, :prices, :reviews, :subjects, :locations).where.not(grinds: { teacher_id: nil }) \
+                                    .where(grinds: { subject_id: @subject.id }).paginate(page: params[:page])
       
       end
       
