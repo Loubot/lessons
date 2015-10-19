@@ -435,6 +435,16 @@ teachersInfoReady = ->
                                  """
       @.submit()
 
+  $(document).on 'click', '.show_home_schooling_content', -> #show hide home schooling section
+    $('.home_schooling_content').slideToggle 'slow'
+
+  $(document).on 'click', '.show_location_schooling_content', -> #show hide locations schooling section
+    $('.location_schooling_content').slideToggle 'slow'
+
+  $(document).on 'click', '.show_maps_content', -> #show hide locations section
+    $('#map_container').slideToggle 'slow', -> #run function when slideToggle has finished
+      business_page_ready() #initialise maps when slideToggle has finshed loading
+
 #end of  teachers business page, add subject name to for before submitting
 
 

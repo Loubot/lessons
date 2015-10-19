@@ -236,6 +236,34 @@ hr{
 // end of create-new-subject-page
 //your_business page
 
+.home_schooling_wrapper{
+  // background-color: #FFF;
+  border-style: solid;
+  border-width: 1px;
+  //margin-top: 9px;*/
+  border-color: #FFBF3F;
+  clear: both;
+  border: 0px !important;
+}
+
+.schooling_explanation{
+  background-color: #FFF;
+  margin-bottom: 5px;
+}
+
+#map_container{
+  display: none;
+}
+
+.home_schooling_content{
+  background-color: #FFF;
+  display: none;
+}
+
+.location_schooling_content{
+  display: none;
+}
+
 .price_alert{
   background: #ebffeb;
   
