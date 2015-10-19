@@ -106,7 +106,7 @@ window.multiple_maps = ->
 # Run initialize on dom ready if map_container is on screen
 
 
-ready = ->
+window.business_page_ready = ->
   if $('#map_container').is(':visible')
     
     window.mapArray = []
@@ -147,5 +147,5 @@ load_google_maps_api = (name) ->
 
 
 
-$(document).ready ready
-$(document).on 'page:load', ready
+$(document).ready business_page_ready
+$(document).on 'page:load', business_page_ready

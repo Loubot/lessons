@@ -213,7 +213,7 @@
 
 <hr>
   <div class="row package_form_row">
-    <div class="col-xs-12">
+    <div class="col-md-6 col-xs-12">
     <div class="well package_form_well">
       <h2 class="well_form_header">Lesson bundles </h2>
        <span class='well_form_label'>Create bundles of lessons for specific rates.</span>
@@ -221,38 +221,120 @@
         <%# see teachers.js, subject name appended using jquery %>
         <%= form_for [@teacher, @package], html: { class: 'form-horizontal create_package_form' } do |f| %> <%# teachers.js %>
           <div class="form-group">
-            <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-2 control-label' %>
-            <div class="col-sm-10">
+            <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-3 control-label' %>
+            <div class="col-sm-9">
               <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'package_subject_name form-control' } %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
           <div class="form-group">
-            <%= f.label :no_of_lessons, 'No. of lessons?', class: 'well_form_label col-sm-2 control-label' %>
-            <div class="col-sm-10">
+            <%= f.label :no_of_lessons, 'No. of lessons?', class: 'well_form_label col-sm-3 control-label' %>
+            <div class="col-sm-9">
               <%= f.select :no_of_lessons, options_for_select(0..52),{}, { class: 'form-control' } %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
           <div class="form-group">
-            <%= f.label :duration, 'Duration/mins?', class: 'well_form_label col-sm-2 control-label' %>
-            <div class="col-sm-10">
+            <%= f.label :duration, 'Duration/mins?', class: 'well_form_label col-sm-3 control-label' %>
+            <div class="col-sm-9">
               <%= f.number_field :duration, class: 'form-control' %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
           <div class="form-group">
-            <%= f.label :price, 'Total price?', class: 'well_form_label col-sm-2 control-label' %>
-            <div class="col-sm-10">
+            <%= f.label :price, 'Total price?', class: 'well_form_label col-sm-3 control-label' %>
+            <div class="col-sm-9">
               <%= f.number_field :price, placeholder: 'Total price?', class: 'form-control' %>
             </div> <!-- end of col-sm-10 -->
           </div> <!-- end of form-group -->
           <%= f.hidden_field :teacher_id, value: current_teacher.id %>
           <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-3 col-sm-9">
               <%= f.submit 'Create', class: 'btn btn-warning' %>
             </div> <!-- col-sm-offset-2 col-sm-10 -->
           </div> <!-- end of form-group -->
           
         <% end %>
-      </div> <!-- end of well -->
+      </div> <!-- end of well -->      
+    </div> <!-- end of col-xs-12 -->
+
+    <div class="col-md-6 col-xs-12">
+      <div class="well grind_well">
+        <h2 class="well_form_header">Create a classrom</h2>
+        <span class="package_form_label">Define your class room size and price for lesson</span>
+
+        <%= form_for [@teacher, @grind], html: { class: 'form-horizontal grind_form'} do |f| %>
+          <div class="form-group">
+            <%= f.label :subject_id, 'Subject?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.select :subject_id, options_for_select(@teacher.subjects.map { |s| [s.name, s.id] }), {}, { class: 'grind_subject_name form-control' } %> <%# class used to update form %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :location_id, 'Location', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.select :location_id, options_for_select(@teacher.locations.map { |l| [l.name, l.id] }), {}, { class: 'form-control' } %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :capacity, 'Capacity?', class: 'well_form_label col-sm-2 control-label' %>
+            <div class="col-sm-10">
+              <%= f.select :capacity, options_for_select(0..40),{}, { class: 'form-control' } %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :price, "Price per student?", class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.number_field :price, placeholder: 'Price per student?', class: 'form-control' %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :start_date, "First class?", class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= datetime_select(:grind, :start_date, { prompt: true,start_year: Time.now.year, minute_step: 15 },  { class: 'grind_start_time' }) %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :duration, 'Duration?', class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.number_field :duration, placeholder: 'Lesson length', step: 15, class: 'form-control' %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :level, "Level?", class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.select 'level', level_select, { include_blank: true }, { class: 'form-control' } %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <div class="form-group">
+            <%= f.label :weeks, "Weeks?", class: "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.number_field :weeks, placeholder: 'Number of weeks?', class: 'form-control' %>
+            </div> <!-- end of col-sm-10 -->
+          </div> <!-- end of form-group -->
+
+          <%= f.hidden_field :teacher_id, value: current_teacher.id %>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <%= f.submit 'Create', class: 'btn btn-success' %>
+            </div> <!-- col-sm-offset-2 col-sm-10 -->
+          </div> <!-- end of form-group -->
+        <% end %> <!-- end of grin_form -->
+      </div> <!-- end of well grind-->        
+    </div><!-- end of col-xs-12 -->    
+  </div> <!-- end of row -->
+
+  <div class="text-center">
+    <button id="toggle_packages_grinds" class="btn btn-success btn-lg">Show/hide saved packages & grinds</button> <!-- show/hide grinds -->    
+  </div>
+
+  <div class="row saved_packages_and_grinds">
+    <div class="col-md-6 col-xs-12">
       <div class="saved_packages_container">
        <div class="saved_packages clearfix">
          <% @teacher.packages.each do |p| %>
@@ -268,10 +350,67 @@
         <% end %>
        </div> <!-- end of saved_packages -->
       </div> <!-- end of saved_packages_container -->
-    </div> <!-- end of col-xs-12 -->
-  
+    </div> <!-- end of col-md-6 col-xs-12 -->
+
+    <div class="col-md-6 col-xs-12">
+      <div class="display_grind_container clearfix">
+        <% @teacher.grinds.each do |g| %>
+          <div class="display_saved_grinds saved_grinds clearfix">
+            <h4>Subject: <%= g.subject_name %></h4>
+            <%= form_for [current_teacher, g], class: 'form-horizontal' do |f| %>
+              <div class="form-group">
+                <label  class="col-sm-3 control-label">Location:</label>
+                <div class="col-sm-9">
+                  <% location = @teacher.locations.find(g.location_id) %>
+                  <span class="form-control disabled"><%= location.name %></span>
+                </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+              <div class="form-group">
+                <label  class="col-sm-3 control-label">Start time:</label>
+                <div class="col-sm-9">
+                  <span class="form-control"><%= g.start_date.strftime("%a %e %b %Y %H:%M%p") %></span>
+                </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+              <div class="form-group">
+                <label  class="col-sm-3 control-label">Capacity:</label>
+                <div class="col-sm-9">
+                  <span class="form-control disabled"><%= g.capacity %></span>
+                </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+              <div class="form-group">
+                <label  class="col-sm-3 control-label">Places left:</label>
+                <div class="col-sm-9">
+                  <span class="form-control disabled"><%= g.capacity - g.number_booked %></span>
+                </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+              <div class="form-group">
+                <label  class="col-sm-3 control-label">Places booked:</label>
+                <div class="col-sm-9 black">
+                  <%= f.number_field :number_booked, class: 'form-control black' %><br>
+                </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group --><br>
+              <div class="form-group">
+                <label  class="col-sm-3 control-label ">Update time:</label>
+                <div class="col-sm-9 black">
+                  <%= f.datetime_select :start_date, class: 'form-control black' %>
+                </div>  <!-- end of col-sm-10 -->
+              </div> <!-- end of form-group -->
+
+             <%= f.hidden_field :location_id, value: location.id %>
+              <div class="form-group">
+                <%= f.submit 'Update class', class: 'btn btn-success pull-left' %><br>
+                <%= link_to 'Delete entire class?', teacher_grind_path(current_teacher, g), data: { confirm: 'Are you sure?', role: 'button' }, class: 'btn btn-danger pull-right', method: :delete %>
+              </div>
+            <% end %>         
+          
+          </div> <!-- end of saved_grinds -->
+        <% end %> <!-- end of grinds loop -->
+      </div> <!-- end of display_grind_container -->
+    </div> <!-- end of col-md-6 col-xs-12 -->
     
+
   </div> <!-- end of row -->
   <hr>
+
   <%= render 'partials/teachers_stuff/invitation' %>
 </div> <!-- end of outer-container -->
