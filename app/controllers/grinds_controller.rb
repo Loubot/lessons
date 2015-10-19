@@ -15,7 +15,7 @@ class GrindsController < ApplicationController
     # require 'Geocoder'
     require 'will_paginate/array'
     search_subjects = params[:search_subjects].tr('+', ' ')    
-    @subjects = Subject.where('name ILIKE ?', "%#{ search_subjects }%")
+    @subjects = Subject.where('name LIKE ?', "%#{ search_subjects }%")
     p "all subjects #{ pp @subjects.inspect }"
     @subject = @subjects.first
 
@@ -47,7 +47,7 @@ class GrindsController < ApplicationController
 
       format.json{
 
-        @subject = Subject.where("LOWER(name) ILIKE ?", params['coords']["search_subjects"]).first
+        @subject = Subject.where("LOWER(name) LIKE ?", params['coords']["search_subjects"]).first
 
         @teachers = Teacher.includes(:grinds, :locations).where.not(grinds: { teacher_id: nil }) \
                                                         .where(grinds: { subject_id: @subject.id })
