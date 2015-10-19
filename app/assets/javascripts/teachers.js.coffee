@@ -436,8 +436,9 @@ teachersInfoReady = ->
       @.submit()
 
   $(document).on 'click', '.show_home_schooling_content', ->
-    console.log 'h'
-    $('.home_schooling_content').animate visibility: 'toggle', 1000
+    $('.home_schooling_content').slideToggle 'slow'
+  $(document).on 'click', '.show_location_schooling_content', ->
+    $('.location_schooling_content').slideToggle 'slow'
 
 #end of  teachers business page, add subject name to for before submitting
 

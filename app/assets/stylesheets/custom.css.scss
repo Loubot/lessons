@@ -245,8 +245,17 @@ hr{
   border: 0px !important;
 }
 
+.schooling_explanation{
+  background-color: #f5f5f5;
+  margin-bottom: 5px;
+}
+
 .home_schooling_content{
-  
+  display: none;
+}
+
+.location_schooling_content{
+  display: none;
 }
 
 .price_alert{
