@@ -10,6 +10,7 @@ module Lessons
   class Application < Rails::Application
     config.middleware.use Rack::Deflater
     config.action_mailer.default_url_options = { host: 'www.learnyourlesson.ie' }
+    config.assets.paths << "#{Rails.root}/app/assets/videos"
     #config.assets.paths << "#{Rails}/vendor/assets/fonts"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
