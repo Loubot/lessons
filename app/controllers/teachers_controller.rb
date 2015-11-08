@@ -6,10 +6,10 @@ class TeachersController < ApplicationController
 																					#[:show_teacher, :previous_lessons, :modals, :get_locations, :get_subjects, :get_locations_price, :check_home_event]
 	
 	include TeachersHelper
+	include GrindsHelper
 
 	
 	def show_teacher
-		redirect_to root_url and return if params[:id] == ""
 		@teacher = Teacher.includes(:events,:prices, :experiences,:subjects,:qualifications,:locations, :photos, :packages, :friendships).find(params[:id])
 
 		if !@teacher.is_active #only show active teachers
@@ -61,7 +61,8 @@ class TeachersController < ApplicationController
 		session[:teacher_id] = @teacher.id
 
 		pick_show_teacher_view(params[:id])		#teachers_helper teacher or student view
-
+	rescue 
+		render show_teacher_path(id: @teacher)
 		# fresh_when([current_teacher,flash])		
 	end
 
@@ -152,6 +153,7 @@ class TeachersController < ApplicationController
 	end
 
 	def your_business
+
 		@teacher = Teacher.includes(:locations, :prices, :subjects).find(params[:id])
 		@event = Event.new
 		@package = Package.new		
