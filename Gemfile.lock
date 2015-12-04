@@ -478,6 +478,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 4.2.1)
   mandrill-api (~> 1)
   mini_magick (~> 3.8.0)
+  net-ssh
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-linkedin-oauth2

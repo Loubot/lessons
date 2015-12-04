@@ -130,4 +130,6 @@ gem 'browser'
 
 gem 'delayed_job_active_record'
 
+gem 'net-ssh'
+
 gem 'tzinfo-data', '~> 1.2', platforms: [:mingw, :mswin]
