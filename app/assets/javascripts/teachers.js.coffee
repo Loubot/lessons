@@ -447,6 +447,25 @@ teachersInfoReady = ->
 
 #end of  teachers business page, add subject name to for before submitting
 
+#teacher edit page
+  $(document).on 'click', '.show_edit_teacher_info_content', ->
+    $('.edit_teacher_info_content').slideToggle 'slow'
+
+  $(document).on 'click', '.show_edit_teacher_subjects_content', ->
+    $('.edit_teacher_subjects_content').slideToggle 'slow'
+
+  $(document).on 'click', '.show_edit_teacher_photos_content', ->
+    $('.edit_teacher_photos_content').slideToggle 'slow'
+
+  $(document).on 'click', '.show_edit_teacher_experience_content', ->
+    $('.edit_teacher_experience_content').slideToggle 'slow'
+
+  $(document).on 'click', '.show_edit_teacher_bio_content', ->
+    $('.edit_teacher_bio_content').slideToggle 'slow'
+
+  $(document).on 'click', '.show_edit_teacher_payment_content', ->
+    $('.edit_teacher_payment_content').slideToggle 'slow'
+
 
 
 
