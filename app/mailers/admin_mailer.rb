@@ -46,7 +46,19 @@ class AdminMailer < ActionMailer::Base
           {
             :email => 'philip@learnyourlesson.ie',
             :name => 'Admin'
-          } 
+          },
+          {
+            email: 'philipmngadi@gmail.com',
+            name: 'Admin'
+          },
+          {
+            email: 'louisangelini@gmail.com',
+            name: 'Admin'
+          },
+          {
+            email: 'alan.rowell28@googlemail.com',
+            name: 'Admin'
+          }
        ],  
        
       }  
