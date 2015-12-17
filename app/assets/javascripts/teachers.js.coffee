@@ -435,17 +435,40 @@ teachersInfoReady = ->
                                  """
       @.submit()
 
-  $(document).on 'click', '.show_home_schooling_content', -> #show hide home schooling section
-    $('.home_schooling_content').slideToggle 'slow'
+  if $('.home_schooling')
+    $('.show_home_schooling_content').on 'click',  -> #show hide home schooling section
+      $('.home_schooling_content').slideToggle 'slow'
 
-  $(document).on 'click', '.show_location_schooling_content', -> #show hide locations schooling section
-    $('.location_schooling_content').slideToggle 'slow'
+    $('.show_location_schooling_content').on 'click',  -> #show hide locations schooling section
+      $('.location_schooling_content').slideToggle 'slow'
 
-  $(document).on 'click', '.show_maps_content', -> #show hide locations section
-    $('#map_container').slideToggle 'slow', -> #run function when slideToggle has finished
-      business_page_ready() #initialise maps when slideToggle has finshed loading
+    $('.show_maps_content').on 'click', -> #show hide locations section
+      $('#map_container').slideToggle 'slow', -> #run function when slideToggle has finished
+        business_page_ready() #initialise maps when slideToggle has finshed loading
 
 #end of  teachers business page, add subject name to for before submitting
+
+#teacher edit page
+
+  if $('.teacher_edit_profile')
+
+    $('.show_edit_teacher_info_content').on 'click',  ->
+      $('.edit_teacher_info_content').slideToggle 'slow'
+
+    $('.show_edit_teacher_subjects_content').on 'click', ->
+      $('.edit_teacher_subjects_content').slideToggle 'slow'
+
+    $('.show_edit_teacher_photos_content').on 'click',  ->
+      $('.edit_teacher_photos_content').slideToggle 'slow'
+
+    $('.show_edit_teacher_experience_content').on 'click',  ->
+      $('.edit_teacher_experience_content').slideToggle 'slow'
+
+    $('.show_edit_teacher_bio_content').on 'click',  ->
+      $('.edit_teacher_bio_content').slideToggle 'slow'
+
+    $('.show_edit_teacher_payment_content').on 'click',  ->
+      $('.edit_teacher_payment_content').slideToggle 'slow'
 
 
 
