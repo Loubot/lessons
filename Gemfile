@@ -124,8 +124,6 @@ gem 'actionpack-action_caching'
 
 gem 'actionpack-page_caching'
 
-gem 'rack-zippy'
-
 gem 'browser'
 
 gem 'delayed_job_active_record'
