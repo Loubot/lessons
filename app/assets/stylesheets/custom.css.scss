@@ -1063,6 +1063,15 @@ form .glyphicon {
 
 //welcome page*/
 
+.welcome_video_link{
+  color: red;
+  font-size: 120%;
+}
+
+.welcome_video_link a{
+  color: #548235;
+}
+
 #main_subject_search{
   color: #000;
 }
@@ -1831,24 +1840,28 @@ ul.share-buttons li{
 }
 
 #feedback { 
-  height: 104px; 
-  width: 104px; 
+  // height: 104px; 
+  // width: 104px; 
   position: fixed; 
-  top: 40%; 
+  top: 0%;
+  left: 45%;
   z-index: 999;
-  transform: rotate(-90deg);
-  -webkit-transform: rotate(-90deg); 
-  -moz-transform: rotate(-90deg); 
-  -o-transform: rotate(-90deg); 
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  // transform: rotate(-90deg);
+  // -webkit-transform: rotate(-90deg); 
+  // -moz-transform: rotate(-90deg); 
+  // -o-transform: rotate(-90deg); 
+  // filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-#feedback a { 
+#feedback a {
+
+  width: 104px;
+  height: 50px;
   display: block; 
   background: #f00; 
-  height: 30px; 
   width: 100px; 
-  padding: 8px 16px;
+  // padding: 8px 16px;
+  padding: 8px 20px 8px 10px;
   color: #fff; 
   font-family: Arial, sans-serif; 
   font-size: 17px; 
@@ -1862,3 +1875,4 @@ ul.share-buttons li{
 #feedback a:hover { 
   background: #06c; 
 }
+
