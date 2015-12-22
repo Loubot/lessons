@@ -17,6 +17,10 @@
     
   </div> <!-- end of welcome_page_form__header -->
 
+  <div class="welcome_video_link">
+    We've made a cool introducrion video for you, <a href="" data-toggle="modal" data-target="#myModal">click here</a> to watch it
+  </div> <!-- end of welcome_video_link --><br>
+
   
   <%= form_tag display_subjects_path, method: 'get', id: 'main_subject_search', :utf8_enforcer_tag => false, class: 'form-inline' do %>
     <div class="form-group">
@@ -107,12 +111,16 @@
 </div> <!-- end of container-fluid -->
 
 
-<div class="row">    
-  <div class="col-md-6 col-centered">
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/MQbZ_I8562k" frameborder="0" allowfullscreen></iframe>
-    </div> <!-- end of embed-responsive embed-responsive-4by3 -->
-  </div>   <!-- end of col-md-6 col-centered --> 
-</div> <!-- end of row -->
-
-
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/MQbZ_I8562k" frameborder="0" allowfullscreen></iframe>
+        <div> <!-- end of modal-body -->
+      
+    </div>
+  </div>
+</div>
