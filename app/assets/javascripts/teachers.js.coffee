@@ -212,6 +212,18 @@ teachersInfoReady = ->
 
     $('.stock_photo_container').mouseleave ->
       $(@).find('.welcome_subject_image').animate opacity: 0, 50
+
+    $('.welcome_fotorama').fotorama
+      width: 333
+      transition: "crossfade"
+      loop: true
+      autoplay: true
+      nav: false
+      allowfullscreen: true
+      height: 333
+      arrows: true     
+      fit: 'cover'
+      thumbfit: 'cover'
 # //////////end of welcome page
 
 #////////// teachers/form photo partial enable dismissable popover
