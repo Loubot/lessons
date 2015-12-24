@@ -291,7 +291,6 @@ GEM
     rack-pratchett (0.1.1)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rack-zippy (3.0.1)
     rails (4.2.4)
       actionmailer (= 4.2.4)
       actionpack (= 4.2.4)
@@ -487,7 +486,6 @@ DEPENDENCIES
   pg (~> 0.17)
   pp-adaptive (~> 1.0.0)
   rack-pratchett
-  rack-zippy
   rails (~> 4.2)
   rails_12factor (~> 0.0)
   rmagick (~> 2.13.3)
