@@ -521,19 +521,19 @@ small.white{
 }
 
 .main_page_search_container{
-  color: #000;
-  text-align: center;
-  // margin-bottom: 50px;
-  // margin-bottom: 20px;
-  // margin-top: -22px;
-  height: 350px;  
+  // color: #000;
+  // text-align: center;
+  // // margin-bottom: 50px;
+  // // margin-bottom: 20px;
+  // // margin-top: -22px;
+  // height: 350px;  
   
-  -moz-background-size: 100% 100%;
-  -webkit-background-size: 100% 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  position: relative;
-  width: 100%;;
+  // -moz-background-size: 100% 100%;
+  // -webkit-background-size: 100% 100%;
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // position: relative;
+  // width: 100%;;
   // left: calc(-50vw + 50%);
 }
 .search_page_results{
@@ -1065,6 +1065,7 @@ form .glyphicon {
 
 .welcome_fotorama{
   border: none !important;
+  margin: auto;
 }
 
 .welcome_video_link{
