@@ -1063,6 +1063,11 @@ form .glyphicon {
 
 //welcome page*/
 
+.full_height{
+  min-height: 100%;
+  margin: 0 50px;
+}
+
 .welcome_fotorama{
   border: none !important;
   margin: auto;
@@ -1073,8 +1078,28 @@ form .glyphicon {
   font-size: 120%;
 }
 
+.main_page_search_container{
+  font-size: x-large;
+  // color: #000;
+  // text-align: center;
+  // // margin-bottom: 50px;
+  // // margin-bottom: 20px;
+  // // margin-top: -22px;
+  // height: 350px;  
+  
+  // -moz-background-size: 100% 100%;
+  // -webkit-background-size: 100% 100%;
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // position: relative;
+  // width: 100%;;
+  // left: calc(-50vw + 50%);
+}
+
 .welcome_how_it_works{
-  background-color: #e2f0d9;
+  font-size: x-large;
+  background-color: #d7eacb;
+  margin: 0 50px;
 }
 
 .welcome_how_it_works_header{
