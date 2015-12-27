@@ -42,18 +42,46 @@
 
 <div class="container-fluid welcome_how_it_works text-center full_height hidden-xs">
   <h1 class="welcome_how_it_works_header">How it works</h1>
-  <strong>From finding the perfect teacher to managing bookings or full payments, and scheduling lessons - we take care of all the details, so you can focus on learning.</strong> <br>
-  <div class="row text-center">
-    
-    <div class="welcome_fotorama col-xs-12">
-      <%= image_tag 'how_it_works_1.jpg' %>
-      <%= image_tag 'how_it_works_2.jpg' %>
-      <%= image_tag 'how_it_works_3.jpg' %>
-      <%= image_tag 'how_it_works_4.jpg' %>
-    </div>
-    
-  </div>
+  <strong>From finding the perfect teacher to managing bookings or full payments, and scheduling lessons - we take care of all the details, so you can focus on learning. <%= link_to 'Learn more', 'how-it-works' %></strong> <br>
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'search_for_a_teacher.jpg', class: 'img-responsive' %>
+    <h3 class="welcome_how_it_works_header">Search for your teacher</h3>
+    Compare teachers based on the criteria that matter to to you -from age and location to experience and price.
+  </div> <!-- end of col-xs-4 -->
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'schedule_your_lessons.jpg', class: 'img-responsive' %>
+    <h3 class="welcome_how_it_works_header">Schedule your lessons</h3>
+    When you've found your preferred teacher, schedule your lessons online using the teacher's real-time availability and pay a small booking
+    deposit to confirm the lesson.
+  </div> <!-- end of col-xs-4 -->
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'connect_with_your_teacher.jpg', class: 'img-responsive' %>
+    <h3 class="welcome_how_it_works_header">Connect with your teacher</h3>
+    On the scheduled date and at the agreed venue - you can meet your teacher and learn your lesson. Our platform also facilitates online learning using your webcam.
+  </div> <!-- end of col-xs-4 -->
 </div> <!-- end of welcome_how_it_works -->
+
+<div class="container-fluid welcome_reviews text-center full_height">
+  <h1 class="welcome_how_it_works_header mg_bottom">Lesson review from other students</h1>
+  <p class="mg_bottom">Students in Ireland are using LearnYourLesson to connect with teachers and take music lessons. Here is what some students in the past have had to say about our platform.</p> <br>
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'review_1.jpg', class: 'img-responsive' %>
+  </div>
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'review_2.jpg', class: 'img-responsive' %>
+  </div>
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'review_3.jpg', class: 'img-responsive' %>
+  </div>
+
+
+</div> <!-- end of welcome_reviews -->
+
+
 
 <div class="container-fluid hidden-xs">
   <!-- <div class="browse_topics">
