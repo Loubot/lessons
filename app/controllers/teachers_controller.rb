@@ -209,6 +209,10 @@ class TeachersController < ApplicationController
 		redirect_to :back
 	end
 
+	def video
+
+	end
+
 	private
 		def check_is_teacher
 			if current_teacher.is_teacher != true

@@ -482,3 +482,42 @@ getCounties = () ->
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']
+
+initFlashPublish = ->
+  flashVars =
+    'src' : 'rtmp://46.101.155.142:1935/live_chat?publish=j'
+    'controls' : 'true'
+
+  params =
+    'quality' : 'high'
+    'bgcolor' : '#000000'
+    'allowFullScreen' : 'true'
+    'wmode' : 'transparent'
+    'allowScriptAccess' : 'always'
+    'src' : 'rtmp://46.101.155.142:1935/live_chat?publish=j'
+
+  attributes =
+    'id' : 'practice_audition_feed'
+    'name' : 'PracticeAudition'
+
+  swfobject.embedSWF('VideoIO.swf', 'teachers_publish', '100%', '100%', '9', 'false', flashVars, params, attributes)
+
+initFlashPLay = ->
+  flashVars =
+    'src' : 'rtmp://46.101.155.142:1935/live_chat?play=l'
+    'controls' : 'true'
+
+  params =
+    'quality' : 'high'
+    'bgcolor' : '#000000'
+    'allowFullScreen' : 'true'
+    'wmode' : 'transparent'
+    'allowScriptAccess' : 'always'
+    'src' : 'rtmp://46.101.155.142:1935/live_chat?play=l'
+
+  attributes =
+    'id' : 'practice_audition_feed1'
+    'name' : 'PracticeAudition'
+
+  swfobject.embedSWF('VideoIO.swf', 'students_play', '100%', '100%', '9', 'false', flashVars, params, attributes)
+
