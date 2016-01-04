@@ -10,7 +10,9 @@
 <% end %>
 <% content_for :title, "The place to connect with local teachers and learn" %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
-<%= link_to 'video', video_teacher_path(id: current_teacher.id) %>
+<% if teacher_signed_in? %>
+  <%= link_to 'video', video_teacher_path(id: current_teacher.id) %>
+<% end %>
 <div  class="container-fluid main_page_search_container home_welcome">
   <div class="welcome_page_form__header">
     <h1>Your place to connect with local teachers <br><small>on guitar, piano, drums or anything else musical</small></h1>

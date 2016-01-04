@@ -1,3 +1,4 @@
+<embed src="<%= asset_path('VideIO.swf') %>">
 <div class="container-fluid">
   <div class="col-xs-6">
     <div id="teachers_publish"></div>
@@ -9,3 +10,51 @@
   <button class="btn btn-default" onclick="initFlashPublish()">Publish</button>
   <button class="btn btn-default" onclick="initFlashPLay()">Play</button>
 </div>
+
+<%= javascript_tag do %>
+
+  var initFlashPLay, initFlashPublish;
+
+  initFlashPublish = function() {
+    var attributes, flashVars, params;
+    flashVars = {
+      'src': 'rtmp://46.101.155.142:1935/live_chat?publish=j',
+      'controls': 'true'
+    };
+    params = {
+      'quality': 'high',
+      'bgcolor': '#000000',
+      'allowFullScreen': 'true',
+      'wmode': 'transparent',
+      'allowScriptAccess': 'always',
+      'src': 'rtmp://46.101.155.142:1935/live_chat?publish=j'
+    };
+    attributes = {
+      'id': 'practice_audition_feed',
+      'name': 'PracticeAudition'
+    };
+    return swfobject.embedSWF('VideoIO.swf', 'teachers_publish', '100%', '100%', '9', 'false', flashVars, params, attributes);
+  };
+
+  initFlashPLay = function() {
+    var attributes, flashVars, params;
+    flashVars = {
+      'src': 'rtmp://46.101.155.142:1935/live_chat?play=l',
+      'controls': 'true'
+    };
+    params = {
+      'quality': 'high',
+      'bgcolor': '#000000',
+      'allowFullScreen': 'true',
+      'wmode': 'transparent',
+      'allowScriptAccess': 'always',
+      'src': 'rtmp://46.101.155.142:1935/live_chat?play=l'
+    };
+    attributes = {
+      'id': 'practice_audition_feed1',
+      'name': 'PracticeAudition'
+    };
+    return swfobject.embedSWF('VideoIO.swf', 'students_play', '100%', '100%', '9', 'false', flashVars, params, attributes);
+  };
+<% end %>
+
