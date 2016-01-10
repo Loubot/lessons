@@ -14,6 +14,24 @@ hr{
   border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 
+.full_height{
+  min-height: 100%;
+  margin: 0 50px;
+}
+
+.full_width{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mg_bottom{
+  margin-bottom: 25px;
+}
+
+.mg_left{
+  margin-left: 5%;
+}
+
 .add_col_padding{
   padding: 0 15px;
 }
@@ -521,19 +539,19 @@ small.white{
 }
 
 .main_page_search_container{
-  color: #000;
-  text-align: center;
-  // margin-bottom: 50px;
-  // margin-bottom: 20px;
-  // margin-top: -22px;
-  height: 350px;  
+  // color: #000;
+  // text-align: center;
+  // // margin-bottom: 50px;
+  // // margin-bottom: 20px;
+  // // margin-top: -22px;
+  // height: 350px;  
   
-  -moz-background-size: 100% 100%;
-  -webkit-background-size: 100% 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  position: relative;
-  width: 100%;;
+  // -moz-background-size: 100% 100%;
+  // -webkit-background-size: 100% 100%;
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // position: relative;
+  // width: 100%;;
   // left: calc(-50vw + 50%);
 }
 .search_page_results{
@@ -1063,9 +1081,71 @@ form .glyphicon {
 
 //welcome page*/
 
+.welcome_fotorama{
+  border: none !important;
+  padding-bottom: 20px;
+  margin: auto;
+}
+
 .welcome_video_link{
   color: red;
   font-size: 120%;
+}
+
+.main_page_search_container{
+  font-size: x-large;
+  // color: #000;
+  // text-align: center;
+  // // margin-bottom: 50px;
+  // // margin-bottom: 20px;
+  // // margin-top: -22px;
+  // height: 350px;  
+  
+  // -moz-background-size: 100% 100%;
+  // -webkit-background-size: 100% 100%;
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // position: relative;
+  // width: 100%;;
+  // left: calc(-50vw + 50%);
+}
+
+.welcome_how_it_works{
+  font-size: x-large;
+  background-color: #d7eacb;
+  margin: 0 50px;
+}
+
+.welcome_how_it_works_header{
+  color: #548235;
+}
+
+.how_it_works_cols{
+  padding: 0 10px;
+}
+
+.welcome_reviews{
+  font-size: x-large;
+  margin: 0 50px;
+}
+
+.are_you_a_teacher{
+  font-size: x-large;
+  background-color: #fff2cc;
+  margin: 0 50px;
+}
+
+.are_you_a_teacher_header{
+  font-size: 48px;
+  color: #548235;
+}
+
+.are_you_a_teacher_mini_header{
+  color: #548235;
+}
+
+.are_you_a_teacher_list_image{
+  margin: 0 auto;
 }
 
 .welcome_video_link a{

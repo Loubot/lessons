@@ -11,14 +11,14 @@
 <% content_for :title, "The place to connect with local teachers and learn" %>
 <% content_for :description, "LearnYourLesson lets you connect with local teachers in your area for lessons on music, photography, languages or anything else." %>
 
-<div  class="container-fluid main_page_search_container home_welcome">
+<div  class="container-fluid main_page_search_container full_height text-center">
   <div class="welcome_page_form__header">
     <h1>Your place to connect with local teachers <br><small>on guitar, piano, drums or anything else musical</small></h1>
     
   </div> <!-- end of welcome_page_form__header -->
 
   <div class="welcome_video_link">
-    We've made a cool introducrion video for you, <a href="" data-toggle="modal" data-target="#myModal">click here</a> to watch it
+    We've made a cool introduction video for you, <a href="" data-toggle="modal" data-target="#myModal">click here</a> to watch it
   </div> <!-- end of welcome_video_link --><br>
 
   
@@ -40,6 +40,84 @@
   </div> <!-- end of welcome_prompt_container -->
 </div> <!-- end of container-fluid main_page_search -->
 
+<div class="row welcome_how_it_works text-center full_width full_height hidden-xs">
+  <h1 class="welcome_how_it_works_header">How it works</h1>
+  <strong>From finding the perfect teacher to managing bookings or full payments, and scheduling lessons - we take care of all the details, so you can focus on learning. <%= link_to 'Learn more', 'how-it-works' %></strong> <br>
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'search_for_a_teacher.jpg', class: 'img-responsive' %>
+    <h3 class="welcome_how_it_works_header">Search for your teacher</h3>
+    Compare teachers based on the criteria that matter to to you -from age and location to experience and price.
+  </div> <!-- end of col-xs-4 -->
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'schedule_your_lessons.jpg', class: 'img-responsive' %>
+    <h3 class="welcome_how_it_works_header">Schedule your lessons</h3>
+    When you've found your preferred teacher, schedule your lessons online using the teacher's real-time availability and pay a small booking
+    deposit to confirm the lesson.
+  </div> <!-- end of col-xs-4 -->
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'connect_with_your_teacher.jpg', class: 'img-responsive' %>
+    <h3 class="welcome_how_it_works_header">Connect with your teacher</h3>
+    On the scheduled date and at the agreed venue - you can meet your teacher and learn your lesson. Our platform also facilitates online learning using your webcam.
+  </div> <!-- end of col-xs-4 -->
+</div> <!-- end of welcome_how_it_works -->
+
+<div class="container-fluid welcome_reviews text-center full_height">
+  <h1 class="welcome_how_it_works_header mg_bottom">Lesson reviews from other students</h1>
+  <p class="mg_bottom"><strong>Students in Ireland are using LearnYourLesson to connect with teachers and take music lessons. Here is what some students in the past have had to say about our platform. <%= link_to 'Learn more', 'how-it-works' %></strong></p> <br>
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'review_1.jpg', class: 'img-responsive' %>
+  </div>
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'review_2.jpg', class: 'img-responsive' %>
+  </div>
+
+  <div class="col-xs-4 how_it_works_cols text-center">
+    <%= image_tag 'review_3.jpg', class: 'img-responsive' %>
+  </div>
+
+
+</div> <!-- end of welcome_reviews -->
+
+<div class="row full_width full_height are_you_a_teacher text-center hidden-xs">
+  <h1 class="are_you_a_teacher_header mg_bottom"><strong>Are you a teacher?</strong></h1>
+  <p>Learn your lesson can help you grow the number of students you teach - therefor increasing your income from lessons, whilst helping you manage your teaching schedules and incoming finances. </p>
+  <%= image_tag 'are_you_a_teacher_list.jpg', class: 'img-responsive are_you_a_teacher_list_image' %>
+  <p>As a teacher you know that teachers face the battle of finding new students. Now, did you know that everyday students also face the battle of finding teachers?</p><br><br>
+  <p>Well, call us the middle man. We have built a platform that students rely on to find teachers and we help teachers get more students without having to invest time and money on marketing. With a free profile on LearnYourLesson.ie, your skills will be visible to the students who search our site every day for teachers like you. And with mobile optimisation and online lesson options, you'll extend your reach even further.</p>
+</div> <!-- end of are_you_a_teacher -->
+
+<div class="row full_width full_height are_you_a_teacher hidden-xs">
+  <div class="mg_bottom mg_left">
+    <h3 class="are_you_a_teacher_mini_header "><strong>Free Profile</strong></h3>
+    <p>Extend your reach to thousands of students actively searching for teachers like you</p>
+  </div> <!-- end of are_you_a_teacher_container -->
+
+  <div class="mg_bottom mg_left">
+    <h3 class="are_you_a_teacher_mini_header "><strong>National Reach</strong></h3>
+    <p>Use our reach to connect with students anywhere in Ireland through live, online lessons.</p>
+  </div> <!-- end of are_you_a_teacher_container -->
+
+  <div class="mg_bottom mg_left">
+    <h3 class="are_you_a_teacher_mini_header "><strong>Risk-Free</strong></h3>
+    <p>Get started with no upfront costs. You get your first month free and then it's just €5 a month to keep your account online.</p>
+  </div> <!-- end of are_you_a_teacher_container -->
+
+  <div class="mg_bottom mg_left">
+    <h3 class="are_you_a_teacher_mini_header "><strong>Manage Your Business</strong></h3>
+    <p>With LearnYourLesson, you can manage your lessons, earnings, and more all in one place. With our platform you can reset the balance of power: more teaching, less administration. You can personalise your prices, teaching instruments, location and lesson duration.</p>
+  </div> <!-- end of are_you_a_teacher_container -->
+
+  <div class="text-center">
+    <%= link_to "Become a teacher!", teach_path, class: 'btn btn-info btn-lg' %>
+  </div>
+
+</div> <!-- end of are_you_a_teacher -->
+
+
+
 <div class="container-fluid hidden-xs">
   <!-- <div class="browse_topics">
 
@@ -51,7 +129,8 @@
       <li class="browse_option" id="academic">Academic Grinds</li>
     </ul>
   </div>  end of browse_topics --> 
-  <div class="row fav_subjects_container">
+  
+  <!-- <div class="row fav_subjects_container">
     <div class="container-fluid stock_photos_container hidden-xs">    
       <div class="center-me">
         <div class="add_padding col-md-4 col-sm-4" >
@@ -59,26 +138,26 @@
               <%= link_to browse_categories_path, class: "stock_photo_container" do %>
                 <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search all subjects on www.learnyourlesson.ie' %>
               <% end %>
-            </div> <!-- end of stock_photo_container -->      
-          </div> <!-- end of add_padding -->
+            </div>  end of stock_photo_container       
+          </div>  end of add_padding 
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="guitar">
             <%= link_to display_subjects_path(search_subjects: 'guitar', search_position: ''), class: "stock_photo_container" do %>
               <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for guitar teachers near you' %>
             <% end %>
-          </div> <!-- end of stock_photo_container -->      
-        </div> <!-- end of add_padding -->
+          </div>  end of stock_photo_container       
+        </div>  end of add_padding 
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="drums">
             <%= link_to display_subjects_path(search_subjects: 'drums', search_position: ''), class: "stock_photo_container" do %>
               <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for drum teachers near you' %>
             <% end %>
-          </div> <!-- end of stock_photo_container -->      
-        </div> <!-- end of add_padding -->
+          </div>  end of stock_photo_container       
+        </div>  end of add_padding 
         
         
-      </div> <!-- end of center-me -->  
-    </div> <!-- end of stock_photos_container -->
+      </div>  end of center-me   
+    </div>  end of stock_photos_container 
     <div class="container-fluid stock_photos_container hidden-xs">
 
       <div class="center-me">
@@ -87,27 +166,27 @@
             <%= link_to display_subjects_path(search_subjects: 'violin', search_position: ''), class: "stock_photo_container" do %>
               <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for violin teachers near you' %>
             <% end %>
-          </div> <!-- end of stock_photo_container -->      
-        </div> <!-- end of add_padding -->
+          </div>  end of stock_photo_container       
+        </div>  end of add_padding 
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="electric-guitar">
             <%= link_to display_subjects_path(search_subjects: 'electric guitar', search_position: ''), class: "stock_photo_container" do %>
               <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for electric-guitar teachers near you' %>
             <% end %>
-          </div> <!-- end of stock_photo_container -->      
-        </div> <!-- end of add_padding -->
+          </div>  end of stock_photo_container       
+        </div>  end of add_padding 
         <div class="add_padding col-md-4 col-sm-4" >
           <div  class="col-md-12 stock_photo_container" id="piano">
             <%= link_to display_subjects_path(search_subjects: 'piano', search_position: ''), class: "stock_photo_container" do %>
               <%= image_tag 'view-more.png', class: 'welcome_subject_image img-responsive', alt: 'Search for piano teachers near you' %>
             <% end %>
-          </div> <!-- end of stock_photo_container -->      
-        </div> <!-- end of add_padding -->
+          </div>  end of stock_photo_container       
+        </div>  end of add_padding 
         
-      </div> <!-- end of center-me -->  
-    </div> <!-- end of stock_photos_container -->     
+      </div>  end of center-me   
+    </div>  end of stock_photos_container      
 
-  </div> <!-- end of fav_subjects_container -->
+  </div>  end of fav_subjects_container --> 
 </div> <!-- end of container-fluid -->
 
 
