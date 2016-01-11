@@ -24,6 +24,9 @@
       <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
         <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
         <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
+        <div class="row center-text">
+          <%= link_to 'Contact teacher', 'www.google.ie', class: 'btn btn-info btn-lg this_it' %>
+        </div>
       </div> <!-- end of col-xs-12 profile_pic_container -->   
       <table class="table table-bordered table-striped table-hover teacher_profile_table col-xs-12">
         
