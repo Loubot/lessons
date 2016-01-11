@@ -10,8 +10,8 @@
 	<% end %> <%# end of teacher.paid_up %>
 	
 
-	<div class="container-fluid teacher_edit_profile edit_profile_content">
-		<div class="schooling_explanation text-center">
+	<div class="container-fluid teacher_edit_profile mg_bottom edit_profile_content">
+		<div class="schooling_explanation row text-center">
 	    <h4>Edit your personal info</h4>
 	    
 	      <button class="btn btn-lg btn-success show_edit_teacher_info_content">Show/Hide</button>
@@ -64,8 +64,8 @@
 	
 
 	
-		<div class="container-fluid">
-			<div class="schooling_explanation text-center">
+		<div class="container-fluid mg_bottom">
+			<div class="schooling_explanation row text-center">
 	    	<h4>Edit your subjects</h4>
 	    
 	      <button class="btn btn-lg btn-success show_edit_teacher_subjects_content">Show/Hide</button>
@@ -95,8 +95,8 @@
 
 	<!-- start of profile picture panel -->
 
-		<div class="container-fluid">
-			<div class="schooling_explanation text-center">
+		<div class="container-fluid mg_bottom">
+			<div class="schooling_explanation row text-center">
 	    	<h4>Edit your photos</h4>
 	    
 	      <button class="btn btn-lg btn-success show_edit_teacher_photos_content">Show/Hide</button>
@@ -127,8 +127,8 @@
 	<!-- end of profile picture panel -->
 
 	
-		<div class="container-fluid">
-			<div class="schooling_explanation text-center">
+		<div class="container-fluid mg_bottom">
+			<div class="schooling_explanation row text-center">
 	    	<h4>Edit your experience</h4>
 	    
 	      <button class="btn btn-lg btn-success show_edit_teacher_experience_content">Show/Hide</button>
@@ -155,8 +155,8 @@
 	
 
 	
-		<div class="container-fluid">
-			<div class="schooling_explanation text-center">
+		<div class="container-fluid mg_bottom">
+			<div class="schooling_explanation row text-center">
 	    	<h4>Tell people about you</h4>
 	    
 	      <button class="btn btn-lg btn-success show_edit_teacher_bio_content">Show/Hide</button>
@@ -174,7 +174,7 @@
 						<div class="panel-body">
 							<ul class="list-group clearfix">
 								<% if !@teacher.overview.empty? %>
-									<li class="list-group-item"><%= @teacher.overview %></li>
+									<li class="list-group-item"><%= simple_format(@teacher.overview) %></li>
 								<% else %>
 									<li class="list-group-item">Please fill in your overview</li>
 								<% end %>							
@@ -191,8 +191,8 @@
 	
 
 	
-		<div class="container-fluid">
-			<div class="schooling_explanation text-center">
+		<div class="container-fluid mg_bottom">
+			<div class="schooling_explanation row text-center">
 	    	<h4>Payment options</h4>
 	    
 	      <button class="btn btn-lg btn-success show_edit_teacher_payment_content">Show/Hide</button>
@@ -230,7 +230,7 @@
 		</div> <!-- end of container-fluid -->
 	
 
-	<div class="container-fluid">
+	<div class="container-fluid mg_bottom">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">

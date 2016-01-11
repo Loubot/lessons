@@ -56,6 +56,7 @@ teachersInfoReady = ->
         # console.log 'File uploaded successfully'
         location.reload()
       $('#process_queue').on 'click', ->
+        alert 'b'
         dropzone.processQueue()
 
       

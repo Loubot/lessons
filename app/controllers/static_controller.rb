@@ -79,7 +79,8 @@ class StaticController < ApplicationController
 	end
 
 	def subject_search
-		@subjects = params[:search] == '' ? [] : Subject.where('name LIKE ?', "%#{params[:search]}%")
+		@subjects = params[:search] == '' ? [] : Subject.where('name ILIKE ?', "%#{params[:search]}%")
+		p "Subjects #{ @subjects }" 
 		render json: @subjects
 		fresh_when [params[:search_subjects], params[:position]]
 	end
