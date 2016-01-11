@@ -24,6 +24,11 @@ hr{
   padding: 0 !important;
 }
 
+.stick_botom{
+  bottom: 0;
+  position: absolute;
+}
+
 .mg_bottom{
   margin-bottom: 25px;
 }
@@ -445,6 +450,8 @@ small.white{
 }
 
 //display_subject _subject_search page*/
+
+
 #search_map{
   height: 250px;
   width: 250px;

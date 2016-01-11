@@ -26,6 +26,9 @@
 					 <%= pluralize(teacher.reviews.count, 'review') %>
 				</div>
 			<% end %>
+			<div class="row">
+				<%= link_to 'Show teacher', show_teacher_path(id: teacher.id, subject_id: @subject.id), class: 'btn btn-info btn-lg stick_botom' %>
+			</div> <!-- end of pull-right -->
 		</div> <!-- end of search_restuls_right -->
 	<% end %>
 </div> <!-- end of row -->
