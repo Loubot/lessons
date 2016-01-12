@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: subjects
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  category_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class SubjectsController < ApplicationController
 
 	before_action :authenticate_teacher!

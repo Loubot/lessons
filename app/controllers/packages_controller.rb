@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: packages
+#
+#  id            :integer          not null, primary key
+#  subject_name  :string           default("")
+#  teacher_id    :integer
+#  subject_id    :integer
+#  price         :decimal(, )      default(0.0)
+#  no_of_lessons :integer          default(0)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  duration      :integer          default(0)
+#
+
 class PackagesController < ApplicationController
   before_action :authenticate_teacher!
 

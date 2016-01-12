@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class CategoriesController < ApplicationController
 	before_action :authenticate_teacher!
 	before_action :is_admin?

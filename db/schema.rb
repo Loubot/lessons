@@ -23,13 +23,20 @@ ActiveRecord::Schema.define(version: 20160111225334) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.integer  "teacher"
-    t.integer  "student"
+    t.integer  "teacher_id"
+    t.integer  "student_id"
+    t.string   "teacher_email"
     t.string   "student_email"
+    t.string   "teacher_name"
+    t.string   "student_name"
     t.text     "message"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "conversations", ["student_email"], name: "index_conversations_on_student_email", using: :btree
+  add_index "conversations", ["student_id"], name: "index_conversations_on_student_id", using: :btree
+  add_index "conversations", ["teacher_id"], name: "index_conversations_on_teacher_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false

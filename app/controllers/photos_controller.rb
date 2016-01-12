@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: photos
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  imageable_id   :integer
+#  imageable_type :string
+#  created_at     :datetime
+#  updated_at     :datetime
+#  avatar         :string
+#
+
 class PhotosController < ApplicationController
 	include PhotosHelper
 
