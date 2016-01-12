@@ -20,11 +20,6 @@ hr{
   margin: 0 50px;
 }
 
-.this_it{
-  margin-top: 85%;
-  right: 0px;
-}
-
 .full_width{
   margin: 0 !important;
   padding: 0 !important;
@@ -675,6 +670,12 @@ small.white{
 //end of show_teacher page*/
 
 // teachers/show_teacher_to_user*/
+.contact_teacher{
+  position: absolute;
+  bottom: 0px;
+  left: 30%;
+}
+
 .btn_book_now{
   color: white;
   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5cb85c', endColorstr='#398439');
