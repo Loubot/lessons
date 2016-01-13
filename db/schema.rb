@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111225334) do
+ActiveRecord::Schema.define(version: 20160113214504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20160111225334) do
     t.string   "student_email"
     t.string   "teacher_name"
     t.string   "student_name"
-    t.text     "message"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -140,6 +139,15 @@ ActiveRecord::Schema.define(version: 20160111225334) do
   end
 
   add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "message"
+    t.integer  "conversation_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
 
   create_table "openings", force: :cascade do |t|
     t.datetime "mon_open"

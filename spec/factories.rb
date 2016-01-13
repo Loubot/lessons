@@ -1,4 +1,8 @@
-FactoryGirl.define do  factory :conversation do
+FactoryGirl.define do  factory :message do
+    message "MyText"
+conversation_id 1
+  end
+  factory :conversation do
     teacher 1
 student 1
 student_email "MyString"
