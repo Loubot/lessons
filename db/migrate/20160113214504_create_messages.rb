@@ -3,6 +3,7 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.text :message
       t.integer :conversation_id
+      t.text :random
 
       t.timestamps null: false
     end

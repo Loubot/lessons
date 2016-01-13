@@ -20,7 +20,7 @@
             </div> <!-- end of col-xs-6 -->
             <div class="col-xs-12">
               <div class="form-group">
-                <%= f.text_area 'message', placeholder: 'Your message(required)', class: 'form-control' %>
+                <%= text_area_tag 'conversation[message]', nil, placeholder: 'Your message(required)', class: 'form-control' %>
               </div>
             </div> <!-- end of col-xs-12 -->
             <%# hidden_fields %>

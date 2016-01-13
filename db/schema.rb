@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20160113214504) do
   create_table "messages", force: :cascade do |t|
     t.text     "message"
     t.integer  "conversation_id"
+    t.text     "random"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
