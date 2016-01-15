@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :conversations, only: [:create, :show] 
+  resources :messages, only: [:create] 
 
   get         '/show-teacher'           =>  'teachers#show_teacher'  
   get         '/teacher-subject-search' =>  'teachers#teacher_subject_search'

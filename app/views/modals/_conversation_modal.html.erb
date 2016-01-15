@@ -26,6 +26,7 @@
             <%# hidden_fields %>
             <%= f.hidden_field :teacher_email, value: @teacher.email %>
             <%= f.hidden_field :teacher_id, value: @teacher.id %>
+            <%= f.hidden_field :teacher_name, value: @teacher.full_name %>
 
 
             <%= f.submit 'Send message', class: 'btn btn-info center-block' %>

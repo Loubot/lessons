@@ -15,6 +15,11 @@ hr{
 }
 // bla
 
+.center_div{
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
 .full_height{
   min-height: 100%;
   margin: 0 50px;
@@ -971,6 +976,14 @@ form .glyphicon {
 
 // end of static/learn page. User registration*/
 
+// conversation page
+
+.message_heading{
+  background-color: #9d9d9d;
+}
+
+// end of conversation page
+
 //static how it works page
 .how_it_works_page{
   font-size: 20px;
@@ -1733,9 +1746,7 @@ ul.share-buttons li{
   .mobile.panel-body{ //show_teacher_to_user page
     padding: 15px;
   }
-  .mob_no_padding{ //show_teacher_to_user page
-    padding: 0 15px;
-  }
+  
   
   .show_teacher_profile_section{ //teachers profile pic on show_teacher_to_user page
     margin-top: 42px;

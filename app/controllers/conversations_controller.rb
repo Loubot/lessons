@@ -20,11 +20,7 @@ class ConversationsController < ApplicationController
     
     @conversation = Conversation.includes(:messages).find(params[:id])
     
-    @m = @conversation.messages.select{ |m| m.id.to_i == params[:message_id].to_i }.first
-    if @m.random.to_s != params[:random]
-      flash[:danger] = "Safety keys don't match"
-      redirect_to root_path
-    end
+    @messages = @conversation.messages
   end
 
   def create
