@@ -16,5 +16,5 @@
 class Conversation < ActiveRecord::Base
   validates :teacher_id, :teacher_email, :student_email, presence: true
 
-  has_many :messages
+  has_many :messages, dependent: :destroy
 end

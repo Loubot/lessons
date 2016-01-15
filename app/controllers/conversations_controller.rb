@@ -15,12 +15,22 @@
 
 class ConversationsController < ApplicationController
 
+  before_filter :get_categories
+
+  def get_categories
+    @categories = Category.includes(:subjects).all
+   end
+
   def show
-    p "Hit conversation controller"
+    p "Hit conversation controller/show"
     
     @conversation = Conversation.includes(:messages).find(params[:id])
+
     
     @messages = @conversation.messages
+    @message = Message.new
+    teacher_signed_in? ? @message.sender_email = current_teacher.email : false 
+
   end
 
   def create
@@ -29,10 +39,9 @@ class ConversationsController < ApplicationController
     
     if c.save      
       p "conversation id #{ c.id }"
-      m = Message.new( message_params( c.id ), conversation_params )
-
+      m = Message.new( message_params( c.id, c.student_email ), conversation_params )
       if m.save
-        ConversationMailer.send_message( params[:conversation][:student_email],
+        ConversationMailer.send_message( params[:conversation][:teacher_email],
                                          c.id,
                                          m.id,
                                          m.random
@@ -56,9 +65,9 @@ class ConversationsController < ApplicationController
                                             :student_name)
     end
 
-    def message_params(id)
-      params[:conversation].merge!(conversation_id: id)
+    def message_params(id, student_email)
+      params[:conversation].merge!(conversation_id: id, sender_email: student_email )
       
-      params.require(:conversation).permit(:message, :conversation_id)
+      params.require(:conversation).permit(:message, :conversation_id, :sender_email )
     end
 end

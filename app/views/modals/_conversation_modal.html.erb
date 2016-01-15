@@ -27,6 +27,11 @@
             <%= f.hidden_field :teacher_email, value: @teacher.email %>
             <%= f.hidden_field :teacher_id, value: @teacher.id %>
             <%= f.hidden_field :teacher_name, value: @teacher.full_name %>
+            <% if teacher_signed_in? %>
+              <%= f.hidden_field :is_teacher, value: @teacher.is_teacher %>
+            <% else %>
+              <%= f.hidden_field :is_teacher, value: false %>
+            <% end %>
 
 
             <%= f.submit 'Send message', class: 'btn btn-info center-block' %>

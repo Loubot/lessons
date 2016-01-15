@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
 
   def create
     p "Hit the MessagesController/create"
+    p "Params #{ params }"
     m = Message.new( message_params )
     if m.save
       flash[:success] = "Message sent ok"
@@ -33,6 +34,6 @@ class MessagesController < ApplicationController
     def message_params
       
       
-      params.require(:message).permit(:message, :conversation_id)
+      params.require(:message).permit(:message, :conversation_id, :sender_email)
     end
 end
