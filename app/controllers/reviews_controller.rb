@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id         :integer          not null, primary key
+#  rating     :integer
+#  user_id    :integer
+#  teacher_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  comment    :text
+#  event_id   :integer
+#
+
 class ReviewsController < ApplicationController
   before_action :authenticate_teacher!
   def create

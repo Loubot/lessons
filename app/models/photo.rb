@@ -3,12 +3,12 @@
 # Table name: photos
 #
 #  id             :integer          not null, primary key
-#  name           :string(255)
+#  name           :string
 #  imageable_id   :integer
-#  imageable_type :string(255)
+#  imageable_type :string
 #  created_at     :datetime
 #  updated_at     :datetime
-#  avatar         :string(255)
+#  avatar         :string
 #
 
 class Photo < ActiveRecord::Base

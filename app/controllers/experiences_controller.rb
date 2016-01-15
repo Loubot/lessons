@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: experiences
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  description :text
+#  teacher_id  :integer
+#  start       :datetime
+#  end_time    :datetime
+#  present     :binary
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class ExperiencesController < ApplicationController
 
 	before_action :authenticate_teacher!

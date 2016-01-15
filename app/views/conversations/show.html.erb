@@ -1,0 +1,34 @@
+<div class="container-fluid ">
+  <div class="panel panel-default center_div col-xs-6 mob_no_padding">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Conversation between <%= @conversation.teacher_name %> and <%= @conversation.student_name %>
+    </div>
+    <!-- Table -->
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th class="message_heading">Messages</th>
+      </tr>
+      <% @messages.each do |m| %>
+      <tr><td><%= m.message %></td></tr>
+
+      <% end %>
+    </table>
+    <div class="panel-body">
+      <%= form_for Message.new do |f| %>
+        <div class="col-xs-12">
+          <div class="form-group">
+            <%= f.text_area :message, placeholder: 'Message', class: 'form-control' %>
+          </div>
+        </div> <!-- end of col-xs-6 -->
+        
+        <%# hidden_fields %>
+        <%= f.hidden_field :conversation_id, value: @conversation.id %>
+        
+
+
+        <%= f.submit 'Send message', class: 'btn btn-info center-block' %>
+      <% end %>
+    </div> <!-- end of panel-body -->
+
+  </div>
+</div>

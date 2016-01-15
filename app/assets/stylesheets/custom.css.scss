@@ -13,7 +13,13 @@ body {
 hr{
   border: 0; height: 1px; background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
+// bla
 
+.center_div{
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
 .full_height{
   min-height: 100%;
   margin: 0 50px;
@@ -676,6 +682,12 @@ small.white{
 //end of show_teacher page*/
 
 // teachers/show_teacher_to_user*/
+.contact_teacher{
+  position: absolute;
+  bottom: 0px;
+  left: 30%;
+}
+
 .btn_book_now{
   color: white;
   filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#5cb85c', endColorstr='#398439');
@@ -970,6 +982,14 @@ form .glyphicon {
 }
 
 // end of static/learn page. User registration*/
+
+// conversation page
+
+.message_heading{
+  background-color: #9d9d9d;
+}
+
+// end of conversation page
 
 //static how it works page
 .how_it_works_page{
@@ -1733,9 +1753,7 @@ ul.share-buttons li{
   .mobile.panel-body{ //show_teacher_to_user page
     padding: 15px;
   }
-  .mob_no_padding{ //show_teacher_to_user page
-    padding: 0 15px;
-  }
+  
   
   .show_teacher_profile_section{ //teachers profile pic on show_teacher_to_user page
     margin-top: 42px;

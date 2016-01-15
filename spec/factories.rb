@@ -1,4 +1,15 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :message do
+    message "MyText"
+conversation_id 1
+  end
+  factory :conversation do
+    teacher 1
+student 1
+student_email "MyString"
+student_email "MyString"
+message "MyText"
+  end
+
 
 	sequence :email do |n|
     "email#{n}@factory.com"

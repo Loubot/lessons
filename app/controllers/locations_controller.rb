@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  id         :integer          not null, primary key
+#  teacher_id :integer
+#  latitude   :float
+#  longitude  :float
+#  name       :string
+#  address    :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class LocationsController < ApplicationController
 
   before_action :authenticate_teacher!

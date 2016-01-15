@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: friendships
+#
+#  id         :integer          not null, primary key
+#  teacher_id :integer
+#  student_id :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 module FriendshipsHelper
 
 
