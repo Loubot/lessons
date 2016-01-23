@@ -4,7 +4,8 @@
 teachersInfoReady = ->
   $.cookieBar(
     declineButton: true
-    
+    fixed: true
+    bottom: true
   )
   
   if !(jQuery.cookieBar('cookies'))
