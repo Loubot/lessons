@@ -3,8 +3,8 @@
 # Table name: identities
 #
 #  id         :integer          not null, primary key
-#  uid        :string(255)
-#  provider   :string(255)
+#  uid        :string
+#  provider   :string
 #  teacher_id :integer
 #  created_at :datetime
 #  updated_at :datetime

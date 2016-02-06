@@ -4,7 +4,8 @@
 teachersInfoReady = ->
   $.cookieBar(
     declineButton: true
-    
+    fixed: true
+    bottom: true
   )
   
   if !(jQuery.cookieBar('cookies'))
@@ -56,6 +57,7 @@ teachersInfoReady = ->
         # console.log 'File uploaded successfully'
         location.reload()
       $('#process_queue').on 'click', ->
+        alert 'b'
         dropzone.processQueue()
 
       
@@ -212,7 +214,27 @@ teachersInfoReady = ->
 
     $('.stock_photo_container').mouseleave ->
       $(@).find('.welcome_subject_image').animate opacity: 0, 50
+
+    
 # //////////end of welcome page
+
+# //////////// how it works page
+
+  if $('.how_it_works_page').length
+
+    $('.welcome_fotorama').fotorama
+      # width: "100%"
+      # height: "100%"
+      transition: "crossfade"
+      loop: true
+      autoplay: false
+      nav: false
+      allowfullscreen: true
+      
+      arrows: true     
+      # fit: 'cover'
+      # thumbfit: 'cover'
+# //////////// end of how it works page
 
 #////////// teachers/form photo partial enable dismissable popover
   if $('.profile_pic_popover').length

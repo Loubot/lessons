@@ -1,0 +1,50 @@
+<div class="container-fluid ">
+  <div class="panel panel-default center_div col-xs-8 mob_no_padding">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Conversation between <%= @conversation.teacher_name %> and <%= @conversation.student_name %>
+    </div>
+    <!-- Table -->
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th class="message_heading">Messages</th>
+      </tr>
+      <% @messages.each do |m| %>
+
+        <% if m.sender_email == @conversation.teacher_email %>
+
+          <tr><td class="teacher_message"><%= m.message %></td></tr>
+        <% else %>
+          <tr><td class="student_message"><%= m.message %></td></tr>
+        <% end %>
+
+      <% end %>
+    </table>
+
+    <div class="panel-body">
+      <%= form_for @message do |f| %>
+        <div class="col-xs-12">
+          <div class="form-group">
+            <% if @message.sender_email %>
+              <%= f.email_field :sender_email, class: 'form-control', readonly: true %>
+            <% else %>
+              <%= f.email_field :sender_email, placeholder: 'Your email(required)', class: 'form-control'%>
+            <% end %>
+          </div>
+        </div> <!-- end of col-xs-6 -->
+        <div class="col-xs-12">
+          <div class="form-group">
+            <%= f.text_area :message, placeholder: 'Message', class: 'form-control' %>
+          </div>
+        </div> <!-- end of col-xs-6 -->
+        
+        <%# hidden_fields %>
+        <%= f.hidden_field :conversation_id, value: @conversation.id %>
+        
+
+
+        <%= f.submit 'Send message', class: 'btn btn-info center-block' %>
+      <% end %>
+    </div> <!-- end of panel-body -->
+
+  </div>
+</div>

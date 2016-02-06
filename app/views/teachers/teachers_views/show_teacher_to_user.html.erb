@@ -21,9 +21,13 @@
 
   <div class="row show_teacher_profile_container">
     <div class="col-sm-4 col-xs-12 show_teacher_profile_section nopadding mob_no_padding">    
-      <div class="col-xs-12 profile_pic_container" style="background-image: url(<%= @profilePic %>)">
+      <div class="container-fluid profile_pic_container" style="background-image: url(<%= @profilePic %>)">
         <%# image_tag Photo.find(@teacher.profile).avatar.url, class: 'pull-left img-responsive', size:'150x150' %>
         <p class="pull-left teachers_name"><%= @teacher.full_name %></p>
+        
+        <%= link_to 'Contact teacher', '#', class: 'btn btn-info btn-lg contact_teacher', 
+            data: { toggle: 'modal', target: "#conversation" } %>
+        
       </div> <!-- end of col-xs-12 profile_pic_container -->   
       <table class="table table-bordered table-striped table-hover teacher_profile_table col-xs-12">
         
@@ -59,7 +63,7 @@
           </div> <!-- end of panel heading -->
           <div class="panel-body ">
             <ul class="list-group">     
-              <%= @teacher.overview %>
+              <%= simple_format(@teacher.overview) %>
             </ul>
           </div> <!-- end of panel-body -->
         </div> <!-- end of panel panel-default -->
@@ -202,9 +206,13 @@
         </div> <!-- end of scheduler_here -->   
       </div>
     </div> <!-- end of row -->
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" >
+  Launch demo modal
+</button>
 </div>
 
 <%= render 'modals/show_teacher/booking_modal' %>
 <%= render 'modals/show_teacher/payment_packages_modal' %>
-
+<%= render 'modals/conversation_modal' %>
 <%= render 'modals/show_teacher/the_one_modal' %>

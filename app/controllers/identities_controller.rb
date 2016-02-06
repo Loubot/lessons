@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: identities
+#
+#  id         :integer          not null, primary key
+#  uid        :string
+#  provider   :string
+#  teacher_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class IdentitiesController < ApplicationController
   before_action :authenticate_teacher!
 

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: prices
+#
+#  id          :integer          not null, primary key
+#  subject_id  :integer
+#  teacher_id  :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  location_id :integer
+#  price       :decimal(8, 2)
+#  duration    :integer          default(0)
+#
+
 class PricesController < ApplicationController
 	before_action :authenticate_teacher!
 	before_action :check_correct_teacher, except: [:destroy]

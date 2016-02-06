@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: qualifications
+#
+#  id         :integer          not null, primary key
+#  title      :string
+#  school     :string
+#  start      :datetime
+#  end_time   :datetime
+#  teacher_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  present    :binary
+#
+
 class QualificationsController < ApplicationController
 
 	before_action :authenticate_teacher!

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: invitations
+#
+#  id              :integer          not null, primary key
+#  inviter_id      :integer
+#  inviter_name    :string
+#  recipient_email :string
+#  token           :string
+#  accepted        :boolean
+#  accepted_at     :date
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class InvitationsController < ApplicationController
   before_action :authenticate_teacher!
 

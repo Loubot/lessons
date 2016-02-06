@@ -1,3 +1,37 @@
+# == Schema Information
+#
+# Table name: teachers
+#
+#  id                     :integer          not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  overview               :text             default("")
+#  created_at             :datetime
+#  updated_at             :datetime
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
+#  admin                  :boolean
+#  profile                :integer
+#  is_teacher             :boolean          default(FALSE), not null
+#  paypal_email           :string           default("")
+#  stripe_access_token    :string           default("")
+#  is_active              :boolean          default(FALSE), not null
+#  will_travel            :boolean          default(FALSE), not null
+#  stripe_user_id         :string
+#  address                :string           default("")
+#  paid_up                :boolean          default(FALSE)
+#  paid_up_date           :date
+#  profile_views          :integer          default(0)
+#
+
 module TeachersHelper
 	def format_times(events) #create array of events with times formatted correctly
 		formatted_times = []

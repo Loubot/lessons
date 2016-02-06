@@ -11,16 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720194257) do
+ActiveRecord::Schema.define(version: 20160113214504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "student_id"
+    t.string   "teacher_email"
+    t.string   "student_email"
+    t.string   "teacher_name"
+    t.string   "student_name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "conversations", ["student_email"], name: "index_conversations_on_student_email", using: :btree
+  add_index "conversations", ["student_id"], name: "index_conversations_on_student_id", using: :btree
+  add_index "conversations", ["teacher_id"], name: "index_conversations_on_teacher_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -39,15 +54,15 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "status",     limit: 255
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "teacher_id",             default: 0
+    t.integer  "teacher_id", default: 0
     t.binary   "time_off"
-    t.integer  "student_id",             default: 0
+    t.integer  "student_id", default: 0
     t.integer  "review_id"
     t.integer  "subject_id"
   end
@@ -55,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   add_index "events", ["review_id"], name: "index_events_on_review_id", using: :btree
 
   create_table "experiences", force: :cascade do |t|
-    t.string   "title",       limit: 255
+    t.string   "title"
     t.text     "description"
     t.integer  "teacher_id"
     t.datetime "start"
@@ -90,8 +105,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   add_index "grinds", ["teacher_id"], name: "index_grinds_on_teacher_id", using: :btree
 
   create_table "identities", force: :cascade do |t|
-    t.string   "uid",        limit: 255
-    t.string   "provider",   limit: 255
+    t.string   "uid"
+    t.string   "provider"
     t.integer  "teacher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -124,6 +139,17 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   end
 
   add_index "locations", ["teacher_id"], name: "index_locations_on_teacher_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "message"
+    t.text     "sender_email"
+    t.integer  "conversation_id"
+    t.text     "random"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
 
   create_table "openings", force: :cascade do |t|
     t.datetime "mon_open"
@@ -169,12 +195,12 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   add_index "packages", ["teacher_id"], name: "index_packages_on_teacher_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
-    t.string   "name",           limit: 255
+    t.string   "name"
     t.integer  "imageable_id"
-    t.string   "imageable_type", limit: 255
+    t.string   "imageable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar",         limit: 255
+    t.string   "avatar"
   end
 
   create_table "prices", force: :cascade do |t|
@@ -191,8 +217,8 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   add_index "prices", ["teacher_id"], name: "index_prices_on_teacher_id", using: :btree
 
   create_table "qualifications", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "school",     limit: 255
+    t.string   "title"
+    t.string   "school"
     t.datetime "start"
     t.datetime "end_time"
     t.integer  "teacher_id"
@@ -214,7 +240,7 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   add_index "reviews", ["event_id"], name: "index_reviews_on_event_id", using: :btree
 
   create_table "subjects", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -228,50 +254,50 @@ ActiveRecord::Schema.define(version: 20150720194257) do
   add_index "subjects_teachers", ["subject_id", "teacher_id"], name: "index_subjects_teachers_on_subject_id_and_teacher_id", using: :btree
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
-    t.text     "overview",                           default: ""
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "overview",               default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.boolean  "admin"
     t.integer  "profile"
-    t.boolean  "is_teacher",                         default: false, null: false
-    t.string   "paypal_email",           limit: 255, default: ""
-    t.string   "stripe_access_token",    limit: 255, default: ""
-    t.boolean  "is_active",                          default: false, null: false
-    t.boolean  "will_travel",                        default: false, null: false
+    t.boolean  "is_teacher",             default: false, null: false
+    t.string   "paypal_email",           default: ""
+    t.string   "stripe_access_token",    default: ""
+    t.boolean  "is_active",              default: false, null: false
+    t.boolean  "will_travel",            default: false, null: false
     t.string   "stripe_user_id"
-    t.string   "address",                            default: ""
-    t.boolean  "paid_up",                            default: false
+    t.string   "address",                default: ""
+    t.boolean  "paid_up",                default: false
     t.date     "paid_up_date"
-    t.integer  "profile_views",                      default: 0
+    t.integer  "profile_views",          default: 0
   end
 
   add_index "teachers", ["email"], name: "index_teachers_on_email", unique: true, using: :btree
   add_index "teachers", ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true, using: :btree
 
   create_table "transactions", force: :cascade do |t|
-    t.string   "sender",        limit: 255
-    t.string   "trans_id",      limit: 255
-    t.string   "payStripe",     limit: 255
+    t.string   "sender"
+    t.string   "trans_id"
+    t.string   "payStripe"
     t.integer  "user_id"
     t.integer  "teacher_id"
     t.datetime "pay_date"
-    t.string   "tracking_id",   limit: 255
+    t.string   "tracking_id"
     t.text     "whole_message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "amount",        precision: 8, scale: 2, default: 0.0, null: false
   end
 
   add_index "transactions", ["tracking_id"], name: "index_transactions_on_tracking_id", unique: true, using: :btree
@@ -281,21 +307,21 @@ ActiveRecord::Schema.define(version: 20150720194257) do
     t.integer  "student_id"
     t.text     "params"
     t.text     "tracking_id"
-    t.string   "student_name",  limit: 255,                         default: ""
-    t.string   "student_email", limit: 255
-    t.string   "teacher_email", limit: 255
+    t.string   "student_name",                          default: ""
+    t.string   "student_email"
+    t.string   "teacher_email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "subject_id"
-    t.boolean  "multiple",                                          default: false
-    t.integer  "weeks",                                             default: 0
-    t.string   "address",                                           default: ""
-    t.string   "booking_type",                                      default: ""
-    t.integer  "package_id",                                        default: 0
-    t.decimal  "amount",                    precision: 8, scale: 2, default: 0.0,   null: false
-    t.string   "teacher_name",                                      default: ""
+    t.boolean  "multiple",                              default: false
+    t.integer  "weeks",                                 default: 0
+    t.string   "address",                               default: ""
+    t.string   "booking_type",                          default: ""
+    t.integer  "package_id",                            default: 0
+    t.decimal  "amount",        precision: 8, scale: 2, default: 0.0,   null: false
+    t.string   "teacher_name",                          default: ""
     t.integer  "location_id"
-    t.string   "status",                                            default: ""
+    t.string   "status",                                default: ""
     t.datetime "start_time"
     t.integer  "price_id"
     t.date     "date"
