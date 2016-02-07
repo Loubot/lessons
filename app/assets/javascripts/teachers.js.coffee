@@ -504,4 +504,3 @@ getCounties = () ->
           'Fermanagh','Galway','Kerry','Kildare','Kilkenny','Laois','Leitrim','Limerick','Longford',
           'Louth','Mayo','Meath','Monaghan','Offaly','Roscommon','Sligo','Tipperary','Tyrone',
           'Waterford','Westmeath','Wexford','Wicklow']
-
