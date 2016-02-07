@@ -243,8 +243,12 @@ class TeachersController < ApplicationController
 		redirect_to :back
 	end
 
-	def video
+	def publish
 
+	end
+
+	def play
+		
 	end
 
 	private

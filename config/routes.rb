@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       get     '/your-business'          =>  'teachers#your_business'
       get     'previous-lessons'        =>  'teachers#previous_lessons'
       get     'create-new-subject'      =>  'teachers#create_new_subject'
-      get     'video'                   =>  'teachers#video'
-      get     'video1'                  =>  'teachers#video'
+      get     'publish'                 =>  'teachers#publish'
+      get     'play'                    =>  'teachers#play'
       post    '/change-profile-pic'     =>  'teachers#change_profile_pic'
       post    'invite-student'          =>  'teachers#invite_students'
   	end
