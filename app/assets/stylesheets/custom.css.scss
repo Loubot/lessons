@@ -15,6 +15,11 @@ hr{
 }
 // bla
 
+.white_text{
+  color: #FFF !important;
+
+}
+
 .center_div{
   float: none;
   margin-left: auto;
@@ -570,9 +575,7 @@ small.white{
   margin-bottom: 20px;
   // margin-top: -22px;
 }
-.main_page_search_container small{
-  color: #000;
-}
+
 
 .typeahead.subject{
   height: 45px;
@@ -1112,6 +1115,8 @@ form .glyphicon {
 
 //welcome page*/
 
+.welcome_
+
 .welcome_fotorama{
   border: none !important;
   padding: 0 15px;
@@ -1126,20 +1131,17 @@ form .glyphicon {
 
 .main_page_search_container{
   font-size: x-large;
-  // color: #000;
-  // text-align: center;
-  // // margin-bottom: 50px;
-  // // margin-bottom: 20px;
-  // // margin-top: -22px;
-  // height: 350px;  
+  margin-bottom: 20px;
+  margin-top: -22px;
+  height: 500px;  
+  background-image: asset_url('piano.jpg');
+  -moz-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
   
-  // -moz-background-size: 100% 100%;
-  // -webkit-background-size: 100% 100%;
-  // background-size: 100% 100%;
-  // background-repeat: no-repeat;
-  // position: relative;
-  // width: 100%;;
-  // left: calc(-50vw + 50%);
 }
 
 .welcome_how_it_works{
@@ -1790,7 +1792,7 @@ ul.share-buttons li{
 @media (min-width: 992px) {
   .full_height{
     min-height: 100%;
-    margin: 0 50px;
+    // margin: 0 50px;
   }
   //set gutter width
   .outer-container{
