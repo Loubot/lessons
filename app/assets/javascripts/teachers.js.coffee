@@ -191,8 +191,8 @@ teachersInfoReady = ->
 
 # ///////////welcome page
   if $(".stock_photos_container").length
-    h = $('#main_page').height()
-    $('#main_page').height(h)
+    # h = $('#main_page').height()
+    # $('#main_page').height(h)
     
     #/// ajax load browse options
     $(document).on 'click', '.browse_option', (e) ->

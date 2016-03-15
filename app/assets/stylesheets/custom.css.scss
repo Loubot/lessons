@@ -15,6 +15,11 @@ hr{
 }
 // bla
 
+.full_height{
+  min-height: 100%;
+  // margin: 0 50px;
+}
+
 .white_text{
   color: #FFF !important;
 
@@ -1133,7 +1138,7 @@ form .glyphicon {
   font-size: x-large;
   margin-bottom: 20px;
   margin-top: -22px;
-  height: 500px;  
+  // height: 500px;  
   background-image: asset_url('piano.jpg');
   -moz-background-size: 100% 100%;
   -webkit-background-size: 100% 100%;
@@ -1790,10 +1795,6 @@ ul.share-buttons li{
 }
   
 @media (min-width: 992px) {
-  .full_height{
-    min-height: 100%;
-    // margin: 0 50px;
-  }
   //set gutter width
   .outer-container{
     padding: 0 100px;
