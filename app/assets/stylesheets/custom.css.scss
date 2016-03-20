@@ -1134,21 +1134,6 @@ form .glyphicon {
   font-size: 120%;
 }
 
-.main_page_search_container{
-  font-size: x-large;
-  margin-bottom: 20px;
-  margin-top: -22px;
-  // height: 500px;  
-  background-image: asset_url('piano.jpg');
-  -moz-background-size: 100% 100%;
-  -webkit-background-size: 100% 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  position: relative;
-  width: 100%;
-  
-}
-
 .welcome_how_it_works{
   font-size: x-large;
   background-color: #d7eacb;
@@ -1562,6 +1547,21 @@ ul.share-buttons li{
 // end of mobile_share_buttons
 
 @media (min-width: 250px){
+  .main_page_search_container{
+    font-size: x-large;
+    margin-bottom: 20px;
+    margin-top: -22px;
+    color: #111 !important;
+    // height: 500px;  
+    // background-image: asset_url('piano.jpg');
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    
+  }
   // set gutter width  
   .outer-container{
     padding: 0;
@@ -1723,6 +1723,20 @@ ul.share-buttons li{
 }
 
 @media (min-width: 768px) {
+  .main_page_search_container{
+    font-size: x-large;
+    margin-bottom: 20px;
+    margin-top: -22px;
+    // height: 500px;  
+    background-image: asset_url('piano.jpg');
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    
+  }
 
   .dropdown-menu{
     width:100%;
