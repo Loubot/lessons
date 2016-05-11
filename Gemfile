@@ -124,7 +124,7 @@ gem 'actionpack-action_caching'
 
 gem 'actionpack-page_caching'
 
-gem 'browser'
+gem 'browser', '~> 1.1.0'
 
 gem 'delayed_job_active_record'
 
