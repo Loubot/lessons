@@ -56,6 +56,10 @@ class AdminMailer < ActionMailer::Base
             name: 'Admin'
           },
           {
+            email: 'turquoisecathy@gmail.com',
+            name: 'Admin'
+          },
+          {
             email: 'alan.rowell28@googlemail.com',
             name: 'Admin'
           }
