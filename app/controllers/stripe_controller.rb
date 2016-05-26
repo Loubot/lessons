@@ -202,11 +202,6 @@ class StripeController < ApplicationController
     render status: 200, nothing: true and return if json_response['data']['object']['object'] == 'balance'
 
     # logger.info "Stripe webhook response: #{json_response}"
-    begin
-      json_response['data']['object']['metadata']['tracking_id'].blank?
-    rescue Exception => e
-      render stats: 200, nothing: true and return
-    end
        
     logger.info "Store-stripe params #{json_response['data']['object']['metadata']['tracking_id']}"
     
