@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.2.4'
+# ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
@@ -46,8 +46,8 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'capybara'
-  gem 'capybara-webkit', platforms: [:ruby]
+  # gem 'capybara'
+  # gem 'capybara-webkit', platforms: [:ruby]
   # gem 'selenium-webdriver'
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
