@@ -11,11 +11,11 @@ class AdminMailer < ActionMailer::Base
        :text=> params['feedback-info'],  
        :to=>[  
           {
-            :email => 'alan.rowell28@googlemail.com',
+            :email => 'alan@learnyourlesson.ie',
             :name => 'Admin'
           },
          {  
-           :email=> 'louisangelini@gmail.com',
+           :email=> 'loubot@learnyourlesson.ie',
            :name=> 'Admin' 
          }  
        ],  
