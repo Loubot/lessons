@@ -7,7 +7,7 @@ class AdminMailer < ActionMailer::Base
       message = {  
        :subject=> params[:subject],  
        :from_name=> params[:name],
-       :from_email => params[:email],
+       :from_email => "alan@learnyourlesson.ie",
        :text=> params['feedback-info'],  
        :to=>[  
           {
@@ -20,7 +20,7 @@ class AdminMailer < ActionMailer::Base
          }  
        ],  
        :html=> params['feedback-info'],  
-       :from_email=> params[:email]  
+       # :from_email=> params[:emal]  
       }  
       sending = m.messages.send message  
       puts sending
