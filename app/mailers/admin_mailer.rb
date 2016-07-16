@@ -9,7 +9,11 @@ class AdminMailer < ActionMailer::Base
        :from_name=> params[:name],
        :from_email => "alan@learnyourlesson.ie",
        :text=> params['feedback-info'],  
-       :to=>[  
+       :to=>[
+          {
+            :email => "louisangelini@gmail.com",
+            :name => "Admin"
+          }, 
           {
             :email => 'alan@learnyourlesson.ie',
             :name => 'Admin'
