@@ -16,13 +16,13 @@
 class Experience < ActiveRecord::Base
 	belongs_to :teacher, touch: true
 
-	validates :title, :description, :teacher_id, :start, presence: true
+	validates :description, :teacher_id, presence: true
 
-	validates :start, :end_time, date: true
+	# validates :start, :end_time, date: true
 
-	validates :start, date: { before: :end_time, message: 'must be after end time' }
+	# validates :start, date: { before: :end_time, message: 'must be after end time' }
 
-	before_save :addTime
+	# before_save :addTime
 
 
 	def addTime
