@@ -49,7 +49,7 @@ class Teacher < ActiveRecord::Base
 
   has_many :photos, as: :imageable, dependent: :destroy
 
-  has_one :locations, dependent: :destroy
+  has_many :locations, dependent: :destroy
 
   has_many :reviews, dependent: :destroy
 
